@@ -6,7 +6,7 @@
   <link href="https://fenqian.xyz/atom.xml" rel="self"/>
   
   <link href="https://fenqian.xyz/"/>
-  <updated>2021-04-16T07:17:59.509Z</updated>
+  <updated>2021-04-23T09:26:52.450Z</updated>
   <id>https://fenqian.xyz/</id>
   
   <author>
@@ -17,11 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>测试</title>
+    <link href="https://fenqian.xyz/posts/9daba997/"/>
+    <id>https://fenqian.xyz/posts/9daba997/</id>
+    <published>2021-04-23T09:26:50.000Z</published>
+    <updated>2021-04-23T09:26:52.450Z</updated>
+    
+    <content type="html"><![CDATA[<p>test</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;test&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>编写博客--makedown语法说明</title>
-    <link href="https://fenqian.xyz/2021/04/16/%E7%BC%96%E5%86%99%E5%8D%9A%E5%AE%A2-makedown%E8%AF%AD%E6%B3%95%E8%AF%B4%E6%98%8E/"/>
-    <id>https://fenqian.xyz/2021/04/16/%E7%BC%96%E5%86%99%E5%8D%9A%E5%AE%A2-makedown%E8%AF%AD%E6%B3%95%E8%AF%B4%E6%98%8E/</id>
+    <link href="https://fenqian.xyz/posts/ed6b07f3/"/>
+    <id>https://fenqian.xyz/posts/ed6b07f3/</id>
     <published>2021-04-16T06:06:13.490Z</published>
-    <updated>2021-04-16T07:17:59.509Z</updated>
+    <updated>2021-04-22T08:33:27.596Z</updated>
     
     <content type="html"><![CDATA[<h1 id="语法总览"><a href="#语法总览" class="headerlink" title="语法总览"></a>语法总览</h1><h2 id="正文语法"><a href="#正文语法" class="headerlink" title="正文语法"></a>正文语法</h2><pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; 1.=== title ===最顶级标题</span><br><span class="line">&gt; 2.---  title --- 二级标题</span><br><span class="line">&gt; 3.<span class="comment"># title/## title/###### title一级/二级/六级标题</span></span><br><span class="line">&gt; * tab缩进语法</span><br><span class="line">&gt; + 字体加粗使用** text ** 或__text__</span><br><span class="line">&gt; - 排序列表，无序列表使用（+-*），有序列表使用（1.数字加点）</span><br><span class="line">&gt; - 换行，如果上下行无\n(换行操作)则不换行，如果有则换行</span><br><span class="line">&gt; - 空行，如果上下行之间有空行，则会进行换行</span><br></pre></td></tr></table></figure></code></pre><h2 id="资源语法"><a href="#资源语法" class="headerlink" title="资源语法"></a>资源语法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">链接：</span><br><span class="line"></span><br><span class="line">&gt; - [链接](baidu.com <span class="string">&quot;百度这可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + [链接2][1]...[链接3][id]</span><br><span class="line">[1]: baidu.com <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">[id]: zhihu.com <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">图片：</span><br><span class="line"></span><br><span class="line">&gt; - ![alt text](/path/.jpg <span class="string">&quot;可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + ![alt text][1]...![alt text][id可任意和下文保持一致即可]</span><br><span class="line">[1]: /path/.jpg <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">[id]: /path/.jpg <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">代码块：</span><br><span class="line"></span><br><span class="line">&gt; 1. `中间是代码块`</span><br><span class="line">&gt; 2. ```bash 中间是代码块 ```</span><br><span class="line">&gt; 3. 四个空格/一个tab操作后面的代码</span><br></pre></td></tr></table></figure><p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>]]></content>
     
@@ -38,10 +59,10 @@
   
   <entry>
     <title>搭建hexo博客</title>
-    <link href="https://fenqian.xyz/2021/04/15/%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/"/>
-    <id>https://fenqian.xyz/2021/04/15/%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/</id>
+    <link href="https://fenqian.xyz/posts/8e88d59c/"/>
+    <id>https://fenqian.xyz/posts/8e88d59c/</id>
     <published>2021-04-15T09:52:45.461Z</published>
-    <updated>2021-04-22T06:31:34.069Z</updated>
+    <updated>2021-04-22T08:33:27.598Z</updated>
     
     <content type="html"><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1、建立github代码库</span><br><span class="line">2、下载hexo文件</span><br><span class="line">3、下载主题，更改配置使主题生效</span><br><span class="line">4、部署配置git</span><br><span class="line">5、下载git同步工具</span><br><span class="line">6、清洗旧数据，生成新的静态文件，同步静态文件至代码库（需更改hexo部署配置）</span><br><span class="line">7、域名解析，并给github代码库配置域名</span><br></pre></td></tr></table></figure><span id="more"></span><p>More info: <a href="https://zhuanlan.zhihu.com/p/26625249">参考</a></p><ul><li>related_posts: true</li></ul>]]></content>
     
@@ -55,10 +76,10 @@
   
   <entry>
     <title>test_my_site</title>
-    <link href="https://fenqian.xyz/2021/04/15/test-my-site/"/>
-    <id>https://fenqian.xyz/2021/04/15/test-my-site/</id>
+    <link href="https://fenqian.xyz/posts/7525f478/"/>
+    <id>https://fenqian.xyz/posts/7525f478/</id>
     <published>2021-04-15T06:25:33.000Z</published>
-    <updated>2021-04-15T06:25:33.495Z</updated>
+    <updated>2021-04-22T08:33:27.594Z</updated>
     
     
     
@@ -68,10 +89,10 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="https://fenqian.xyz/2021/04/15/hello-world/"/>
-    <id>https://fenqian.xyz/2021/04/15/hello-world/</id>
+    <link href="https://fenqian.xyz/posts/4a17b156/"/>
+    <id>https://fenqian.xyz/posts/4a17b156/</id>
     <published>2021-04-15T06:20:40.707Z</published>
-    <updated>2021-04-22T06:50:03.734Z</updated>
+    <updated>2021-04-22T08:33:27.595Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><span id="more"></span><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p><p>#开启动画<br>canvas_nest: true </p>]]></content>
     
