@@ -1219,7 +1219,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #e9464f;
+  background: #296388;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2595,12 +2595,6 @@ hr {
 }
 .sub-menu .menu-item {
   display: inline-block;
-}
-footer {
-  background: url("/images/bk2.png");
-  background-repeat: repeat-x;
-  background-attachment: fixed;
-  background-size: 100% 100%;
 }
 body {
   background-image: url("/images/bk.jpg");

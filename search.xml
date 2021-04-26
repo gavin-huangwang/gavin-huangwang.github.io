@@ -21,20 +21,32 @@
 ]]></content>
   </entry>
   <entry>
-    <title>测试</title>
-    <url>/posts/9daba997/</url>
-    <content><![CDATA[<p>test</p>
-]]></content>
+    <title>Android资源采集</title>
+    <url>/posts/0/</url>
+    <content><![CDATA[<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><h3 id="命令："><a href="#命令：" class="headerlink" title="命令："></a>命令：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys cpuinfo</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h3 id="结果解析："><a href="#结果解析：" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/cpu.png" alt="alt text"></p>
+<h5 id="第一行"><a href="#第一行" class="headerlink" title="第一行"></a>第一行</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">其中第一行：Load: 10.1 / 2.49 / 0.83</span><br><span class="line">表示系统1min/5min/10min cpu负载平均值</span><br><span class="line">标准说明：1/0.7---理论上单核满载是1，但是在真实情况下，满载会存在性能问题，一般不超过70%；四核满载则是4.</span><br></pre></td></tr></table></figure>
+<h5 id="第三行"><a href="#第三行" class="headerlink" title="第三行"></a>第三行</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">75% 593/system_server: 58% user + 16% kernel / faults: 33566 minor 473 major</span><br><span class="line">该行表示资源消耗情况；</span><br><span class="line">593/75%/58%/16%：pid/cpu负载/用户空间负载/内核空间负载</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="命令扩展"><a href="#命令扩展" class="headerlink" title="命令扩展"></a>命令扩展</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys cpuinfo | grep -w com.afmobi.boomplayer:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>参考：<a href="https://blog.csdn.net/lipanpan1030/article/details/108118685">dumpsys工具cpu采集说明</a></p>
+<h2 id="MEN"><a href="#MEN" class="headerlink" title="MEN"></a>MEN</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell  dumpsys  meminfo com.afmobi.boomplayer</span><br></pre></td></tr></table></figure>
+
+<h3 id="结果解析：-1"><a href="#结果解析：-1" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/men.png" alt="alt text"><br><strong>由图可知：</strong> 需要解析获取TOTAL之后的值，单位kb</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#脚本如下</span></span><br><span class="line"><span class="comment"># 得到men的使用情况</span></span><br><span class="line">def get_men(devices, pkg_name):</span><br><span class="line">    cmd = <span class="string">&quot;adb -s &quot;</span>+devices+<span class="string">&quot; shell  dumpsys  meminfo %s&quot;</span>  %(pkg_name)</span><br><span class="line">    total = <span class="string">&quot;TOTAL&quot;</span></span><br><span class="line">    get_cmd = os.popen(cmd).readlines()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;men:&#x27;</span>,get_cmd)</span><br><span class="line">    <span class="keyword">for</span> info <span class="keyword">in</span> get_cmd:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;men_info:&#x27;</span>,info)</span><br><span class="line">        info_sp = info.strip().split()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;info_sp:&quot;</span>,info_sp)</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> range(len(info_sp)):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;item:&quot;</span>,item)</span><br><span class="line">            <span class="keyword">if</span> info_sp[item] == total:</span><br><span class="line">                <span class="built_in">return</span> int(info_sp[item+1])</span><br><span class="line">    <span class="built_in">return</span> 0</span><br></pre></td></tr></table></figure>
+<h2 id="FPS"><a href="#FPS" class="headerlink" title="FPS"></a>FPS</h2><p><strong>fps为帧率，表示单位时间1s内屏幕刷新的次数，Android6之前存在一个相对标准，帧率不能低于60，即单帧耗时不能大于16.67ms,否则会存在丢帧</strong></p>
+<h3 id="命令-1"><a href="#命令-1" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys gfxinfo com.afmobi.boomplayer | grep -A 128 Execute | grep -v <span class="string">&#x27;[a-z]&#x27;</span> </span><br></pre></td></tr></table></figure>
+
+<h3 id="结果解析：-2"><a href="#结果解析：-2" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/fps.png" alt="alt text"><br><strong>如上图 Draw/Prepare/Process/Execute表示一帧被绘制的四个阶段，四个值相加即为一帧的耗时(无数据则很可能是手机的“GPU呈现模式分析”未打开)</strong></p>
+<p><a href="https://blog.csdn.net/weixin_43291944/article/details/98497689">fps说明</a></p>
+<h2 id="FLOW"><a href="#FLOW" class="headerlink" title="FLOW"></a>FLOW</h2>]]></content>
   </entry>
   <entry>
-    <title>编写博客--makedown语法说明</title>
-    <url>/posts/ed6b07f3/</url>
-    <content><![CDATA[<h1 id="语法总览"><a href="#语法总览" class="headerlink" title="语法总览"></a>语法总览</h1><h2 id="正文语法"><a href="#正文语法" class="headerlink" title="正文语法"></a>正文语法</h2><pre><code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; 1.=== title ===	最顶级标题</span><br><span class="line">&gt; 2.---  title --- 二级标题</span><br><span class="line">&gt; 3.<span class="comment"># title/## title/###### title	一级/二级/六级标题</span></span><br><span class="line">&gt; * tab缩进语法</span><br><span class="line">&gt; + 字体加粗使用** text ** 或__text__</span><br><span class="line">&gt; - 排序列表，无序列表使用（+-*），有序列表使用（1.数字加点）</span><br><span class="line">&gt; - 换行，如果上下行无\n(换行操作)则不换行，如果有则换行</span><br><span class="line">&gt; - 空行，如果上下行之间有空行，则会进行换行</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="资源语法"><a href="#资源语法" class="headerlink" title="资源语法"></a>资源语法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">链接：</span><br><span class="line"></span><br><span class="line">&gt; - [链接](baidu.com <span class="string">&quot;百度这可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + [链接2][1]...[链接3][id]</span><br><span class="line">	[1]: baidu.com <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: zhihu.com <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">图片：</span><br><span class="line"></span><br><span class="line">&gt; - ![alt text](/path/.jpg <span class="string">&quot;可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + ![alt text][1]...![alt text][id可任意和下文保持一致即可]</span><br><span class="line">	[1]: /path/.jpg <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: /path/.jpg <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">代码块：</span><br><span class="line"></span><br><span class="line">&gt; 1. `中间是代码块`</span><br><span class="line">&gt; 2. ```bash 中间是代码块 ```</span><br><span class="line">&gt; 3. 四个空格/一个tab操作后面的代码</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>
-]]></content>
+    <title>test_my_site</title>
+    <url>/posts/7525f478/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>搭建hexo博客</title>
@@ -48,8 +60,13 @@
 ]]></content>
   </entry>
   <entry>
-    <title>test_my_site</title>
-    <url>/posts/7525f478/</url>
-    <content><![CDATA[]]></content>
+    <title>编写博客--makedown语法说明</title>
+    <url>/posts/ed6b07f3/</url>
+    <content><![CDATA[<h1 id="语法总览"><a href="#语法总览" class="headerlink" title="语法总览"></a>语法总览</h1><h2 id="正文语法"><a href="#正文语法" class="headerlink" title="正文语法"></a>正文语法</h2><pre><code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; 1.=== title ===	最顶级标题</span><br><span class="line">&gt; 2.---  title --- 二级标题</span><br><span class="line">&gt; 3.<span class="comment"># title/## title/###### title	一级/二级/六级标题</span></span><br><span class="line">&gt; * tab缩进语法</span><br><span class="line">&gt; + 字体加粗使用** text ** 或__text__</span><br><span class="line">&gt; - 排序列表，无序列表使用（+-*），有序列表使用（1.数字加点）</span><br><span class="line">&gt; - 换行，如果上下行无\n(换行操作)则不换行，如果有则换行</span><br><span class="line">&gt; - 空行，如果上下行之间有空行，则会进行换行</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="资源语法"><a href="#资源语法" class="headerlink" title="资源语法"></a>资源语法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">链接：</span><br><span class="line"></span><br><span class="line">&gt; - [链接](baidu.com <span class="string">&quot;百度这可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + [链接2][1]...[链接3][id]</span><br><span class="line">	[1]: baidu.com <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: zhihu.com <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">图片：</span><br><span class="line"></span><br><span class="line">&gt; - ![alt text](/path/.jpg <span class="string">&quot;可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + ![alt text][1]...![alt text][id可任意和下文保持一致即可]</span><br><span class="line">	[1]: /path/.jpg <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: /path/.jpg <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">代码块：</span><br><span class="line"></span><br><span class="line">&gt; 1. `中间是代码块`</span><br><span class="line">&gt; 2. ```bash 中间是代码块 ```</span><br><span class="line">&gt; 3. 四个空格/一个tab操作后面的代码</span><br><span class="line">&gt; 4.&lt;!-- more --&gt; 缩写/不展示全文</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>
+]]></content>
   </entry>
 </search>
