@@ -1,6 +1,6 @@
 :root {
   --body-bg-color: #fff;
-  --content-bg-color: #f5f5f5;
+/*--content-bg-color: $content-bg-color;*/
   --card-bg-color: #f5f5f5;
   --text-color: #555;
   --blockquote-color: #666;
@@ -1219,7 +1219,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #296388;
+  background: #0f1452;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2602,7 +2602,7 @@ body {
   width: 100%;
   background-repeat: repeat-x;
   background-attachment: fixed;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 .content-wrap {
   opacity: 0.9;
