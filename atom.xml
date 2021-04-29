@@ -6,7 +6,7 @@
   <link href="https://fenqian.xyz/atom.xml" rel="self"/>
   
   <link href="https://fenqian.xyz/"/>
-  <updated>2021-04-29T05:51:57.407Z</updated>
+  <updated>2021-04-29T10:44:20.329Z</updated>
   <id>https://fenqian.xyz/</id>
   
   <author>
@@ -15,6 +15,66 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>做点事</title>
+    <link href="https://fenqian.xyz/posts/2837d102/"/>
+    <id>https://fenqian.xyz/posts/2837d102/</id>
+    <published>2021-04-29T08:08:04.000Z</published>
+    <updated>2021-04-29T10:44:20.329Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="广告也是内容"><a href="#广告也是内容" class="headerlink" title="广告也是内容"></a>广告也是内容</h1><p><em><strong>广告内容加工</strong></em></p><span id="more"></span><ul><li><strong>优点</strong></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、内容生产投入大，因此质地优良；</span><br><span class="line">2、由于是免费传播，无版权问题；</span><br><span class="line">3、广告天然是变现产品，变现能力强；</span><br><span class="line"></span><br></pre></td></tr></table></figure><ul><li><strong>生产</strong></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、youtube</span><br><span class="line">2、bilibili</span><br><span class="line">3、其他短视频</span><br><span class="line">4、电视节目</span><br></pre></td></tr></table></figure><ul><li><strong>痛点</strong></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">怎么使得内容有消费潜力</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;广告也是内容&quot;&gt;&lt;a href=&quot;#广告也是内容&quot; class=&quot;headerlink&quot; title=&quot;广告也是内容&quot;&gt;&lt;/a&gt;广告也是内容&lt;/h1&gt;&lt;p&gt;&lt;em&gt;&lt;strong&gt;广告内容加工&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>装饰器详解</title>
+    <link href="https://fenqian.xyz/posts/1d1282f5/"/>
+    <id>https://fenqian.xyz/posts/1d1282f5/</id>
+    <published>2021-04-29T07:14:52.000Z</published>
+    <updated>2021-04-29T10:45:18.237Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="装饰器是什么"><a href="#装饰器是什么" class="headerlink" title="装饰器是什么"></a>装饰器是什么</h1><span id="more"></span><ul><li>装饰器本质上是一种函数构造方法，其构造的是一种可变函数；我们知道在python中一切皆对象，函数即对象，由于对象是灵活不受约束的，因此我们在构造函数时，可将函数对象作为参数传递或者返回，可将函数对象进行随意嵌套，基于这些特性，我们可在在不变更代码的情况下，灵活的扩展函数/模块的功能；</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#装饰器的基本语法如下</span></span><br><span class="line">def father(funs):</span><br><span class="line">def b(funs):</span><br><span class="line">    funs</span><br><span class="line">    pass</span><br><span class="line"><span class="built_in">return</span> b</span><br><span class="line">    </span><br><span class="line">@father()</span><br><span class="line">def son():</span><br><span class="line">pass</span><br><span class="line">    </span><br><span class="line"><span class="comment">#使用,执行子函数，基于结构，会将子函数作为参数传递给父函数，实际执行的是父函数</span></span><br><span class="line">son()</span><br></pre></td></tr></table></figure><ul><li>由上可知，将子函数作为参数传递给父函数，父函数，会谁传递的函数的对象的变化而执行不同的操作，从而实现可变函数的构造。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#上方的结构，不支持复合结构如下，这是由于执行son时已经是复合结构了，在复用一层，就会报错，但是python针对这种场景，也有处理的方法</span></span><br><span class="line">father(son())</span><br><span class="line"></span><br><span class="line"><span class="comment">#处理方法</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line"><span class="comment">#装饰器的基本语法如下</span></span><br><span class="line">def father(funs):</span><br><span class="line">@wraps(funs)</span><br><span class="line">def b(funs):</span><br><span class="line">    funs</span><br><span class="line">    pass</span><br><span class="line"><span class="built_in">return</span> b</span><br><span class="line">    </span><br><span class="line">@father()</span><br><span class="line">def son():</span><br><span class="line">pass</span><br><span class="line"></span><br><span class="line"><span class="comment">#此时即可支持复合结构</span></span><br></pre></td></tr></table></figure></li></ul><h1 id="装饰器的作用"><a href="#装饰器的作用" class="headerlink" title="装饰器的作用"></a>装饰器的作用</h1>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;装饰器是什么&quot;&gt;&lt;a href=&quot;#装饰器是什么&quot; class=&quot;headerlink&quot; title=&quot;装饰器是什么&quot;&gt;&lt;/a&gt;装饰器是什么&lt;/h1&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>好看的hexo博客</title>
+    <link href="https://fenqian.xyz/posts/b6d42d86/"/>
+    <id>https://fenqian.xyz/posts/b6d42d86/</id>
+    <published>2021-04-29T06:30:00.000Z</published>
+    <updated>2021-04-29T06:37:09.935Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="如下"><a href="#如下" class="headerlink" title="如下"></a>如下</h1><ul><li><a href="https://blog.bill.moe/"><strong>竞赛</strong></a></li><li><a href="https://diygod.me/"><strong>b站开源大佬</strong></a></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;如下&quot;&gt;&lt;a href=&quot;#如下&quot; class=&quot;headerlink&quot; title=&quot;如下&quot;&gt;&lt;/a&gt;如下&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://blog.bill.moe/&quot;&gt;&lt;strong&gt;竞赛&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;l</summary>
+      
+    
+    
+    
+    <category term="博客" scheme="https://fenqian.xyz/categories/%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="hexo" scheme="https://fenqian.xyz/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>Android资源采集</title>
