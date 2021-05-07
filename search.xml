@@ -39,6 +39,21 @@
       </tags>
   </entry>
   <entry>
+    <title>好看的hexo博客</title>
+    <url>/posts/b6d42d86/</url>
+    <content><![CDATA[<h1 id="如下"><a href="#如下" class="headerlink" title="如下"></a>如下</h1><ul>
+<li><a href="https://blog.bill.moe/"><strong>竞赛</strong></a></li>
+<li><a href="https://diygod.me/"><strong>b站开源大佬</strong></a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/posts/4a17b156/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -60,24 +75,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>做点事</title>
-    <url>/posts/2837d102/</url>
-    <content><![CDATA[<h1 id="广告也是内容"><a href="#广告也是内容" class="headerlink" title="广告也是内容"></a>广告也是内容</h1><p><em><strong>广告内容加工</strong></em></p>
-<span id="more"></span>
-<ul>
-<li><strong>优点</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、内容生产投入大，因此质地优良；</span><br><span class="line">2、由于是免费传播，无版权问题；</span><br><span class="line">3、广告天然是变现产品，变现能力强；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>生产</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、youtube</span><br><span class="line">2、bilibili</span><br><span class="line">3、其他短视频</span><br><span class="line">4、电视节目</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>痛点</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">怎么使得内容有消费潜力</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
     <title>搭建hexo博客</title>
     <url>/posts/8e88d59c/</url>
     <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
@@ -88,21 +85,6 @@
 <li>related_posts: true</li>
 </ul>
 ]]></content>
-  </entry>
-  <entry>
-    <title>好看的hexo博客</title>
-    <url>/posts/b6d42d86/</url>
-    <content><![CDATA[<h1 id="如下"><a href="#如下" class="headerlink" title="如下"></a>如下</h1><ul>
-<li><a href="https://blog.bill.moe/"><strong>竞赛</strong></a></li>
-<li><a href="https://diygod.me/"><strong>b站开源大佬</strong></a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
   </entry>
   <entry>
     <title>编写博客--makedown语法说明</title>
