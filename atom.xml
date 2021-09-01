@@ -6,7 +6,7 @@
   <link href="https://fenqian.xyz/atom.xml" rel="self"/>
   
   <link href="https://fenqian.xyz/"/>
-  <updated>2021-05-07T09:18:05.330Z</updated>
+  <updated>2021-09-01T09:00:32.564Z</updated>
   <id>https://fenqian.xyz/</id>
   
   <author>
@@ -15,6 +15,74 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>混沌工程</title>
+    <link href="https://fenqian.xyz/posts/7a6c2f74/"/>
+    <id>https://fenqian.xyz/posts/7a6c2f74/</id>
+    <published>2021-09-01T03:56:00.000Z</published>
+    <updated>2021-09-01T09:00:32.564Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="混沌工程"><a href="#混沌工程" class="headerlink" title="混沌工程"></a>混沌工程</h1><ul><li><em><strong>介绍</strong></em></li></ul><p><code>混沌工程是提高分布式系统的稳定性，而进行的一种故障演练测试；具体的方式是向系统注入故障，对比系统稳定时和注入故障后的指标变化；进而评估系统的稳定性和容错能力；</code></p><ul><li><strong>目录</strong></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">混沌工程是什么</span><br><span class="line">为什么要做混沌工程，应用场景</span><br><span class="line">怎么样进行混沌工程</span><br><span class="line">长期规划</span><br></pre></td></tr></table></figure><span id="more"></span><ul><li><p><strong>混沌工程是什么?</strong></p><p>  <code>混沌工程本质是一种故障演练，通过向系统注入故障的方式，来发现问题，从而提升系统的稳定性；  </code></p></li><li><p><strong>为什么要做混沌工程，混沌工程的价值？</strong></p><p>  <code>由于商业软件，基本都是分布式架构，随着用户的增加，架构的节点也越来越多，越来越复炸；复杂系统很容易由于系统中的一些故障，比如节点挂了，redis挂了，消息队列杜塞，硬盘满了，等问题导致系统能力下降；因此我们需要通过模拟故障的方式来碰撞系统，及早发现问题，减少线上风险；  </code></p></li><li><p><strong>怎么样进行混沌工程？</strong></p><ul><li><em><strong>分四步进行</strong></em></li></ul> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">先找到一个稳定状态，然后确定稳定态的指标</span><br><span class="line">确定需覆盖的异常场景，构造异常去碰撞系统</span><br><span class="line">记录系统被碰撞后，相应的指标</span><br><span class="line">将异常态指标和稳定态指标进行对比，分析系统能力是否下降，若下降则代表这个故障未做兼容，需要进行处理</span><br></pre></td></tr></table></figure></li><li><p><strong>如何确定稳定态，如何选取指标?</strong></p><p>  1、一般是参考线上的稳定状态，作为稳定态；稳定态时，需要选取业务指标和系统指标；具体指标的选取要    基于业务特征来进行，比如我们的产品是一款音乐app,用户使用最多的就是音乐播放，音乐下载；影响较大的      是新增用户量，用户活跃度；</p><p>  2、因此我们在选取业务指标时，考虑选取：故障态和稳定态下的，音乐播放数/音乐下载数/听歌人数/新增用      户数/用户留存率/用户的活跃度作为业务指标；</p><p>  3、在确定系统指标时，我们需要具体分析，碰撞的故障，可能影响系统的指标和相应的节点，来监控相应指    标的变化；同时需要分析这种变化对系统业务的影响；</p></li><li><p><strong>如何确定碰撞的异常场景，如何进行碰撞？</strong></p><ul><li><p>异常场景的确认一般是有两种途径；分析系统特征来提取可能的故障/利用线上历史的故障，常见故障有：</p>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CPU 高负载</span><br><span class="line">磁盘高负载：频繁读写磁盘</span><br><span class="line">磁盘空间不足</span><br><span class="line">优雅的下线应用：使用应用的 stop 脚本平滑的停止应用</span><br><span class="line">通过 kill 进程直接停止应用，可能造成数据不一致</span><br><span class="line">网络恶化：随机改变一些包数据，使数据内容不正确</span><br><span class="line">网络延迟：将包延迟一个特定范围的时间</span><br><span class="line">网络丢包：构造一个 tcp 不会完全失败的丢包率</span><br><span class="line">网络黑洞：忽略来自某个 ip 的包</span><br><span class="line">外部服务不可达：将外部服务的域名指向本地环回地址或将访问外部服务的端口的 OUTPUT 数据包丢弃</span><br></pre></td></tr></table></figure></li><li><p>由于混沌工程是对系统健壮性进行的测试，因此需保证系统的真实性，最好利用线上的系统来进行</p><p>  <code>  1、利用线上系统进行混沌工程，需保证系统节点的容量可调度，可控；选取较小可控的节点来进行混沌            工程；   2、进行混沌工程需保证影响可控，可恢复；要保证对线上的业务无影响；  </code></p></li></ul></li><li><p><strong>进行混沌工程的主流工具</strong></p><p>  <code>     大厂基本都有自研的混沌工程的工具，现在国内开源的工具热度最高的是:  </code></p><p>  <a href="https://github.com/chaosblade-io/chaosblade/blob/master/README_CN.md">阿里的chaosblade</a></p><p>  <a href="https://github.com/chaos-mesh/chaos-mesh">云原生计算基金会托管的Chaos Mesh</a></p><p>  <a href="https://github.com/dastergon/awesome-chaos-engineering">混沌工程相关的资料–AWS</a></p></li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;混沌工程&quot;&gt;&lt;a href=&quot;#混沌工程&quot; class=&quot;headerlink&quot; title=&quot;混沌工程&quot;&gt;&lt;/a&gt;混沌工程&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;介绍&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;混沌工程是提高分布式系统的稳定性，而进行的一种故障演练测试；具体的方式是向系统注入故障，对比系统稳定时和注入故障后的指标变化；进而评估系统的稳定性和容错能力；&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;目录&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;混沌工程是什么&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;为什么要做混沌工程，应用场景	&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;怎么样进行混沌工程&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;长期规划&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="技术" scheme="https://fenqian.xyz/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="混沌工程" scheme="https://fenqian.xyz/tags/%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>百度质量体系建设</title>
+    <link href="https://fenqian.xyz/posts/bcd76c52/"/>
+    <id>https://fenqian.xyz/posts/bcd76c52/</id>
+    <published>2021-06-25T02:06:00.000Z</published>
+    <updated>2021-09-01T03:55:56.482Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul><li><em><strong>介绍</strong></em></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure><ul><li><strong>目录</strong></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;百度质量体系建设&quot;&gt;&lt;a href=&quot;#百度质量体系建设&quot; class=&quot;headerlink&quot; title=&quot;百度质量体系建设&quot;&gt;&lt;/a&gt;百度质量体系建设&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;介绍&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>大数据BI报表架构调整</title>
+    <link href="https://fenqian.xyz/posts/10f9513d/"/>
+    <id>https://fenqian.xyz/posts/10f9513d/</id>
+    <published>2021-05-11T03:19:22.000Z</published>
+    <updated>2021-05-11T07:36:15.497Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="大数据BI报表架构调整"><a href="#大数据BI报表架构调整" class="headerlink" title="大数据BI报表架构调整"></a>大数据BI报表架构调整</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span><h2 id="架构说明"><a href="#架构说明" class="headerlink" title="架构说明"></a>架构说明</h2><h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="覆盖范围"><a href="#覆盖范围" class="headerlink" title="覆盖范围"></a>覆盖范围</h3><p><em><strong>oms Category Analysis模块</strong></em></p><ul><li>覆盖前端交互</li><li>覆盖报表的数据</li><li>覆盖接口性能</li></ul><p><em><strong>Traffic Analysis</strong></em></p><ul><li>覆盖前端交互</li><li>覆盖报表的数据</li><li>覆盖接口性能</li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;大数据BI报表架构调整&quot;&gt;&lt;a href=&quot;#大数据BI报表架构调整&quot; class=&quot;headerlink&quot; title=&quot;大数据BI报表架构调整&quot;&gt;&lt;/a&gt;大数据BI报表架构调整&lt;/h1&gt;&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>搭建hexo博客</title>
@@ -45,6 +113,23 @@
     
     <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>做点事</title>
+    <link href="https://fenqian.xyz/posts/2837d102/"/>
+    <id>https://fenqian.xyz/posts/2837d102/</id>
+    <published>2021-04-29T08:08:00.000Z</published>
+    <updated>2021-09-01T03:59:33.945Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="广告也是内容"><a href="#广告也是内容" class="headerlink" title="广告也是内容"></a>广告也是内容</h1><p><em><strong>广告内容加工</strong></em></p><span id="more"></span><ul><li><strong>优点</strong></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、内容生产投入大，因此质地优良；</span><br><span class="line">2、由于是免费传播，无版权问题；</span><br><span class="line">3、广告天然是变现产品，变现能力强；</span><br><span class="line"></span><br></pre></td></tr></table></figure><ul><li><strong>生产</strong></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、youtube</span><br><span class="line">2、bilibili</span><br><span class="line">3、其他短视频</span><br><span class="line">4、电视节目</span><br></pre></td></tr></table></figure><ul><li><strong>痛点</strong></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">怎么使得内容有消费潜力</span><br></pre></td></tr></table></figure><p><em><strong>聚合站</strong></em></p><ul><li><strong>介绍</strong></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">聚合站指视频/pron/小说/新闻聚合站</span><br><span class="line"></span><br></pre></td></tr></table></figure><ul><li><strong>优点</strong></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、内容丰富，可消费性强</span><br><span class="line">2、可通过爬虫获取数据，成本较低</span><br><span class="line">3、变现方式多元，盈利能力强</span><br></pre></td></tr></table></figure><ul><li><strong>生产</strong></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、从几大主站爬去内容</span><br><span class="line">2、从其他盗版站爬去内容</span><br><span class="line">3、从开源/商业的内容服务获取内容</span><br></pre></td></tr></table></figure><ul><li><strong>痛点</strong></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;广告也是内容&quot;&gt;&lt;a href=&quot;#广告也是内容&quot; class=&quot;headerlink&quot; title=&quot;广告也是内容&quot;&gt;&lt;/a&gt;广告也是内容&lt;/h1&gt;&lt;p&gt;&lt;em&gt;&lt;strong&gt;广告内容加工&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;</summary>
     
     
     
@@ -99,27 +184,6 @@
   </entry>
   
   <entry>
-    <title>Android资源采集</title>
-    <link href="https://fenqian.xyz/posts/0/"/>
-    <id>https://fenqian.xyz/posts/0/</id>
-    <published>2021-04-28T09:31:00.000Z</published>
-    <updated>2021-05-07T09:18:05.329Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><span id="more"></span><h3 id="命令："><a href="#命令：" class="headerlink" title="命令："></a>命令：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys cpuinfo</span><br></pre></td></tr></table></figure><h3 id="结果解析："><a href="#结果解析：" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/cpu.png" alt="alt text"></p><h5 id="第一行"><a href="#第一行" class="headerlink" title="第一行"></a>第一行</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">其中第一行：Load: 10.1 / 2.49 / 0.83</span><br><span class="line">表示系统1min/5min/10min cpu负载平均值</span><br><span class="line">标准说明：1/0.7---理论上单核满载是1，但是在真实情况下，满载会存在性能问题，一般不超过70%；四核满载则是4.</span><br></pre></td></tr></table></figure><h5 id="第三行"><a href="#第三行" class="headerlink" title="第三行"></a>第三行</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">75% 593/system_server: 58% user + 16% kernel / faults: 33566 minor 473 major</span><br><span class="line">该行表示资源消耗情况；</span><br><span class="line">593/75%/58%/16%：pid/cpu负载/用户空间负载/内核空间负载</span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="命令扩展"><a href="#命令扩展" class="headerlink" title="命令扩展"></a>命令扩展</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys cpuinfo | grep -w com.afmobi.boomplayer:</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>参考：<a href="https://blog.csdn.net/lipanpan1030/article/details/108118685">dumpsys工具cpu采集说明</a></p><h2 id="MEN"><a href="#MEN" class="headerlink" title="MEN"></a>MEN</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb -s 042461198L000964 shell  dumpsys  meminfo com.afmobi.boomplayer</span><br></pre></td></tr></table></figure><h3 id="结果解析：-1"><a href="#结果解析：-1" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/men.png" alt="alt text"><br><strong>由图可知：</strong> 需要解析获取TOTAL之后的值，单位kb</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#脚本如下</span></span><br><span class="line"><span class="comment"># 得到men的使用情况</span></span><br><span class="line">def get_men(devices, pkg_name):</span><br><span class="line">    cmd = <span class="string">&quot;adb -s &quot;</span>+devices+<span class="string">&quot; shell  dumpsys  meminfo %s&quot;</span>  %(pkg_name)</span><br><span class="line">    total = <span class="string">&quot;TOTAL&quot;</span></span><br><span class="line">    get_cmd = os.popen(cmd).readlines()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;men:&#x27;</span>,get_cmd)</span><br><span class="line">    <span class="keyword">for</span> info <span class="keyword">in</span> get_cmd:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;men_info:&#x27;</span>,info)</span><br><span class="line">        info_sp = info.strip().split()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;info_sp:&quot;</span>,info_sp)</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> range(len(info_sp)):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;item:&quot;</span>,item)</span><br><span class="line">            <span class="keyword">if</span> info_sp[item] == total:</span><br><span class="line">                <span class="built_in">return</span> int(info_sp[item+1])</span><br><span class="line">    <span class="built_in">return</span> 0</span><br></pre></td></tr></table></figure><h2 id="FPS"><a href="#FPS" class="headerlink" title="FPS"></a>FPS</h2><p><strong>fps为帧率，表示单位时间1s内屏幕刷新的次数，Android6之前存在一个相对标准，帧率不能低于60，即单帧耗时不能大于16.67ms,否则会存在丢帧</strong></p><h3 id="命令-1"><a href="#命令-1" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys gfxinfo com.afmobi.boomplayer | grep -A 128 Execute | grep -v <span class="string">&#x27;[a-z]&#x27;</span> </span><br></pre></td></tr></table></figure><h3 id="结果解析：-2"><a href="#结果解析：-2" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/fps.png" alt="alt text"><br><strong>如上图 Draw/Prepare/Process/Execute表示一帧被绘制的四个阶段，四个值相加即为一帧的耗时(无数据则很可能是手机的“GPU呈现模式分析”未打开)</strong></p><p><a href="https://blog.csdn.net/weixin_43291944/article/details/98497689">fps说明</a></p><h2 id="FLOW"><a href="#FLOW" class="headerlink" title="FLOW"></a>FLOW</h2><p><strong>流量获取有多个路径，比如通过在tcp_snd文件获取tcp发送流量，在tcp_rcv文件中获取tcp接受流量，在/net/dev中获取总的发送/接受流量，同时也可以通过代理获取流量值</strong></p><h3 id="命令-2"><a href="#命令-2" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tcp_send_cmd=adb shell cat /proc/uid_stat/uid_cmd/tcp_snd</span><br><span class="line"></span><br><span class="line">tcp_recv_cmd=adb shell cat /proc/uid_stat/uid_cmd/tcp_rcv</span><br><span class="line"></span><br><span class="line">sum_send_cmd=adb shell cat /proc/pid_cmd/net/dev|grep <span class="string">&quot;wlan0&quot;</span>|awk <span class="string">&quot;&#123;print <span class="variable">$10</span>&#125;&quot;</span></span><br><span class="line"></span><br><span class="line">sum_recv_cmd=adb shell cat /proc/pid_cmd/net/dev|grep <span class="string">&quot;wlan0&quot;</span>|awk <span class="string">&quot;&#123;print <span class="variable">$2</span>&#125;&quot;</span></span><br></pre></td></tr></table></figure><p>[流量命令]（<a href="https://testerhome.com/topics/14310%EF%BC%89">https://testerhome.com/topics/14310）</a></p><h2 id="电量"><a href="#电量" class="headerlink" title="电量"></a>电量</h2><h3 id="命令-3"><a href="#命令-3" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell dumpsys batterystats --charged com.afmobi.boomplayer</span><br></pre></td></tr></table></figure><p><strong>预计的电量值如下</strong><br><img src="/text_image/dian.png" alt="alt text"></p><p><a href="https://source.android.com/devices/tech/power/batterystats?hl=zh-cn">电量/流量说明</a></p>]]></content>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;CPU&quot;&gt;&lt;a href=&quot;#CPU&quot; class=&quot;headerlink&quot; title=&quot;CPU&quot;&gt;&lt;/a&gt;CPU&lt;/h2&gt;</summary>
-    
-    
-    
-    <category term="技术" scheme="https://fenqian.xyz/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-    <category term="Android" scheme="https://fenqian.xyz/tags/Android/"/>
-    
-  </entry>
-  
-  <entry>
     <title>编写博客--makedown语法说明</title>
     <link href="https://fenqian.xyz/posts/ed6b07f3/"/>
     <id>https://fenqian.xyz/posts/ed6b07f3/</id>
@@ -136,6 +200,27 @@
     
     
     
+    
+  </entry>
+  
+  <entry>
+    <title>Android资源采集</title>
+    <link href="https://fenqian.xyz/posts/0/"/>
+    <id>https://fenqian.xyz/posts/0/</id>
+    <published>2021-04-01T09:31:00.000Z</published>
+    <updated>2021-09-01T09:03:40.617Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><span id="more"></span><h3 id="命令："><a href="#命令：" class="headerlink" title="命令："></a>命令：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys cpuinfo</span><br></pre></td></tr></table></figure><h3 id="结果解析："><a href="#结果解析：" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/cpu.png" alt="alt text"></p><h5 id="第一行"><a href="#第一行" class="headerlink" title="第一行"></a>第一行</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">其中第一行：Load: 10.1 / 2.49 / 0.83</span><br><span class="line">表示系统1min/5min/10min cpu负载平均值</span><br><span class="line">标准说明：1/0.7---理论上单核满载是1，但是在真实情况下，满载会存在性能问题，一般不超过70%；四核满载则是4.</span><br></pre></td></tr></table></figure><h5 id="第三行"><a href="#第三行" class="headerlink" title="第三行"></a>第三行</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">75% 593/system_server: 58% user + 16% kernel / faults: 33566 minor 473 major</span><br><span class="line">该行表示资源消耗情况；</span><br><span class="line">593/75%/58%/16%：pid/cpu负载/用户空间负载/内核空间负载</span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="命令扩展"><a href="#命令扩展" class="headerlink" title="命令扩展"></a>命令扩展</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys cpuinfo | grep -w com.afmobi.boomplayer:</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>参考：<a href="https://blog.csdn.net/lipanpan1030/article/details/108118685">dumpsys工具cpu采集说明</a></p><h2 id="MEN"><a href="#MEN" class="headerlink" title="MEN"></a>MEN</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb -s 042461198L000964 shell  dumpsys  meminfo com.afmobi.boomplayer</span><br></pre></td></tr></table></figure><h3 id="结果解析：-1"><a href="#结果解析：-1" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/men.png" alt="alt text"><br><strong>由图可知：</strong> 需要解析获取TOTAL之后的值，单位kb</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#脚本如下</span></span><br><span class="line"><span class="comment"># 得到men的使用情况</span></span><br><span class="line">def get_men(devices, pkg_name):</span><br><span class="line">    cmd = <span class="string">&quot;adb -s &quot;</span>+devices+<span class="string">&quot; shell  dumpsys  meminfo %s&quot;</span>  %(pkg_name)</span><br><span class="line">    total = <span class="string">&quot;TOTAL&quot;</span></span><br><span class="line">    get_cmd = os.popen(cmd).readlines()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;men:&#x27;</span>,get_cmd)</span><br><span class="line">    <span class="keyword">for</span> info <span class="keyword">in</span> get_cmd:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;men_info:&#x27;</span>,info)</span><br><span class="line">        info_sp = info.strip().split()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;info_sp:&quot;</span>,info_sp)</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> range(len(info_sp)):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;item:&quot;</span>,item)</span><br><span class="line">            <span class="keyword">if</span> info_sp[item] == total:</span><br><span class="line">                <span class="built_in">return</span> int(info_sp[item+1])</span><br><span class="line">    <span class="built_in">return</span> 0</span><br></pre></td></tr></table></figure><h2 id="FPS"><a href="#FPS" class="headerlink" title="FPS"></a>FPS</h2><p><strong>fps为帧率，表示单位时间1s内屏幕刷新的次数，Android6之前存在一个相对标准，帧率不能低于60，即单帧耗时不能大于16.67ms,否则会存在丢帧</strong></p><h3 id="命令-1"><a href="#命令-1" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys gfxinfo com.afmobi.boomplayer | grep -A 128 Execute | grep -v <span class="string">&#x27;[a-z]&#x27;</span> </span><br></pre></td></tr></table></figure><h3 id="结果解析：-2"><a href="#结果解析：-2" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/fps.png" alt="alt text"><br><strong>如上图 Draw/Prepare/Process/Execute表示一帧被绘制的四个阶段，四个值相加即为一帧的耗时(无数据则很可能是手机的“GPU呈现模式分析”未打开)</strong></p><p><a href="https://blog.csdn.net/weixin_43291944/article/details/98497689">fps说明</a></p><h2 id="FLOW"><a href="#FLOW" class="headerlink" title="FLOW"></a>FLOW</h2><p><strong>流量获取有多个路径，比如通过在tcp_snd文件获取tcp发送流量，在tcp_rcv文件中获取tcp接受流量，在/net/dev中获取总的发送/接受流量，同时也可以通过代理获取流量值</strong></p><h3 id="命令-2"><a href="#命令-2" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tcp_send_cmd=adb shell cat /proc/uid_stat/uid_cmd/tcp_snd</span><br><span class="line"></span><br><span class="line">tcp_recv_cmd=adb shell cat /proc/uid_stat/uid_cmd/tcp_rcv</span><br><span class="line"></span><br><span class="line">sum_send_cmd=adb shell cat /proc/pid_cmd/net/dev|grep <span class="string">&quot;wlan0&quot;</span>|awk <span class="string">&quot;&#123;print <span class="variable">$10</span>&#125;&quot;</span></span><br><span class="line"></span><br><span class="line">sum_recv_cmd=adb shell cat /proc/pid_cmd/net/dev|grep <span class="string">&quot;wlan0&quot;</span>|awk <span class="string">&quot;&#123;print <span class="variable">$2</span>&#125;&quot;</span></span><br></pre></td></tr></table></figure><p><a href="https://testerhome.com/topics/14310">流量命令</a></p><h2 id="电量"><a href="#电量" class="headerlink" title="电量"></a>电量</h2><h3 id="命令-3"><a href="#命令-3" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell dumpsys batterystats --charged com.afmobi.boomplayer</span><br></pre></td></tr></table></figure><p><strong>预计的电量值如下</strong><br><img src="/text_image/dian.png" alt="alt text"></p><p><a href="https://source.android.com/devices/tech/power/batterystats?hl=zh-cn">电量/流量说明</a></p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;CPU&quot;&gt;&lt;a href=&quot;#CPU&quot; class=&quot;headerlink&quot; title=&quot;CPU&quot;&gt;&lt;/a&gt;CPU&lt;/h2&gt;</summary>
+    
+    
+    
+    <category term="技术" scheme="https://fenqian.xyz/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="Android" scheme="https://fenqian.xyz/tags/Android/"/>
     
   </entry>
   
