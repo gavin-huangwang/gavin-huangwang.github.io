@@ -6,7 +6,7 @@
   <link href="https://fenqian.xyz/atom.xml" rel="self"/>
   
   <link href="https://fenqian.xyz/"/>
-  <updated>2021-09-06T11:55:35.133Z</updated>
+  <updated>2021-09-06T11:58:44.463Z</updated>
   <id>https://fenqian.xyz/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://fenqian.xyz/posts/1ee32bf1/"/>
     <id>https://fenqian.xyz/posts/1ee32bf1/</id>
     <published>2021-09-06T08:22:00.000Z</published>
-    <updated>2021-09-06T11:55:35.133Z</updated>
+    <updated>2021-09-06T11:58:44.463Z</updated>
     
     <content type="html"><![CDATA[<h1 id="ANR治理"><a href="#ANR治理" class="headerlink" title="ANR治理"></a>ANR治理</h1><ul><li><em><strong>大纲</strong></em></li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">anr是什么？</span><br><span class="line">为什么会产生anr?</span><br><span class="line">anr是怎样产生的，哪些场景下会产生？</span><br><span class="line">anr如何治理？</span><br><span class="line">解决anr问题的价值？</span><br></pre></td></tr></table></figure><p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1780091311874686979&scene=173&from_msgid=2247488558&from_itemidx=1&count=3&nolastread=1&uin=&key=&devicetype=Windows+10+x64&version=63030532&lang=zh_CN&ascene=0&fontgear=2">头条anr治理系列</a></p><p><a href="https://mp.weixin.qq.com/s/L30s7rOyn6NcPC2y9XNZIQ">百度anr治理</a></p>]]></content>
     
