@@ -8,6 +8,15 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">anr是什么？</span><br><span class="line">为什么会产生anr?</span><br><span class="line">anr是怎样产生的，哪些场景下会产生？</span><br><span class="line">anr如何治理？</span><br><span class="line">解决anr问题的价值？</span><br></pre></td></tr></table></figure>
 
+<ul>
+<li><strong>anr是什么？</strong><br>  <code>anr(Applicatipon No Response),即应用无响应；本质是一个性能问题；在用户和app进行交互时，常会遇到长时间无响应/卡顿的场景；为了改善性能，Android设计了anr的机制，即保证交互能在一定时间内完成，如果未完成，就抛出异常，也就是ANR;   </code></li>
+<li><strong>anr设计机制：</strong><br>  <code>是系统通过与之交互的组件(Activity，Service，Receiver，Provider)以及用户交互(InputEvent)进行超时监控，以判断应用进程(主线程)是否存在卡死或响应过慢的问题，通俗来说就是很多系统中看门狗(watchdog)的设计思想。   </code><ul>
+<li><strong>不同的组件，系统设置的超时时间是不同的，这个时间不同手机厂商的os可能也会做调整：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
+<li><strong>系统抛出anr的机制：</strong><br><code>在进行相关的操作前，系统会基于当前的时间戳和这个类型组件的超时时间设置，计算出超时时间戳；并将超时时间戳传递给anr触发函数，组件若未超时启动，则会在启动成功后，在传递一个参数给anr函数来阻止触发anr;若到超时时间，anr函数还未收到阻止信号，就会触发ANR(类似构建了个定时触发的任务)； </code></li>
+<li><strong>超时触发流程如下：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
+</ul>
+</li>
+</ul>
 <p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1780091311874686979&scene=173&from_msgid=2247488558&from_itemidx=1&count=3&nolastread=1&uin=&key=&devicetype=Windows+10+x64&version=63030532&lang=zh_CN&ascene=0&fontgear=2">头条anr治理系列</a></p>
 <p><a href="https://mp.weixin.qq.com/s/L30s7rOyn6NcPC2y9XNZIQ">百度anr治理</a></p>
 ]]></content>
@@ -17,6 +26,46 @@
       <tags>
         <tag>anr</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>做点事</title>
+    <url>/posts/2837d102/</url>
+    <content><![CDATA[<h1 id="广告也是内容"><a href="#广告也是内容" class="headerlink" title="广告也是内容"></a>广告也是内容</h1><p><em><strong>广告内容加工</strong></em></p>
+<span id="more"></span>
+<ul>
+<li><strong>优点</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、内容生产投入大，因此质地优良；</span><br><span class="line">2、由于是免费传播，无版权问题；</span><br><span class="line">3、广告天然是变现产品，变现能力强；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>生产</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、youtube</span><br><span class="line">2、bilibili</span><br><span class="line">3、其他短视频</span><br><span class="line">4、电视节目</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>痛点</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">怎么使得内容有消费潜力</span><br></pre></td></tr></table></figure>
+
+
+<p><em><strong>聚合站</strong></em></p>
+<ul>
+<li><strong>介绍</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">聚合站指视频/pron/小说/新闻聚合站</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>优点</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、内容丰富，可消费性强</span><br><span class="line">2、可通过爬虫获取数据，成本较低</span><br><span class="line">3、变现方式多元，盈利能力强</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>生产</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、从几大主站爬去内容</span><br><span class="line">2、从其他盗版站爬去内容</span><br><span class="line">3、从开源/商业的内容服务获取内容</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>痛点</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>Android资源采集</title>
@@ -97,46 +146,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>做点事</title>
-    <url>/posts/2837d102/</url>
-    <content><![CDATA[<h1 id="广告也是内容"><a href="#广告也是内容" class="headerlink" title="广告也是内容"></a>广告也是内容</h1><p><em><strong>广告内容加工</strong></em></p>
-<span id="more"></span>
-<ul>
-<li><strong>优点</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、内容生产投入大，因此质地优良；</span><br><span class="line">2、由于是免费传播，无版权问题；</span><br><span class="line">3、广告天然是变现产品，变现能力强；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>生产</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、youtube</span><br><span class="line">2、bilibili</span><br><span class="line">3、其他短视频</span><br><span class="line">4、电视节目</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>痛点</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">怎么使得内容有消费潜力</span><br></pre></td></tr></table></figure>
-
-
-<p><em><strong>聚合站</strong></em></p>
-<ul>
-<li><strong>介绍</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">聚合站指视频/pron/小说/新闻聚合站</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>优点</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、内容丰富，可消费性强</span><br><span class="line">2、可通过爬虫获取数据，成本较低</span><br><span class="line">3、变现方式多元，盈利能力强</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>生产</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、从几大主站爬去内容</span><br><span class="line">2、从其他盗版站爬去内容</span><br><span class="line">3、从开源/商业的内容服务获取内容</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>痛点</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
     <title>搭建hexo博客</title>
     <url>/posts/8e88d59c/</url>
     <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
@@ -162,6 +171,19 @@
       <tags>
         <tag>hexo</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>百度质量体系建设</title>
+    <url>/posts/bcd76c52/</url>
+    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
+<li><em><strong>介绍</strong></em></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>目录</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>混沌工程</title>
@@ -216,19 +238,6 @@
       <tags>
         <tag>混沌工程</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>百度质量体系建设</title>
-    <url>/posts/bcd76c52/</url>
-    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
-<li><em><strong>介绍</strong></em></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>目录</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>类对象/实例对象/类方法/实例方法/静态方法</title>
