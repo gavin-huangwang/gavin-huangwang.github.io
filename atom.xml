@@ -6,7 +6,7 @@
   <link href="https://fenqian.xyz/atom.xml" rel="self"/>
   
   <link href="https://fenqian.xyz/"/>
-  <updated>2021-09-07T12:31:24.035Z</updated>
+  <updated>2021-09-28T11:49:19.074Z</updated>
   <id>https://fenqian.xyz/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>各家模拟器对比分析</title>
+    <link href="https://fenqian.xyz/posts/83661fed/"/>
+    <id>https://fenqian.xyz/posts/83661fed/</id>
+    <published>2021-09-28T02:31:00.000Z</published>
+    <updated>2021-09-28T11:49:19.074Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="各家模拟器对比分析"><a href="#各家模拟器对比分析" class="headerlink" title="各家模拟器对比分析"></a>各家模拟器对比分析</h1><ul><li><em><strong>大纲</strong></em></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">对比产品</span><br><span class="line">包体大小</span><br><span class="line">安兔兔评分</span><br><span class="line">支持功能</span><br><span class="line">资源消耗/操作体验</span><br></pre></td></tr></table></figure><span id="more"></span><ul><li><p><strong>对比产品</strong></p><ul><li>网易Mumu模拟器</li><li>逍遥模拟器</li><li>腾讯手游模拟器</li><li>黑雷模拟器</li><li>水果模拟器</li></ul></li><li><p><strong>包体大小</strong></p><ul><li>网易Mumu模拟器</li></ul><ul><li>apk大小: 8.87M</li><li>安装消耗硬盘: 2.73G</li></ul><ul><li>逍遥模拟器<ul><li>apk大小: 351M </li></ul></li></ul><ul><li>安装消耗硬盘: 1.96G</li></ul><ul><li>腾讯手游模拟器<ul><li>apk大小: 3.49M </li></ul></li></ul><ul><li>安装消耗硬盘: 235M</li></ul><ul><li>黑雷模拟器</li></ul><ul><li>apk大小: 126M</li><li>安装消耗硬盘: 333M</li></ul><ul><li>水果模拟器</li></ul><ul><li>apk大小: 37.1M</li><li>安装消耗硬盘: 125M</li></ul></li><li><p><strong>安兔兔评分</strong></p><ul><li>网易Mumu模拟器</li></ul><ul><li>评分<br><img src="/text_image/%E7%BD%91%E6%98%93.png" alt="alt text"></li></ul><ul><li>逍遥模拟器<ul><li>评分<br><img src="/text_image/%E9%80%8D%E9%81%A5%E6%B8%B8.png" alt="alt text"></li></ul></li><li>腾讯手游模拟器</li></ul><ul><li>评分<br>无，不支持非分发应用</li></ul><ul><li>黑雷模拟器（付费）</li></ul><ul><li>评分</li></ul><ul><li>水果模拟器（付费）</li></ul><ul><li>评分</li></ul></li><li><p><strong>支持功能</strong></p><ul><li>网易Mumu模拟器<ul><li>支持功能<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">支持安装boomplay</span><br><span class="line">支持对boomplay进行的所有操作</span><br><span class="line">不支持手势操作</span><br></pre></td></tr></table></figure></li></ul></li><li>逍遥模拟器<pre><code>* 支持功能</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">支持安装boomplay</span><br><span class="line">支持对boomplay进行的所有操作</span><br><span class="line">不支持手势操作</span><br><span class="line">安兔兔跑分时崩溃</span><br><span class="line">打开app时崩溃</span><br></pre></td></tr></table></figure></li><li>腾讯手游模拟器<ul><li>支持功能<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">不支持安装我们的apk,仅支持安装在腾讯手游助手分发的应用</span><br></pre></td></tr></table></figure></li></ul></li><li>黑雷模拟器（付费）<ul><li>支持功能<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">不支持安装非分发的应用</span><br></pre></td></tr></table></figure></li></ul></li><li>水果模拟器（付费）<ul><li>支持功能<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">支持安装boomplay</span><br><span class="line">支持对boomplay进行的所有操作</span><br><span class="line">不支持手势操作</span><br></pre></td></tr></table></figure></li></ul></li></ul></li><li><p><strong>资源消耗/操作体验</strong> </p><ul><li>网易Mumu模拟器<br><img src="/text_image/%E7%BD%91%E6%98%93_cpu.jpg" alt="alt text"></li><li>逍遥模拟器<br><img src="/text_image/%E9%80%8D%E9%81%A5%E6%B8%B8_cpu.png" alt="alt text"></li></ul></li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;各家模拟器对比分析&quot;&gt;&lt;a href=&quot;#各家模拟器对比分析&quot; class=&quot;headerlink&quot; title=&quot;各家模拟器对比分析&quot;&gt;&lt;/a&gt;各家模拟器对比分析&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;大纲&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;对比产品&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;包体大小&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;安兔兔评分&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;支持功能&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;资源消耗/操作体验&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="工具" scheme="https://fenqian.xyz/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="模拟器" scheme="https://fenqian.xyz/tags/%E6%A8%A1%E6%8B%9F%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>UI自动化框架说明</title>
+    <link href="https://fenqian.xyz/posts/411091fa/"/>
+    <id>https://fenqian.xyz/posts/411091fa/</id>
+    <published>2021-09-09T07:34:58.000Z</published>
+    <updated>2021-09-09T09:14:12.729Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`</code></pre><p>___ 大纲 ___</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">框架的整体结构</span><br><span class="line">代码模块的结构，文件说明</span><br><span class="line">框架的执行过程</span><br><span class="line">框架优化&#x2F;改动以适应我们产品</span><br></pre></td></tr></table></figure><p>___ 框架整体结构 ___<br><img src="/text_image/ui%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%B6%E6%9E%84.png" alt="alt_text"></p><p><code>框架整体构成由五部分构成；分别是runner(入口)/TestCase(控制层)/PageObject(逻辑层)/日志文件/yaml配置模块/报告模块 </code></p><p>___ runner(入口) ___</p><p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;UI自动化框架说明&quot;&gt;&lt;a href=&quot;#UI自动化框架说明&quot; class=&quot;headerlink&quot; title=&quot;UI自动化框架说明&quot;&gt;&lt;/a&gt;UI自动化框架说明&lt;/h1&gt;&lt;pre&gt;&lt;code&gt;`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>ANR治理</title>

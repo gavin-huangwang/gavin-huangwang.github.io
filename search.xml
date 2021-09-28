@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Android资源采集</title>
+    <url>/posts/0/</url>
+    <content><![CDATA[<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><span id="more"></span>
+
+<h3 id="命令："><a href="#命令：" class="headerlink" title="命令："></a>命令：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys cpuinfo</span><br></pre></td></tr></table></figure>
+
+<h3 id="结果解析："><a href="#结果解析：" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/cpu.png" alt="alt text"></p>
+<h5 id="第一行"><a href="#第一行" class="headerlink" title="第一行"></a>第一行</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">其中第一行：Load: 10.1 / 2.49 / 0.83</span><br><span class="line">表示系统1min/5min/10min cpu负载平均值</span><br><span class="line">标准说明：1/0.7---理论上单核满载是1，但是在真实情况下，满载会存在性能问题，一般不超过70%；四核满载则是4.</span><br></pre></td></tr></table></figure>
+<h5 id="第三行"><a href="#第三行" class="headerlink" title="第三行"></a>第三行</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">75% 593/system_server: 58% user + 16% kernel / faults: 33566 minor 473 major</span><br><span class="line">该行表示资源消耗情况；</span><br><span class="line">593/75%/58%/16%：pid/cpu负载/用户空间负载/内核空间负载</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="命令扩展"><a href="#命令扩展" class="headerlink" title="命令扩展"></a>命令扩展</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys cpuinfo | grep -w com.afmobi.boomplayer:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>参考：<a href="https://blog.csdn.net/lipanpan1030/article/details/108118685">dumpsys工具cpu采集说明</a></p>
+<h2 id="MEN"><a href="#MEN" class="headerlink" title="MEN"></a>MEN</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell  dumpsys  meminfo com.afmobi.boomplayer</span><br></pre></td></tr></table></figure>
+
+<h3 id="结果解析：-1"><a href="#结果解析：-1" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/men.png" alt="alt text"><br><strong>由图可知：</strong> 需要解析获取TOTAL之后的值，单位kb</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#脚本如下</span></span><br><span class="line"><span class="comment"># 得到men的使用情况</span></span><br><span class="line">def get_men(devices, pkg_name):</span><br><span class="line">    cmd = <span class="string">&quot;adb -s &quot;</span>+devices+<span class="string">&quot; shell  dumpsys  meminfo %s&quot;</span>  %(pkg_name)</span><br><span class="line">    total = <span class="string">&quot;TOTAL&quot;</span></span><br><span class="line">    get_cmd = os.popen(cmd).readlines()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;men:&#x27;</span>,get_cmd)</span><br><span class="line">    <span class="keyword">for</span> info <span class="keyword">in</span> get_cmd:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;men_info:&#x27;</span>,info)</span><br><span class="line">        info_sp = info.strip().split()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;info_sp:&quot;</span>,info_sp)</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> range(len(info_sp)):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;item:&quot;</span>,item)</span><br><span class="line">            <span class="keyword">if</span> info_sp[item] == total:</span><br><span class="line">                <span class="built_in">return</span> int(info_sp[item+1])</span><br><span class="line">    <span class="built_in">return</span> 0</span><br></pre></td></tr></table></figure>
+<h2 id="FPS"><a href="#FPS" class="headerlink" title="FPS"></a>FPS</h2><p><strong>fps为帧率，表示单位时间1s内屏幕刷新的次数，Android6之前存在一个相对标准，帧率不能低于60，即单帧耗时不能大于16.67ms,否则会存在丢帧</strong></p>
+<h3 id="命令-1"><a href="#命令-1" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys gfxinfo com.afmobi.boomplayer | grep -A 128 Execute | grep -v <span class="string">&#x27;[a-z]&#x27;</span> </span><br></pre></td></tr></table></figure>
+
+<h3 id="结果解析：-2"><a href="#结果解析：-2" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/fps.png" alt="alt text"><br><strong>如上图 Draw/Prepare/Process/Execute表示一帧被绘制的四个阶段，四个值相加即为一帧的耗时(无数据则很可能是手机的“GPU呈现模式分析”未打开)</strong></p>
+<p><a href="https://blog.csdn.net/weixin_43291944/article/details/98497689">fps说明</a></p>
+<h2 id="FLOW"><a href="#FLOW" class="headerlink" title="FLOW"></a>FLOW</h2><p><strong>流量获取有多个路径，比如通过在tcp_snd文件获取tcp发送流量，在tcp_rcv文件中获取tcp接受流量，在/net/dev中获取总的发送/接受流量，同时也可以通过代理获取流量值</strong></p>
+<h3 id="命令-2"><a href="#命令-2" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tcp_send_cmd=adb shell cat /proc/uid_stat/uid_cmd/tcp_snd</span><br><span class="line"></span><br><span class="line">tcp_recv_cmd=adb shell cat /proc/uid_stat/uid_cmd/tcp_rcv</span><br><span class="line"></span><br><span class="line">sum_send_cmd=adb shell cat /proc/pid_cmd/net/dev|grep <span class="string">&quot;wlan0&quot;</span>|awk <span class="string">&quot;&#123;print <span class="variable">$10</span>&#125;&quot;</span></span><br><span class="line"></span><br><span class="line">sum_recv_cmd=adb shell cat /proc/pid_cmd/net/dev|grep <span class="string">&quot;wlan0&quot;</span>|awk <span class="string">&quot;&#123;print <span class="variable">$2</span>&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://testerhome.com/topics/14310">流量命令</a></p>
+<h2 id="电量"><a href="#电量" class="headerlink" title="电量"></a>电量</h2><h3 id="命令-3"><a href="#命令-3" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb shell dumpsys batterystats --charged com.afmobi.boomplayer</span><br></pre></td></tr></table></figure>
+<p><strong>预计的电量值如下</strong><br><img src="/text_image/dian.png" alt="alt text"></p>
+<p><a href="https://source.android.com/devices/tech/power/batterystats?hl=zh-cn">电量/流量说明</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UI自动化框架说明</title>
+    <url>/posts/411091fa/</url>
+    <content><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`
+</code></pre>
+<p>___ 大纲 ___</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">框架的整体结构</span><br><span class="line">代码模块的结构，文件说明</span><br><span class="line">框架的执行过程</span><br><span class="line">框架优化&#x2F;改动以适应我们产品</span><br></pre></td></tr></table></figure>
+
+<p>___ 框架整体结构 ___<br><img src="/text_image/ui%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%B6%E6%9E%84.png" alt="alt_text"></p>
+<p><code>框架整体构成由五部分构成；分别是runner(入口)/TestCase(控制层)/PageObject(逻辑层)/日志文件/yaml配置模块/报告模块 </code></p>
+<p>___ runner(入口) ___</p>
+<p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+]]></content>
+  </entry>
+  <entry>
     <title>ANR治理</title>
     <url>/posts/1ee32bf1/</url>
     <content><![CDATA[<h1 id="ANR治理"><a href="#ANR治理" class="headerlink" title="ANR治理"></a>ANR治理</h1><ul>
@@ -26,6 +83,27 @@
       <tags>
         <tag>anr</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/posts/4a17b156/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><span id="more"></span>
+<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>#开启动画<br>canvas_nest: true </p>
+]]></content>
   </entry>
   <entry>
     <title>做点事</title>
@@ -68,63 +146,133 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
-    <title>Android资源采集</title>
-    <url>/posts/0/</url>
-    <content><![CDATA[<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><span id="more"></span>
+    <title>各家模拟器对比分析</title>
+    <url>/posts/83661fed/</url>
+    <content><![CDATA[<h1 id="各家模拟器对比分析"><a href="#各家模拟器对比分析" class="headerlink" title="各家模拟器对比分析"></a>各家模拟器对比分析</h1><ul>
+<li><em><strong>大纲</strong></em></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">对比产品</span><br><span class="line">包体大小</span><br><span class="line">安兔兔评分</span><br><span class="line">支持功能</span><br><span class="line">资源消耗/操作体验</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
 
-<h3 id="命令："><a href="#命令：" class="headerlink" title="命令："></a>命令：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys cpuinfo</span><br></pre></td></tr></table></figure>
-
-<h3 id="结果解析："><a href="#结果解析：" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/cpu.png" alt="alt text"></p>
-<h5 id="第一行"><a href="#第一行" class="headerlink" title="第一行"></a>第一行</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">其中第一行：Load: 10.1 / 2.49 / 0.83</span><br><span class="line">表示系统1min/5min/10min cpu负载平均值</span><br><span class="line">标准说明：1/0.7---理论上单核满载是1，但是在真实情况下，满载会存在性能问题，一般不超过70%；四核满载则是4.</span><br></pre></td></tr></table></figure>
-<h5 id="第三行"><a href="#第三行" class="headerlink" title="第三行"></a>第三行</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">75% 593/system_server: 58% user + 16% kernel / faults: 33566 minor 473 major</span><br><span class="line">该行表示资源消耗情况；</span><br><span class="line">593/75%/58%/16%：pid/cpu负载/用户空间负载/内核空间负载</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="命令扩展"><a href="#命令扩展" class="headerlink" title="命令扩展"></a>命令扩展</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys cpuinfo | grep -w com.afmobi.boomplayer:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>参考：<a href="https://blog.csdn.net/lipanpan1030/article/details/108118685">dumpsys工具cpu采集说明</a></p>
-<h2 id="MEN"><a href="#MEN" class="headerlink" title="MEN"></a>MEN</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell  dumpsys  meminfo com.afmobi.boomplayer</span><br></pre></td></tr></table></figure>
-
-<h3 id="结果解析：-1"><a href="#结果解析：-1" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/men.png" alt="alt text"><br><strong>由图可知：</strong> 需要解析获取TOTAL之后的值，单位kb</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#脚本如下</span></span><br><span class="line"><span class="comment"># 得到men的使用情况</span></span><br><span class="line">def get_men(devices, pkg_name):</span><br><span class="line">    cmd = <span class="string">&quot;adb -s &quot;</span>+devices+<span class="string">&quot; shell  dumpsys  meminfo %s&quot;</span>  %(pkg_name)</span><br><span class="line">    total = <span class="string">&quot;TOTAL&quot;</span></span><br><span class="line">    get_cmd = os.popen(cmd).readlines()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;men:&#x27;</span>,get_cmd)</span><br><span class="line">    <span class="keyword">for</span> info <span class="keyword">in</span> get_cmd:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;men_info:&#x27;</span>,info)</span><br><span class="line">        info_sp = info.strip().split()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;info_sp:&quot;</span>,info_sp)</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> range(len(info_sp)):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;item:&quot;</span>,item)</span><br><span class="line">            <span class="keyword">if</span> info_sp[item] == total:</span><br><span class="line">                <span class="built_in">return</span> int(info_sp[item+1])</span><br><span class="line">    <span class="built_in">return</span> 0</span><br></pre></td></tr></table></figure>
-<h2 id="FPS"><a href="#FPS" class="headerlink" title="FPS"></a>FPS</h2><p><strong>fps为帧率，表示单位时间1s内屏幕刷新的次数，Android6之前存在一个相对标准，帧率不能低于60，即单帧耗时不能大于16.67ms,否则会存在丢帧</strong></p>
-<h3 id="命令-1"><a href="#命令-1" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys gfxinfo com.afmobi.boomplayer | grep -A 128 Execute | grep -v <span class="string">&#x27;[a-z]&#x27;</span> </span><br></pre></td></tr></table></figure>
-
-<h3 id="结果解析：-2"><a href="#结果解析：-2" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/fps.png" alt="alt text"><br><strong>如上图 Draw/Prepare/Process/Execute表示一帧被绘制的四个阶段，四个值相加即为一帧的耗时(无数据则很可能是手机的“GPU呈现模式分析”未打开)</strong></p>
-<p><a href="https://blog.csdn.net/weixin_43291944/article/details/98497689">fps说明</a></p>
-<h2 id="FLOW"><a href="#FLOW" class="headerlink" title="FLOW"></a>FLOW</h2><p><strong>流量获取有多个路径，比如通过在tcp_snd文件获取tcp发送流量，在tcp_rcv文件中获取tcp接受流量，在/net/dev中获取总的发送/接受流量，同时也可以通过代理获取流量值</strong></p>
-<h3 id="命令-2"><a href="#命令-2" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tcp_send_cmd=adb shell cat /proc/uid_stat/uid_cmd/tcp_snd</span><br><span class="line"></span><br><span class="line">tcp_recv_cmd=adb shell cat /proc/uid_stat/uid_cmd/tcp_rcv</span><br><span class="line"></span><br><span class="line">sum_send_cmd=adb shell cat /proc/pid_cmd/net/dev|grep <span class="string">&quot;wlan0&quot;</span>|awk <span class="string">&quot;&#123;print <span class="variable">$10</span>&#125;&quot;</span></span><br><span class="line"></span><br><span class="line">sum_recv_cmd=adb shell cat /proc/pid_cmd/net/dev|grep <span class="string">&quot;wlan0&quot;</span>|awk <span class="string">&quot;&#123;print <span class="variable">$2</span>&#125;&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><a href="https://testerhome.com/topics/14310">流量命令</a></p>
-<h2 id="电量"><a href="#电量" class="headerlink" title="电量"></a>电量</h2><h3 id="命令-3"><a href="#命令-3" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb shell dumpsys batterystats --charged com.afmobi.boomplayer</span><br></pre></td></tr></table></figure>
-<p><strong>预计的电量值如下</strong><br><img src="/text_image/dian.png" alt="alt text"></p>
-<p><a href="https://source.android.com/devices/tech/power/batterystats?hl=zh-cn">电量/流量说明</a></p>
+<ul>
+<li><p><strong>对比产品</strong></p>
+<ul>
+<li>网易Mumu模拟器</li>
+<li>逍遥模拟器</li>
+<li>腾讯手游模拟器</li>
+<li>黑雷模拟器</li>
+<li>水果模拟器</li>
+</ul>
+</li>
+<li><p><strong>包体大小</strong></p>
+<ul>
+<li>网易Mumu模拟器</li>
+</ul>
+<ul>
+<li>apk大小: 8.87M</li>
+<li>安装消耗硬盘: 2.73G</li>
+</ul>
+<ul>
+<li>逍遥模拟器<ul>
+<li>apk大小: 351M </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>安装消耗硬盘: 1.96G</li>
+</ul>
+<ul>
+<li>腾讯手游模拟器<ul>
+<li>apk大小: 3.49M </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>安装消耗硬盘: 235M</li>
+</ul>
+<ul>
+<li>黑雷模拟器</li>
+</ul>
+<ul>
+<li>apk大小: 126M</li>
+<li>安装消耗硬盘: 333M</li>
+</ul>
+<ul>
+<li>水果模拟器</li>
+</ul>
+<ul>
+<li>apk大小: 37.1M</li>
+<li>安装消耗硬盘: 125M</li>
+</ul>
+</li>
+<li><p><strong>安兔兔评分</strong></p>
+<ul>
+<li>网易Mumu模拟器</li>
+</ul>
+<ul>
+<li>评分<br><img src="/text_image/%E7%BD%91%E6%98%93.png" alt="alt text"></li>
+</ul>
+<ul>
+<li>逍遥模拟器<ul>
+<li>评分<br><img src="/text_image/%E9%80%8D%E9%81%A5%E6%B8%B8.png" alt="alt text"></li>
+</ul>
+</li>
+<li>腾讯手游模拟器</li>
+</ul>
+<ul>
+<li>评分<br>无，不支持非分发应用</li>
+</ul>
+<ul>
+<li>黑雷模拟器（付费）</li>
+</ul>
+<ul>
+<li>评分</li>
+</ul>
+<ul>
+<li>水果模拟器（付费）</li>
+</ul>
+<ul>
+<li>评分</li>
+</ul>
+</li>
+<li><p><strong>支持功能</strong></p>
+<ul>
+<li>网易Mumu模拟器<ul>
+<li>支持功能<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">支持安装boomplay</span><br><span class="line">支持对boomplay进行的所有操作</span><br><span class="line">不支持手势操作</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>逍遥模拟器<pre><code>* 支持功能
+</code></pre>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">支持安装boomplay</span><br><span class="line">支持对boomplay进行的所有操作</span><br><span class="line">不支持手势操作</span><br><span class="line">安兔兔跑分时崩溃</span><br><span class="line">打开app时崩溃</span><br></pre></td></tr></table></figure>
+</li>
+<li>腾讯手游模拟器<ul>
+<li>支持功能<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">不支持安装我们的apk,仅支持安装在腾讯手游助手分发的应用</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>黑雷模拟器（付费）<ul>
+<li>支持功能<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">不支持安装非分发的应用</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>水果模拟器（付费）<ul>
+<li>支持功能<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">支持安装boomplay</span><br><span class="line">支持对boomplay进行的所有操作</span><br><span class="line">不支持手势操作</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>资源消耗/操作体验</strong> </p>
+<ul>
+<li>网易Mumu模拟器<br><img src="/text_image/%E7%BD%91%E6%98%93_cpu.jpg" alt="alt text"></li>
+<li>逍遥模拟器<br><img src="/text_image/%E9%80%8D%E9%81%A5%E6%B8%B8_cpu.png" alt="alt text"></li>
+</ul>
+</li>
+</ul>
 ]]></content>
       <categories>
-        <category>技术</category>
+        <category>工具</category>
       </categories>
       <tags>
-        <tag>Android</tag>
+        <tag>模拟器</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/posts/4a17b156/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><span id="more"></span>
-<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<p>#开启动画<br>canvas_nest: true </p>
-]]></content>
   </entry>
   <entry>
     <title>大数据BI报表架构调整</title>
@@ -146,18 +294,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>搭建hexo博客</title>
-    <url>/posts/8e88d59c/</url>
-    <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、建立github代码库</span><br><span class="line">2、下载hexo文件</span><br><span class="line">3、下载主题，更改配置使主题生效</span><br><span class="line">4、部署配置git</span><br><span class="line">5、下载git同步工具</span><br><span class="line">6、清洗旧数据，生成新的静态文件，同步静态文件至代码库（需更改hexo部署配置）</span><br><span class="line">7、域名解析，并给github代码库配置域名</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://zhuanlan.zhihu.com/p/26625249">参考</a></p>
-<ul>
-<li>related_posts: true</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>好看的hexo博客</title>
     <url>/posts/b6d42d86/</url>
     <content><![CDATA[<h1 id="如下"><a href="#如下" class="headerlink" title="如下"></a>如下</h1><ul>
@@ -173,17 +309,16 @@
       </tags>
   </entry>
   <entry>
-    <title>百度质量体系建设</title>
-    <url>/posts/bcd76c52/</url>
-    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
-<li><em><strong>介绍</strong></em></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
+    <title>搭建hexo博客</title>
+    <url>/posts/8e88d59c/</url>
+    <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、建立github代码库</span><br><span class="line">2、下载hexo文件</span><br><span class="line">3、下载主题，更改配置使主题生效</span><br><span class="line">4、部署配置git</span><br><span class="line">5、下载git同步工具</span><br><span class="line">6、清洗旧数据，生成新的静态文件，同步静态文件至代码库（需更改hexo部署配置）</span><br><span class="line">7、域名解析，并给github代码库配置域名</span><br></pre></td></tr></table></figure>
 
+<p>More info: <a href="https://zhuanlan.zhihu.com/p/26625249">参考</a></p>
 <ul>
-<li><strong>目录</strong></li>
+<li>related_posts: true</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
+]]></content>
   </entry>
   <entry>
     <title>混沌工程</title>
@@ -238,6 +373,19 @@
       <tags>
         <tag>混沌工程</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>百度质量体系建设</title>
+    <url>/posts/bcd76c52/</url>
+    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
+<li><em><strong>介绍</strong></em></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>目录</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>类对象/实例对象/类方法/实例方法/静态方法</title>
