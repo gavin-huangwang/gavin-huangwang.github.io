@@ -6,7 +6,7 @@
   <link href="https://fenqian.xyz/atom.xml" rel="self"/>
   
   <link href="https://fenqian.xyz/"/>
-  <updated>2021-09-29T03:55:54.397Z</updated>
+  <updated>2021-10-13T10:35:46.085Z</updated>
   <id>https://fenqian.xyz/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>工作梳理</title>
+    <link href="https://fenqian.xyz/posts/8c69a8ec/"/>
+    <id>https://fenqian.xyz/posts/8c69a8ec/</id>
+    <published>2021-10-12T09:15:00.000Z</published>
+    <updated>2021-10-13T10:35:46.085Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="工作梳理"><a href="#工作梳理" class="headerlink" title="工作梳理"></a>工作梳理</h1><ul><li><em><strong>大纲</strong></em></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">重点核心</span><br><span class="line">kpi导向</span><br><span class="line">日常工作</span><br></pre></td></tr></table></figure><span id="more"></span><ul><li><p><em><strong>重点核心</strong></em></p>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">外部标准&#x2F;规范（预装&#x2F;上架）：稳定性&#x2F;anr&#x2F;clash&#x2F;内存曲线（P0）</span><br><span class="line">线上监控&#x2F;稳定性：监控体系（P1）</span><br><span class="line">服务性能提升：性能测试(P1)</span><br><span class="line">增效：环境治理，效率提升</span><br></pre></td></tr></table></figure><ul><li><strong>外部标准</strong></li></ul><p> <code> 外部标准，指的是对接传音/其他外部时（谷歌），需要遵循对方的标准；因为不达标会影响上线，因此优先级最高为PO级； </code></p><ul><li>场景：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">稳定性测试：监控anr/clash/内存曲线是否达标</span><br><span class="line">核心：场景需要和标准同步</span><br><span class="line">实践：实用性强</span><br></pre></td></tr></table></figure></li><li>实现：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">待补</span><br></pre></td></tr></table></figure></li><li><strong>线上监控</strong></li></ul><p> <code> 线上监控是质量保障体系的重要一环；设定监控可以及时发现线上问题，及时处理；有效保障系统的质量； </code></p><ul><li>场景：  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">系统监控：接口监控/服务器资源监控/数据的监控/基于埋点的功能监控</span><br></pre></td></tr></table></figure></li><li>实践：</li></ul><p>  <a href="https://testerhome.com/topics/19188">线上监控体系概述</a></p><ul><li><strong>服务性能提升</strong> </li></ul><p>  <code>  c端的系统，性能问题通常是困扰系统的常见问题；性能保障，也是对系统可用性的最大保障  </code></p><ul><li>场景：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">接口性能优化</span><br><span class="line">服务性能优化</span><br><span class="line">app性能优化</span><br></pre></td></tr></table></figure></li><li>实践：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">接口性能：接口性能其实是中后台性能，前后端分离的情况下，后端的性能瓶颈，往往是整个系统的性能瓶颈；</span><br><span class="line">服务性能：服务性能是后端的性能，粒度比接口更细，一般不用关注；</span><br><span class="line">客户端性能：客户端时和用户交互的，客户端性能直接影响到用户的体验；</span><br></pre></td></tr></table></figure></li><li><strong>增效/功能自动化</strong>  </li></ul><p>  <code>  功能自动化，一般用于回归测试，定期的巡检；起到增效的作用；  </code></p><ul><li>场景：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CI/CD持续迭代系统</span><br><span class="line">接口自动化</span><br><span class="line">ui自动化</span><br><span class="line">数据测试自动化</span><br><span class="line">常见的自动化脚本等</span><br></pre></td></tr></table></figure></li><li>实践：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">待补</span><br></pre></td></tr></table></figure></li></ul></li><li><p><em><strong>kpi导向</strong></em></p></li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">增效&#x2F;功能自动化：ui自动化&#x2F;接口自动化(P2)&#x2F;数据测试&#x2F;常见的自动化脚本</span><br></pre></td></tr></table></figure><ul><li><em><strong>日常工作</strong></em></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">稳定性测试（monkey）</span><br><span class="line">接口自动化维护</span><br><span class="line">ui自动化维护</span><br><span class="line">数据测试脚本构建</span><br><span class="line">常见脚本开发</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;工作梳理&quot;&gt;&lt;a href=&quot;#工作梳理&quot; class=&quot;headerlink&quot; title=&quot;工作梳理&quot;&gt;&lt;/a&gt;工作梳理&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;大纲&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;重点核心&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;kpi导向&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;日常工作&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="技术" scheme="https://fenqian.xyz/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="日常" scheme="https://fenqian.xyz/tags/%E6%97%A5%E5%B8%B8/"/>
+    
+    <category term="价值" scheme="https://fenqian.xyz/tags/%E4%BB%B7%E5%80%BC/"/>
+    
+  </entry>
   
   <entry>
     <title>各家模拟器对比分析</title>
