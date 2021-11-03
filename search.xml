@@ -47,6 +47,46 @@
 ]]></content>
   </entry>
   <entry>
+    <title>做点事</title>
+    <url>/posts/2837d102/</url>
+    <content><![CDATA[<h1 id="广告也是内容"><a href="#广告也是内容" class="headerlink" title="广告也是内容"></a>广告也是内容</h1><p><em><strong>广告内容加工</strong></em></p>
+<span id="more"></span>
+<ul>
+<li><strong>优点</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、内容生产投入大，因此质地优良；</span><br><span class="line">2、由于是免费传播，无版权问题；</span><br><span class="line">3、广告天然是变现产品，变现能力强；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>生产</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、youtube</span><br><span class="line">2、bilibili</span><br><span class="line">3、其他短视频</span><br><span class="line">4、电视节目</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>痛点</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">怎么使得内容有消费潜力</span><br></pre></td></tr></table></figure>
+
+
+<p><em><strong>聚合站</strong></em></p>
+<ul>
+<li><strong>介绍</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">聚合站指视频/pron/小说/新闻聚合站</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>优点</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、内容丰富，可消费性强</span><br><span class="line">2、可通过爬虫获取数据，成本较低</span><br><span class="line">3、变现方式多元，盈利能力强</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>生产</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、从几大主站爬去内容</span><br><span class="line">2、从其他盗版站爬去内容</span><br><span class="line">3、从开源/商业的内容服务获取内容</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>痛点</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
     <title>Android资源采集</title>
     <url>/posts/0/</url>
     <content><![CDATA[<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><span id="more"></span>
@@ -106,6 +146,25 @@
 ]]></content>
   </entry>
   <entry>
+    <title>全局函数局部函数</title>
+    <url>/posts/ae3a85c8/</url>
+    <content><![CDATA[<h1 id="全局局部函数"><a href="#全局局部函数" class="headerlink" title="全局局部函数"></a>全局局部函数</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">全局函数：global</span><br><span class="line">局部函数：nonlocal</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>global</strong></p>
+<p><code>全局函数在模块py中生效；使用时需要先定义，在声明；一次声明，模块中全局使用，全局和局部不能是同一个变量； global a a=s</code></p>
+<p><strong>nonlocal</strong></p>
+<p><code>局部变量函数在模块中局部函数中生效；需要先声明，后定义成局部变量，一旦定义成局部变量就仅在该函数中生效，离开该函数就不生效，不能和全局变量为同一个变量 a=s nonlocal a</code></p>
+<p><a href="https://www.cnblogs.com/liyang93/p/6669874.html">参考</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>变量</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>可变对象合并方法</title>
     <url>/posts/def45bf2/</url>
     <content><![CDATA[<h1 id="可变对象合并的方法"><a href="#可变对象合并的方法" class="headerlink" title="可变对象合并的方法"></a>可变对象合并的方法</h1><p>eg:list</p>
@@ -124,46 +183,6 @@
         <tag>python</tag>
         <tag>序列</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>做点事</title>
-    <url>/posts/2837d102/</url>
-    <content><![CDATA[<h1 id="广告也是内容"><a href="#广告也是内容" class="headerlink" title="广告也是内容"></a>广告也是内容</h1><p><em><strong>广告内容加工</strong></em></p>
-<span id="more"></span>
-<ul>
-<li><strong>优点</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、内容生产投入大，因此质地优良；</span><br><span class="line">2、由于是免费传播，无版权问题；</span><br><span class="line">3、广告天然是变现产品，变现能力强；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>生产</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、youtube</span><br><span class="line">2、bilibili</span><br><span class="line">3、其他短视频</span><br><span class="line">4、电视节目</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>痛点</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">怎么使得内容有消费潜力</span><br></pre></td></tr></table></figure>
-
-
-<p><em><strong>聚合站</strong></em></p>
-<ul>
-<li><strong>介绍</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">聚合站指视频/pron/小说/新闻聚合站</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>优点</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、内容丰富，可消费性强</span><br><span class="line">2、可通过爬虫获取数据，成本较低</span><br><span class="line">3、变现方式多元，盈利能力强</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>生产</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、从几大主站爬去内容</span><br><span class="line">2、从其他盗版站爬去内容</span><br><span class="line">3、从开源/商业的内容服务获取内容</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>痛点</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>各家模拟器对比分析</title>
@@ -404,18 +423,6 @@
       </tags>
   </entry>
   <entry>
-    <title>搭建hexo博客</title>
-    <url>/posts/8e88d59c/</url>
-    <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、建立github代码库</span><br><span class="line">2、下载hexo文件</span><br><span class="line">3、下载主题，更改配置使主题生效</span><br><span class="line">4、部署配置git</span><br><span class="line">5、下载git同步工具</span><br><span class="line">6、清洗旧数据，生成新的静态文件，同步静态文件至代码库（需更改hexo部署配置）</span><br><span class="line">7、域名解析，并给github代码库配置域名</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://zhuanlan.zhihu.com/p/26625249">参考</a></p>
-<ul>
-<li>related_posts: true</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>混沌工程</title>
     <url>/posts/7a6c2f74/</url>
     <content><![CDATA[<h1 id="混沌工程"><a href="#混沌工程" class="headerlink" title="混沌工程"></a>混沌工程</h1><ul>
@@ -483,6 +490,18 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
+    <title>搭建hexo博客</title>
+    <url>/posts/8e88d59c/</url>
+    <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、建立github代码库</span><br><span class="line">2、下载hexo文件</span><br><span class="line">3、下载主题，更改配置使主题生效</span><br><span class="line">4、部署配置git</span><br><span class="line">5、下载git同步工具</span><br><span class="line">6、清洗旧数据，生成新的静态文件，同步静态文件至代码库（需更改hexo部署配置）</span><br><span class="line">7、域名解析，并给github代码库配置域名</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://zhuanlan.zhihu.com/p/26625249">参考</a></p>
+<ul>
+<li>related_posts: true</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>类对象/实例对象/类方法/实例方法/静态方法</title>
     <url>/posts/93899372/</url>
     <content><![CDATA[<ul>
@@ -547,6 +566,35 @@
 ]]></content>
   </entry>
   <entry>
+    <title>阿里测开面试题</title>
+    <url>/posts/92386e32/</url>
+    <content><![CDATA[<p>技术题</p>
+<span id="more"></span>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">了解多线程吗？了解 Python 的 GIL 锁吗？</span><br><span class="line">说一下进程和线程</span><br><span class="line">进程间通信的方式有哪些？</span><br><span class="line">说一下什么是乐观锁和悲观锁？</span><br><span class="line">AOP</span><br><span class="line">什么是 IOC？</span><br><span class="line">list 和 map 相关</span><br><span class="line">解释一下工厂模式？</span><br><span class="line">内存泄漏</span><br><span class="line">会做性能测试吗？容量测试/稳定性测试？</span><br><span class="line">Python2 和 3 的区别？</span><br><span class="line">DNS 解释一下？</span><br><span class="line">用户名、密码、验证码哪个校验顺序？</span><br><span class="line">Linux 根据进程查端口/端口查进程</span><br><span class="line">常用的 Linux 指令？</span><br><span class="line">排序算法</span><br><span class="line">围绕工具开发</span><br><span class="line">工具是如何开发的？</span><br><span class="line">为什么要开发这个工具？</span><br><span class="line">公司内部没有类似平台吗？</span><br><span class="line">效能工具包含哪些？举几个例子？</span><br><span class="line">介绍一下自研的接口自动化框架？</span><br><span class="line">有哪些模块组成？</span><br><span class="line">相比其他框架有哪些优势？缺点有哪些？</span><br><span class="line">介绍一下框架的代码生成模块是怎样实现的？</span><br><span class="line">使用你的框架测一个接口需要做哪些步骤？</span><br><span class="line">接口的断言怎么做？</span><br><span class="line">接口测试带来的收益？</span><br><span class="line">testng 和 junit 优缺点</span><br><span class="line">造数据工具，如何开发、提效多少。</span><br><span class="line">大数据测试</span><br><span class="line">怎么测试数据的准确性？</span><br><span class="line">算法测试</span><br><span class="line">项目经验</span><br><span class="line">算法测试做哪些工作？</span><br><span class="line">如何进行算法评测？</span><br><span class="line">不同的算法类型，评测标准是不同的</span><br><span class="line">介绍一个最近的算法测试案例？</span><br><span class="line">如何选择测试集？测试集的特征如何选择？</span><br><span class="line">说一些算法测试发现的 badcase？</span><br><span class="line">如何保障算法质量？</span><br></pre></td></tr></table></figure>
+
+<p>编程题</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">线程交替打印奇偶数</span><br><span class="line">最长回文子串</span><br></pre></td></tr></table></figure>
+
+<p>项目经历</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍一下负责的项目？</span><br><span class="line">针对老系统（有很多僵尸代码）如何保证质量？</span><br><span class="line">做过的项目遇到的最大风险点？</span><br><span class="line">怎么保障项目的质量？</span><br><span class="line">如何处理紧急需求？</span><br><span class="line">项目的迭代方式？</span><br><span class="line">说一下最近项目推动成功的案例？</span><br><span class="line">说一下自己人力分配？</span><br></pre></td></tr></table></figure>
+
+<p>持续集成</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">了解 CI 吗？解释一下 CI</span><br><span class="line">如何衡量测试用例质量？</span><br><span class="line">说说你对测试的理解？或者说质量的理解？</span><br></pre></td></tr></table></figure>
+
+<p>团队管理</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">团队管理上有没有什么难点？</span><br><span class="line">你期望一个怎样的测试团队？</span><br><span class="line">团队的测试开发比是怎样的？</span><br><span class="line">如何衡量全职/外包比例？</span><br><span class="line">外包的忠诚度如何保障？</span><br><span class="line">你能为团队带来什么？</span><br></pre></td></tr></table></figure>
+
+<p>HR 问题</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">为什么跳槽？</span><br><span class="line">为什么选择阿里？</span><br><span class="line">前几家公司收获</span><br><span class="line">有什么问题要问的？</span><br><span class="line">工作中最大的挑战（最大挫折），如何克服的？</span><br><span class="line">最大的有点和缺点？各自说一个？</span><br><span class="line">未来的职业 3-5 年发展规划？</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>面试</tag>
+        <tag>阿里</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>装饰器详解</title>
     <url>/posts/1d1282f5/</url>
     <content><![CDATA[<h1 id="装饰器是什么"><a href="#装饰器是什么" class="headerlink" title="装饰器是什么"></a>装饰器是什么</h1><span id="more"></span>
@@ -585,35 +633,6 @@
       </categories>
       <tags>
         <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>阿里测开面试题</title>
-    <url>/posts/92386e32/</url>
-    <content><![CDATA[<p>技术题</p>
-<span id="more"></span>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">了解多线程吗？了解 Python 的 GIL 锁吗？</span><br><span class="line">说一下进程和线程</span><br><span class="line">进程间通信的方式有哪些？</span><br><span class="line">说一下什么是乐观锁和悲观锁？</span><br><span class="line">AOP</span><br><span class="line">什么是 IOC？</span><br><span class="line">list 和 map 相关</span><br><span class="line">解释一下工厂模式？</span><br><span class="line">内存泄漏</span><br><span class="line">会做性能测试吗？容量测试/稳定性测试？</span><br><span class="line">Python2 和 3 的区别？</span><br><span class="line">DNS 解释一下？</span><br><span class="line">用户名、密码、验证码哪个校验顺序？</span><br><span class="line">Linux 根据进程查端口/端口查进程</span><br><span class="line">常用的 Linux 指令？</span><br><span class="line">排序算法</span><br><span class="line">围绕工具开发</span><br><span class="line">工具是如何开发的？</span><br><span class="line">为什么要开发这个工具？</span><br><span class="line">公司内部没有类似平台吗？</span><br><span class="line">效能工具包含哪些？举几个例子？</span><br><span class="line">介绍一下自研的接口自动化框架？</span><br><span class="line">有哪些模块组成？</span><br><span class="line">相比其他框架有哪些优势？缺点有哪些？</span><br><span class="line">介绍一下框架的代码生成模块是怎样实现的？</span><br><span class="line">使用你的框架测一个接口需要做哪些步骤？</span><br><span class="line">接口的断言怎么做？</span><br><span class="line">接口测试带来的收益？</span><br><span class="line">testng 和 junit 优缺点</span><br><span class="line">造数据工具，如何开发、提效多少。</span><br><span class="line">大数据测试</span><br><span class="line">怎么测试数据的准确性？</span><br><span class="line">算法测试</span><br><span class="line">项目经验</span><br><span class="line">算法测试做哪些工作？</span><br><span class="line">如何进行算法评测？</span><br><span class="line">不同的算法类型，评测标准是不同的</span><br><span class="line">介绍一个最近的算法测试案例？</span><br><span class="line">如何选择测试集？测试集的特征如何选择？</span><br><span class="line">说一些算法测试发现的 badcase？</span><br><span class="line">如何保障算法质量？</span><br></pre></td></tr></table></figure>
-
-<p>编程题</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">线程交替打印奇偶数</span><br><span class="line">最长回文子串</span><br></pre></td></tr></table></figure>
-
-<p>项目经历</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍一下负责的项目？</span><br><span class="line">针对老系统（有很多僵尸代码）如何保证质量？</span><br><span class="line">做过的项目遇到的最大风险点？</span><br><span class="line">怎么保障项目的质量？</span><br><span class="line">如何处理紧急需求？</span><br><span class="line">项目的迭代方式？</span><br><span class="line">说一下最近项目推动成功的案例？</span><br><span class="line">说一下自己人力分配？</span><br></pre></td></tr></table></figure>
-
-<p>持续集成</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">了解 CI 吗？解释一下 CI</span><br><span class="line">如何衡量测试用例质量？</span><br><span class="line">说说你对测试的理解？或者说质量的理解？</span><br></pre></td></tr></table></figure>
-
-<p>团队管理</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">团队管理上有没有什么难点？</span><br><span class="line">你期望一个怎样的测试团队？</span><br><span class="line">团队的测试开发比是怎样的？</span><br><span class="line">如何衡量全职/外包比例？</span><br><span class="line">外包的忠诚度如何保障？</span><br><span class="line">你能为团队带来什么？</span><br></pre></td></tr></table></figure>
-
-<p>HR 问题</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">为什么跳槽？</span><br><span class="line">为什么选择阿里？</span><br><span class="line">前几家公司收获</span><br><span class="line">有什么问题要问的？</span><br><span class="line">工作中最大的挑战（最大挫折），如何克服的？</span><br><span class="line">最大的有点和缺点？各自说一个？</span><br><span class="line">未来的职业 3-5 年发展规划？</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>面试</tag>
-        <tag>阿里</tag>
       </tags>
   </entry>
 </search>

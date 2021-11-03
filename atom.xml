@@ -6,7 +6,7 @@
   <link href="https://fenqian.xyz/atom.xml" rel="self"/>
   
   <link href="https://fenqian.xyz/"/>
-  <updated>2021-11-03T03:57:38.451Z</updated>
+  <updated>2021-11-03T06:34:09.861Z</updated>
   <id>https://fenqian.xyz/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>全局函数局部函数</title>
+    <link href="https://fenqian.xyz/posts/ae3a85c8/"/>
+    <id>https://fenqian.xyz/posts/ae3a85c8/</id>
+    <published>2021-11-03T06:23:00.000Z</published>
+    <updated>2021-11-03T06:34:09.861Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="全局局部函数"><a href="#全局局部函数" class="headerlink" title="全局局部函数"></a>全局局部函数</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">全局函数：global</span><br><span class="line">局部函数：nonlocal</span><br></pre></td></tr></table></figure><span id="more"></span><p><strong>global</strong></p><p><code>全局函数在模块py中生效；使用时需要先定义，在声明；一次声明，模块中全局使用，全局和局部不能是同一个变量； global a a=s</code></p><p><strong>nonlocal</strong></p><p><code>局部变量函数在模块中局部函数中生效；需要先声明，后定义成局部变量，一旦定义成局部变量就仅在该函数中生效，离开该函数就不生效，不能和全局变量为同一个变量 a=s nonlocal a</code></p><p><a href="https://www.cnblogs.com/liyang93/p/6669874.html">参考</a></p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;全局局部函数&quot;&gt;&lt;a href=&quot;#全局局部函数&quot; class=&quot;headerlink&quot; title=&quot;全局局部函数&quot;&gt;&lt;/a&gt;全局局部函数&lt;/h1&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;全局函数：global&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;局部函数：nonlocal&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="技术" scheme="https://fenqian.xyz/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="python" scheme="https://fenqian.xyz/tags/python/"/>
+    
+    <category term="变量" scheme="https://fenqian.xyz/tags/%E5%8F%98%E9%87%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>可变对象合并方法</title>
