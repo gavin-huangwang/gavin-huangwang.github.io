@@ -6,7 +6,7 @@
   <link href="https://fenqian.xyz/atom.xml" rel="self"/>
   
   <link href="https://fenqian.xyz/"/>
-  <updated>2021-11-03T06:34:09.861Z</updated>
+  <updated>2021-11-08T07:42:50.019Z</updated>
   <id>https://fenqian.xyz/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python语法特性</title>
+    <link href="https://fenqian.xyz/posts/d641bafc/"/>
+    <id>https://fenqian.xyz/posts/d641bafc/</id>
+    <published>2021-11-03T09:30:00.000Z</published>
+    <updated>2021-11-08T07:42:50.019Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;python语法特性&quot;&gt;&lt;a href=&quot;#python语法特性&quot; class=&quot;headerlink&quot; title=&quot;python语法特性&quot;&gt;&lt;/a&gt;python语法特性&lt;/h1&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr</summary>
+      
+    
+    
+    
+    <category term="技术" scheme="https://fenqian.xyz/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="python" scheme="https://fenqian.xyz/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>全局函数局部函数</title>
