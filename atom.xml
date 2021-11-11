@@ -6,7 +6,7 @@
   <link href="https://fenqian.xyz/atom.xml" rel="self"/>
   
   <link href="https://fenqian.xyz/"/>
-  <updated>2021-11-10T07:55:07.655Z</updated>
+  <updated>2021-11-11T03:33:27.127Z</updated>
   <id>https://fenqian.xyz/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python文档管理</title>
+    <link href="https://fenqian.xyz/posts/2020cd00/"/>
+    <id>https://fenqian.xyz/posts/2020cd00/</id>
+    <published>2021-11-11T02:15:00.000Z</published>
+    <updated>2021-11-11T03:33:27.127Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="python文档说明"><a href="#python文档说明" class="headerlink" title="python文档说明"></a>python文档说明</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">文档管理的作用</span><br><span class="line">文档管理模块pydoc介绍</span><br><span class="line">怎么使用文档管理</span><br><span class="line"></span><br></pre></td></tr></table></figure><span id="more"></span><ul><li><p><strong>文档管理的作用</strong></p><p>  <code>  通过在模块/类/函数中进行规范化注释，可以有效的说明模块/类/函数的功能；清晰的体现程序的结构；  </code></p></li><li><p><strong>文档管理模块pydoc.py</strong>  </p><p>  <code>  文档管理模块pydoc，是python内置的一个文档管理模块。它可以实现在线实时/离线查看。模块/类/函数（内置/第三方/自有均支持）中的注释信息，同时可以将规范的注释信息生成html文件进行查看；  </code></p></li><li><p><strong>怎么实现</strong> </p>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">模块中注释的规范</span><br><span class="line">文档管理模块实时查看</span><br><span class="line">文档管理模块生成html文件查看</span><br></pre></td></tr></table></figure><ul><li><em>模块中注释的规范</em></li></ul>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">   e.g</span><br><span class="line">   # -*- coding: utf-8 -*-</span><br><span class="line">   </span><br><span class="line">   &quot;&quot;&quot;</span><br><span class="line">   @author jw</span><br><span class="line">   @desc 本模块是一个测试文件，用来说明pydoc的读取内容</span><br><span class="line">   @date 2017&#x2F;4&#x2F;13</span><br><span class="line">   &quot;&quot;&quot;</span><br><span class="line">   </span><br><span class="line">   #测试变量</span><br><span class="line">   data&#x3D;1</span><br><span class="line">   </span><br><span class="line">   class Test():</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">       测试类</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">   </span><br><span class="line">       def test_c(s):</span><br><span class="line">           &quot;&quot;&quot;</span><br><span class="line">           测试函数</span><br><span class="line">           &quot;&quot;&quot;</span><br><span class="line">           pass</span><br><span class="line">   </span><br><span class="line">   def test():</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">       测试函数</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">       pass</span><br><span class="line">       </span><br><span class="line">以上就是相对标准的注释规范，注释一般由三部分构成模块的注释，类的注释，函数的注释；以上注释在编译后，可使用pydoc进行查看，如下图，第一个区域是顶部注释；第二个区域是类注释，其中会包含类函数，第三个区域是模块函数注释；最后为模块定义的变量；</span><br><span class="line"></span><br></pre></td></tr></table></figure><ul><li>_查看效果如下_：</li></ul><p>  <img src="/text_image/pydoc.jpg" alt="alt_text"></p><ul><li><em>实时查看模块说明文档</em></li></ul><p>  实时查看可使用pydoc的help方法，注意非内置模块，使用前，需要先导入模块</p><p>  <img src="/text_image/help.png" alt="alt_text"></p><ul><li><em>离线生成html查看模块文档</em></li></ul>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">生成全局html文档命令：python  -m pydoc -p *** #在通过loaclhost:****的方式访问查看</span><br><span class="line">查看特定的对象 python -m pydoc -w test&#x2F;test.Test #生成特定对象的html文件</span><br><span class="line">查找特定对象的文档 python -m pydoc -k test</span><br></pre></td></tr></table></figure></li></ul><p><code>PS:    上方的&quot;&quot;&quot;注释&quot;&quot;&quot;称为文档字符串，可通过对象的__doc__方法来进行查看，如Test.__doc__;</code></p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;python文档说明&quot;&gt;&lt;a href=&quot;#python文档说明&quot; class=&quot;headerlink&quot; title=&quot;python文档说明&quot;&gt;&lt;/a&gt;python文档说明&lt;/h1&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;文档管理的作用&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;文档管理模块pydoc介绍&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;怎么使用文档管理&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="技术" scheme="https://fenqian.xyz/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="python" scheme="https://fenqian.xyz/tags/python/"/>
+    
+    <category term="说明文档" scheme="https://fenqian.xyz/tags/%E8%AF%B4%E6%98%8E%E6%96%87%E6%A1%A3/"/>
+    
+  </entry>
   
   <entry>
     <title>python语法特性</title>
