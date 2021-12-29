@@ -6,7 +6,7 @@
   <link href="https://fenqian.xyz/atom.xml" rel="self"/>
   
   <link href="https://fenqian.xyz/"/>
-  <updated>2021-12-27T05:59:52.896Z</updated>
+  <updated>2021-12-29T09:01:48.644Z</updated>
   <id>https://fenqian.xyz/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python-多线程</title>
+    <link href="https://fenqian.xyz/posts/b7270d4a/"/>
+    <id>https://fenqian.xyz/posts/b7270d4a/</id>
+    <published>2021-12-29T08:32:00.000Z</published>
+    <updated>2021-12-29T09:01:48.644Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">多线程是什么？</span><br><span class="line">为什么需要使用多线程，多线程的作用？</span><br><span class="line">怎么使用多线程，join方法的作用？</span><br><span class="line">python多线程弊端？</span><br></pre></td></tr></table></figure><span id="more"></span><ul><li><strong>多线程是什么？</strong></li></ul><p><code>线程是程序的最小单元，程序运行时，实际是线程在解释器中执行工作；</code></p><ul><li><strong>为什么需要使用多线程，多线程的作用？</strong></li></ul><p><code>python的多线程是假的多线程，在进程中同时最多只能有一个线程在解释器中运行，这是由python的全局解释器（GIL）来控制的，具体过程为“生成gil-线程运行-线程休眠（gil上锁）-运行其他线程-再次运行此线程时（需要将上一个线程上锁，并解锁此线程）”，这种虽然是假的多线程，但是可以在一个线程等待时，运行另一个线程，使单核得到充分利用；</code></p><ul><li><strong>怎么使用多线程，join方法的作用？</strong></li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import threading</span><br><span class="line">#fun是函数，arg是参数</span><br><span class="line">t1&#x3D;threading.Thread(fun,arg)</span><br><span class="line">t1.start()</span><br><span class="line">t1.join() </span><br><span class="line">print(&quot;主线程执行&quot;)</span><br></pre></td></tr></table></figure><p>join方法的作用是子线程劫持主线程，仅当子线程执行完之后，才能执行主线程，常用于爬虫，如爬取多个资源时，使用多线程，每个子线程添加join等待，仅当爬虫子线程爬取完资源后，才能进行下一步操作（运行主线程）</p><ul><li><strong>python 多线程的弊端</strong></li></ul><p><code>python多线程的GIL机制，导致python同时只能执行一个线程，只能使用单核，在多核机器上会存在巨大的资源浪费；因此多线程多用于高IO操作，尽量避免在多cpu计算场景下使用，该场景下应使用多进程；</code></p>]]></content>
+    
+    
+    <summary type="html">&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;多线程是什么？&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;为什么需要使用多线程，多线程的作用？&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;怎么使用多线程，join方法的作用？&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;python多线程弊端？&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="技术" scheme="https://fenqian.xyz/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="python" scheme="https://fenqian.xyz/tags/python/"/>
+    
+    <category term="多线程" scheme="https://fenqian.xyz/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>常用app测试工具</title>
@@ -435,26 +458,6 @@
     
     
     <category term="hexo" scheme="https://fenqian.xyz/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>编写博客--makedown语法说明</title>
-    <link href="https://fenqian.xyz/posts/ed6b07f3/"/>
-    <id>https://fenqian.xyz/posts/ed6b07f3/</id>
-    <published>2021-04-26T05:41:45.000Z</published>
-    <updated>2021-05-07T10:25:00.239Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="语法总览"><a href="#语法总览" class="headerlink" title="语法总览"></a>语法总览</h1><h2 id="正文语法"><a href="#正文语法" class="headerlink" title="正文语法"></a>正文语法</h2><pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; 1.=== title ===最顶级标题</span><br><span class="line">&gt; 2.---  title --- 二级标题</span><br><span class="line">&gt; 3.<span class="comment"># title/## title/###### title一级/二级/六级标题</span></span><br><span class="line">&gt; * tab缩进语法</span><br><span class="line">&gt; + 字体加粗使用** text ** 或__text__</span><br><span class="line">&gt; - 排序列表，无序列表使用（+-*），有序列表使用（1.数字加点）</span><br><span class="line">&gt; - 换行，如果上下行无\n(换行操作)则不换行，如果有则换行</span><br><span class="line">&gt; - 空行，如果上下行之间有空行，则会进行换行</span><br></pre></td></tr></table></figure></code></pre><h2 id="资源语法"><a href="#资源语法" class="headerlink" title="资源语法"></a>资源语法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">链接：</span><br><span class="line"></span><br><span class="line">&gt; - [链接](baidu.com <span class="string">&quot;百度这可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + [链接2][1]...[链接3][id]</span><br><span class="line">[1]: baidu.com <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">[id]: zhihu.com <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">图片：</span><br><span class="line"></span><br><span class="line">&gt; - ![alt text](/path/.jpg <span class="string">&quot;可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + ![alt text][1]...![alt text][id可任意和下文保持一致即可]</span><br><span class="line">[1]: /path/.jpg <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">[id]: /path/.jpg <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">代码块：</span><br><span class="line"></span><br><span class="line">&gt; 1. `中间是代码块`</span><br><span class="line">&gt; 2. ```bash 中间是代码块 ```</span><br><span class="line">&gt; 3. 四个空格/一个tab操作后面的代码</span><br><span class="line">&gt; 4.&lt;!-- more --&gt; 缩写/不展示全文</span><br></pre></td></tr></table></figure><p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;语法总览&quot;&gt;&lt;a href=&quot;#语法总览&quot; class=&quot;headerlink&quot; title=&quot;语法总览&quot;&gt;&lt;/a&gt;语法总览&lt;/h1&gt;&lt;h2 id=&quot;正文语法&quot;&gt;&lt;a href=&quot;#正文语法&quot; class=&quot;headerlink&quot; title=&quot;正文语法&quot;&gt;&lt;/a</summary>
-      
-    
-    
-    
     
   </entry>
   
