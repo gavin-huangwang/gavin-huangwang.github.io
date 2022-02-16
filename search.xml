@@ -66,27 +66,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/posts/4a17b156/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><span id="more"></span>
-<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<p>#开启动画<br>canvas_nest: true </p>
-]]></content>
-  </entry>
-  <entry>
     <title>SOLOPI使用教程</title>
     <url>/posts/49e140/</url>
     <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
@@ -191,6 +170,7 @@
 <li><p><em><strong>下一步：</strong></em></p>
 </li>
 </ul>
+<p><a href="https://github.com/alipay/SoloPi"><em>Solopi github</em>_</a></p>
 ]]></content>
       <categories>
         <category>技术</category>
@@ -222,48 +202,25 @@
 ]]></content>
   </entry>
   <entry>
-    <title>python文档管理</title>
-    <url>/posts/2020cd00/</url>
-    <content><![CDATA[<h1 id="python文档说明"><a href="#python文档说明" class="headerlink" title="python文档说明"></a>python文档说明</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">文档管理的作用</span><br><span class="line">文档管理模块pydoc介绍</span><br><span class="line">怎么使用文档管理</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<span id="more"></span>
+    <title>Hello World</title>
+    <url>/posts/4a17b156/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><span id="more"></span>
+<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><p><strong>文档管理的作用</strong></p>
-<p>  <code>  通过在模块/类/函数中进行规范化注释，可以有效的说明模块/类/函数的功能；清晰的体现程序的结构；  </code></p>
-</li>
-<li><p><strong>文档管理模块pydoc.py</strong>  </p>
-<p>  <code>  文档管理模块pydoc，是python内置的一个文档管理模块。它可以实现在线实时/离线查看。模块/类/函数（内置/第三方/自有均支持）中的注释信息，同时可以将规范的注释信息生成html文件进行查看；  </code></p>
-</li>
-<li><p><strong>怎么实现</strong> </p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">模块中注释的规范</span><br><span class="line">文档管理模块实时查看</span><br><span class="line">文档管理模块生成html文件查看</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><em>模块中注释的规范</em></li>
-</ul>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   e.g</span><br><span class="line">   # -*- coding: utf-8 -*-</span><br><span class="line">   </span><br><span class="line">   &quot;&quot;&quot;</span><br><span class="line">   @author jw</span><br><span class="line">   @desc 本模块是一个测试文件，用来说明pydoc的读取内容</span><br><span class="line">   @date 2017&#x2F;4&#x2F;13</span><br><span class="line">   &quot;&quot;&quot;</span><br><span class="line">   </span><br><span class="line">   #测试变量</span><br><span class="line">   data&#x3D;1</span><br><span class="line">   </span><br><span class="line">   class Test():</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">       测试类</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">   </span><br><span class="line">       def test_c(s):</span><br><span class="line">           &quot;&quot;&quot;</span><br><span class="line">           测试函数</span><br><span class="line">           &quot;&quot;&quot;</span><br><span class="line">           pass</span><br><span class="line">   </span><br><span class="line">   def test():</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">       测试函数</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">       pass</span><br><span class="line">       </span><br><span class="line">以上就是相对标准的注释规范，注释一般由三部分构成模块的注释，类的注释，函数的注释；以上注释在编译后，可使用pydoc进行查看，如下图，第一个区域是顶部注释；第二个区域是类注释，其中会包含类函数，第三个区域是模块函数注释；最后为模块定义的变量；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>_查看效果如下_：</li>
-</ul>
-<p>  <img src="/text_image/pydoc.jpg" alt="alt_text"></p>
-<ul>
-<li><em>实时查看模块说明文档</em></li>
-</ul>
-<p>  实时查看可使用pydoc的help方法，注意非内置模块，使用前，需要先导入模块</p>
-<p>  <img src="/text_image/help.png" alt="alt_text"></p>
-<ul>
-<li><em>离线生成html查看模块文档</em></li>
-</ul>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">生成全局html文档命令：python  -m pydoc -p *** #在通过loaclhost:****的方式访问查看</span><br><span class="line">查看特定的对象 python -m pydoc -w test&#x2F;test.Test #生成特定对象的html文件</span><br><span class="line">查找特定对象的文档 python -m pydoc -k test</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><code>PS:    上方的&quot;&quot;&quot;注释&quot;&quot;&quot;称为文档字符串，可通过对象的__doc__方法来进行查看，如Test.__doc__;</code></p>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>#开启动画<br>canvas_nest: true </p>
 ]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>说明文档</tag>
-      </tags>
   </entry>
   <entry>
     <title>python-多线程</title>
@@ -315,6 +272,50 @@
       </categories>
       <tags>
         <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python文档管理</title>
+    <url>/posts/2020cd00/</url>
+    <content><![CDATA[<h1 id="python文档说明"><a href="#python文档说明" class="headerlink" title="python文档说明"></a>python文档说明</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">文档管理的作用</span><br><span class="line">文档管理模块pydoc介绍</span><br><span class="line">怎么使用文档管理</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<ul>
+<li><p><strong>文档管理的作用</strong></p>
+<p>  <code>  通过在模块/类/函数中进行规范化注释，可以有效的说明模块/类/函数的功能；清晰的体现程序的结构；  </code></p>
+</li>
+<li><p><strong>文档管理模块pydoc.py</strong>  </p>
+<p>  <code>  文档管理模块pydoc，是python内置的一个文档管理模块。它可以实现在线实时/离线查看。模块/类/函数（内置/第三方/自有均支持）中的注释信息，同时可以将规范的注释信息生成html文件进行查看；  </code></p>
+</li>
+<li><p><strong>怎么实现</strong> </p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">模块中注释的规范</span><br><span class="line">文档管理模块实时查看</span><br><span class="line">文档管理模块生成html文件查看</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><em>模块中注释的规范</em></li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   e.g</span><br><span class="line">   # -*- coding: utf-8 -*-</span><br><span class="line">   </span><br><span class="line">   &quot;&quot;&quot;</span><br><span class="line">   @author jw</span><br><span class="line">   @desc 本模块是一个测试文件，用来说明pydoc的读取内容</span><br><span class="line">   @date 2017&#x2F;4&#x2F;13</span><br><span class="line">   &quot;&quot;&quot;</span><br><span class="line">   </span><br><span class="line">   #测试变量</span><br><span class="line">   data&#x3D;1</span><br><span class="line">   </span><br><span class="line">   class Test():</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">       测试类</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">   </span><br><span class="line">       def test_c(s):</span><br><span class="line">           &quot;&quot;&quot;</span><br><span class="line">           测试函数</span><br><span class="line">           &quot;&quot;&quot;</span><br><span class="line">           pass</span><br><span class="line">   </span><br><span class="line">   def test():</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">       测试函数</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">       pass</span><br><span class="line">       </span><br><span class="line">以上就是相对标准的注释规范，注释一般由三部分构成模块的注释，类的注释，函数的注释；以上注释在编译后，可使用pydoc进行查看，如下图，第一个区域是顶部注释；第二个区域是类注释，其中会包含类函数，第三个区域是模块函数注释；最后为模块定义的变量；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>_查看效果如下_：</li>
+</ul>
+<p>  <img src="/text_image/pydoc.jpg" alt="alt_text"></p>
+<ul>
+<li><em>实时查看模块说明文档</em></li>
+</ul>
+<p>  实时查看可使用pydoc的help方法，注意非内置模块，使用前，需要先导入模块</p>
+<p>  <img src="/text_image/help.png" alt="alt_text"></p>
+<ul>
+<li><em>离线生成html查看模块文档</em></li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">生成全局html文档命令：python  -m pydoc -p *** #在通过loaclhost:****的方式访问查看</span><br><span class="line">查看特定的对象 python -m pydoc -w test&#x2F;test.Test #生成特定对象的html文件</span><br><span class="line">查找特定对象的文档 python -m pydoc -k test</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><code>PS:    上方的&quot;&quot;&quot;注释&quot;&quot;&quot;称为文档字符串，可通过对象的__doc__方法来进行查看，如Test.__doc__;</code></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>说明文档</tag>
       </tags>
   </entry>
   <entry>
@@ -561,18 +562,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>搭建hexo博客</title>
-    <url>/posts/8e88d59c/</url>
-    <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、建立github代码库</span><br><span class="line">2、下载hexo文件</span><br><span class="line">3、下载主题，更改配置使主题生效</span><br><span class="line">4、部署配置git</span><br><span class="line">5、下载git同步工具</span><br><span class="line">6、清洗旧数据，生成新的静态文件，同步静态文件至代码库（需更改hexo部署配置）</span><br><span class="line">7、域名解析，并给github代码库配置域名</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://zhuanlan.zhihu.com/p/26625249">参考</a></p>
-<ul>
-<li>related_posts: true</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>好看的hexo博客</title>
     <url>/posts/b6d42d86/</url>
     <content><![CDATA[<h1 id="如下"><a href="#如下" class="headerlink" title="如下"></a>如下</h1><ul>
@@ -662,6 +651,18 @@
       </tags>
   </entry>
   <entry>
+    <title>搭建hexo博客</title>
+    <url>/posts/8e88d59c/</url>
+    <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、建立github代码库</span><br><span class="line">2、下载hexo文件</span><br><span class="line">3、下载主题，更改配置使主题生效</span><br><span class="line">4、部署配置git</span><br><span class="line">5、下载git同步工具</span><br><span class="line">6、清洗旧数据，生成新的静态文件，同步静态文件至代码库（需更改hexo部署配置）</span><br><span class="line">7、域名解析，并给github代码库配置域名</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://zhuanlan.zhihu.com/p/26625249">参考</a></p>
+<ul>
+<li>related_posts: true</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>混沌工程</title>
     <url>/posts/7a6c2f74/</url>
     <content><![CDATA[<h1 id="混沌工程"><a href="#混沌工程" class="headerlink" title="混沌工程"></a>混沌工程</h1><ul>
@@ -716,6 +717,12 @@
       </tags>
   </entry>
   <entry>
+    <title>用例管理平台</title>
+    <url>/posts/c48e9a83/</url>
+    <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>百度质量体系建设</title>
     <url>/posts/bcd76c52/</url>
     <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
@@ -727,12 +734,6 @@
 <li><strong>目录</strong></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>用例管理平台</title>
-    <url>/posts/c48e9a83/</url>
-    <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
-]]></content>
   </entry>
   <entry>
     <title>稳定性治理</title>
