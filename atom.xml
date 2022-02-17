@@ -6,7 +6,7 @@
   <link href="https://fenqian.xyz/atom.xml" rel="self"/>
   
   <link href="https://fenqian.xyz/"/>
-  <updated>2022-02-16T09:13:09.026Z</updated>
+  <updated>2022-02-17T09:22:49.306Z</updated>
   <id>https://fenqian.xyz/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>稳定性治理-暴力回放</title>
+    <link href="https://fenqian.xyz/posts/81de0e43/"/>
+    <id>https://fenqian.xyz/posts/81de0e43/</id>
+    <published>2022-02-17T01:52:00.000Z</published>
+    <updated>2022-02-17T09:22:49.306Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p><h4 id="覆盖场景"><a href="#覆盖场景" class="headerlink" title="覆盖场景"></a>覆盖场景</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">music首页，点击歌单播放按钮播放，然后息屏进入后台，10s后切换回前台；</span><br><span class="line">music首页，点开播放列表，然后点击music播放音乐，然后关闭播放列表，然后切换到后台，10s后切换回前台；</span><br><span class="line">music首页，进入歌单，点击全部播放，点击全部下载，然后返回首页，上下滑动一屏，然后切换回后台，10s后切换回前台；</span><br><span class="line">music首页，点击头像登录，退出，切换到后台，10s后切换回前台；</span><br><span class="line">treding首页，点击任意music播放，切换到后台，10s后回到前台，关闭播放详情页；</span><br><span class="line">首页，滑动到treding页，上下滑动一屏；然后向左滑动一屏，上下滑动一屏，然后向左滑动一屏，上下滑动一屏,然后向左滑动一屏，上下滑动一屏,然后切换到后台，停留10s;然后点击导航页到library页，然后点击导航页到search页，然后点击导航页到music页；</span><br><span class="line">搜索页，搜索music，搜索结果页左右滚动一屏；点击结果页播放，然后切换到后台休眠10s,在切换回前台;</span><br><span class="line">首页，点击导航页进入library页；点击进入喜欢的music页，点击全部播放；然后切换到后台，停留10s，在切换回前台，退出music页，切换回首页；</span><br><span class="line">首页，切换到buzz页；上下滑动两屏，点击buzz关注按钮，buzz点赞，buzz评论，点击查看buzz详情，然后回退到buzz页，然后在切换到后台，休眠10s，在切换回前台；</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;code&gt;暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&quot;覆盖场景&quot;&gt;&lt;a href=&quot;#覆盖场景&quot; class=&quot;headerlink&quot; title=&quot;覆盖场景&quot;&gt;&lt;/</summary>
+      
+    
+    
+    
+    <category term="技术" scheme="https://fenqian.xyz/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="稳定性" scheme="https://fenqian.xyz/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/"/>
+    
+    <category term="暴力回放" scheme="https://fenqian.xyz/tags/%E6%9A%B4%E5%8A%9B%E5%9B%9E%E6%94%BE/"/>
+    
+  </entry>
   
   <entry>
     <title>传音刷机</title>
@@ -454,29 +481,6 @@
     
     
     <category term="混沌工程" scheme="https://fenqian.xyz/tags/%E6%B7%B7%E6%B2%8C%E5%B7%A5%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>百度质量体系建设</title>
-    <link href="https://fenqian.xyz/posts/bcd76c52/"/>
-    <id>https://fenqian.xyz/posts/bcd76c52/</id>
-    <published>2021-06-25T02:06:00.000Z</published>
-    <updated>2021-09-01T03:55:56.482Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul><li><em><strong>介绍</strong></em></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure><ul><li><strong>目录</strong></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;百度质量体系建设&quot;&gt;&lt;a href=&quot;#百度质量体系建设&quot; class=&quot;headerlink&quot; title=&quot;百度质量体系建设&quot;&gt;&lt;/a&gt;百度质量体系建设&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;&lt;strong&gt;介绍&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</summary>
-      
-    
-    
-    
     
   </entry>
   
