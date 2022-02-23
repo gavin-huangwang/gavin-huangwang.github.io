@@ -194,6 +194,113 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://fenqian.xyz/posts/fbd896d0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/me.jpg">
+      <meta itemprop="name" content="GAVIN HUANG">
+      <meta itemprop="description" content="一身清贫怎敢入繁华，两袖清风岂敢误佳人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fen Qian Web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/fbd896d0/" class="post-title-link" itemprop="url">实战--传音预装</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-02-23 20:00:00 / 修改时间：20:27:24" itemprop="dateCreated datePublished" datetime="2022-02-23T20:00:00+08:00">2022-02-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">确认需要覆盖的场景；</span><br><span class="line">场景的指标监控；</span><br><span class="line">分析监控数据，采集异常数据定位问题；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>确认需要覆盖的场景：</strong></li>
+</ul>
+<p><code>一般需要覆盖功能/性能/兼容/耗电/升级这几块，功能一般覆盖app的主功能</code></p>
+<ul>
+<li><em>方案：</em></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">启动app,点击播放栏播放按钮播放music，在切换到后台，在切换回前台；</span><br><span class="line">treding页上下滑动，在切换到music页上下滑动，在切换回treding页；</span><br><span class="line">music页点击歌单，进入歌单，歌单上下滑动两页，然后返回music页；在点击进入chart页，上下滑动两页，在返回；在点击进入艺人页，上下滑动两页，在返回；在点击进入曲风页，上下滑动，在进入第一个曲风，上下滑动，然后返回music首页；在次进入歌单页，上下滑动，然后在次点击第一个歌单进入歌单详情页，然后返回music首页；点击进入视频页，上下滑动，然后返回music首页；点击进入bbc，上下滑动，然后返回music首页；</span><br><span class="line">treding页播放music，然后返回treding;进入music页，点击歌单上浮按钮，进行全部播放，点击歌单详情页的全部播放按钮进行播放，点击歌单详情页的music播放，返回music后，点击进入video页，点击视频进行播放，返回treding页</span><br><span class="line">treding页进行music下载，music首页歌单全局下载按钮进行下载，点击进入歌单详情页，通过全部下载按钮进行下载；</span><br><span class="line">library页，通过localmusic或者下载music对本地下载的music进行播放，播放和后台循环切换；</span><br><span class="line">后台播放music时，分别同时打开，Facebook，WhatsApp，Twitter，Instagram，chrome；在切换回前台；</span><br><span class="line">music页/library页/buzz页/account页进行循环切换；</span><br><span class="line">buzz页，一二级页面循环切换，且每个页面均进行上下滑动；buzz页，点击评论和点赞按键；</span><br><span class="line">account页，进行登录，退出应用，切换回前台，退出登录；</span><br><span class="line">notification,页面循环切换，且每个页面进行上下滑动；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>场景的指标监控：</strong></p>
+<p>  <code>由于渠道方未提供确切的合规标准，因此选用网易云音乐作为对比范本；在相同场景下，资源消耗超出网易云10%-30%判定为合规，否则判断为异常</code></p>
+<ul>
+<li><em>监控性能工具：</em></li>
+</ul>
+<p>  支付宝：solopi</p>
+<ul>
+<li><em>监控指标：</em></li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CPU:</span><br><span class="line">ROM:</span><br><span class="line">带宽：</span><br><span class="line">响应耗时：</span><br><span class="line">启动耗时：</span><br><span class="line">电量：</span><br><span class="line">流量：</span><br><span class="line">app抛出的异常堆栈：</span><br><span class="line">场景数据：</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://fenqian.xyz/posts/a1c10886/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -946,95 +1053,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://fenqian.xyz/posts/4a17b156/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/me.jpg">
-      <meta itemprop="name" content="GAVIN HUANG">
-      <meta itemprop="description" content="一身清贫怎敢入繁华，两袖清风岂敢误佳人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fen Qian Web">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/4a17b156/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-06 16:18:46" itemprop="dateCreated datePublished" datetime="2022-02-06T16:18:46+08:00">2022-02-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-07 17:18:05" itemprop="dateModified" datetime="2021-05-07T17:18:05+08:00">2021-05-07</time>
-              </span>
-
-          
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>388</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/4a17b156/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1107,7 +1125,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1120,7 +1138,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1177,12 +1195,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">26k</span>
+    <span title="站点总字数">27k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">24 分钟</span>
+    <span title="站点阅读时长">25 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

@@ -6,7 +6,7 @@
   <link href="https://fenqian.xyz/atom.xml" rel="self"/>
   
   <link href="https://fenqian.xyz/"/>
-  <updated>2022-02-23T07:02:54.458Z</updated>
+  <updated>2022-02-23T12:27:24.307Z</updated>
   <id>https://fenqian.xyz/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>实战--传音预装</title>
+    <link href="https://fenqian.xyz/posts/fbd896d0/"/>
+    <id>https://fenqian.xyz/posts/fbd896d0/</id>
+    <published>2022-02-23T12:00:00.000Z</published>
+    <updated>2022-02-23T12:27:24.307Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">确认需要覆盖的场景；</span><br><span class="line">场景的指标监控；</span><br><span class="line">分析监控数据，采集异常数据定位问题；</span><br></pre></td></tr></table></figure><ul><li><strong>确认需要覆盖的场景：</strong></li></ul><p><code>一般需要覆盖功能/性能/兼容/耗电/升级这几块，功能一般覆盖app的主功能</code></p><ul><li><em>方案：</em></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">启动app,点击播放栏播放按钮播放music，在切换到后台，在切换回前台；</span><br><span class="line">treding页上下滑动，在切换到music页上下滑动，在切换回treding页；</span><br><span class="line">music页点击歌单，进入歌单，歌单上下滑动两页，然后返回music页；在点击进入chart页，上下滑动两页，在返回；在点击进入艺人页，上下滑动两页，在返回；在点击进入曲风页，上下滑动，在进入第一个曲风，上下滑动，然后返回music首页；在次进入歌单页，上下滑动，然后在次点击第一个歌单进入歌单详情页，然后返回music首页；点击进入视频页，上下滑动，然后返回music首页；点击进入bbc，上下滑动，然后返回music首页；</span><br><span class="line">treding页播放music，然后返回treding;进入music页，点击歌单上浮按钮，进行全部播放，点击歌单详情页的全部播放按钮进行播放，点击歌单详情页的music播放，返回music后，点击进入video页，点击视频进行播放，返回treding页</span><br><span class="line">treding页进行music下载，music首页歌单全局下载按钮进行下载，点击进入歌单详情页，通过全部下载按钮进行下载；</span><br><span class="line">library页，通过localmusic或者下载music对本地下载的music进行播放，播放和后台循环切换；</span><br><span class="line">后台播放music时，分别同时打开，Facebook，WhatsApp，Twitter，Instagram，chrome；在切换回前台；</span><br><span class="line">music页/library页/buzz页/account页进行循环切换；</span><br><span class="line">buzz页，一二级页面循环切换，且每个页面均进行上下滑动；buzz页，点击评论和点赞按键；</span><br><span class="line">account页，进行登录，退出应用，切换回前台，退出登录；</span><br><span class="line">notification,页面循环切换，且每个页面进行上下滑动；</span><br></pre></td></tr></table></figure><ul><li><p><strong>场景的指标监控：</strong></p><p>  <code>由于渠道方未提供确切的合规标准，因此选用网易云音乐作为对比范本；在相同场景下，资源消耗超出网易云10%-30%判定为合规，否则判断为异常</code></p><ul><li><em>监控性能工具：</em></li></ul><p>  支付宝：solopi</p><ul><li><em>监控指标：</em></li></ul>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CPU:</span><br><span class="line">ROM:</span><br><span class="line">带宽：</span><br><span class="line">响应耗时：</span><br><span class="line">启动耗时：</span><br><span class="line">电量：</span><br><span class="line">流量：</span><br><span class="line">app抛出的异常堆栈：</span><br><span class="line">场景数据：</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;大纲&quot;&gt;&lt;a href=&quot;#大纲&quot; class=&quot;headerlink&quot; title=&quot;大纲&quot;&gt;&lt;/a&gt;大纲&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span c</summary>
+      
+    
+    
+    
+    <category term="技术" scheme="https://fenqian.xyz/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="实战" scheme="https://fenqian.xyz/tags/%E5%AE%9E%E6%88%98/"/>
+    
+    <category term="预装" scheme="https://fenqian.xyz/tags/%E9%A2%84%E8%A3%85/"/>
+    
+  </entry>
   
   <entry>
     <title>python-多进程</title>
@@ -438,30 +464,6 @@
     <category term="日常" scheme="https://fenqian.xyz/tags/%E6%97%A5%E5%B8%B8/"/>
     
     <category term="价值" scheme="https://fenqian.xyz/tags/%E4%BB%B7%E5%80%BC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>各家模拟器对比分析</title>
-    <link href="https://fenqian.xyz/posts/83661fed/"/>
-    <id>https://fenqian.xyz/posts/83661fed/</id>
-    <published>2021-09-28T02:31:00.000Z</published>
-    <updated>2021-09-29T03:55:54.397Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="各家模拟器对比分析"><a href="#各家模拟器对比分析" class="headerlink" title="各家模拟器对比分析"></a>各家模拟器对比分析</h1><ul><li><em><strong>大纲</strong></em></li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">对比产品</span><br><span class="line">包体大小</span><br><span class="line">安兔兔评分</span><br><span class="line">支持功能</span><br><span class="line">资源消耗/操作体验</span><br></pre></td></tr></table></figure><span id="more"></span><ul><li><p><strong>对比产品</strong></p><ul><li>网易Mumu模拟器</li><li>逍遥模拟器</li><li>腾讯手游模拟器</li><li>黑雷模拟器</li><li>水果模拟器</li></ul></li><li><p><strong>包体大小</strong></p><ul><li>网易Mumu模拟器</li></ul><ul><li>apk大小: 8.87M</li><li>安装消耗硬盘: 2.73G</li></ul><ul><li>逍遥模拟器<ul><li>apk大小: 351M </li></ul></li></ul><ul><li>安装消耗硬盘: 1.96G</li></ul><ul><li>腾讯手游模拟器<ul><li>apk大小: 3.49M </li></ul></li></ul><ul><li>安装消耗硬盘: 235M</li></ul><ul><li>黑雷模拟器</li></ul><ul><li>apk大小: 126M</li><li>安装消耗硬盘: 333M</li></ul><ul><li>水果模拟器</li></ul><ul><li>apk大小: 37.1M</li><li>安装消耗硬盘: 125M</li></ul></li><li><p><strong>安兔兔评分</strong></p><ul><li>网易Mumu模拟器</li></ul><ul><li>评分<br><img src="/text_image/%E7%BD%91%E6%98%93.png" alt="alt text"></li></ul><ul><li>逍遥模拟器<ul><li>评分<br><img src="/text_image/%E9%80%8D%E9%81%A5%E6%B8%B8.png" alt="alt text"></li></ul></li><li>腾讯手游模拟器</li></ul><ul><li>评分<br>无，不支持非分发应用</li></ul><ul><li>黑雷模拟器（付费）</li></ul><ul><li>评分</li></ul><ul><li>水果模拟器（付费）</li></ul><ul><li>评分</li></ul></li><li><p><strong>支持功能</strong></p><ul><li>网易Mumu模拟器<ul><li>支持功能<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">支持安装boomplay</span><br><span class="line">支持对boomplay进行的所有操作</span><br><span class="line">不支持手势操作</span><br></pre></td></tr></table></figure></li></ul></li><li>逍遥模拟器<pre><code>* 支持功能</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">支持安装boomplay</span><br><span class="line">支持对boomplay进行的所有操作</span><br><span class="line">不支持手势操作</span><br><span class="line">安兔兔跑分时崩溃</span><br><span class="line">打开app时崩溃</span><br></pre></td></tr></table></figure></li><li>腾讯手游模拟器<ul><li>支持功能<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">不支持安装我们的apk,仅支持安装在腾讯手游助手分发的应用</span><br></pre></td></tr></table></figure></li></ul></li><li>黑雷模拟器（付费）<ul><li>支持功能<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">不支持安装非分发的应用</span><br><span class="line">含病毒组件，用来挖矿的</span><br></pre></td></tr></table></figure></li></ul></li><li>水果模拟器（付费）<ul><li>支持功能<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">云手机，非手机模拟器</span><br><span class="line">不支持安装boomplay</span><br></pre></td></tr></table></figure></li></ul></li></ul></li><li><p><strong>资源消耗/操作体验</strong> </p><ul><li><p>网易Mumu模拟器<br><img src="/text_image/%E7%BD%91%E6%98%93_cpu.jpg" alt="alt text"></p><ul><li>操作体验<br><code>覆盖从5.3.0到最新版本的所有大版本，功能均支持；稳定性也较好，无崩溃或anr现象；操作流畅，无卡顿；</code></li></ul></li><li><p>逍遥模拟器<br><img src="/text_image/%E9%80%8D%E9%81%A5%E6%B8%B8_cpu.png" alt="alt text"></p></li></ul></li><li><p><strong>结论</strong> </p><ul><li><em><strong>android</strong></em></li></ul><p><code>建议使用网易mumu模拟器，改模拟器支持我们app的所有版本，操作流程，资源消耗较少，稳定性较高；且一旦出现模拟器/app崩溃等异常现象时，只要电脑支持远程连接，恢复也较方便；</code></p><ul><li><em><strong>ios</strong></em></li></ul><p><code>国内付费的模拟器均不支持安装我们的app;</code></p></li></ul><p> 建议方案：ups+远控软件（tv）+网易模拟器（免费）<br> 成本：ups(200-300￥)+win自带的远程连接+mumu模拟器 </p>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;各家模拟器对比分析&quot;&gt;&lt;a href=&quot;#各家模拟器对比分析&quot; class=&quot;headerlink&quot; title=&quot;各家模拟器对比分析&quot;&gt;&lt;/a&gt;各家模拟器对比分析&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;&lt;strong&gt;大纲&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;对比产品&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;包体大小&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;安兔兔评分&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;支持功能&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;资源消耗/操作体验&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
-    
-    
-    
-    <category term="工具" scheme="https://fenqian.xyz/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-    <category term="模拟器" scheme="https://fenqian.xyz/tags/%E6%A8%A1%E6%8B%9F%E5%99%A8/"/>
     
   </entry>
   
