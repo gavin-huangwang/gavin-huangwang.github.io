@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>稳定性--ANR治理</title>
+    <url>/posts/1ee32bf1/</url>
+    <content><![CDATA[<h1 id="ANR治理"><a href="#ANR治理" class="headerlink" title="ANR治理"></a>ANR治理</h1><ul>
+<li><em><strong>大纲</strong></em></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">anr是什么？</span><br><span class="line">为什么会产生anr?</span><br><span class="line">anr是怎样产生的，哪些场景下会产生？</span><br><span class="line">anr如何治理？</span><br><span class="line">解决anr问题的价值？</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>anr是什么？</strong><br>  <code>anr(Applicatipon No Response),即应用无响应；本质是一个性能问题；在用户和app进行交互时，常会遇到长时间无响应/卡顿的场景；为了改善性能，Android设计了anr的机制，即保证交互能在一定时间内完成，如果未完成，就抛出异常，也就是ANR;   </code></li>
+<li><strong>anr设计机制：</strong><br>  <code>是系统通过与之交互的组件(Activity，Service，Receiver，Provider)以及用户交互(InputEvent)进行超时监控，以判断应用进程(主线程)是否存在卡死或响应过慢的问题，通俗来说就是很多系统中看门狗(watchdog)的设计思想。   </code><ul>
+<li><strong>不同的组件，系统设置的超时时间是不同的，这个时间不同手机厂商的os可能也会做调整：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
+<li><strong>系统抛出anr的机制：</strong><br><code>在进行相关的操作前，系统会基于当前的时间戳和这个类型组件的超时时间设置，计算出超时时间戳；并将超时时间戳传递给anr触发函数，组件若未超时启动，则会在启动成功后，在传递一个参数给anr函数来阻止触发anr;若到超时时间，anr函数还未收到阻止信号，就会触发ANR(类似构建了个定时触发的任务)； </code></li>
+<li><strong>超时触发流程如下：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
+</ul>
+</li>
+</ul>
+<p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1780091311874686979&scene=173&from_msgid=2247488558&from_itemidx=1&count=3&nolastread=1&uin=&key=&devicetype=Windows+10+x64&version=63030532&lang=zh_CN&ascene=0&fontgear=2">头条anr治理系列</a></p>
+<p><a href="https://mp.weixin.qq.com/s/L30s7rOyn6NcPC2y9XNZIQ">百度anr治理</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>anr</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Android资源采集</title>
     <url>/posts/0/</url>
     <content><![CDATA[<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><span id="more"></span>
@@ -36,33 +63,6 @@
       </categories>
       <tags>
         <tag>Android</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>稳定性--ANR治理</title>
-    <url>/posts/1ee32bf1/</url>
-    <content><![CDATA[<h1 id="ANR治理"><a href="#ANR治理" class="headerlink" title="ANR治理"></a>ANR治理</h1><ul>
-<li><em><strong>大纲</strong></em></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">anr是什么？</span><br><span class="line">为什么会产生anr?</span><br><span class="line">anr是怎样产生的，哪些场景下会产生？</span><br><span class="line">anr如何治理？</span><br><span class="line">解决anr问题的价值？</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>anr是什么？</strong><br>  <code>anr(Applicatipon No Response),即应用无响应；本质是一个性能问题；在用户和app进行交互时，常会遇到长时间无响应/卡顿的场景；为了改善性能，Android设计了anr的机制，即保证交互能在一定时间内完成，如果未完成，就抛出异常，也就是ANR;   </code></li>
-<li><strong>anr设计机制：</strong><br>  <code>是系统通过与之交互的组件(Activity，Service，Receiver，Provider)以及用户交互(InputEvent)进行超时监控，以判断应用进程(主线程)是否存在卡死或响应过慢的问题，通俗来说就是很多系统中看门狗(watchdog)的设计思想。   </code><ul>
-<li><strong>不同的组件，系统设置的超时时间是不同的，这个时间不同手机厂商的os可能也会做调整：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
-<li><strong>系统抛出anr的机制：</strong><br><code>在进行相关的操作前，系统会基于当前的时间戳和这个类型组件的超时时间设置，计算出超时时间戳；并将超时时间戳传递给anr触发函数，组件若未超时启动，则会在启动成功后，在传递一个参数给anr函数来阻止触发anr;若到超时时间，anr函数还未收到阻止信号，就会触发ANR(类似构建了个定时触发的任务)； </code></li>
-<li><strong>超时触发流程如下：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
-</ul>
-</li>
-</ul>
-<p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1780091311874686979&scene=173&from_msgid=2247488558&from_itemidx=1&count=3&nolastread=1&uin=&key=&devicetype=Windows+10+x64&version=63030532&lang=zh_CN&ascene=0&fontgear=2">头条anr治理系列</a></p>
-<p><a href="https://mp.weixin.qq.com/s/L30s7rOyn6NcPC2y9XNZIQ">百度anr治理</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>anr</tag>
       </tags>
   </entry>
   <entry>
@@ -365,18 +365,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python语法-super方法</title>
-    <url>/posts/7b2ded6/</url>
-    <content><![CDATA[<p><code>super方法用来，继承父类，或祖父类；常用的结构为super(C,self)/python3括号内的可缩写（super()）;super方法本身是一个类，和当前所在的类（父类）无关，该类使用了mro的算法（方法查找顺序）来决定继承类的顺序</code></p>
-<span id="more"></span>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A():</span><br><span class="line"></span><br><span class="line">	def __init__(self):</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">&quot;---A---&quot;</span>)</span><br><span class="line"></span><br><span class="line">class B(A):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---B---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super(B,self).__init__()</span><br><span class="line"></span><br><span class="line">class C(A):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---C---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super(C,self).__init__()</span><br><span class="line"></span><br><span class="line">class D(B,C):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---D---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super().__init__()</span><br><span class="line">D()</span><br></pre></td></tr></table></figure>
-<p><strong>方法查找顺序说明:</strong></p>
-<pre><code>super.mro策略；采用的是查找继承类的上一个节点的方式来实现继承，如super(D,self).__init__();实际上继承的是上一个节点类B；Python2和Python3使用super来继承时，使用上存在差异，Python必须使用super(C,self)方式继承，python3则可同时使用super()和super(C,self)来进行继承；同时Python2存在class A:/class A(object):这两种经典类和新式类；Python3只有新式类；经典类和新式类的mro策略不一样，虽然两者都是使用从左到右的广度遍历，经典类在某类已继承时，后续在查找到这个类，也不在继承；新式类，在某类已经继承时，后续在查找到改类，会继承最新查找到的；
-</code></pre>
-]]></content>
-  </entry>
-  <entry>
     <title>python语法特性</title>
     <url>/posts/d641bafc/</url>
     <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
@@ -387,6 +375,18 @@
       <tags>
         <tag>python</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>python语法-super方法</title>
+    <url>/posts/7b2ded6/</url>
+    <content><![CDATA[<p><code>super方法用来，继承父类，或祖父类；常用的结构为super(C,self)/python3括号内的可缩写（super()）;super方法本身是一个类，和当前所在的类（父类）无关，该类使用了mro的算法（方法查找顺序）来决定继承类的顺序</code></p>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A():</span><br><span class="line"></span><br><span class="line">	def __init__(self):</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">&quot;---A---&quot;</span>)</span><br><span class="line"></span><br><span class="line">class B(A):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---B---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super(B,self).__init__()</span><br><span class="line"></span><br><span class="line">class C(A):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---C---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super(C,self).__init__()</span><br><span class="line"></span><br><span class="line">class D(B,C):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---D---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super().__init__()</span><br><span class="line">D()</span><br></pre></td></tr></table></figure>
+<p><strong>方法查找顺序说明:</strong></p>
+<pre><code>super.mro策略；采用的是查找继承类的上一个节点的方式来实现继承，如super(D,self).__init__();实际上继承的是上一个节点类B；Python2和Python3使用super来继承时，使用上存在差异，Python必须使用super(C,self)方式继承，python3则可同时使用super()和super(C,self)来进行继承；同时Python2存在class A:/class A(object):这两种经典类和新式类；Python3只有新式类；经典类和新式类的mro策略不一样，虽然两者都是使用从左到右的广度遍历，经典类在某类已继承时，后续在查找到这个类，也不在继承；新式类，在某类已经继承时，后续在查找到改类，会继承最新查找到的；
+</code></pre>
+]]></content>
   </entry>
   <entry>
     <title>优秀博客</title>
@@ -682,6 +682,60 @@
       </tags>
   </entry>
   <entry>
+    <title>实战--传音预装</title>
+    <url>/posts/fbd896d0/</url>
+    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">确认需要覆盖的场景；</span><br><span class="line">场景的指标监控；</span><br><span class="line">分析监控数据，采集异常数据定位问题；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>确认需要覆盖的场景：</strong></li>
+</ul>
+<p><code>一般需要覆盖功能/性能/兼容/耗电/升级这几块，功能一般覆盖app的主功能</code></p>
+<ul>
+<li><em>方案：</em></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">启动app,点击播放栏播放按钮播放music，在切换到后台，在切换回前台；</span><br><span class="line">treding页上下滑动，在切换到music页上下滑动，在切换回treding页；</span><br><span class="line">music页点击歌单，进入歌单，歌单上下滑动两页，然后返回music页；在点击进入chart页，上下滑动两页，在返回；在点击进入艺人页，上下滑动两页，在返回；在点击进入曲风页，上下滑动，在进入第一个曲风，上下滑动，然后返回music首页；在次进入歌单页，上下滑动，然后在次点击第一个歌单进入歌单详情页，然后返回music首页；点击进入视频页，上下滑动，然后返回music首页；点击进入bbc，上下滑动，然后返回music首页；</span><br><span class="line">treding页播放music，然后返回treding;进入music页，点击歌单上浮按钮，进行全部播放，点击歌单详情页的全部播放按钮进行播放，点击歌单详情页的music播放，返回music后，点击进入video页，点击视频进行播放，返回treding页;</span><br><span class="line">treding页进行music下载，music首页歌单全局下载按钮进行下载，点击进入歌单详情页，通过全部下载按钮进行下载；</span><br><span class="line">library页，通过localmusic或者下载music对本地下载的music进行播放，播放和后台循环切换；</span><br><span class="line">后台播放music时，分别同时打开，Facebook，WhatsApp，Twitter，Instagram，chrome；在切换回前台；</span><br><span class="line">music页/library页/buzz页/account页进行循环切换；</span><br><span class="line">buzz页，一二级页面循环切换，且每个页面均进行上下滑动；buzz页，点击评论和点赞按键；</span><br><span class="line">account页，进行登录，退出应用，切换回前台，退出登录；</span><br><span class="line">notification,页面循环切换，且每个页面进行上下滑动；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>场景的指标监控：</strong></p>
+<p>  <code>由于渠道方未提供确切的合规标准，因此选用网易云音乐作为对比范本；在相同场景下，资源消耗超出网易云10%-30%判定为合规，否则判断为异常</code></p>
+<ul>
+<li><em>监控性能工具：</em></li>
+</ul>
+<p>  支付宝：solopi</p>
+<ul>
+<li><em>监控指标：</em></li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CPU:cpu_max,cpu_ave;需要区分进程cpu和系统cpu</span><br><span class="line">ROM:</span><br><span class="line">带宽：</span><br><span class="line">响应耗时：</span><br><span class="line">启动耗时：</span><br><span class="line">电量：</span><br><span class="line">流量：</span><br><span class="line">app抛出的异常堆栈：</span><br><span class="line">场景数据：</span><br></pre></td></tr></table></figure>
+<ul>
+<li><em>网易指标</em><ul>
+<li><strong>场景1：</strong> 启动app,点击播放栏播放按钮播放music，在切换到后台，在切换回前台；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">进程cpu:31.04&#x2F;20.68&#x2F;22.62&#x2F;28.35&#x2F;35.68(max)&#x3D;27.33	11.22&#x2F;10.30&#x2F;10.65&#x2F;9.11&#x2F;13.36(ave)&#x3D;10.72</span><br><span class="line">总cpu:86.08&#x2F;79.02&#x2F;78.69&#x2F;91.11&#x2F;87(max)&#x3D;84.03	45.80&#x2F;44.40&#x2F;41.81&#x2F;40.14&#x2F;48.35(ave)&#x3D;44</span><br><span class="line">private-ram:196.40&#x2F;243.39&#x2F;168.5&#x2F;157.63&#x2F;168.03(max)&#x3D;177.64	186.76&#x2F;231.17&#x2F;158.1&#x2F;144.2&#x2F;141.02(ave)&#x3D;163.02</span><br><span class="line">pss-ram：267.32&#x2F;177.49&#x2F;234.1&#x2F;221.47&#x2F;235.23(max)&#x3D;230.27	256.2&#x2F;163.50&#x2F;219.3&#x2F;211.83&#x2F;206.29(ave)&#x3D;212.47</span><br><span class="line">系统总ram：3453&#x2F;3365&#x2F;3372&#x2F;3457&#x2F;3421(max)&#x3D;3415.33	3410.91&#x2F;3349.44&#x2F;3335.2&#x2F;3325.13&#x2F;3377.08(ave)&#x3D;3353.91</span><br><span class="line">全局上行流量：449.13&#x2F;383.05&#x2F;423.08&#x2F;629.68&#x2F;4627&#x3D;500.63</span><br><span class="line">全局下行流量：1768.87&#x2F;1732.48&#x2F;1862.45&#x2F;3001.82&#x2F;33997.12&#x3D;2211.05</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景2：</strong> 启动耗时；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cpu:41.86&#x2F;40&#x2F;54.73&#x2F;41.79&#x2F;43.54</span><br><span class="line">rom:2977&#x2F;3007&#x2F;3028&#x2F;2986&#x2F;2924</span><br><span class="line">上行流量：32.34&#x2F;9.72&#x2F;11.13&#x2F;11.74&#x2F;20.76</span><br><span class="line">下行流量：138.13&#x2F;61.34&#x2F;32.75&#x2F;76.30&#x2F;54.90</span><br><span class="line">启动耗时：771ms&#x2F;2431ms&#x2F;1080ms&#x2F;781&#x2F;748ms</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景3：</strong> treding页上下滑动，在切换到music页上下滑动，在切换回treding页；；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:56.28&#x2F;69.59&#x2F;65.96&#x2F;54.79&#x2F;75.57(max)&#x3D;	40.32&#x2F;39.65&#x2F;40.95&#x2F;36.15&#x2F;38.25(ave)</span><br><span class="line">进程cpu:21.84&#x2F;23.71&#x2F;22.19&#x2F;20.37&#x2F;24.17(max)&#x3D;&#x3D;22.58	11.64&#x2F;11.6&#x2F;12.07&#x2F;9.35&#x2F;10.64(ave)&#x3D;11.29</span><br><span class="line">pss-ram：403.67&#x2F;361.57&#x2F;359.02&#x2F;375.05&#x2F;339.13(max)&#x3D;365.21	388.28&#x2F;349&#x2F;340.59&#x2F;359.07&#x2F;320.53(ave)&#x3D;349.55</span><br><span class="line">private-ram:327.68&#x2F;288.42&#x2F;284.15&#x2F;300.31&#x2F;265.09(max)	&#x3D;290.96	313.29&#x2F;275.5&#x2F;266.61&#x2F;284&#x2F;248.88(ave)&#x3D;275.37</span><br><span class="line">系统总ram：3635&#x2F;3578&#x2F;3587&#x2F;3571&#x2F;3500(max)&#x3D;3578.67	3623&#x2F;3563.6&#x2F;3570.09&#x2F;3560.56&#x2F;3484.78(ave)&#x3D;3564.75</span><br><span class="line">全局上行流量：281.49&#x2F;351.88&#x2F;342.72&#x2F;256.57&#x2F;320.48&#x3D;341.90</span><br><span class="line">全局下行流量：1406.78&#x2F;1530.86&#x2F;1694.41&#x2F;1208.77&#x2F;1678.10&#x3D;1538.58</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景4：</strong> music页点击歌单，进入歌单，歌单上下滑动两页，然后返回music页；在点击进入chart页，上下滑动两页，在返回；在点击进入艺人页，上下滑动两页，在返回；在点击进入曲风页，上下滑动，在进入第一个曲风，上下滑动，然后返回music首页；在次进入歌单页，上下滑动，然后在次点击第一个歌单进入歌单详情页，然后返回music首页；点击进入视频页，上下滑动，然后返回music首页；点击进入bbc，上下滑动，然后返回music首页；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:75.71&#x2F;80.96&#x2F;89.29&#x2F;87.47&#x2F;91.79(max)&#x3D;85.91	39.67&#x2F;40.07&#x2F;44.62&#x2F;43.97&#x2F;39.84(ave)&#x3D;41.29</span><br><span class="line">进程cpu:49.75&#x2F;51.24&#x2F;62.76&#x2F;50.77&#x2F;63.49(max)&#x3D;54.92	14.63&#x2F;14.62&#x2F;16.87&#x2F;16.06&#x2F;13.35(ave)&#x3D;15.10</span><br><span class="line">pss-ram：267.17&#x2F;271.73&#x2F;265.97&#x2F;262.30&#x2F;314.29(max)&#x3D;268.29	216.92&#x2F;222.82&#x2F;220.84&#x2F;218.53&#x2F;281.03(ave)&#x3D;220.73</span><br><span class="line">private-ram:204.31&#x2F;209.68&#x2F;205.87&#x2F;202&#x2F;240.15(max)&#x3D;206.62	157.54&#x2F;163.98&#x2F;161.26&#x2F;159.72&#x2F;206.50(ave)&#x3D;161.65</span><br><span class="line">系统总ram：3415&#x2F;3414&#x2F;3428&#x2F;3394&#x2F;3412(max)&#x3D;3413.67	3371.28&#x2F;3379.18&#x2F;3383.33&#x2F;3337.13&#x2F;3374.4(ave)&#x3D;3374.95</span><br><span class="line">全局上行流量：809.21&#x2F;896.26&#x2F;810.98&#x2F;858.86&#x2F;827.16&#x3D;832.33</span><br><span class="line">全局下行流量：4067.93&#x2F;4459.75&#x2F;3786.03&#x2F;3666.64&#x2F;5148.2&#x3D;4104.57</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景5：</strong> treding页播放music，然后返回treding;进入music页，点击歌单上浮按钮，进行全部播放，点击歌单详情页的全部播放按钮进行播放，点击歌单详情页的music播放，返回music后，点击进入video页，点击视频进行播放，返回treding页；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:82.99&#x2F;73.3&#x2F;79.35(max)&#x3D;78.55	45.87&#x2F;45.57&#x2F;44.19(ave)&#x3D;45.21</span><br><span class="line">进程cpu:28.88&#x2F;33.77&#x2F;30.33(max)&#x3D;30.99	12.87&#x2F;11.60&#x2F;11.34(ave)&#x3D;11.94</span><br><span class="line">pss-ram：360.44&#x2F;339.74&#x2F;348.03(max)&#x3D;349.4	332&#x2F;313.36&#x2F;314.22(ave)&#x3D;319.86</span><br><span class="line">private-ram:262.51&#x2F;250.52&#x2F;259.28(max)&#x3D;257.44	233.83&#x2F;224.32&#x2F;228.88(ave)&#x3D;229.01</span><br><span class="line">系统总ram：3449&#x2F;3485&#x2F;3462(max)&#x3D;3465.33	3407.38&#x2F;3431.68&#x2F;3427.11(ave)&#x3D;3422.06</span><br><span class="line">全局上行流量：14914.79&#x2F;6908.25&#x2F;11193.83&#x3D;11005.62</span><br><span class="line">全局下行流量：35355.44&#x2F;17913.15&#x2F;28217.16&#x3D;27161.92</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景6：</strong> treding页进行music下载，music首页歌单全局下载按钮进行下载，点击进入歌单详情页，通过全部下载按钮进行下载(单次/歌单批量/播放列表批量)；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:73.77&#x2F;83.13&#x2F;77.37&#x2F;51.35&#x2F;72.18(max)	46.94&#x2F;49.59&#x2F;46.94&#x2F;29.66&#x2F;41.61(ave)</span><br><span class="line">进程cpu:20.62&#x2F;21.09&#x2F;21.91&#x2F;15.18&#x2F;10.79(max)	11.91&#x2F;13.48&#x2F;10.14&#x2F;7.87&#x2F;10.31(ave)</span><br><span class="line">pss-ram：351.01&#x2F;301.85&#x2F;307.79&#x2F;(max)	339.44&#x2F;291.96&#x2F;297.10(ave)</span><br><span class="line">private-ram:269.26&#x2F;222.66&#x2F;228.95(max)	259.39&#x2F;212.57&#x2F;217.98(ave)</span><br><span class="line">系统总ram：2765&#x2F;2813&#x2F;2676(max)	2738.27&#x2F;2770.88&#x2F;2667.55(ave)</span><br><span class="line">全局上行流量：16531.35&#x2F;21262.26&#x2F;9539.49&#x2F;3160.78&#x2F;4068.34</span><br><span class="line">全局下行流量：32460.28&#x2F;43211.35&#x2F;18512.41&#x2F;6134.98&#x2F;7870.63</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景7：</strong> library页，通过localmusic或者下载music对本地下载的music进行播放，播放和后台循环切换；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:(max)	(ave)</span><br><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景8：</strong> 后台播放music时，分别同时打开，Facebook，WhatsApp，Twitter，Instagram，chrome；在切换回前台；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:(max)	(ave)</span><br><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景9：</strong> music页/library页/buzz页/account页进行循环切换；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:(max)	(ave)</span><br><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景10：</strong> buzz页，一二级页面循环切换，且每个页面均进行上下滑动；buzz页，点击评论和点赞按键；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:(max)	(ave)</span><br><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景11：</strong> account页，进行登录，退出应用，切换回前台，退出登录(无法登录)；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:94.5&#x2F;100&#x2F;82.71&#x2F;92.37(max)&#x3D;93.44	37.83&#x2F;45.15&#x2F;39.34&#x2F;32.20(ave)&#x3D;35.02</span><br><span class="line">进程cpu:42.78&#x2F;19.69&#x2F;23.83&#x2F;43.29(max)&#x3D;32.40	11.17&#x2F;9.02&#x2F;10.08&#x2F;9.10(ave)&#x3D;9.84</span><br><span class="line">pss-ram：263.71&#x2F;240.92&#x2F;125.89(max)&#x3D;252.315	206.20&#x2F;236.28&#x2F;120.34(ave)&#x3D;221.24</span><br><span class="line">private-ram:205&#x2F;184.32&#x2F;75.10(max)&#x3D;194.66	150.55&#x2F;179.58&#x2F;68.81(ave)&#x3D;165.07</span><br><span class="line">系统总ram：2753&#x2F;2785&#x2F;2529(max)&#x3D;2689	2699.31&#x2F;2752.05&#x2F;2483.05(ave)&#x3D;2644.80</span><br><span class="line">全局上行流量：1157.70&#x2F;1290.43&#x2F;730.34&#x2F;1402.62&#x3D;1283.59</span><br><span class="line">全局下行流量：2662.21&#x2F;2518.72&#x2F;556.74&#x2F;6012.13&#x3D;2590.47</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景12：</strong> notification,页面循环切换，且每个页面进行上下滑动；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">总cpu:(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景12：</strong> 首次进入页面的资源消耗；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:(max)	(ave)</span><br><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>实战</tag>
+        <tag>预装</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>工作梳理</title>
     <url>/posts/8c69a8ec/</url>
     <content><![CDATA[<h1 id="工作梳理"><a href="#工作梳理" class="headerlink" title="工作梳理"></a>工作梳理</h1><ul>
@@ -741,60 +795,6 @@
       </tags>
   </entry>
   <entry>
-    <title>实战--传音预装</title>
-    <url>/posts/fbd896d0/</url>
-    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">确认需要覆盖的场景；</span><br><span class="line">场景的指标监控；</span><br><span class="line">分析监控数据，采集异常数据定位问题；</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>确认需要覆盖的场景：</strong></li>
-</ul>
-<p><code>一般需要覆盖功能/性能/兼容/耗电/升级这几块，功能一般覆盖app的主功能</code></p>
-<ul>
-<li><em>方案：</em></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">启动app,点击播放栏播放按钮播放music，在切换到后台，在切换回前台；</span><br><span class="line">treding页上下滑动，在切换到music页上下滑动，在切换回treding页；</span><br><span class="line">music页点击歌单，进入歌单，歌单上下滑动两页，然后返回music页；在点击进入chart页，上下滑动两页，在返回；在点击进入艺人页，上下滑动两页，在返回；在点击进入曲风页，上下滑动，在进入第一个曲风，上下滑动，然后返回music首页；在次进入歌单页，上下滑动，然后在次点击第一个歌单进入歌单详情页，然后返回music首页；点击进入视频页，上下滑动，然后返回music首页；点击进入bbc，上下滑动，然后返回music首页；</span><br><span class="line">treding页播放music，然后返回treding;进入music页，点击歌单上浮按钮，进行全部播放，点击歌单详情页的全部播放按钮进行播放，点击歌单详情页的music播放，返回music后，点击进入video页，点击视频进行播放，返回treding页;</span><br><span class="line">treding页进行music下载，music首页歌单全局下载按钮进行下载，点击进入歌单详情页，通过全部下载按钮进行下载；</span><br><span class="line">library页，通过localmusic或者下载music对本地下载的music进行播放，播放和后台循环切换；</span><br><span class="line">后台播放music时，分别同时打开，Facebook，WhatsApp，Twitter，Instagram，chrome；在切换回前台；</span><br><span class="line">music页/library页/buzz页/account页进行循环切换；</span><br><span class="line">buzz页，一二级页面循环切换，且每个页面均进行上下滑动；buzz页，点击评论和点赞按键；</span><br><span class="line">account页，进行登录，退出应用，切换回前台，退出登录；</span><br><span class="line">notification,页面循环切换，且每个页面进行上下滑动；</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>场景的指标监控：</strong></p>
-<p>  <code>由于渠道方未提供确切的合规标准，因此选用网易云音乐作为对比范本；在相同场景下，资源消耗超出网易云10%-30%判定为合规，否则判断为异常</code></p>
-<ul>
-<li><em>监控性能工具：</em></li>
-</ul>
-<p>  支付宝：solopi</p>
-<ul>
-<li><em>监控指标：</em></li>
-</ul>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CPU:cpu_max,cpu_ave;需要区分进程cpu和系统cpu</span><br><span class="line">ROM:</span><br><span class="line">带宽：</span><br><span class="line">响应耗时：</span><br><span class="line">启动耗时：</span><br><span class="line">电量：</span><br><span class="line">流量：</span><br><span class="line">app抛出的异常堆栈：</span><br><span class="line">场景数据：</span><br></pre></td></tr></table></figure>
-<ul>
-<li><em>网易指标</em><ul>
-<li><strong>场景1：</strong> 启动app,点击播放栏播放按钮播放music，在切换到后台，在切换回前台；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">进程cpu:31.04&#x2F;20.68&#x2F;22.62&#x2F;28.35&#x2F;35.68(max)&#x3D;27.33	11.22&#x2F;10.30&#x2F;10.65&#x2F;9.11&#x2F;13.36(ave)&#x3D;10.72</span><br><span class="line">总cpu:86.08&#x2F;79.02&#x2F;78.69&#x2F;91.11&#x2F;87(max)&#x3D;84.03	45.80&#x2F;44.40&#x2F;41.81&#x2F;40.14&#x2F;48.35(ave)&#x3D;44</span><br><span class="line">private-ram:196.40&#x2F;243.39&#x2F;168.5&#x2F;157.63&#x2F;168.03(max)&#x3D;177.64	186.76&#x2F;231.17&#x2F;158.1&#x2F;144.2&#x2F;141.02(ave)&#x3D;163.02</span><br><span class="line">pss-ram：267.32&#x2F;177.49&#x2F;234.1&#x2F;221.47&#x2F;235.23(max)&#x3D;230.27	256.2&#x2F;163.50&#x2F;219.3&#x2F;211.83&#x2F;206.29(ave)&#x3D;212.47</span><br><span class="line">系统总ram：3453&#x2F;3365&#x2F;3372&#x2F;3457&#x2F;3421(max)&#x3D;3415.33	3410.91&#x2F;3349.44&#x2F;3335.2&#x2F;3325.13&#x2F;3377.08(ave)&#x3D;3353.91</span><br><span class="line">全局上行流量：449.13&#x2F;383.05&#x2F;423.08&#x2F;629.68&#x2F;4627&#x3D;500.63</span><br><span class="line">全局下行流量：1768.87&#x2F;1732.48&#x2F;1862.45&#x2F;3001.82&#x2F;33997.12&#x3D;2211.05</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
-<li><strong>场景2：</strong> 启动耗时；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cpu:41.86&#x2F;40&#x2F;54.73&#x2F;41.79&#x2F;43.54</span><br><span class="line">rom:2977&#x2F;3007&#x2F;3028&#x2F;2986&#x2F;2924</span><br><span class="line">上行流量：32.34&#x2F;9.72&#x2F;11.13&#x2F;11.74&#x2F;20.76</span><br><span class="line">下行流量：138.13&#x2F;61.34&#x2F;32.75&#x2F;76.30&#x2F;54.90</span><br><span class="line">启动耗时：771ms&#x2F;2431ms&#x2F;1080ms&#x2F;781&#x2F;748ms</span><br></pre></td></tr></table></figure></li>
-<li><strong>场景3：</strong> treding页上下滑动，在切换到music页上下滑动，在切换回treding页；；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:56.28&#x2F;69.59&#x2F;65.96&#x2F;54.79&#x2F;75.57(max)&#x3D;	40.32&#x2F;39.65&#x2F;40.95&#x2F;36.15&#x2F;38.25(ave)</span><br><span class="line">进程cpu:21.84&#x2F;23.71&#x2F;22.19&#x2F;20.37&#x2F;24.17(max)&#x3D;&#x3D;22.58	11.64&#x2F;11.6&#x2F;12.07&#x2F;9.35&#x2F;10.64(ave)&#x3D;11.29</span><br><span class="line">pss-ram：403.67&#x2F;361.57&#x2F;359.02&#x2F;375.05&#x2F;339.13(max)&#x3D;365.21	388.28&#x2F;349&#x2F;340.59&#x2F;359.07&#x2F;320.53(ave)&#x3D;349.55</span><br><span class="line">private-ram:327.68&#x2F;288.42&#x2F;284.15&#x2F;300.31&#x2F;265.09(max)	&#x3D;290.96	313.29&#x2F;275.5&#x2F;266.61&#x2F;284&#x2F;248.88(ave)&#x3D;275.37</span><br><span class="line">系统总ram：3635&#x2F;3578&#x2F;3587&#x2F;3571&#x2F;3500(max)&#x3D;3578.67	3623&#x2F;3563.6&#x2F;3570.09&#x2F;3560.56&#x2F;3484.78(ave)&#x3D;3564.75</span><br><span class="line">全局上行流量：281.49&#x2F;351.88&#x2F;342.72&#x2F;256.57&#x2F;320.48&#x3D;341.90</span><br><span class="line">全局下行流量：1406.78&#x2F;1530.86&#x2F;1694.41&#x2F;1208.77&#x2F;1678.10&#x3D;1538.58</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
-<li><strong>场景4：</strong> music页点击歌单，进入歌单，歌单上下滑动两页，然后返回music页；在点击进入chart页，上下滑动两页，在返回；在点击进入艺人页，上下滑动两页，在返回；在点击进入曲风页，上下滑动，在进入第一个曲风，上下滑动，然后返回music首页；在次进入歌单页，上下滑动，然后在次点击第一个歌单进入歌单详情页，然后返回music首页；点击进入视频页，上下滑动，然后返回music首页；点击进入bbc，上下滑动，然后返回music首页；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:75.71&#x2F;80.96&#x2F;89.29&#x2F;87.47&#x2F;91.79(max)&#x3D;85.91	39.67&#x2F;40.07&#x2F;44.62&#x2F;43.97&#x2F;39.84(ave)&#x3D;41.29</span><br><span class="line">进程cpu:49.75&#x2F;51.24&#x2F;62.76&#x2F;50.77&#x2F;63.49(max)&#x3D;54.92	14.63&#x2F;14.62&#x2F;16.87&#x2F;16.06&#x2F;13.35(ave)&#x3D;15.10</span><br><span class="line">pss-ram：267.17&#x2F;271.73&#x2F;265.97&#x2F;262.30&#x2F;314.29(max)&#x3D;268.29	216.92&#x2F;222.82&#x2F;220.84&#x2F;218.53&#x2F;281.03(ave)&#x3D;220.73</span><br><span class="line">private-ram:204.31&#x2F;209.68&#x2F;205.87&#x2F;202&#x2F;240.15(max)&#x3D;206.62	157.54&#x2F;163.98&#x2F;161.26&#x2F;159.72&#x2F;206.50(ave)&#x3D;161.65</span><br><span class="line">系统总ram：3415&#x2F;3414&#x2F;3428&#x2F;3394&#x2F;3412(max)&#x3D;3413.67	3371.28&#x2F;3379.18&#x2F;3383.33&#x2F;3337.13&#x2F;3374.4(ave)&#x3D;3374.95</span><br><span class="line">全局上行流量：809.21&#x2F;896.26&#x2F;810.98&#x2F;858.86&#x2F;827.16&#x3D;832.33</span><br><span class="line">全局下行流量：4067.93&#x2F;4459.75&#x2F;3786.03&#x2F;3666.64&#x2F;5148.2&#x3D;4104.57</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
-<li><strong>场景5：</strong> treding页播放music，然后返回treding;进入music页，点击歌单上浮按钮，进行全部播放，点击歌单详情页的全部播放按钮进行播放，点击歌单详情页的music播放，返回music后，点击进入video页，点击视频进行播放，返回treding页；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:82.99(max)	45.87(ave)</span><br><span class="line">进程cpu:28.88(max)	12.87(ave)</span><br><span class="line">pss-ram：360.44(max)	332(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
-<li><strong>场景6：</strong> treding页进行music下载，music首页歌单全局下载按钮进行下载，点击进入歌单详情页，通过全部下载按钮进行下载；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:(max)	(ave)</span><br><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
-<li><strong>场景7：</strong> library页，通过localmusic或者下载music对本地下载的music进行播放，播放和后台循环切换；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:(max)	(ave)</span><br><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
-<li><strong>场景8：</strong> 后台播放music时，分别同时打开，Facebook，WhatsApp，Twitter，Instagram，chrome；在切换回前台；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:(max)	(ave)</span><br><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
-<li><strong>场景9：</strong> music页/library页/buzz页/account页进行循环切换；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:(max)	(ave)</span><br><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
-<li><strong>场景10：</strong> buzz页，一二级页面循环切换，且每个页面均进行上下滑动；buzz页，点击评论和点赞按键；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:(max)	(ave)</span><br><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
-<li><strong>场景11：</strong> account页，进行登录，退出应用，切换回前台，退出登录；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:(max)	(ave)</span><br><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
-<li><strong>场景12：</strong> notification,页面循环切换，且每个页面进行上下滑动；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">总cpu:(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
-<li><strong>场景12：</strong> 首次进入页面的资源消耗；<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">总cpu:(max)	(ave)</span><br><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>实战</tag>
-        <tag>预装</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>常用app测试工具</title>
     <url>/posts/28eebda3/</url>
     <content><![CDATA[<h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
@@ -808,18 +808,6 @@
         <tag>app测试</tag>
         <tag>工具</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>搭建hexo博客</title>
-    <url>/posts/8e88d59c/</url>
-    <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、建立github代码库</span><br><span class="line">2、下载hexo文件</span><br><span class="line">3、下载主题，更改配置使主题生效</span><br><span class="line">4、部署配置git</span><br><span class="line">5、下载git同步工具</span><br><span class="line">6、清洗旧数据，生成新的静态文件，同步静态文件至代码库（需更改hexo部署配置）</span><br><span class="line">7、域名解析，并给github代码库配置域名</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://zhuanlan.zhihu.com/p/26625249">参考</a></p>
-<ul>
-<li>related_posts: true</li>
-</ul>
-]]></content>
   </entry>
   <entry>
     <title>混沌工程</title>
@@ -876,6 +864,18 @@
       </tags>
   </entry>
   <entry>
+    <title>搭建hexo博客</title>
+    <url>/posts/8e88d59c/</url>
+    <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、建立github代码库</span><br><span class="line">2、下载hexo文件</span><br><span class="line">3、下载主题，更改配置使主题生效</span><br><span class="line">4、部署配置git</span><br><span class="line">5、下载git同步工具</span><br><span class="line">6、清洗旧数据，生成新的静态文件，同步静态文件至代码库（需更改hexo部署配置）</span><br><span class="line">7、域名解析，并给github代码库配置域名</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://zhuanlan.zhihu.com/p/26625249">参考</a></p>
+<ul>
+<li>related_posts: true</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>百度质量体系建设</title>
     <url>/posts/bcd76c52/</url>
     <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
@@ -893,19 +893,6 @@
     <url>/posts/c48e9a83/</url>
     <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>稳定性治理-暴力回放</title>
-    <url>/posts/81de0e43/</url>
-    <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
-<h4 id="覆盖场景"><a href="#覆盖场景" class="headerlink" title="覆盖场景"></a>覆盖场景</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">music首页，点击歌单播放按钮播放，然后息屏进入后台，10s后切换回前台；</span><br><span class="line">music首页，点开播放列表，然后点击music播放音乐，然后关闭播放列表，然后切换到后台，10s后切换回前台；</span><br><span class="line">music首页，进入歌单，点击全部播放，点击全部下载，然后返回首页，上下滑动一屏，然后切换回后台，10s后切换回前台；</span><br><span class="line">music首页，点击头像登录，退出，切换到后台，10s后切换回前台；</span><br><span class="line">treding首页，点击任意music播放，切换到后台，10s后回到前台，关闭播放详情页；</span><br><span class="line">首页，滑动到treding页，上下滑动一屏；然后向左滑动一屏，上下滑动一屏，然后向左滑动一屏，上下滑动一屏,然后向左滑动一屏，上下滑动一屏,然后切换到后台，停留10s;然后点击导航页到library页，然后点击导航页到search页，然后点击导航页到music页；</span><br><span class="line">搜索页，搜索music，搜索结果页左右滚动一屏；点击结果页播放，然后切换到后台休眠10s,在切换回前台;</span><br><span class="line">首页，点击导航页进入library页；点击进入喜欢的music页，点击全部播放；然后切换到后台，停留10s，在切换回前台，退出music页，切换回首页；</span><br><span class="line">首页，切换到buzz页；上下滑动两屏，点击buzz关注按钮，buzz点赞，buzz评论，点击查看buzz详情，然后回退到buzz页，然后在切换到后台，休眠10s，在切换回前台；</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>稳定性</tag>
-        <tag>暴力回放</tag>
-      </tags>
   </entry>
   <entry>
     <title>稳定性治理</title>
@@ -1069,6 +1056,19 @@
         <tag>稳定性</tag>
         <tag>头条</tag>
         <tag>阿里</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>稳定性治理-暴力回放</title>
+    <url>/posts/81de0e43/</url>
+    <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
+<h4 id="覆盖场景"><a href="#覆盖场景" class="headerlink" title="覆盖场景"></a>覆盖场景</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">music首页，点击歌单播放按钮播放，然后息屏进入后台，10s后切换回前台；</span><br><span class="line">music首页，点开播放列表，然后点击music播放音乐，然后关闭播放列表，然后切换到后台，10s后切换回前台；</span><br><span class="line">music首页，进入歌单，点击全部播放，点击全部下载，然后返回首页，上下滑动一屏，然后切换回后台，10s后切换回前台；</span><br><span class="line">music首页，点击头像登录，退出，切换到后台，10s后切换回前台；</span><br><span class="line">treding首页，点击任意music播放，切换到后台，10s后回到前台，关闭播放详情页；</span><br><span class="line">首页，滑动到treding页，上下滑动一屏；然后向左滑动一屏，上下滑动一屏，然后向左滑动一屏，上下滑动一屏,然后向左滑动一屏，上下滑动一屏,然后切换到后台，停留10s;然后点击导航页到library页，然后点击导航页到search页，然后点击导航页到music页；</span><br><span class="line">搜索页，搜索music，搜索结果页左右滚动一屏；点击结果页播放，然后切换到后台休眠10s,在切换回前台;</span><br><span class="line">首页，点击导航页进入library页；点击进入喜欢的music页，点击全部播放；然后切换到后台，停留10s，在切换回前台，退出music页，切换回首页；</span><br><span class="line">首页，切换到buzz页；上下滑动两屏，点击buzz关注按钮，buzz点赞，buzz评论，点击查看buzz详情，然后回退到buzz页，然后在切换到后台，休眠10s，在切换回前台；</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>稳定性</tag>
+        <tag>暴力回放</tag>
       </tags>
   </entry>
   <entry>
