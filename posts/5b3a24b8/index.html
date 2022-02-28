@@ -30,9 +30,11 @@
 <meta property="og:description" content="大纲123unittest介绍unittest使用教程unittest中的方法说明">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://fenqian.xyz/text_image/unitest%E6%96%AD%E8%A8%80.png">
-<meta property="article:published_time" content="2022-02-21T06:11:13.000Z">
-<meta property="article:modified_time" content="2022-02-21T08:15:16.074Z">
+<meta property="article:published_time" content="2022-02-21T06:11:00.000Z">
+<meta property="article:modified_time" content="2022-02-28T11:26:29.225Z">
 <meta property="article:author" content="GAVIN HUANG">
+<meta property="article:tag" content="unittest">
+<meta property="article:tag" content="参数化">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://fenqian.xyz/text_image/unitest%E6%96%AD%E8%A8%80.png">
 
@@ -221,9 +223,24 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-02-21 14:11:13 / 修改时间：16:15:16" itemprop="dateCreated datePublished" datetime="2022-02-21T14:11:13+08:00">2022-02-21</time>
+              <time title="创建时间：2022-02-21 14:11:00" itemprop="dateCreated datePublished" datetime="2022-02-21T14:11:00+08:00">2022-02-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-02-28 19:26:29" itemprop="dateModified" datetime="2022-02-28T19:26:29+08:00">2022-02-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
             </span>
 
           
@@ -246,7 +263,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>760</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -275,7 +292,12 @@
 <ul>
 <li>testcase:待测对象，待测对象必须要以test，类方法必须含test开头命名;</li>
 <li>TestLoader类：unittest中的类，用来获取模块中的待测对象；返回待测对象的列表；</li>
-<li>TestSuit：测试套件，将测试case加到套件，套件会根据加入的顺序来确认执行顺序；</li>
+<li>TestSuit：测试套件，将测试case加到套件，套件会根据加入的顺序来确认执行顺序；<ul>
+<li>该类的addTest方法，可将测试对象加到套件中，但对结构有要求，必须保持addTest(测试类(具体测试方法))，这种实现方案能保证最先加入套件的最先被执行；</li>
+<li>该类的另一个方法addTests,也可将测试对象加到套件中，但其对结构也有要求，必须保持addTests([测试类1(测试方法1)，测试类1（测试方法2）])</li>
+<li>这种方法能保证直接将获取的对象加入测试套件，执行顺序按加入套件的顺序，一般是按test的命名顺序：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">	testloader &#x3D; unittest.TestLoader()</span><br><span class="line">	# 获取测试类里面case名，以固定顺序数组返回</span><br><span class="line">	testnames &#x3D; testloader.loadTestsFromTestCase(t)</span><br><span class="line">	print(testnames)</span><br><span class="line">	suite &#x3D; unittest.TestSuite()</span><br><span class="line">	suite.addTest&#x2F;addTests(testnames)  </span><br><span class="line">	runn &#x3D; unittest.TextTestRunner(verbosity&#x3D;2)</span><br><span class="line">	runn.run(suite)</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">   suite &#x3D; unittest.TestSuite()</span><br><span class="line">   suite.addTest(sui.pa(Test_ap))	#支持加入对象是一个套件，以实现二次封装</span><br><span class="line">   runn &#x3D; unittest.TextTestRunner(verbosity&#x3D;2)</span><br><span class="line">   runn.run(suite)</span><br><span class="line">   </span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
 <li>TextTestRunner()类：unittest中的类；用来执行suit，控制测试case的执行，执行生成的是text的报告；如果是需要生成htmlt报告，则使用htmltestrunner;</li>
 <li>执行顺序：默认按case名称顺序来确认执行顺序，也可手动定制顺序，各suit来确定执行顺序；</li>
 <li>环境/前置/后置处理：使用unittest自带的方法，setUp/setDown,setUpClass setDownClass,其中前两个每个case执行前后都会分别执行前置后置处理；后两个在套件执行前后，分别执行签字和后置处理，且仅执行一次；</li>
@@ -337,6 +359,10 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/unittest/" rel="tag"># unittest</a>
+              <a href="/tags/%E5%8F%82%E6%95%B0%E5%8C%96/" rel="tag"># 参数化</a>
+          </div>
 
         
 
@@ -440,7 +466,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -497,7 +523,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">36k</span>
+    <span title="站点总字数">37k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
