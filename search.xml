@@ -39,6 +39,33 @@
       </tags>
   </entry>
   <entry>
+    <title>稳定性--ANR治理</title>
+    <url>/posts/1ee32bf1/</url>
+    <content><![CDATA[<h1 id="ANR治理"><a href="#ANR治理" class="headerlink" title="ANR治理"></a>ANR治理</h1><ul>
+<li><em><strong>大纲</strong></em></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">anr是什么？</span><br><span class="line">为什么会产生anr?</span><br><span class="line">anr是怎样产生的，哪些场景下会产生？</span><br><span class="line">anr如何治理？</span><br><span class="line">解决anr问题的价值？</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>anr是什么？</strong><br>  <code>anr(Applicatipon No Response),即应用无响应；本质是一个性能问题；在用户和app进行交互时，常会遇到长时间无响应/卡顿的场景；为了改善性能，Android设计了anr的机制，即保证交互能在一定时间内完成，如果未完成，就抛出异常，也就是ANR;   </code></li>
+<li><strong>anr设计机制：</strong><br>  <code>是系统通过与之交互的组件(Activity，Service，Receiver，Provider)以及用户交互(InputEvent)进行超时监控，以判断应用进程(主线程)是否存在卡死或响应过慢的问题，通俗来说就是很多系统中看门狗(watchdog)的设计思想。   </code><ul>
+<li><strong>不同的组件，系统设置的超时时间是不同的，这个时间不同手机厂商的os可能也会做调整：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
+<li><strong>系统抛出anr的机制：</strong><br><code>在进行相关的操作前，系统会基于当前的时间戳和这个类型组件的超时时间设置，计算出超时时间戳；并将超时时间戳传递给anr触发函数，组件若未超时启动，则会在启动成功后，在传递一个参数给anr函数来阻止触发anr;若到超时时间，anr函数还未收到阻止信号，就会触发ANR(类似构建了个定时触发的任务)； </code></li>
+<li><strong>超时触发流程如下：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
+</ul>
+</li>
+</ul>
+<p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1780091311874686979&scene=173&from_msgid=2247488558&from_itemidx=1&count=3&nolastread=1&uin=&key=&devicetype=Windows+10+x64&version=63030532&lang=zh_CN&ascene=0&fontgear=2">头条anr治理系列</a></p>
+<p><a href="https://mp.weixin.qq.com/s/L30s7rOyn6NcPC2y9XNZIQ">百度anr治理</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>anr</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SOLOPI使用教程</title>
     <url>/posts/49e140/</url>
     <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
@@ -156,31 +183,23 @@
       </tags>
   </entry>
   <entry>
-    <title>稳定性--ANR治理</title>
-    <url>/posts/1ee32bf1/</url>
-    <content><![CDATA[<h1 id="ANR治理"><a href="#ANR治理" class="headerlink" title="ANR治理"></a>ANR治理</h1><ul>
-<li><em><strong>大纲</strong></em></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">anr是什么？</span><br><span class="line">为什么会产生anr?</span><br><span class="line">anr是怎样产生的，哪些场景下会产生？</span><br><span class="line">anr如何治理？</span><br><span class="line">解决anr问题的价值？</span><br></pre></td></tr></table></figure>
+    <title>UI自动化框架说明</title>
+    <url>/posts/411091fa/</url>
+    <content><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`
+</code></pre>
+<p>___ 大纲 ___</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">框架的整体结构</span><br><span class="line">代码模块的结构，文件说明</span><br><span class="line">框架的执行过程</span><br><span class="line">框架优化&#x2F;改动以适应我们产品</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><strong>anr是什么？</strong><br>  <code>anr(Applicatipon No Response),即应用无响应；本质是一个性能问题；在用户和app进行交互时，常会遇到长时间无响应/卡顿的场景；为了改善性能，Android设计了anr的机制，即保证交互能在一定时间内完成，如果未完成，就抛出异常，也就是ANR;   </code></li>
-<li><strong>anr设计机制：</strong><br>  <code>是系统通过与之交互的组件(Activity，Service，Receiver，Provider)以及用户交互(InputEvent)进行超时监控，以判断应用进程(主线程)是否存在卡死或响应过慢的问题，通俗来说就是很多系统中看门狗(watchdog)的设计思想。   </code><ul>
-<li><strong>不同的组件，系统设置的超时时间是不同的，这个时间不同手机厂商的os可能也会做调整：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
-<li><strong>系统抛出anr的机制：</strong><br><code>在进行相关的操作前，系统会基于当前的时间戳和这个类型组件的超时时间设置，计算出超时时间戳；并将超时时间戳传递给anr触发函数，组件若未超时启动，则会在启动成功后，在传递一个参数给anr函数来阻止触发anr;若到超时时间，anr函数还未收到阻止信号，就会触发ANR(类似构建了个定时触发的任务)； </code></li>
-<li><strong>超时触发流程如下：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
-</ul>
-</li>
-</ul>
-<p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1780091311874686979&scene=173&from_msgid=2247488558&from_itemidx=1&count=3&nolastread=1&uin=&key=&devicetype=Windows+10+x64&version=63030532&lang=zh_CN&ascene=0&fontgear=2">头条anr治理系列</a></p>
-<p><a href="https://mp.weixin.qq.com/s/L30s7rOyn6NcPC2y9XNZIQ">百度anr治理</a></p>
+<p>___ 框架整体结构 ___<br><img src="/text_image/ui%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%B6%E6%9E%84.png" alt="alt_text"></p>
+<p><code>框架整体构成由五部分构成；分别是runner(入口)/TestCase(控制层)/PageObject(逻辑层)/日志文件/yaml配置模块/报告模块 </code></p>
+<p>___ runner(入口) ___</p>
+<p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
 ]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>anr</tag>
-      </tags>
   </entry>
   <entry>
     <title>Hello World</title>
@@ -201,25 +220,6 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 <p>#开启动画<br>canvas_nest: true </p>
-]]></content>
-  </entry>
-  <entry>
-    <title>UI自动化框架说明</title>
-    <url>/posts/411091fa/</url>
-    <content><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`
-</code></pre>
-<p>___ 大纲 ___</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">框架的整体结构</span><br><span class="line">代码模块的结构，文件说明</span><br><span class="line">框架的执行过程</span><br><span class="line">框架优化&#x2F;改动以适应我们产品</span><br></pre></td></tr></table></figure>
-
-<p>___ 框架整体结构 ___<br><img src="/text_image/ui%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%B6%E6%9E%84.png" alt="alt_text"></p>
-<p><code>框架整体构成由五部分构成；分别是runner(入口)/TestCase(控制层)/PageObject(逻辑层)/日志文件/yaml配置模块/报告模块 </code></p>
-<p>___ runner(入口) ___</p>
-<p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-
 ]]></content>
   </entry>
   <entry>
@@ -377,18 +377,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python语法特性</title>
-    <url>/posts/d641bafc/</url>
-    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
-<span id="more"></span>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>python语法-super方法</title>
     <url>/posts/7b2ded6/</url>
     <content><![CDATA[<p><code>super方法用来，继承父类，或祖父类；常用的结构为super(C,self)/python3括号内的可缩写（super()）;super方法本身是一个类，和当前所在的类（父类）无关，该类使用了mro的算法（方法查找顺序）来决定继承类的顺序</code></p>
@@ -415,24 +403,15 @@
       </tags>
   </entry>
   <entry>
-    <title>传音刷机</title>
-    <url>/posts/a1b2e86a/</url>
-    <content><![CDATA[<ol>
-<li>设置 -&gt; 开发者模式打开 oem unlock<br>输入 adb reboot bootloader</li>
-<li>进入fastboot模式输入 fastboot flashing unlock。按住音量上键确认unlock</li>
-<li>fastboot reboot 重启</li>
-<li>开机后,输入 adb root</li>
-<li>执行 adb disable-verity</li>
-<li>执行 adb reboot</li>
-<li>重启后 执行 adb root</li>
-<li>执行 adb remount</li>
-</ol>
-]]></content>
+    <title>python语法特性</title>
+    <url>/posts/d641bafc/</url>
+    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>]]></content>
       <categories>
-        <category>工具</category>
+        <category>技术</category>
       </categories>
       <tags>
-        <tag>刷机</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -452,6 +431,27 @@
       <tags>
         <tag>python</tag>
         <tag>变量</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>传音刷机</title>
+    <url>/posts/a1b2e86a/</url>
+    <content><![CDATA[<ol>
+<li>设置 -&gt; 开发者模式打开 oem unlock<br>输入 adb reboot bootloader</li>
+<li>进入fastboot模式输入 fastboot flashing unlock。按住音量上键确认unlock</li>
+<li>fastboot reboot 重启</li>
+<li>开机后,输入 adb root</li>
+<li>执行 adb disable-verity</li>
+<li>执行 adb reboot</li>
+<li>重启后 执行 adb root</li>
+<li>执行 adb remount</li>
+</ol>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>刷机</tag>
       </tags>
   </entry>
   <entry>
@@ -660,21 +660,6 @@
       </tags>
   </entry>
   <entry>
-    <title>好看的hexo博客</title>
-    <url>/posts/b6d42d86/</url>
-    <content><![CDATA[<h1 id="如下"><a href="#如下" class="headerlink" title="如下"></a>如下</h1><ul>
-<li><a href="https://blog.bill.moe/"><strong>竞赛</strong></a></li>
-<li><a href="https://diygod.me/"><strong>b站开源大佬</strong></a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>大数据BI报表架构调整</title>
     <url>/posts/10f9513d/</url>
     <content><![CDATA[<h1 id="大数据BI报表架构调整"><a href="#大数据BI报表架构调整" class="headerlink" title="大数据BI报表架构调整"></a>大数据BI报表架构调整</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span>
@@ -694,16 +679,19 @@
 ]]></content>
   </entry>
   <entry>
-    <title>搭建hexo博客</title>
-    <url>/posts/8e88d59c/</url>
-    <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、建立github代码库</span><br><span class="line">2、下载hexo文件</span><br><span class="line">3、下载主题，更改配置使主题生效</span><br><span class="line">4、部署配置git</span><br><span class="line">5、下载git同步工具</span><br><span class="line">6、清洗旧数据，生成新的静态文件，同步静态文件至代码库（需更改hexo部署配置）</span><br><span class="line">7、域名解析，并给github代码库配置域名</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://zhuanlan.zhihu.com/p/26625249">参考</a></p>
-<ul>
-<li>related_posts: true</li>
+    <title>好看的hexo博客</title>
+    <url>/posts/b6d42d86/</url>
+    <content><![CDATA[<h1 id="如下"><a href="#如下" class="headerlink" title="如下"></a>如下</h1><ul>
+<li><a href="https://blog.bill.moe/"><strong>竞赛</strong></a></li>
+<li><a href="https://diygod.me/"><strong>b站开源大佬</strong></a></li>
 </ul>
 ]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
   </entry>
   <entry>
     <title>工作梳理</title>
@@ -778,6 +766,18 @@
         <tag>app测试</tag>
         <tag>工具</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>搭建hexo博客</title>
+    <url>/posts/8e88d59c/</url>
+    <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、建立github代码库</span><br><span class="line">2、下载hexo文件</span><br><span class="line">3、下载主题，更改配置使主题生效</span><br><span class="line">4、部署配置git</span><br><span class="line">5、下载git同步工具</span><br><span class="line">6、清洗旧数据，生成新的静态文件，同步静态文件至代码库（需更改hexo部署配置）</span><br><span class="line">7、域名解析，并给github代码库配置域名</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://zhuanlan.zhihu.com/p/26625249">参考</a></p>
+<ul>
+<li>related_posts: true</li>
+</ul>
+]]></content>
   </entry>
   <entry>
     <title>混沌工程</title>
@@ -1030,16 +1030,6 @@
       </tags>
   </entry>
   <entry>
-    <title>编写博客--makedown语法说明</title>
-    <url>/posts/ed6b07f3/</url>
-    <content><![CDATA[<h1 id="语法总览"><a href="#语法总览" class="headerlink" title="语法总览"></a>语法总览</h1><h2 id="正文语法"><a href="#正文语法" class="headerlink" title="正文语法"></a>正文语法</h2><pre><code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; 1.=== title ===	最顶级标题</span><br><span class="line">&gt; 2.---  title --- 二级标题</span><br><span class="line">&gt; 3.<span class="comment"># title/## title/###### title	一级/二级/六级标题</span></span><br><span class="line">&gt; * tab缩进语法</span><br><span class="line">&gt; + 字体加粗使用** text ** 或__text__</span><br><span class="line">&gt; - 排序列表，无序列表使用（+-*），有序列表使用（1.数字加点）</span><br><span class="line">&gt; - 换行，如果上下行无\n(换行操作)则不换行，如果有则换行</span><br><span class="line">&gt; - 空行，如果上下行之间有空行，则会进行换行</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="资源语法"><a href="#资源语法" class="headerlink" title="资源语法"></a>资源语法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">链接：</span><br><span class="line"></span><br><span class="line">&gt; - [链接](baidu.com <span class="string">&quot;百度这可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + [链接2][1]...[链接3][id]</span><br><span class="line">	[1]: baidu.com <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: zhihu.com <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">图片：</span><br><span class="line"></span><br><span class="line">&gt; - ![alt text](/path/.jpg <span class="string">&quot;可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + ![alt text][1]...![alt text][id可任意和下文保持一致即可]</span><br><span class="line">	[1]: /path/.jpg <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: /path/.jpg <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">代码块：</span><br><span class="line"></span><br><span class="line">&gt; 1. `中间是代码块`</span><br><span class="line">&gt; 2. ```bash 中间是代码块 ```</span><br><span class="line">&gt; 3. 四个空格/一个tab操作后面的代码</span><br><span class="line">&gt; 4.&lt;!-- more --&gt; 缩写/不展示全文</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>类对象/实例对象/类方法/实例方法/静态方法</title>
     <url>/posts/93899372/</url>
     <content><![CDATA[<ul>
@@ -1092,6 +1082,16 @@
       <tags>
         <tag>python</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>编写博客--makedown语法说明</title>
+    <url>/posts/ed6b07f3/</url>
+    <content><![CDATA[<h1 id="语法总览"><a href="#语法总览" class="headerlink" title="语法总览"></a>语法总览</h1><h2 id="正文语法"><a href="#正文语法" class="headerlink" title="正文语法"></a>正文语法</h2><pre><code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; 1.=== title ===	最顶级标题</span><br><span class="line">&gt; 2.---  title --- 二级标题</span><br><span class="line">&gt; 3.<span class="comment"># title/## title/###### title	一级/二级/六级标题</span></span><br><span class="line">&gt; * tab缩进语法</span><br><span class="line">&gt; + 字体加粗使用** text ** 或__text__</span><br><span class="line">&gt; - 排序列表，无序列表使用（+-*），有序列表使用（1.数字加点）</span><br><span class="line">&gt; - 换行，如果上下行无\n(换行操作)则不换行，如果有则换行</span><br><span class="line">&gt; - 空行，如果上下行之间有空行，则会进行换行</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="资源语法"><a href="#资源语法" class="headerlink" title="资源语法"></a>资源语法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">链接：</span><br><span class="line"></span><br><span class="line">&gt; - [链接](baidu.com <span class="string">&quot;百度这可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + [链接2][1]...[链接3][id]</span><br><span class="line">	[1]: baidu.com <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: zhihu.com <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">图片：</span><br><span class="line"></span><br><span class="line">&gt; - ![alt text](/path/.jpg <span class="string">&quot;可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + ![alt text][1]...![alt text][id可任意和下文保持一致即可]</span><br><span class="line">	[1]: /path/.jpg <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: /path/.jpg <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">代码块：</span><br><span class="line"></span><br><span class="line">&gt; 1. `中间是代码块`</span><br><span class="line">&gt; 2. ```bash 中间是代码块 ```</span><br><span class="line">&gt; 3. 四个空格/一个tab操作后面的代码</span><br><span class="line">&gt; 4.&lt;!-- more --&gt; 缩写/不展示全文</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>
+]]></content>
   </entry>
   <entry>
     <title>装饰器详解</title>
@@ -1232,7 +1232,7 @@
 <p><img src="/text_image/solopi_%E8%B5%84%E6%BA%90.jpg" alt="alt_text"></p>
 <ul>
 <li><p><em>工具各路径说明：</em></p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">  solopi/error:工具的错误日志；</span><br><span class="line">  solopi/logcat:整个工具的logcat;</span><br><span class="line">  solopi/patch:扩展/补丁，可实现对solopi工具的功能扩展；</span><br><span class="line">  solopi/records：最重要的文件夹，测试对象（app）的所有数据放在此路径下；</span><br><span class="line">solopi\records\error：app执行，adb监控到的异常会记录在这个目录下；</span><br><span class="line">solopi\records\<span class="built_in">export</span>：导出的用例，会放在这个路径下，从这里复制出来给其他人用</span><br><span class="line">solopi\records\import：从<span class="built_in">export</span>导出的用例，放在这个路径下，然后在solopi配置里点导入按钮，这样就成功导入了；</span><br><span class="line">solopi\records\replay：这里存放的是solopi录制的所有用例，以json格式存放，可以解析看下；</span><br><span class="line">solopi\records\logcat：存放app的，所有adb日志，和工具的adb日志差不多；</span><br><span class="line">solopi\records\records\20220217183647_20220218093514：见上图，为资源路径，文件名为时间戳；</span><br><span class="line">solopi\records\screenshot:存放app录屏的路径;</span><br><span class="line">solopi\records\screenshots:脚本执行失败时会截图，此为存放失败截图的路径；</span><br><span class="line">solopi\records\tmp：临时目录，用以存放一些临时文件，如强制结束时，所处页面的截图；</span><br><span class="line">  solopi/ScreenCaptures:存放录屏的目录，通过录屏分帧，可以计算每页的启动耗时；</span><br><span class="line">  solopi/screenshots:脚本故障截图的存放路径，脚本故障时会截图；</span><br><span class="line">  </span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">  solopi/error:工具的错误日志；</span><br><span class="line">  solopi/logcat:整个工具的logcat;</span><br><span class="line">  solopi/patch:扩展/补丁，可实现对solopi工具的功能扩展；</span><br><span class="line">  solopi/records：最重要的文件夹，测试对象（app）的所有数据放在此路径下；</span><br><span class="line">solopi\records\error：app执行，adb监控到的异常会记录在这个目录下；</span><br><span class="line">solopi\records\<span class="built_in">export</span>：导出的用例，会放在这个路径下，从这里复制出来给其他人用</span><br><span class="line">solopi\records\import：从<span class="built_in">export</span>导出的用例，放在这个路径下，然后在solopi配置里点导入按钮，这样就成功导入了；</span><br><span class="line">solopi\records\replay：存放solopi用例执行的保存结果，必须点保存，才会落地；否则存放在cpu中，退出会话就会清空，以json格式存放，可以解析看下；</span><br><span class="line">solopi\records\logcat：存放app的，所有adb日志，和工具的adb日志差不多；</span><br><span class="line">solopi\records\records\20220217183647_20220218093514：见上图，为资源路径，文件名为时间戳；</span><br><span class="line">solopi\records\screenshot:存放app录屏的路径;</span><br><span class="line">solopi\records\screenshots:脚本执行失败时会截图，此为存放失败截图的路径；</span><br><span class="line">solopi\records\tmp：临时目录，用以存放一些临时文件，如强制结束时，所处页面的截图；</span><br><span class="line">  solopi/ScreenCaptures:存放录屏的目录，通过录屏分帧，可以计算每页的启动耗时；</span><br><span class="line">  solopi/screenshots:脚本故障截图的存放路径，脚本故障时会截图；</span><br><span class="line">  </span><br><span class="line">  </span><br></pre></td></tr></table></figure>
 </li>
 <li><p><em>分析数据：</em></p>
 <p>  执行操作且确认结束后，需要按照以下顺序来进行分析，上一步失败，下一步中断：</p>
