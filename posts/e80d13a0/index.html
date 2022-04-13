@@ -22,21 +22,19 @@
     var CONFIG = {"hostname":"fenqian.xyz","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="常用app测试工具常用测试工具">
+  <meta name="description" content="背景智能遍历，即通智能化的规则来访问APP的UI页面；之所以要考虑这种方式，主要是monkey随机测试，随机性太强，覆盖率不好衡量；不方便进行版本之间的对比，因此考虑其他智能遍历方案，备选的有三种方案“UI自动化实现&#x2F;appcrawler自动遍历&#x2F;fastbot智能遍历” 方案对比 UI自动化实现  优点12定制化程度高，可控；可进行持续集成； 缺点1工作量大，稳定性差，实现难度高；   appc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="常用app测试工具">
-<meta property="og:url" content="https://fenqian.xyz/posts/28eebda3/index.html">
+<meta property="og:title" content="稳定性治理--智能遍历">
+<meta property="og:url" content="https://fenqian.xyz/posts/e80d13a0/index.html">
 <meta property="og:site_name" content="Fen Qian Web">
-<meta property="og:description" content="常用app测试工具常用测试工具">
+<meta property="og:description" content="背景智能遍历，即通智能化的规则来访问APP的UI页面；之所以要考虑这种方式，主要是monkey随机测试，随机性太强，覆盖率不好衡量；不方便进行版本之间的对比，因此考虑其他智能遍历方案，备选的有三种方案“UI自动化实现&#x2F;appcrawler自动遍历&#x2F;fastbot智能遍历” 方案对比 UI自动化实现  优点12定制化程度高，可控；可进行持续集成； 缺点1工作量大，稳定性差，实现难度高；   appc">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-24T08:08:00.000Z">
-<meta property="article:modified_time" content="2021-12-27T05:59:52.896Z">
+<meta property="article:published_time" content="2022-04-13T02:52:03.000Z">
+<meta property="article:modified_time" content="2022-04-13T03:57:32.215Z">
 <meta property="article:author" content="GAVIN HUANG">
-<meta property="article:tag" content="app测试">
-<meta property="article:tag" content="工具">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://fenqian.xyz/posts/28eebda3/">
+<link rel="canonical" href="https://fenqian.xyz/posts/e80d13a0/">
 
 
 <script id="page-configurations">
@@ -49,7 +47,7 @@
   };
 </script>
 
-  <title>常用app测试工具 | Fen Qian Web</title>
+  <title>稳定性治理--智能遍历 | Fen Qian Web</title>
   
 
 
@@ -199,7 +197,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://fenqian.xyz/posts/28eebda3/">
+    <link itemprop="mainEntityOfPage" href="https://fenqian.xyz/posts/e80d13a0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/me.jpg">
@@ -212,7 +210,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          常用app测试工具<a href="https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name_posts/%E5%B8%B8%E7%94%A8app%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+          稳定性治理--智能遍历<a href="https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name_posts/%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%B2%BB%E7%90%86-%E6%99%BA%E8%83%BD%E9%81%8D%E5%8E%86.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
         </h1>
 
         <div class="post-meta">
@@ -221,24 +219,9 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-12-24 16:08:00" itemprop="dateCreated datePublished" datetime="2021-12-24T16:08:00+08:00">2021-12-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-27 13:59:52" itemprop="dateModified" datetime="2021-12-27T13:59:52+08:00">2021-12-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-                </span>
+              <time title="创建时间：2022-04-13 10:52:03 / 修改时间：11:57:32" itemprop="dateCreated datePublished" datetime="2022-04-13T10:52:03+08:00">2022-04-13</time>
             </span>
 
           
@@ -250,8 +233,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/posts/28eebda3/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/28eebda3/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/e80d13a0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/e80d13a0/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -261,7 +244,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>843</span>
+              <span>1.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -280,10 +263,69 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
-<span id="more"></span>
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p><code>智能遍历，即通智能化的规则来访问APP的UI页面；之所以要考虑这种方式，主要是monkey随机测试，随机性太强，覆盖率不好衡量；不方便进行版本之间的对比，因此考虑其他智能遍历方案，备选的有三种方案“UI自动化实现/appcrawler自动遍历/fastbot智能遍历”</code></p>
+<h1 id="方案对比"><a href="#方案对比" class="headerlink" title="方案对比"></a>方案对比</h1><ul>
+<li><p><strong>UI自动化实现</strong></p>
+<ul>
+<li><em>优点</em><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">定制化程度高，可控；</span><br><span class="line">可进行持续集成；</span><br></pre></td></tr></table></figure></li>
+<li><em>缺点</em><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">工作量大，稳定性差，实现难度高；</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>appcrawler自动遍历</strong></p>
+<ul>
+<li><em>优点</em><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">覆盖率高，利用类爬虫机制能进行深度遍历，基本覆盖所有的页面；</span><br><span class="line">可进行策略定制，灵活性较高，使用成本较低；</span><br><span class="line">执行有HTML结果，支持Android和iOS渠道；</span><br><span class="line">支持持续集成；</span><br></pre></td></tr></table></figure></li>
+<li><em>缺点</em><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">全局遍历，意义不大，且执行策略和版本数据相关性不大；</span><br><span class="line">利用appium进行驱动，稳定性较差，耗时较长；</span><br><span class="line">需要第三方工具，进行性能监控，本身不支持；</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>fastbot智能遍历</strong></p>
+<ul>
+<li><em>优点</em><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">覆盖率高，且有覆盖率指标，进行智能遍历，遍历策略较智能，现实意义较强；</span><br><span class="line">可进行定制，灵活度较高，使用成本较低；</span><br><span class="line">支持iOS和Android渠道；</span><br><span class="line">可利用数据驱动，方便进行版本间的迭代，方便优化驱动策略；</span><br><span class="line">支持持续集成；</span><br></pre></td></tr></table></figure></li>
+<li><em>缺点</em><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">需要第三方工具，进行性能监控，本身不支持；</span><br><span class="line">无结果报告，只有打印的覆盖率指标，同时只有异常日志；</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<p>综合考虑，最终决定采用fastbot，其中很大一个原因是其支持数据驱动，方便持续优化策略，同时据同事说shein也在使用；</p>
+<h2 id="fastBOT使用"><a href="#fastBOT使用" class="headerlink" title="fastBOT使用"></a><em><strong>fastBOT使用</strong></em></h2><h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">安装/部署</span><br><span class="line">使用指令</span><br><span class="line">定制策略</span><br><span class="line">优化策略</span><br><span class="line">结果分析</span><br><span class="line">性能采集</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">参考回答：</span><br><span class="line">功能测试自动化</span><br><span class="line">a) 轻量接口自动化测试</span><br><span class="line"></span><br><span class="line">jmeter，</span><br><span class="line"></span><br><span class="line">b) APP UI层面的自动化</span><br><span class="line"></span><br><span class="line">android：UI Automator Viewer，Android Junit，Instrumentation，UIAutomator，</span><br><span class="line"></span><br><span class="line">iOS:基于Instrument的iOS UI自动化，</span><br><span class="line"></span><br><span class="line">性能测试</span><br><span class="line"></span><br><span class="line">a) Web前端性能测试</span><br><span class="line"></span><br><span class="line">网络抓包工具：Wireshark</span><br><span class="line"></span><br><span class="line">网页文件大小</span><br><span class="line"></span><br><span class="line">webpagetest</span><br><span class="line"></span><br><span class="line">pagespeed insight</span><br><span class="line"></span><br><span class="line">chrome adb</span><br><span class="line"></span><br><span class="line">b) APP端性能测试</span><br><span class="line"></span><br><span class="line">Android内存占用分析：MAT</span><br><span class="line"></span><br><span class="line">iOS内存问题分析：ARC模式</span><br><span class="line"></span><br><span class="line">Android WebView性能分析：</span><br><span class="line"></span><br><span class="line">iOS WebView性能分析</span><br><span class="line"></span><br><span class="line">c) 后台服务性能测试</span><br><span class="line"></span><br><span class="line">负载，压力，耐久性</span><br><span class="line"></span><br><span class="line">可拓展性，基准</span><br><span class="line"></span><br><span class="line">工具：apacheAB，Jmeter，LoadRunner，</span><br><span class="line"></span><br><span class="line">专项测试</span><br><span class="line"></span><br><span class="line">a) 兼容性测试</span><br><span class="line"></span><br><span class="line">手工测试：操作系统，分辨率，rom，网络类型</span><br><span class="line"></span><br><span class="line">云平台：testin，脚本编写，Android。</span><br><span class="line"></span><br><span class="line">b) 流量测试</span><br><span class="line"></span><br><span class="line">Android自带的流量管理，</span><br><span class="line"></span><br><span class="line">iOS自带的Network</span><br><span class="line"></span><br><span class="line">tcpdump抓包</span><br><span class="line"></span><br><span class="line">WiFi代理抓包：Fiddler</span><br><span class="line"></span><br><span class="line">流量节省方法：压缩数据，json优于xml；WebP优于传统的JPG，PNG；控制访问的频次；只获取必要的数据；缓存；</span><br><span class="line"></span><br><span class="line">c) 电量测试</span><br><span class="line"></span><br><span class="line">基于测试设备的方法，购买电量表进行测试。</span><br><span class="line"></span><br><span class="line">GSam Battery Monitoe Pro</span><br><span class="line"></span><br><span class="line">iOS基于Instrument Energy工具</span><br><span class="line"></span><br><span class="line">d) 弱网络测试</span><br><span class="line"></span><br><span class="line">手机自带的网络状况模拟工具</span><br><span class="line"></span><br><span class="line">基于代理的弱网络的模拟:</span><br><span class="line"></span><br><span class="line">工具：windows：Network Delay Simulator</span><br><span class="line"></span><br><span class="line">Mac：Network Link Conditioner</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>安装/部署</strong><ul>
+<li><em>部署Java环境</em></li>
+<li><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/downloads/#jdk18-windows">下载java jdk</a></li>
+<li>配置Java环境变量：在系统变量中对JAVA_HOME、PATH、CLASSPATH进行配置：<ul>
+<li>JAVA_HOME:C:\Program Files (x86)\Java\jdk1.8.0_91</li>
+<li>PATH:%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;</li>
+<li>CLASSPATH:.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;</li>
+</ul>
+</li>
+<li><em>部署Android环境</em><ul>
+<li>先部署Java环境</li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.google.cn/studio">安装Android studio</a></li>
+<li>添加Android环境变量：系统变量中添加ANDROID_HOME，PATH：<ul>
+<li>ANDROID_HOME:C:\Users\gavin\AppData\Local\Android\Sdk</li>
+<li>PATH:%ANDROID_HOME%\platform-tools;%ANDROID_HOME%\tools;C:\Users\gavin\AppData\Local\Android\Sdk\build-tools\32.0.0</li>
+</ul>
+</li>
+<li>通过Android studio 安装对应版本的Android sdk</li>
+</ul>
+</li>
+<li><em>将jdk包，pull到手机</em><ul>
+<li>adb push * .jar /sdcard</li>
+<li>adb push libs/ * /data/local/tmp/</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>使用指令</strong></li>
+</ul>
+<ul>
+<li>举例：adb -s device_vendor_id shell CLASSPATH=/sdcard/monkeyq.jar:/sdcard/framework.jar:/sdcard/fastbot-thirdpart.jar exec app_process /system/bin com.android.commands.monkey.Monkey -p package_name –agent reuseq –running-minutes duration(min) –throttle delay(ms) -v -v</li>
+</ul>
+<ul>
+<li><strong>定制策略</strong></li>
+<li><strong>优化策略</strong></li>
+<li><strong>性能采集</strong></li>
+</ul>
+
     </div>
 
     
@@ -337,10 +379,6 @@
 
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/app%E6%B5%8B%E8%AF%95/" rel="tag"># app测试</a>
-              <a href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag"># 工具</a>
-          </div>
 
         
 
@@ -348,13 +386,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/2020cd00/" rel="prev" title="python文档管理">
-      <i class="fa fa-chevron-left"></i> python文档管理
+    <a href="/posts/3de87ac/" rel="prev" title="uwnc">
+      <i class="fa fa-chevron-left"></i> uwnc
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/b7270d4a/" rel="next" title="python-多线程">
-      python-多线程 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -414,7 +449,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8app%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7"><span class="nav-number">1.</span> <span class="nav-text">常用app测试工具</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E5%AF%B9%E6%AF%94"><span class="nav-number">2.</span> <span class="nav-text">方案对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fastBOT%E4%BD%BF%E7%94%A8"><span class="nav-number">2.1.</span> <span class="nav-text">fastBOT使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E7%BA%B2"><span class="nav-number">2.1.1.</span> <span class="nav-text">大纲</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 	  

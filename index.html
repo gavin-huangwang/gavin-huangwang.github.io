@@ -194,6 +194,142 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://fenqian.xyz/posts/e80d13a0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/me.jpg">
+      <meta itemprop="name" content="GAVIN HUANG">
+      <meta itemprop="description" content="一身清贫怎敢入繁华，两袖清风岂敢误佳人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fen Qian Web">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/e80d13a0/" class="post-title-link" itemprop="url">稳定性治理--智能遍历</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-04-13 10:52:03 / 修改时间：11:57:32" itemprop="dateCreated datePublished" datetime="2022-04-13T10:52:03+08:00">2022-04-13</time>
+            </span>
+
+          
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p><code>智能遍历，即通智能化的规则来访问APP的UI页面；之所以要考虑这种方式，主要是monkey随机测试，随机性太强，覆盖率不好衡量；不方便进行版本之间的对比，因此考虑其他智能遍历方案，备选的有三种方案“UI自动化实现/appcrawler自动遍历/fastbot智能遍历”</code></p>
+<h1 id="方案对比"><a href="#方案对比" class="headerlink" title="方案对比"></a>方案对比</h1><ul>
+<li><p><strong>UI自动化实现</strong></p>
+<ul>
+<li><em>优点</em><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">定制化程度高，可控；</span><br><span class="line">可进行持续集成；</span><br></pre></td></tr></table></figure></li>
+<li><em>缺点</em><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">工作量大，稳定性差，实现难度高；</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>appcrawler自动遍历</strong></p>
+<ul>
+<li><em>优点</em><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">覆盖率高，利用类爬虫机制能进行深度遍历，基本覆盖所有的页面；</span><br><span class="line">可进行策略定制，灵活性较高，使用成本较低；</span><br><span class="line">执行有HTML结果，支持Android和iOS渠道；</span><br><span class="line">支持持续集成；</span><br></pre></td></tr></table></figure></li>
+<li><em>缺点</em><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">全局遍历，意义不大，且执行策略和版本数据相关性不大；</span><br><span class="line">利用appium进行驱动，稳定性较差，耗时较长；</span><br><span class="line">需要第三方工具，进行性能监控，本身不支持；</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>fastbot智能遍历</strong></p>
+<ul>
+<li><em>优点</em><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">覆盖率高，且有覆盖率指标，进行智能遍历，遍历策略较智能，现实意义较强；</span><br><span class="line">可进行定制，灵活度较高，使用成本较低；</span><br><span class="line">支持iOS和Android渠道；</span><br><span class="line">可利用数据驱动，方便进行版本间的迭代，方便优化驱动策略；</span><br><span class="line">支持持续集成；</span><br></pre></td></tr></table></figure></li>
+<li><em>缺点</em><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">需要第三方工具，进行性能监控，本身不支持；</span><br><span class="line">无结果报告，只有打印的覆盖率指标，同时只有异常日志；</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<p>综合考虑，最终决定采用fastbot，其中很大一个原因是其支持数据驱动，方便持续优化策略，同时据同事说shein也在使用；</p>
+<h2 id="fastBOT使用"><a href="#fastBOT使用" class="headerlink" title="fastBOT使用"></a><em><strong>fastBOT使用</strong></em></h2><h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">安装/部署</span><br><span class="line">使用指令</span><br><span class="line">定制策略</span><br><span class="line">优化策略</span><br><span class="line">结果分析</span><br><span class="line">性能采集</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>安装/部署</strong><ul>
+<li><em>部署Java环境</em></li>
+<li><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/downloads/#jdk18-windows">下载java jdk</a></li>
+<li>配置Java环境变量：在系统变量中对JAVA_HOME、PATH、CLASSPATH进行配置：<ul>
+<li>JAVA_HOME:C:\Program Files (x86)\Java\jdk1.8.0_91</li>
+<li>PATH:%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;</li>
+<li>CLASSPATH:.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;</li>
+</ul>
+</li>
+<li><em>部署Android环境</em><ul>
+<li>先部署Java环境</li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.google.cn/studio">安装Android studio</a></li>
+<li>添加Android环境变量：系统变量中添加ANDROID_HOME，PATH：<ul>
+<li>ANDROID_HOME:C:\Users\gavin\AppData\Local\Android\Sdk</li>
+<li>PATH:%ANDROID_HOME%\platform-tools;%ANDROID_HOME%\tools;C:\Users\gavin\AppData\Local\Android\Sdk\build-tools\32.0.0</li>
+</ul>
+</li>
+<li>通过Android studio 安装对应版本的Android sdk</li>
+</ul>
+</li>
+<li><em>将jdk包，pull到手机</em><ul>
+<li>adb push * .jar /sdcard</li>
+<li>adb push libs/ * /data/local/tmp/</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>使用指令</strong></li>
+</ul>
+<ul>
+<li>举例：adb -s device_vendor_id shell CLASSPATH=/sdcard/monkeyq.jar:/sdcard/framework.jar:/sdcard/fastbot-thirdpart.jar exec app_process /system/bin com.android.commands.monkey.Monkey -p package_name –agent reuseq –running-minutes duration(min) –throttle delay(ms) -v -v</li>
+</ul>
+<ul>
+<li><strong>定制策略</strong></li>
+<li><strong>优化策略</strong></li>
+<li><strong>性能采集</strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://fenqian.xyz/posts/3de87ac/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -970,81 +1106,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://fenqian.xyz/posts/c48e9a83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/me.jpg">
-      <meta itemprop="name" content="GAVIN HUANG">
-      <meta itemprop="description" content="一身清贫怎敢入繁华，两袖清风岂敢误佳人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fen Qian Web">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/c48e9a83/" class="post-title-link" itemprop="url">用例管理平台</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-02-11 16:51:24 / 修改时间：16:52:12" itemprop="dateCreated datePublished" datetime="2022-02-11T16:51:24+08:00">2022-02-11</time>
-            </span>
-
-          
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>13</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1117,7 +1178,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1187,12 +1248,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">37k</span>
+    <span title="站点总字数">38k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">34 分钟</span>
+    <span title="站点阅读时长">35 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
