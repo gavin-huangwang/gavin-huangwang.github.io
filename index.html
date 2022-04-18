@@ -217,9 +217,24 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-04-13 10:52:03 / 修改时间：11:57:32" itemprop="dateCreated datePublished" datetime="2022-04-13T10:52:03+08:00">2022-04-13</time>
+              <time title="创建时间：2022-04-13 10:52:00" itemprop="dateCreated datePublished" datetime="2022-04-13T10:52:00+08:00">2022-04-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-18 08:32:25" itemprop="dateModified" datetime="2022-04-18T08:32:25+08:00">2022-04-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
             </span>
 
           
@@ -230,14 +245,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
+              <span>3.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -265,7 +280,7 @@
 </li>
 <li><p><strong>fastbot智能遍历</strong></p>
 <ul>
-<li><em>优点</em><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">覆盖率高，且有覆盖率指标，进行智能遍历，遍历策略较智能，现实意义较强；</span><br><span class="line">可进行定制，灵活度较高，使用成本较低；</span><br><span class="line">支持iOS和Android渠道；</span><br><span class="line">可利用数据驱动，方便进行版本间的迭代，方便优化驱动策略；</span><br><span class="line">支持持续集成；</span><br></pre></td></tr></table></figure></li>
+<li><em>优点</em><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">覆盖率高，且有覆盖率指标，进行智能遍历，遍历策略较智能（每次遍历都会建模，利用深度学习会持续优化模型，作为驱动策略），现实意义较强；</span><br><span class="line">可进行定制，灵活度较高，使用成本较低；</span><br><span class="line">支持iOS和Android渠道；</span><br><span class="line">可利用数据驱动，方便进行版本间的迭代，方便优化驱动策略；</span><br><span class="line">支持持续集成；</span><br><span class="line">利用monkey来遍历，执行较高，效率高；</span><br><span class="line">支持非标准化控件，可以利用图像识别来进行断言；</span><br><span class="line">每次的模型可复用，模型文件会自动存储在 /sdcard/fastbot_[包名].fbm，换设备或者版本可复用原有模型，保证策略完全一致；只需要放在相同的位置即可；</span><br><span class="line">支持多设备</span><br></pre></td></tr></table></figure></li>
 <li><em>缺点</em><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">需要第三方工具，进行性能监控，本身不支持；</span><br><span class="line">无结果报告，只有打印的覆盖率指标，同时只有异常日志；</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
@@ -288,7 +303,7 @@
 <li><a target="_blank" rel="noopener" href="https://developer.android.google.cn/studio">安装Android studio</a></li>
 <li>添加Android环境变量：系统变量中添加ANDROID_HOME，PATH：<ul>
 <li>ANDROID_HOME:C:\Users\gavin\AppData\Local\Android\Sdk</li>
-<li>PATH:%ANDROID_HOME%\platform-tools;%ANDROID_HOME%\tools;C:\Users\gavin\AppData\Local\Android\Sdk\build-tools\32.0.0</li>
+<li>PATH:%ANDROID_HOME%\platform-tools;%ANDROID_HOME%\tools;C:\Users\gavin\AppData\Local\Android\Sdk\build-tools\32.0.0（aapt命令的环境变量，其是apk解析程序）</li>
 </ul>
 </li>
 <li>通过Android studio 安装对应版本的Android sdk</li>
@@ -304,11 +319,37 @@
 <li><strong>使用指令</strong></li>
 </ul>
 <ul>
-<li>举例：adb -s device_vendor_id shell CLASSPATH=/sdcard/monkeyq.jar:/sdcard/framework.jar:/sdcard/fastbot-thirdpart.jar exec app_process /system/bin com.android.commands.monkey.Monkey -p package_name –agent reuseq –running-minutes duration(min) –throttle delay(ms) -v -v</li>
+<li><p>举例：adb -s device_vendor_id shell CLASSPATH=/sdcard/monkeyq.jar:/sdcard/framework.jar:/sdcard/fastbot-thirdpart.jar exec app_process /system/bin com.android.commands.monkey.Monkey -p package_name –agent reuseq –running-minutes duration(min) –throttle delay(ms) -v -v</p>
+</li>
+<li><p>参数说明</p>
+</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">必填参数：</span><br><span class="line">-s imei imei2:支持多设备</span><br><span class="line">-p package_name:str；“adb shell pm list package”可获取APP包名</span><br><span class="line">--agent reuseq	：遍历模式，无需更改</span><br><span class="line">--running-minutes 120：遍历时长，单位是min</span><br><span class="line">--throttle 500：和monkey中的--throttle相同，为事件频率，建议500-800</span><br><span class="line">选填参数：</span><br><span class="line">--bugreport ：<span class="comment">#发生崩溃时打印的日志</span></span><br><span class="line">--output-directory ： /sdcard/xxx <span class="comment">#输出目录的文件夹</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <ul>
-<li><strong>定制策略</strong></li>
-<li><strong>优化策略</strong></li>
+<li><strong>定制策略</strong><ul>
+<li>限定词：限定自动化定位到的文本只能是apk字符串池中出现的文本，否则抛出异常  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">操作：</span><br><span class="line">aapt2 dump strings apk路径 &gt; max.valid.strings :将apk中所有的字符创，加入到限定词文档</span><br><span class="line">adb push max.valid.strings &#x2F;sdcard:配置文件需要push到sdk卡才能生效</span><br></pre></td></tr></table></figure></li>
+<li>自定义事件执行顺序：应用于需要自定义执行顺序的场景（如登录），或者要保证一定要覆盖到的核心场景,实现方式如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在pc端新建 max.xpath.actions 文件</span><br><span class="line">编写事件序列的<span class="keyword">case</span>，参考我提供的max.xpath.actions文件；举例说明：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><strong>优化策略</strong><ul>
+<li><em>输入内容优化</em><br><code>输入是用户主观意愿很强的行为，为保证输入的内容是有价值的，更添近真实场景，在覆盖输入场景做一些策略优化，以屏蔽乱输入内容</code></li>
+<li><em>操作</em><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  使用ADBKeyBoard在输入栏自动输入内容，屏蔽UI输入法：UI输入法，不同终端使用不同的输入法，不稳定（安装部署adbkeyboard见下方内容，基本所有的开源的自动化工具在输入这块都会封装输入法，为了方便复用和稳定，不建议调用手机的输入法）；</span><br><span class="line">  输入随机字符串：pc建一个max.config文件；配置 max.config 中 max.randomPickFromStringList &#x3D; false，最后将文件push到手机的&#x2F;sdcard目录下；</span><br><span class="line">  从文件中随机读取字符串来输入：pc建一个max.config文件；配置 max.config 中 max.randomPickFromStringList &#x3D; true，然后在建一个max.strings文件，里面放用来输入的字符串（每一行为一个对象）；最后将max.config和max.strings文件push到手机的&#x2F;sdcard目录下；</span><br><span class="line">  模糊输入：模糊输入和随机输入有点类似，不过有限定范围，fastbot模糊输入的限定规则如下：</span><br><span class="line">50% 概率输入fuzzing.strings中某个string</span><br><span class="line">35% 概率输入被测试 App 历史页面中text&#x2F;desc文本内容（不存在max.fuzzing.strings文件时概率提高到85%）</span><br><span class="line">15% 概率不输入</span><br><span class="line">使用模糊输入：将git项目中的test&#x2F;max.fuzzing.strings文件push到手机&#x2F;sdcard下，此文件存在模糊搜索策略及生效，文件里放想输入的字符串；</span><br><span class="line">  </span><br></pre></td></tr></table></figure></li>
+<li>部署adbkeyboard<ul>
+<li>[下载开源包]（<a target="_blank" rel="noopener" href="https://github.com/senzhk/ADBKeyBoard/archive/refs/heads/master.zip%EF%BC%89">https://github.com/senzhk/ADBKeyBoard/archive/refs/heads/master.zip）</a></li>
+<li>进入项目目录cd ADBKeyBoard</li>
+<li>设置环境变量 export ANDROID_HOME=$HOME/Android/Sdk</li>
+<li>在保证手机连接电脑，且赋予debug权限情况下，执行安装命令./gradlew installDebug</li>
+<li>如果以上方式无法安装，请安装apk包：<a target="_blank" rel="noopener" href="https://github.com/senzhk/ADBKeyBoard/raw/master/ADBKeyboard.apk">地址</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>结果分析</strong><ul>
+<li>异常数据<br>  crash：Crash会以追加方式写入/sdcard/crash-dump.log文件<br>  anr：写入 /sdcard/oom-traces.log 文件</li>
+<li>覆盖率统计：coverage = testedActivity / totalActivities * 100<br>  testedActivity:本次测试的activity,会打印出来<br>  totalActivities:总的activity，会打印出来<br>  以上的所有activity，是不区分废弃，或者未使用的activity，为APP的所有的activity</li>
+</ul>
+</li>
 <li><strong>性能采集</strong></li>
 </ul>
 
@@ -1248,12 +1289,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">38k</span>
+    <span title="站点总字数">40k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">35 分钟</span>
+    <span title="站点阅读时长">37 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
