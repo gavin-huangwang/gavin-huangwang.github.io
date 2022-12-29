@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"fenqian.xyz","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="背景智能遍历，即通智能化的规则来访问APP的UI页面；之所以要考虑这种方式，主要是monkey随机测试，随机性太强，覆盖率不好衡量；不方便进行版本之间的对比，因此考虑其他智能遍历方案，备选的有三种方案“UI自动化实现&#x2F;appcrawler自动遍历&#x2F;fastbot智能遍历”">
+<meta property="og:type" content="article">
+<meta property="og:title" content="稳定性治理--智能遍历">
+<meta property="og:url" content="https://fenqian.xyz/posts/e80d13a0/index.html">
+<meta property="og:site_name" content="Fen Qian Web">
+<meta property="og:description" content="背景智能遍历，即通智能化的规则来访问APP的UI页面；之所以要考虑这种方式，主要是monkey随机测试，随机性太强，覆盖率不好衡量；不方便进行版本之间的对比，因此考虑其他智能遍历方案，备选的有三种方案“UI自动化实现&#x2F;appcrawler自动遍历&#x2F;fastbot智能遍历”">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-13T02:52:00.000Z">
+<meta property="article:modified_time" content="2022-12-29T07:31:33.539Z">
+<meta property="article:author" content="GAVIN HUANG">
+<meta property="article:tag" content="稳定性">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://fenqian.xyz/posts/e80d13a0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>稳定性治理--智能遍历 | Fen Qian Web</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0c0805c7973dc17cabb0b51e3386ffc0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Fen Qian Web" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Fen Qian Web</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">HELLO,YOU</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://fenqian.xyz/posts/e80d13a0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/me.jpg">
+      <meta itemprop="name" content="GAVIN HUANG">
+      <meta itemprop="description" content="此地无银三百两">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fen Qian Web">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          稳定性治理--智能遍历<a href="https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name_posts/%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%B2%BB%E7%90%86-%E6%99%BA%E8%83%BD%E9%81%8D%E5%8E%86.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-13 10:52:00" itemprop="dateCreated datePublished" datetime="2022-04-13T10:52:00+08:00">2022-04-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-29 15:31:33" itemprop="dateModified" datetime="2022-12-29T15:31:33+08:00">2022-12-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/e80d13a0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/e80d13a0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p><code>智能遍历，即通智能化的规则来访问APP的UI页面；之所以要考虑这种方式，主要是monkey随机测试，随机性太强，覆盖率不好衡量；不方便进行版本之间的对比，因此考虑其他智能遍历方案，备选的有三种方案“UI自动化实现/appcrawler自动遍历/fastbot智能遍历”</code></p>
+<span id="more"></span>
+<h1 id="方案对比"><a href="#方案对比" class="headerlink" title="方案对比"></a>方案对比</h1><ul>
+<li><p><strong>UI自动化实现</strong></p>
+<ul>
+<li><em>优点</em><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">定制化程度高，可控</span><br><span class="line">可进行持续集成</span><br></pre></td></tr></table></figure></li>
+<li><em>缺点</em><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">工作量大，稳定性差，实现难度高</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>appcrawler自动遍历</strong></p>
+<ul>
+<li><em>优点</em><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">覆盖率高，利用类爬虫机制能进行深度遍历，基本覆盖所有的页面</span><br><span class="line">可进行策略定制，灵活性较高，使用成本较低</span><br><span class="line">执行有HTML结果，支持Android和iOS渠道</span><br><span class="line">支持持续集成；</span><br></pre></td></tr></table></figure></li>
+<li><em>缺点</em><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">执行策略和版本数据相关性不大,无法利用历史策略数据</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>fastbot智能遍历</strong></p>
+<ul>
+<li><em>优点</em><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">覆盖率高，且有覆盖率指标，进行智能遍历，遍历策略较智能（每次遍历都会建模，利用深度学习会持续优化模型，作为驱动策略），现实意义较强；</span><br><span class="line">可进行定制，灵活度较高，使用成本较低；</span><br><span class="line">支持iOS和Android渠道；</span><br><span class="line">可利用数据驱动，方便进行版本间的迭代，方便优化驱动策略；</span><br><span class="line">支持持续集成；</span><br><span class="line">利用monkey来遍历，执行较快，效率高；</span><br><span class="line">支持非标准化控件，可以利用图像识别来进行断言；</span><br><span class="line">每次的模型可复用，模型文件会自动存储在 /sdcard/fastbot_[包名].fbm，换设备或者版本可复用原有模型，保证策略完全一致；只需要放在相同的位置即可；</span><br><span class="line">支持多设备</span><br></pre></td></tr></table></figure></li>
+<li><em>缺点</em><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">需要第三方工具，进行性能监控，本身不支持；</span><br><span class="line">无结果报告，只有打印的覆盖率指标，同时只有异常日志；</span><br><span class="line">后期可能会收费，一旦收费，建议转solopi或者自研；</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<p>综合考虑，最终决定采用fastbot，其中很大一个原因是其支持数据驱动，方便持续优化策略，同时据同事说shein也在使用；</p>
+<h2 id="fastBOT使用"><a href="#fastBOT使用" class="headerlink" title="fastBOT使用"></a><em><strong>fastBOT使用</strong></em></h2><h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">安装/部署</span><br><span class="line">使用指令</span><br><span class="line">定制策略</span><br><span class="line">优化策略</span><br><span class="line">结果分析</span><br><span class="line">性能采集</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>安装/部署</strong></p>
+<ul>
+<li><em>部署Java环境</em><ul>
+<li><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/downloads/#jdk18-windows">下载java jdk</a></li>
+<li>配置Java环境变量：在系统变量中对JAVA_HOME、PATH、CLASSPATH进行配置：<ul>
+<li>JAVA_HOME:C:\Program Files (x86)\Java\jdk1.8.0_91</li>
+<li>PATH:%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin</li>
+<li>CLASSPATH:.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><em>部署Android环境</em><ul>
+<li>先部署Java环境</li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.google.cn/studio">安装Android studio</a></li>
+<li>通过Android studio 安装对应版本的Android sdk</li>
+<li>添加Android环境变量：系统变量中添加ANDROID_HOME，PATH：<ul>
+<li>ANDROID_HOME:C:\Users\gavin\AppData\Local\Android\Sdk</li>
+<li>PATH:%ANDROID_HOME%\platform-tools;%ANDROID_HOME%\tools;C:\Users\gavin\AppData\Local\Android\Sdk\build-tools\32.0.0（aapt命令的环境变量，其是apk解析程序）        </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><em>将jdk包，pull到手机</em><ul>
+<li>adb push * .jar /sdcard</li>
+<li>adb push libs/ * /data/local/tmp/</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>使用指令</strong></p>
+<ul>
+<li><em>举例：</em></li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IOS:tidevice xctest -B bytedance.FastbotRunner112.xctrunner -e 	BUNDLEID:com.TranssnetMusic.Boomplay -e duration:120 -e throttle:300 --debug</span><br><span class="line"></span><br><span class="line">ANDROID:adb -s 037952588D000392 0442233974160287 shell CLASSPATH&#x3D;&#x2F;sdcard&#x2F;monkeyq.jar:&#x2F;sdcard&#x2F;framework.jar:&#x2F;sdcard&#x2F;fastbot-thirdpart.jar exec app_process &#x2F;system&#x2F;bin com.android.commands.monkey.Monkey -p com.afmobi.boomplayer --agent reuseq --running-minutes 240 --throttle 500 -v -v --output-directory &#x2F;sdcard&#x2F;fast_data</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><em>参数说明</em></li>
+</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">必填参数：</span><br><span class="line">-s imei imei2:支持多设备</span><br><span class="line">-p package_name:str；“adb shell pm list package”可获取APP包名</span><br><span class="line">--agent reuseq	：遍历模式，无需更改</span><br><span class="line">--running-minutes 120：遍历时长，单位是min</span><br><span class="line">--throttle 500：和monkey中的--throttle相同，为事件频率，建议500-800</span><br><span class="line">选填参数：</span><br><span class="line">--bugreport ：<span class="comment">#发生崩溃时打印的日志</span></span><br><span class="line">--output-directory ： /sdcard/xxx <span class="comment">#输出目录的文件夹</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>定制策略</strong></p>
+<ul>
+<li><em>限定词</em><br><code>限定自动化定位到的文本只能是apk字符串池中出现的文本，否则抛出异常</code>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">操作：</span><br><span class="line">aapt2 dump strings apk路径 &gt; max.valid.strings :将apk中所有的字符创，加入到限定词文档</span><br><span class="line">adb push max.valid.strings &#x2F;sdcard:配置文件需要push到sdk卡才能生效</span><br></pre></td></tr></table></figure></li>
+<li><em>自定义事件执行顺序</em><br><code>应用于需要自定义执行顺序的场景（如登录），或者要保证一定要覆盖到的核心场景,实现方式如下：</code></li>
+</ul>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">在pc端新建 max.xpath.actions 文件</span><br><span class="line">编写事件序列的<span class="keyword">case</span>，参考我提供的max.xpath.actions文件，文件编写好之后push到/sdcard的根目录；举例说明：</span><br><span class="line">[</span><br><span class="line">&#123;</span><br><span class="line"><span class="string">&quot;prob&quot;</span>:1,										//事件发生概率，实际使用注释文件要删掉</span><br><span class="line"><span class="string">&quot;activity&quot;</span>:<span class="string">&quot;com.boomplay.ui.main.MainActivity&quot;</span>,	//作用的页面</span><br><span class="line"><span class="string">&quot;times&quot;</span>:1,										//重复次数</span><br><span class="line"><span class="string">&quot;actions&quot;</span>:[										//具体步骤的执行,同时支持多个操作</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="string">&quot;xpath&quot;</span>:<span class="string">&quot;//*[@text=&#x27;Charts&#x27;]&quot;</span>,			//尽量使用resource-id作为xpath路径，也可以组合使用比如<span class="string">&quot;xpath&quot;</span>: <span class="string">&quot;//*[@resource-id=&#x27;xxx&#x27;and @text=&#x27;xx&#x27;]&quot;</span></span><br><span class="line">		<span class="string">&quot;action&quot;</span>:<span class="string">&quot;CLICK&quot;</span>,						//动作支持的操作，必须大写（CLICK，LONG_CLICK，BACK，SCROLL_TOP_DOWN，SCROLL_BOTTOM_UP，SCROLL_LEFT_RIGHT，SCROLL_RIGHT_LEFT）</span><br><span class="line">		<span class="string">&quot;text&quot;</span>: <span class="string">&quot;打开页面成功&quot;</span>,</span><br><span class="line">		<span class="string">&quot;clearText&quot;</span>:<span class="literal">false</span>,						//明文，可不带</span><br><span class="line">		<span class="string">&quot;throttle&quot;</span>:5000							//action间隔事件（ms）					</span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;<span class="string">&quot;xpath&quot;</span>:<span class="string">&quot;//*[@text=&#x27;Artists&#x27;]&quot;</span>,</span><br><span class="line">		<span class="string">&quot;action&quot;</span>:<span class="string">&quot;CLICK&quot;</span>,</span><br><span class="line">		<span class="string">&quot;throttle&quot;</span>:5000&#125;</span><br><span class="line">	]</span><br><span class="line">&#125;,												//到不同的activity操作，需要新起一个对象</span><br><span class="line">&#123;								</span><br><span class="line"><span class="string">&quot;prob&quot;</span>:1,</span><br><span class="line"><span class="string">&quot;activity&quot;</span>:<span class="string">&quot;com.boomplay.ui.guide.GuideDialogSearchActivity&quot;</span>,</span><br><span class="line"><span class="string">&quot;times&quot;</span>:1,</span><br><span class="line"><span class="string">&quot;actions&quot;</span>:[</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="string">&quot;xpath&quot;</span>:<span class="string">&quot;//*[@text=&#x27;Charts&#x27;]&quot;</span>,</span><br><span class="line">		<span class="string">&quot;action&quot;</span>:<span class="string">&quot;CLICK&quot;</span>,</span><br><span class="line">		<span class="string">&quot;text&quot;</span>: <span class="string">&quot;打开页面成功&quot;</span>,</span><br><span class="line">		<span class="string">&quot;clearText&quot;</span>:<span class="literal">false</span>,</span><br><span class="line">		<span class="string">&quot;throttle&quot;</span>:5000</span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;<span class="string">&quot;xpath&quot;</span>:<span class="string">&quot;//*[@text=&#x27;Artists&#x27;]&quot;</span>,</span><br><span class="line">		<span class="string">&quot;action&quot;</span>:<span class="string">&quot;CLICK&quot;</span>,</span><br><span class="line">		<span class="string">&quot;throttle&quot;</span>:5000&#125;</span><br><span class="line">	]</span><br><span class="line">&#125;,</span><br><span class="line">]</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><em>配置白名单</em><br><code>作用：定制策略只在白名单页面内进行操作</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">操作：</span><br><span class="line">新建 awl.strings文件</span><br><span class="line">在文件中写入Activity的名称，如：com.boomplay.ui.main.MainActivity</span><br><span class="line">将文件push到手机&#x2F;sdcard路径下，使用时，在执行命令尾部添加：</span><br><span class="line">--act-whitelist-file &#x2F;sdcard&#x2F;awl.strings</span><br></pre></td></tr></table></figure></li>
+<li><p><em>配置黑名单</em><br><code>作用：定制策略不允许访问黑名单页面</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">操作：</span><br><span class="line">新建 abl.strings文件</span><br><span class="line">在文件中写入Activity的名称，如：com.boomplay.ui.main.MainActivity</span><br><span class="line">将文件push到手机&#x2F;sdcard路径下，使用时，在执行命令尾部添加：</span><br><span class="line">--act-blacklist-file &#x2F;sdcard&#x2F;abl.strings</span><br></pre></td></tr></table></figure>
+<p><em><strong>黑白名单不能同时配置，非黑即白</strong></em></p>
+</li>
+<li><p><em>定制需要屏蔽的按钮/区域</em><br><code>作用：如登防止登录后，中途退出</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">    新建max.widget.black文件，文件配置后，push到&#x2F;sdcard路径下</span><br><span class="line">    [</span><br><span class="line">&#123;</span><br><span class="line">    &quot;activity&quot;:&quot;com.ss.android.xxx.MainActivity&quot;,</span><br><span class="line">    &quot;xpath&quot;: &quot;&#x2F;&#x2F;*[@resource-id&#x3D;&#39;com.xxx.go:id&#x2F;aaa&#39;]&quot;&#x2F;&#x2F;通过元素控制不让访问</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">    &quot;activity&quot;:&quot;com.ss.android.xxx.MainActivity&quot;,</span><br><span class="line">    &quot;bounds&quot;: 0.5									&#x2F;&#x2F;activity区域内50%区域不被点击，值为0-1</span><br><span class="line">&#125;</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p><em>通过tree屏蔽</em><br><code>原理配置xpath：查找匹配的控件，改变控件属性，从而使控件屏蔽</code></p>
+</li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">新建max.tree.pruning文件，文件配置完后，push到&#x2F;sdcard路径下</span><br><span class="line">配置实例：建github提供的文件参考配置</span><br></pre></td></tr></table></figure>
+<ul>
+<li><em>定制事件中模糊事件/突发性事件的占比</em><br><code>所谓的模糊事件，是指执行某个操作后（定制的action事件），模型会根据这个操作生成5-10个相关的操作的策略</code></li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">在max.config文件中增加模糊性事件，在总的事件中的占比，配置完成后，push到&#x2F;sdcard路径</span><br><span class="line">max.fuzzingRate &#x3D; 0.01D &#x2F;&#x2F;0.01为Fuzz事件的总概率</span><br><span class="line">模糊事件，包含以下事件，（数字为配置事件在模糊性事件中的概率，以下数值为默认值，可定制）： </span><br><span class="line">	max.doRotateFuzzing &#x3D; 0.15</span><br><span class="line">	max.doAppSwitchFuzzing &#x3D; 0.15</span><br><span class="line">	max.doTrackballFuzzing &#x3D; 0.15</span><br><span class="line">	max.doNavKeyFuzzing &#x3D; 0.15</span><br><span class="line">	max.doKeyCodeFuzzing &#x3D; 0.15</span><br><span class="line">	max.doSystemKeyFuzzing &#x3D; 0.15</span><br><span class="line">	max.doDragFuzzing &#x3D; 0.5</span><br><span class="line">	max.doPinchZoomFuzzing &#x3D; 0.15 </span><br><span class="line">	max.doClickFuzzing &#x3D; 0.7</span><br><span class="line">在max.config文件中增加随机性事件（monkey随机性事件），在总的事件中的占比，配置完成后push到&#x2F;sdcard路径下</span><br><span class="line">max.startMutation &#x3D; 0.3D &#x2F;&#x2F;启动Fastbot立刻设置mutation的几率，默认30%</span><br><span class="line">随机性事件，包含以下事件，(数字为默认概率，此概率为事件总概率，可定制)：</span><br><span class="line">	max.doMutationAirplaneFuzzing &#x3D; 0.001</span><br><span class="line">	max.doMutationMutationAlwaysFinishActivitysFuzzing &#x3D; 0.1</span><br><span class="line">	max.doMutationWifiFuzzing &#x3D; 0.001</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>优化策略</strong></p>
+<ul>
+<li><em>输入内容优化</em><br><code>输入是用户主观意愿很强的行为，为保证输入的内容是有价值的，更添近真实场景，在覆盖输入场景做一些策略优化，以屏蔽乱输入内容</code></li>
+<li><em>操作</em></li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">使用ADBKeyBoard在输入栏自动输入内容，屏蔽UI输入法：UI输入法，不同终端使用不同的输入法，不稳定（安装部署adbkeyboard见下方内容，基本所有的开源的自动化工具在输入这块都会封装输入法，为了方便复用和稳定，不建议调用手机的输入法）；</span><br><span class="line">输入随机字符串：pc建一个max.config文件；配置 max.config 中 max.randomPickFromStringList &#x3D; false，最后将文件push到手机的&#x2F;sdcard目录下；</span><br><span class="line">从文件中随机读取字符串来输入：pc建一个max.config文件；配置 max.config 中 max.randomPickFromStringList &#x3D; true，然后在建一个max.strings文件，里面放用来输入的字符串（每一行为一个对象）；最后将max.config和max.strings文件push到手机的&#x2F;sdcard目录下；</span><br><span class="line">模糊输入：模糊输入和随机输入有点类似，不过有限定范围，fastbot模糊输入的限定规则如下：</span><br><span class="line">	50% 概率输入fuzzing.strings中某个string</span><br><span class="line">	35% 概率输入被测试 App 历史页面中text&#x2F;desc文本内容（不存在max.fuzzing.strings文件时概率提高到85%）</span><br><span class="line">	15% 概率不输入</span><br><span class="line">使用文件限定的模糊输入：将git项目中的test&#x2F;max.fuzzing.strings文件push到手机&#x2F;sdcard下，此文件存在模糊搜索策略及生效，文件里放想输入的字符串；</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>部署adbkeyboard</p>
+<ul>
+<li>[下载开源包]（<a target="_blank" rel="noopener" href="https://github.com/senzhk/ADBKeyBoard/archive/refs/heads/master.zip%EF%BC%89">https://github.com/senzhk/ADBKeyBoard/archive/refs/heads/master.zip）</a></li>
+<li>进入项目目录cd ADBKeyBoard</li>
+<li>设置环境变量 export ANDROID_HOME=$HOME/Android/Sdk</li>
+<li>在保证手机连接电脑，且赋予debug权限情况下，执行安装命令./gradlew installDebug</li>
+<li>如果以上方式无法安装，请安装apk包：<a target="_blank" rel="noopener" href="https://github.com/senzhk/ADBKeyBoard/raw/master/ADBKeyboard.apk">地址</a></li>
+</ul>
+</li>
+<li><p><em>apk反混淆</em><br><code>是什么：混淆指的是Java混淆编译，用以防止对源码的反编译破解；反混淆，类似于解密;使得配置在 不同版本的App中可以通用 </code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">配置混淆映射文件max.mapping，push到手机&#x2F;sdcard中，以建立混淆前后ID映射关系：</span><br><span class="line">adb push resguard_mapping_NewsArticle_beta_version_v7.2.x_?????.txt &#x2F;sdcard&#x2F;max.mapping</span><br><span class="line">配置反混淆文件，以自定义事件为例，在 max.xpath.actions 中配置混淆前的 resource-id，参考示例文件</span><br></pre></td></tr></table></figure></li>
+<li><p><em>测试过程中自动截图</em><br><code>场景：当--throttle 事件频率&gt;200时，配置了截图，会对测试过程中页面进行截图</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">新建max.config配置文件，增加以下属性，配置完成后文件push到&#x2F;sdcard路径下</span><br><span class="line">max.takeScreenshot &#x3D; true</span><br><span class="line">max.takeScreenshotForEveryStep &#x3D; true</span><br><span class="line">max.saveGUITreeToXmlEveryStep &#x3D;true</span><br><span class="line">目录默认保存为手机端sdcard中，如需改变保存位置，在执行命令末尾添加 --output-directory 指定路径</span><br></pre></td></tr></table></figure></li>
+<li><p><em>支持外链跳转</em><br><code>支持第三方的外链跳转，跳转到第三方应用，或者跳转到端内页面</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">新建max.schema文件，增加配置如下，文件配置完后，push到&#x2F;sdcard路径下</span><br><span class="line">max.execSchema &#x3D; true</span><br><span class="line">max.execSchemaEveryStartup  &#x3D; true  #每次启动app先执行schema</span><br></pre></td></tr></table></figure></li>
+<li><p><em>应用自动授予权限</em><br><code>如boomplay需要获取通讯录/相机权限，fastbot启动时默认会一次性各所有权限，如需每次动态给权限，需要更改配置</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在max.config中增加以下配置，则不会自动给所有权限；文件配置完之后push到&#x2F;sdcard路径下</span><br><span class="line">max.grantAllPermission &#x3D; false</span><br><span class="line">动态给权限的方式是，在执行的adb命令尾部增加对应的android权限授予的指令：</span><br><span class="line">-p com.android.packageinstaller </span><br><span class="line">-p com.android.permissioncontroller</span><br><span class="line">-p com.lbe.security.miui  # for (miui android 10)</span><br><span class="line">-p com.samsung.android.permissioncontroller #  for (samsung android 10)</span><br></pre></td></tr></table></figure></li>
+<li><p><em>fastbot压缩包提供了各类素材，用以在执行选取各类素材的场景中使用，如发带图片的buzz</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb push data&#x2F;fuzzing&#x2F; &#x2F;sdcard</span><br><span class="line">adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:&#x2F;&#x2F;&#x2F;sdcard&#x2F;fuzzing</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>结果分析</strong></p>
+<ul>
+<li>异常数据<br>  crash：Crash会以追加方式写入/sdcard/crash-dump.log文件<br>  anr：写入 /sdcard/oom-traces.log 文件</li>
+<li>覆盖率统计：coverage = testedActivity / totalActivities * 100<br>  testedActivity:本次测试的activity,会打印出来<br>  totalActivities:总的activity，会打印出来<br>  以上的所有activity，是不区分废弃，或者未使用的activity，为APP的所有的activity</li>
+</ul>
+</li>
+<li><p><strong>性能采集</strong><br><code>性能采集，主要是采集内存/CPU的数据，从而来分析APP执行case时的性能</code></p>
+</li>
+</ul>
+<ul>
+<li><p><em>方法一</em></p>
+<p>  通过火山提供的APP性能分析工具进行监控：<a target="_blank" rel="noopener" href="https://www.volcengine.com/docs/6431/82895">工具地址</a>（火山引擎开始收费了，工具现在虽然免费，不排除未来收费，有使用风险）</p>
+</li>
+<li><p><em>方法二</em></p>
+<p>  借助其他的性能数据抓取工具,比如 OneApm, NewRelic（付费）；或者支付宝的solopi；使用第三方工具可能会对结果有影响，最好能统一场景，保证结果一致；</p>
+</li>
+</ul>
+<ul>
+<li><strong>常用操作</strong></li>
+</ul>
+<ul>
+<li><p><em>获取APP包名</em></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aapt dump badging apk_path</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><em>使用<a target="_blank" rel="noopener" href="https://github.com/zhangzhao4444/Maxim">maxim</a>获取APPactivity</em></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell CLASSPATH&#x3D;&#x2F;sdcard&#x2F;monkey.jar:&#x2F;sdcard&#x2F;framework.jar exec app_process &#x2F;system&#x2F;bin tv.panda.test.monkey.api.CurrentActivity 注意里面的文件需要push到手机对应的位置后才能使用</span><br></pre></td></tr></table></figure></li>
+<li><p><em>使用<a target="_blank" rel="noopener" href="https://github.com/zhangzhao4444/Maxim">maxim</a>查看当前页面的TREE结构，来获取配置需要id等。。</em></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell CLASSPATH&#x3D;&#x2F;sdcard&#x2F;monkey.jar:&#x2F;sdcard&#x2F;framework.jar exec app_process &#x2F;system&#x2F;bin tv.panda.test.monkey.api.Dumptree</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><em>常见问题，查看帮助文档</em></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/bytedance/Fastbot_Android/blob/main/handbook-cn.md#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题点这里</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/bytedance/Fastbot_Android/issues">其他问题可以看下issue里找下</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/bytedance/Fastbot_Android/blob/main/handbook-cn.md">官方文档点这里</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\posts\49e140\" rel="bookmark">SOLOPI使用教程</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\posts\81de0e43\" rel="bookmark">稳定性治理-暴力回放</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/qian.png" alt="GAVIN HUANG 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/wechat.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/" rel="tag"># 稳定性</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/3de87ac/" rel="prev" title="uwnc">
+      <i class="fa fa-chevron-left"></i> uwnc
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/2e4c0062/" rel="next" title="UI自动化元素定位">
+      UI自动化元素定位 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E5%AF%B9%E6%AF%94"><span class="nav-number">2.</span> <span class="nav-text">方案对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fastBOT%E4%BD%BF%E7%94%A8"><span class="nav-number">2.1.</span> <span class="nav-text">fastBOT使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E7%BA%B2"><span class="nav-number">2.1.1.</span> <span class="nav-text">大纲</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GAVIN HUANG"
+      src="/me.jpg">
+  <p class="site-author-name" itemprop="name">GAVIN HUANG</p>
+  <div class="site-description" itemprop="description">此地无银三百两</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="http://gavin-log.herokuapp.com/" title="Ynote → http:&#x2F;&#x2F;gavin-log.herokuapp.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>Ynote</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/1009gavin/" title="Blog → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;1009gavin&#x2F;" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/gavin-huangwang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gavin-huangwang" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  <!-- 音乐播放器 -->
+	<div>
+		
+			<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=442009412&auto=1&height=66"></iframe>
+		
+	</div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GAVIN HUANG</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">49k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">45 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '7SnCyhwFab6OJHulh0SsCRHv-gzGzoHsz',
+      appKey     : 'MlToRxXyU1kGTgW6WHSJOnCL',
+      placeholder: "Just go go",
+      avatar     : 'wavatar',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+<!-- 雪花特效 -->
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.8.3/jquery.js"></script>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="\js\snow.js"></script> 
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

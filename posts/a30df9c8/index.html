@@ -22,18 +22,19 @@
     var CONFIG = {"hostname":"fenqian.xyz","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="头条稳定性治理系列文章">
+  <meta name="description" content="123概述，目的？怎么进行稳定性治理，稳定性治理的体系建设？稳定性治理的过程？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="稳定性治理">
 <meta property="og:url" content="https://fenqian.xyz/posts/a30df9c8/index.html">
 <meta property="og:site_name" content="Fen Qian Web">
-<meta property="og:description" content="头条稳定性治理系列文章">
+<meta property="og:description" content="123概述，目的？怎么进行稳定性治理，稳定性治理的体系建设？稳定性治理的过程？">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-01-04T06:47:00.000Z">
-<meta property="article:modified_time" content="2022-01-04T06:52:33.005Z">
+<meta property="article:modified_time" content="2022-02-16T08:02:54.709Z">
 <meta property="article:author" content="GAVIN HUANG">
 <meta property="article:tag" content="稳定性">
 <meta property="article:tag" content="头条">
+<meta property="article:tag" content="阿里">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://fenqian.xyz/posts/a30df9c8/">
@@ -221,10 +222,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-01-04 14:47:00 / 修改时间：14:52:33" itemprop="dateCreated datePublished" datetime="2022-01-04T14:47:00+08:00">2022-01-04</time>
+              <time title="创建时间：2022-01-04 14:47:00" itemprop="dateCreated datePublished" datetime="2022-01-04T14:47:00+08:00">2022-01-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-02-16 16:02:54" itemprop="dateModified" datetime="2022-02-16T16:02:54+08:00">2022-02-16</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -255,14 +262,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>11</span>
+              <span>3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -274,7 +281,157 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1590413073616519171&scene=173&from_msgid=2247487203&from_itemidx=1&count=3&nolastread=1#wechat_redirect">头条稳定性治理系列文章</a></p>
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">概述，目的？</span><br><span class="line">怎么进行稳定性治理，稳定性治理的体系建设？</span><br><span class="line">稳定性治理的过程？</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>稳定性治理概述，目的？</strong></p>
+<p><code>稳定性是系统最核心的需求；稳定性包含最核心的，系统服务的稳定性和前端的稳定性；稳定性核心有两大快，一是系统稳定，在复杂的环境下能稳定运行；二是抛出异常能及时处理，降低异常带来的风险；本文的稳定性治理，主要考虑的是通过模仿异常环境下系统运行，及时发现问题，解决问题，提升系统的稳定性；</code></p>
+<p><strong>怎么进行稳定性治理，稳定性治理体系的建设？</strong></p>
+<p><code>稳定性治理，首要目标，是要确认稳定性的衡量指标；其次要具有构造仿真环境的能力，在复杂环境下要具有系统监控能力，同时整个体系要能实现自动化运行维护具有平台能力。</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">稳定性衡量指标？</span><br><span class="line">稳定性环境监控？</span><br><span class="line">稳定性测试策略？</span><br><span class="line">自动化稳定性平台建设？</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><em><strong>稳定性衡量指标?</strong></em><br><code>系统稳定；一般是指系统在定义的状态下稳定运行，且长时间不会出现异常状态,常见的异常如下：</code></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">崩溃率</span><br><span class="line">anr</span><br><span class="line">内存泄露</span><br><span class="line">oom</span><br><span class="line">系统性能</span><br></pre></td></tr></table></figure>
+<ul>
+<li><em>崩溃率</em><br><code>崩溃是稳定性的最大对手；通常关注的崩溃是crash；关注崩溃率，一般关注日崩溃率和崩溃用户率； </code><ul>
+<li>日崩溃率=日崩溃次数/日打开总次数        合规标准：0.2%</li>
+<li>崩溃用户数=去重的崩溃用户数/日活跃用户数    合规标准：0.2%</li>
+</ul>
+</li>
+<li><em>anr</em><br><code>anr即(Application Not Response);常会直接暴露给用户，照成不好影响;</code></li>
+<li><em>内存泄露</em><br><code>系统占用的堆内存未及时释放或无法释放，从而导致占用的内存一直递增，从而导致环境资源不足;</code></li>
+<li><em>oom</em><br><code>app申请的内存超过最大内存的限制，系统不分配内存，导致程序崩溃;</code></li>
+<li><em>系统性能</em><br><code>指在不同场景下对系统或环境的资源消耗进行监控，常监控系统资源和消耗的资源;</code></li>
+</ul>
+</li>
+<li><p><em><strong>系统稳定性监控？</strong></em></p>
+<p>  <code>系统稳定，说明系统在全局环境下，都能长期稳定的运行；揭释了稳定性检测的核心的几个点，异常环境构造，稳定运行指标监控，长期稳定性；</code></p>
+<ul>
+<li><em>稳定性指标</em><br><code>本文的指标监控，仅对前端的相关的指标进行监控；后端服务的监控，有运维在做;</code><ul>
+<li><p>服务及时响应/且响应参数无误</p>
+<ul>
+<li>场景：如接口监控，特指对后端服务进行监控;</li>
+<li>指标：一般监控服务相关指标（如接口响应时间/参数准确性）,资源监控（cpu/内存/带宽/io），消耗资源（流量/电量）;</li>
+<li>方案：可通过仅触发服务的方式，仅对服务进行监控，如接口自动化；可通过前端触发服务来实现监控，如ui自动化实现接口覆盖；系统资源消耗可通过监控系统资源文件获取；系统监控可通过后端方案实现，如prometheus；</li>
+</ul>
+</li>
+<li><p>前端加载时间满足用户体验/呈现无误</p>
+<ul>
+<li>场景：触发前端场景，来实现对产品提供给用户的服务进行监控；</li>
+<li>指标：页面加载时间/页面UI测试/前端资源检测；</li>
+<li>方案：可通过UI自动化，UI遍历等方式实现；数据采集可通过获取activity的响应时间获取；UI测试可通过telescop植入性来实现；</li>
+</ul>
+</li>
+<li><p>前端稳定性</p>
+<ul>
+<li>场景：稳定性是最核心的指标，稳定指服务稳定不崩溃，不抛出异常；</li>
+<li>指标：<ul>
+<li>crash率：通过监控crash文件进行采集；</li>
+<li>anr率：通过监控anr文件进行采集；</li>
+<li>内存泄露：通过LeakCanary监控内存泄露,通过haha来解析hprf文件，来分析Java虚拟机的内存使用清空；</li>
+<li>hprf:hprof最初是由J2SE支持的一种二进制堆转储格式，hprof文件保存了当前java堆上所有的内存使用信息，能够完整的反映虚拟机当前的内存状态；</li>
+<li>oom：通过字节的tailor来进行监控；</li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI1MzYzMjE0MQ==&mid=2247487203&idx=1&sn=182584b69910c843ae95f60e74127249&chksm=e9d0c501dea74c178e16f95a2ffc5007c5dbca89a02d56895ed9b05883cf0562da689ac6146b&scene=178&cur_album_id=1590413073616519171#rd">oom问题监控</a></li>
+<li>方案<ul>
+<li>稳定性在不同的场景下有着不同的表现；可以通过这些方式来实现场景的覆盖；ui遍历/暴力回放/monkey测试/流量回放；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>其他监控</p>
+<ul>
+<li>场景：除了上述指标外，我们还会对以下指标进行监控，以评估对系统的影响;</li>
+<li>指标：<ul>
+<li>UI资源监控：图片过大/图片持有/过度绘制/资源泄露/过度布局</li>
+<li>线程阻塞</li>
+<li>文件创建</li>
+<li>线程创建</li>
+<li>主线程io</li>
+<li>启动性能</li>
+</ul>
+</li>
+<li>方案：使用telescop的植入性和监控能力来监控；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em><strong>稳定性测试策略？</strong></em><br><code>稳定性测试时，有几个核心待解决的问题；如何解决真实环境下各种复杂环境的覆盖？如何保证效率，实现低投入高产出？如何保证采集的指标和问题场景结合，快速复现？</code></p>
+<ul>
+<li><p><em>如何保证覆盖率？覆盖率是如何计算的？</em><br><code>稳定性治理，在复杂环境下要保证全覆盖时不可能实现的工作；因此我们考虑实现一种可迭代优化的机制保证覆盖，保障系统的稳定，通常我们考虑系统覆盖时，从页面覆盖和代码逻辑的覆盖来实现;</code></p>
+<ul>
+<li>覆盖率指标：<ul>
+<li>页面场景覆盖：activity覆盖70%；覆盖所有的一级页面和所有的核心二级页面以及所有的主流程相关的三四级页面；覆盖所有的核心业务流程；</li>
+<li>代码行覆盖：可通过白盒走查或者代码检测工具；单测实现代码的覆盖；覆盖所有核心流程和代码的核心处理逻辑；</li>
+</ul>
+</li>
+<li>覆盖率保障策略：<ul>
+<li>终端覆盖：设备信息采集，通过埋点采集线上设备数据；至少要保证top10的设备能实现覆盖；保障top5系统版本能实现覆盖；top5-10的os版本能实现覆盖；</li>
+<li>预装版本：最好能实现需预装的机型的覆盖；否则至少要保证覆盖前一个机型，相同配置的版本的设备不低于10台；</li>
+<li>需要有问题统计/上报机制；能收集线上问题进行统计归纳，方便策略的设计和混度工程的实现；</li>
+<li>覆盖所有的核心链路，及70%的页面（所有一级页面，所有核心二级页面，所有核心三级页面）</li>
+<li>时间：看具体的策略，monkey一般不低于一天，也就是8小时；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em>测试方式？各种方式的优缺点？</em></p>
+<ul>
+<li><p>UI遍历测试<br>  <code>UI遍历，指利用爬虫和过滤策略，实现从头遍历所有页面；</code></p>
+<ul>
+<li>优点：实现所有流程/页面的覆盖，能保证较高的覆盖率；</li>
+<li>缺点：耗时太久，无法模仿真实的用户操作，对测试版本或者测试环境有要求；很难构造高压力的场景；</li>
+<li>方案：AppCrawler实现；</li>
+</ul>
+</li>
+<li><p>暴力回放<br><code>暴力回放，指通过频繁对某些场景进行循环操作，来实现对核心场景的覆盖，此策略传音要求必须要做;</code></p>
+<ul>
+<li>优点：可对核心场景进行大量覆盖，保证核心链路无误；</li>
+<li>缺点：能覆盖的场景有限，耗时较长；较难覆盖到特殊场景；</li>
+<li>场景：通过UI自动化脚本实现循环遍历；</li>
+</ul>
+</li>
+<li><p>monkey随机遍历<br><code>monkey是Android自带的稳定性治理的工具，也是稳定性治理的核心方式，能模仿用户进行随机性的点击操作；</code></p>
+<ul>
+<li>优点：实现简单，有较强的随机性，能发现一些特殊问题；</li>
+<li>缺点：过于随机，不能保证覆盖率，无法模仿真实用户的操作；</li>
+<li>方案：针对monkey过于随机的缺陷，为保证效率，可对monkey的策略进行定制化，具体实现如下：<ul>
+<li>通过黑名单策略，跳过低频操作（如新手引导、权限类操作、关闭输入法，屏蔽其他应用的activity减少无效操作）；</li>
+<li>通过白名单策略，定制执行的activity和app,减少无效操作；</li>
+<li>定制事件比例，提高测试效率；</li>
+<li>执行时间，一般不低于一天，也就是8小时；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>线上流量回放<br><code>线上流量回放，指利用线上的日志数据记录的用户行为，作为源数据来建模，模仿用户操作;</code></p>
+<ul>
+<li>优点：覆盖大量的真实用户操作，case有效性高，针对性强；</li>
+<li>缺点：需要利用大量的线上日志，对系统的要求高；利用线上日志进行回放，实现难度大；利用线上用户数据，会存在隐私安全问题；</li>
+<li>方案：可使用头条的智能化monkey工具，fastbot;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em>具体实现，如何保证效率？</em><br><code>结合上诉几种方案的优缺点，可知，最好能四种方案结合着使用；</code></p>
+<ul>
+<li>新发功能版本：最好先执行一遍UI遍历（冒烟）/monkey遍历（每日）/流量回放（bug修复版本）</li>
+<li>RC版本：可执行流量回放/暴力回放</li>
+<li>预装版本：可执行流量回放/暴力回放</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em><strong>自动化稳定性平台的建设</strong></em></p>
+</li>
+</ul>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/L7RTCzqQ-1GbNhMNHONdRw"><strong>阿里稳定性治理</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1590413073616519171&scene=173&from_msgid=2247487203&from_itemidx=1&count=3&nolastread=1#wechat_redirect"><strong>头条稳定性治理系列</strong></a></li>
+</ul>
 
     </div>
 
@@ -282,6 +439,15 @@
     
     
       
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\posts\49e140\" rel="bookmark">SOLOPI使用教程</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\posts\e80d13a0\" rel="bookmark">稳定性治理--智能遍历</a></div>
+    </li>
+  </ul>
 
         <div class="reward-container">
   <div></div>
@@ -332,6 +498,7 @@
           <div class="post-tags">
               <a href="/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/" rel="tag"># 稳定性</a>
               <a href="/tags/%E5%A4%B4%E6%9D%A1/" rel="tag"># 头条</a>
+              <a href="/tags/%E9%98%BF%E9%87%8C/" rel="tag"># 阿里</a>
           </div>
 
         
@@ -343,7 +510,10 @@
     <a href="/posts/b7270d4a/" rel="prev" title="python-多线程">
       <i class="fa fa-chevron-left"></i> python-多线程
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/posts/c48e9a83/" rel="next" title="用例管理平台">
+      用例管理平台 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -419,20 +589,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -489,12 +659,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">17k</span>
+    <span title="站点总字数">49k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">15 分钟</span>
+    <span title="站点阅读时长">45 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

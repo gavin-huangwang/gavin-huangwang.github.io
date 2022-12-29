@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"fenqian.xyz","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="大纲1234确认需要覆盖的场景；场景的指标监控；构建脚本；分析监控数据，采集异常数据定位问题；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实战--传音预装">
+<meta property="og:url" content="https://fenqian.xyz/posts/fbd896d0/index.html">
+<meta property="og:site_name" content="Fen Qian Web">
+<meta property="og:description" content="大纲1234确认需要覆盖的场景；场景的指标监控；构建脚本；分析监控数据，采集异常数据定位问题；">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fenqian.xyz/text_image/solopi_%E8%B5%84%E6%BA%90.jpg">
+<meta property="og:image" content="https://fenqian.xyz/text_image/low_win10.jpg">
+<meta property="article:published_time" content="2022-02-28T12:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-20T02:44:53.493Z">
+<meta property="article:author" content="GAVIN HUANG">
+<meta property="article:tag" content="稳定性">
+<meta property="article:tag" content="实战">
+<meta property="article:tag" content="预装">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fenqian.xyz/text_image/solopi_%E8%B5%84%E6%BA%90.jpg">
+
+<link rel="canonical" href="https://fenqian.xyz/posts/fbd896d0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>实战--传音预装 | Fen Qian Web</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0c0805c7973dc17cabb0b51e3386ffc0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Fen Qian Web" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Fen Qian Web</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">HELLO,YOU</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://fenqian.xyz/posts/fbd896d0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/me.jpg">
+      <meta itemprop="name" content="GAVIN HUANG">
+      <meta itemprop="description" content="此地无银三百两">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fen Qian Web">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          实战--传音预装<a href="https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name_posts/%E5%AE%9E%E6%88%98-%E4%BC%A0%E9%9F%B3%E9%A2%84%E8%A3%85.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-28 20:00:00" itemprop="dateCreated datePublished" datetime="2022-02-28T20:00:00+08:00">2022-02-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-03-20 10:44:53" itemprop="dateModified" datetime="2022-03-20T10:44:53+08:00">2022-03-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/fbd896d0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/fbd896d0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>9.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>9 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">确认需要覆盖的场景；</span><br><span class="line">场景的指标监控；</span><br><span class="line">构建脚本；</span><br><span class="line">分析监控数据，采集异常数据定位问题；</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<ul>
+<li><strong>确认需要覆盖的场景：</strong></li>
+</ul>
+<p><code>一般需要覆盖功能/性能/兼容/耗电/升级这几块，功能一般覆盖app的主功能</code></p>
+<ul>
+<li><em>方案：</em></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">启动app,点击播放栏播放按钮播放music，在切换到后台，在切换回前台；</span><br><span class="line">treding页上下滑动，在切换到music页上下滑动，在切换回treding页；</span><br><span class="line">music页点击歌单，进入歌单，歌单上下滑动两页，然后返回music页；在点击进入chart页，上下滑动两页，在返回；在点击进入艺人页，上下滑动两页，在返回；在点击进入曲风页，上下滑动，在进入第一个曲风，上下滑动，然后返回music首页；在次进入歌单页，上下滑动，然后在次点击第一个歌单进入歌单详情页，然后返回music首页；点击进入视频页，上下滑动，然后返回music首页；点击进入bbc，上下滑动，然后返回music首页；</span><br><span class="line">treding页播放music，然后返回treding;进入music页，点击歌单上浮按钮，进行全部播放，点击歌单详情页的全部播放按钮进行播放，点击歌单详情页的music播放，返回music后；进入播放列表，点击music播放；在进入播放详情页，切歌播放，在返回music首页，点击进入video页，点击视频进行播放，返回treding页;</span><br><span class="line">treding页进行music下载，music首页歌单全局下载按钮进行下载，点击进入歌单详情页，通过全部下载按钮进行下载，进入播放详情页，下载music；</span><br><span class="line">library页，通过localmusic或者下载music对本地下载的music进行播放，播放和后台循环切换；</span><br><span class="line">后台播放music时，分别同时打开，Facebook，WhatsApp，Twitter，Instagram，chrome；在切换回前台；</span><br><span class="line">music页/library页/buzz页/account页进行循环切换；</span><br><span class="line">buzz页，一二级页面循环切换，且每个页面均进行上下滑动；buzz页，点击评论和点赞按键；</span><br><span class="line">account页，进行登录，退出应用，切换回前台，退出登录；</span><br><span class="line">notification,页面循环切换，且每个页面进行上下滑动；</span><br><span class="line">前台常驻10分钟，切换到后台常驻10分钟，在切换回前台；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>场景的指标监控：</strong></p>
+<p>  <code>由于渠道方未提供确切的合规标准，因此选用网易云音乐作为对比范本；在相同场景下，资源消耗超出网易云10%-30%判定为合规，否则判断为异常</code></p>
+<ul>
+<li><em>监控性能工具：</em></li>
+</ul>
+<p>  支付宝：solopi</p>
+<ul>
+<li><em>监控指标：</em></li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CPU:cpu_max,cpu_ave;需要区分进程cpu和系统cpu</span><br><span class="line">ROM:需要监控pps&#x2F;privatedirty-main&#x2F;全局内存&#x2F;activity的内存泄露&#x2F;是否有oom问题，同时需要提供hprof文件；</span><br><span class="line">带宽：环境带宽，最大占用的带宽；</span><br><span class="line">响应耗时：前端渲染耗时；</span><br><span class="line">启动耗时：应用启动耗时，activity启动耗时；</span><br><span class="line">电量：前台&#x2F;高频&#x2F;后台常驻电量消耗；</span><br><span class="line">流量：前台&#x2F;高频&#x2F;后台常驻消耗,升级，下载时的资源消耗；</span><br><span class="line">app抛出的异常堆栈：监控adb日志获取；</span><br><span class="line">场景数据：查看工具报告，和工具收集的异常数据；</span><br><span class="line">线程状态：监控app创建的所有线程及状态；</span><br></pre></td></tr></table></figure>
+<ul>
+<li><em>网易指标</em><ul>
+<li><strong>场景1：</strong> 启动app,点击播放栏播放按钮播放music，在切换到后台，在切换回前台；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">进程cpu:31.04&#x2F;20.68&#x2F;22.62&#x2F;28.35&#x2F;35.68(max)&#x3D;27.33	11.22&#x2F;10.30&#x2F;10.65&#x2F;9.11&#x2F;13.36(ave)&#x3D;10.72</span><br><span class="line">总cpu:86.08&#x2F;79.02&#x2F;78.69&#x2F;91.11&#x2F;87(max)&#x3D;84.03	45.80&#x2F;44.40&#x2F;41.81&#x2F;40.14&#x2F;48.35(ave)&#x3D;44</span><br><span class="line">private-ram:196.40&#x2F;243.39&#x2F;168.5&#x2F;157.63&#x2F;168.03(max)&#x3D;177.64	186.76&#x2F;231.17&#x2F;158.1&#x2F;144.2&#x2F;141.02(ave)&#x3D;163.02</span><br><span class="line">pss-ram：267.32&#x2F;177.49&#x2F;234.1&#x2F;221.47&#x2F;235.23(max)&#x3D;230.27	256.2&#x2F;163.50&#x2F;219.3&#x2F;211.83&#x2F;206.29(ave)&#x3D;212.47</span><br><span class="line">系统总ram：3453&#x2F;3365&#x2F;3372&#x2F;3457&#x2F;3421(max)&#x3D;3415.33	3410.91&#x2F;3349.44&#x2F;3335.2&#x2F;3325.13&#x2F;3377.08(ave)&#x3D;3353.91</span><br><span class="line">全局上行流量：449.13&#x2F;383.05&#x2F;423.08&#x2F;629.68&#x2F;4627&#x3D;500.63</span><br><span class="line">全局下行流量：1768.87&#x2F;1732.48&#x2F;1862.45&#x2F;3001.82&#x2F;33997.12&#x3D;2211.05</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景2：</strong> 启动耗时；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cpu:41.86&#x2F;40&#x2F;54.73&#x2F;41.79&#x2F;43.54</span><br><span class="line">rom:2977&#x2F;3007&#x2F;3028&#x2F;2986&#x2F;2924</span><br><span class="line">上行流量：32.34&#x2F;9.72&#x2F;11.13&#x2F;11.74&#x2F;20.76</span><br><span class="line">下行流量：138.13&#x2F;61.34&#x2F;32.75&#x2F;76.30&#x2F;54.90</span><br><span class="line">启动耗时：771ms&#x2F;2431ms&#x2F;1080ms&#x2F;781&#x2F;748ms</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景3：</strong> treding页上下滑动，在切换到music页上下滑动，在切换回treding页；；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">总cpu:56.28&#x2F;69.59&#x2F;65.96&#x2F;54.79&#x2F;75.57(max)&#x3D;	40.32&#x2F;39.65&#x2F;40.95&#x2F;36.15&#x2F;38.25(ave)</span><br><span class="line">进程cpu:21.84&#x2F;23.71&#x2F;22.19&#x2F;20.37&#x2F;24.17(max)&#x3D;&#x3D;22.58	11.64&#x2F;11.6&#x2F;12.07&#x2F;9.35&#x2F;10.64(ave)&#x3D;11.29</span><br><span class="line">pss-ram：403.67&#x2F;361.57&#x2F;359.02&#x2F;375.05&#x2F;339.13(max)&#x3D;365.21	388.28&#x2F;349&#x2F;340.59&#x2F;359.07&#x2F;320.53(ave)&#x3D;349.55</span><br><span class="line">private-ram:327.68&#x2F;288.42&#x2F;284.15&#x2F;300.31&#x2F;265.09(max)	&#x3D;290.96	313.29&#x2F;275.5&#x2F;266.61&#x2F;284&#x2F;248.88(ave)&#x3D;275.37</span><br><span class="line">系统总ram：3635&#x2F;3578&#x2F;3587&#x2F;3571&#x2F;3500(max)&#x3D;3578.67	3623&#x2F;3563.6&#x2F;3570.09&#x2F;3560.56&#x2F;3484.78(ave)&#x3D;3564.75</span><br><span class="line">全局上行流量：281.49&#x2F;351.88&#x2F;342.72&#x2F;256.57&#x2F;320.48&#x3D;341.90</span><br><span class="line">全局下行流量：1406.78&#x2F;1530.86&#x2F;1694.41&#x2F;1208.77&#x2F;1678.10&#x3D;1538.58</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景4：</strong> music页点击歌单，进入歌单，歌单上下滑动两页，然后返回music页；在点击进入chart页，上下滑动两页，在返回；在点击进入艺人页，上下滑动两页，在返回；在点击进入曲风页，上下滑动，在进入第一个曲风，上下滑动，然后返回music首页；在次进入歌单页，上下滑动，然后在次点击第一个歌单进入歌单详情页，然后返回music首页；点击进入视频页，上下滑动，然后返回music首页；点击进入bbc，上下滑动，然后返回music首页；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">总cpu:75.71&#x2F;80.96&#x2F;89.29&#x2F;87.47&#x2F;91.79(max)&#x3D;85.91	39.67&#x2F;40.07&#x2F;44.62&#x2F;43.97&#x2F;39.84(ave)&#x3D;41.29</span><br><span class="line">进程cpu:49.75&#x2F;51.24&#x2F;62.76&#x2F;50.77&#x2F;63.49(max)&#x3D;54.92	14.63&#x2F;14.62&#x2F;16.87&#x2F;16.06&#x2F;13.35(ave)&#x3D;15.10</span><br><span class="line">pss-ram：267.17&#x2F;271.73&#x2F;265.97&#x2F;262.30&#x2F;314.29(max)&#x3D;268.29	216.92&#x2F;222.82&#x2F;220.84&#x2F;218.53&#x2F;281.03(ave)&#x3D;220.73</span><br><span class="line">private-ram:204.31&#x2F;209.68&#x2F;205.87&#x2F;202&#x2F;240.15(max)&#x3D;206.62	157.54&#x2F;163.98&#x2F;161.26&#x2F;159.72&#x2F;206.50(ave)&#x3D;161.65</span><br><span class="line">系统总ram：3415&#x2F;3414&#x2F;3428&#x2F;3394&#x2F;3412(max)&#x3D;3413.67	3371.28&#x2F;3379.18&#x2F;3383.33&#x2F;3337.13&#x2F;3374.4(ave)&#x3D;3374.95</span><br><span class="line">全局上行流量：809.21&#x2F;896.26&#x2F;810.98&#x2F;858.86&#x2F;827.16&#x3D;832.33</span><br><span class="line">全局下行流量：4067.93&#x2F;4459.75&#x2F;3786.03&#x2F;3666.64&#x2F;5148.2&#x3D;4104.57</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景5：</strong> treding页播放music，然后返回treding;进入music页，点击歌单上浮按钮，进行全部播放，点击歌单详情页的全部播放按钮进行播放，点击歌单详情页的music播放，返回music后；进入播放列表，点击music播放；在进入播放详情页，切歌播放，在返回music首页，点击进入video页，点击视频进行播放，返回treding页；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">总cpu:82.99&#x2F;73.3&#x2F;79.35(max)&#x3D;78.55	45.87&#x2F;45.57&#x2F;44.19(ave)&#x3D;45.21</span><br><span class="line">进程cpu:28.88&#x2F;33.77&#x2F;30.33(max)&#x3D;30.99	12.87&#x2F;11.60&#x2F;11.34(ave)&#x3D;11.94</span><br><span class="line">pss-ram：360.44&#x2F;339.74&#x2F;348.03(max)&#x3D;349.4	332&#x2F;313.36&#x2F;314.22(ave)&#x3D;319.86</span><br><span class="line">private-ram:262.51&#x2F;250.52&#x2F;259.28(max)&#x3D;257.44	233.83&#x2F;224.32&#x2F;228.88(ave)&#x3D;229.01</span><br><span class="line">系统总ram：3449&#x2F;3485&#x2F;3462(max)&#x3D;3465.33	3407.38&#x2F;3431.68&#x2F;3427.11(ave)&#x3D;3422.06</span><br><span class="line">全局上行流量：14914.79&#x2F;6908.25&#x2F;11193.83&#x3D;11005.62</span><br><span class="line">全局下行流量：35355.44&#x2F;17913.15&#x2F;28217.16&#x3D;27161.92</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景6：</strong> treding页进行music下载，music首页歌单全局下载按钮进行下载，点击进入歌单详情页，通过全部下载按钮进行下载，进入播放详情页，下载music；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">总cpu:73.77&#x2F;83.13&#x2F;77.37&#x2F;51.35&#x2F;72.18(max)	46.94&#x2F;49.59&#x2F;46.94&#x2F;29.66&#x2F;41.61(ave)</span><br><span class="line">进程cpu:20.62&#x2F;21.09&#x2F;21.91&#x2F;15.18&#x2F;10.79(max)	11.91&#x2F;13.48&#x2F;10.14&#x2F;7.87&#x2F;10.31(ave)</span><br><span class="line">pss-ram：351.01&#x2F;301.85&#x2F;307.79&#x2F;(max)	339.44&#x2F;291.96&#x2F;297.10(ave)</span><br><span class="line">private-ram:269.26&#x2F;222.66&#x2F;228.95(max)	259.39&#x2F;212.57&#x2F;217.98(ave)</span><br><span class="line">系统总ram：2765&#x2F;2813&#x2F;2676(max)	2738.27&#x2F;2770.88&#x2F;2667.55(ave)</span><br><span class="line">全局上行流量：16531.35&#x2F;21262.26&#x2F;9539.49&#x2F;3160.78&#x2F;4068.34</span><br><span class="line">全局下行流量：32460.28&#x2F;43211.35&#x2F;18512.41&#x2F;6134.98&#x2F;7870.63</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景7：</strong> library页，通过localmusic或者下载music对本地下载的music进行播放，播放和后台循环切换；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">总cpu:(max)	(ave)</span><br><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景8：</strong> 后台播放music时，分别同时打开，Facebook，WhatsApp，Twitter，Instagram，chrome；在切换回前台；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">总cpu:(max)	(ave)</span><br><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景9：</strong> music页/library页/buzz页/account页进行循环切换；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">总cpu:(max)	(ave)</span><br><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景10：</strong> buzz页，一二级页面循环切换，且每个页面均进行上下滑动；buzz页，点击评论和点赞按键；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">总cpu:(max)	(ave)</span><br><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景11：</strong> account页，进行登录，退出应用，切换回前台，退出登录(无法登录)；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">总cpu:94.5&#x2F;100&#x2F;82.71&#x2F;92.37(max)&#x3D;93.44	37.83&#x2F;45.15&#x2F;39.34&#x2F;32.20(ave)&#x3D;35.02</span><br><span class="line">进程cpu:42.78&#x2F;19.69&#x2F;23.83&#x2F;43.29(max)&#x3D;32.40	11.17&#x2F;9.02&#x2F;10.08&#x2F;9.10(ave)&#x3D;9.84</span><br><span class="line">pss-ram：263.71&#x2F;240.92&#x2F;125.89(max)&#x3D;252.315	206.20&#x2F;236.28&#x2F;120.34(ave)&#x3D;221.24</span><br><span class="line">private-ram:205&#x2F;184.32&#x2F;75.10(max)&#x3D;194.66	150.55&#x2F;179.58&#x2F;68.81(ave)&#x3D;165.07</span><br><span class="line">系统总ram：2753&#x2F;2785&#x2F;2529(max)&#x3D;2689	2699.31&#x2F;2752.05&#x2F;2483.05(ave)&#x3D;2644.80</span><br><span class="line">全局上行流量：1157.70&#x2F;1290.43&#x2F;730.34&#x2F;1402.62&#x3D;1283.59</span><br><span class="line">全局下行流量：2662.21&#x2F;2518.72&#x2F;556.74&#x2F;6012.13&#x3D;2590.47</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景12：</strong> notification,页面循环切换，且每个页面进行上下滑动；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">总cpu:(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景12：</strong> 首次进入页面的资源消耗；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">总cpu:(max)	(ave)</span><br><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+<li><strong>场景13：</strong> 前台常驻10分钟，切换到后台常驻10分钟，在切换回前台；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">总cpu:(max)	(ave)</span><br><span class="line">进程cpu:(max)	(ave)</span><br><span class="line">pss-ram：(max)	(ave)</span><br><span class="line">private-ram:(max)	(ave)</span><br><span class="line">系统总ram：(max)	(ave)</span><br><span class="line">全局上行流量：</span><br><span class="line">全局下行流量：</span><br><span class="line">响应耗时：</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>构建脚本：</strong></p>
+</li>
+</ul>
+<ul>
+<li><p><em>方案：</em></p>
+<p>  <code>使用solopi构建脚本；录制脚本时，需要保证时间尽量长，且需要规避无效操作，需要保证脚本尽量简单；在批量执行前，需要先进行三次循环调试，以保证脚本无异常，可批量回放和单脚本循环执行，短时间执行，建议单脚本，跑全维度稳定性，建议批量执行；   </code><br><strong>注意实际执行时，需要保证覆盖的机型，尽量接近真实场景；且用solopi进行多次重复执行的压测场景时，建议不要选择重复播放选项来重复播放多次，这种会生成多个性能文件，且一次只能执行一个用例，可以使用批量执行，选择多个用例，一个用例要执行几次，就选中几次，具体看我的教学视频</strong></p>
+</li>
+</ul>
+<p>监控指标：见上方监控指标</p>
+<ul>
+<li><p><strong>分析监控数据，采集异常数据定位问题 :</strong></p>
+<p>  <code>本方案，主要是为了实现APP稳定性的评测；因此分析时，主要关注终端性能，消耗资源，是否有异常</code></p>
+</li>
+</ul>
+<ul>
+<li><p><em>资源路径：</em></p>
+<p>  <code>该路径下包含有终端资源数据（CPU/MEN/带宽/响应耗时/fps..）和消耗资源数据(电量/流量)，具体数据按勾选的监控对象来落地；</code></p>
+</li>
+</ul>
+<p><img src="/text_image/solopi_%E8%B5%84%E6%BA%90.jpg" alt="alt_text"></p>
+<ul>
+<li><p><em>工具各路径说明：</em></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">  solopi/error:工具的错误日志；</span><br><span class="line">  solopi/logcat:整个工具的logcat;</span><br><span class="line">  solopi/patch:扩展/补丁，可实现对solopi工具的功能扩展；</span><br><span class="line">  solopi/records：最重要的文件夹，测试对象（app）的所有数据放在此路径下；</span><br><span class="line">solopi\records\error：app执行，adb监控到的异常会记录在这个目录下；</span><br><span class="line">solopi\records\<span class="built_in">export</span>：导出的用例，会放在这个路径下，从这里复制出来给其他人用</span><br><span class="line">solopi\records\import：从<span class="built_in">export</span>导出的用例，放在这个路径下，然后在solopi配置里点导入按钮，这样就成功导入了；</span><br><span class="line">solopi\records\replay：存放solopi用例执行的保存结果，必须点保存，才会落地；否则存放在cpu中，退出会话就会清空，以json格式存放，可以解析看下；</span><br><span class="line">solopi\records\logcat：存放app的，所有adb日志，和工具的adb日志差不多；</span><br><span class="line">solopi\records\records\20220217183647_20220218093514：见上图，为资源路径，文件名为时间戳；</span><br><span class="line">solopi\records\screenshot:存放app录屏的路径;</span><br><span class="line">solopi\records\screenshots:脚本执行失败时会截图，此为存放失败截图的路径；</span><br><span class="line">solopi\records\tmp：临时目录，用以存放一些临时文件，如强制结束时，所处页面的截图；</span><br><span class="line">  solopi/ScreenCaptures:存放录屏的目录，通过录屏分帧，可以计算每页的启动耗时；</span><br><span class="line">  solopi/screenshots:脚本故障截图的存放路径，脚本故障时会截图；</span><br><span class="line">  </span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p><em>分析数据：</em></p>
+<p>  执行操作且确认结束后，需要按照以下顺序来进行分析，上一步失败，下一步中断：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> 1、先确认本次脚本，是否执行成功；先查看执行结果，仅当执行成功后，将执行结果导出，归档；</span><br><span class="line"> 2、查看下工具的error路径，查看是否有异常抛出，确认与APP无关，则过滤，否则记录；</span><br><span class="line"> 3、通过工具，查看录制的性能结果，观察有无异常值，主要关注以下几点：</span><br><span class="line">cpu:单独执行app时，cpu峰值是否超过80-90%，且cpu超过75%占比是否过大，对比相同场景下网易云的数据，是否超出网易指标20-30%；</span><br><span class="line">men:查看内存是否存在一直增长，不随场景释放的内存泄露问题；查看内存是否存在oom问题，查看hprof文件，结合内存曲线配合场景，分析内存消耗是否合理；同时需要关注相同场景下网易云音乐的资源消耗对比是否比我们的APP具有明显的优势；</span><br><span class="line">带宽：带宽，主要考虑，下载资源和实际消耗的流量比，是否实际消耗的在一个合理区间内；以及最大占有带宽，和分配带宽比，分析带宽资源能否得到合理的利用；</span><br><span class="line">响应耗时：响应耗时，是用户感知最明显的指标；需要符合业界的规范；</span><br><span class="line">启动耗时：activity启动耗时，通过数帧的方式计算，也是用户能直接感知到的，结合响应耗时，需要符合业界规范；</span><br><span class="line">流量：流量，主要考虑升级场景流量消耗，后台常驻&#x2F;前台常驻的流量消耗，活跃及下载场景下的流量消耗；</span><br><span class="line">电量：电量考虑用户活跃场景&#x2F;后台常驻&#x2F;前台常驻时的电量消耗；</span><br><span class="line">异常日志监控：主要是关注工具solopi\records\error或solopi\error及solopi\records\logcat路径下，查看有无异常抛出；</span><br><span class="line">anr&#x2F;crash收集：关注APP的crash和anr目录下是否有响应的异常收集文件；</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>扩展：有时开发需要dump文件来分析，内存的消耗，此时就需要下载hprf文件提供给开发，低于win10版本，可使用下图方案：<br><img src="/text_image/low_win10.jpg" alt="alt_text"><br>高于win10版本，可通过,以下方式获取：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、ps -ef|grep com.afmobi.boomplayer			--获取pid</span><br><span class="line">2、 <span class="built_in">kill</span> -10 pid</span><br><span class="line">3、adb bugreport</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\posts\49e140\" rel="bookmark">SOLOPI使用教程</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\posts\e80d13a0\" rel="bookmark">稳定性治理--智能遍历</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/qian.png" alt="GAVIN HUANG 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/wechat.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/" rel="tag"># 稳定性</a>
+              <a href="/tags/%E5%AE%9E%E6%88%98/" rel="tag"># 实战</a>
+              <a href="/tags/%E9%A2%84%E8%A3%85/" rel="tag"># 预装</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/a1c10886/" rel="prev" title="python-多进程">
+      <i class="fa fa-chevron-left"></i> python-多进程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/3de87ac/" rel="next" title="uwnc">
+      uwnc <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E7%BA%B2"><span class="nav-number">1.</span> <span class="nav-text">大纲</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GAVIN HUANG"
+      src="/me.jpg">
+  <p class="site-author-name" itemprop="name">GAVIN HUANG</p>
+  <div class="site-description" itemprop="description">此地无银三百两</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="http://gavin-log.herokuapp.com/" title="Ynote → http:&#x2F;&#x2F;gavin-log.herokuapp.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>Ynote</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/1009gavin/" title="Blog → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;1009gavin&#x2F;" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/gavin-huangwang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gavin-huangwang" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  <!-- 音乐播放器 -->
+	<div>
+		
+			<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=442009412&auto=1&height=66"></iframe>
+		
+	</div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GAVIN HUANG</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">49k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">45 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '7SnCyhwFab6OJHulh0SsCRHv-gzGzoHsz',
+      appKey     : 'MlToRxXyU1kGTgW6WHSJOnCL',
+      placeholder: "Just go go",
+      avatar     : 'wavatar',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+<!-- 雪花特效 -->
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.8.3/jquery.js"></script>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="\js\snow.js"></script> 
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
