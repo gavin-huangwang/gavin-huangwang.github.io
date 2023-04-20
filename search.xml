@@ -39,6 +39,79 @@
       </tags>
   </entry>
   <entry>
+    <title>稳定性--ANR治理</title>
+    <url>/posts/1ee32bf1/</url>
+    <content><![CDATA[<h1 id="ANR治理"><a href="#ANR治理" class="headerlink" title="ANR治理"></a>ANR治理</h1><ul>
+<li><em><strong>大纲</strong></em></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">anr是什么？</span><br><span class="line">为什么会产生anr?</span><br><span class="line">anr是怎样产生的，哪些场景下会产生？</span><br><span class="line">anr如何治理？</span><br><span class="line">解决anr问题的价值？</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<ul>
+<li><strong>anr是什么？</strong><br>  <code>anr(Applicatipon No Response),即应用无响应；本质是一个性能问题；在用户和app进行交互时，常会遇到长时间无响应/卡顿的场景；为了改善性能，Android设计了anr的机制，即保证交互能在一定时间内完成，如果未完成，就抛出异常，也就是ANR;   </code></li>
+<li><strong>anr设计机制：</strong><br>  <code>是系统通过与之交互的组件(Activity，Service，Receiver，Provider)以及用户交互(InputEvent)进行超时监控，以判断应用进程(主线程)是否存在卡死或响应过慢的问题，通俗来说就是很多系统中看门狗(watchdog)的设计思想。   </code><ul>
+<li><strong>不同的组件，系统设置的超时时间是不同的，这个时间不同手机厂商的os可能也会做调整：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
+<li><strong>系统抛出anr的机制：</strong><br><code>在进行相关的操作前，系统会基于当前的时间戳和这个类型组件的超时时间设置，计算出超时时间戳；并将超时时间戳传递给anr触发函数，组件若未超时启动，则会在启动成功后，在传递一个参数给anr函数来阻止触发anr;若到超时时间，anr函数还未收到阻止信号，就会触发ANR(类似构建了个定时触发的任务)； </code></li>
+<li><strong>超时触发流程如下：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
+</ul>
+</li>
+</ul>
+<p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1780091311874686979&scene=173&from_msgid=2247488558&from_itemidx=1&count=3&nolastread=1&uin=&key=&devicetype=Windows+10+x64&version=63030532&lang=zh_CN&ascene=0&fontgear=2">头条anr治理系列</a></p>
+<p><a href="https://mp.weixin.qq.com/s/L30s7rOyn6NcPC2y9XNZIQ">百度anr治理</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>anr</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NEW JOBS</title>
+    <url>/posts/200e1d4e/</url>
+    <content><![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p><code>    通过二个月的冲刺，达到准高级工程师水准，进入大厂（BAT/TMDJKXB)；预期岗位是大厂的中级测开岗，或者广告/音乐/金融类的高级业务测试岗；大厂有包就行，小厂的核心产出岗；</code><br><code>    测开岗方向，主要集中在流程（devops）/服务（稳定性，性能）/自动化（ui/接口/单测）/脚本工具类（打杂，项目需要啥，开发啥）/可视化（也是流程类，不过主要集中在数据和工作流程方面），最具有发展前途的是devops和服务岗，这是真正能有产出的岗位；自动化也就是平台工具化和可视化工具，基本是一体的，小公司认为的自动化一般是这种，就业面广；脚本侠，和业务测试其实区别不大；</code></p>
+<h2 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h2><h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">目标企业</span><br><span class="line">企业要求</span><br><span class="line">完成规划</span><br><span class="line">模拟训练</span><br><span class="line">过往归纳</span><br><span class="line">反思总结</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<p><em><strong>目标企业</strong></em></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">百度</span><br><span class="line">阿里</span><br><span class="line">	lazada</span><br><span class="line"> 	网商银行  </span><br><span class="line">腾讯</span><br><span class="line">	腾讯音乐</span><br><span class="line">	微众银行</span><br><span class="line">头条</span><br><span class="line">滴滴</span><br><span class="line">美团</span><br><span class="line">京东</span><br><span class="line">拼多多</span><br><span class="line">小红书</span><br><span class="line">快手</span><br><span class="line">网易</span><br><span class="line">携程</span><br><span class="line">满帮</span><br><span class="line">货拉拉</span><br><span class="line">手机厂</span><br><span class="line">	华为</span><br><span class="line">	荣耀</span><br><span class="line">	oppo</span><br><span class="line">	vivo</span><br><span class="line">	小米</span><br><span class="line">	魅族</span><br><span class="line">	传音    </span><br><span class="line">汽车厂</span><br><span class="line">	比亚迪</span><br><span class="line">	小鹏</span><br><span class="line">	蔚来</span><br><span class="line">	理想</span><br><span class="line">	其他车企    </span><br><span class="line">其他制造业</span><br><span class="line">	大疆</span><br><span class="line">	顺丰    </span><br><span class="line">金融+银行+券商    </span><br><span class="line">外企 </span><br><span class="line">海外</span><br><span class="line">	虾皮</span><br><span class="line">	shenin</span><br><span class="line">	    </span><br><span class="line">其他</span><br><span class="line">	b站</span><br><span class="line">	贝壳</span><br><span class="line">	用友</span><br><span class="line">	boss直聘</span><br><span class="line">	360</span><br><span class="line">	微博 </span><br><span class="line">	唯品会</span><br><span class="line">	爱奇艺    </span><br><span class="line">   阅文</span><br><span class="line">   达达</span><br><span class="line">	知乎</span><br><span class="line">	金山</span><br><span class="line">	喜马拉雅</span><br><span class="line">	同城艺龙</span><br><span class="line">	汽车之家</span><br><span class="line">	欢聚时代</span><br><span class="line">	微盟</span><br><span class="line">	陌陌</span><br><span class="line">	有赞</span><br><span class="line">	斗鱼</span><br><span class="line">	虎牙</span><br><span class="line">	哈罗</span><br><span class="line">	得物</span><br><span class="line">	soul</span><br><span class="line">	keep</span><br><span class="line">	涂鸦	    </span><br><span class="line">	浪潮</span><br><span class="line">	商汤</span><br><span class="line">	云从</span><br><span class="line">	旷视</span><br><span class="line">	依图</span><br><span class="line">	猎豹</span><br><span class="line">	大宇</span><br><span class="line">	美图</span><br><span class="line">	奇安信</span><br><span class="line">	华润    </span><br><span class="line">国企   </span><br><span class="line">人工智能</span><br><span class="line">chatgpt</span><br><span class="line">币圈</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>企业要求</strong></em></p>
+<p><em>大厂用人着重点</em></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">招聘岗位需要什么样的人，匹配最重要，此岗位那些技能是重点，会着重考量；</span><br><span class="line">会着重问简历重的问题，而且会扩展，主要考量深度，还有诚信；</span><br><span class="line">会问面试者印象深刻的工作，主要考虑是否会在工作中思考，以及解决复杂问题的思路；</span><br><span class="line">味道&#x2F;风格和公司以及团队是否匹配；</span><br><span class="line">性格是不是积极向上的。主动、乐观、皮实；</span><br><span class="line">技能方面，考虑一个问题：应聘的同学能够提升团队平均技能的水位线么？如果不是，招聘对你团队的整体收益就会打折。除非应急，否则还是尽量招聘能够提升团队水位线的人，这很重要；</span><br><span class="line">应聘的人有潜力么？成长性怎么样，也就是说，后入者的要求只会越来越高；</span><br><span class="line">	如何看潜力？准则就是：工作年限是否与工作能力相匹配。锚点就是你身边的同事，一个个去比，心里就会有数。 回想一下，你在他这个年龄的时候，是比他好，还是比他差？对于工作年限比较长的应聘者，一定要看应聘者是不是在一个方向已经钻了足够的深度。如果没有，大概率不具备潜力。</span><br><span class="line">    </span><br><span class="line">应聘者的意愿，与岗位能够提供的匹配么？</span><br><span class="line">来公司的动机？</span><br><span class="line">诚信一票否决。如果发现明显的不诚信，一定一票否决？</span><br><span class="line">可能会问一些逻辑思维题，考察思维的灵活性，人是否聪明。</span><br><span class="line"></span><br><span class="line">技术：</span><br><span class="line">项目经验：是否有正规的项目组工作经验：理解敏捷的工作模式，有良好的开发习惯，有和项目组良好的协作、沟通能力；是否对原有参与建设的业务系统的业务有一个完整的理解；</span><br><span class="line">技术根底：对应的技术栈是否有与工作年龄匹配的深度。举例：一个做 Java 业务开发 3~5 年的程序员应该对 Java 的基础知识（Core Java 书里的所有知识点），在设计模式，业务建模， 性能调优等一个或者几个点，有比较深的理解；有很强的故障定位及排除能力；能够熟练使用 Java 常见的框架，如 Spring 等；读过部分流行框架源码等。</span><br><span class="line">系统思考的能力，是否有模块化，体系化的思考能力。</span><br><span class="line"></span><br><span class="line">项目需要体现复杂性，拼配度，需要在项目中体现自己的价值</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">其他：重点</span><br><span class="line">https:&#x2F;&#x2F;testerhome.com&#x2F;topics&#x2F;16354(p8)</span><br><span class="line">https:&#x2F;&#x2F;testerhome.com&#x2F;topics&#x2F;30722#reply9</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><em>腾讯</em></p>
+<p><strong>测开岗</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">本科及以上学历，计算机或相关专业，具备扎实的计算机和软件技术基础</span><br><span class="line">2 年及以上开发 或者 测试开发 工作经验，技术栈至少满足以下技术项中的一项或者多项：</span><br><span class="line">	①、 熟悉 Android&#x2F;iOS 移动操作系统，具备终端的自动化测试工具或性能测试等项目开发经验；熟悉 		Java&#x2F;OC&#x2F;Swift 等至少一门编程语言；</span><br><span class="line">	②、 熟悉 go&#x2F;C++&#x2F;java 等至少一种后台主流编程语言，熟悉至少一门脚本开发语言（如 shell、python）；	 熟悉 linux 平台下服务器调试开发；对缓存、存储、并发等场景有一定的测试开发经验；熟悉微服务架构并	能独立开发后台服务，熟悉大数据开发及应用</span><br><span class="line">	③、熟悉前端开发基础知识，熟练掌握 CSS，JS，HTML 语言，至少熟练掌握一个前端 MVVM 框架（React、		Vue最佳），具备丰富的前端项目开发经验</span><br><span class="line">三年以上软件开发经验，能熟悉掌握和运用 C&#x2F;C++&#x2F;Python 等任何一门主流编程语言；</span><br><span class="line">在测试自动化、平台研发、web 自动化、报表分析、静态分析、开发调试工具、框架设计和分布式系统等领域中，有涉及到一项或多项相关的实践经验；</span><br><span class="line">具有发现问题的灵敏嗅觉，具备针对复杂问题的分析和解决的能力；</span><br><span class="line">熟悉 JS ES6 Webpack Vue 有加分；</span><br><span class="line">业务项目中，应用行业前沿的优秀的工程实践经验，提升研发和工程生产力和效率；</span><br><span class="line">设计、构建和落地自动化构建、测试和发布的工程基础设施；</span><br><span class="line">驱动研发团队落实优秀的代码规范、代码设计原则和高质量的测试；</span><br><span class="line">分析和定位复杂系统耦合关系，梳理跨团队分工协作，以提升系统可测试性；</span><br><span class="line"></span><br><span class="line">个人特质</span><br><span class="line">	①、具备良好的学习能力、复杂问题定位和分析能力；具备创新性思维、较强的抗压能力和技术钻研能力</span><br><span class="line">	②、具备扎实的编程基本功，具备一定的项目架构设计能力</span><br><span class="line">	③、对 devops 工程效能实践有深入理解和实践经验者优先</span><br><span class="line"></span><br><span class="line">【腾讯会议测试开发工程师（深圳&#x2F;广州&#x2F;北京）】</span><br><span class="line">工作职责</span><br><span class="line"></span><br><span class="line">参与腾讯会议及相关音视频产品进行专项测试工具能力建设设计及开发工作；</span><br><span class="line">参与产品研发效能工具的开发工作；</span><br><span class="line">建设产品自动化测试体系，提升团队的工作效率；</span><br><span class="line">评估引入外部先进工作方法或技术，服务团队； 工作要求</span><br><span class="line">计算机、通信相关专业本科及以上学历， 2 年以上社会工作经验；</span><br><span class="line">熟悉软件开发的流程、工具及相关技能；</span><br><span class="line">掌握数据结构，数据库，操作系统，网络等基础知识；</span><br><span class="line">熟练掌握至少一门开发语言，编译或者脚本语言均可；</span><br><span class="line">有自动化测试系统开发经验者优先；</span><br><span class="line">了解音频、视频相关知识，熟悉音质、画质、时延、卡顿等测试内容者优先考虑</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>业务岗</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">对云服务、分布式计算、大数据处理等有深刻架构理解和测试经验；</span><br><span class="line">对 Linux&#x2F;Unix 操作系统、TCP&#x2F;IP 网络协议、NoSQL 等都有比较深入的理解和实践经验；</span><br><span class="line">具备自动化测试经验，深刻理解自动化平台和持续集成体系建设者优先；</span><br><span class="line">有丰富性能、协议或白盒测试经验者优先；</span><br><span class="line"></span><br><span class="line">【腾讯会议高级测试工程师（深圳&#x2F;广州&#x2F;北京）】</span><br><span class="line">工作职责：</span><br><span class="line">1.负责腾讯会议产品的质量保障工作，以及专项测试技术、效能工具和平台等相关工作；</span><br><span class="line">2.推进各端自动化体系、专项测试体系、工具平台的建设和优化，持续提升测试效率；</span><br><span class="line">3.推动整个研发团队的质量意识，在保障高质量的同时通过 devops 提升研发效能。</span><br><span class="line">工作要求：</span><br><span class="line">1.计算机相关专业本科以上学历，有两年及以上测试开发工作经验；</span><br><span class="line">2.能通过最新的技术手段来保障和改进产品质量 ，有音视频或会议相关大型项目测试开发实践者优先考虑；</span><br><span class="line">3.深入掌握测试体系、测试流程和测试技术，能通过测试技术提升效率；</span><br><span class="line">4.对质量体系、流程、测试风险把握，测试范畴的定义有很好的理解和应用，独立承担过大型项目测试负责人，能够通过有效的手段、流程和方法推进产品测试开展，把控产品质量；</span><br><span class="line">5.熟悉功能测试方法和设计，掌握分层测试， CICD 等测试建设手段；</span><br><span class="line">6.良好的沟通能力和团队协作能力。能从整个研发的角度出发，对研发流程和研发效率的改善提出落地方案。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><em>百度</em></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#96;&#96;&#96;</span><br><span class="line">_阿里_</span><br></pre></td></tr></table></figure>
+<p>至少 3 年以上工作经验<br>本科及以上学历，硕士生，研究生，博士生更佳<br>精通C、C++、Java、Python 等至少一种编程语言<br>熟悉软件研发流程，掌握软件测试理论和方法，有设计和开发测试工具和自动化测试框架能力更佳<br>喜欢钻研技术，对质量捍卫有热情，不断追求产品用户体验的完善<br>善于沟通，善于团队合作</p>
+<p>[杭州] 阿里巴巴 CBU 技术部 招聘 高级测试开发工程师 / 测试开发专家<br>职位要求：</p>
+<p>两年以上互联网及传统行业的测试开发经验，对软件质量保障有体系化的思考和经验。能够面对复杂情况建立体系化的软件质量控制的策略和模型，并且有大型项目成功实践的经验；<br>具备业务或测试技术（自动化、性能、安全、用户体验、稳定性等）某方面的专长，具有一定的业务建模能力或测试技术预研、选型、设计开发、统一规划的能力。<br>具备抽像提炼测试技术的共性问题，主导业务线相关领域的测试系统建设，持续发现和解决重大系统、业务问题<br>优秀的代码实现能力，精通 C/C++, JAVA, Python 等编程语言之一，并有实际项目代码经验;<br>逻辑能力强、思维活跃，接受新事物能力强；责任心强，积极主动，善于沟通，良好的团队合作能力；良好英文沟通能力；<br>大型互联网名企经验优先，数据和算法测试经验优先。</p>
+<p>[北京][杭州] 阿里云存储测试开发 P6~P8 核心团队内推</p>
+<p>传播测试理念，设计 CI/CD 流程，指导研发工程师持续快速地交付产品特性；<br>根据业务需求，设计和开发测试工具，包括自动化测试框架、持续回归平台、性能测试工具、资源管理工具等；<br>参与某个存储产品的测试工作，制定和实施测试计划，保障被测系统高质量发布上线；<br>针对测试和发布流程提出改进意见，提升研发工程师的幸福感。<br>职位要求</p>
+<p>计算机本科以上相关专业，三年以上工作经验；<br>有互联网后端 、存储或网络产品自动化测试经验，有系统化的测试分析和设计能力；<br>熟悉 Linux 操作系统、熟练使用 shell 和 python 编程语言；<br>具备很强的逻辑思维能力和较高的分析、处理问题的能力，熟练的文档、沟通表达和辅导技巧；<br>善于团队合作，理解和适应变化，以结果和行动为准则，努力追求成功。​</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">_字节_</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">_京东_</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">_拼多多_</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">_美团_</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">_小红书_</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">_快手_</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">_网易_</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">### 完成规划</span><br><span class="line"></span><br><span class="line">___补全基础知识___</span><br><span class="line"></span><br><span class="line">+ [高级软件测试分析师](https:&#x2F;&#x2F;blog.51cto.com&#x2F;u_15127510&#x2F;4549327)</span><br><span class="line">+ 高级软件测试管理</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">___面试话题___</span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">DevOps一体化研发体系：需结合自己公司的CICDCT体系进行说明,深化出他的理解</span><br><span class="line">工作中的技巧：时间不足场景&#x2F;线上问题场景&#x2F;绩效汇报&#x2F;工作汇报的场景</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>职业</category>
+      </categories>
+      <tags>
+        <tag>职业</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SOLOPI使用教程</title>
     <url>/posts/49e140/</url>
     <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
@@ -153,79 +226,6 @@
         <tag>稳定性</tag>
         <tag>前端性能</tag>
         <tag>solopi</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>稳定性--ANR治理</title>
-    <url>/posts/1ee32bf1/</url>
-    <content><![CDATA[<h1 id="ANR治理"><a href="#ANR治理" class="headerlink" title="ANR治理"></a>ANR治理</h1><ul>
-<li><em><strong>大纲</strong></em></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">anr是什么？</span><br><span class="line">为什么会产生anr?</span><br><span class="line">anr是怎样产生的，哪些场景下会产生？</span><br><span class="line">anr如何治理？</span><br><span class="line">解决anr问题的价值？</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<ul>
-<li><strong>anr是什么？</strong><br>  <code>anr(Applicatipon No Response),即应用无响应；本质是一个性能问题；在用户和app进行交互时，常会遇到长时间无响应/卡顿的场景；为了改善性能，Android设计了anr的机制，即保证交互能在一定时间内完成，如果未完成，就抛出异常，也就是ANR;   </code></li>
-<li><strong>anr设计机制：</strong><br>  <code>是系统通过与之交互的组件(Activity，Service，Receiver，Provider)以及用户交互(InputEvent)进行超时监控，以判断应用进程(主线程)是否存在卡死或响应过慢的问题，通俗来说就是很多系统中看门狗(watchdog)的设计思想。   </code><ul>
-<li><strong>不同的组件，系统设置的超时时间是不同的，这个时间不同手机厂商的os可能也会做调整：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
-<li><strong>系统抛出anr的机制：</strong><br><code>在进行相关的操作前，系统会基于当前的时间戳和这个类型组件的超时时间设置，计算出超时时间戳；并将超时时间戳传递给anr触发函数，组件若未超时启动，则会在启动成功后，在传递一个参数给anr函数来阻止触发anr;若到超时时间，anr函数还未收到阻止信号，就会触发ANR(类似构建了个定时触发的任务)； </code></li>
-<li><strong>超时触发流程如下：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
-</ul>
-</li>
-</ul>
-<p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1780091311874686979&scene=173&from_msgid=2247488558&from_itemidx=1&count=3&nolastread=1&uin=&key=&devicetype=Windows+10+x64&version=63030532&lang=zh_CN&ascene=0&fontgear=2">头条anr治理系列</a></p>
-<p><a href="https://mp.weixin.qq.com/s/L30s7rOyn6NcPC2y9XNZIQ">百度anr治理</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>anr</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>NEW JOBS</title>
-    <url>/posts/200e1d4e/</url>
-    <content><![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p><code>    通过二个月的冲刺，达到准高级工程师水准，进入大厂（BAT/TMDJKXB)；预期岗位是大厂的中级测开岗，或者广告/音乐/金融类的高级业务测试岗；大厂有包就行，小厂的核心产出岗；</code><br><code>    测开岗方向，主要集中在流程（devops）/服务（稳定性，性能）/自动化（ui/接口/单测）/脚本工具类（打杂，项目需要啥，开发啥）/可视化（也是流程类，不过主要集中在数据和工作流程方面），最具有发展前途的是devops和服务岗，这是真正能有产出的岗位；自动化也就是平台工具化和可视化工具，基本是一体的，小公司认为的自动化一般是这种，就业面广；脚本侠，和业务测试其实区别不大；</code></p>
-<h2 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h2><h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">目标企业</span><br><span class="line">企业要求</span><br><span class="line">完成规划</span><br><span class="line">模拟训练</span><br><span class="line">过往归纳</span><br><span class="line">反思总结</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<p><em><strong>目标企业</strong></em></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">百度</span><br><span class="line">阿里</span><br><span class="line">	lazada</span><br><span class="line"> 	网商银行  </span><br><span class="line">腾讯</span><br><span class="line">	腾讯音乐</span><br><span class="line">	微众银行</span><br><span class="line">头条</span><br><span class="line">滴滴</span><br><span class="line">美团</span><br><span class="line">京东</span><br><span class="line">拼多多</span><br><span class="line">小红书</span><br><span class="line">快手</span><br><span class="line">网易</span><br><span class="line">携程</span><br><span class="line">满帮</span><br><span class="line">货拉拉</span><br><span class="line">手机厂</span><br><span class="line">	华为</span><br><span class="line">	荣耀</span><br><span class="line">	oppo</span><br><span class="line">	vivo</span><br><span class="line">	小米</span><br><span class="line">	魅族</span><br><span class="line">	传音    </span><br><span class="line">汽车厂</span><br><span class="line">	比亚迪</span><br><span class="line">	小鹏</span><br><span class="line">	蔚来</span><br><span class="line">	理想</span><br><span class="line">	其他车企    </span><br><span class="line">其他制造业</span><br><span class="line">	大疆</span><br><span class="line">	顺丰    </span><br><span class="line">金融+银行+券商    </span><br><span class="line">外企 </span><br><span class="line">海外</span><br><span class="line">	虾皮</span><br><span class="line">	shenin</span><br><span class="line">	    </span><br><span class="line">其他</span><br><span class="line">	b站</span><br><span class="line">	贝壳</span><br><span class="line">	用友</span><br><span class="line">	boss直聘</span><br><span class="line">	360</span><br><span class="line">	微博 </span><br><span class="line">	唯品会</span><br><span class="line">	爱奇艺    </span><br><span class="line">   阅文</span><br><span class="line">   达达</span><br><span class="line">	知乎</span><br><span class="line">	金山</span><br><span class="line">	喜马拉雅</span><br><span class="line">	同城艺龙</span><br><span class="line">	汽车之家</span><br><span class="line">	欢聚时代</span><br><span class="line">	微盟</span><br><span class="line">	陌陌</span><br><span class="line">	有赞</span><br><span class="line">	斗鱼</span><br><span class="line">	虎牙</span><br><span class="line">	哈罗</span><br><span class="line">	得物</span><br><span class="line">	soul</span><br><span class="line">	keep</span><br><span class="line">	涂鸦	    </span><br><span class="line">	浪潮</span><br><span class="line">	商汤</span><br><span class="line">	云从</span><br><span class="line">	旷视</span><br><span class="line">	依图</span><br><span class="line">	猎豹</span><br><span class="line">	大宇</span><br><span class="line">	美图</span><br><span class="line">	奇安信</span><br><span class="line">	华润    </span><br><span class="line">国企   </span><br><span class="line">人工智能</span><br><span class="line">chatgpt</span><br><span class="line">币圈</span><br></pre></td></tr></table></figure>
-
-<p><em><strong>企业要求</strong></em></p>
-<p><em>大厂用人着重点</em></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">招聘岗位需要什么样的人，匹配最重要，此岗位那些技能是重点，会着重考量；</span><br><span class="line">会着重问简历重的问题，而且会扩展，主要考量深度，还有诚信；</span><br><span class="line">会问面试者印象深刻的工作，主要考虑是否会在工作中思考，以及解决复杂问题的思路；</span><br><span class="line">味道&#x2F;风格和公司以及团队是否匹配；</span><br><span class="line">性格是不是积极向上的。主动、乐观、皮实；</span><br><span class="line">技能方面，考虑一个问题：应聘的同学能够提升团队平均技能的水位线么？如果不是，招聘对你团队的整体收益就会打折。除非应急，否则还是尽量招聘能够提升团队水位线的人，这很重要；</span><br><span class="line">应聘的人有潜力么？成长性怎么样，也就是说，后入者的要求只会越来越高；</span><br><span class="line">	如何看潜力？准则就是：工作年限是否与工作能力相匹配。锚点就是你身边的同事，一个个去比，心里就会有数。 回想一下，你在他这个年龄的时候，是比他好，还是比他差？对于工作年限比较长的应聘者，一定要看应聘者是不是在一个方向已经钻了足够的深度。如果没有，大概率不具备潜力。</span><br><span class="line">    </span><br><span class="line">应聘者的意愿，与岗位能够提供的匹配么？</span><br><span class="line">来公司的动机？</span><br><span class="line">诚信一票否决。如果发现明显的不诚信，一定一票否决？</span><br><span class="line">可能会问一些逻辑思维题，考察思维的灵活性，人是否聪明。</span><br><span class="line"></span><br><span class="line">技术：</span><br><span class="line">项目经验：是否有正规的项目组工作经验：理解敏捷的工作模式，有良好的开发习惯，有和项目组良好的协作、沟通能力；是否对原有参与建设的业务系统的业务有一个完整的理解；</span><br><span class="line">技术根底：对应的技术栈是否有与工作年龄匹配的深度。举例：一个做 Java 业务开发 3~5 年的程序员应该对 Java 的基础知识（Core Java 书里的所有知识点），在设计模式，业务建模， 性能调优等一个或者几个点，有比较深的理解；有很强的故障定位及排除能力；能够熟练使用 Java 常见的框架，如 Spring 等；读过部分流行框架源码等。</span><br><span class="line">系统思考的能力，是否有模块化，体系化的思考能力。</span><br><span class="line"></span><br><span class="line">项目需要体现复杂性，拼配度，需要在项目中体现自己的价值</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">其他：重点</span><br><span class="line">https:&#x2F;&#x2F;testerhome.com&#x2F;topics&#x2F;16354(p8)</span><br><span class="line">https:&#x2F;&#x2F;testerhome.com&#x2F;topics&#x2F;30722#reply9</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><em>腾讯</em></p>
-<p><strong>测开岗</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">本科及以上学历，计算机或相关专业，具备扎实的计算机和软件技术基础</span><br><span class="line">2 年及以上开发 或者 测试开发 工作经验，技术栈至少满足以下技术项中的一项或者多项：</span><br><span class="line">	①、 熟悉 Android&#x2F;iOS 移动操作系统，具备终端的自动化测试工具或性能测试等项目开发经验；熟悉 		Java&#x2F;OC&#x2F;Swift 等至少一门编程语言；</span><br><span class="line">	②、 熟悉 go&#x2F;C++&#x2F;java 等至少一种后台主流编程语言，熟悉至少一门脚本开发语言（如 shell、python）；	 熟悉 linux 平台下服务器调试开发；对缓存、存储、并发等场景有一定的测试开发经验；熟悉微服务架构并	能独立开发后台服务，熟悉大数据开发及应用</span><br><span class="line">	③、熟悉前端开发基础知识，熟练掌握 CSS，JS，HTML 语言，至少熟练掌握一个前端 MVVM 框架（React、		Vue最佳），具备丰富的前端项目开发经验</span><br><span class="line">三年以上软件开发经验，能熟悉掌握和运用 C&#x2F;C++&#x2F;Python 等任何一门主流编程语言；</span><br><span class="line">在测试自动化、平台研发、web 自动化、报表分析、静态分析、开发调试工具、框架设计和分布式系统等领域中，有涉及到一项或多项相关的实践经验；</span><br><span class="line">具有发现问题的灵敏嗅觉，具备针对复杂问题的分析和解决的能力；</span><br><span class="line">熟悉 JS ES6 Webpack Vue 有加分；</span><br><span class="line">业务项目中，应用行业前沿的优秀的工程实践经验，提升研发和工程生产力和效率；</span><br><span class="line">设计、构建和落地自动化构建、测试和发布的工程基础设施；</span><br><span class="line">驱动研发团队落实优秀的代码规范、代码设计原则和高质量的测试；</span><br><span class="line">分析和定位复杂系统耦合关系，梳理跨团队分工协作，以提升系统可测试性；</span><br><span class="line"></span><br><span class="line">个人特质</span><br><span class="line">	①、具备良好的学习能力、复杂问题定位和分析能力；具备创新性思维、较强的抗压能力和技术钻研能力</span><br><span class="line">	②、具备扎实的编程基本功，具备一定的项目架构设计能力</span><br><span class="line">	③、对 devops 工程效能实践有深入理解和实践经验者优先</span><br><span class="line"></span><br><span class="line">【腾讯会议测试开发工程师（深圳&#x2F;广州&#x2F;北京）】</span><br><span class="line">工作职责</span><br><span class="line"></span><br><span class="line">参与腾讯会议及相关音视频产品进行专项测试工具能力建设设计及开发工作；</span><br><span class="line">参与产品研发效能工具的开发工作；</span><br><span class="line">建设产品自动化测试体系，提升团队的工作效率；</span><br><span class="line">评估引入外部先进工作方法或技术，服务团队； 工作要求</span><br><span class="line">计算机、通信相关专业本科及以上学历， 2 年以上社会工作经验；</span><br><span class="line">熟悉软件开发的流程、工具及相关技能；</span><br><span class="line">掌握数据结构，数据库，操作系统，网络等基础知识；</span><br><span class="line">熟练掌握至少一门开发语言，编译或者脚本语言均可；</span><br><span class="line">有自动化测试系统开发经验者优先；</span><br><span class="line">了解音频、视频相关知识，熟悉音质、画质、时延、卡顿等测试内容者优先考虑</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><strong>业务岗</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">对云服务、分布式计算、大数据处理等有深刻架构理解和测试经验；</span><br><span class="line">对 Linux&#x2F;Unix 操作系统、TCP&#x2F;IP 网络协议、NoSQL 等都有比较深入的理解和实践经验；</span><br><span class="line">具备自动化测试经验，深刻理解自动化平台和持续集成体系建设者优先；</span><br><span class="line">有丰富性能、协议或白盒测试经验者优先；</span><br><span class="line"></span><br><span class="line">【腾讯会议高级测试工程师（深圳&#x2F;广州&#x2F;北京）】</span><br><span class="line">工作职责：</span><br><span class="line">1.负责腾讯会议产品的质量保障工作，以及专项测试技术、效能工具和平台等相关工作；</span><br><span class="line">2.推进各端自动化体系、专项测试体系、工具平台的建设和优化，持续提升测试效率；</span><br><span class="line">3.推动整个研发团队的质量意识，在保障高质量的同时通过 devops 提升研发效能。</span><br><span class="line">工作要求：</span><br><span class="line">1.计算机相关专业本科以上学历，有两年及以上测试开发工作经验；</span><br><span class="line">2.能通过最新的技术手段来保障和改进产品质量 ，有音视频或会议相关大型项目测试开发实践者优先考虑；</span><br><span class="line">3.深入掌握测试体系、测试流程和测试技术，能通过测试技术提升效率；</span><br><span class="line">4.对质量体系、流程、测试风险把握，测试范畴的定义有很好的理解和应用，独立承担过大型项目测试负责人，能够通过有效的手段、流程和方法推进产品测试开展，把控产品质量；</span><br><span class="line">5.熟悉功能测试方法和设计，掌握分层测试， CICD 等测试建设手段；</span><br><span class="line">6.良好的沟通能力和团队协作能力。能从整个研发的角度出发，对研发流程和研发效率的改善提出落地方案。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><em>百度</em></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#96;&#96;&#96;</span><br><span class="line">_阿里_</span><br></pre></td></tr></table></figure>
-<p>至少 3 年以上工作经验<br>本科及以上学历，硕士生，研究生，博士生更佳<br>精通C、C++、Java、Python 等至少一种编程语言<br>熟悉软件研发流程，掌握软件测试理论和方法，有设计和开发测试工具和自动化测试框架能力更佳<br>喜欢钻研技术，对质量捍卫有热情，不断追求产品用户体验的完善<br>善于沟通，善于团队合作</p>
-<p>[杭州] 阿里巴巴 CBU 技术部 招聘 高级测试开发工程师 / 测试开发专家<br>职位要求：</p>
-<p>两年以上互联网及传统行业的测试开发经验，对软件质量保障有体系化的思考和经验。能够面对复杂情况建立体系化的软件质量控制的策略和模型，并且有大型项目成功实践的经验；<br>具备业务或测试技术（自动化、性能、安全、用户体验、稳定性等）某方面的专长，具有一定的业务建模能力或测试技术预研、选型、设计开发、统一规划的能力。<br>具备抽像提炼测试技术的共性问题，主导业务线相关领域的测试系统建设，持续发现和解决重大系统、业务问题<br>优秀的代码实现能力，精通 C/C++, JAVA, Python 等编程语言之一，并有实际项目代码经验;<br>逻辑能力强、思维活跃，接受新事物能力强；责任心强，积极主动，善于沟通，良好的团队合作能力；良好英文沟通能力；<br>大型互联网名企经验优先，数据和算法测试经验优先。</p>
-<p>[北京][杭州] 阿里云存储测试开发 P6~P8 核心团队内推</p>
-<p>传播测试理念，设计 CI/CD 流程，指导研发工程师持续快速地交付产品特性；<br>根据业务需求，设计和开发测试工具，包括自动化测试框架、持续回归平台、性能测试工具、资源管理工具等；<br>参与某个存储产品的测试工作，制定和实施测试计划，保障被测系统高质量发布上线；<br>针对测试和发布流程提出改进意见，提升研发工程师的幸福感。<br>职位要求</p>
-<p>计算机本科以上相关专业，三年以上工作经验；<br>有互联网后端 、存储或网络产品自动化测试经验，有系统化的测试分析和设计能力；<br>熟悉 Linux 操作系统、熟练使用 shell 和 python 编程语言；<br>具备很强的逻辑思维能力和较高的分析、处理问题的能力，熟练的文档、沟通表达和辅导技巧；<br>善于团队合作，理解和适应变化，以结果和行动为准则，努力追求成功。​</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">_字节_</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">_京东_</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">_拼多多_</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">_美团_</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">_小红书_</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">_快手_</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">_网易_</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">### 完成规划</span><br><span class="line"></span><br><span class="line">___补全基础知识___</span><br><span class="line"></span><br><span class="line">+ [高级软件测试分析师](https:&#x2F;&#x2F;blog.51cto.com&#x2F;u_15127510&#x2F;4549327)</span><br><span class="line">+ 高级软件测试管理</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">___面试话题___</span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">DevOps一体化研发体系：需结合自己公司的CICDCT体系进行说明,深化出他的理解</span><br><span class="line">工作中的技巧：时间不足场景&#x2F;线上问题场景&#x2F;绩效汇报&#x2F;工作汇报的场景</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>职业</category>
-      </categories>
-      <tags>
-        <tag>职业</tag>
       </tags>
   </entry>
   <entry>
@@ -458,6 +458,41 @@
       </tags>
   </entry>
   <entry>
+    <title>python-多进程</title>
+    <url>/posts/a1c10886/</url>
+    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python多进程简述</span><br><span class="line">python多进程模块方法介绍</span><br><span class="line">python多进程使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<ul>
+<li><p><em><strong>python多进程模块简述：</strong></em></p>
+<p>  <code>python由于GIL机制，多线程，实际仅消耗一个内核资源；因此效率较低，python要实现并发，提高性能，只能使用多进程模块，python的多进程模块为multiprocessing，通过使用Pool类实现多进程；   </code></p>
+</li>
+<li><p><em><strong>python多进程模块方法介绍：</strong></em></p>
+<p>  <code>   python多进程模块为multiprocessing，为python的内置模块；通过该模块封装的Pool()对象实现多进程，Pool类的属性介绍如下：</code></p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()	#需要被执行的方法&#x2F;任务</span><br><span class="line">iter&#x3D;iter	#迭代对象，list&#x2F;变量值</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(3)	#创建一个仅容纳3个进程的进程池，一旦工作任务超出进程的数量，则需等待，进程池中的进程被释放，任务才能进入进程池；</span><br><span class="line">__init__(self, group&#x3D;None, target&#x3D;None, name&#x3D;None, args&#x3D;(), kwargs&#x3D;&#123;&#125;)	#进程池的构造方法</span><br><span class="line">group：进程池所属的进程组，一旦不需要给值；</span><br><span class="line">target：待处理的任务或方法；</span><br><span class="line">name：进程池的别名，默认不给值；</span><br><span class="line">args：调用对象的位置参数，可给值元组&#x2F;列表等可迭代对象或者参数值；</span><br><span class="line">kwargs：调用对象的字典参数；</span><br><span class="line"></span><br><span class="line">使用：在win环境下，进程池必须在当前模块下执行，即必须在 if __name__&#x3D;&#x3D;main:下执行；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Pool()类中拥有的属性方法如下：</strong></li>
+</ul>
+<ul>
+<li>pool.map()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br></pre></td></tr></table></figure></li>
+<li>pool.map_async(run,iter)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map_async(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map_async(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br><span class="line">---效果和pool.map()不相同，mapasyc效率更高；mapasyc主进程未阻塞进程池，不需要等该批次的进程全执行完，新的任务就能进入进程池执行；常用pool.map()</span><br></pre></td></tr></table></figure></li>
+<li>pool.apply()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]])</span><br><span class="line">apply,参数需要为具体的变量值，且仅在python2支持；</span><br><span class="line">apply方法的原理是，阻塞进程池，一次仅让一个任务进入进程池，该任务完成后，才能执行下一个任务，实际是串行；</span><br></pre></td></tr></table></figure></li>
+<li>pool.applyasyc()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]],[, callback&#x3D;None]]])</span><br><span class="line">   applyasyc,参数需要为具体的变量值，在python3上支持；</span><br><span class="line">   applyasyc方法的原理是，进程池非阻塞，一次可以让多个任务进入进程池，且未对该批次任务进行阻塞，只要其中一个进程执行完后，就能释放资源，让新的任务进入进程池，实际是并行的,效率等同于mapasyc()；</span><br><span class="line">回调使用：pool.applyasyc(run,kwargs,callback&#x3D;func2)，run的返回作为func2的参数，执行完返回func2的值；</span><br><span class="line">   ---applyasyc效果等同于mapasyc()，只是他具有回调功能，且入参的变量不能是可迭代对象，必须为具体的变量值；</span><br></pre></td></tr></table></figure></li>
+<li>pool.terminal()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用：结束工作进程，不在处理未完成的任务</span><br><span class="line">pool.map(run,iter)</span><br><span class="line">pool.close()</span><br><span class="line">pool.run()</span><br><span class="line">sleep(2)</span><br><span class="line">pool.terminal()		#执行两秒后，哪怕进程未执行完，也结束该主进程</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><em><strong>python多进程使用：</strong></em></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()</span><br><span class="line">iter&#x3D;iter</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(multiprocessing.cpu_count())</span><br><span class="line">pool.map(run(),iter)</span><br><span class="line">pool.join()</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>python</tag>
+        <tag>多进程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python-多线程</title>
     <url>/posts/b7270d4a/</url>
     <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">多线程是什么？</span><br><span class="line">为什么需要使用多线程，多线程的作用？</span><br><span class="line">怎么使用多线程，join方法的作用？</span><br><span class="line">python多线程弊端？</span><br><span class="line">python多线程其他机制？</span><br></pre></td></tr></table></figure>
@@ -495,41 +530,6 @@
       <tags>
         <tag>python</tag>
         <tag>多线程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python-多进程</title>
-    <url>/posts/a1c10886/</url>
-    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python多进程简述</span><br><span class="line">python多进程模块方法介绍</span><br><span class="line">python多进程使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<ul>
-<li><p><em><strong>python多进程模块简述：</strong></em></p>
-<p>  <code>python由于GIL机制，多线程，实际仅消耗一个内核资源；因此效率较低，python要实现并发，提高性能，只能使用多进程模块，python的多进程模块为multiprocessing，通过使用Pool类实现多进程；   </code></p>
-</li>
-<li><p><em><strong>python多进程模块方法介绍：</strong></em></p>
-<p>  <code>   python多进程模块为multiprocessing，为python的内置模块；通过该模块封装的Pool()对象实现多进程，Pool类的属性介绍如下：</code></p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()	#需要被执行的方法&#x2F;任务</span><br><span class="line">iter&#x3D;iter	#迭代对象，list&#x2F;变量值</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(3)	#创建一个仅容纳3个进程的进程池，一旦工作任务超出进程的数量，则需等待，进程池中的进程被释放，任务才能进入进程池；</span><br><span class="line">__init__(self, group&#x3D;None, target&#x3D;None, name&#x3D;None, args&#x3D;(), kwargs&#x3D;&#123;&#125;)	#进程池的构造方法</span><br><span class="line">group：进程池所属的进程组，一旦不需要给值；</span><br><span class="line">target：待处理的任务或方法；</span><br><span class="line">name：进程池的别名，默认不给值；</span><br><span class="line">args：调用对象的位置参数，可给值元组&#x2F;列表等可迭代对象或者参数值；</span><br><span class="line">kwargs：调用对象的字典参数；</span><br><span class="line"></span><br><span class="line">使用：在win环境下，进程池必须在当前模块下执行，即必须在 if __name__&#x3D;&#x3D;main:下执行；</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>Pool()类中拥有的属性方法如下：</strong></li>
-</ul>
-<ul>
-<li>pool.map()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br></pre></td></tr></table></figure></li>
-<li>pool.map_async(run,iter)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map_async(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map_async(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br><span class="line">---效果和pool.map()不相同，mapasyc效率更高；mapasyc主进程未阻塞进程池，不需要等该批次的进程全执行完，新的任务就能进入进程池执行；常用pool.map()</span><br></pre></td></tr></table></figure></li>
-<li>pool.apply()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]])</span><br><span class="line">apply,参数需要为具体的变量值，且仅在python2支持；</span><br><span class="line">apply方法的原理是，阻塞进程池，一次仅让一个任务进入进程池，该任务完成后，才能执行下一个任务，实际是串行；</span><br></pre></td></tr></table></figure></li>
-<li>pool.applyasyc()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]],[, callback&#x3D;None]]])</span><br><span class="line">   applyasyc,参数需要为具体的变量值，在python3上支持；</span><br><span class="line">   applyasyc方法的原理是，进程池非阻塞，一次可以让多个任务进入进程池，且未对该批次任务进行阻塞，只要其中一个进程执行完后，就能释放资源，让新的任务进入进程池，实际是并行的,效率等同于mapasyc()；</span><br><span class="line">回调使用：pool.applyasyc(run,kwargs,callback&#x3D;func2)，run的返回作为func2的参数，执行完返回func2的值；</span><br><span class="line">   ---applyasyc效果等同于mapasyc()，只是他具有回调功能，且入参的变量不能是可迭代对象，必须为具体的变量值；</span><br></pre></td></tr></table></figure></li>
-<li>pool.terminal()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用：结束工作进程，不在处理未完成的任务</span><br><span class="line">pool.map(run,iter)</span><br><span class="line">pool.close()</span><br><span class="line">pool.run()</span><br><span class="line">sleep(2)</span><br><span class="line">pool.terminal()		#执行两秒后，哪怕进程未执行完，也结束该主进程</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p><em><strong>python多进程使用：</strong></em></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()</span><br><span class="line">iter&#x3D;iter</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(multiprocessing.cpu_count())</span><br><span class="line">pool.map(run(),iter)</span><br><span class="line">pool.join()</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>python</tag>
-        <tag>多进程</tag>
       </tags>
   </entry>
   <entry>
@@ -589,18 +589,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>python语法特性</title>
-    <url>/posts/d641bafc/</url>
-    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
-<span id="more"></span>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ui自动化分布式并行运算</title>
     <url>/posts/2be91958/</url>
     <content><![CDATA[<p><a href="https://cloud.tencent.com/developer/article/1974105">Gird</a></p>
@@ -614,10 +602,16 @@
       </tags>
   </entry>
   <entry>
-    <title>uwnc</title>
-    <url>/posts/3de87ac/</url>
-    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
-]]></content>
+    <title>python语法特性</title>
+    <url>/posts/d641bafc/</url>
+    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
   </entry>
   <entry>
     <title>优秀博客</title>
@@ -644,6 +638,33 @@
       </categories>
       <tags>
         <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>uwnc</title>
+    <url>/posts/3de87ac/</url>
+    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>传音刷机</title>
+    <url>/posts/a1b2e86a/</url>
+    <content><![CDATA[<ol>
+<li>设置 -&gt; 开发者模式打开 oem unlock<br>输入 adb reboot bootloader</li>
+<li>进入fastboot模式输入 fastboot flashing unlock。按住音量上键确认unlock</li>
+<li>fastboot reboot 重启</li>
+<li>开机后,输入 adb root</li>
+<li>执行 adb disable-verity</li>
+<li>执行 adb reboot</li>
+<li>重启后 执行 adb root</li>
+<li>执行 adb remount</li>
+</ol>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>刷机</tag>
       </tags>
   </entry>
   <entry>
@@ -687,25 +708,12 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
-    <title>传音刷机</title>
-    <url>/posts/a1b2e86a/</url>
-    <content><![CDATA[<ol>
-<li>设置 -&gt; 开发者模式打开 oem unlock<br>输入 adb reboot bootloader</li>
-<li>进入fastboot模式输入 fastboot flashing unlock。按住音量上键确认unlock</li>
-<li>fastboot reboot 重启</li>
-<li>开机后,输入 adb root</li>
-<li>执行 adb disable-verity</li>
-<li>执行 adb reboot</li>
-<li>重启后 执行 adb root</li>
-<li>执行 adb remount</li>
-</ol>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>刷机</tag>
-      </tags>
+    <title>估值体系</title>
+    <url>/posts/daef770e/</url>
+    <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的除非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
+<h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">高收益的前提是持续稳定的复利，即好企业是时间的朋友，坏企业是时间的敌人</span><br><span class="line">30pe是合理估值的上限，这是由无风险收益率决定的，如果在高，买入收益就低于无风险收益率了；同理合理估值一般给到20-25</span><br><span class="line">股权和债券的差异，主要体现在确定性和成长里；合理估值（不是买点），就是利用成长优势抵消不确定性；收益率=利润/本金（股价）=1/pe；合理估值的锚其实就是无风险收益率（1/无风险收益率）</span><br><span class="line"></span><br><span class="line">理想买点：三年后合理估值*0.5</span><br><span class="line">理想卖点：min(动态市盈率50,三年后合理估值150%)</span><br><span class="line">买操作：20-25倍区间都能买，茅台可以给到30pe;到达理想买点时，分三批买完剩余资金（理想买点/理想买点-5%/理想买点-10%）</span><br><span class="line">卖操作：当年预计净利润的50/55/60三次清空；（买卖点是唐朝基于无风险收益率计算，正常超出合理估值都能卖，50%其实是预留的安全边际）</span><br><span class="line">三年后合理估值=三年后预估净利率*25（具体企业具体分析，也就是pe的中分位）</span><br><span class="line"></span><br><span class="line">全指数基金买/卖点：基于无风险收益率来，但是由于不确定性，要做净利润折算，需要进行等比例折算，折算区间在5-7折</span><br><span class="line">买点：12-15pe</span><br><span class="line">卖点：25-35pe</span><br><span class="line"></span><br><span class="line">卖出后买全指还是留现金取决于无风险收益率（一般2倍无风险收益率即可买pe=1/无风险收益率*2，全指唐朝仅关注沪深300/恒生指数/标普500/纳斯达克100）</span><br><span class="line">其他时间：企业逻辑未变时，低于买点买，高于卖点卖，其他时间坐等；但需要遵循单股不超40%原则，即三五个行业，七八家公司；</span><br><span class="line">不要严格按买卖价来，要接受错误和风险；确定性高的企业，越偏向合理估值之下就买，确定性低的企业越偏向理想买点才买，唐朝的理念是理想买点位置一定要买完资金；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">腾讯+中概+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以330均价，买入4手；</span><br><span class="line">16的中概换纳指（中概大部分公司不盈利）</span><br><span class="line">理想买点：340</span><br><span class="line">理想卖点：1年内720</span><br><span class="line">纳指买点：21pe</span><br><span class="line">纳指卖点：35pe</span><br><span class="line">中概买点：10-14（以腾讯为锚点，这是由于中概大部分公司不盈利，无法通过现金流计算买卖点，最优解是不买这类产品）</span><br><span class="line">中概的卖点：25-35或腾讯的卖点；</span><br><span class="line"></span><br><span class="line">银行+家电25%：计划100k,余量14k</span><br><span class="line">已持仓86k,其中家电53k&#x2F;银行33k</span><br><span class="line">招商计划以28均价，买入5手；</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右</span><br><span class="line">美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34快</span><br><span class="line"></span><br><span class="line">消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利17k&#x2F;海螺3k</span><br><span class="line">洋河计划均价135，买入3手</span><br><span class="line">伊利计划27.2-27.5，买入1手</span><br><span class="line">理想卖点：</span><br><span class="line">洋河300快,理想买点140</span><br><span class="line">伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下</span><br><span class="line"></span><br><span class="line">医药10%：计划40k,余量9k</span><br><span class="line">已持仓31k,其中恒瑞20k&#x2F;ETF11K</span><br><span class="line">300医药ETF计划0.46，买入19000个</span><br><span class="line">理想卖点：</span><br><span class="line">恒瑞按50倍市盈率20.07%净利润增长，卖点57.9（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">医药etf买点：9300（医药300）</span><br><span class="line">医药etf买点：15500（医药300）</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>全局函数局部函数</title>
@@ -724,26 +732,6 @@
       <tags>
         <tag>python</tag>
         <tag>变量</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>可变对象合并方法</title>
-    <url>/posts/def45bf2/</url>
-    <content><![CDATA[<h1 id="可变对象合并的方法"><a href="#可变对象合并的方法" class="headerlink" title="可变对象合并的方法"></a>可变对象合并的方法</h1><p>eg:list</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">+:合并</span><br><span class="line">+=：增加赋值</span><br><span class="line">append()：添加</span><br><span class="line">extend()：插入</span><br><span class="line"></span><br><span class="line">list=[1,2,3]</span><br><span class="line">l=[4]</span><br><span class="line">s=list+l</span><br><span class="line">s=list.append(l)</span><br><span class="line">s=list.extend(l)</span><br><span class="line">list+=l</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;list&#x27;</span>,list)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;l&#x27;</span>,l)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;s&#x27;</span>,s)</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p><strong>+合并</strong></p>
-<p><code> 合并方法，是影响最小，速度最慢的方法；因为他不会改变原序列，会复制后生成一个新的序列    </code></p>
-<p><strong>append()</strong><br>    <code>    添加方法，会直接将对象添加到原序列末尾；会改变原序列    </code></p>
-<p><strong>extend()</strong><br>    <code>    插入方法，会将对象的元素添加到序列末尾，而不是对象，会改变原序列    </code></p>
-<p><strong>+=</strong><br>    <code>    增强赋值方法，类似于合并=；和extend()等效，效率比其低，会改变原序列    </code></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>序列</tag>
       </tags>
   </entry>
   <entry>
@@ -892,6 +880,26 @@
       </tags>
   </entry>
   <entry>
+    <title>可变对象合并方法</title>
+    <url>/posts/def45bf2/</url>
+    <content><![CDATA[<h1 id="可变对象合并的方法"><a href="#可变对象合并的方法" class="headerlink" title="可变对象合并的方法"></a>可变对象合并的方法</h1><p>eg:list</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">+:合并</span><br><span class="line">+=：增加赋值</span><br><span class="line">append()：添加</span><br><span class="line">extend()：插入</span><br><span class="line"></span><br><span class="line">list=[1,2,3]</span><br><span class="line">l=[4]</span><br><span class="line">s=list+l</span><br><span class="line">s=list.append(l)</span><br><span class="line">s=list.extend(l)</span><br><span class="line">list+=l</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;list&#x27;</span>,list)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;l&#x27;</span>,l)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;s&#x27;</span>,s)</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>+合并</strong></p>
+<p><code> 合并方法，是影响最小，速度最慢的方法；因为他不会改变原序列，会复制后生成一个新的序列    </code></p>
+<p><strong>append()</strong><br>    <code>    添加方法，会直接将对象添加到原序列末尾；会改变原序列    </code></p>
+<p><strong>extend()</strong><br>    <code>    插入方法，会将对象的元素添加到序列末尾，而不是对象，会改变原序列    </code></p>
+<p><strong>+=</strong><br>    <code>    增强赋值方法，类似于合并=；和extend()等效，效率比其低，会改变原序列    </code></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>序列</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>大数据BI报表架构调整</title>
     <url>/posts/10f9513d/</url>
     <content><![CDATA[<h1 id="大数据BI报表架构调整"><a href="#大数据BI报表架构调整" class="headerlink" title="大数据BI报表架构调整"></a>大数据BI报表架构调整</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span>
@@ -970,19 +978,6 @@
       </tags>
   </entry>
   <entry>
-    <title>传易--性能测试</title>
-    <url>/posts/56a1ed73/</url>
-    <content><![CDATA[<p><a href="https://docs.qq.com/doc/DSWZnVGNka29qa1lJ">内部项目，需找我授权</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
-        <tag>实战</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>常用app测试工具</title>
     <url>/posts/28eebda3/</url>
     <content><![CDATA[<h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
@@ -1008,6 +1003,19 @@
 <li>related_posts: true</li>
 </ul>
 ]]></content>
+  </entry>
+  <entry>
+    <title>传易--性能测试</title>
+    <url>/posts/56a1ed73/</url>
+    <content><![CDATA[<p><a href="https://docs.qq.com/doc/DSWZnVGNka29qa1lJ">内部项目，需找我授权</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>性能</tag>
+        <tag>实战</tag>
+      </tags>
   </entry>
   <entry>
     <title>数据库性能测试</title>
@@ -1488,20 +1496,6 @@
       </tags>
   </entry>
   <entry>
-    <title>编写博客--makedown语法说明</title>
-    <url>/posts/ed6b07f3/</url>
-    <content><![CDATA[<h1 id="语法总览"><a href="#语法总览" class="headerlink" title="语法总览"></a>语法总览</h1><h2 id="正文语法"><a href="#正文语法" class="headerlink" title="正文语法"></a>正文语法</h2><pre><code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; 1.=== title ===	最顶级标题</span><br><span class="line">&gt; 2.---  title --- 二级标题</span><br><span class="line">&gt; 3.<span class="comment"># title/## title/###### title	一级/二级/六级标题</span></span><br><span class="line">&gt; * tab缩进语法</span><br><span class="line">&gt; + 字体加粗使用** text ** 或__text__</span><br><span class="line">&gt; - 排序列表，无序列表使用（+-*），有序列表使用（1.数字加点）</span><br><span class="line">&gt; - 换行，如果上下行无\n(换行操作)则不换行，如果有则换行</span><br><span class="line">&gt; - 空行，如果上下行之间有空行，则会进行换行</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="资源语法"><a href="#资源语法" class="headerlink" title="资源语法"></a>资源语法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">链接：</span><br><span class="line"></span><br><span class="line">&gt; - [链接](baidu.com <span class="string">&quot;百度这可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + [链接2][1]...[链接3][id]</span><br><span class="line">	[1]: baidu.com <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: zhihu.com <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">图片：</span><br><span class="line"></span><br><span class="line">&gt; - ![alt text](/path/.jpg <span class="string">&quot;可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + ![alt text][1]...![alt text][id可任意和下文保持一致即可]</span><br><span class="line">	[1]: /path/.jpg <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: /path/.jpg <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">代码块：</span><br><span class="line"></span><br><span class="line">&gt; 1. `中间是代码块`</span><br><span class="line">&gt; 2. ```bash 中间是代码块 ```</span><br><span class="line">&gt; 3. 四个空格/一个tab操作后面的代码</span><br><span class="line">&gt; 4.&lt;!-- more --&gt; 缩写/不展示全文</span><br></pre></td></tr></table></figure>
-
-<h2 id="好看的hexo"><a href="#好看的hexo" class="headerlink" title="好看的hexo"></a>好看的hexo</h2><ul>
-<li><a href="https://blog.bill.moe/"><strong>竞赛</strong></a></li>
-<li><a href="https://diygod.me/"><strong>b站开源大佬</strong></a></li>
-</ul>
-<p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>装饰器详解</title>
     <url>/posts/1d1282f5/</url>
     <content><![CDATA[<h1 id="装饰器是什么"><a href="#装饰器是什么" class="headerlink" title="装饰器是什么"></a>装饰器是什么</h1><span id="more"></span>
@@ -1541,6 +1535,20 @@
       <tags>
         <tag>python</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>编写博客--makedown语法说明</title>
+    <url>/posts/ed6b07f3/</url>
+    <content><![CDATA[<h1 id="语法总览"><a href="#语法总览" class="headerlink" title="语法总览"></a>语法总览</h1><h2 id="正文语法"><a href="#正文语法" class="headerlink" title="正文语法"></a>正文语法</h2><pre><code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; 1.=== title ===	最顶级标题</span><br><span class="line">&gt; 2.---  title --- 二级标题</span><br><span class="line">&gt; 3.<span class="comment"># title/## title/###### title	一级/二级/六级标题</span></span><br><span class="line">&gt; * tab缩进语法</span><br><span class="line">&gt; + 字体加粗使用** text ** 或__text__</span><br><span class="line">&gt; - 排序列表，无序列表使用（+-*），有序列表使用（1.数字加点）</span><br><span class="line">&gt; - 换行，如果上下行无\n(换行操作)则不换行，如果有则换行</span><br><span class="line">&gt; - 空行，如果上下行之间有空行，则会进行换行</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="资源语法"><a href="#资源语法" class="headerlink" title="资源语法"></a>资源语法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">链接：</span><br><span class="line"></span><br><span class="line">&gt; - [链接](baidu.com <span class="string">&quot;百度这可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + [链接2][1]...[链接3][id]</span><br><span class="line">	[1]: baidu.com <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: zhihu.com <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">图片：</span><br><span class="line"></span><br><span class="line">&gt; - ![alt text](/path/.jpg <span class="string">&quot;可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + ![alt text][1]...![alt text][id可任意和下文保持一致即可]</span><br><span class="line">	[1]: /path/.jpg <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: /path/.jpg <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">代码块：</span><br><span class="line"></span><br><span class="line">&gt; 1. `中间是代码块`</span><br><span class="line">&gt; 2. ```bash 中间是代码块 ```</span><br><span class="line">&gt; 3. 四个空格/一个tab操作后面的代码</span><br><span class="line">&gt; 4.&lt;!-- more --&gt; 缩写/不展示全文</span><br></pre></td></tr></table></figure>
+
+<h2 id="好看的hexo"><a href="#好看的hexo" class="headerlink" title="好看的hexo"></a>好看的hexo</h2><ul>
+<li><a href="https://blog.bill.moe/"><strong>竞赛</strong></a></li>
+<li><a href="https://diygod.me/"><strong>b站开源大佬</strong></a></li>
+</ul>
+<p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>
+]]></content>
   </entry>
   <entry>
     <title>阿里测开面试题</title>
