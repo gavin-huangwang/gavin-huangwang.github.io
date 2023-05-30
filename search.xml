@@ -330,6 +330,18 @@
       </tags>
   </entry>
   <entry>
+    <title>UI自动化基础--微软</title>
+    <url>/posts/d1646a55/</url>
+    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>UI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>UI自动化框架说明</title>
     <url>/posts/411091fa/</url>
     <content><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`
@@ -364,18 +376,6 @@
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 <p>#开启动画<br>canvas_nest: true </p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>UI自动化基础--微软</title>
-    <url>/posts/d1646a55/</url>
-    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>UI</tag>
-      </tags>
   </entry>
   <entry>
     <title>Python语法-unittest</title>
@@ -453,41 +453,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python-多进程</title>
-    <url>/posts/a1c10886/</url>
-    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python多进程简述</span><br><span class="line">python多进程模块方法介绍</span><br><span class="line">python多进程使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<ul>
-<li><p><em><strong>python多进程模块简述：</strong></em></p>
-<p>  <code>python由于GIL机制，多线程，实际仅消耗一个内核资源；因此效率较低，python要实现并发，提高性能，只能使用多进程模块，python的多进程模块为multiprocessing，通过使用Pool类实现多进程；   </code></p>
-</li>
-<li><p><em><strong>python多进程模块方法介绍：</strong></em></p>
-<p>  <code>   python多进程模块为multiprocessing，为python的内置模块；通过该模块封装的Pool()对象实现多进程，Pool类的属性介绍如下：</code></p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()	#需要被执行的方法&#x2F;任务</span><br><span class="line">iter&#x3D;iter	#迭代对象，list&#x2F;变量值</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(3)	#创建一个仅容纳3个进程的进程池，一旦工作任务超出进程的数量，则需等待，进程池中的进程被释放，任务才能进入进程池；</span><br><span class="line">__init__(self, group&#x3D;None, target&#x3D;None, name&#x3D;None, args&#x3D;(), kwargs&#x3D;&#123;&#125;)	#进程池的构造方法</span><br><span class="line">group：进程池所属的进程组，一旦不需要给值；</span><br><span class="line">target：待处理的任务或方法；</span><br><span class="line">name：进程池的别名，默认不给值；</span><br><span class="line">args：调用对象的位置参数，可给值元组&#x2F;列表等可迭代对象或者参数值；</span><br><span class="line">kwargs：调用对象的字典参数；</span><br><span class="line"></span><br><span class="line">使用：在win环境下，进程池必须在当前模块下执行，即必须在 if __name__&#x3D;&#x3D;main:下执行；</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>Pool()类中拥有的属性方法如下：</strong></li>
-</ul>
-<ul>
-<li>pool.map()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br></pre></td></tr></table></figure></li>
-<li>pool.map_async(run,iter)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map_async(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map_async(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br><span class="line">---效果和pool.map()不相同，mapasyc效率更高；mapasyc主进程未阻塞进程池，不需要等该批次的进程全执行完，新的任务就能进入进程池执行；常用pool.map()</span><br></pre></td></tr></table></figure></li>
-<li>pool.apply()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]])</span><br><span class="line">apply,参数需要为具体的变量值，且仅在python2支持；</span><br><span class="line">apply方法的原理是，阻塞进程池，一次仅让一个任务进入进程池，该任务完成后，才能执行下一个任务，实际是串行；</span><br></pre></td></tr></table></figure></li>
-<li>pool.applyasyc()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]],[, callback&#x3D;None]]])</span><br><span class="line">   applyasyc,参数需要为具体的变量值，在python3上支持；</span><br><span class="line">   applyasyc方法的原理是，进程池非阻塞，一次可以让多个任务进入进程池，且未对该批次任务进行阻塞，只要其中一个进程执行完后，就能释放资源，让新的任务进入进程池，实际是并行的,效率等同于mapasyc()；</span><br><span class="line">回调使用：pool.applyasyc(run,kwargs,callback&#x3D;func2)，run的返回作为func2的参数，执行完返回func2的值；</span><br><span class="line">   ---applyasyc效果等同于mapasyc()，只是他具有回调功能，且入参的变量不能是可迭代对象，必须为具体的变量值；</span><br></pre></td></tr></table></figure></li>
-<li>pool.terminal()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用：结束工作进程，不在处理未完成的任务</span><br><span class="line">pool.map(run,iter)</span><br><span class="line">pool.close()</span><br><span class="line">pool.run()</span><br><span class="line">sleep(2)</span><br><span class="line">pool.terminal()		#执行两秒后，哪怕进程未执行完，也结束该主进程</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p><em><strong>python多进程使用：</strong></em></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()</span><br><span class="line">iter&#x3D;iter</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(multiprocessing.cpu_count())</span><br><span class="line">pool.map(run(),iter)</span><br><span class="line">pool.join()</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>python</tag>
-        <tag>多进程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>python文档管理</title>
     <url>/posts/2020cd00/</url>
     <content><![CDATA[<h1 id="python文档说明"><a href="#python文档说明" class="headerlink" title="python文档说明"></a>python文档说明</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">文档管理的作用</span><br><span class="line">文档管理模块pydoc介绍</span><br><span class="line">怎么使用文档管理</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -532,15 +497,57 @@
       </tags>
   </entry>
   <entry>
-    <title>python语法特性</title>
-    <url>/posts/d641bafc/</url>
-    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
-<span id="more"></span>]]></content>
+    <title>python-多进程</title>
+    <url>/posts/a1c10886/</url>
+    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python多进程简述</span><br><span class="line">python多进程模块方法介绍</span><br><span class="line">python多进程使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<ul>
+<li><p><em><strong>python多进程模块简述：</strong></em></p>
+<p>  <code>python由于GIL机制，多线程，实际仅消耗一个内核资源；因此效率较低，python要实现并发，提高性能，只能使用多进程模块，python的多进程模块为multiprocessing，通过使用Pool类实现多进程；   </code></p>
+</li>
+<li><p><em><strong>python多进程模块方法介绍：</strong></em></p>
+<p>  <code>   python多进程模块为multiprocessing，为python的内置模块；通过该模块封装的Pool()对象实现多进程，Pool类的属性介绍如下：</code></p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()	#需要被执行的方法&#x2F;任务</span><br><span class="line">iter&#x3D;iter	#迭代对象，list&#x2F;变量值</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(3)	#创建一个仅容纳3个进程的进程池，一旦工作任务超出进程的数量，则需等待，进程池中的进程被释放，任务才能进入进程池；</span><br><span class="line">__init__(self, group&#x3D;None, target&#x3D;None, name&#x3D;None, args&#x3D;(), kwargs&#x3D;&#123;&#125;)	#进程池的构造方法</span><br><span class="line">group：进程池所属的进程组，一旦不需要给值；</span><br><span class="line">target：待处理的任务或方法；</span><br><span class="line">name：进程池的别名，默认不给值；</span><br><span class="line">args：调用对象的位置参数，可给值元组&#x2F;列表等可迭代对象或者参数值；</span><br><span class="line">kwargs：调用对象的字典参数；</span><br><span class="line"></span><br><span class="line">使用：在win环境下，进程池必须在当前模块下执行，即必须在 if __name__&#x3D;&#x3D;main:下执行；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Pool()类中拥有的属性方法如下：</strong></li>
+</ul>
+<ul>
+<li>pool.map()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br></pre></td></tr></table></figure></li>
+<li>pool.map_async(run,iter)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map_async(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map_async(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br><span class="line">---效果和pool.map()不相同，mapasyc效率更高；mapasyc主进程未阻塞进程池，不需要等该批次的进程全执行完，新的任务就能进入进程池执行；常用pool.map()</span><br></pre></td></tr></table></figure></li>
+<li>pool.apply()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]])</span><br><span class="line">apply,参数需要为具体的变量值，且仅在python2支持；</span><br><span class="line">apply方法的原理是，阻塞进程池，一次仅让一个任务进入进程池，该任务完成后，才能执行下一个任务，实际是串行；</span><br></pre></td></tr></table></figure></li>
+<li>pool.applyasyc()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]],[, callback&#x3D;None]]])</span><br><span class="line">   applyasyc,参数需要为具体的变量值，在python3上支持；</span><br><span class="line">   applyasyc方法的原理是，进程池非阻塞，一次可以让多个任务进入进程池，且未对该批次任务进行阻塞，只要其中一个进程执行完后，就能释放资源，让新的任务进入进程池，实际是并行的,效率等同于mapasyc()；</span><br><span class="line">回调使用：pool.applyasyc(run,kwargs,callback&#x3D;func2)，run的返回作为func2的参数，执行完返回func2的值；</span><br><span class="line">   ---applyasyc效果等同于mapasyc()，只是他具有回调功能，且入参的变量不能是可迭代对象，必须为具体的变量值；</span><br></pre></td></tr></table></figure></li>
+<li>pool.terminal()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用：结束工作进程，不在处理未完成的任务</span><br><span class="line">pool.map(run,iter)</span><br><span class="line">pool.close()</span><br><span class="line">pool.run()</span><br><span class="line">sleep(2)</span><br><span class="line">pool.terminal()		#执行两秒后，哪怕进程未执行完，也结束该主进程</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><em><strong>python多进程使用：</strong></em></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()</span><br><span class="line">iter&#x3D;iter</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(multiprocessing.cpu_count())</span><br><span class="line">pool.map(run(),iter)</span><br><span class="line">pool.join()</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>python</tag>
+        <tag>多进程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>uwnc</title>
+    <url>/posts/3de87ac/</url>
+    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>ui自动化分布式并行运算</title>
+    <url>/posts/2be91958/</url>
+    <content><![CDATA[<p><a href="https://cloud.tencent.com/developer/article/1974105">Gird</a></p>
+]]></content>
       <categories>
         <category>技术</category>
       </categories>
       <tags>
-        <tag>python</tag>
+        <tag>UI</tag>
+        <tag>gird</tag>
       </tags>
   </entry>
   <entry>
@@ -554,6 +561,18 @@
 <pre><code>super.mro策略；采用的是查找继承类的上一个节点的方式来实现继承，如super(D,self).__init__();实际上继承的是上一个节点类B；Python2和Python3使用super来继承时，使用上存在差异，Python必须使用super(C,self)方式继承，python3则可同时使用super()和super(C,self)来进行继承；同时Python2存在class A:/class A(object):这两种经典类和新式类；Python3只有新式类；经典类和新式类的mro策略不一样，虽然两者都是使用从左到右的广度遍历，经典类在某类已继承时，后续在查找到这个类，也不在继承；新式类，在某类已经继承时，后续在查找到改类，会继承最新查找到的；
 </code></pre>
 ]]></content>
+  </entry>
+  <entry>
+    <title>python语法特性</title>
+    <url>/posts/d641bafc/</url>
+    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
   </entry>
   <entry>
     <title>优秀博客</title>
@@ -583,19 +602,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ui自动化分布式并行运算</title>
-    <url>/posts/2be91958/</url>
-    <content><![CDATA[<p><a href="https://cloud.tencent.com/developer/article/1974105">Gird</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>UI</tag>
-        <tag>gird</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>传音刷机</title>
     <url>/posts/a1b2e86a/</url>
     <content><![CDATA[<ol>
@@ -617,18 +623,23 @@
       </tags>
   </entry>
   <entry>
-    <title>uwnc</title>
-    <url>/posts/3de87ac/</url>
-    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
+    <title>全局函数局部函数</title>
+    <url>/posts/ae3a85c8/</url>
+    <content><![CDATA[<h1 id="全局局部函数"><a href="#全局局部函数" class="headerlink" title="全局局部函数"></a>全局局部函数</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">全局函数：global</span><br><span class="line">局部函数：nonlocal</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>global</strong></p>
+<p><code>全局函数在模块py中生效；使用时需要先定义，在声明；一次声明，模块中全局使用，全局和局部不能是同一个变量； global a a=s</code></p>
+<p><strong>nonlocal</strong></p>
+<p><code>局部变量函数在模块中局部函数中生效；需要先声明，后定义成局部变量，一旦定义成局部变量就仅在该函数中生效，离开该函数就不生效，不能和全局变量为同一个变量 a=s nonlocal a</code></p>
+<p><a href="https://www.cnblogs.com/liyang93/p/6669874.html">参考</a></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>估值体系</title>
-    <url>/posts/daef770e/</url>
-    <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的除非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
-<h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">高收益的前提是持续稳定的复利，即好企业是时间的朋友，坏企业是时间的敌人</span><br><span class="line">30pe是合理估值的上限，这是由无风险收益率决定的，如果在高，买入收益就低于无风险收益率了；同理合理估值一般给到20-25</span><br><span class="line">股权和债券的差异，主要体现在确定性和成长里；合理估值（不是买点），就是利用成长优势抵消不确定性；收益率=利润/本金（股价）=1/pe；合理估值的锚其实就是无风险收益率（1/无风险收益率）</span><br><span class="line"></span><br><span class="line">理想买点：三年后合理估值*0.5</span><br><span class="line">理想卖点：min(动态市盈率50,三年后合理估值150%)</span><br><span class="line">买操作：20-25倍区间都能买，茅台可以给到30pe;到达理想买点时，分三批买完剩余资金（理想买点/理想买点-5%/理想买点-10%）</span><br><span class="line">卖操作：当年预计净利润的50/55/60三次清空；（买卖点是唐朝基于无风险收益率计算，正常超出合理估值都能卖，50%其实是预留的安全边际）</span><br><span class="line">三年后合理估值=三年后预估净利率*25（具体企业具体分析，也就是pe的中分位）</span><br><span class="line"></span><br><span class="line">全指数基金买/卖点：基于无风险收益率来，但是由于不确定性，要做净利润折算，需要进行等比例折算，折算区间在5-7折</span><br><span class="line">买点：12-15pe</span><br><span class="line">卖点：25-35pe</span><br><span class="line"></span><br><span class="line">卖出后买全指还是留现金取决于无风险收益率（一般2倍无风险收益率即可买pe=1/无风险收益率*2，全指唐朝仅关注沪深300/恒生指数/标普500/纳斯达克100）</span><br><span class="line">其他时间：企业逻辑未变时，低于买点买，高于卖点卖，其他时间坐等；但需要遵循单股不超40%原则，即三五个行业，七八家公司；</span><br><span class="line">不要严格按买卖价来，要接受错误和风险；确定性高的企业，越偏向合理估值之下就买，确定性低的企业越偏向理想买点才买，唐朝的理念是理想买点位置一定要买完资金；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">腾讯+中概+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以330均价，买入4手；</span><br><span class="line">16的中概换纳指（中概大部分公司不盈利）</span><br><span class="line">理想买点：340</span><br><span class="line">理想卖点：1年内720</span><br><span class="line">纳指买点：21pe</span><br><span class="line">纳指卖点：35pe</span><br><span class="line">中概买点：10-14（以腾讯为锚点，这是由于中概大部分公司不盈利，无法通过现金流计算买卖点，最优解是不买这类产品）</span><br><span class="line">中概的卖点：25-35或腾讯的卖点；</span><br><span class="line"></span><br><span class="line">银行+家电25%：计划100k,余量14k</span><br><span class="line">已持仓86k,其中家电53k&#x2F;银行33k</span><br><span class="line">招商计划以28均价，买入5手；</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右</span><br><span class="line">美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34快</span><br><span class="line"></span><br><span class="line">消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利17k&#x2F;海螺3k</span><br><span class="line">洋河计划均价135，买入3手</span><br><span class="line">伊利计划27.2-27.5，买入1手</span><br><span class="line">理想卖点：</span><br><span class="line">洋河300快,理想买点140</span><br><span class="line">伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下</span><br><span class="line"></span><br><span class="line">医药10%：计划40k,余量9k</span><br><span class="line">已持仓31k,其中恒瑞20k&#x2F;ETF11K</span><br><span class="line">300医药ETF计划0.46，买入19000个</span><br><span class="line">理想卖点：</span><br><span class="line">恒瑞按50倍市盈率20.07%净利润增长，卖点57.9（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">医药etf买点：9300（医药300）</span><br><span class="line">医药etf买点：15500（医药300）</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>变量</tag>
+      </tags>
   </entry>
   <entry>
     <title>做点事</title>
@@ -671,22 +682,31 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
-    <title>全局函数局部函数</title>
-    <url>/posts/ae3a85c8/</url>
-    <content><![CDATA[<h1 id="全局局部函数"><a href="#全局局部函数" class="headerlink" title="全局局部函数"></a>全局局部函数</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">全局函数：global</span><br><span class="line">局部函数：nonlocal</span><br></pre></td></tr></table></figure>
+    <title>估值体系</title>
+    <url>/posts/daef770e/</url>
+    <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的除非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
+<h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">高收益的前提是持续稳定的复利，即好企业是时间的朋友，坏企业是时间的敌人</span><br><span class="line">30pe是合理估值的上限，这是由无风险收益率决定的，如果在高，买入收益就低于无风险收益率了；同理合理估值一般给到20-25，而我觉不买25倍以上的企业；</span><br><span class="line">股权和债券的差异，主要体现在确定性和成长里；就是利用成长优势抵消不确定性；收益率=利润/本金（股价）=1/pe；合理估值的锚其实就是无风险收益率（1/无风险收益率）</span><br><span class="line"></span><br><span class="line">理想买点：三年后合理估值*0.5</span><br><span class="line">理想卖点：min(动态市盈率50,三年后合理估值150%)</span><br><span class="line">买操作：20-25倍区间都能买，茅台可以给到30pe;到达理想买点时，分三批买完剩余资金（理想买点/理想买点-5%/理想买点-10%）</span><br><span class="line">卖操作：当年预计净利润的50/55/60三次清空；（买卖点是唐朝基于无风险收益率计算，正常超出合理估值都能卖，50%其实是预留的安全边际）</span><br><span class="line">三年后合理估值=三年后预估净利率*25（具体企业具体分析，也就是pe的中分位）</span><br><span class="line"></span><br><span class="line">全指数基金买/卖点：基于无风险收益率来，但是由于不确定性，要做净利润折算，需要进行等比例折算，折算区间在5-7折</span><br><span class="line">买点：12-15pe</span><br><span class="line">卖点：25-35pe</span><br><span class="line"></span><br><span class="line">卖出后买全指还是留现金取决于无风险收益率（一般2倍无风险收益率即可买pe=1/无风险收益率*2，全指唐朝仅关注沪深300/恒生指数/标普500/纳斯达克100）</span><br><span class="line">其他时间：企业逻辑未变时，低于买点买，高于卖点卖，其他时间坐等；但需要遵循单股不超40%原则，即三五个行业，七八家公司；</span><br><span class="line">不要严格按买卖价来，要接受错误和风险；确定性高的企业，越偏向合理估值之下就买，确定性低的企业越偏向理想买点才买，唐朝的理念是理想买点位置一定要买完资金；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">腾讯+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以330均价，买入4手；高溢价时，优先使用中概换腾讯（中概大部分公司不盈利）</span><br><span class="line">理想买点：340</span><br><span class="line">理想卖点：1年内720</span><br><span class="line">纳指买点：21pe</span><br><span class="line">纳指卖点：35pe</span><br><span class="line"></span><br><span class="line">银行+家电25%：计划100k,余量14k</span><br><span class="line">已持仓86k,其中家电53k&#x2F;银行33k</span><br><span class="line">招商计划以28均价，买入5手；</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右</span><br><span class="line">美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34快</span><br><span class="line"></span><br><span class="line">消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利17k&#x2F;海螺3k</span><br><span class="line">五粮液计划均价150，买入3手</span><br><span class="line">伊利计划27.2-27.5，买入1手</span><br><span class="line">理想卖点：</span><br><span class="line">五粮液###快,理想买点150</span><br><span class="line">伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下</span><br><span class="line"></span><br><span class="line">医药10%：计划40k,余量9k</span><br><span class="line">已持仓31k,其中恒瑞20k&#x2F;ETF11K</span><br><span class="line">300医药ETF计划0.46，买入19000个</span><br><span class="line">理想卖点：</span><br><span class="line">恒瑞按50倍市盈率20.07%净利润增长，卖点57.9（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">医药etf买点：9300（医药300）</span><br><span class="line">医药etf买点：15500（医药300）</span><br><span class="line">医药需要恒瑞和etf实现互换，那个高估，卖出换低估；</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>可变对象合并方法</title>
+    <url>/posts/def45bf2/</url>
+    <content><![CDATA[<h1 id="可变对象合并的方法"><a href="#可变对象合并的方法" class="headerlink" title="可变对象合并的方法"></a>可变对象合并的方法</h1><p>eg:list</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">+:合并</span><br><span class="line">+=：增加赋值</span><br><span class="line">append()：添加</span><br><span class="line">extend()：插入</span><br><span class="line"></span><br><span class="line">list=[1,2,3]</span><br><span class="line">l=[4]</span><br><span class="line">s=list+l</span><br><span class="line">s=list.append(l)</span><br><span class="line">s=list.extend(l)</span><br><span class="line">list+=l</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;list&#x27;</span>,list)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;l&#x27;</span>,l)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;s&#x27;</span>,s)</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
-<p><strong>global</strong></p>
-<p><code>全局函数在模块py中生效；使用时需要先定义，在声明；一次声明，模块中全局使用，全局和局部不能是同一个变量； global a a=s</code></p>
-<p><strong>nonlocal</strong></p>
-<p><code>局部变量函数在模块中局部函数中生效；需要先声明，后定义成局部变量，一旦定义成局部变量就仅在该函数中生效，离开该函数就不生效，不能和全局变量为同一个变量 a=s nonlocal a</code></p>
-<p><a href="https://www.cnblogs.com/liyang93/p/6669874.html">参考</a></p>
+<p><strong>+合并</strong></p>
+<p><code> 合并方法，是影响最小，速度最慢的方法；因为他不会改变原序列，会复制后生成一个新的序列    </code></p>
+<p><strong>append()</strong><br>    <code>    添加方法，会直接将对象添加到原序列末尾；会改变原序列    </code></p>
+<p><strong>extend()</strong><br>    <code>    插入方法，会将对象的元素添加到序列末尾，而不是对象，会改变原序列    </code></p>
+<p><strong>+=</strong><br>    <code>    增强赋值方法，类似于合并=；和extend()等效，效率比其低，会改变原序列    </code></p>
 ]]></content>
       <categories>
         <category>技术</category>
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>变量</tag>
+        <tag>序列</tag>
       </tags>
   </entry>
   <entry>
@@ -832,26 +852,6 @@
       </categories>
       <tags>
         <tag>模拟器</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>可变对象合并方法</title>
-    <url>/posts/def45bf2/</url>
-    <content><![CDATA[<h1 id="可变对象合并的方法"><a href="#可变对象合并的方法" class="headerlink" title="可变对象合并的方法"></a>可变对象合并的方法</h1><p>eg:list</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">+:合并</span><br><span class="line">+=：增加赋值</span><br><span class="line">append()：添加</span><br><span class="line">extend()：插入</span><br><span class="line"></span><br><span class="line">list=[1,2,3]</span><br><span class="line">l=[4]</span><br><span class="line">s=list+l</span><br><span class="line">s=list.append(l)</span><br><span class="line">s=list.extend(l)</span><br><span class="line">list+=l</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;list&#x27;</span>,list)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;l&#x27;</span>,l)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;s&#x27;</span>,s)</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p><strong>+合并</strong></p>
-<p><code> 合并方法，是影响最小，速度最慢的方法；因为他不会改变原序列，会复制后生成一个新的序列    </code></p>
-<p><strong>append()</strong><br>    <code>    添加方法，会直接将对象添加到原序列末尾；会改变原序列    </code></p>
-<p><strong>extend()</strong><br>    <code>    插入方法，会将对象的元素添加到序列末尾，而不是对象，会改变原序列    </code></p>
-<p><strong>+=</strong><br>    <code>    增强赋值方法，类似于合并=；和extend()等效，效率比其低，会改变原序列    </code></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>序列</tag>
       </tags>
   </entry>
   <entry>
@@ -1039,19 +1039,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>百度质量体系建设</title>
-    <url>/posts/bcd76c52/</url>
-    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
-<li><em><strong>介绍</strong></em></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>目录</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
     <title>稳定性治理--智能遍历</title>
     <url>/posts/e80d13a0/</url>
     <content><![CDATA[<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p><code>智能遍历，即通智能化的规则来访问APP的UI页面；之所以要考虑这种方式，主要是monkey随机测试，随机性太强，覆盖率不好衡量；不方便进行版本之间的对比，因此考虑其他智能遍历方案，备选的有三种方案“UI自动化实现/appcrawler自动遍历/fastbot智能遍历”</code></p>
@@ -1220,58 +1207,17 @@
       </tags>
   </entry>
   <entry>
-    <title>类对象/实例对象/类方法/实例方法/静态方法</title>
-    <url>/posts/93899372/</url>
-    <content><![CDATA[<ul>
-<li><strong>类对象</strong></li>
+    <title>百度质量体系建设</title>
+    <url>/posts/bcd76c52/</url>
+    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
+<li><em><strong>介绍</strong></em></li>
 </ul>
-<span id="more"></span>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A(object):</span><br><span class="line">    def m1(self, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br><span class="line"></span><br><span class="line">    @classmethod</span><br><span class="line">    def m2(cls, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br><span class="line">    @staticmethod</span><br><span class="line">    def m3(n):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.m1(1) <span class="comment"># self: &lt;__main__.A object at 0x000001E596E41A90&gt;</span></span><br><span class="line">A.m2(1) <span class="comment"># cls: &lt;class &#x27;__main__.A&#x27;&gt;</span></span><br><span class="line">A.m3(1)</span><br><span class="line"></span><br><span class="line">按顺序执行时，执行class A（）创建了A这个类对象</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><strong>实例对象</strong></li>
+<li><strong>目录</strong></li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">a = A()</span><br><span class="line">是对类对象A的实例化，创建了实例对象a,也可以说a绑定了实例对象</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>类方法</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">@classmethod</span><br><span class="line">def m2(cls, n):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><code>类中@classmethod下方的是类方法，写法也是固定写法；其中cls必须要有，cls绑定了类对象A(),在类外部，需要这样引用A(类对象).类方法 ；因为类方法在类中能被直接引用，一般是这样引用self.类方法；这是由于self绑定的是实例对象，根据实例对象可以查找到类对象</code></p>
-<ul>
-<li><p>使用场景</p>
-<p>  <code>  如果希望在方法裡面调用静态类，那么把方法定义成类方法是合适的，因为要是定义成静态方法，那么你就要显示地引用类A，这对继承来说可不是一件好事情。(为了方便调用，但又为了继承方便，因此不用静态方法，显示调用)  </code></p>
-</li>
-<li><p><strong>实例方法</strong></p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def m1(self, n):</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br></pre></td></tr></table></figure>
-<p><code>实例方法，必须带self;其中self绑定的实例对象a;因此外部使用可以这样使用，a.m1()；在类的内部self绑定了实例对象，因此可以直接使用self.m1来调用</code></p>
-<ul>
-<li><p>使用场景</p>
-<p>  <code>  需要将方法作为对象属性，进行调用，继承，传递的方法，大部分类方法都会定义成实例方法；  </code></p>
-</li>
-<li><p><strong>静态方法</strong></p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@staticmethod</span><br><span class="line">def m3(n):</span><br><span class="line">	pass</span><br><span class="line">        </span><br><span class="line">静态方法，就是普通函数；和类对象和实例对象均无绑定关系；</span><br><span class="line">即可被类调用，也可通过实例调用；</span><br><span class="line">A.m3()</span><br><span class="line">a.m3()</span><br><span class="line">self.m3</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>使用场景</p>
-<p>  <code>  如果在方法中不需要访问任何实例方法和属性，纯粹地通过传入参数并返回数据的功能性方法，那么它就适合用静态方法来定义，它节省了实例化对象的开销成本，往往这种方法放在类外面的模块层作为一个函数存在也是没问题的，而放在类中，仅为这个类服务（定义了一个局部域函数仅为该类专门服务）。  </code></p>
-</li>
-<li><p><strong>装饰器</strong></p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def A(FUN):</span><br><span class="line">	<span class="built_in">return</span> FUN+1</span><br><span class="line">    </span><br><span class="line">@FUN</span><br><span class="line">def b():</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">在装饰器中@后跟的是父方法，注意类方法/静态方法/装饰器方法区别	</span><br></pre></td></tr></table></figure>
-<p><a href="https://zhuanlan.zhihu.com/p/28010894">参考</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>稳定性治理-暴力回放</title>
@@ -1451,38 +1397,51 @@
       </tags>
   </entry>
   <entry>
-    <title>装饰器详解</title>
-    <url>/posts/1d1282f5/</url>
-    <content><![CDATA[<h1 id="装饰器是什么"><a href="#装饰器是什么" class="headerlink" title="装饰器是什么"></a>装饰器是什么</h1><span id="more"></span>
+    <title>类对象/实例对象/类方法/实例方法/静态方法</title>
+    <url>/posts/93899372/</url>
+    <content><![CDATA[<ul>
+<li><strong>类对象</strong></li>
+</ul>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A(object):</span><br><span class="line">    def m1(self, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br><span class="line"></span><br><span class="line">    @classmethod</span><br><span class="line">    def m2(cls, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br><span class="line">    @staticmethod</span><br><span class="line">    def m3(n):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.m1(1) <span class="comment"># self: &lt;__main__.A object at 0x000001E596E41A90&gt;</span></span><br><span class="line">A.m2(1) <span class="comment"># cls: &lt;class &#x27;__main__.A&#x27;&gt;</span></span><br><span class="line">A.m3(1)</span><br><span class="line"></span><br><span class="line">按顺序执行时，执行class A（）创建了A这个类对象</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>装饰器本质上是一种函数构造方法，其构造的是一种可变函数；我们知道在python中一切皆对象，函数即对象，由于对象是灵活不受约束的，因此我们在构造函数时，可将函数对象作为参数传递或者返回，可将函数对象进行随意嵌套，基于这些特性，我们可在在不变更代码的情况下，灵活的扩展函数/模块的功能；</li>
+<li><strong>实例对象</strong></li>
 </ul>
-<h1 id="装饰器的作用"><a href="#装饰器的作用" class="headerlink" title="装饰器的作用"></a>装饰器的作用</h1><ul>
-<li><em><strong>为已存在的对象添加额外功能</strong></em></li>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">a = A()</span><br><span class="line">是对类对象A的实例化，创建了实例对象a,也可以说a绑定了实例对象</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>类方法</strong></li>
 </ul>
-<h1 id="装饰器的实现"><a href="#装饰器的实现" class="headerlink" title="装饰器的实现"></a>装饰器的实现</h1><ul>
-<li><strong>原则:</strong> <ul>
-<li>装饰器必须接受一个callable对象</li>
-<li>其实它并不关心你返回什么，可以是另外一个callable对象（大部分情况），也可以是其他类对象，比如property</li>
-</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">@classmethod</span><br><span class="line">def m2(cls, n):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>类中@classmethod下方的是类方法，写法也是固定写法；其中cls必须要有，cls绑定了类对象A(),在类外部，需要这样引用A(类对象).类方法 ；因为类方法在类中能被直接引用，一般是这样引用self.类方法；这是由于self绑定的是实例对象，根据实例对象可以查找到类对象</code></p>
+<ul>
+<li><p>使用场景</p>
+<p>  <code>  如果希望在方法裡面调用静态类，那么把方法定义成类方法是合适的，因为要是定义成静态方法，那么你就要显示地引用类A，这对继承来说可不是一件好事情。(为了方便调用，但又为了继承方便，因此不用静态方法，显示调用)  </code></p>
+</li>
+<li><p><strong>实例方法</strong></p>
 </li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#装饰器的基本语法如下</span></span><br><span class="line">def father(funs):</span><br><span class="line">	def b(funs):</span><br><span class="line">    funs</span><br><span class="line">    pass</span><br><span class="line">	<span class="built_in">return</span> b</span><br><span class="line"><span class="comment">#@这种称为语法糖，实际等同father(son)    </span></span><br><span class="line">@father()</span><br><span class="line">def son():</span><br><span class="line">	pass</span><br><span class="line">    </span><br><span class="line"><span class="comment">#使用,执行子函数，基于结构，会将子函数作为参数传递给父函数，实际执行的是父函数</span></span><br><span class="line">son()</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def m1(self, n):</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br></pre></td></tr></table></figure>
+<p><code>实例方法，必须带self;其中self绑定的实例对象a;因此外部使用可以这样使用，a.m1()；在类的内部self绑定了实例对象，因此可以直接使用self.m1来调用</code></p>
 <ul>
-<li>由上可知，将子函数作为参数传递给父函数，父函数，会谁传递的函数的对象的变化而执行不同的操作，从而实现可变函数的构造。<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#上方的结构，不支持复合结构如下，这是由于执行son时已经是复合结构了，在复用一层，就会报错，但是python针对这种场景，也有处理的方法</span></span><br><span class="line">father(son())</span><br><span class="line"></span><br><span class="line"><span class="comment">#处理方法</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line"><span class="comment">#装饰器的基本语法如下</span></span><br><span class="line">def father(funs):</span><br><span class="line">	@wraps(funs)</span><br><span class="line">	def b(funs):</span><br><span class="line">    funs</span><br><span class="line">    pass</span><br><span class="line">	<span class="built_in">return</span> b</span><br><span class="line">    </span><br><span class="line">@father()</span><br><span class="line">def son():</span><br><span class="line">	pass</span><br><span class="line"></span><br><span class="line"><span class="comment">#此时即可支持复合结构</span></span><br></pre></td></tr></table></figure></li>
-<li><strong>除上诉以外，装饰器还能被进一步封装</strong></li>
+<li><p>使用场景</p>
+<p>  <code>  需要将方法作为对象属性，进行调用，继承，传递的方法，大部分类方法都会定义成实例方法；  </code></p>
+</li>
+<li><p><strong>静态方法</strong></p>
+</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def logged(level, name=None, message=None):</span><br><span class="line">    <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">    Add logging to a function. level is the logging</span></span><br><span class="line"><span class="string">    level, name is the logger name, and message is the</span></span><br><span class="line"><span class="string">    log message. If name and message aren&#x27;t specified,</span></span><br><span class="line"><span class="string">    they default to the function&#x27;s module and name.</span></span><br><span class="line"><span class="string">    &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">    def decorate(func):</span><br><span class="line">        logname = name <span class="keyword">if</span> name <span class="keyword">else</span> func.__module__</span><br><span class="line">        <span class="built_in">log</span> = logging.getLogger(logname)</span><br><span class="line">        logmsg = message <span class="keyword">if</span> message <span class="keyword">else</span> func.__name__</span><br><span class="line"></span><br><span class="line">        @wraps(func)</span><br><span class="line">        def wrapper(*args, **kwargs):</span><br><span class="line">            log.log(level, logmsg)</span><br><span class="line">            <span class="built_in">return</span> func(*args, **kwargs)</span><br><span class="line">        <span class="built_in">return</span> wrapper</span><br><span class="line">    <span class="built_in">return</span> decorate</span><br><span class="line"></span><br><span class="line"><span class="comment"># Example use</span></span><br><span class="line">@logged(logging.DEBUG)</span><br><span class="line">def add(x, y):</span><br><span class="line">    <span class="built_in">return</span> x + y</span><br><span class="line"></span><br><span class="line">@logged(logging.CRITICAL, <span class="string">&#x27;example&#x27;</span>)</span><br><span class="line">def spam():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Spam!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@staticmethod</span><br><span class="line">def m3(n):</span><br><span class="line">	pass</span><br><span class="line">        </span><br><span class="line">静态方法，就是普通函数；和类对象和实例对象均无绑定关系；</span><br><span class="line">即可被类调用，也可通过实例调用；</span><br><span class="line">A.m3()</span><br><span class="line">a.m3()</span><br><span class="line">self.m3</span><br></pre></td></tr></table></figure>
 <ul>
-<li><strong>同样一个函数，也可以有多个装饰器</strong></li>
+<li><p>使用场景</p>
+<p>  <code>  如果在方法中不需要访问任何实例方法和属性，纯粹地通过传入参数并返回数据的功能性方法，那么它就适合用静态方法来定义，它节省了实例化对象的开销成本，往往这种方法放在类外面的模块层作为一个函数存在也是没问题的，而放在类中，仅为这个类服务（定义了一个局部域函数仅为该类专门服务）。  </code></p>
+</li>
+<li><p><strong>装饰器</strong></p>
+</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#a/b/c都是装饰器，执行的优先顺序是先内后外即a(son)&gt;b(son)&gt;c(son)</span></span><br><span class="line">@c</span><br><span class="line">@b</span><br><span class="line">@a</span><br><span class="line">def son():</span><br><span class="line">	pass</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>装饰器不仅仅只能是函数，也可以是类，利用的是类的内置方法（__call__）</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class logging(object):</span><br><span class="line">    def __init__(self, level=<span class="string">&#x27;INFO&#x27;</span>):</span><br><span class="line">        self.level = level</span><br><span class="line">        </span><br><span class="line">    def __call__(self, func): <span class="comment"># 接受函数</span></span><br><span class="line">        def wrapper(*args, **kwargs):</span><br><span class="line">            <span class="built_in">print</span> <span class="string">&quot;[&#123;level&#125;]: enter function &#123;func&#125;()&quot;</span>.format(</span><br><span class="line">                level=self.level,</span><br><span class="line">                func=func.__name__)</span><br><span class="line">            func(*args, **kwargs)</span><br><span class="line">        <span class="built_in">return</span> wrapper  <span class="comment">#返回函数</span></span><br><span class="line"></span><br><span class="line">@logging(level=<span class="string">&#x27;INFO&#x27;</span>)</span><br><span class="line">def say(something):</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;say &#123;&#125;!&quot;</span>.format(something)</span><br></pre></td></tr></table></figure>
-<p><a href="https://www.cnblogs.com/cicaday/p/python-decorator.html#_caption_1"><em><strong>参考：装饰器详解</strong></em></a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def A(FUN):</span><br><span class="line">	<span class="built_in">return</span> FUN+1</span><br><span class="line">    </span><br><span class="line">@FUN</span><br><span class="line">def b():</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">在装饰器中@后跟的是父方法，注意类方法/静态方法/装饰器方法区别	</span><br></pre></td></tr></table></figure>
+<p><a href="https://zhuanlan.zhihu.com/p/28010894">参考</a></p>
 ]]></content>
       <categories>
         <category>技术</category>
@@ -1534,6 +1493,47 @@
       <tags>
         <tag>阿里</tag>
         <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>装饰器详解</title>
+    <url>/posts/1d1282f5/</url>
+    <content><![CDATA[<h1 id="装饰器是什么"><a href="#装饰器是什么" class="headerlink" title="装饰器是什么"></a>装饰器是什么</h1><span id="more"></span>
+
+<ul>
+<li>装饰器本质上是一种函数构造方法，其构造的是一种可变函数；我们知道在python中一切皆对象，函数即对象，由于对象是灵活不受约束的，因此我们在构造函数时，可将函数对象作为参数传递或者返回，可将函数对象进行随意嵌套，基于这些特性，我们可在在不变更代码的情况下，灵活的扩展函数/模块的功能；</li>
+</ul>
+<h1 id="装饰器的作用"><a href="#装饰器的作用" class="headerlink" title="装饰器的作用"></a>装饰器的作用</h1><ul>
+<li><em><strong>为已存在的对象添加额外功能</strong></em></li>
+</ul>
+<h1 id="装饰器的实现"><a href="#装饰器的实现" class="headerlink" title="装饰器的实现"></a>装饰器的实现</h1><ul>
+<li><strong>原则:</strong> <ul>
+<li>装饰器必须接受一个callable对象</li>
+<li>其实它并不关心你返回什么，可以是另外一个callable对象（大部分情况），也可以是其他类对象，比如property</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#装饰器的基本语法如下</span></span><br><span class="line">def father(funs):</span><br><span class="line">	def b(funs):</span><br><span class="line">    funs</span><br><span class="line">    pass</span><br><span class="line">	<span class="built_in">return</span> b</span><br><span class="line"><span class="comment">#@这种称为语法糖，实际等同father(son)    </span></span><br><span class="line">@father()</span><br><span class="line">def son():</span><br><span class="line">	pass</span><br><span class="line">    </span><br><span class="line"><span class="comment">#使用,执行子函数，基于结构，会将子函数作为参数传递给父函数，实际执行的是父函数</span></span><br><span class="line">son()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>由上可知，将子函数作为参数传递给父函数，父函数，会谁传递的函数的对象的变化而执行不同的操作，从而实现可变函数的构造。<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#上方的结构，不支持复合结构如下，这是由于执行son时已经是复合结构了，在复用一层，就会报错，但是python针对这种场景，也有处理的方法</span></span><br><span class="line">father(son())</span><br><span class="line"></span><br><span class="line"><span class="comment">#处理方法</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line"><span class="comment">#装饰器的基本语法如下</span></span><br><span class="line">def father(funs):</span><br><span class="line">	@wraps(funs)</span><br><span class="line">	def b(funs):</span><br><span class="line">    funs</span><br><span class="line">    pass</span><br><span class="line">	<span class="built_in">return</span> b</span><br><span class="line">    </span><br><span class="line">@father()</span><br><span class="line">def son():</span><br><span class="line">	pass</span><br><span class="line"></span><br><span class="line"><span class="comment">#此时即可支持复合结构</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>除上诉以外，装饰器还能被进一步封装</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def logged(level, name=None, message=None):</span><br><span class="line">    <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">    Add logging to a function. level is the logging</span></span><br><span class="line"><span class="string">    level, name is the logger name, and message is the</span></span><br><span class="line"><span class="string">    log message. If name and message aren&#x27;t specified,</span></span><br><span class="line"><span class="string">    they default to the function&#x27;s module and name.</span></span><br><span class="line"><span class="string">    &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">    def decorate(func):</span><br><span class="line">        logname = name <span class="keyword">if</span> name <span class="keyword">else</span> func.__module__</span><br><span class="line">        <span class="built_in">log</span> = logging.getLogger(logname)</span><br><span class="line">        logmsg = message <span class="keyword">if</span> message <span class="keyword">else</span> func.__name__</span><br><span class="line"></span><br><span class="line">        @wraps(func)</span><br><span class="line">        def wrapper(*args, **kwargs):</span><br><span class="line">            log.log(level, logmsg)</span><br><span class="line">            <span class="built_in">return</span> func(*args, **kwargs)</span><br><span class="line">        <span class="built_in">return</span> wrapper</span><br><span class="line">    <span class="built_in">return</span> decorate</span><br><span class="line"></span><br><span class="line"><span class="comment"># Example use</span></span><br><span class="line">@logged(logging.DEBUG)</span><br><span class="line">def add(x, y):</span><br><span class="line">    <span class="built_in">return</span> x + y</span><br><span class="line"></span><br><span class="line">@logged(logging.CRITICAL, <span class="string">&#x27;example&#x27;</span>)</span><br><span class="line">def spam():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Spam!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>同样一个函数，也可以有多个装饰器</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#a/b/c都是装饰器，执行的优先顺序是先内后外即a(son)&gt;b(son)&gt;c(son)</span></span><br><span class="line">@c</span><br><span class="line">@b</span><br><span class="line">@a</span><br><span class="line">def son():</span><br><span class="line">	pass</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>装饰器不仅仅只能是函数，也可以是类，利用的是类的内置方法（__call__）</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class logging(object):</span><br><span class="line">    def __init__(self, level=<span class="string">&#x27;INFO&#x27;</span>):</span><br><span class="line">        self.level = level</span><br><span class="line">        </span><br><span class="line">    def __call__(self, func): <span class="comment"># 接受函数</span></span><br><span class="line">        def wrapper(*args, **kwargs):</span><br><span class="line">            <span class="built_in">print</span> <span class="string">&quot;[&#123;level&#125;]: enter function &#123;func&#125;()&quot;</span>.format(</span><br><span class="line">                level=self.level,</span><br><span class="line">                func=func.__name__)</span><br><span class="line">            func(*args, **kwargs)</span><br><span class="line">        <span class="built_in">return</span> wrapper  <span class="comment">#返回函数</span></span><br><span class="line"></span><br><span class="line">@logging(level=<span class="string">&#x27;INFO&#x27;</span>)</span><br><span class="line">def say(something):</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;say &#123;&#125;!&quot;</span>.format(something)</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.cnblogs.com/cicaday/p/python-decorator.html#_caption_1"><em><strong>参考：装饰器详解</strong></em></a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
