@@ -67,18 +67,21 @@
       </tags>
   </entry>
   <entry>
-    <title>NEW JOBS</title>
-    <url>/posts/200e1d4e/</url>
+    <title>New Jobs</title>
+    <url>/posts/7eb8636e/</url>
     <content><![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p><code>    通过二个月的冲刺，达到准高级工程师水准，进入大厂（BAT/TMDJKXB)；预期岗位是大厂的中级测开岗，或者广告/音乐/金融类的高级业务测试岗；大厂有包就行，小厂的核心产出岗；</code><br><code>    测开岗方向，主要集中在流程（devops）/服务（稳定性，性能）/自动化（ui/接口/单测）/脚本工具类（打杂，项目需要啥，开发啥）/可视化（也是流程类，不过主要集中在数据和工作流程方面），最具有发展前途的是devops和服务岗，这是真正能有产出的岗位；自动化也就是平台工具化和可视化工具，基本是一体的，小公司认为的自动化一般是这种，就业面广；脚本侠，和业务测试其实区别不大；</code></p>
 <h2 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h2><h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">目标企业</span><br><span class="line">企业要求</span><br><span class="line">完成规划</span><br><span class="line">模拟训练</span><br><span class="line">过往归纳</span><br><span class="line">反思总结</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
 
 <p><em><strong>目标企业</strong></em></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">百度</span><br><span class="line">阿里</span><br><span class="line">	lazada</span><br><span class="line"> 	网商银行  </span><br><span class="line">腾讯</span><br><span class="line">	腾讯音乐</span><br><span class="line">	微众银行</span><br><span class="line">头条</span><br><span class="line">滴滴</span><br><span class="line">美团</span><br><span class="line">京东</span><br><span class="line">拼多多</span><br><span class="line">小红书</span><br><span class="line">快手</span><br><span class="line">网易</span><br><span class="line">携程</span><br><span class="line">满帮</span><br><span class="line">货拉拉</span><br><span class="line">手机厂</span><br><span class="line">	华为</span><br><span class="line">	荣耀</span><br><span class="line">	oppo</span><br><span class="line">	vivo</span><br><span class="line">	小米</span><br><span class="line">	魅族</span><br><span class="line">	传音    </span><br><span class="line">汽车厂</span><br><span class="line">	比亚迪</span><br><span class="line">	小鹏</span><br><span class="line">	蔚来</span><br><span class="line">	理想</span><br><span class="line">	其他车企    </span><br><span class="line">其他制造业</span><br><span class="line">	大疆</span><br><span class="line">	顺丰    </span><br><span class="line">金融+银行+券商    </span><br><span class="line">外企 </span><br><span class="line">海外</span><br><span class="line">	虾皮</span><br><span class="line">	shenin</span><br><span class="line">	    </span><br><span class="line">其他</span><br><span class="line">	b站</span><br><span class="line">	贝壳</span><br><span class="line">	用友</span><br><span class="line">	boss直聘</span><br><span class="line">	360</span><br><span class="line">	微博 </span><br><span class="line">	唯品会</span><br><span class="line">	爱奇艺    </span><br><span class="line">   阅文</span><br><span class="line">   达达</span><br><span class="line">	知乎</span><br><span class="line">	金山</span><br><span class="line">	喜马拉雅</span><br><span class="line">	同城艺龙</span><br><span class="line">	汽车之家</span><br><span class="line">	欢聚时代</span><br><span class="line">	微盟</span><br><span class="line">	陌陌</span><br><span class="line">	有赞</span><br><span class="line">	斗鱼</span><br><span class="line">	虎牙</span><br><span class="line">	哈罗</span><br><span class="line">	得物</span><br><span class="line">	soul</span><br><span class="line">	keep</span><br><span class="line">	涂鸦	    </span><br><span class="line">	浪潮</span><br><span class="line">	商汤</span><br><span class="line">	云从</span><br><span class="line">	旷视</span><br><span class="line">	依图</span><br><span class="line">	猎豹</span><br><span class="line">	大宇</span><br><span class="line">	美图</span><br><span class="line">	奇安信</span><br><span class="line">	华润    </span><br><span class="line">国企   </span><br><span class="line">人工智能</span><br><span class="line">chatgpt</span><br><span class="line">币圈</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">百度</span><br><span class="line">阿里</span><br><span class="line">	lazada</span><br><span class="line"> 	网商银行  </span><br><span class="line">腾讯</span><br><span class="line">	腾讯音乐</span><br><span class="line">	微众银行</span><br><span class="line">头条</span><br><span class="line">滴滴</span><br><span class="line">美团</span><br><span class="line">京东</span><br><span class="line">拼多多</span><br><span class="line">小红书</span><br><span class="line">快手</span><br><span class="line">网易</span><br><span class="line">携程</span><br><span class="line"></span><br><span class="line">手机厂</span><br><span class="line">	华为</span><br><span class="line">	荣耀</span><br><span class="line">	oppo</span><br><span class="line">	vivo</span><br><span class="line">	小米</span><br><span class="line">	魅族</span><br><span class="line">	传音</span><br><span class="line">    </span><br><span class="line">汽车厂</span><br><span class="line">	比亚迪</span><br><span class="line">	小鹏</span><br><span class="line">	蔚来</span><br><span class="line">	理想</span><br><span class="line">	其他车企</span><br><span class="line">    </span><br><span class="line">其他制造业</span><br><span class="line">	大疆</span><br><span class="line">	顺丰</span><br><span class="line">	满帮</span><br><span class="line">	货拉拉</span><br><span class="line">    </span><br><span class="line">金融+银行+券商    </span><br><span class="line">外企 </span><br><span class="line">海外</span><br><span class="line">	虾皮</span><br><span class="line">	shenin</span><br><span class="line">	大厂出海</span><br><span class="line">		头条-tiktok</span><br><span class="line">		头条-汽水音乐</span><br><span class="line">		拼多多-TEMU</span><br><span class="line">		快手-kwai</span><br><span class="line">		万兴</span><br><span class="line">		大宇无限</span><br><span class="line">		anker</span><br><span class="line">        </span><br><span class="line">其他</span><br><span class="line">	b站</span><br><span class="line">	贝壳</span><br><span class="line">	用友</span><br><span class="line">	boss直聘</span><br><span class="line">	360</span><br><span class="line">	微博 </span><br><span class="line">	唯品会</span><br><span class="line">	爱奇艺    </span><br><span class="line">	阅文</span><br><span class="line">	达达</span><br><span class="line">	知乎</span><br><span class="line">	金山</span><br><span class="line">	喜马拉雅</span><br><span class="line">	同城艺龙</span><br><span class="line">	汽车之家</span><br><span class="line">	欢聚时代</span><br><span class="line">	微盟</span><br><span class="line">	陌陌</span><br><span class="line">	有赞</span><br><span class="line">	斗鱼</span><br><span class="line">	虎牙</span><br><span class="line">	哈罗</span><br><span class="line">	得物</span><br><span class="line">	soul</span><br><span class="line">	keep</span><br><span class="line">	涂鸦	    </span><br><span class="line">	浪潮</span><br><span class="line">	商汤</span><br><span class="line">	云从</span><br><span class="line">	旷视</span><br><span class="line">	依图</span><br><span class="line">	猎豹</span><br><span class="line">	大宇</span><br><span class="line">	美图</span><br><span class="line">	奇安信</span><br><span class="line">	华润</span><br><span class="line">    </span><br><span class="line">国企   </span><br><span class="line">人工智能</span><br><span class="line">chatgpt</span><br><span class="line">币圈</span><br></pre></td></tr></table></figure>
 
 <p><em><strong>企业要求</strong></em></p>
-<p><em>大厂用人着重点</em></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">招聘岗位需要什么样的人，匹配最重要，此岗位那些技能是重点，会着重考量；</span><br><span class="line">会着重问简历重的问题，而且会扩展，主要考量深度，还有诚信；</span><br><span class="line">会问面试者印象深刻的工作，主要考虑是否会在工作中思考，以及解决复杂问题的思路；</span><br><span class="line">味道&#x2F;风格和公司以及团队是否匹配；</span><br><span class="line">性格是不是积极向上的。主动、乐观、皮实；</span><br><span class="line">技能方面，考虑一个问题：应聘的同学能够提升团队平均技能的水位线么？如果不是，招聘对你团队的整体收益就会打折。除非应急，否则还是尽量招聘能够提升团队水位线的人，这很重要；</span><br><span class="line">应聘的人有潜力么？成长性怎么样，也就是说，后入者的要求只会越来越高；</span><br><span class="line">	如何看潜力？准则就是：工作年限是否与工作能力相匹配。锚点就是你身边的同事，一个个去比，心里就会有数。 回想一下，你在他这个年龄的时候，是比他好，还是比他差？对于工作年限比较长的应聘者，一定要看应聘者是不是在一个方向已经钻了足够的深度。如果没有，大概率不具备潜力。</span><br><span class="line">    </span><br><span class="line">应聘者的意愿，与岗位能够提供的匹配么？</span><br><span class="line">来公司的动机？</span><br><span class="line">诚信一票否决。如果发现明显的不诚信，一定一票否决？</span><br><span class="line">可能会问一些逻辑思维题，考察思维的灵活性，人是否聪明。</span><br><span class="line"></span><br><span class="line">技术：</span><br><span class="line">项目经验：是否有正规的项目组工作经验：理解敏捷的工作模式，有良好的开发习惯，有和项目组良好的协作、沟通能力；是否对原有参与建设的业务系统的业务有一个完整的理解；</span><br><span class="line">技术根底：对应的技术栈是否有与工作年龄匹配的深度。举例：一个做 Java 业务开发 3~5 年的程序员应该对 Java 的基础知识（Core Java 书里的所有知识点），在设计模式，业务建模， 性能调优等一个或者几个点，有比较深的理解；有很强的故障定位及排除能力；能够熟练使用 Java 常见的框架，如 Spring 等；读过部分流行框架源码等。</span><br><span class="line">系统思考的能力，是否有模块化，体系化的思考能力。</span><br><span class="line"></span><br><span class="line">项目需要体现复杂性，拼配度，需要在项目中体现自己的价值</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">其他：重点</span><br><span class="line">https:&#x2F;&#x2F;testerhome.com&#x2F;topics&#x2F;16354(p8)</span><br><span class="line">https:&#x2F;&#x2F;testerhome.com&#x2F;topics&#x2F;30722#reply9</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><em>为人</em></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">招聘岗位需要什么样的人，匹配最重要，此岗位那些技能是重点，会着重考量；</span><br><span class="line">会着重问简历中的问题，而且会扩展，主要考量深度，还有诚信；</span><br><span class="line">会问面试者印象深刻的工作，主要考虑是否会在工作中思考，以及解决复杂问题的思路；</span><br><span class="line">味道&#x2F;风格和公司以及团队是否匹配；</span><br><span class="line">性格是不是积极向上的。主动、乐观、皮实；</span><br><span class="line">应聘的人有潜力么，成长性怎么样？也就是说，后入者的要求只会越来越高；</span><br><span class="line">	如何看潜力？准则就是：工作年限是否与工作能力相匹配。锚点就是你身边的同事，一个个去比，心里就会有数。 回想一下，你在他这个年龄的时候，是比他好，还是比他差？对于工作年限比较长的应聘者，一定要看应聘者是不是在一个方向已经钻了足够的深度。如果没有，大概率不具备潜力。</span><br><span class="line">应聘者的意愿，与岗位能够完全匹配么？</span><br><span class="line">来公司的动机；</span><br><span class="line">诚信一票否决。如果发现明显的不诚信，一定一票否决；</span><br><span class="line">可能会问一些逻辑思维题，考察思维的灵活性，人是否聪明。</span><br></pre></td></tr></table></figure>
+
+<p><em>处事</em></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">项目经验：是否有正规的项目组工作经验：理解敏捷的工作模式，有良好的开发习惯，有和项目组良好的协作、沟通能力；是否对原有参与建设的业务系统的业务有一个完整的理解；</span><br><span class="line">项目需要体现复杂性，匹配度，需要在项目中体现自己的价值；</span><br><span class="line">技术根底：对应的技术栈是否有与工作年龄匹配的深度。举例：一个做 Java 业务开发 3~5 年的程序员应该对 Java 的基础知识（Core Java 书里的所有知识点），在设计模式，业务建模， 性能调优等一个或者几个点，有比较深的理解；有很强的故障定位及排除能力；能够熟练使用 Java 常见的框架，如 Spring 等；读过部分流行框架源码等。</span><br><span class="line">系统思考的能力，是否有模块化，体系化的思考能力。</span><br><span class="line">技能方面，考虑一个问题：应聘的同学能够提升团队平均技能的水位线么？如果不是，招聘对你团队的整体收益就会打折。除非应急，否则还是尽量招聘能够提升团队水位线的人，这很重要；</span><br><span class="line"></span><br><span class="line">基础知识，基础知识是底子，读下那两本书，明白常问的，业务性问题背后的深意(PS:WT)</span><br><span class="line">	如果测试时间不够，你会怎么办？ </span><br><span class="line">	如果让你去测试一个你完全不熟悉的系统，你会怎么办？</span><br><span class="line">	你平时会使用那些测试设计方法？</span><br><span class="line">熟练掌握一门开发语言，也就是python</span><br><span class="line">	系统学习过 Java 的教程，高频面试 50 题 这样的题可以自测一下，可以回答上 35 个以上；</span><br><span class="line">   熟悉最主流的 Spring 框架，能够写出一个简单的网站，实现基础的 Restful 服务；</span><br><span class="line">   读懂过一个测试框架，如 mockito 或者 Junit 的源码；</span><br><span class="line">   能够熟练实施接口测试（基于一些测试框架 如：rest-assured+Junit）；</span><br><span class="line">   能够读懂开发的业务代码，对他们的代码进行 Code Review；</span><br><span class="line">精通语言的标准</span><br><span class="line">	还拿 Java 来说吧：熟练使用 Java 的常见 API；</span><br><span class="line">   深入理解基于语言特性&#x2F;系统特性的知识，如 Collections 的实现机制、类型系统、I&#x2F;O、网络、多线程等；		熟知设计模式（广义范围的设计模式，不局限于 GOF 的设计模式）；</span><br><span class="line">   熟悉 JVM 的工作模式；熟练使用调试排查工具解决性能问题；</span><br><span class="line">   熟练掌握市面上常见的脚手架；</span><br><span class="line">   熟练掌握周边知识（OPs 相关，网络知识相关）有不错的实战开发经验（做过真正被生产检验的东西）；</span><br><span class="line">   对于测试开发，AOP，Java 字节码技术是很重要的知识。。。</span><br><span class="line">   胜任普通的开发岗位</span><br><span class="line">业务知识积累</span><br><span class="line">	体现业务知识积累的全局观,全局架构师很重要的一点</span><br><span class="line">   业务遇到的问题,解决的问题也是重要的积累</span><br><span class="line">   技术角度上，你要能够画得出来系统的交互图</span><br><span class="line">   熟悉最核心的接口和最核心的参数</span><br><span class="line">   能够读懂开发的代码，熟练使用 trace 和监控工具，诊断定位线上问题到代码行。</span><br><span class="line">效能</span><br><span class="line">	你能够举一个你用技术手段提高测试效率，增强测试能力的例子么？这是面试时最大的一个坎,因为太大，需要有明显的可量化的效能很难</span><br><span class="line">   环境、CI、数据、测试用例生成、数据比对的很小的一些点上，都能有不错的提效产出，从这些点能够做得好，会得到不错的加分。用明确的小案例证明价值也是可行的</span><br><span class="line">案例&#x2F;故事</span><br><span class="line">	要有证明能力的勋章</span><br><span class="line">个人特质</span><br><span class="line">	快速学习、系统性学习、学以致用、系统性思考、强大的推动力、技术思维、突出的沟通能力、条理性、抗压性、乐观精神、抗挫折能力、迅速调整的能力、迭代改进的意识、ownership、团队合作、愿景和规划。 这些特性体现人的内核，有强大内核的人，做什么都行，技能暂时不足，也一定能补足。所以，在招聘的时候往往对是否录用的判断起决定性作用</span><br><span class="line">    </span><br><span class="line">高级职位的要求</span><br><span class="line">	计算机领域知识的通盘理解，高级岗位要求，各块，基本都要了解一点</span><br><span class="line">   计算机网络：基本的网络链路需要了解，http协议tcp&#x2F;ip协议需要吃透（推荐图解tcp&#x2F;ip）(图解http)</span><br><span class="line">   linux服务器，需要会使用基本的命令，要能在特定的性能场景定位问题；需要能读写shell,同时云原生的ks常见架构要了解，需要能简单的部署，和使用。并且能利用与测试提效；</span><br><span class="line">   数据库知识：市面常见数据库（redis，mysql，oracle）的常见 DBA 操作，问题排查；SQL 的熟练使用；</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">	    </span><br><span class="line">	    </span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">其他：重点</span><br><span class="line">https:&#x2F;&#x2F;testerhome.com&#x2F;topics&#x2F;16354(p8)</span><br><span class="line">https:&#x2F;&#x2F;testerhome.com&#x2F;topics&#x2F;30722#reply9</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p><em>腾讯</em></p>
 <p><strong>测开岗</strong></p>
@@ -104,12 +107,6 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">### 完成规划</span><br><span class="line"></span><br><span class="line">___补全基础知识___</span><br><span class="line"></span><br><span class="line">+ [高级软件测试分析师](https:&#x2F;&#x2F;blog.51cto.com&#x2F;u_15127510&#x2F;4549327)</span><br><span class="line">+ 高级软件测试管理</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">___面试话题___</span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">DevOps一体化研发体系：需结合自己公司的CICDCT体系进行说明,深化出他的理解</span><br><span class="line">工作中的技巧：时间不足场景&#x2F;线上问题场景&#x2F;绩效汇报&#x2F;工作汇报的场景</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>职业</category>
-      </categories>
-      <tags>
-        <tag>职业</tag>
-      </tags>
   </entry>
   <entry>
     <title>SOLOPI使用教程</title>
@@ -387,21 +384,6 @@
       </tags>
   </entry>
   <entry>
-    <title>UI自动化框架说明</title>
-    <url>/posts/411091fa/</url>
-    <content><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`
-</code></pre>
-<p>___ 大纲 ___</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">框架的整体结构</span><br><span class="line">代码模块的结构，文件说明</span><br><span class="line">框架的执行过程</span><br><span class="line">框架优化&#x2F;改动以适应我们产品</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<p>___ 框架整体结构 ___<br><img src="/text_image/ui%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%B6%E6%9E%84.png" alt="alt_text"></p>
-<p><code>框架整体构成由五部分构成；分别是runner(入口)/TestCase(控制层)/PageObject(逻辑层)/日志文件/yaml配置模块/报告模块 </code></p>
-<p>___ runner(入口) ___</p>
-<p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
     <title>HEXO 官方使用指南</title>
     <url>/posts/4a17b156/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -421,6 +403,21 @@
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 <p>#开启动画<br>canvas_nest: true </p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>UI自动化框架说明</title>
+    <url>/posts/411091fa/</url>
+    <content><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`
+</code></pre>
+<p>___ 大纲 ___</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">框架的整体结构</span><br><span class="line">代码模块的结构，文件说明</span><br><span class="line">框架的执行过程</span><br><span class="line">框架优化&#x2F;改动以适应我们产品</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<p>___ 框架整体结构 ___<br><img src="/text_image/ui%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%B6%E6%9E%84.png" alt="alt_text"></p>
+<p><code>框架整体构成由五部分构成；分别是runner(入口)/TestCase(控制层)/PageObject(逻辑层)/日志文件/yaml配置模块/报告模块 </code></p>
+<p>___ runner(入口) ___</p>
+<p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>Python语法-unittest</title>
@@ -455,41 +452,6 @@
       <tags>
         <tag>unittest</tag>
         <tag>参数化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python-多进程</title>
-    <url>/posts/a1c10886/</url>
-    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python多进程简述</span><br><span class="line">python多进程模块方法介绍</span><br><span class="line">python多进程使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<ul>
-<li><p><em><strong>python多进程模块简述：</strong></em></p>
-<p>  <code>python由于GIL机制，多线程，实际仅消耗一个内核资源；因此效率较低，python要实现并发，提高性能，只能使用多进程模块，python的多进程模块为multiprocessing，通过使用Pool类实现多进程；   </code></p>
-</li>
-<li><p><em><strong>python多进程模块方法介绍：</strong></em></p>
-<p>  <code>   python多进程模块为multiprocessing，为python的内置模块；通过该模块封装的Pool()对象实现多进程，Pool类的属性介绍如下：</code></p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()	#需要被执行的方法&#x2F;任务</span><br><span class="line">iter&#x3D;iter	#迭代对象，list&#x2F;变量值</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(3)	#创建一个仅容纳3个进程的进程池，一旦工作任务超出进程的数量，则需等待，进程池中的进程被释放，任务才能进入进程池；</span><br><span class="line">__init__(self, group&#x3D;None, target&#x3D;None, name&#x3D;None, args&#x3D;(), kwargs&#x3D;&#123;&#125;)	#进程池的构造方法</span><br><span class="line">group：进程池所属的进程组，一旦不需要给值；</span><br><span class="line">target：待处理的任务或方法；</span><br><span class="line">name：进程池的别名，默认不给值；</span><br><span class="line">args：调用对象的位置参数，可给值元组&#x2F;列表等可迭代对象或者参数值；</span><br><span class="line">kwargs：调用对象的字典参数；</span><br><span class="line"></span><br><span class="line">使用：在win环境下，进程池必须在当前模块下执行，即必须在 if __name__&#x3D;&#x3D;main:下执行；</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>Pool()类中拥有的属性方法如下：</strong></li>
-</ul>
-<ul>
-<li>pool.map()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br></pre></td></tr></table></figure></li>
-<li>pool.map_async(run,iter)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map_async(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map_async(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br><span class="line">---效果和pool.map()不相同，mapasyc效率更高；mapasyc主进程未阻塞进程池，不需要等该批次的进程全执行完，新的任务就能进入进程池执行；常用pool.map()</span><br></pre></td></tr></table></figure></li>
-<li>pool.apply()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]])</span><br><span class="line">apply,参数需要为具体的变量值，且仅在python2支持；</span><br><span class="line">apply方法的原理是，阻塞进程池，一次仅让一个任务进入进程池，该任务完成后，才能执行下一个任务，实际是串行；</span><br></pre></td></tr></table></figure></li>
-<li>pool.applyasyc()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]],[, callback&#x3D;None]]])</span><br><span class="line">   applyasyc,参数需要为具体的变量值，在python3上支持；</span><br><span class="line">   applyasyc方法的原理是，进程池非阻塞，一次可以让多个任务进入进程池，且未对该批次任务进行阻塞，只要其中一个进程执行完后，就能释放资源，让新的任务进入进程池，实际是并行的,效率等同于mapasyc()；</span><br><span class="line">回调使用：pool.applyasyc(run,kwargs,callback&#x3D;func2)，run的返回作为func2的参数，执行完返回func2的值；</span><br><span class="line">   ---applyasyc效果等同于mapasyc()，只是他具有回调功能，且入参的变量不能是可迭代对象，必须为具体的变量值；</span><br></pre></td></tr></table></figure></li>
-<li>pool.terminal()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用：结束工作进程，不在处理未完成的任务</span><br><span class="line">pool.map(run,iter)</span><br><span class="line">pool.close()</span><br><span class="line">pool.run()</span><br><span class="line">sleep(2)</span><br><span class="line">pool.terminal()		#执行两秒后，哪怕进程未执行完，也结束该主进程</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p><em><strong>python多进程使用：</strong></em></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()</span><br><span class="line">iter&#x3D;iter</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(multiprocessing.cpu_count())</span><br><span class="line">pool.map(run(),iter)</span><br><span class="line">pool.join()</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>python</tag>
-        <tag>多进程</tag>
       </tags>
   </entry>
   <entry>
@@ -530,6 +492,41 @@
       <tags>
         <tag>python</tag>
         <tag>多线程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python-多进程</title>
+    <url>/posts/a1c10886/</url>
+    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python多进程简述</span><br><span class="line">python多进程模块方法介绍</span><br><span class="line">python多进程使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<ul>
+<li><p><em><strong>python多进程模块简述：</strong></em></p>
+<p>  <code>python由于GIL机制，多线程，实际仅消耗一个内核资源；因此效率较低，python要实现并发，提高性能，只能使用多进程模块，python的多进程模块为multiprocessing，通过使用Pool类实现多进程；   </code></p>
+</li>
+<li><p><em><strong>python多进程模块方法介绍：</strong></em></p>
+<p>  <code>   python多进程模块为multiprocessing，为python的内置模块；通过该模块封装的Pool()对象实现多进程，Pool类的属性介绍如下：</code></p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()	#需要被执行的方法&#x2F;任务</span><br><span class="line">iter&#x3D;iter	#迭代对象，list&#x2F;变量值</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(3)	#创建一个仅容纳3个进程的进程池，一旦工作任务超出进程的数量，则需等待，进程池中的进程被释放，任务才能进入进程池；</span><br><span class="line">__init__(self, group&#x3D;None, target&#x3D;None, name&#x3D;None, args&#x3D;(), kwargs&#x3D;&#123;&#125;)	#进程池的构造方法</span><br><span class="line">group：进程池所属的进程组，一旦不需要给值；</span><br><span class="line">target：待处理的任务或方法；</span><br><span class="line">name：进程池的别名，默认不给值；</span><br><span class="line">args：调用对象的位置参数，可给值元组&#x2F;列表等可迭代对象或者参数值；</span><br><span class="line">kwargs：调用对象的字典参数；</span><br><span class="line"></span><br><span class="line">使用：在win环境下，进程池必须在当前模块下执行，即必须在 if __name__&#x3D;&#x3D;main:下执行；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Pool()类中拥有的属性方法如下：</strong></li>
+</ul>
+<ul>
+<li>pool.map()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br></pre></td></tr></table></figure></li>
+<li>pool.map_async(run,iter)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map_async(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map_async(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br><span class="line">---效果和pool.map()不相同，mapasyc效率更高；mapasyc主进程未阻塞进程池，不需要等该批次的进程全执行完，新的任务就能进入进程池执行；常用pool.map()</span><br></pre></td></tr></table></figure></li>
+<li>pool.apply()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]])</span><br><span class="line">apply,参数需要为具体的变量值，且仅在python2支持；</span><br><span class="line">apply方法的原理是，阻塞进程池，一次仅让一个任务进入进程池，该任务完成后，才能执行下一个任务，实际是串行；</span><br></pre></td></tr></table></figure></li>
+<li>pool.applyasyc()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]],[, callback&#x3D;None]]])</span><br><span class="line">   applyasyc,参数需要为具体的变量值，在python3上支持；</span><br><span class="line">   applyasyc方法的原理是，进程池非阻塞，一次可以让多个任务进入进程池，且未对该批次任务进行阻塞，只要其中一个进程执行完后，就能释放资源，让新的任务进入进程池，实际是并行的,效率等同于mapasyc()；</span><br><span class="line">回调使用：pool.applyasyc(run,kwargs,callback&#x3D;func2)，run的返回作为func2的参数，执行完返回func2的值；</span><br><span class="line">   ---applyasyc效果等同于mapasyc()，只是他具有回调功能，且入参的变量不能是可迭代对象，必须为具体的变量值；</span><br></pre></td></tr></table></figure></li>
+<li>pool.terminal()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用：结束工作进程，不在处理未完成的任务</span><br><span class="line">pool.map(run,iter)</span><br><span class="line">pool.close()</span><br><span class="line">pool.run()</span><br><span class="line">sleep(2)</span><br><span class="line">pool.terminal()		#执行两秒后，哪怕进程未执行完，也结束该主进程</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><em><strong>python多进程使用：</strong></em></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()</span><br><span class="line">iter&#x3D;iter</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(multiprocessing.cpu_count())</span><br><span class="line">pool.map(run(),iter)</span><br><span class="line">pool.join()</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>python</tag>
+        <tag>多进程</tag>
       </tags>
   </entry>
   <entry>
@@ -589,6 +586,18 @@
 ]]></content>
   </entry>
   <entry>
+    <title>python语法特性</title>
+    <url>/posts/d641bafc/</url>
+    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ui自动化分布式并行运算</title>
     <url>/posts/2be91958/</url>
     <content><![CDATA[<p><a href="https://cloud.tencent.com/developer/article/1974105">Gird</a></p>
@@ -602,16 +611,10 @@
       </tags>
   </entry>
   <entry>
-    <title>python语法特性</title>
-    <url>/posts/d641bafc/</url>
-    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
-<span id="more"></span>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
+    <title>uwnc</title>
+    <url>/posts/3de87ac/</url>
+    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
+]]></content>
   </entry>
   <entry>
     <title>优秀博客</title>
@@ -641,12 +644,6 @@
       </tags>
   </entry>
   <entry>
-    <title>uwnc</title>
-    <url>/posts/3de87ac/</url>
-    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>传音刷机</title>
     <url>/posts/a1b2e86a/</url>
     <content><![CDATA[<ol>
@@ -666,6 +663,14 @@
       <tags>
         <tag>刷机</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>估值体系</title>
+    <url>/posts/daef770e/</url>
+    <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的除非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
+<h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">高收益的前提是持续稳定的复利，即好企业是时间的朋友，坏企业是时间的敌人</span><br><span class="line">30pe是合理估值的上限，这是由无风险收益率决定的，如果在高，买入收益就低于无风险收益率了；同理合理估值一般给到20-25</span><br><span class="line">股权和债券的差异，主要体现在确定性和成长里；合理估值（不是买点），就是利用成长优势抵消不确定性；收益率=利润/本金（股价）=1/pe；合理估值的锚其实就是无风险收益率（1/无风险收益率）</span><br><span class="line"></span><br><span class="line">理想买点：三年后合理估值*0.5</span><br><span class="line">理想卖点：min(动态市盈率50,三年后合理估值150%)</span><br><span class="line">买操作：20-25倍区间都能买，茅台可以给到30pe;到达理想买点时，分三批买完剩余资金（理想买点/理想买点-5%/理想买点-10%）</span><br><span class="line">卖操作：当年预计净利润的50/55/60三次清空；（买卖点是唐朝基于无风险收益率计算，正常超出合理估值都能卖，50%其实是预留的安全边际）</span><br><span class="line">三年后合理估值=三年后预估净利率*25（具体企业具体分析，也就是pe的中分位）</span><br><span class="line"></span><br><span class="line">全指数基金买/卖点：基于无风险收益率来，但是由于不确定性，要做净利润折算，需要进行等比例折算，折算区间在5-7折</span><br><span class="line">买点：12-15pe</span><br><span class="line">卖点：25-35pe</span><br><span class="line"></span><br><span class="line">卖出后买全指还是留现金取决于无风险收益率（一般2倍无风险收益率即可买pe=1/无风险收益率*2，全指唐朝仅关注沪深300/恒生指数/标普500/纳斯达克100）</span><br><span class="line">其他时间：企业逻辑未变时，低于买点买，高于卖点卖，其他时间坐等；但需要遵循单股不超40%原则，即三五个行业，七八家公司；</span><br><span class="line">不要严格按买卖价来，要接受错误和风险；确定性高的企业，越偏向合理估值之下就买，确定性低的企业越偏向理想买点才买，唐朝的理念是理想买点位置一定要买完资金；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">腾讯+中概+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以330均价，买入4手；</span><br><span class="line">16的中概换纳指（中概大部分公司不盈利）</span><br><span class="line">理想买点：340</span><br><span class="line">理想卖点：1年内720</span><br><span class="line">纳指买点：21pe</span><br><span class="line">纳指卖点：35pe</span><br><span class="line">中概买点：10-14（以腾讯为锚点，这是由于中概大部分公司不盈利，无法通过现金流计算买卖点，最优解是不买这类产品）</span><br><span class="line">中概的卖点：25-35或腾讯的卖点；</span><br><span class="line"></span><br><span class="line">银行+家电25%：计划100k,余量14k</span><br><span class="line">已持仓86k,其中家电53k&#x2F;银行33k</span><br><span class="line">招商计划以28均价，买入5手；</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右</span><br><span class="line">美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34快</span><br><span class="line"></span><br><span class="line">消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利17k&#x2F;海螺3k</span><br><span class="line">洋河计划均价135，买入3手</span><br><span class="line">伊利计划27.2-27.5，买入1手</span><br><span class="line">理想卖点：</span><br><span class="line">洋河300快,理想买点140</span><br><span class="line">伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下</span><br><span class="line"></span><br><span class="line">医药10%：计划40k,余量9k</span><br><span class="line">已持仓31k,其中恒瑞20k&#x2F;ETF11K</span><br><span class="line">300医药ETF计划0.46，买入19000个</span><br><span class="line">理想卖点：</span><br><span class="line">恒瑞按50倍市盈率20.07%净利润增长，卖点57.9（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">医药etf买点：9300（医药300）</span><br><span class="line">医药etf买点：15500（医药300）</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>做点事</title>
@@ -708,14 +713,6 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
-    <title>估值体系</title>
-    <url>/posts/daef770e/</url>
-    <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的除非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
-<h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">高收益的前提是持续稳定的复利，即好企业是时间的朋友，坏企业是时间的敌人</span><br><span class="line">30pe是合理估值的上限，这是由无风险收益率决定的，如果在高，买入收益就低于无风险收益率了；同理合理估值一般给到20-25</span><br><span class="line">股权和债券的差异，主要体现在确定性和成长里；合理估值（不是买点），就是利用成长优势抵消不确定性；收益率=利润/本金（股价）=1/pe；合理估值的锚其实就是无风险收益率（1/无风险收益率）</span><br><span class="line"></span><br><span class="line">理想买点：三年后合理估值*0.5</span><br><span class="line">理想卖点：min(动态市盈率50,三年后合理估值150%)</span><br><span class="line">买操作：20-25倍区间都能买，茅台可以给到30pe;到达理想买点时，分三批买完剩余资金（理想买点/理想买点-5%/理想买点-10%）</span><br><span class="line">卖操作：当年预计净利润的50/55/60三次清空；（买卖点是唐朝基于无风险收益率计算，正常超出合理估值都能卖，50%其实是预留的安全边际）</span><br><span class="line">三年后合理估值=三年后预估净利率*25（具体企业具体分析，也就是pe的中分位）</span><br><span class="line"></span><br><span class="line">全指数基金买/卖点：基于无风险收益率来，但是由于不确定性，要做净利润折算，需要进行等比例折算，折算区间在5-7折</span><br><span class="line">买点：12-15pe</span><br><span class="line">卖点：25-35pe</span><br><span class="line"></span><br><span class="line">卖出后买全指还是留现金取决于无风险收益率（一般2倍无风险收益率即可买pe=1/无风险收益率*2，全指唐朝仅关注沪深300/恒生指数/标普500/纳斯达克100）</span><br><span class="line">其他时间：企业逻辑未变时，低于买点买，高于卖点卖，其他时间坐等；但需要遵循单股不超40%原则，即三五个行业，七八家公司；</span><br><span class="line">不要严格按买卖价来，要接受错误和风险；确定性高的企业，越偏向合理估值之下就买，确定性低的企业越偏向理想买点才买，唐朝的理念是理想买点位置一定要买完资金；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">腾讯+中概+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以330均价，买入4手；</span><br><span class="line">16的中概换纳指（中概大部分公司不盈利）</span><br><span class="line">理想买点：340</span><br><span class="line">理想卖点：1年内720</span><br><span class="line">纳指买点：21pe</span><br><span class="line">纳指卖点：35pe</span><br><span class="line">中概买点：10-14（以腾讯为锚点，这是由于中概大部分公司不盈利，无法通过现金流计算买卖点，最优解是不买这类产品）</span><br><span class="line">中概的卖点：25-35或腾讯的卖点；</span><br><span class="line"></span><br><span class="line">银行+家电25%：计划100k,余量14k</span><br><span class="line">已持仓86k,其中家电53k&#x2F;银行33k</span><br><span class="line">招商计划以28均价，买入5手；</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右</span><br><span class="line">美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34快</span><br><span class="line"></span><br><span class="line">消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利17k&#x2F;海螺3k</span><br><span class="line">洋河计划均价135，买入3手</span><br><span class="line">伊利计划27.2-27.5，买入1手</span><br><span class="line">理想卖点：</span><br><span class="line">洋河300快,理想买点140</span><br><span class="line">伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下</span><br><span class="line"></span><br><span class="line">医药10%：计划40k,余量9k</span><br><span class="line">已持仓31k,其中恒瑞20k&#x2F;ETF11K</span><br><span class="line">300医药ETF计划0.46，买入19000个</span><br><span class="line">理想卖点：</span><br><span class="line">恒瑞按50倍市盈率20.07%净利润增长，卖点57.9（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">医药etf买点：9300（医药300）</span><br><span class="line">医药etf买点：15500（医药300）</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
     <title>全局函数局部函数</title>
     <url>/posts/ae3a85c8/</url>
     <content><![CDATA[<h1 id="全局局部函数"><a href="#全局局部函数" class="headerlink" title="全局局部函数"></a>全局局部函数</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">全局函数：global</span><br><span class="line">局部函数：nonlocal</span><br></pre></td></tr></table></figure>
@@ -732,6 +729,26 @@
       <tags>
         <tag>python</tag>
         <tag>变量</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>可变对象合并方法</title>
+    <url>/posts/def45bf2/</url>
+    <content><![CDATA[<h1 id="可变对象合并的方法"><a href="#可变对象合并的方法" class="headerlink" title="可变对象合并的方法"></a>可变对象合并的方法</h1><p>eg:list</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">+:合并</span><br><span class="line">+=：增加赋值</span><br><span class="line">append()：添加</span><br><span class="line">extend()：插入</span><br><span class="line"></span><br><span class="line">list=[1,2,3]</span><br><span class="line">l=[4]</span><br><span class="line">s=list+l</span><br><span class="line">s=list.append(l)</span><br><span class="line">s=list.extend(l)</span><br><span class="line">list+=l</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;list&#x27;</span>,list)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;l&#x27;</span>,l)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;s&#x27;</span>,s)</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>+合并</strong></p>
+<p><code> 合并方法，是影响最小，速度最慢的方法；因为他不会改变原序列，会复制后生成一个新的序列    </code></p>
+<p><strong>append()</strong><br>    <code>    添加方法，会直接将对象添加到原序列末尾；会改变原序列    </code></p>
+<p><strong>extend()</strong><br>    <code>    插入方法，会将对象的元素添加到序列末尾，而不是对象，会改变原序列    </code></p>
+<p><strong>+=</strong><br>    <code>    增强赋值方法，类似于合并=；和extend()等效，效率比其低，会改变原序列    </code></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>序列</tag>
       </tags>
   </entry>
   <entry>
@@ -880,26 +897,6 @@
       </tags>
   </entry>
   <entry>
-    <title>可变对象合并方法</title>
-    <url>/posts/def45bf2/</url>
-    <content><![CDATA[<h1 id="可变对象合并的方法"><a href="#可变对象合并的方法" class="headerlink" title="可变对象合并的方法"></a>可变对象合并的方法</h1><p>eg:list</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">+:合并</span><br><span class="line">+=：增加赋值</span><br><span class="line">append()：添加</span><br><span class="line">extend()：插入</span><br><span class="line"></span><br><span class="line">list=[1,2,3]</span><br><span class="line">l=[4]</span><br><span class="line">s=list+l</span><br><span class="line">s=list.append(l)</span><br><span class="line">s=list.extend(l)</span><br><span class="line">list+=l</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;list&#x27;</span>,list)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;l&#x27;</span>,l)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;s&#x27;</span>,s)</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p><strong>+合并</strong></p>
-<p><code> 合并方法，是影响最小，速度最慢的方法；因为他不会改变原序列，会复制后生成一个新的序列    </code></p>
-<p><strong>append()</strong><br>    <code>    添加方法，会直接将对象添加到原序列末尾；会改变原序列    </code></p>
-<p><strong>extend()</strong><br>    <code>    插入方法，会将对象的元素添加到序列末尾，而不是对象，会改变原序列    </code></p>
-<p><strong>+=</strong><br>    <code>    增强赋值方法，类似于合并=；和extend()等效，效率比其低，会改变原序列    </code></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>序列</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>大数据BI报表架构调整</title>
     <url>/posts/10f9513d/</url>
     <content><![CDATA[<h1 id="大数据BI报表架构调整"><a href="#大数据BI报表架构调整" class="headerlink" title="大数据BI报表架构调整"></a>大数据BI报表架构调整</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span>
@@ -993,18 +990,6 @@
       </tags>
   </entry>
   <entry>
-    <title>搭建hexo博客</title>
-    <url>/posts/8e88d59c/</url>
-    <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、建立github代码库</span><br><span class="line">2、下载hexo文件</span><br><span class="line">3、下载主题，更改配置使主题生效</span><br><span class="line">4、部署配置git</span><br><span class="line">5、下载git同步工具</span><br><span class="line">6、清洗旧数据，生成新的静态文件，同步静态文件至代码库（需更改hexo部署配置）</span><br><span class="line">7、域名解析，并给github代码库配置域名</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://zhuanlan.zhihu.com/p/26625249">参考</a></p>
-<ul>
-<li>related_posts: true</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>传易--性能测试</title>
     <url>/posts/56a1ed73/</url>
     <content><![CDATA[<p><a href="https://docs.qq.com/doc/DSWZnVGNka29qa1lJ">内部项目，需找我授权</a></p>
@@ -1018,10 +1003,35 @@
       </tags>
   </entry>
   <entry>
+    <title>搭建hexo博客</title>
+    <url>/posts/8e88d59c/</url>
+    <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、建立github代码库</span><br><span class="line">2、下载hexo文件</span><br><span class="line">3、下载主题，更改配置使主题生效</span><br><span class="line">4、部署配置git</span><br><span class="line">5、下载git同步工具</span><br><span class="line">6、清洗旧数据，生成新的静态文件，同步静态文件至代码库（需更改hexo部署配置）</span><br><span class="line">7、域名解析，并给github代码库配置域名</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://zhuanlan.zhihu.com/p/26625249">参考</a></p>
+<ul>
+<li>related_posts: true</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>数据库性能测试</title>
     <url>/posts/ab3091af/</url>
     <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>百度质量体系建设</title>
+    <url>/posts/bcd76c52/</url>
+    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
+<li><em><strong>介绍</strong></em></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>目录</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>混沌工程</title>
@@ -1082,19 +1092,6 @@
     <url>/posts/c48e9a83/</url>
     <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>百度质量体系建设</title>
-    <url>/posts/bcd76c52/</url>
-    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
-<li><em><strong>介绍</strong></em></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>目录</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>稳定性治理--智能遍历</title>
@@ -1265,19 +1262,6 @@
       </tags>
   </entry>
   <entry>
-    <title>稳定性治理-暴力回放</title>
-    <url>/posts/81de0e43/</url>
-    <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
-<h4 id="覆盖场景"><a href="#覆盖场景" class="headerlink" title="覆盖场景"></a>覆盖场景</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">music首页，点击歌单播放按钮播放，然后息屏进入后台，10s后切换回前台；</span><br><span class="line">music首页，点开播放列表，然后点击music播放音乐，然后关闭播放列表，然后切换到后台，10s后切换回前台；</span><br><span class="line">music首页，进入歌单，点击全部播放，点击全部下载，然后返回首页，上下滑动一屏，然后切换回后台，10s后切换回前台；</span><br><span class="line">music首页，点击头像登录，退出，切换到后台，10s后切换回前台；</span><br><span class="line">treding首页，点击任意music播放，切换到后台，10s后回到前台，关闭播放详情页；</span><br><span class="line">首页，滑动到treding页，上下滑动一屏；然后向左滑动一屏，上下滑动一屏，然后向左滑动一屏，上下滑动一屏,然后向左滑动一屏，上下滑动一屏,然后切换到后台，停留10s;然后点击导航页到library页，然后点击导航页到search页，然后点击导航页到music页；</span><br><span class="line">搜索页，搜索music，搜索结果页左右滚动一屏；点击结果页播放，然后切换到后台休眠10s,在切换回前台;</span><br><span class="line">首页，点击导航页进入library页；点击进入喜欢的music页，点击全部播放；然后切换到后台，停留10s，在切换回前台，退出music页，切换回首页；</span><br><span class="line">首页，切换到buzz页；上下滑动两屏，点击buzz关注按钮，buzz点赞，buzz评论，点击查看buzz详情，然后回退到buzz页，然后在切换到后台，休眠10s，在切换回前台；</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>稳定性</tag>
-        <tag>暴力回放</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>稳定性治理</title>
     <url>/posts/a30df9c8/</url>
     <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">概述，目的？</span><br><span class="line">怎么进行稳定性治理，稳定性治理的体系建设？</span><br><span class="line">稳定性治理的过程？</span><br></pre></td></tr></table></figure>
@@ -1442,6 +1426,19 @@
       </tags>
   </entry>
   <entry>
+    <title>稳定性治理-暴力回放</title>
+    <url>/posts/81de0e43/</url>
+    <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
+<h4 id="覆盖场景"><a href="#覆盖场景" class="headerlink" title="覆盖场景"></a>覆盖场景</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">music首页，点击歌单播放按钮播放，然后息屏进入后台，10s后切换回前台；</span><br><span class="line">music首页，点开播放列表，然后点击music播放音乐，然后关闭播放列表，然后切换到后台，10s后切换回前台；</span><br><span class="line">music首页，进入歌单，点击全部播放，点击全部下载，然后返回首页，上下滑动一屏，然后切换回后台，10s后切换回前台；</span><br><span class="line">music首页，点击头像登录，退出，切换到后台，10s后切换回前台；</span><br><span class="line">treding首页，点击任意music播放，切换到后台，10s后回到前台，关闭播放详情页；</span><br><span class="line">首页，滑动到treding页，上下滑动一屏；然后向左滑动一屏，上下滑动一屏，然后向左滑动一屏，上下滑动一屏,然后向左滑动一屏，上下滑动一屏,然后切换到后台，停留10s;然后点击导航页到library页，然后点击导航页到search页，然后点击导航页到music页；</span><br><span class="line">搜索页，搜索music，搜索结果页左右滚动一屏；点击结果页播放，然后切换到后台休眠10s,在切换回前台;</span><br><span class="line">首页，点击导航页进入library页；点击进入喜欢的music页，点击全部播放；然后切换到后台，停留10s，在切换回前台，退出music页，切换回首页；</span><br><span class="line">首页，切换到buzz页；上下滑动两屏，点击buzz关注按钮，buzz点赞，buzz评论，点击查看buzz详情，然后回退到buzz页，然后在切换到后台，休眠10s，在切换回前台；</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>稳定性</tag>
+        <tag>暴力回放</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>类对象/实例对象/类方法/实例方法/静态方法</title>
     <url>/posts/93899372/</url>
     <content><![CDATA[<ul>
@@ -1496,6 +1493,20 @@
       </tags>
   </entry>
   <entry>
+    <title>编写博客--makedown语法说明</title>
+    <url>/posts/ed6b07f3/</url>
+    <content><![CDATA[<h1 id="语法总览"><a href="#语法总览" class="headerlink" title="语法总览"></a>语法总览</h1><h2 id="正文语法"><a href="#正文语法" class="headerlink" title="正文语法"></a>正文语法</h2><pre><code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; 1.=== title ===	最顶级标题</span><br><span class="line">&gt; 2.---  title --- 二级标题</span><br><span class="line">&gt; 3.<span class="comment"># title/## title/###### title	一级/二级/六级标题</span></span><br><span class="line">&gt; * tab缩进语法</span><br><span class="line">&gt; + 字体加粗使用** text ** 或__text__</span><br><span class="line">&gt; - 排序列表，无序列表使用（+-*），有序列表使用（1.数字加点）</span><br><span class="line">&gt; - 换行，如果上下行无\n(换行操作)则不换行，如果有则换行</span><br><span class="line">&gt; - 空行，如果上下行之间有空行，则会进行换行</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="资源语法"><a href="#资源语法" class="headerlink" title="资源语法"></a>资源语法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">链接：</span><br><span class="line"></span><br><span class="line">&gt; - [链接](baidu.com <span class="string">&quot;百度这可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + [链接2][1]...[链接3][id]</span><br><span class="line">	[1]: baidu.com <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: zhihu.com <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">图片：</span><br><span class="line"></span><br><span class="line">&gt; - ![alt text](/path/.jpg <span class="string">&quot;可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + ![alt text][1]...![alt text][id可任意和下文保持一致即可]</span><br><span class="line">	[1]: /path/.jpg <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: /path/.jpg <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">代码块：</span><br><span class="line"></span><br><span class="line">&gt; 1. `中间是代码块`</span><br><span class="line">&gt; 2. ```bash 中间是代码块 ```</span><br><span class="line">&gt; 3. 四个空格/一个tab操作后面的代码</span><br><span class="line">&gt; 4.&lt;!-- more --&gt; 缩写/不展示全文</span><br></pre></td></tr></table></figure>
+
+<h2 id="好看的hexo"><a href="#好看的hexo" class="headerlink" title="好看的hexo"></a>好看的hexo</h2><ul>
+<li><a href="https://blog.bill.moe/"><strong>竞赛</strong></a></li>
+<li><a href="https://diygod.me/"><strong>b站开源大佬</strong></a></li>
+</ul>
+<p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>装饰器详解</title>
     <url>/posts/1d1282f5/</url>
     <content><![CDATA[<h1 id="装饰器是什么"><a href="#装饰器是什么" class="headerlink" title="装饰器是什么"></a>装饰器是什么</h1><span id="more"></span>
@@ -1535,20 +1546,6 @@
       <tags>
         <tag>python</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>编写博客--makedown语法说明</title>
-    <url>/posts/ed6b07f3/</url>
-    <content><![CDATA[<h1 id="语法总览"><a href="#语法总览" class="headerlink" title="语法总览"></a>语法总览</h1><h2 id="正文语法"><a href="#正文语法" class="headerlink" title="正文语法"></a>正文语法</h2><pre><code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; 1.=== title ===	最顶级标题</span><br><span class="line">&gt; 2.---  title --- 二级标题</span><br><span class="line">&gt; 3.<span class="comment"># title/## title/###### title	一级/二级/六级标题</span></span><br><span class="line">&gt; * tab缩进语法</span><br><span class="line">&gt; + 字体加粗使用** text ** 或__text__</span><br><span class="line">&gt; - 排序列表，无序列表使用（+-*），有序列表使用（1.数字加点）</span><br><span class="line">&gt; - 换行，如果上下行无\n(换行操作)则不换行，如果有则换行</span><br><span class="line">&gt; - 空行，如果上下行之间有空行，则会进行换行</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="资源语法"><a href="#资源语法" class="headerlink" title="资源语法"></a>资源语法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">链接：</span><br><span class="line"></span><br><span class="line">&gt; - [链接](baidu.com <span class="string">&quot;百度这可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + [链接2][1]...[链接3][id]</span><br><span class="line">	[1]: baidu.com <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: zhihu.com <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">图片：</span><br><span class="line"></span><br><span class="line">&gt; - ![alt text](/path/.jpg <span class="string">&quot;可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + ![alt text][1]...![alt text][id可任意和下文保持一致即可]</span><br><span class="line">	[1]: /path/.jpg <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: /path/.jpg <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">代码块：</span><br><span class="line"></span><br><span class="line">&gt; 1. `中间是代码块`</span><br><span class="line">&gt; 2. ```bash 中间是代码块 ```</span><br><span class="line">&gt; 3. 四个空格/一个tab操作后面的代码</span><br><span class="line">&gt; 4.&lt;!-- more --&gt; 缩写/不展示全文</span><br></pre></td></tr></table></figure>
-
-<h2 id="好看的hexo"><a href="#好看的hexo" class="headerlink" title="好看的hexo"></a>好看的hexo</h2><ul>
-<li><a href="https://blog.bill.moe/"><strong>竞赛</strong></a></li>
-<li><a href="https://diygod.me/"><strong>b站开源大佬</strong></a></li>
-</ul>
-<p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>
-]]></content>
   </entry>
   <entry>
     <title>阿里测开面试题</title>
