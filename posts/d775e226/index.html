@@ -22,20 +22,23 @@
     var CONFIG = {"hostname":"fenqian.xyz","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="python语法特性123456return a or b:遇到为true的值即返回该值，如果均为false,即返回最后一个return a and b:遇到为false的值，即返回该值，如果均为true就返回最后一个如果函数无return,则该函数返回None对象生成器比用迭代器实现块的多，因为生成器底层是通过c编写的[line.upper() for line in open(text.txt">
+  <meta name="description" content="模型是程序化广告的灵魂，决定着广告的点击和转化，直接影响收入；而模型由于复杂度高，标签&#x2F;数据量大，是广告测试的难点，一般意义上，测试是不负责模型质量的，仅对模型中的一些定向&#x2F;过滤逻辑做覆盖，模型有效性测试，模型工程师一般是通过灰度&#x2F;ab测试来实现自测的，这种自我监督的实现方式有着明显缺陷，故本次对过往模型测试方面的记录，做下总结 大纲12常规测试方案调研测试方案  常规测试方案模型由于数据量大，且">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python语法特性">
-<meta property="og:url" content="https://fenqian.xyz/posts/d641bafc/index.html">
+<meta property="og:title" content="广告--大数据模型测试">
+<meta property="og:url" content="https://fenqian.xyz/posts/d775e226/index.html">
 <meta property="og:site_name" content="Fen Qian Web">
-<meta property="og:description" content="python语法特性123456return a or b:遇到为true的值即返回该值，如果均为false,即返回最后一个return a and b:遇到为false的值，即返回该值，如果均为true就返回最后一个如果函数无return,则该函数返回None对象生成器比用迭代器实现块的多，因为生成器底层是通过c编写的[line.upper() for line in open(text.txt">
+<meta property="og:description" content="模型是程序化广告的灵魂，决定着广告的点击和转化，直接影响收入；而模型由于复杂度高，标签&#x2F;数据量大，是广告测试的难点，一般意义上，测试是不负责模型质量的，仅对模型中的一些定向&#x2F;过滤逻辑做覆盖，模型有效性测试，模型工程师一般是通过灰度&#x2F;ab测试来实现自测的，这种自我监督的实现方式有着明显缺陷，故本次对过往模型测试方面的记录，做下总结 大纲12常规测试方案调研测试方案  常规测试方案模型由于数据量大，且">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-11-03T09:30:00.000Z">
-<meta property="article:modified_time" content="2021-11-12T10:21:56.547Z">
+<meta property="og:image" content="https://fenqian.xyz/text_image/%E6%A8%A1%E5%9E%8B%E7%9B%91%E6%8E%A7%E6%8C%87%E6%A0%87.png">
+<meta property="og:image" content="https://fenqian.xyz/text_image/%E6%A8%A1%E5%9E%8B%E5%8F%91%E5%B8%83%E4%BE%9D%E8%B5%96.png">
+<meta property="og:image" content="https://fenqian.xyz/text_image/%E5%8F%82%E8%80%83%E9%A1%B5%E9%9D%A2.png">
+<meta property="article:published_time" content="2023-06-20T15:48:00.000Z">
+<meta property="article:modified_time" content="2023-06-23T12:41:18.132Z">
 <meta property="article:author" content="GAVIN HUANG">
-<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fenqian.xyz/text_image/%E6%A8%A1%E5%9E%8B%E7%9B%91%E6%8E%A7%E6%8C%87%E6%A0%87.png">
 
-<link rel="canonical" href="https://fenqian.xyz/posts/d641bafc/">
+<link rel="canonical" href="https://fenqian.xyz/posts/d775e226/">
 
 
 <script id="page-configurations">
@@ -48,7 +51,7 @@
   };
 </script>
 
-  <title>python语法特性 | Fen Qian Web</title>
+  <title>广告--大数据模型测试 | Fen Qian Web</title>
   
 
 
@@ -198,7 +201,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://fenqian.xyz/posts/d641bafc/">
+    <link itemprop="mainEntityOfPage" href="https://fenqian.xyz/posts/d775e226/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/me.jpg">
@@ -211,7 +214,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          python语法特性<a href="https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name_posts/python%E8%AF%AD%E6%B3%95%E7%89%B9%E6%80%A7.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+          广告--大数据模型测试<a href="https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name_posts/%E5%B9%BF%E5%91%8A-%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
         </h1>
 
         <div class="post-meta">
@@ -221,24 +224,15 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-11-03 17:30:00" itemprop="dateCreated datePublished" datetime="2021-11-03T17:30:00+08:00">2021-11-03</time>
+              <time title="创建时间：2023-06-20 23:48:00" itemprop="dateCreated datePublished" datetime="2023-06-20T23:48:00+08:00">2023-06-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-12 18:21:56" itemprop="dateModified" datetime="2021-11-12T18:21:56+08:00">2021-11-12</time>
+                <time title="修改时间：2023-06-23 20:41:18" itemprop="dateModified" datetime="2023-06-23T20:41:18+08:00">2023-06-23</time>
               </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-                </span>
-            </span>
 
           
   
@@ -249,8 +243,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/posts/d641bafc/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/d641bafc/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/d775e226/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/d775e226/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -260,7 +254,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>260</span>
+              <span>955</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -279,23 +273,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
-<span id="more"></span>
+        <p><code>模型是程序化广告的灵魂，决定着广告的点击和转化，直接影响收入；而模型由于复杂度高，标签/数据量大，是广告测试的难点，一般意义上，测试是不负责模型质量的，仅对模型中的一些定向/过滤逻辑做覆盖，模型有效性测试，模型工程师一般是通过灰度/ab测试来实现自测的，这种自我监督的实现方式有着明显缺陷，故本次对过往模型测试方面的记录，做下总结</code></p>
+<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">常规测试方案</span><br><span class="line">调研测试方案</span><br></pre></td></tr></table></figure>
+
+<h2 id="常规测试方案"><a href="#常规测试方案" class="headerlink" title="常规测试方案"></a>常规测试方案</h2><p><code>模型由于数据量大，且计算的复杂度极高，一般测试不参与测试；大数据研发测试模型质量的常用方式，主要有离线指标分析，灰度流量评估的方式；这两种方式的有效性都比较低。其中离线指标分析，一般是单条数据或者指标的分析，覆盖的场景较少；而灰度流量评估的方式也存在数据量小，场景单一，且不同场景无法横向对比的问题，且评估效果太主观，无法量化和追溯。</code></p>
+<h2 id="调研测试方案"><a href="#调研测试方案" class="headerlink" title="调研测试方案"></a>调研测试方案</h2><p><code>本次调研了testerhome上面同业们的处理方式；思路，主要是对模型处理的各环节进行监控，然后对各环节的处理逻辑进行复盘，对中间数据进行分析，设置阈值，记录数据及异常值，同时通过流量回放的方式来横向评估效果；难点不少，首先模型的因子众多，需要监控的指标极多，同时模型训练时，样本数据极多，需要时间和机器成本，如果规模较小，收益会比较低。</code></p>
+<h3 id="广告模型链路"><a href="#广告模型链路" class="headerlink" title="广告模型链路"></a>广告模型链路</h3><p><code>基于链路分析，设计监控指标，进行对比</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">数据来源</span><br><span class="line">特征提取</span><br><span class="line">离线训练</span><br><span class="line">模型构建</span><br><span class="line">发布上线</span><br><span class="line">效果评估</span><br></pre></td></tr></table></figure>
+
+<h3 id="参考监控指标"><a href="#参考监控指标" class="headerlink" title="参考监控指标"></a>参考监控指标</h3><p><code>监控指标需要根据具体情况实现</code><br><img src="/text_image/%E6%A8%A1%E5%9E%8B%E7%9B%91%E6%8E%A7%E6%8C%87%E6%A0%87.png" alt="alt text"></p>
+<h3 id="效果横向对比"><a href="#效果横向对比" class="headerlink" title="效果横向对比"></a>效果横向对比</h3><p><code>模型的效果通过流量回放的方式来触发，通过横向多维度对比来评估效果，监控的效果类的指标如下</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">机器学习相关</span><br><span class="line">	AUC</span><br><span class="line">	COPC</span><br><span class="line">	LOGLOSS</span><br><span class="line">	PCTR</span><br><span class="line">	准确率</span><br><span class="line">	召回率</span><br><span class="line">	ROC 曲线</span><br><span class="line">业务相关</span><br><span class="line">	实时收入</span><br><span class="line">	CTR</span><br><span class="line">	CVR</span><br><span class="line">	CPM</span><br><span class="line">特征效果相关</span><br><span class="line">	IV</span><br><span class="line">	WOE</span><br><span class="line">	特征变现变化</span><br><span class="line"></span><br><span class="line">效果数据横向对比</span><br><span class="line">	不同阶段的对比</span><br><span class="line">	阶段一致性对比</span><br><span class="line">	时间维度</span><br><span class="line">	版本对比</span><br><span class="line">	分桶</span><br><span class="line">	分adx    </span><br></pre></td></tr></table></figure>
+
+<h3 id="模型发布依赖监控"><a href="#模型发布依赖监控" class="headerlink" title="模型发布依赖监控"></a>模型发布依赖监控</h3><p><code>模型发布依赖环节的监控，是全流程监控的一部分</code><br><img src="/text_image/%E6%A8%A1%E5%9E%8B%E5%8F%91%E5%B8%83%E4%BE%9D%E8%B5%96.png" alt="alt text"></p>
+<h3 id="360模型监控平台的其他功能"><a href="#360模型监控平台的其他功能" class="headerlink" title="360模型监控平台的其他功能"></a>360模型监控平台的其他功能</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">查询</span><br><span class="line">	自定义场景查询</span><br><span class="line">	配套表格数据</span><br><span class="line">	线上部署记录查询</span><br><span class="line">对比</span><br><span class="line">	同环比数据</span><br><span class="line">	不同模型对比</span><br><span class="line">	不同版本对比</span><br><span class="line">在线配置</span><br><span class="line">	基础属性配置</span><br><span class="line">	特征项管理</span><br><span class="line">	报警阈值配置</span><br><span class="line">	监控信号阈值配置</span><br><span class="line">交互友好</span><br><span class="line">	更新记录可查</span><br><span class="line">	前端性能</span><br></pre></td></tr></table></figure>
+<p><strong>示例页面</strong><br><img src="/text_image/%E5%8F%82%E8%80%83%E9%A1%B5%E9%9D%A2.png" alt="alt text"></p>
+
     </div>
 
     
     
     
       
-  <div class="popular-posts-header">相关文章</div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\b7270d4a\" rel="bookmark">python-多线程</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\a1c10886\" rel="bookmark">python-多进程</a></div>
-    </li>
-  </ul>
 
         <div class="reward-container">
   <div></div>
@@ -343,9 +342,6 @@
 
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/python/" rel="tag"># python</a>
-          </div>
 
         
 
@@ -353,13 +349,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/ae3a85c8/" rel="prev" title="全局函数局部函数">
-      <i class="fa fa-chevron-left"></i> 全局函数局部函数
+    <a href="/posts/c184c696/" rel="prev" title="职业--传易工作总结">
+      <i class="fa fa-chevron-left"></i> 职业--传易工作总结
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/2020cd00/" rel="next" title="python文档管理">
-      python文档管理 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -419,7 +412,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python%E8%AF%AD%E6%B3%95%E7%89%B9%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">python语法特性</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%A7%E7%BA%B2"><span class="nav-number">1.</span> <span class="nav-text">大纲</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%84%E6%B5%8B%E8%AF%95%E6%96%B9%E6%A1%88"><span class="nav-number">1.1.</span> <span class="nav-text">常规测试方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E7%A0%94%E6%B5%8B%E8%AF%95%E6%96%B9%E6%A1%88"><span class="nav-number">1.2.</span> <span class="nav-text">调研测试方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%BF%E5%91%8A%E6%A8%A1%E5%9E%8B%E9%93%BE%E8%B7%AF"><span class="nav-number">1.2.1.</span> <span class="nav-text">广告模型链路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E7%9B%91%E6%8E%A7%E6%8C%87%E6%A0%87"><span class="nav-number">1.2.2.</span> <span class="nav-text">参考监控指标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%88%E6%9E%9C%E6%A8%AA%E5%90%91%E5%AF%B9%E6%AF%94"><span class="nav-number">1.2.3.</span> <span class="nav-text">效果横向对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E5%8F%91%E5%B8%83%E4%BE%9D%E8%B5%96%E7%9B%91%E6%8E%A7"><span class="nav-number">1.2.4.</span> <span class="nav-text">模型发布依赖监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#360%E6%A8%A1%E5%9E%8B%E7%9B%91%E6%8E%A7%E5%B9%B3%E5%8F%B0%E7%9A%84%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD"><span class="nav-number">1.2.5.</span> <span class="nav-text">360模型监控平台的其他功能</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 	  
