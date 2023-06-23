@@ -184,6 +184,18 @@
       </tags>
   </entry>
   <entry>
+    <title>UI自动化基础--微软</title>
+    <url>/posts/d1646a55/</url>
+    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>UI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>UI自动化元素定位</title>
     <url>/posts/2e4c0062/</url>
     <content><![CDATA[<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">APPIUM元素定位原理</span><br><span class="line">常见的元素定位方式</span><br><span class="line">元素定位技巧/辅助工具</span><br></pre></td></tr></table></figure>
@@ -330,18 +342,6 @@
       </tags>
   </entry>
   <entry>
-    <title>UI自动化基础--微软</title>
-    <url>/posts/d1646a55/</url>
-    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>UI</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>UI自动化框架说明</title>
     <url>/posts/411091fa/</url>
     <content><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`
@@ -355,6 +355,41 @@
 <p>___ runner(入口) ___</p>
 <p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>Python语法-unittest</title>
+    <url>/posts/5b3a24b8/</url>
+    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">unittest介绍</span><br><span class="line">unittest使用教程</span><br><span class="line">unittest中的方法说明</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+
+<h4 id="unittest介绍"><a href="#unittest介绍" class="headerlink" title="unittest介绍"></a>unittest介绍</h4><p><code>unnittest是Python中使用的单测模块，能实现对模块，类，方法的自动调用执行，断言测试，环境管理，结果输出的功能</code></p>
+<p><strong>原理:</strong></p>
+<p>unittest构成要素，主要由以下几部分组成:</p>
+<ul>
+<li>testcase:待测对象，待测对象必须要以test，类方法必须含test开头命名;</li>
+<li>TestLoader类：unittest中的类，用来获取模块中的待测对象；返回待测对象的列表；</li>
+<li>TestSuit：测试套件，将测试case加到套件，套件会根据加入的顺序来确认执行顺序；<ul>
+<li>该类的addTest方法，可将测试对象加到套件中，但对结构有要求，必须保持addTest(测试类(具体测试方法))，这种实现方案能保证最先加入套件的最先被执行；</li>
+<li>该类的另一个方法addTests,也可将测试对象加到套件中，但其对结构也有要求，必须保持addTests([测试类1(测试方法1)，测试类1（测试方法2）])</li>
+<li>这种方法能保证直接将获取的对象加入测试套件，执行顺序按加入套件的顺序，一般是按test的命名顺序：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">	testloader &#x3D; unittest.TestLoader()</span><br><span class="line">	# 获取测试类里面case名，以固定顺序数组返回</span><br><span class="line">	testnames &#x3D; testloader.loadTestsFromTestCase(t)</span><br><span class="line">	print(testnames)</span><br><span class="line">	suite &#x3D; unittest.TestSuite()</span><br><span class="line">	suite.addTest&#x2F;addTests(testnames)  </span><br><span class="line">	runn &#x3D; unittest.TextTestRunner(verbosity&#x3D;2)</span><br><span class="line">	runn.run(suite)</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">   suite &#x3D; unittest.TestSuite()</span><br><span class="line">   suite.addTest(sui.pa(Test_ap))	#支持加入对象是一个套件，以实现二次封装</span><br><span class="line">   runn &#x3D; unittest.TextTestRunner(verbosity&#x3D;2)</span><br><span class="line">   runn.run(suite)</span><br><span class="line">   </span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>TextTestRunner()类：unittest中的类；用来执行suit，控制测试case的执行，执行生成的是text的报告；如果是需要生成htmlt报告，则使用htmltestrunner;</li>
+<li>执行顺序：默认按case名称顺序来确认执行顺序，也可手动定制顺序，各suit来确定执行顺序；</li>
+<li>环境/前置/后置处理：使用unittest自带的方法，setUp/setDown,setUpClass setDownClass,其中前两个每个case执行前后都会分别执行前置后置处理；后两个在套件执行前后，分别执行签字和后置处理，且仅执行一次；</li>
+<li>断言：unittest提供了个钟断言方法，如下图:<br> <img src="/text_image/unitest%E6%96%AD%E8%A8%80.png" alt="alt_text"></li>
+<li>跳过某些测试case：可以使用unittest的skip装饰器，其中skip装饰器主要有3种;(@unittest.skip(reason)/@unittest.skipIf(condition,reason)/@unittest.skipUnless(condition,reason)/即在满足condition条件下跳过该用例，reason用于描述跳过的原因)</li>
+</ul>
+<p><a href="https://blog.51cto.com/u_2681882/2123613"><strong>参考：unitest使用详解</strong></a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>unittest</tag>
+        <tag>参数化</tag>
+      </tags>
   </entry>
   <entry>
     <title>HEXO 官方使用指南</title>
@@ -418,76 +453,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Python语法-unittest</title>
-    <url>/posts/5b3a24b8/</url>
-    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">unittest介绍</span><br><span class="line">unittest使用教程</span><br><span class="line">unittest中的方法说明</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-
-<h4 id="unittest介绍"><a href="#unittest介绍" class="headerlink" title="unittest介绍"></a>unittest介绍</h4><p><code>unnittest是Python中使用的单测模块，能实现对模块，类，方法的自动调用执行，断言测试，环境管理，结果输出的功能</code></p>
-<p><strong>原理:</strong></p>
-<p>unittest构成要素，主要由以下几部分组成:</p>
-<ul>
-<li>testcase:待测对象，待测对象必须要以test，类方法必须含test开头命名;</li>
-<li>TestLoader类：unittest中的类，用来获取模块中的待测对象；返回待测对象的列表；</li>
-<li>TestSuit：测试套件，将测试case加到套件，套件会根据加入的顺序来确认执行顺序；<ul>
-<li>该类的addTest方法，可将测试对象加到套件中，但对结构有要求，必须保持addTest(测试类(具体测试方法))，这种实现方案能保证最先加入套件的最先被执行；</li>
-<li>该类的另一个方法addTests,也可将测试对象加到套件中，但其对结构也有要求，必须保持addTests([测试类1(测试方法1)，测试类1（测试方法2）])</li>
-<li>这种方法能保证直接将获取的对象加入测试套件，执行顺序按加入套件的顺序，一般是按test的命名顺序：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">	testloader &#x3D; unittest.TestLoader()</span><br><span class="line">	# 获取测试类里面case名，以固定顺序数组返回</span><br><span class="line">	testnames &#x3D; testloader.loadTestsFromTestCase(t)</span><br><span class="line">	print(testnames)</span><br><span class="line">	suite &#x3D; unittest.TestSuite()</span><br><span class="line">	suite.addTest&#x2F;addTests(testnames)  </span><br><span class="line">	runn &#x3D; unittest.TextTestRunner(verbosity&#x3D;2)</span><br><span class="line">	runn.run(suite)</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">   suite &#x3D; unittest.TestSuite()</span><br><span class="line">   suite.addTest(sui.pa(Test_ap))	#支持加入对象是一个套件，以实现二次封装</span><br><span class="line">   runn &#x3D; unittest.TextTestRunner(verbosity&#x3D;2)</span><br><span class="line">   runn.run(suite)</span><br><span class="line">   </span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li>TextTestRunner()类：unittest中的类；用来执行suit，控制测试case的执行，执行生成的是text的报告；如果是需要生成htmlt报告，则使用htmltestrunner;</li>
-<li>执行顺序：默认按case名称顺序来确认执行顺序，也可手动定制顺序，各suit来确定执行顺序；</li>
-<li>环境/前置/后置处理：使用unittest自带的方法，setUp/setDown,setUpClass setDownClass,其中前两个每个case执行前后都会分别执行前置后置处理；后两个在套件执行前后，分别执行签字和后置处理，且仅执行一次；</li>
-<li>断言：unittest提供了个钟断言方法，如下图:<br> <img src="/text_image/unitest%E6%96%AD%E8%A8%80.png" alt="alt_text"></li>
-<li>跳过某些测试case：可以使用unittest的skip装饰器，其中skip装饰器主要有3种;(@unittest.skip(reason)/@unittest.skipIf(condition,reason)/@unittest.skipUnless(condition,reason)/即在满足condition条件下跳过该用例，reason用于描述跳过的原因)</li>
-</ul>
-<p><a href="https://blog.51cto.com/u_2681882/2123613"><strong>参考：unitest使用详解</strong></a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>unittest</tag>
-        <tag>参数化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python-多进程</title>
-    <url>/posts/a1c10886/</url>
-    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python多进程简述</span><br><span class="line">python多进程模块方法介绍</span><br><span class="line">python多进程使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<ul>
-<li><p><em><strong>python多进程模块简述：</strong></em></p>
-<p>  <code>python由于GIL机制，多线程，实际仅消耗一个内核资源；因此效率较低，python要实现并发，提高性能，只能使用多进程模块，python的多进程模块为multiprocessing，通过使用Pool类实现多进程；   </code></p>
-</li>
-<li><p><em><strong>python多进程模块方法介绍：</strong></em></p>
-<p>  <code>   python多进程模块为multiprocessing，为python的内置模块；通过该模块封装的Pool()对象实现多进程，Pool类的属性介绍如下：</code></p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()	#需要被执行的方法&#x2F;任务</span><br><span class="line">iter&#x3D;iter	#迭代对象，list&#x2F;变量值</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(3)	#创建一个仅容纳3个进程的进程池，一旦工作任务超出进程的数量，则需等待，进程池中的进程被释放，任务才能进入进程池；</span><br><span class="line">__init__(self, group&#x3D;None, target&#x3D;None, name&#x3D;None, args&#x3D;(), kwargs&#x3D;&#123;&#125;)	#进程池的构造方法</span><br><span class="line">group：进程池所属的进程组，一旦不需要给值；</span><br><span class="line">target：待处理的任务或方法；</span><br><span class="line">name：进程池的别名，默认不给值；</span><br><span class="line">args：调用对象的位置参数，可给值元组&#x2F;列表等可迭代对象或者参数值；</span><br><span class="line">kwargs：调用对象的字典参数；</span><br><span class="line"></span><br><span class="line">使用：在win环境下，进程池必须在当前模块下执行，即必须在 if __name__&#x3D;&#x3D;main:下执行；</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>Pool()类中拥有的属性方法如下：</strong></li>
-</ul>
-<ul>
-<li>pool.map()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br></pre></td></tr></table></figure></li>
-<li>pool.map_async(run,iter)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map_async(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map_async(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br><span class="line">---效果和pool.map()不相同，mapasyc效率更高；mapasyc主进程未阻塞进程池，不需要等该批次的进程全执行完，新的任务就能进入进程池执行；常用pool.map()</span><br></pre></td></tr></table></figure></li>
-<li>pool.apply()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]])</span><br><span class="line">apply,参数需要为具体的变量值，且仅在python2支持；</span><br><span class="line">apply方法的原理是，阻塞进程池，一次仅让一个任务进入进程池，该任务完成后，才能执行下一个任务，实际是串行；</span><br></pre></td></tr></table></figure></li>
-<li>pool.applyasyc()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]],[, callback&#x3D;None]]])</span><br><span class="line">   applyasyc,参数需要为具体的变量值，在python3上支持；</span><br><span class="line">   applyasyc方法的原理是，进程池非阻塞，一次可以让多个任务进入进程池，且未对该批次任务进行阻塞，只要其中一个进程执行完后，就能释放资源，让新的任务进入进程池，实际是并行的,效率等同于mapasyc()；</span><br><span class="line">回调使用：pool.applyasyc(run,kwargs,callback&#x3D;func2)，run的返回作为func2的参数，执行完返回func2的值；</span><br><span class="line">   ---applyasyc效果等同于mapasyc()，只是他具有回调功能，且入参的变量不能是可迭代对象，必须为具体的变量值；</span><br></pre></td></tr></table></figure></li>
-<li>pool.terminal()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用：结束工作进程，不在处理未完成的任务</span><br><span class="line">pool.map(run,iter)</span><br><span class="line">pool.close()</span><br><span class="line">pool.run()</span><br><span class="line">sleep(2)</span><br><span class="line">pool.terminal()		#执行两秒后，哪怕进程未执行完，也结束该主进程</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p><em><strong>python多进程使用：</strong></em></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()</span><br><span class="line">iter&#x3D;iter</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(multiprocessing.cpu_count())</span><br><span class="line">pool.map(run(),iter)</span><br><span class="line">pool.join()</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>python</tag>
-        <tag>多进程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>python文档管理</title>
     <url>/posts/2020cd00/</url>
     <content><![CDATA[<h1 id="python文档说明"><a href="#python文档说明" class="headerlink" title="python文档说明"></a>python文档说明</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">文档管理的作用</span><br><span class="line">文档管理模块pydoc介绍</span><br><span class="line">怎么使用文档管理</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -532,6 +497,41 @@
       </tags>
   </entry>
   <entry>
+    <title>python-多进程</title>
+    <url>/posts/a1c10886/</url>
+    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python多进程简述</span><br><span class="line">python多进程模块方法介绍</span><br><span class="line">python多进程使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<ul>
+<li><p><em><strong>python多进程模块简述：</strong></em></p>
+<p>  <code>python由于GIL机制，多线程，实际仅消耗一个内核资源；因此效率较低，python要实现并发，提高性能，只能使用多进程模块，python的多进程模块为multiprocessing，通过使用Pool类实现多进程；   </code></p>
+</li>
+<li><p><em><strong>python多进程模块方法介绍：</strong></em></p>
+<p>  <code>   python多进程模块为multiprocessing，为python的内置模块；通过该模块封装的Pool()对象实现多进程，Pool类的属性介绍如下：</code></p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()	#需要被执行的方法&#x2F;任务</span><br><span class="line">iter&#x3D;iter	#迭代对象，list&#x2F;变量值</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(3)	#创建一个仅容纳3个进程的进程池，一旦工作任务超出进程的数量，则需等待，进程池中的进程被释放，任务才能进入进程池；</span><br><span class="line">__init__(self, group&#x3D;None, target&#x3D;None, name&#x3D;None, args&#x3D;(), kwargs&#x3D;&#123;&#125;)	#进程池的构造方法</span><br><span class="line">group：进程池所属的进程组，一旦不需要给值；</span><br><span class="line">target：待处理的任务或方法；</span><br><span class="line">name：进程池的别名，默认不给值；</span><br><span class="line">args：调用对象的位置参数，可给值元组&#x2F;列表等可迭代对象或者参数值；</span><br><span class="line">kwargs：调用对象的字典参数；</span><br><span class="line"></span><br><span class="line">使用：在win环境下，进程池必须在当前模块下执行，即必须在 if __name__&#x3D;&#x3D;main:下执行；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Pool()类中拥有的属性方法如下：</strong></li>
+</ul>
+<ul>
+<li>pool.map()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br></pre></td></tr></table></figure></li>
+<li>pool.map_async(run,iter)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map_async(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map_async(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br><span class="line">---效果和pool.map()不相同，mapasyc效率更高；mapasyc主进程未阻塞进程池，不需要等该批次的进程全执行完，新的任务就能进入进程池执行；常用pool.map()</span><br></pre></td></tr></table></figure></li>
+<li>pool.apply()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]])</span><br><span class="line">apply,参数需要为具体的变量值，且仅在python2支持；</span><br><span class="line">apply方法的原理是，阻塞进程池，一次仅让一个任务进入进程池，该任务完成后，才能执行下一个任务，实际是串行；</span><br></pre></td></tr></table></figure></li>
+<li>pool.applyasyc()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]],[, callback&#x3D;None]]])</span><br><span class="line">   applyasyc,参数需要为具体的变量值，在python3上支持；</span><br><span class="line">   applyasyc方法的原理是，进程池非阻塞，一次可以让多个任务进入进程池，且未对该批次任务进行阻塞，只要其中一个进程执行完后，就能释放资源，让新的任务进入进程池，实际是并行的,效率等同于mapasyc()；</span><br><span class="line">回调使用：pool.applyasyc(run,kwargs,callback&#x3D;func2)，run的返回作为func2的参数，执行完返回func2的值；</span><br><span class="line">   ---applyasyc效果等同于mapasyc()，只是他具有回调功能，且入参的变量不能是可迭代对象，必须为具体的变量值；</span><br></pre></td></tr></table></figure></li>
+<li>pool.terminal()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用：结束工作进程，不在处理未完成的任务</span><br><span class="line">pool.map(run,iter)</span><br><span class="line">pool.close()</span><br><span class="line">pool.run()</span><br><span class="line">sleep(2)</span><br><span class="line">pool.terminal()		#执行两秒后，哪怕进程未执行完，也结束该主进程</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><em><strong>python多进程使用：</strong></em></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()</span><br><span class="line">iter&#x3D;iter</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(multiprocessing.cpu_count())</span><br><span class="line">pool.map(run(),iter)</span><br><span class="line">pool.join()</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>python</tag>
+        <tag>多进程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python语法-super方法</title>
     <url>/posts/7b2ded6/</url>
     <content><![CDATA[<p><code>super方法用来，继承父类，或祖父类；常用的结构为super(C,self)/python3括号内的可缩写（super()）;super方法本身是一个类，和当前所在的类（父类）无关，该类使用了mro的算法（方法查找顺序）来决定继承类的顺序</code></p>
@@ -544,6 +544,18 @@
 ]]></content>
   </entry>
   <entry>
+    <title>python语法特性</title>
+    <url>/posts/d641bafc/</url>
+    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ui自动化分布式并行运算</title>
     <url>/posts/2be91958/</url>
     <content><![CDATA[<p><a href="https://cloud.tencent.com/developer/article/1974105">Gird</a></p>
@@ -554,18 +566,6 @@
       <tags>
         <tag>UI</tag>
         <tag>gird</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python语法特性</title>
-    <url>/posts/d641bafc/</url>
-    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
-<span id="more"></span>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -999,21 +999,6 @@
       </tags>
   </entry>
   <entry>
-    <title>常用app测试工具</title>
-    <url>/posts/28eebda3/</url>
-    <content><![CDATA[<h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
-<span id="more"></span>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">参考回答：</span><br><span class="line">功能测试自动化</span><br><span class="line">a) 轻量接口自动化测试</span><br><span class="line"></span><br><span class="line">jmeter，</span><br><span class="line"></span><br><span class="line">b) APP UI层面的自动化</span><br><span class="line"></span><br><span class="line">android：UI Automator Viewer，Android Junit，Instrumentation，UIAutomator，</span><br><span class="line"></span><br><span class="line">iOS:基于Instrument的iOS UI自动化，</span><br><span class="line"></span><br><span class="line">性能测试</span><br><span class="line"></span><br><span class="line">a) Web前端性能测试</span><br><span class="line"></span><br><span class="line">网络抓包工具：Wireshark</span><br><span class="line"></span><br><span class="line">网页文件大小</span><br><span class="line"></span><br><span class="line">webpagetest</span><br><span class="line"></span><br><span class="line">pagespeed insight</span><br><span class="line"></span><br><span class="line">chrome adb</span><br><span class="line"></span><br><span class="line">b) APP端性能测试</span><br><span class="line"></span><br><span class="line">Android内存占用分析：MAT</span><br><span class="line"></span><br><span class="line">iOS内存问题分析：ARC模式</span><br><span class="line"></span><br><span class="line">Android WebView性能分析：</span><br><span class="line"></span><br><span class="line">iOS WebView性能分析</span><br><span class="line"></span><br><span class="line">c) 后台服务性能测试</span><br><span class="line"></span><br><span class="line">负载，压力，耐久性</span><br><span class="line"></span><br><span class="line">可拓展性，基准</span><br><span class="line"></span><br><span class="line">工具：apacheAB，Jmeter，LoadRunner，</span><br><span class="line"></span><br><span class="line">专项测试</span><br><span class="line"></span><br><span class="line">a) 兼容性测试</span><br><span class="line"></span><br><span class="line">手工测试：操作系统，分辨率，rom，网络类型</span><br><span class="line"></span><br><span class="line">云平台：testin，脚本编写，Android。</span><br><span class="line"></span><br><span class="line">b) 流量测试</span><br><span class="line"></span><br><span class="line">Android自带的流量管理，</span><br><span class="line"></span><br><span class="line">iOS自带的Network</span><br><span class="line"></span><br><span class="line">tcpdump抓包</span><br><span class="line"></span><br><span class="line">WiFi代理抓包：Fiddler</span><br><span class="line"></span><br><span class="line">流量节省方法：压缩数据，json优于xml；WebP优于传统的JPG，PNG；控制访问的频次；只获取必要的数据；缓存；</span><br><span class="line"></span><br><span class="line">c) 电量测试</span><br><span class="line"></span><br><span class="line">基于测试设备的方法，购买电量表进行测试。</span><br><span class="line"></span><br><span class="line">GSam Battery Monitoe Pro</span><br><span class="line"></span><br><span class="line">iOS基于Instrument Energy工具</span><br><span class="line"></span><br><span class="line">d) 弱网络测试</span><br><span class="line"></span><br><span class="line">手机自带的网络状况模拟工具</span><br><span class="line"></span><br><span class="line">基于代理的弱网络的模拟:</span><br><span class="line"></span><br><span class="line">工具：windows：Network Delay Simulator</span><br><span class="line"></span><br><span class="line">Mac：Network Link Conditioner</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>app测试</tag>
-        <tag>工具</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>广告--大数据模型测试</title>
     <url>/posts/d775e226/</url>
     <content><![CDATA[<p><code>模型是程序化广告的灵魂，决定着广告的点击和转化，直接影响收入；而模型由于复杂度高，标签/数据量大，是广告测试的难点，一般意义上，测试是不负责模型质量的，仅对模型中的一些定向/过滤逻辑做覆盖，模型有效性测试，模型工程师一般是通过灰度/ab测试来实现自测的，这种自我监督的实现方式有着明显缺陷，故本次对过往模型测试方面的记录，做下总结</code></p>
@@ -1041,6 +1026,21 @@
       </tags>
   </entry>
   <entry>
+    <title>常用app测试工具</title>
+    <url>/posts/28eebda3/</url>
+    <content><![CDATA[<h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">参考回答：</span><br><span class="line">功能测试自动化</span><br><span class="line">a) 轻量接口自动化测试</span><br><span class="line"></span><br><span class="line">jmeter，</span><br><span class="line"></span><br><span class="line">b) APP UI层面的自动化</span><br><span class="line"></span><br><span class="line">android：UI Automator Viewer，Android Junit，Instrumentation，UIAutomator，</span><br><span class="line"></span><br><span class="line">iOS:基于Instrument的iOS UI自动化，</span><br><span class="line"></span><br><span class="line">性能测试</span><br><span class="line"></span><br><span class="line">a) Web前端性能测试</span><br><span class="line"></span><br><span class="line">网络抓包工具：Wireshark</span><br><span class="line"></span><br><span class="line">网页文件大小</span><br><span class="line"></span><br><span class="line">webpagetest</span><br><span class="line"></span><br><span class="line">pagespeed insight</span><br><span class="line"></span><br><span class="line">chrome adb</span><br><span class="line"></span><br><span class="line">b) APP端性能测试</span><br><span class="line"></span><br><span class="line">Android内存占用分析：MAT</span><br><span class="line"></span><br><span class="line">iOS内存问题分析：ARC模式</span><br><span class="line"></span><br><span class="line">Android WebView性能分析：</span><br><span class="line"></span><br><span class="line">iOS WebView性能分析</span><br><span class="line"></span><br><span class="line">c) 后台服务性能测试</span><br><span class="line"></span><br><span class="line">负载，压力，耐久性</span><br><span class="line"></span><br><span class="line">可拓展性，基准</span><br><span class="line"></span><br><span class="line">工具：apacheAB，Jmeter，LoadRunner，</span><br><span class="line"></span><br><span class="line">专项测试</span><br><span class="line"></span><br><span class="line">a) 兼容性测试</span><br><span class="line"></span><br><span class="line">手工测试：操作系统，分辨率，rom，网络类型</span><br><span class="line"></span><br><span class="line">云平台：testin，脚本编写，Android。</span><br><span class="line"></span><br><span class="line">b) 流量测试</span><br><span class="line"></span><br><span class="line">Android自带的流量管理，</span><br><span class="line"></span><br><span class="line">iOS自带的Network</span><br><span class="line"></span><br><span class="line">tcpdump抓包</span><br><span class="line"></span><br><span class="line">WiFi代理抓包：Fiddler</span><br><span class="line"></span><br><span class="line">流量节省方法：压缩数据，json优于xml；WebP优于传统的JPG，PNG；控制访问的频次；只获取必要的数据；缓存；</span><br><span class="line"></span><br><span class="line">c) 电量测试</span><br><span class="line"></span><br><span class="line">基于测试设备的方法，购买电量表进行测试。</span><br><span class="line"></span><br><span class="line">GSam Battery Monitoe Pro</span><br><span class="line"></span><br><span class="line">iOS基于Instrument Energy工具</span><br><span class="line"></span><br><span class="line">d) 弱网络测试</span><br><span class="line"></span><br><span class="line">手机自带的网络状况模拟工具</span><br><span class="line"></span><br><span class="line">基于代理的弱网络的模拟:</span><br><span class="line"></span><br><span class="line">工具：windows：Network Delay Simulator</span><br><span class="line"></span><br><span class="line">Mac：Network Link Conditioner</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>app测试</tag>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>传易--性能测试</title>
     <url>/posts/56a1ed73/</url>
     <content><![CDATA[<p><a href="https://docs.qq.com/doc/DSWZnVGNka29qa1lJ">内部项目，需找我授权</a></p>
@@ -1054,6 +1054,12 @@
       </tags>
   </entry>
   <entry>
+    <title>数据库性能测试</title>
+    <url>/posts/ab3091af/</url>
+    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>搭建hexo博客</title>
     <url>/posts/8e88d59c/</url>
     <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
@@ -1063,12 +1069,6 @@
 <ul>
 <li>related_posts: true</li>
 </ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>数据库性能测试</title>
-    <url>/posts/ab3091af/</url>
-    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -1490,6 +1490,47 @@
       </tags>
   </entry>
   <entry>
+    <title>装饰器详解</title>
+    <url>/posts/1d1282f5/</url>
+    <content><![CDATA[<h1 id="装饰器是什么"><a href="#装饰器是什么" class="headerlink" title="装饰器是什么"></a>装饰器是什么</h1><span id="more"></span>
+
+<ul>
+<li>装饰器本质上是一种函数构造方法，其构造的是一种可变函数；我们知道在python中一切皆对象，函数即对象，由于对象是灵活不受约束的，因此我们在构造函数时，可将函数对象作为参数传递或者返回，可将函数对象进行随意嵌套，基于这些特性，我们可在在不变更代码的情况下，灵活的扩展函数/模块的功能；</li>
+</ul>
+<h1 id="装饰器的作用"><a href="#装饰器的作用" class="headerlink" title="装饰器的作用"></a>装饰器的作用</h1><ul>
+<li><em><strong>为已存在的对象添加额外功能</strong></em></li>
+</ul>
+<h1 id="装饰器的实现"><a href="#装饰器的实现" class="headerlink" title="装饰器的实现"></a>装饰器的实现</h1><ul>
+<li><strong>原则:</strong> <ul>
+<li>装饰器必须接受一个callable对象</li>
+<li>其实它并不关心你返回什么，可以是另外一个callable对象（大部分情况），也可以是其他类对象，比如property</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#装饰器的基本语法如下</span></span><br><span class="line">def father(funs):</span><br><span class="line">	def b(funs):</span><br><span class="line">    funs</span><br><span class="line">    pass</span><br><span class="line">	<span class="built_in">return</span> b</span><br><span class="line"><span class="comment">#@这种称为语法糖，实际等同father(son)    </span></span><br><span class="line">@father()</span><br><span class="line">def son():</span><br><span class="line">	pass</span><br><span class="line">    </span><br><span class="line"><span class="comment">#使用,执行子函数，基于结构，会将子函数作为参数传递给父函数，实际执行的是父函数</span></span><br><span class="line">son()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>由上可知，将子函数作为参数传递给父函数，父函数，会谁传递的函数的对象的变化而执行不同的操作，从而实现可变函数的构造。<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#上方的结构，不支持复合结构如下，这是由于执行son时已经是复合结构了，在复用一层，就会报错，但是python针对这种场景，也有处理的方法</span></span><br><span class="line">father(son())</span><br><span class="line"></span><br><span class="line"><span class="comment">#处理方法</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line"><span class="comment">#装饰器的基本语法如下</span></span><br><span class="line">def father(funs):</span><br><span class="line">	@wraps(funs)</span><br><span class="line">	def b(funs):</span><br><span class="line">    funs</span><br><span class="line">    pass</span><br><span class="line">	<span class="built_in">return</span> b</span><br><span class="line">    </span><br><span class="line">@father()</span><br><span class="line">def son():</span><br><span class="line">	pass</span><br><span class="line"></span><br><span class="line"><span class="comment">#此时即可支持复合结构</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>除上诉以外，装饰器还能被进一步封装</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def logged(level, name=None, message=None):</span><br><span class="line">    <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">    Add logging to a function. level is the logging</span></span><br><span class="line"><span class="string">    level, name is the logger name, and message is the</span></span><br><span class="line"><span class="string">    log message. If name and message aren&#x27;t specified,</span></span><br><span class="line"><span class="string">    they default to the function&#x27;s module and name.</span></span><br><span class="line"><span class="string">    &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">    def decorate(func):</span><br><span class="line">        logname = name <span class="keyword">if</span> name <span class="keyword">else</span> func.__module__</span><br><span class="line">        <span class="built_in">log</span> = logging.getLogger(logname)</span><br><span class="line">        logmsg = message <span class="keyword">if</span> message <span class="keyword">else</span> func.__name__</span><br><span class="line"></span><br><span class="line">        @wraps(func)</span><br><span class="line">        def wrapper(*args, **kwargs):</span><br><span class="line">            log.log(level, logmsg)</span><br><span class="line">            <span class="built_in">return</span> func(*args, **kwargs)</span><br><span class="line">        <span class="built_in">return</span> wrapper</span><br><span class="line">    <span class="built_in">return</span> decorate</span><br><span class="line"></span><br><span class="line"><span class="comment"># Example use</span></span><br><span class="line">@logged(logging.DEBUG)</span><br><span class="line">def add(x, y):</span><br><span class="line">    <span class="built_in">return</span> x + y</span><br><span class="line"></span><br><span class="line">@logged(logging.CRITICAL, <span class="string">&#x27;example&#x27;</span>)</span><br><span class="line">def spam():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Spam!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>同样一个函数，也可以有多个装饰器</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#a/b/c都是装饰器，执行的优先顺序是先内后外即a(son)&gt;b(son)&gt;c(son)</span></span><br><span class="line">@c</span><br><span class="line">@b</span><br><span class="line">@a</span><br><span class="line">def son():</span><br><span class="line">	pass</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>装饰器不仅仅只能是函数，也可以是类，利用的是类的内置方法（__call__）</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class logging(object):</span><br><span class="line">    def __init__(self, level=<span class="string">&#x27;INFO&#x27;</span>):</span><br><span class="line">        self.level = level</span><br><span class="line">        </span><br><span class="line">    def __call__(self, func): <span class="comment"># 接受函数</span></span><br><span class="line">        def wrapper(*args, **kwargs):</span><br><span class="line">            <span class="built_in">print</span> <span class="string">&quot;[&#123;level&#125;]: enter function &#123;func&#125;()&quot;</span>.format(</span><br><span class="line">                level=self.level,</span><br><span class="line">                func=func.__name__)</span><br><span class="line">            func(*args, **kwargs)</span><br><span class="line">        <span class="built_in">return</span> wrapper  <span class="comment">#返回函数</span></span><br><span class="line"></span><br><span class="line">@logging(level=<span class="string">&#x27;INFO&#x27;</span>)</span><br><span class="line">def say(something):</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;say &#123;&#125;!&quot;</span>.format(something)</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.cnblogs.com/cicaday/p/python-decorator.html#_caption_1"><em><strong>参考：装饰器详解</strong></em></a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>类对象/实例对象/类方法/实例方法/静态方法</title>
     <url>/posts/93899372/</url>
     <content><![CDATA[<ul>
@@ -1556,47 +1597,6 @@
 </ul>
 <p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>装饰器详解</title>
-    <url>/posts/1d1282f5/</url>
-    <content><![CDATA[<h1 id="装饰器是什么"><a href="#装饰器是什么" class="headerlink" title="装饰器是什么"></a>装饰器是什么</h1><span id="more"></span>
-
-<ul>
-<li>装饰器本质上是一种函数构造方法，其构造的是一种可变函数；我们知道在python中一切皆对象，函数即对象，由于对象是灵活不受约束的，因此我们在构造函数时，可将函数对象作为参数传递或者返回，可将函数对象进行随意嵌套，基于这些特性，我们可在在不变更代码的情况下，灵活的扩展函数/模块的功能；</li>
-</ul>
-<h1 id="装饰器的作用"><a href="#装饰器的作用" class="headerlink" title="装饰器的作用"></a>装饰器的作用</h1><ul>
-<li><em><strong>为已存在的对象添加额外功能</strong></em></li>
-</ul>
-<h1 id="装饰器的实现"><a href="#装饰器的实现" class="headerlink" title="装饰器的实现"></a>装饰器的实现</h1><ul>
-<li><strong>原则:</strong> <ul>
-<li>装饰器必须接受一个callable对象</li>
-<li>其实它并不关心你返回什么，可以是另外一个callable对象（大部分情况），也可以是其他类对象，比如property</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#装饰器的基本语法如下</span></span><br><span class="line">def father(funs):</span><br><span class="line">	def b(funs):</span><br><span class="line">    funs</span><br><span class="line">    pass</span><br><span class="line">	<span class="built_in">return</span> b</span><br><span class="line"><span class="comment">#@这种称为语法糖，实际等同father(son)    </span></span><br><span class="line">@father()</span><br><span class="line">def son():</span><br><span class="line">	pass</span><br><span class="line">    </span><br><span class="line"><span class="comment">#使用,执行子函数，基于结构，会将子函数作为参数传递给父函数，实际执行的是父函数</span></span><br><span class="line">son()</span><br></pre></td></tr></table></figure>
-<ul>
-<li>由上可知，将子函数作为参数传递给父函数，父函数，会谁传递的函数的对象的变化而执行不同的操作，从而实现可变函数的构造。<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#上方的结构，不支持复合结构如下，这是由于执行son时已经是复合结构了，在复用一层，就会报错，但是python针对这种场景，也有处理的方法</span></span><br><span class="line">father(son())</span><br><span class="line"></span><br><span class="line"><span class="comment">#处理方法</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line"><span class="comment">#装饰器的基本语法如下</span></span><br><span class="line">def father(funs):</span><br><span class="line">	@wraps(funs)</span><br><span class="line">	def b(funs):</span><br><span class="line">    funs</span><br><span class="line">    pass</span><br><span class="line">	<span class="built_in">return</span> b</span><br><span class="line">    </span><br><span class="line">@father()</span><br><span class="line">def son():</span><br><span class="line">	pass</span><br><span class="line"></span><br><span class="line"><span class="comment">#此时即可支持复合结构</span></span><br></pre></td></tr></table></figure></li>
-<li><strong>除上诉以外，装饰器还能被进一步封装</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def logged(level, name=None, message=None):</span><br><span class="line">    <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">    Add logging to a function. level is the logging</span></span><br><span class="line"><span class="string">    level, name is the logger name, and message is the</span></span><br><span class="line"><span class="string">    log message. If name and message aren&#x27;t specified,</span></span><br><span class="line"><span class="string">    they default to the function&#x27;s module and name.</span></span><br><span class="line"><span class="string">    &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">    def decorate(func):</span><br><span class="line">        logname = name <span class="keyword">if</span> name <span class="keyword">else</span> func.__module__</span><br><span class="line">        <span class="built_in">log</span> = logging.getLogger(logname)</span><br><span class="line">        logmsg = message <span class="keyword">if</span> message <span class="keyword">else</span> func.__name__</span><br><span class="line"></span><br><span class="line">        @wraps(func)</span><br><span class="line">        def wrapper(*args, **kwargs):</span><br><span class="line">            log.log(level, logmsg)</span><br><span class="line">            <span class="built_in">return</span> func(*args, **kwargs)</span><br><span class="line">        <span class="built_in">return</span> wrapper</span><br><span class="line">    <span class="built_in">return</span> decorate</span><br><span class="line"></span><br><span class="line"><span class="comment"># Example use</span></span><br><span class="line">@logged(logging.DEBUG)</span><br><span class="line">def add(x, y):</span><br><span class="line">    <span class="built_in">return</span> x + y</span><br><span class="line"></span><br><span class="line">@logged(logging.CRITICAL, <span class="string">&#x27;example&#x27;</span>)</span><br><span class="line">def spam():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Spam!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>同样一个函数，也可以有多个装饰器</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#a/b/c都是装饰器，执行的优先顺序是先内后外即a(son)&gt;b(son)&gt;c(son)</span></span><br><span class="line">@c</span><br><span class="line">@b</span><br><span class="line">@a</span><br><span class="line">def son():</span><br><span class="line">	pass</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>装饰器不仅仅只能是函数，也可以是类，利用的是类的内置方法（__call__）</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class logging(object):</span><br><span class="line">    def __init__(self, level=<span class="string">&#x27;INFO&#x27;</span>):</span><br><span class="line">        self.level = level</span><br><span class="line">        </span><br><span class="line">    def __call__(self, func): <span class="comment"># 接受函数</span></span><br><span class="line">        def wrapper(*args, **kwargs):</span><br><span class="line">            <span class="built_in">print</span> <span class="string">&quot;[&#123;level&#125;]: enter function &#123;func&#125;()&quot;</span>.format(</span><br><span class="line">                level=self.level,</span><br><span class="line">                func=func.__name__)</span><br><span class="line">            func(*args, **kwargs)</span><br><span class="line">        <span class="built_in">return</span> wrapper  <span class="comment">#返回函数</span></span><br><span class="line"></span><br><span class="line">@logging(level=<span class="string">&#x27;INFO&#x27;</span>)</span><br><span class="line">def say(something):</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;say &#123;&#125;!&quot;</span>.format(something)</span><br></pre></td></tr></table></figure>
-<p><a href="https://www.cnblogs.com/cicaday/p/python-decorator.html#_caption_1"><em><strong>参考：装饰器详解</strong></em></a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
   </entry>
   <entry>
     <title>阿里测开面试题</title>
