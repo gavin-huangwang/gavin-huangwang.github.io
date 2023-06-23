@@ -544,18 +544,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>python语法特性</title>
-    <url>/posts/d641bafc/</url>
-    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
-<span id="more"></span>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ui自动化分布式并行运算</title>
     <url>/posts/2be91958/</url>
     <content><![CDATA[<p><a href="https://cloud.tencent.com/developer/article/1974105">Gird</a></p>
@@ -566,6 +554,18 @@
       <tags>
         <tag>UI</tag>
         <tag>gird</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python语法特性</title>
+    <url>/posts/d641bafc/</url>
+    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -735,25 +735,6 @@
 <li><strong>痛点</strong></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>大数据BI报表架构调整</title>
-    <url>/posts/10f9513d/</url>
-    <content><![CDATA[<h1 id="大数据BI报表架构调整"><a href="#大数据BI报表架构调整" class="headerlink" title="大数据BI报表架构调整"></a>大数据BI报表架构调整</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span>
-
-<h2 id="架构说明"><a href="#架构说明" class="headerlink" title="架构说明"></a>架构说明</h2><h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="覆盖范围"><a href="#覆盖范围" class="headerlink" title="覆盖范围"></a>覆盖范围</h3><p><em><strong>oms Category Analysis模块</strong></em></p>
-<ul>
-<li>覆盖前端交互</li>
-<li>覆盖报表的数据</li>
-<li>覆盖接口性能</li>
-</ul>
-<p><em><strong>Traffic Analysis</strong></em></p>
-<ul>
-<li>覆盖前端交互</li>
-<li>覆盖报表的数据</li>
-<li>覆盖接口性能</li>
-</ul>
-]]></content>
   </entry>
   <entry>
     <title>全局函数局部函数</title>
@@ -940,6 +921,25 @@
       </tags>
   </entry>
   <entry>
+    <title>大数据BI报表架构调整</title>
+    <url>/posts/10f9513d/</url>
+    <content><![CDATA[<h1 id="大数据BI报表架构调整"><a href="#大数据BI报表架构调整" class="headerlink" title="大数据BI报表架构调整"></a>大数据BI报表架构调整</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span>
+
+<h2 id="架构说明"><a href="#架构说明" class="headerlink" title="架构说明"></a>架构说明</h2><h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="覆盖范围"><a href="#覆盖范围" class="headerlink" title="覆盖范围"></a>覆盖范围</h3><p><em><strong>oms Category Analysis模块</strong></em></p>
+<ul>
+<li>覆盖前端交互</li>
+<li>覆盖报表的数据</li>
+<li>覆盖接口性能</li>
+</ul>
+<p><em><strong>Traffic Analysis</strong></em></p>
+<ul>
+<li>覆盖前端交互</li>
+<li>覆盖报表的数据</li>
+<li>覆盖接口性能</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>工作梳理</title>
     <url>/posts/8c69a8ec/</url>
     <content><![CDATA[<h1 id="工作梳理"><a href="#工作梳理" class="headerlink" title="工作梳理"></a>工作梳理</h1><ul>
@@ -1032,6 +1032,13 @@
 <h3 id="360模型监控平台的其他功能"><a href="#360模型监控平台的其他功能" class="headerlink" title="360模型监控平台的其他功能"></a>360模型监控平台的其他功能</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">查询</span><br><span class="line">	自定义场景查询</span><br><span class="line">	配套表格数据</span><br><span class="line">	线上部署记录查询</span><br><span class="line">对比</span><br><span class="line">	同环比数据</span><br><span class="line">	不同模型对比</span><br><span class="line">	不同版本对比</span><br><span class="line">在线配置</span><br><span class="line">	基础属性配置</span><br><span class="line">	特征项管理</span><br><span class="line">	报警阈值配置</span><br><span class="line">	监控信号阈值配置</span><br><span class="line">交互友好</span><br><span class="line">	更新记录可查</span><br><span class="line">	前端性能</span><br></pre></td></tr></table></figure>
 <p><strong>示例页面</strong><br><img src="/text_image/%E5%8F%82%E8%80%83%E9%A1%B5%E9%9D%A2.png" alt="alt text"></p>
 ]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>广告</tag>
+        <tag>模型</tag>
+      </tags>
   </entry>
   <entry>
     <title>传易--性能测试</title>
@@ -1047,12 +1054,6 @@
       </tags>
   </entry>
   <entry>
-    <title>数据库性能测试</title>
-    <url>/posts/ab3091af/</url>
-    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>搭建hexo博客</title>
     <url>/posts/8e88d59c/</url>
     <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
@@ -1062,6 +1063,12 @@
 <ul>
 <li>related_posts: true</li>
 </ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>数据库性能测试</title>
+    <url>/posts/ab3091af/</url>
+    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
 ]]></content>
   </entry>
   <entry>
