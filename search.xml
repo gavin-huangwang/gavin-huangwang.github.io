@@ -67,135 +67,6 @@
       </tags>
   </entry>
   <entry>
-    <title>SOLOPI使用教程</title>
-    <url>/posts/49e140/</url>
-    <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<ul>
-<li><p><em><strong>介绍</strong></em></p>
-<p>  <code>solopi是支付宝团队研发的ui自动化工具;支持UI录制回放，录制脚本的编辑/扩展/转换成appium脚本/录制脚本支持分发到其他的设备执行；同时还支持性能测试和一机多控，执行采集各种性能数据，同时支持通过一台设备控制多台设备的行为；</code></p>
-</li>
-<li><p><em><strong>使用指南</strong></em></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">环境准备</span><br><span class="line">app配置</span><br><span class="line">录制</span><br><span class="line">回放</span><br><span class="line">性能测试</span><br><span class="line">一机多控</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>环境准备</strong></p>
-<ul>
-<li><p><em>下载配置Androidsdk</em></p>
-<ul>
-<li>地址:<a href="https://developer.android.com/studio/releases/platform-tools#downloads">https://developer.android.com/studio/releases/platform-tools#downloads</a></li>
-<li>操作：下载安装完Android调试工具后，在下载对应系统版本的 SDK Platform Tools，配置好环境变量，注意win10以上系统环境变量配置即生效，低版本需要重启pc才能生效；</li>
-</ul>
-</li>
-<li><p><em>给手机授权</em></p>
-<ul>
-<li>操作：进入开发者模式，并授权usb调试权限；</li>
-</ul>
-</li>
-<li><p><em>检测环境并连接wifi</em></p>
-<ul>
-<li>操作：通过adb devices命令检测，同时要连接wifi;</li>
-</ul>
-</li>
-<li><p><em>建立连接</em></p>
-<ul>
-<li>操作：通过pc的cmd启动服务,输入（adb tcpip 5555）</li>
-</ul>
-</li>
-<li><p><em>下载solopi的apk</em></p>
-<ul>
-<li>地址：<a href="https://github.com/alipay/SoloPi/releases/download/v0.11.2/SoloPi_0.11.2.apk">apk点击下载</a></li>
-<li>操作：下载安装后，通过配置授权</li>
-<li>环境配置：<a href="https://github.com/alipay/SoloPi/wiki/FirstUse">地址跳转参考内容</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>app配置</strong></p>
-<p>  <code>按需配置，一般不需要进行配置；可参考上方的环境配置</code></p>
-</li>
-<li><p><strong>录制/回放</strong></p>
-<ul>
-<li><a href="https://github.com/alipay/SoloPi/wiki/RecordCase"><em>官方教程</em></a></li>
-<li>录制：录制支持直接对收到操作进行录制，且录制的脚本支持编辑/扩展/保存/导入等操作，支持各类操作和断言，支持图像识别，简单方便；</li>
-<li>回放：回放支持单脚本回放，支持批量回放，支持重复播放；</li>
-<li>优点：操作简单，可扩展编辑定制策略，可同步到其他设备，可重复回放支持暴力遍历；</li>
-<li>缺点：不支持持续集成，需要手动触发；</li>
-</ul>
-</li>
-<li><p><strong>性能测试</strong></p>
-<ul>
-<li><a href="https://github.com/alipay/SoloPi/wiki/Performance"><em>官方教程</em></a></li>
-<li>操作：性能测试时，直接勾选需要监控的性能指标，不进行录制则可以实时查看；进行录制时，点击录制按钮开始录制，录制结束后点击录制结束按钮，录制的性能数据会存储下来，支持图表分析，可同时存储多份性能数据；</li>
-<li>优点：支持实时查看场景的性能，可和业务测试结合方便简单；支持性能录制，可和UI自动化结合，查看各场景的性能变化和差异；</li>
-<li>缺点：不支持续集成，利用脚本进行回放时不支持性能监控；</li>
-</ul>
-</li>
-<li><p><strong>一机多控</strong></p>
-<ul>
-<li>[<em>官方教程</em>]</li>
-<li>操作：多台设备上同时安装solopi和待测APP；做好配置和授权操作，同时主机（控制机）选中一机多控，选中为主机；其他设备点击一机多控，选中为从机；然后用主机扫码录入从机，然后在主机点击建立主从机的连接，然后主机点击录屏按钮，开始进行一机多控操作；原理是利用solopi的录屏回放功能，主机录屏，从机回放；</li>
-<li>优点：可以用一台机器，控制多台设备操作，能有效的覆盖兼容性测试；</li>
-<li>缺点：不支持ios系统；由于是先录制，在回放，因此所有设备都需要有网络，且必须是同一局域网，且存在延时；不支持批量操作时，同时监控性能数据；</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p><em><strong>和业务结合</strong></em></p>
-<p>  <code>和业务结合使用前，需要先梳理清楚solopi的优缺点：</code></p>
-<p>  优点：</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">支持录制UI自动化，且录制的脚本支持编辑自定义，且无环境依赖；</span><br><span class="line">录制的脚本可以导出在任意设备上回放，或者转换成appium脚本；</span><br><span class="line">支持回放管理，支持批量回放和重复回放；</span><br><span class="line">支持性能测试，实时监控APP性能和录制APP的性能；</span><br><span class="line">支持一机多控，可同时控制多台设备；</span><br></pre></td></tr></table></figure>
-
-<p>  缺点：</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">不支持iOS设备，仅支持Android设备；</span><br><span class="line">工具是一款纯功能测试辅助软件，不支持持续集成；</span><br><span class="line">功能过于离散，几个功能不能结合在一起使用；</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>和业务结合：</strong></p>
-<ul>
-<li><p><em>rc验收阶段：</em><br><code>建议功能测试完毕且无误后，最后在rc验收一遍，主流程，验收时进行功能&quot;录制&quot;,录制的脚本可定期回放/开发了相关功能时进行回放/也可以通过Jenkins触发回放;</code></p>
-</li>
-<li><p><em>灰度/线上验收阶段：</em><br><code>建议测试进行线上验收时，进行录制，录制的脚本，可通过扩展进行定期回放；</code></p>
-</li>
-<li><p><em>冒烟/功能测试/rc验收阶段：</em><br><code>建议以上阶段，进行测试验收时，打开性能测试监控，观察功能场景有没用性能问题；</code></p>
-</li>
-<li><p><em>冒烟/兼容性测试阶段：</em><br><code>可以使用一机多控功能，进行兼容性测试；但此功能对控制的终端有要求，最好有固定的兼容环境；</code></p>
-</li>
-<li><p><em>稳定性治理/预装版本暴力回放：</em><br><code>使用重复回放功能进行暴力回放；</code></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em><strong>下一步：</strong></em></p>
-</li>
-</ul>
-<p><a href="https://github.com/alipay/SoloPi"><em>Solopi github</em>_</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>ui自动化</tag>
-        <tag>稳定性</tag>
-        <tag>前端性能</tag>
-        <tag>solopi</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>UI自动化基础--微软</title>
-    <url>/posts/d1646a55/</url>
-    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>UI</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>UI自动化元素定位</title>
     <url>/posts/2e4c0062/</url>
     <content><![CDATA[<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">APPIUM元素定位原理</span><br><span class="line">常见的元素定位方式</span><br><span class="line">元素定位技巧/辅助工具</span><br></pre></td></tr></table></figure>
@@ -342,6 +213,123 @@
       </tags>
   </entry>
   <entry>
+    <title>SOLOPI使用教程</title>
+    <url>/posts/49e140/</url>
+    <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<ul>
+<li><p><em><strong>介绍</strong></em></p>
+<p>  <code>solopi是支付宝团队研发的ui自动化工具;支持UI录制回放，录制脚本的编辑/扩展/转换成appium脚本/录制脚本支持分发到其他的设备执行；同时还支持性能测试和一机多控，执行采集各种性能数据，同时支持通过一台设备控制多台设备的行为；</code></p>
+</li>
+<li><p><em><strong>使用指南</strong></em></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">环境准备</span><br><span class="line">app配置</span><br><span class="line">录制</span><br><span class="line">回放</span><br><span class="line">性能测试</span><br><span class="line">一机多控</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>环境准备</strong></p>
+<ul>
+<li><p><em>下载配置Androidsdk</em></p>
+<ul>
+<li>地址:<a href="https://developer.android.com/studio/releases/platform-tools#downloads">https://developer.android.com/studio/releases/platform-tools#downloads</a></li>
+<li>操作：下载安装完Android调试工具后，在下载对应系统版本的 SDK Platform Tools，配置好环境变量，注意win10以上系统环境变量配置即生效，低版本需要重启pc才能生效；</li>
+</ul>
+</li>
+<li><p><em>给手机授权</em></p>
+<ul>
+<li>操作：进入开发者模式，并授权usb调试权限；</li>
+</ul>
+</li>
+<li><p><em>检测环境并连接wifi</em></p>
+<ul>
+<li>操作：通过adb devices命令检测，同时要连接wifi;</li>
+</ul>
+</li>
+<li><p><em>建立连接</em></p>
+<ul>
+<li>操作：通过pc的cmd启动服务,输入（adb tcpip 5555）</li>
+</ul>
+</li>
+<li><p><em>下载solopi的apk</em></p>
+<ul>
+<li>地址：<a href="https://github.com/alipay/SoloPi/releases/download/v0.11.2/SoloPi_0.11.2.apk">apk点击下载</a></li>
+<li>操作：下载安装后，通过配置授权</li>
+<li>环境配置：<a href="https://github.com/alipay/SoloPi/wiki/FirstUse">地址跳转参考内容</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>app配置</strong></p>
+<p>  <code>按需配置，一般不需要进行配置；可参考上方的环境配置</code></p>
+</li>
+<li><p><strong>录制/回放</strong></p>
+<ul>
+<li><a href="https://github.com/alipay/SoloPi/wiki/RecordCase"><em>官方教程</em></a></li>
+<li>录制：录制支持直接对收到操作进行录制，且录制的脚本支持编辑/扩展/保存/导入等操作，支持各类操作和断言，支持图像识别，简单方便；</li>
+<li>回放：回放支持单脚本回放，支持批量回放，支持重复播放；</li>
+<li>优点：操作简单，可扩展编辑定制策略，可同步到其他设备，可重复回放支持暴力遍历；</li>
+<li>缺点：不支持持续集成，需要手动触发；</li>
+</ul>
+</li>
+<li><p><strong>性能测试</strong></p>
+<ul>
+<li><a href="https://github.com/alipay/SoloPi/wiki/Performance"><em>官方教程</em></a></li>
+<li>操作：性能测试时，直接勾选需要监控的性能指标，不进行录制则可以实时查看；进行录制时，点击录制按钮开始录制，录制结束后点击录制结束按钮，录制的性能数据会存储下来，支持图表分析，可同时存储多份性能数据；</li>
+<li>优点：支持实时查看场景的性能，可和业务测试结合方便简单；支持性能录制，可和UI自动化结合，查看各场景的性能变化和差异；</li>
+<li>缺点：不支持续集成，利用脚本进行回放时不支持性能监控；</li>
+</ul>
+</li>
+<li><p><strong>一机多控</strong></p>
+<ul>
+<li>[<em>官方教程</em>]</li>
+<li>操作：多台设备上同时安装solopi和待测APP；做好配置和授权操作，同时主机（控制机）选中一机多控，选中为主机；其他设备点击一机多控，选中为从机；然后用主机扫码录入从机，然后在主机点击建立主从机的连接，然后主机点击录屏按钮，开始进行一机多控操作；原理是利用solopi的录屏回放功能，主机录屏，从机回放；</li>
+<li>优点：可以用一台机器，控制多台设备操作，能有效的覆盖兼容性测试；</li>
+<li>缺点：不支持ios系统；由于是先录制，在回放，因此所有设备都需要有网络，且必须是同一局域网，且存在延时；不支持批量操作时，同时监控性能数据；</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><em><strong>和业务结合</strong></em></p>
+<p>  <code>和业务结合使用前，需要先梳理清楚solopi的优缺点：</code></p>
+<p>  优点：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">支持录制UI自动化，且录制的脚本支持编辑自定义，且无环境依赖；</span><br><span class="line">录制的脚本可以导出在任意设备上回放，或者转换成appium脚本；</span><br><span class="line">支持回放管理，支持批量回放和重复回放；</span><br><span class="line">支持性能测试，实时监控APP性能和录制APP的性能；</span><br><span class="line">支持一机多控，可同时控制多台设备；</span><br></pre></td></tr></table></figure>
+
+<p>  缺点：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">不支持iOS设备，仅支持Android设备；</span><br><span class="line">工具是一款纯功能测试辅助软件，不支持持续集成；</span><br><span class="line">功能过于离散，几个功能不能结合在一起使用；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>和业务结合：</strong></p>
+<ul>
+<li><p><em>rc验收阶段：</em><br><code>建议功能测试完毕且无误后，最后在rc验收一遍，主流程，验收时进行功能&quot;录制&quot;,录制的脚本可定期回放/开发了相关功能时进行回放/也可以通过Jenkins触发回放;</code></p>
+</li>
+<li><p><em>灰度/线上验收阶段：</em><br><code>建议测试进行线上验收时，进行录制，录制的脚本，可通过扩展进行定期回放；</code></p>
+</li>
+<li><p><em>冒烟/功能测试/rc验收阶段：</em><br><code>建议以上阶段，进行测试验收时，打开性能测试监控，观察功能场景有没用性能问题；</code></p>
+</li>
+<li><p><em>冒烟/兼容性测试阶段：</em><br><code>可以使用一机多控功能，进行兼容性测试；但此功能对控制的终端有要求，最好有固定的兼容环境；</code></p>
+</li>
+<li><p><em>稳定性治理/预装版本暴力回放：</em><br><code>使用重复回放功能进行暴力回放；</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em><strong>下一步：</strong></em></p>
+</li>
+</ul>
+<p><a href="https://github.com/alipay/SoloPi"><em>Solopi github</em>_</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>ui自动化</tag>
+        <tag>稳定性</tag>
+        <tag>前端性能</tag>
+        <tag>solopi</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>UI自动化框架说明</title>
     <url>/posts/411091fa/</url>
     <content><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`
@@ -355,6 +343,39 @@
 <p>___ runner(入口) ___</p>
 <p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>UI自动化基础--微软</title>
+    <url>/posts/d1646a55/</url>
+    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>UI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HEXO 官方使用指南</title>
+    <url>/posts/4a17b156/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><span id="more"></span>
+<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>#开启动画<br>canvas_nest: true </p>
+]]></content>
   </entry>
   <entry>
     <title>Python语法-unittest</title>
@@ -389,67 +410,6 @@
       <tags>
         <tag>unittest</tag>
         <tag>参数化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HEXO 官方使用指南</title>
-    <url>/posts/4a17b156/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><span id="more"></span>
-<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<p>#开启动画<br>canvas_nest: true </p>
-]]></content>
-  </entry>
-  <entry>
-    <title>python-多线程</title>
-    <url>/posts/b7270d4a/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">多线程是什么？</span><br><span class="line">为什么需要使用多线程，多线程的作用？</span><br><span class="line">怎么使用多线程，join方法的作用？</span><br><span class="line">python多线程弊端？</span><br><span class="line">python多线程其他机制？</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<ul>
-<li><strong>多线程是什么？</strong></li>
-</ul>
-<p><code>线程是程序的最小单元，程序运行时，实际是线程在解释器中执行工作；</code></p>
-<ul>
-<li><strong>为什么需要使用多线程，多线程的作用？</strong></li>
-</ul>
-<p><code>python的多线程是假的多线程，在进程中同时最多只能有一个线程在解释器中运行，这是由python的全局解释器（GIL）来控制的，具体过程为“生成gil-线程运行-线程休眠（gil上锁）-运行其他线程-再次运行此线程时（需要将上一个线程上锁，并解锁此线程）”，这种虽然是假的多线程，但是可以在一个线程等待时，运行另一个线程，使单核得到充分利用；</code></p>
-<ul>
-<li><strong>怎么使用多线程，join方法的作用？</strong></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import threading</span><br><span class="line">#fun是函数，arg是参数</span><br><span class="line">t1&#x3D;threading.Thread(fun,arg)</span><br><span class="line">t1.start()</span><br><span class="line">t1.join() </span><br><span class="line">print(&quot;主线程执行&quot;)</span><br></pre></td></tr></table></figure>
-<p>join方法的作用是子线程劫持主线程，仅当子线程执行完之后，才能执行主线程，常用于爬虫，如爬取多个资源时，使用多线程，每个子线程添加join等待，仅当爬虫子线程爬取完资源后，才能进行下一步操作（运行主线程）</p>
-<ul>
-<li><strong>python 多线程的弊端</strong></li>
-</ul>
-<p><code>python多线程的GIL机制，导致python同时只能执行一个线程，只能使用单核，在多核机器上会存在巨大的资源浪费；因此多线程多用于高IO操作，尽量避免在多cpu计算场景下使用，该场景下应使用多进程；</code></p>
-<ul>
-<li><strong>python多线程其他机制？</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python守护线程？</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>python的守护线程？</strong><br>  <code>python主线程运行时，默认会等待子线程运行结束后主线程才能结束，但我们可以在子线程启动前，将子线程添加到守护线程里，这样的话哪怕该守护子线程未结束，只要主线程结束了，守护线程也会跟着结束；   </code>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import threading</span><br><span class="line">#fun是函数，arg是参数</span><br><span class="line">t1&#x3D;threading.Thread(fun,arg)</span><br><span class="line">t1.setDaemon(True)#设置守护线程必须在该子线程执行前</span><br><span class="line">t1.start()</span><br><span class="line">t1.join() </span><br><span class="line">print(&quot;主线程执行&quot;)	#主线程结束后，子线程会跟着结束，不会执行</span><br><span class="line"></span><br><span class="line">线程的其他常用方法：</span><br><span class="line"></span><br><span class="line">run():  线程被cpu调度后自动执行线程对象的run方法</span><br><span class="line">start():启动线程活动。</span><br><span class="line">isAlive(): 返回线程是否活动的。</span><br><span class="line">getName(): 返回线程名。</span><br><span class="line">setName(): 设置线程名。</span><br><span class="line"></span><br><span class="line">threading模块提供的一些方法：</span><br><span class="line">threading.currentThread(): 返回当前的线程变量。</span><br><span class="line">threading.enumerate(): 返回一个包含正在运行的线程的list。正在运行指线程启动后、结束前，不包括启动前和终止后的线程。</span><br><span class="line">threading.activeCount():返回正在运行的线程数量，与len(threading.enumerate())有相同的结果。</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>总结：python的多线程支持多任务，但多任务并不支持并行运行（同时运行），只是利用了cpu的多道技术，支持任务的切换；</p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>多线程</tag>
       </tags>
   </entry>
   <entry>
@@ -494,6 +454,46 @@
       <tags>
         <tag>python</tag>
         <tag>说明文档</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python-多线程</title>
+    <url>/posts/b7270d4a/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">多线程是什么？</span><br><span class="line">为什么需要使用多线程，多线程的作用？</span><br><span class="line">怎么使用多线程，join方法的作用？</span><br><span class="line">python多线程弊端？</span><br><span class="line">python多线程其他机制？</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<ul>
+<li><strong>多线程是什么？</strong></li>
+</ul>
+<p><code>线程是程序的最小单元，程序运行时，实际是线程在解释器中执行工作；</code></p>
+<ul>
+<li><strong>为什么需要使用多线程，多线程的作用？</strong></li>
+</ul>
+<p><code>python的多线程是假的多线程，在进程中同时最多只能有一个线程在解释器中运行，这是由python的全局解释器（GIL）来控制的，具体过程为“生成gil-线程运行-线程休眠（gil上锁）-运行其他线程-再次运行此线程时（需要将上一个线程上锁，并解锁此线程）”，这种虽然是假的多线程，但是可以在一个线程等待时，运行另一个线程，使单核得到充分利用；</code></p>
+<ul>
+<li><strong>怎么使用多线程，join方法的作用？</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import threading</span><br><span class="line">#fun是函数，arg是参数</span><br><span class="line">t1&#x3D;threading.Thread(fun,arg)</span><br><span class="line">t1.start()</span><br><span class="line">t1.join() </span><br><span class="line">print(&quot;主线程执行&quot;)</span><br></pre></td></tr></table></figure>
+<p>join方法的作用是子线程劫持主线程，仅当子线程执行完之后，才能执行主线程，常用于爬虫，如爬取多个资源时，使用多线程，每个子线程添加join等待，仅当爬虫子线程爬取完资源后，才能进行下一步操作（运行主线程）</p>
+<ul>
+<li><strong>python 多线程的弊端</strong></li>
+</ul>
+<p><code>python多线程的GIL机制，导致python同时只能执行一个线程，只能使用单核，在多核机器上会存在巨大的资源浪费；因此多线程多用于高IO操作，尽量避免在多cpu计算场景下使用，该场景下应使用多进程；</code></p>
+<ul>
+<li><strong>python多线程其他机制？</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python守护线程？</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>python的守护线程？</strong><br>  <code>python主线程运行时，默认会等待子线程运行结束后主线程才能结束，但我们可以在子线程启动前，将子线程添加到守护线程里，这样的话哪怕该守护子线程未结束，只要主线程结束了，守护线程也会跟着结束；   </code>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import threading</span><br><span class="line">#fun是函数，arg是参数</span><br><span class="line">t1&#x3D;threading.Thread(fun,arg)</span><br><span class="line">t1.setDaemon(True)#设置守护线程必须在该子线程执行前</span><br><span class="line">t1.start()</span><br><span class="line">t1.join() </span><br><span class="line">print(&quot;主线程执行&quot;)	#主线程结束后，子线程会跟着结束，不会执行</span><br><span class="line"></span><br><span class="line">线程的其他常用方法：</span><br><span class="line"></span><br><span class="line">run():  线程被cpu调度后自动执行线程对象的run方法</span><br><span class="line">start():启动线程活动。</span><br><span class="line">isAlive(): 返回线程是否活动的。</span><br><span class="line">getName(): 返回线程名。</span><br><span class="line">setName(): 设置线程名。</span><br><span class="line"></span><br><span class="line">threading模块提供的一些方法：</span><br><span class="line">threading.currentThread(): 返回当前的线程变量。</span><br><span class="line">threading.enumerate(): 返回一个包含正在运行的线程的list。正在运行指线程启动后、结束前，不包括启动前和终止后的线程。</span><br><span class="line">threading.activeCount():返回正在运行的线程数量，与len(threading.enumerate())有相同的结果。</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>总结：python的多线程支持多任务，但多任务并不支持并行运行（同时运行），只是利用了cpu的多道技术，支持任务的切换；</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>多线程</tag>
       </tags>
   </entry>
   <entry>
@@ -776,6 +776,25 @@
       </tags>
   </entry>
   <entry>
+    <title>大数据BI报表架构调整</title>
+    <url>/posts/10f9513d/</url>
+    <content><![CDATA[<h1 id="大数据BI报表架构调整"><a href="#大数据BI报表架构调整" class="headerlink" title="大数据BI报表架构调整"></a>大数据BI报表架构调整</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span>
+
+<h2 id="架构说明"><a href="#架构说明" class="headerlink" title="架构说明"></a>架构说明</h2><h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="覆盖范围"><a href="#覆盖范围" class="headerlink" title="覆盖范围"></a>覆盖范围</h3><p><em><strong>oms Category Analysis模块</strong></em></p>
+<ul>
+<li>覆盖前端交互</li>
+<li>覆盖报表的数据</li>
+<li>覆盖接口性能</li>
+</ul>
+<p><em><strong>Traffic Analysis</strong></em></p>
+<ul>
+<li>覆盖前端交互</li>
+<li>覆盖报表的数据</li>
+<li>覆盖接口性能</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>各家模拟器对比分析</title>
     <url>/posts/83661fed/</url>
     <content><![CDATA[<h1 id="各家模拟器对比分析"><a href="#各家模拟器对比分析" class="headerlink" title="各家模拟器对比分析"></a>各家模拟器对比分析</h1><ul>
@@ -921,25 +940,6 @@
       </tags>
   </entry>
   <entry>
-    <title>大数据BI报表架构调整</title>
-    <url>/posts/10f9513d/</url>
-    <content><![CDATA[<h1 id="大数据BI报表架构调整"><a href="#大数据BI报表架构调整" class="headerlink" title="大数据BI报表架构调整"></a>大数据BI报表架构调整</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span>
-
-<h2 id="架构说明"><a href="#架构说明" class="headerlink" title="架构说明"></a>架构说明</h2><h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="覆盖范围"><a href="#覆盖范围" class="headerlink" title="覆盖范围"></a>覆盖范围</h3><p><em><strong>oms Category Analysis模块</strong></em></p>
-<ul>
-<li>覆盖前端交互</li>
-<li>覆盖报表的数据</li>
-<li>覆盖接口性能</li>
-</ul>
-<p><em><strong>Traffic Analysis</strong></em></p>
-<ul>
-<li>覆盖前端交互</li>
-<li>覆盖报表的数据</li>
-<li>覆盖接口性能</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>工作梳理</title>
     <url>/posts/8c69a8ec/</url>
     <content><![CDATA[<h1 id="工作梳理"><a href="#工作梳理" class="headerlink" title="工作梳理"></a>工作梳理</h1><ul>
@@ -999,11 +999,26 @@
       </tags>
   </entry>
   <entry>
+    <title>常用app测试工具</title>
+    <url>/posts/28eebda3/</url>
+    <content><![CDATA[<h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">参考回答：</span><br><span class="line">功能测试自动化</span><br><span class="line">a) 轻量接口自动化测试</span><br><span class="line"></span><br><span class="line">jmeter，</span><br><span class="line"></span><br><span class="line">b) APP UI层面的自动化</span><br><span class="line"></span><br><span class="line">android：UI Automator Viewer，Android Junit，Instrumentation，UIAutomator，</span><br><span class="line"></span><br><span class="line">iOS:基于Instrument的iOS UI自动化，</span><br><span class="line"></span><br><span class="line">性能测试</span><br><span class="line"></span><br><span class="line">a) Web前端性能测试</span><br><span class="line"></span><br><span class="line">网络抓包工具：Wireshark</span><br><span class="line"></span><br><span class="line">网页文件大小</span><br><span class="line"></span><br><span class="line">webpagetest</span><br><span class="line"></span><br><span class="line">pagespeed insight</span><br><span class="line"></span><br><span class="line">chrome adb</span><br><span class="line"></span><br><span class="line">b) APP端性能测试</span><br><span class="line"></span><br><span class="line">Android内存占用分析：MAT</span><br><span class="line"></span><br><span class="line">iOS内存问题分析：ARC模式</span><br><span class="line"></span><br><span class="line">Android WebView性能分析：</span><br><span class="line"></span><br><span class="line">iOS WebView性能分析</span><br><span class="line"></span><br><span class="line">c) 后台服务性能测试</span><br><span class="line"></span><br><span class="line">负载，压力，耐久性</span><br><span class="line"></span><br><span class="line">可拓展性，基准</span><br><span class="line"></span><br><span class="line">工具：apacheAB，Jmeter，LoadRunner，</span><br><span class="line"></span><br><span class="line">专项测试</span><br><span class="line"></span><br><span class="line">a) 兼容性测试</span><br><span class="line"></span><br><span class="line">手工测试：操作系统，分辨率，rom，网络类型</span><br><span class="line"></span><br><span class="line">云平台：testin，脚本编写，Android。</span><br><span class="line"></span><br><span class="line">b) 流量测试</span><br><span class="line"></span><br><span class="line">Android自带的流量管理，</span><br><span class="line"></span><br><span class="line">iOS自带的Network</span><br><span class="line"></span><br><span class="line">tcpdump抓包</span><br><span class="line"></span><br><span class="line">WiFi代理抓包：Fiddler</span><br><span class="line"></span><br><span class="line">流量节省方法：压缩数据，json优于xml；WebP优于传统的JPG，PNG；控制访问的频次；只获取必要的数据；缓存；</span><br><span class="line"></span><br><span class="line">c) 电量测试</span><br><span class="line"></span><br><span class="line">基于测试设备的方法，购买电量表进行测试。</span><br><span class="line"></span><br><span class="line">GSam Battery Monitoe Pro</span><br><span class="line"></span><br><span class="line">iOS基于Instrument Energy工具</span><br><span class="line"></span><br><span class="line">d) 弱网络测试</span><br><span class="line"></span><br><span class="line">手机自带的网络状况模拟工具</span><br><span class="line"></span><br><span class="line">基于代理的弱网络的模拟:</span><br><span class="line"></span><br><span class="line">工具：windows：Network Delay Simulator</span><br><span class="line"></span><br><span class="line">Mac：Network Link Conditioner</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>app测试</tag>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>广告--大数据模型测试</title>
     <url>/posts/d775e226/</url>
     <content><![CDATA[<p><code>模型是程序化广告的灵魂，决定着广告的点击和转化，直接影响收入；而模型由于复杂度高，标签/数据量大，是广告测试的难点，一般意义上，测试是不负责模型质量的，仅对模型中的一些定向/过滤逻辑做覆盖，模型有效性测试，模型工程师一般是通过灰度/ab测试来实现自测的，这种自我监督的实现方式有着明显缺陷，故本次对过往模型测试方面的记录，做下总结</code></p>
 <h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">常规测试方案</span><br><span class="line">调研测试方案</span><br></pre></td></tr></table></figure>
-
+<span id="more"></span>
 <h2 id="常规测试方案"><a href="#常规测试方案" class="headerlink" title="常规测试方案"></a>常规测试方案</h2><p><code>模型由于数据量大，且计算的复杂度极高，一般测试不参与测试；大数据研发测试模型质量的常用方式，主要有离线指标分析，灰度流量评估的方式；这两种方式的有效性都比较低。其中离线指标分析，一般是单条数据或者指标的分析，覆盖的场景较少；而灰度流量评估的方式也存在数据量小，场景单一，且不同场景无法横向对比的问题，且评估效果太主观，无法量化和追溯。</code></p>
 <h2 id="调研测试方案"><a href="#调研测试方案" class="headerlink" title="调研测试方案"></a>调研测试方案</h2><p><code>本次调研了testerhome上面同业们的处理方式；思路，主要是对模型处理的各环节进行监控，然后对各环节的处理逻辑进行复盘，对中间数据进行分析，设置阈值，记录数据及异常值，同时通过流量回放的方式来横向评估效果；难点不少，首先模型的因子众多，需要监控的指标极多，同时模型训练时，样本数据极多，需要时间和机器成本，如果规模较小，收益会比较低。</code></p>
 <h3 id="广告模型链路"><a href="#广告模型链路" class="headerlink" title="广告模型链路"></a>广告模型链路</h3><p><code>基于链路分析，设计监控指标，进行对比</code></p>
@@ -1023,21 +1038,6 @@
       <tags>
         <tag>广告</tag>
         <tag>模型</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>常用app测试工具</title>
-    <url>/posts/28eebda3/</url>
-    <content><![CDATA[<h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
-<span id="more"></span>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">参考回答：</span><br><span class="line">功能测试自动化</span><br><span class="line">a) 轻量接口自动化测试</span><br><span class="line"></span><br><span class="line">jmeter，</span><br><span class="line"></span><br><span class="line">b) APP UI层面的自动化</span><br><span class="line"></span><br><span class="line">android：UI Automator Viewer，Android Junit，Instrumentation，UIAutomator，</span><br><span class="line"></span><br><span class="line">iOS:基于Instrument的iOS UI自动化，</span><br><span class="line"></span><br><span class="line">性能测试</span><br><span class="line"></span><br><span class="line">a) Web前端性能测试</span><br><span class="line"></span><br><span class="line">网络抓包工具：Wireshark</span><br><span class="line"></span><br><span class="line">网页文件大小</span><br><span class="line"></span><br><span class="line">webpagetest</span><br><span class="line"></span><br><span class="line">pagespeed insight</span><br><span class="line"></span><br><span class="line">chrome adb</span><br><span class="line"></span><br><span class="line">b) APP端性能测试</span><br><span class="line"></span><br><span class="line">Android内存占用分析：MAT</span><br><span class="line"></span><br><span class="line">iOS内存问题分析：ARC模式</span><br><span class="line"></span><br><span class="line">Android WebView性能分析：</span><br><span class="line"></span><br><span class="line">iOS WebView性能分析</span><br><span class="line"></span><br><span class="line">c) 后台服务性能测试</span><br><span class="line"></span><br><span class="line">负载，压力，耐久性</span><br><span class="line"></span><br><span class="line">可拓展性，基准</span><br><span class="line"></span><br><span class="line">工具：apacheAB，Jmeter，LoadRunner，</span><br><span class="line"></span><br><span class="line">专项测试</span><br><span class="line"></span><br><span class="line">a) 兼容性测试</span><br><span class="line"></span><br><span class="line">手工测试：操作系统，分辨率，rom，网络类型</span><br><span class="line"></span><br><span class="line">云平台：testin，脚本编写，Android。</span><br><span class="line"></span><br><span class="line">b) 流量测试</span><br><span class="line"></span><br><span class="line">Android自带的流量管理，</span><br><span class="line"></span><br><span class="line">iOS自带的Network</span><br><span class="line"></span><br><span class="line">tcpdump抓包</span><br><span class="line"></span><br><span class="line">WiFi代理抓包：Fiddler</span><br><span class="line"></span><br><span class="line">流量节省方法：压缩数据，json优于xml；WebP优于传统的JPG，PNG；控制访问的频次；只获取必要的数据；缓存；</span><br><span class="line"></span><br><span class="line">c) 电量测试</span><br><span class="line"></span><br><span class="line">基于测试设备的方法，购买电量表进行测试。</span><br><span class="line"></span><br><span class="line">GSam Battery Monitoe Pro</span><br><span class="line"></span><br><span class="line">iOS基于Instrument Energy工具</span><br><span class="line"></span><br><span class="line">d) 弱网络测试</span><br><span class="line"></span><br><span class="line">手机自带的网络状况模拟工具</span><br><span class="line"></span><br><span class="line">基于代理的弱网络的模拟:</span><br><span class="line"></span><br><span class="line">工具：windows：Network Delay Simulator</span><br><span class="line"></span><br><span class="line">Mac：Network Link Conditioner</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>app测试</tag>
-        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -1130,19 +1130,6 @@
     <url>/posts/c48e9a83/</url>
     <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>百度质量体系建设</title>
-    <url>/posts/bcd76c52/</url>
-    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
-<li><em><strong>介绍</strong></em></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>目录</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>稳定性治理--智能遍历</title>
@@ -1313,6 +1300,19 @@
       </tags>
   </entry>
   <entry>
+    <title>百度质量体系建设</title>
+    <url>/posts/bcd76c52/</url>
+    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
+<li><em><strong>介绍</strong></em></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>目录</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
     <title>稳定性治理-暴力回放</title>
     <url>/posts/81de0e43/</url>
     <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
@@ -1323,6 +1323,60 @@
       <tags>
         <tag>稳定性</tag>
         <tag>暴力回放</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>类对象/实例对象/类方法/实例方法/静态方法</title>
+    <url>/posts/93899372/</url>
+    <content><![CDATA[<ul>
+<li><strong>类对象</strong></li>
+</ul>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A(object):</span><br><span class="line">    def m1(self, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br><span class="line"></span><br><span class="line">    @classmethod</span><br><span class="line">    def m2(cls, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br><span class="line">    @staticmethod</span><br><span class="line">    def m3(n):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.m1(1) <span class="comment"># self: &lt;__main__.A object at 0x000001E596E41A90&gt;</span></span><br><span class="line">A.m2(1) <span class="comment"># cls: &lt;class &#x27;__main__.A&#x27;&gt;</span></span><br><span class="line">A.m3(1)</span><br><span class="line"></span><br><span class="line">按顺序执行时，执行class A（）创建了A这个类对象</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>实例对象</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">a = A()</span><br><span class="line">是对类对象A的实例化，创建了实例对象a,也可以说a绑定了实例对象</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>类方法</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">@classmethod</span><br><span class="line">def m2(cls, n):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>类中@classmethod下方的是类方法，写法也是固定写法；其中cls必须要有，cls绑定了类对象A(),在类外部，需要这样引用A(类对象).类方法 ；因为类方法在类中能被直接引用，一般是这样引用self.类方法；这是由于self绑定的是实例对象，根据实例对象可以查找到类对象</code></p>
+<ul>
+<li><p>使用场景</p>
+<p>  <code>  如果希望在方法裡面调用静态类，那么把方法定义成类方法是合适的，因为要是定义成静态方法，那么你就要显示地引用类A，这对继承来说可不是一件好事情。(为了方便调用，但又为了继承方便，因此不用静态方法，显示调用)  </code></p>
+</li>
+<li><p><strong>实例方法</strong></p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def m1(self, n):</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br></pre></td></tr></table></figure>
+<p><code>实例方法，必须带self;其中self绑定的实例对象a;因此外部使用可以这样使用，a.m1()；在类的内部self绑定了实例对象，因此可以直接使用self.m1来调用</code></p>
+<ul>
+<li><p>使用场景</p>
+<p>  <code>  需要将方法作为对象属性，进行调用，继承，传递的方法，大部分类方法都会定义成实例方法；  </code></p>
+</li>
+<li><p><strong>静态方法</strong></p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@staticmethod</span><br><span class="line">def m3(n):</span><br><span class="line">	pass</span><br><span class="line">        </span><br><span class="line">静态方法，就是普通函数；和类对象和实例对象均无绑定关系；</span><br><span class="line">即可被类调用，也可通过实例调用；</span><br><span class="line">A.m3()</span><br><span class="line">a.m3()</span><br><span class="line">self.m3</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>使用场景</p>
+<p>  <code>  如果在方法中不需要访问任何实例方法和属性，纯粹地通过传入参数并返回数据的功能性方法，那么它就适合用静态方法来定义，它节省了实例化对象的开销成本，往往这种方法放在类外面的模块层作为一个函数存在也是没问题的，而放在类中，仅为这个类服务（定义了一个局部域函数仅为该类专门服务）。  </code></p>
+</li>
+<li><p><strong>装饰器</strong></p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def A(FUN):</span><br><span class="line">	<span class="built_in">return</span> FUN+1</span><br><span class="line">    </span><br><span class="line">@FUN</span><br><span class="line">def b():</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">在装饰器中@后跟的是父方法，注意类方法/静态方法/装饰器方法区别	</span><br></pre></td></tr></table></figure>
+<p><a href="https://zhuanlan.zhihu.com/p/28010894">参考</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -1531,57 +1585,61 @@
       </tags>
   </entry>
   <entry>
-    <title>类对象/实例对象/类方法/实例方法/静态方法</title>
-    <url>/posts/93899372/</url>
-    <content><![CDATA[<ul>
-<li><strong>类对象</strong></li>
-</ul>
+    <title>质量体系系列</title>
+    <url>/posts/6696d0e/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><code>测试的核心价值在于保障产品的质量，提效增质；要全面的保障质量，就需要一个完善的体系，从各方面入手来保障产品的质量，本次将以传易互联--音乐项目的质量保障体系进行分析，从而探索质量保障体系的设计</code></p>
+<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">传易音乐质量保障体系</span><br><span class="line">质量保障体系的设计理念</span><br><span class="line">质量保障体系落地</span><br><span class="line">传音音乐质量保障体系理想版</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
+<h2 id="传音音乐质量保障体系"><a href="#传音音乐质量保障体系" class="headerlink" title="传音音乐质量保障体系"></a>传音音乐质量保障体系</h2><p><code>质量保障体系是为具体业务服务的，因此需要结合业务特色设计，好的质量保障体系是兼顾质量、效率、成本，的一种综合性的设计</code></p>
+<h3 id="传易音乐业务特点"><a href="#传易音乐业务特点" class="headerlink" title="传易音乐业务特点"></a>传易音乐业务特点</h3><p><code>传易音乐提供面向非洲主要国家的，音频流媒体服务（音乐+音频直播）；主要由内容端+产品端+数据端+直播业务+商业化业务构成；主要特点是服务国家多，语种人群多，终端设备复杂，产品交付链路复杂，基于这种复杂的海外业务特点，质量保障体系，需要兼顾各类复杂场景</code></p>
+<h3 id="传音音乐产品交付体系"><a href="#传音音乐产品交付体系" class="headerlink" title="传音音乐产品交付体系"></a>传音音乐产品交付体系</h3><p><code>传易音乐的产品交互体系如下；参与方主要有产品、设计、开发、测试、项目管理人员；整个链路主要基于tapd平台来进行管理追溯，项目主要由项目管理人员协调跟踪，通过在线excel表格来排期和维护进度。整个链路整体合理，各方都有参与；但也有不足之处，问题如下：</code><br><img src="/text_image/%E4%BC%A0%E6%98%93%E4%BA%92%E8%81%94%E4%BA%A4%E4%BB%98%E4%BD%93%E7%B3%BB.png" alt="alt text"><br><strong>交互体系的缺陷</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">对用户来说：我们的产品设计风格变动极大，几乎每一个大版本风格都有极大变化；广告太多；不太稳定；</span><br><span class="line">业务：业务缺乏全局的规划，重点经常变；比如这个季度重点发力会员，下个季度就是游戏，突然重心又在广告，产品方面也是，这种混乱局面会导致一系列问题，出现这种问题的原因个人觉得还是管理层对音乐业务了解并不够深；</span><br><span class="line">需求：由于公司是由业务主导的，业务的混乱导致需求没有一个全局的规划，业务方经常会介入研发过程，会导致开发中断，转而开发新的需求；但后期项目方和业务进行了沟通后，需求由三方（项目、业务、产品）协商准入，并于每周四统一进行需求评审，一定的解决了插入问题；</span><br><span class="line">价值：由于公司内部博弈剧烈，且需求没有一个全局的规划，导致整个产品的风格变动频繁，未有效形成产品自身的品牌，且需求的价值无法量化，投入产出比无法量化分析；</span><br><span class="line">研发：需求无全局规划，研发的人员波动很大，经常会出现项目开发到一半，就出现人员抽调情况，导致原有排期受阻；不过研发在每个季度都有大方向的规划，一般是偏向架构/稳定性/成本把控的，基本都能有效落地；</span><br><span class="line">业务排期：开发/测试，排期极度紧张，且每个人手上同时期基本上都有三四个需求，导致业务很难复盘，资料/能力很难总结，人浮于事的后果就是，整个过程很难实现量化，投入产出比很难分析；且研发虽然在架构方面有大的规划，但过于紧张的人效和时间，导致落地会大打折扣，导致上线产品容易出现性能/稳定性问题；</span><br><span class="line">测试：测试方面在年度季度都会有规划，基本就是我于年终/季度末提交下一季度的规划，这些规划会转变为部门的okr由我负责完成（21年的时候，我手底下还有两个人一般意义上是由我这个组来完成），但由于从21年中开始，公司持续在裁员（一起负责测试架构的另外两个同事被裁了），且公司业务中心变动极大，我又开始负责广告业务，基本没有时间完成规划，只有在管理层有需求时，如（预装需求，必须要做稳定性）；线上出现严重性能问题（必须要进行性能治理），才有一段较时间来完成特定的非业务需求；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A(object):</span><br><span class="line">    def m1(self, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br><span class="line"></span><br><span class="line">    @classmethod</span><br><span class="line">    def m2(cls, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br><span class="line">    @staticmethod</span><br><span class="line">    def m3(n):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.m1(1) <span class="comment"># self: &lt;__main__.A object at 0x000001E596E41A90&gt;</span></span><br><span class="line">A.m2(1) <span class="comment"># cls: &lt;class &#x27;__main__.A&#x27;&gt;</span></span><br><span class="line">A.m3(1)</span><br><span class="line"></span><br><span class="line">按顺序执行时，执行class A（）创建了A这个类对象</span><br></pre></td></tr></table></figure>
+<h3 id="传易音乐质量保障体系分析"><a href="#传易音乐质量保障体系分析" class="headerlink" title="传易音乐质量保障体系分析"></a>传易音乐质量保障体系分析</h3><p><code>传易质量保障体系在全面保障质量的情况下，还需要兼顾成本和效率；同时由于海外业务的复杂性，主要是非洲网络环境较差，普遍都是2/3G网络，终端环境配置较低；因此在设计质量保障体系时需要兼顾这种复杂场景。现有质量保障体系如下：</code></p>
+<p><img src="/text_image/%E4%BC%A0%E6%98%93%E9%9F%B3%E4%B9%90%E8%B4%A8%E9%87%8F%E4%BF%9D%E9%9A%9C%E4%BD%93%E7%B3%BB.png" alt="alt text"><br><strong>质量保障体系的缺陷</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量保障体系，未做量化分析改造，无数据产出及呈现，很难量化价值；</span><br><span class="line">且体系未制定细化的标准，效果很难衡量；</span><br><span class="line">体系缺乏完整/长期的规划，未能有效的实施和优化；</span><br><span class="line">部分环节/工具，落地不到位，效果不佳，如UI自动化，接口自动化等；</span><br><span class="line">缺失归纳整理，无wiki资料库，能力很难输出和传递；</span><br><span class="line">工具很散乱，未做平台化集成；</span><br></pre></td></tr></table></figure>
+<h2 id="质量保障体系的设计理念"><a href="#质量保障体系的设计理念" class="headerlink" title="质量保障体系的设计理念"></a>质量保障体系的设计理念</h2><p><code>质量保障体系，需要遵循全面保障质量；有效平衡质量、效率、成本的理念设计；需要做到质量有数据可量化、有标准可衡量、能落地有效果、可传承可输出使用成本低</code></p>
+<p><strong>设计理念</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">有标准可衡量</span><br><span class="line">有能力有效果</span><br><span class="line">有数据可量化</span><br><span class="line">可传承可输出使用成本低,能兼顾成本、效率、质量</span><br></pre></td></tr></table></figure>
+<p><img src="/text_image/%E9%98%BF%E9%87%8C%E8%B4%A8%E9%87%8F%E4%BF%9D%E9%9A%9C%E4%BD%93%E7%B3%BB.png" alt="alt text"></p>
+<h3 id="质量标准"><a href="#质量标准" class="headerlink" title="质量标准"></a>质量标准</h3><p><code>质量的标准简单理解就是不出问题，因此对问题的定义，就是对质量标准的定义；我们一般要考虑功能、稳定性、性能（前后端/系统性能）,易用性，因此质量标准的建立抓手就是业务，只有基于业务建立细致完善的质量标准才有意义，而有了标准体系才能有效运转</code></p>
+<p><strong>传易音乐的质量标准</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">以季度为周期，责任主体是按流程、事故原因分担的；一般的功能性故障必现且是主流程的测试承担100%责任（严重级别），用例漏测同理；非主流程的或非必现的且出现概率较高的，严重级别低一级，测试承担主要责任，开发次之；非测试环境出现的问题或发布导致的问题，开发和测试均摊责任；性能或者稳定性问题，视问题类型，来界定责任主体，此类问题测试只承担次要责任；同时问题持续时间，影响范围，也会影响问题的严重性和责任主体；</span><br><span class="line">每年度制定功能性问题合规标准、性能、系统稳定性问题的合规标准；并根据影响时长，影响范围，严重程度来划分问题等级，问题由项目经理统一收纳，并记录责任主体，在季度末由此数据来影响kpi分值；</span><br><span class="line">提测标准，业务主流程功能ok,自测用例执行通过；</span><br><span class="line">测试通过标准，尽量保证无bug遗留或无严重级别/普通级别的bug遗留；同时根据业务类型来确定，功能、性能、稳定性、安全、兼容性、回归策略是否通过；</span><br><span class="line">验收标准，测试不参与标准制定；但会提交一份验收用例给产品、设计、业务方，是否通过验收由他们自行决定；</span><br></pre></td></tr></table></figure>
+<p><strong>不足</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">标准制定的不够细致，只有大的框架；</span><br><span class="line">质量问题，只有线上严重级别的问题才会收纳、复盘；且通过在线excel维护；没有形成长期的工作，数据太少，无法持续分析，很难通过数据来进一步优化；</span><br><span class="line">整个标准落地执行不到位，尤其是提测&#x2F;验收的标准未严格实施；其针对标准不执行的情况，没有成文的解决方案，很难长期有效针对此类问题暴露风险；</span><br></pre></td></tr></table></figure>
+<p><strong>参考</strong><br><img src="/text_image/%E8%B4%A8%E9%87%8Fgoc%E6%A0%87%E5%87%86.png" alt="alt text"></p>
+<h4 id="合理的质量标准"><a href="#合理的质量标准" class="headerlink" title="合理的质量标准"></a>合理的质量标准</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">标准必须要成文，可落地的，既有大框架，也有细则且与业务贴合的；</span><br><span class="line">必须要数据支持，不建议通过一个简单的excel维护，必须要成习惯，有长期数据；</span><br><span class="line">标准必须要在每个阶段都有（自测/测试/验收/线上），且标准不仅限制于事上，对人员，流程都要有要求；</span><br><span class="line">标准必须要有效，要和kpi、升职加薪结合；</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><strong>实例对象</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">a = A()</span><br><span class="line">是对类对象A的实例化，创建了实例对象a,也可以说a绑定了实例对象</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="覆盖范围"><a href="#覆盖范围" class="headerlink" title="覆盖范围"></a>覆盖范围</h3><p><code>理论上质量保障体系要全面的保障质量，方方面面都要覆盖，但实际工作中要均衡考虑</code><br><strong>范围</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">流程：流程把控，流程优化</span><br><span class="line">测试环节：codereview、单元、集成、系统</span><br><span class="line">类别：性能、兼容、稳定性、监控、功能、安全</span><br></pre></td></tr></table></figure>
+<h3 id="测试能力建设"><a href="#测试能力建设" class="headerlink" title="测试能力建设"></a>测试能力建设</h3><p><code>能力建设，一般是指自动化、工具或平台研发能力；但实际项目过程中，协作能力也很重要,这里讲讲工具/平台的价值</code></p>
+<p><strong>工具/平台价值</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">解决手动测试无法解决的事，如稳定性测试；</span><br><span class="line">自动化测试执行是按固定逻辑来的，能实现执行标准的统一；</span><br><span class="line">提效，可用于解决大量的重复性工作的场景，节省人力，提高效率；</span><br><span class="line">有数据，可溯源；有利于沉淀数据和能力，精准的分析解决问题；</span><br></pre></td></tr></table></figure>
+<p><strong>质量保障体系三要素：质量活动、工具平台、质量流程</strong></p>
+<p><code>以下按这三块来分别讲述质量体系的构建</code></p>
+<h4 id="质量活动及测试执行"><a href="#质量活动及测试执行" class="headerlink" title="质量活动及测试执行"></a>质量活动及测试执行</h4><p><code>在测试策略方面保障质量；主要有两种思路①根据问题设计策略，②分析流程来设计策略 </code></p>
+<h5 id="根据问题来设计策略"><a href="#根据问题来设计策略" class="headerlink" title="根据问题来设计策略"></a>根据问题来设计策略</h5><p><code>发现问题，分析问题，从而预防问题</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">需要一个记录问题的‘小本本’，记录下问题、然后分析问题（做复盘，是共性、还是特定问题、是否经常出现）、然后设计策略来预防此类问题；如app经常崩溃，那么质量活动需要包含此类检测；</span><br><span class="line">可以拉取最近一年的线上数据分析，来发现问题；</span><br></pre></td></tr></table></figure>
+<h5 id="分析流程来设计策略"><a href="#分析流程来设计策略" class="headerlink" title="分析流程来设计策略"></a>分析流程来设计策略</h5><p><code>研发过程中的各流程都有可能出问题，本着早发现早解决的原则，在各流程设置卡点，来规避风险，同时各环节也可以设置多条防线，全面的保障质量</code><br><strong>如以下情况</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Case1: 业务有很复杂的业务人员配置流程，这个环节会引入业务配置问题，可以在这个环节后定制质量活动，如配置规则校验，配置预跑等。   </span><br><span class="line"></span><br><span class="line">Case2: 业务在运行时仍有新机构/新商户接入环节，可以定制质量活动，如新接入时进行联调验证、性能压测。</span><br><span class="line"></span><br><span class="line">Case3: 业务有间隔性的数据跑批环节，那么在每次数据跑批结束后，可以定制质量活动，在每次跑批后做结果验证。典型业务有日切，月账单生成，关键报表生成等。</span><br></pre></td></tr></table></figure>
+<h4 id="工具平台建设"><a href="#工具平台建设" class="headerlink" title="工具平台建设"></a>工具平台建设</h4><p><code>建设工具平台，需要把握好成本和收益；至于如何平衡成本和收益，我的想法是这样的；有些工具是必须的如预装的压测，这种成本不是重点，先必须做出来；但有些比如前端功能测试，研发成熟的ui自动化成本比较高，那可以先考虑部署开源的成熟的产品（或者先手工替代，提前做好回归用例的有效性分析来降低成本）</code><br><strong>具体实施</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">先保障基础的平台有，如组织协作的平台，bug管理平台，代码托管平台；</span><br><span class="line">分析缺口，必要的工具优先做,但要保证效果（覆盖率，发现率，召回率，准确率等），效果越好越有价值；</span><br><span class="line">非必要的一般是提效的工具，在进一步拆分工作，分析日常工作中各快工作的耗时，以及未来的一个占比，优先覆盖重复性强场景；</span><br><span class="line">提效工具要做好性价比综合分析，对比人力或其他工具，当新开发工具的成本（一次性开发成本和维护性成本的考量：接入成本、迁移成本、培训成本、每次使用成本、维护升级成本）相对于收益有明显优势时才有价值；</span><br></pre></td></tr></table></figure>
+<h4 id="质量流程"><a href="#质量流程" class="headerlink" title="质量流程"></a>质量流程</h4><p><code>质量流程要平衡好质量防控，和效率；要贴合业务、研发体系来设计；并且要结合实际情况，及时调整</code></p>
+<h3 id="质量保障体系落地"><a href="#质量保障体系落地" class="headerlink" title="质量保障体系落地"></a>质量保障体系落地</h3><p><code>在具体落地的过程中，要把控好，质量、成本、效率，做好均衡来设计具体的质量策略</code><br><strong>具体落地的策略</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">具体的质量策略，要结合业务；最好结合业务数据，做量化分析制定；</span><br><span class="line">评估质量、效率、成本现行情况，做好平衡；</span><br><span class="line">具体的策略，能保障项目的一致性，形成共识，实现质量标准化；</span><br></pre></td></tr></table></figure>
+<p><strong>举例</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">比如，质量保障体系规定了要做灰度发布，那么怎样做灰度发布？质量策略可以进一步规定执行细节：至少要包含从1%-&gt;10%-&gt;50%-&gt;100%四个阶梯的灰度，且灰度时长不小于2小时。</span><br><span class="line"></span><br><span class="line">再比如，质量保障体系约定了低风险项目可开发自测，那么质量策略可以进一步定义低风险项目包括bug fix，页面展示修改类项目等。</span><br><span class="line"></span><br><span class="line">再比如，质量保障体系要求回归测试要完整，那么质量策略可以进一步定义完整回归的具体要求：全部P0P1用例(不区分手工自动化) or 全部自动化用例 or 人工评估的所有场景用例 or 代码变更分析的所有自动化用例 等。</span><br></pre></td></tr></table></figure>
+<p><strong>质量工具/平台具体落地的策略</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">提效；要综合提效；代码不是目的，提效才是；</span><br><span class="line">要有具体落地的场景，结合上文分析的质量活动、防线，一个质量工具平台最好能锁定某个稳定存在的质量活动、防线作为服务对象，以保证质量工具平台自身的存续性；</span><br><span class="line">维护/使用/培训成本也需要考虑；</span><br><span class="line">设计时要考虑能力沉淀和输出，最大化工具的价值；</span><br><span class="line">要尊重历史积累，考虑历史工具数据沉淀和价值挖掘；</span><br><span class="line">避免重复造轮子；要做到工具平台信息的充分共享、及时刷新，避免因信息不足导致的重复造轮子，其次在有同类工具平台新建初期，及时发起评审，确定定位和发展路线，避免发展成已有轮子的复制品。最后，要在大横向组织里阶段性review同领域工具平台，做好顶层设计（定向发展or关停并转）；</span><br><span class="line">要做好工具的服务推广，工具的价值在于使用；</span><br><span class="line">要保证工具平台体系的持续发展；服务好业务和需求，阶段性考虑质量工具平台的整合、共建、打通，串联形成工具平台体系，形成一致性的服务体系；</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><strong>类方法</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">@classmethod</span><br><span class="line">def m2(cls, n):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><code>类中@classmethod下方的是类方法，写法也是固定写法；其中cls必须要有，cls绑定了类对象A(),在类外部，需要这样引用A(类对象).类方法 ；因为类方法在类中能被直接引用，一般是这样引用self.类方法；这是由于self绑定的是实例对象，根据实例对象可以查找到类对象</code></p>
-<ul>
-<li><p>使用场景</p>
-<p>  <code>  如果希望在方法裡面调用静态类，那么把方法定义成类方法是合适的，因为要是定义成静态方法，那么你就要显示地引用类A，这对继承来说可不是一件好事情。(为了方便调用，但又为了继承方便，因此不用静态方法，显示调用)  </code></p>
-</li>
-<li><p><strong>实例方法</strong></p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def m1(self, n):</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br></pre></td></tr></table></figure>
-<p><code>实例方法，必须带self;其中self绑定的实例对象a;因此外部使用可以这样使用，a.m1()；在类的内部self绑定了实例对象，因此可以直接使用self.m1来调用</code></p>
-<ul>
-<li><p>使用场景</p>
-<p>  <code>  需要将方法作为对象属性，进行调用，继承，传递的方法，大部分类方法都会定义成实例方法；  </code></p>
-</li>
-<li><p><strong>静态方法</strong></p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@staticmethod</span><br><span class="line">def m3(n):</span><br><span class="line">	pass</span><br><span class="line">        </span><br><span class="line">静态方法，就是普通函数；和类对象和实例对象均无绑定关系；</span><br><span class="line">即可被类调用，也可通过实例调用；</span><br><span class="line">A.m3()</span><br><span class="line">a.m3()</span><br><span class="line">self.m3</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>使用场景</p>
-<p>  <code>  如果在方法中不需要访问任何实例方法和属性，纯粹地通过传入参数并返回数据的功能性方法，那么它就适合用静态方法来定义，它节省了实例化对象的开销成本，往往这种方法放在类外面的模块层作为一个函数存在也是没问题的，而放在类中，仅为这个类服务（定义了一个局部域函数仅为该类专门服务）。  </code></p>
-</li>
-<li><p><strong>装饰器</strong></p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def A(FUN):</span><br><span class="line">	<span class="built_in">return</span> FUN+1</span><br><span class="line">    </span><br><span class="line">@FUN</span><br><span class="line">def b():</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">在装饰器中@后跟的是父方法，注意类方法/静态方法/装饰器方法区别	</span><br></pre></td></tr></table></figure>
-<p><a href="https://zhuanlan.zhihu.com/p/28010894">参考</a></p>
+<h3 id="传音音乐质量保障体系理想版"><a href="#传音音乐质量保障体系理想版" class="headerlink" title="传音音乐质量保障体系理想版"></a>传音音乐质量保障体系理想版</h3><p><code>质量保障体系是用来保障质量的，没问题或者问题变少了就是最大的价值,具体来看</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">通过量化数据分析，质量问题，通过结果来确定质量保障体系的价值；</span><br><span class="line">分析具体的问题和结果，有问题就能找到体系薄弱点，进一步优化；结果好，也需要确认价值在哪，是否能进一步细化深化优化；</span><br><span class="line">最后分析质量工具平台的支撑度和技术价值，针对性的实现价值量化可呈现；</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>技术</category>
       </categories>
       <tags>
-        <tag>python</tag>
+        <tag>质量体系</tag>
       </tags>
   </entry>
   <entry>

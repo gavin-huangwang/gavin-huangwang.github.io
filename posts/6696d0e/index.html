@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"fenqian.xyz","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言测试的核心价值在于保障产品的质量，提效增质；要全面的保障质量，就需要一个完善的体系，从各方面入手来保障产品的质量，本次将以传易互联--音乐项目的质量保障体系进行分析，从而探索质量保障体系的设计 大纲1234传易音乐质量保障体系质量保障体系的设计理念质量保障体系落地传音音乐质量保障体系理想版">
+<meta property="og:type" content="article">
+<meta property="og:title" content="质量体系系列">
+<meta property="og:url" content="https://fenqian.xyz/posts/6696d0e/index.html">
+<meta property="og:site_name" content="Fen Qian Web">
+<meta property="og:description" content="前言测试的核心价值在于保障产品的质量，提效增质；要全面的保障质量，就需要一个完善的体系，从各方面入手来保障产品的质量，本次将以传易互联--音乐项目的质量保障体系进行分析，从而探索质量保障体系的设计 大纲1234传易音乐质量保障体系质量保障体系的设计理念质量保障体系落地传音音乐质量保障体系理想版">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fenqian.xyz/text_image/%E4%BC%A0%E6%98%93%E4%BA%92%E8%81%94%E4%BA%A4%E4%BB%98%E4%BD%93%E7%B3%BB.png">
+<meta property="og:image" content="https://fenqian.xyz/text_image/%E4%BC%A0%E6%98%93%E9%9F%B3%E4%B9%90%E8%B4%A8%E9%87%8F%E4%BF%9D%E9%9A%9C%E4%BD%93%E7%B3%BB.png">
+<meta property="og:image" content="https://fenqian.xyz/text_image/%E9%98%BF%E9%87%8C%E8%B4%A8%E9%87%8F%E4%BF%9D%E9%9A%9C%E4%BD%93%E7%B3%BB.png">
+<meta property="og:image" content="https://fenqian.xyz/text_image/%E8%B4%A8%E9%87%8Fgoc%E6%A0%87%E5%87%86.png">
+<meta property="article:published_time" content="2023-07-07T11:21:00.000Z">
+<meta property="article:modified_time" content="2023-07-09T17:08:53.133Z">
+<meta property="article:author" content="GAVIN HUANG">
+<meta property="article:tag" content="质量体系">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fenqian.xyz/text_image/%E4%BC%A0%E6%98%93%E4%BA%92%E8%81%94%E4%BA%A4%E4%BB%98%E4%BD%93%E7%B3%BB.png">
+
+<link rel="canonical" href="https://fenqian.xyz/posts/6696d0e/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>质量体系系列 | Fen Qian Web</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0c0805c7973dc17cabb0b51e3386ffc0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Fen Qian Web" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Fen Qian Web</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">HELLO,YOU</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://fenqian.xyz/posts/6696d0e/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/me.jpg">
+      <meta itemprop="name" content="GAVIN HUANG">
+      <meta itemprop="description" content="此地无银三百两">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fen Qian Web">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          质量体系系列<a href="https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name_posts/%E8%B4%A8%E9%87%8F%E4%BD%93%E7%B3%BB%E7%B3%BB%E5%88%97-%E5%A4%A7%E7%BA%B2.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-07 19:21:00" itemprop="dateCreated datePublished" datetime="2023-07-07T19:21:00+08:00">2023-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-10 01:08:53" itemprop="dateModified" datetime="2023-07-10T01:08:53+08:00">2023-07-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/6696d0e/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/6696d0e/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><code>测试的核心价值在于保障产品的质量，提效增质；要全面的保障质量，就需要一个完善的体系，从各方面入手来保障产品的质量，本次将以传易互联--音乐项目的质量保障体系进行分析，从而探索质量保障体系的设计</code></p>
+<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">传易音乐质量保障体系</span><br><span class="line">质量保障体系的设计理念</span><br><span class="line">质量保障体系落地</span><br><span class="line">传音音乐质量保障体系理想版</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h2 id="传音音乐质量保障体系"><a href="#传音音乐质量保障体系" class="headerlink" title="传音音乐质量保障体系"></a>传音音乐质量保障体系</h2><p><code>质量保障体系是为具体业务服务的，因此需要结合业务特色设计，好的质量保障体系是兼顾质量、效率、成本，的一种综合性的设计</code></p>
+<h3 id="传易音乐业务特点"><a href="#传易音乐业务特点" class="headerlink" title="传易音乐业务特点"></a>传易音乐业务特点</h3><p><code>传易音乐提供面向非洲主要国家的，音频流媒体服务（音乐+音频直播）；主要由内容端+产品端+数据端+直播业务+商业化业务构成；主要特点是服务国家多，语种人群多，终端设备复杂，产品交付链路复杂，基于这种复杂的海外业务特点，质量保障体系，需要兼顾各类复杂场景</code></p>
+<h3 id="传音音乐产品交付体系"><a href="#传音音乐产品交付体系" class="headerlink" title="传音音乐产品交付体系"></a>传音音乐产品交付体系</h3><p><code>传易音乐的产品交互体系如下；参与方主要有产品、设计、开发、测试、项目管理人员；整个链路主要基于tapd平台来进行管理追溯，项目主要由项目管理人员协调跟踪，通过在线excel表格来排期和维护进度。整个链路整体合理，各方都有参与；但也有不足之处，问题如下：</code><br><img src="/text_image/%E4%BC%A0%E6%98%93%E4%BA%92%E8%81%94%E4%BA%A4%E4%BB%98%E4%BD%93%E7%B3%BB.png" alt="alt text"><br><strong>交互体系的缺陷</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">对用户来说：我们的产品设计风格变动极大，几乎每一个大版本风格都有极大变化；广告太多；不太稳定；</span><br><span class="line">业务：业务缺乏全局的规划，重点经常变；比如这个季度重点发力会员，下个季度就是游戏，突然重心又在广告，产品方面也是，这种混乱局面会导致一系列问题，出现这种问题的原因个人觉得还是管理层对音乐业务了解并不够深；</span><br><span class="line">需求：由于公司是由业务主导的，业务的混乱导致需求没有一个全局的规划，业务方经常会介入研发过程，会导致开发中断，转而开发新的需求；但后期项目方和业务进行了沟通后，需求由三方（项目、业务、产品）协商准入，并于每周四统一进行需求评审，一定的解决了插入问题；</span><br><span class="line">价值：由于公司内部博弈剧烈，且需求没有一个全局的规划，导致整个产品的风格变动频繁，未有效形成产品自身的品牌，且需求的价值无法量化，投入产出比无法量化分析；</span><br><span class="line">研发：需求无全局规划，研发的人员波动很大，经常会出现项目开发到一半，就出现人员抽调情况，导致原有排期受阻；不过研发在每个季度都有大方向的规划，一般是偏向架构/稳定性/成本把控的，基本都能有效落地；</span><br><span class="line">业务排期：开发/测试，排期极度紧张，且每个人手上同时期基本上都有三四个需求，导致业务很难复盘，资料/能力很难总结，人浮于事的后果就是，整个过程很难实现量化，投入产出比很难分析；且研发虽然在架构方面有大的规划，但过于紧张的人效和时间，导致落地会大打折扣，导致上线产品容易出现性能/稳定性问题；</span><br><span class="line">测试：测试方面在年度季度都会有规划，基本就是我于年终/季度末提交下一季度的规划，这些规划会转变为部门的okr由我负责完成（21年的时候，我手底下还有两个人一般意义上是由我这个组来完成），但由于从21年中开始，公司持续在裁员（一起负责测试架构的另外两个同事被裁了），且公司业务中心变动极大，我又开始负责广告业务，基本没有时间完成规划，只有在管理层有需求时，如（预装需求，必须要做稳定性）；线上出现严重性能问题（必须要进行性能治理），才有一段较时间来完成特定的非业务需求；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="传易音乐质量保障体系分析"><a href="#传易音乐质量保障体系分析" class="headerlink" title="传易音乐质量保障体系分析"></a>传易音乐质量保障体系分析</h3><p><code>传易质量保障体系在全面保障质量的情况下，还需要兼顾成本和效率；同时由于海外业务的复杂性，主要是非洲网络环境较差，普遍都是2/3G网络，终端环境配置较低；因此在设计质量保障体系时需要兼顾这种复杂场景。现有质量保障体系如下：</code></p>
+<p><img src="/text_image/%E4%BC%A0%E6%98%93%E9%9F%B3%E4%B9%90%E8%B4%A8%E9%87%8F%E4%BF%9D%E9%9A%9C%E4%BD%93%E7%B3%BB.png" alt="alt text"><br><strong>质量保障体系的缺陷</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">质量保障体系，未做量化分析改造，无数据产出及呈现，很难量化价值；</span><br><span class="line">且体系未制定细化的标准，效果很难衡量；</span><br><span class="line">体系缺乏完整/长期的规划，未能有效的实施和优化；</span><br><span class="line">部分环节/工具，落地不到位，效果不佳，如UI自动化，接口自动化等；</span><br><span class="line">缺失归纳整理，无wiki资料库，能力很难输出和传递；</span><br><span class="line">工具很散乱，未做平台化集成；</span><br></pre></td></tr></table></figure>
+<h2 id="质量保障体系的设计理念"><a href="#质量保障体系的设计理念" class="headerlink" title="质量保障体系的设计理念"></a>质量保障体系的设计理念</h2><p><code>质量保障体系，需要遵循全面保障质量；有效平衡质量、效率、成本的理念设计；需要做到质量有数据可量化、有标准可衡量、能落地有效果、可传承可输出使用成本低</code></p>
+<p><strong>设计理念</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">有标准可衡量</span><br><span class="line">有能力有效果</span><br><span class="line">有数据可量化</span><br><span class="line">可传承可输出使用成本低,能兼顾成本、效率、质量</span><br></pre></td></tr></table></figure>
+<p><img src="/text_image/%E9%98%BF%E9%87%8C%E8%B4%A8%E9%87%8F%E4%BF%9D%E9%9A%9C%E4%BD%93%E7%B3%BB.png" alt="alt text"></p>
+<h3 id="质量标准"><a href="#质量标准" class="headerlink" title="质量标准"></a>质量标准</h3><p><code>质量的标准简单理解就是不出问题，因此对问题的定义，就是对质量标准的定义；我们一般要考虑功能、稳定性、性能（前后端/系统性能）,易用性，因此质量标准的建立抓手就是业务，只有基于业务建立细致完善的质量标准才有意义，而有了标准体系才能有效运转</code></p>
+<p><strong>传易音乐的质量标准</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">以季度为周期，责任主体是按流程、事故原因分担的；一般的功能性故障必现且是主流程的测试承担100%责任（严重级别），用例漏测同理；非主流程的或非必现的且出现概率较高的，严重级别低一级，测试承担主要责任，开发次之；非测试环境出现的问题或发布导致的问题，开发和测试均摊责任；性能或者稳定性问题，视问题类型，来界定责任主体，此类问题测试只承担次要责任；同时问题持续时间，影响范围，也会影响问题的严重性和责任主体；</span><br><span class="line">每年度制定功能性问题合规标准、性能、系统稳定性问题的合规标准；并根据影响时长，影响范围，严重程度来划分问题等级，问题由项目经理统一收纳，并记录责任主体，在季度末由此数据来影响kpi分值；</span><br><span class="line">提测标准，业务主流程功能ok,自测用例执行通过；</span><br><span class="line">测试通过标准，尽量保证无bug遗留或无严重级别/普通级别的bug遗留；同时根据业务类型来确定，功能、性能、稳定性、安全、兼容性、回归策略是否通过；</span><br><span class="line">验收标准，测试不参与标准制定；但会提交一份验收用例给产品、设计、业务方，是否通过验收由他们自行决定；</span><br></pre></td></tr></table></figure>
+<p><strong>不足</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">标准制定的不够细致，只有大的框架；</span><br><span class="line">质量问题，只有线上严重级别的问题才会收纳、复盘；且通过在线excel维护；没有形成长期的工作，数据太少，无法持续分析，很难通过数据来进一步优化；</span><br><span class="line">整个标准落地执行不到位，尤其是提测&#x2F;验收的标准未严格实施；其针对标准不执行的情况，没有成文的解决方案，很难长期有效针对此类问题暴露风险；</span><br></pre></td></tr></table></figure>
+<p><strong>参考</strong><br><img src="/text_image/%E8%B4%A8%E9%87%8Fgoc%E6%A0%87%E5%87%86.png" alt="alt text"></p>
+<h4 id="合理的质量标准"><a href="#合理的质量标准" class="headerlink" title="合理的质量标准"></a>合理的质量标准</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">标准必须要成文，可落地的，既有大框架，也有细则且与业务贴合的；</span><br><span class="line">必须要数据支持，不建议通过一个简单的excel维护，必须要成习惯，有长期数据；</span><br><span class="line">标准必须要在每个阶段都有（自测/测试/验收/线上），且标准不仅限制于事上，对人员，流程都要有要求；</span><br><span class="line">标准必须要有效，要和kpi、升职加薪结合；</span><br></pre></td></tr></table></figure>
+
+<h3 id="覆盖范围"><a href="#覆盖范围" class="headerlink" title="覆盖范围"></a>覆盖范围</h3><p><code>理论上质量保障体系要全面的保障质量，方方面面都要覆盖，但实际工作中要均衡考虑</code><br><strong>范围</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">流程：流程把控，流程优化</span><br><span class="line">测试环节：codereview、单元、集成、系统</span><br><span class="line">类别：性能、兼容、稳定性、监控、功能、安全</span><br></pre></td></tr></table></figure>
+<h3 id="测试能力建设"><a href="#测试能力建设" class="headerlink" title="测试能力建设"></a>测试能力建设</h3><p><code>能力建设，一般是指自动化、工具或平台研发能力；但实际项目过程中，协作能力也很重要,这里讲讲工具/平台的价值</code></p>
+<p><strong>工具/平台价值</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">解决手动测试无法解决的事，如稳定性测试；</span><br><span class="line">自动化测试执行是按固定逻辑来的，能实现执行标准的统一；</span><br><span class="line">提效，可用于解决大量的重复性工作的场景，节省人力，提高效率；</span><br><span class="line">有数据，可溯源；有利于沉淀数据和能力，精准的分析解决问题；</span><br></pre></td></tr></table></figure>
+<p><strong>质量保障体系三要素：质量活动、工具平台、质量流程</strong></p>
+<p><code>以下按这三块来分别讲述质量体系的构建</code></p>
+<h4 id="质量活动及测试执行"><a href="#质量活动及测试执行" class="headerlink" title="质量活动及测试执行"></a>质量活动及测试执行</h4><p><code>在测试策略方面保障质量；主要有两种思路①根据问题设计策略，②分析流程来设计策略 </code></p>
+<h5 id="根据问题来设计策略"><a href="#根据问题来设计策略" class="headerlink" title="根据问题来设计策略"></a>根据问题来设计策略</h5><p><code>发现问题，分析问题，从而预防问题</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">需要一个记录问题的‘小本本’，记录下问题、然后分析问题（做复盘，是共性、还是特定问题、是否经常出现）、然后设计策略来预防此类问题；如app经常崩溃，那么质量活动需要包含此类检测；</span><br><span class="line">可以拉取最近一年的线上数据分析，来发现问题；</span><br></pre></td></tr></table></figure>
+<h5 id="分析流程来设计策略"><a href="#分析流程来设计策略" class="headerlink" title="分析流程来设计策略"></a>分析流程来设计策略</h5><p><code>研发过程中的各流程都有可能出问题，本着早发现早解决的原则，在各流程设置卡点，来规避风险，同时各环节也可以设置多条防线，全面的保障质量</code><br><strong>如以下情况</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Case1: 业务有很复杂的业务人员配置流程，这个环节会引入业务配置问题，可以在这个环节后定制质量活动，如配置规则校验，配置预跑等。   </span><br><span class="line"></span><br><span class="line">Case2: 业务在运行时仍有新机构/新商户接入环节，可以定制质量活动，如新接入时进行联调验证、性能压测。</span><br><span class="line"></span><br><span class="line">Case3: 业务有间隔性的数据跑批环节，那么在每次数据跑批结束后，可以定制质量活动，在每次跑批后做结果验证。典型业务有日切，月账单生成，关键报表生成等。</span><br></pre></td></tr></table></figure>
+<h4 id="工具平台建设"><a href="#工具平台建设" class="headerlink" title="工具平台建设"></a>工具平台建设</h4><p><code>建设工具平台，需要把握好成本和收益；至于如何平衡成本和收益，我的想法是这样的；有些工具是必须的如预装的压测，这种成本不是重点，先必须做出来；但有些比如前端功能测试，研发成熟的ui自动化成本比较高，那可以先考虑部署开源的成熟的产品（或者先手工替代，提前做好回归用例的有效性分析来降低成本）</code><br><strong>具体实施</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">先保障基础的平台有，如组织协作的平台，bug管理平台，代码托管平台；</span><br><span class="line">分析缺口，必要的工具优先做,但要保证效果（覆盖率，发现率，召回率，准确率等），效果越好越有价值；</span><br><span class="line">非必要的一般是提效的工具，在进一步拆分工作，分析日常工作中各快工作的耗时，以及未来的一个占比，优先覆盖重复性强场景；</span><br><span class="line">提效工具要做好性价比综合分析，对比人力或其他工具，当新开发工具的成本（一次性开发成本和维护性成本的考量：接入成本、迁移成本、培训成本、每次使用成本、维护升级成本）相对于收益有明显优势时才有价值；</span><br></pre></td></tr></table></figure>
+<h4 id="质量流程"><a href="#质量流程" class="headerlink" title="质量流程"></a>质量流程</h4><p><code>质量流程要平衡好质量防控，和效率；要贴合业务、研发体系来设计；并且要结合实际情况，及时调整</code></p>
+<h3 id="质量保障体系落地"><a href="#质量保障体系落地" class="headerlink" title="质量保障体系落地"></a>质量保障体系落地</h3><p><code>在具体落地的过程中，要把控好，质量、成本、效率，做好均衡来设计具体的质量策略</code><br><strong>具体落地的策略</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">具体的质量策略，要结合业务；最好结合业务数据，做量化分析制定；</span><br><span class="line">评估质量、效率、成本现行情况，做好平衡；</span><br><span class="line">具体的策略，能保障项目的一致性，形成共识，实现质量标准化；</span><br></pre></td></tr></table></figure>
+<p><strong>举例</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">比如，质量保障体系规定了要做灰度发布，那么怎样做灰度发布？质量策略可以进一步规定执行细节：至少要包含从1%-&gt;10%-&gt;50%-&gt;100%四个阶梯的灰度，且灰度时长不小于2小时。</span><br><span class="line"></span><br><span class="line">再比如，质量保障体系约定了低风险项目可开发自测，那么质量策略可以进一步定义低风险项目包括bug fix，页面展示修改类项目等。</span><br><span class="line"></span><br><span class="line">再比如，质量保障体系要求回归测试要完整，那么质量策略可以进一步定义完整回归的具体要求：全部P0P1用例(不区分手工自动化) or 全部自动化用例 or 人工评估的所有场景用例 or 代码变更分析的所有自动化用例 等。</span><br></pre></td></tr></table></figure>
+<p><strong>质量工具/平台具体落地的策略</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">提效；要综合提效；代码不是目的，提效才是；</span><br><span class="line">要有具体落地的场景，结合上文分析的质量活动、防线，一个质量工具平台最好能锁定某个稳定存在的质量活动、防线作为服务对象，以保证质量工具平台自身的存续性；</span><br><span class="line">维护/使用/培训成本也需要考虑；</span><br><span class="line">设计时要考虑能力沉淀和输出，最大化工具的价值；</span><br><span class="line">要尊重历史积累，考虑历史工具数据沉淀和价值挖掘；</span><br><span class="line">避免重复造轮子；要做到工具平台信息的充分共享、及时刷新，避免因信息不足导致的重复造轮子，其次在有同类工具平台新建初期，及时发起评审，确定定位和发展路线，避免发展成已有轮子的复制品。最后，要在大横向组织里阶段性review同领域工具平台，做好顶层设计（定向发展or关停并转）；</span><br><span class="line">要做好工具的服务推广，工具的价值在于使用；</span><br><span class="line">要保证工具平台体系的持续发展；服务好业务和需求，阶段性考虑质量工具平台的整合、共建、打通，串联形成工具平台体系，形成一致性的服务体系；</span><br></pre></td></tr></table></figure>
+
+<h3 id="传音音乐质量保障体系理想版"><a href="#传音音乐质量保障体系理想版" class="headerlink" title="传音音乐质量保障体系理想版"></a>传音音乐质量保障体系理想版</h3><p><code>质量保障体系是用来保障质量的，没问题或者问题变少了就是最大的价值,具体来看</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">通过量化数据分析，质量问题，通过结果来确定质量保障体系的价值；</span><br><span class="line">分析具体的问题和结果，有问题就能找到体系薄弱点，进一步优化；结果好，也需要确认价值在哪，是否能进一步细化深化优化；</span><br><span class="line">最后分析质量工具平台的支撑度和技术价值，针对性的实现价值量化可呈现；</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/qian.png" alt="GAVIN HUANG 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/wechat.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%B4%A8%E9%87%8F%E4%BD%93%E7%B3%BB/" rel="tag"># 质量体系</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/d775e226/" rel="prev" title="广告--大数据模型测试">
+      <i class="fa fa-chevron-left"></i> 广告--大数据模型测试
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%A7%E7%BA%B2"><span class="nav-number">2.</span> <span class="nav-text">大纲</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E9%9F%B3%E9%9F%B3%E4%B9%90%E8%B4%A8%E9%87%8F%E4%BF%9D%E9%9A%9C%E4%BD%93%E7%B3%BB"><span class="nav-number">2.1.</span> <span class="nav-text">传音音乐质量保障体系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E6%98%93%E9%9F%B3%E4%B9%90%E4%B8%9A%E5%8A%A1%E7%89%B9%E7%82%B9"><span class="nav-number">2.1.1.</span> <span class="nav-text">传易音乐业务特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E9%9F%B3%E9%9F%B3%E4%B9%90%E4%BA%A7%E5%93%81%E4%BA%A4%E4%BB%98%E4%BD%93%E7%B3%BB"><span class="nav-number">2.1.2.</span> <span class="nav-text">传音音乐产品交付体系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E6%98%93%E9%9F%B3%E4%B9%90%E8%B4%A8%E9%87%8F%E4%BF%9D%E9%9A%9C%E4%BD%93%E7%B3%BB%E5%88%86%E6%9E%90"><span class="nav-number">2.1.3.</span> <span class="nav-text">传易音乐质量保障体系分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%A8%E9%87%8F%E4%BF%9D%E9%9A%9C%E4%BD%93%E7%B3%BB%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%90%86%E5%BF%B5"><span class="nav-number">2.2.</span> <span class="nav-text">质量保障体系的设计理念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%A8%E9%87%8F%E6%A0%87%E5%87%86"><span class="nav-number">2.2.1.</span> <span class="nav-text">质量标准</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%88%E7%90%86%E7%9A%84%E8%B4%A8%E9%87%8F%E6%A0%87%E5%87%86"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">合理的质量标准</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E8%8C%83%E5%9B%B4"><span class="nav-number">2.2.2.</span> <span class="nav-text">覆盖范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%83%BD%E5%8A%9B%E5%BB%BA%E8%AE%BE"><span class="nav-number">2.2.3.</span> <span class="nav-text">测试能力建设</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%A8%E9%87%8F%E6%B4%BB%E5%8A%A8%E5%8F%8A%E6%B5%8B%E8%AF%95%E6%89%A7%E8%A1%8C"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">质量活动及测试执行</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E9%97%AE%E9%A2%98%E6%9D%A5%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5"><span class="nav-number">2.2.3.1.1.</span> <span class="nav-text">根据问题来设计策略</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B%E6%9D%A5%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5"><span class="nav-number">2.2.3.1.2.</span> <span class="nav-text">分析流程来设计策略</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E5%B9%B3%E5%8F%B0%E5%BB%BA%E8%AE%BE"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">工具平台建设</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%A8%E9%87%8F%E6%B5%81%E7%A8%8B"><span class="nav-number">2.2.3.3.</span> <span class="nav-text">质量流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%A8%E9%87%8F%E4%BF%9D%E9%9A%9C%E4%BD%93%E7%B3%BB%E8%90%BD%E5%9C%B0"><span class="nav-number">2.2.4.</span> <span class="nav-text">质量保障体系落地</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E9%9F%B3%E9%9F%B3%E4%B9%90%E8%B4%A8%E9%87%8F%E4%BF%9D%E9%9A%9C%E4%BD%93%E7%B3%BB%E7%90%86%E6%83%B3%E7%89%88"><span class="nav-number">2.2.5.</span> <span class="nav-text">传音音乐质量保障体系理想版</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GAVIN HUANG"
+      src="/me.jpg">
+  <p class="site-author-name" itemprop="name">GAVIN HUANG</p>
+  <div class="site-description" itemprop="description">此地无银三百两</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="http://gavin-log.herokuapp.com/" title="Ynote → http:&#x2F;&#x2F;gavin-log.herokuapp.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>Ynote</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/1009gavin/" title="Blog → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;1009gavin&#x2F;" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/gavin-huangwang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gavin-huangwang" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  <!-- 音乐播放器 -->
+	<div>
+		
+			<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=442009412&auto=1&height=66"></iframe>
+		
+	</div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GAVIN HUANG</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">71k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:05</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '7SnCyhwFab6OJHulh0SsCRHv-gzGzoHsz',
+      appKey     : 'MlToRxXyU1kGTgW6WHSJOnCL',
+      placeholder: "Just go go",
+      avatar     : 'wavatar',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+<!-- 雪花特效 -->
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.8.3/jquery.js"></script>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="\js\snow.js"></script> 
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
