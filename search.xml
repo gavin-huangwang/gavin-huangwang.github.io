@@ -67,6 +67,171 @@
       </tags>
   </entry>
   <entry>
+    <title>SOLOPI使用教程</title>
+    <url>/posts/49e140/</url>
+    <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<ul>
+<li><p><em><strong>介绍</strong></em></p>
+<p>  <code>solopi是支付宝团队研发的ui自动化工具;支持UI录制回放，录制脚本的编辑/扩展/转换成appium脚本/录制脚本支持分发到其他的设备执行；同时还支持性能测试和一机多控，执行采集各种性能数据，同时支持通过一台设备控制多台设备的行为；</code></p>
+</li>
+<li><p><em><strong>使用指南</strong></em></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">环境准备</span><br><span class="line">app配置</span><br><span class="line">录制</span><br><span class="line">回放</span><br><span class="line">性能测试</span><br><span class="line">一机多控</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>环境准备</strong></p>
+<ul>
+<li><p><em>下载配置Androidsdk</em></p>
+<ul>
+<li>地址:<a href="https://developer.android.com/studio/releases/platform-tools#downloads">https://developer.android.com/studio/releases/platform-tools#downloads</a></li>
+<li>操作：下载安装完Android调试工具后，在下载对应系统版本的 SDK Platform Tools，配置好环境变量，注意win10以上系统环境变量配置即生效，低版本需要重启pc才能生效；</li>
+</ul>
+</li>
+<li><p><em>给手机授权</em></p>
+<ul>
+<li>操作：进入开发者模式，并授权usb调试权限；</li>
+</ul>
+</li>
+<li><p><em>检测环境并连接wifi</em></p>
+<ul>
+<li>操作：通过adb devices命令检测，同时要连接wifi;</li>
+</ul>
+</li>
+<li><p><em>建立连接</em></p>
+<ul>
+<li>操作：通过pc的cmd启动服务,输入（adb tcpip 5555）</li>
+</ul>
+</li>
+<li><p><em>下载solopi的apk</em></p>
+<ul>
+<li>地址：<a href="https://github.com/alipay/SoloPi/releases/download/v0.11.2/SoloPi_0.11.2.apk">apk点击下载</a></li>
+<li>操作：下载安装后，通过配置授权</li>
+<li>环境配置：<a href="https://github.com/alipay/SoloPi/wiki/FirstUse">地址跳转参考内容</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>app配置</strong></p>
+<p>  <code>按需配置，一般不需要进行配置；可参考上方的环境配置</code></p>
+</li>
+<li><p><strong>录制/回放</strong></p>
+<ul>
+<li><a href="https://github.com/alipay/SoloPi/wiki/RecordCase"><em>官方教程</em></a></li>
+<li>录制：录制支持直接对收到操作进行录制，且录制的脚本支持编辑/扩展/保存/导入等操作，支持各类操作和断言，支持图像识别，简单方便；</li>
+<li>回放：回放支持单脚本回放，支持批量回放，支持重复播放；</li>
+<li>优点：操作简单，可扩展编辑定制策略，可同步到其他设备，可重复回放支持暴力遍历；</li>
+<li>缺点：不支持持续集成，需要手动触发；</li>
+</ul>
+</li>
+<li><p><strong>性能测试</strong></p>
+<ul>
+<li><a href="https://github.com/alipay/SoloPi/wiki/Performance"><em>官方教程</em></a></li>
+<li>操作：性能测试时，直接勾选需要监控的性能指标，不进行录制则可以实时查看；进行录制时，点击录制按钮开始录制，录制结束后点击录制结束按钮，录制的性能数据会存储下来，支持图表分析，可同时存储多份性能数据；</li>
+<li>优点：支持实时查看场景的性能，可和业务测试结合方便简单；支持性能录制，可和UI自动化结合，查看各场景的性能变化和差异；</li>
+<li>缺点：不支持续集成，利用脚本进行回放时不支持性能监控；</li>
+</ul>
+</li>
+<li><p><strong>一机多控</strong></p>
+<ul>
+<li>[<em>官方教程</em>]</li>
+<li>操作：多台设备上同时安装solopi和待测APP；做好配置和授权操作，同时主机（控制机）选中一机多控，选中为主机；其他设备点击一机多控，选中为从机；然后用主机扫码录入从机，然后在主机点击建立主从机的连接，然后主机点击录屏按钮，开始进行一机多控操作；原理是利用solopi的录屏回放功能，主机录屏，从机回放；</li>
+<li>优点：可以用一台机器，控制多台设备操作，能有效的覆盖兼容性测试；</li>
+<li>缺点：不支持ios系统；由于是先录制，在回放，因此所有设备都需要有网络，且必须是同一局域网，且存在延时；不支持批量操作时，同时监控性能数据；</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><em><strong>和业务结合</strong></em></p>
+<p>  <code>和业务结合使用前，需要先梳理清楚solopi的优缺点：</code></p>
+<p>  优点：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">支持录制UI自动化，且录制的脚本支持编辑自定义，且无环境依赖；</span><br><span class="line">录制的脚本可以导出在任意设备上回放，或者转换成appium脚本；</span><br><span class="line">支持回放管理，支持批量回放和重复回放；</span><br><span class="line">支持性能测试，实时监控APP性能和录制APP的性能；</span><br><span class="line">支持一机多控，可同时控制多台设备；</span><br></pre></td></tr></table></figure>
+
+<p>  缺点：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">不支持iOS设备，仅支持Android设备；</span><br><span class="line">工具是一款纯功能测试辅助软件，不支持持续集成；</span><br><span class="line">功能过于离散，几个功能不能结合在一起使用；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>和业务结合：</strong></p>
+<ul>
+<li><p><em>rc验收阶段：</em><br><code>建议功能测试完毕且无误后，最后在rc验收一遍，主流程，验收时进行功能&quot;录制&quot;,录制的脚本可定期回放/开发了相关功能时进行回放/也可以通过Jenkins触发回放;</code></p>
+</li>
+<li><p><em>灰度/线上验收阶段：</em><br><code>建议测试进行线上验收时，进行录制，录制的脚本，可通过扩展进行定期回放；</code></p>
+</li>
+<li><p><em>冒烟/功能测试/rc验收阶段：</em><br><code>建议以上阶段，进行测试验收时，打开性能测试监控，观察功能场景有没用性能问题；</code></p>
+</li>
+<li><p><em>冒烟/兼容性测试阶段：</em><br><code>可以使用一机多控功能，进行兼容性测试；但此功能对控制的终端有要求，最好有固定的兼容环境；</code></p>
+</li>
+<li><p><em>稳定性治理/预装版本暴力回放：</em><br><code>使用重复回放功能进行暴力回放；</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em><strong>下一步：</strong></em></p>
+</li>
+</ul>
+<p><a href="https://github.com/alipay/SoloPi"><em>Solopi github</em>_</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>ui自动化</tag>
+        <tag>稳定性</tag>
+        <tag>前端性能</tag>
+        <tag>solopi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UI自动化基础--微软</title>
+    <url>/posts/d1646a55/</url>
+    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>UI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UI自动化框架说明</title>
+    <url>/posts/411091fa/</url>
+    <content><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`
+</code></pre>
+<p>___ 大纲 ___</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">框架的整体结构</span><br><span class="line">代码模块的结构，文件说明</span><br><span class="line">框架的执行过程</span><br><span class="line">框架优化&#x2F;改动以适应我们产品</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<p>___ 框架整体结构 ___<br><img src="/text_image/ui%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%B6%E6%9E%84.png" alt="alt_text"></p>
+<p><code>框架整体构成由五部分构成；分别是runner(入口)/TestCase(控制层)/PageObject(逻辑层)/日志文件/yaml配置模块/报告模块 </code></p>
+<p>___ runner(入口) ___</p>
+<p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>HEXO 官方使用指南</title>
+    <url>/posts/4a17b156/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><span id="more"></span>
+<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>#开启动画<br>canvas_nest: true </p>
+]]></content>
+  </entry>
+  <entry>
     <title>UI自动化元素定位</title>
     <url>/posts/2e4c0062/</url>
     <content><![CDATA[<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">APPIUM元素定位原理</span><br><span class="line">常见的元素定位方式</span><br><span class="line">元素定位技巧/辅助工具</span><br></pre></td></tr></table></figure>
@@ -213,171 +378,6 @@
       </tags>
   </entry>
   <entry>
-    <title>SOLOPI使用教程</title>
-    <url>/posts/49e140/</url>
-    <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<ul>
-<li><p><em><strong>介绍</strong></em></p>
-<p>  <code>solopi是支付宝团队研发的ui自动化工具;支持UI录制回放，录制脚本的编辑/扩展/转换成appium脚本/录制脚本支持分发到其他的设备执行；同时还支持性能测试和一机多控，执行采集各种性能数据，同时支持通过一台设备控制多台设备的行为；</code></p>
-</li>
-<li><p><em><strong>使用指南</strong></em></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">环境准备</span><br><span class="line">app配置</span><br><span class="line">录制</span><br><span class="line">回放</span><br><span class="line">性能测试</span><br><span class="line">一机多控</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>环境准备</strong></p>
-<ul>
-<li><p><em>下载配置Androidsdk</em></p>
-<ul>
-<li>地址:<a href="https://developer.android.com/studio/releases/platform-tools#downloads">https://developer.android.com/studio/releases/platform-tools#downloads</a></li>
-<li>操作：下载安装完Android调试工具后，在下载对应系统版本的 SDK Platform Tools，配置好环境变量，注意win10以上系统环境变量配置即生效，低版本需要重启pc才能生效；</li>
-</ul>
-</li>
-<li><p><em>给手机授权</em></p>
-<ul>
-<li>操作：进入开发者模式，并授权usb调试权限；</li>
-</ul>
-</li>
-<li><p><em>检测环境并连接wifi</em></p>
-<ul>
-<li>操作：通过adb devices命令检测，同时要连接wifi;</li>
-</ul>
-</li>
-<li><p><em>建立连接</em></p>
-<ul>
-<li>操作：通过pc的cmd启动服务,输入（adb tcpip 5555）</li>
-</ul>
-</li>
-<li><p><em>下载solopi的apk</em></p>
-<ul>
-<li>地址：<a href="https://github.com/alipay/SoloPi/releases/download/v0.11.2/SoloPi_0.11.2.apk">apk点击下载</a></li>
-<li>操作：下载安装后，通过配置授权</li>
-<li>环境配置：<a href="https://github.com/alipay/SoloPi/wiki/FirstUse">地址跳转参考内容</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>app配置</strong></p>
-<p>  <code>按需配置，一般不需要进行配置；可参考上方的环境配置</code></p>
-</li>
-<li><p><strong>录制/回放</strong></p>
-<ul>
-<li><a href="https://github.com/alipay/SoloPi/wiki/RecordCase"><em>官方教程</em></a></li>
-<li>录制：录制支持直接对收到操作进行录制，且录制的脚本支持编辑/扩展/保存/导入等操作，支持各类操作和断言，支持图像识别，简单方便；</li>
-<li>回放：回放支持单脚本回放，支持批量回放，支持重复播放；</li>
-<li>优点：操作简单，可扩展编辑定制策略，可同步到其他设备，可重复回放支持暴力遍历；</li>
-<li>缺点：不支持持续集成，需要手动触发；</li>
-</ul>
-</li>
-<li><p><strong>性能测试</strong></p>
-<ul>
-<li><a href="https://github.com/alipay/SoloPi/wiki/Performance"><em>官方教程</em></a></li>
-<li>操作：性能测试时，直接勾选需要监控的性能指标，不进行录制则可以实时查看；进行录制时，点击录制按钮开始录制，录制结束后点击录制结束按钮，录制的性能数据会存储下来，支持图表分析，可同时存储多份性能数据；</li>
-<li>优点：支持实时查看场景的性能，可和业务测试结合方便简单；支持性能录制，可和UI自动化结合，查看各场景的性能变化和差异；</li>
-<li>缺点：不支持续集成，利用脚本进行回放时不支持性能监控；</li>
-</ul>
-</li>
-<li><p><strong>一机多控</strong></p>
-<ul>
-<li>[<em>官方教程</em>]</li>
-<li>操作：多台设备上同时安装solopi和待测APP；做好配置和授权操作，同时主机（控制机）选中一机多控，选中为主机；其他设备点击一机多控，选中为从机；然后用主机扫码录入从机，然后在主机点击建立主从机的连接，然后主机点击录屏按钮，开始进行一机多控操作；原理是利用solopi的录屏回放功能，主机录屏，从机回放；</li>
-<li>优点：可以用一台机器，控制多台设备操作，能有效的覆盖兼容性测试；</li>
-<li>缺点：不支持ios系统；由于是先录制，在回放，因此所有设备都需要有网络，且必须是同一局域网，且存在延时；不支持批量操作时，同时监控性能数据；</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p><em><strong>和业务结合</strong></em></p>
-<p>  <code>和业务结合使用前，需要先梳理清楚solopi的优缺点：</code></p>
-<p>  优点：</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">支持录制UI自动化，且录制的脚本支持编辑自定义，且无环境依赖；</span><br><span class="line">录制的脚本可以导出在任意设备上回放，或者转换成appium脚本；</span><br><span class="line">支持回放管理，支持批量回放和重复回放；</span><br><span class="line">支持性能测试，实时监控APP性能和录制APP的性能；</span><br><span class="line">支持一机多控，可同时控制多台设备；</span><br></pre></td></tr></table></figure>
-
-<p>  缺点：</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">不支持iOS设备，仅支持Android设备；</span><br><span class="line">工具是一款纯功能测试辅助软件，不支持持续集成；</span><br><span class="line">功能过于离散，几个功能不能结合在一起使用；</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>和业务结合：</strong></p>
-<ul>
-<li><p><em>rc验收阶段：</em><br><code>建议功能测试完毕且无误后，最后在rc验收一遍，主流程，验收时进行功能&quot;录制&quot;,录制的脚本可定期回放/开发了相关功能时进行回放/也可以通过Jenkins触发回放;</code></p>
-</li>
-<li><p><em>灰度/线上验收阶段：</em><br><code>建议测试进行线上验收时，进行录制，录制的脚本，可通过扩展进行定期回放；</code></p>
-</li>
-<li><p><em>冒烟/功能测试/rc验收阶段：</em><br><code>建议以上阶段，进行测试验收时，打开性能测试监控，观察功能场景有没用性能问题；</code></p>
-</li>
-<li><p><em>冒烟/兼容性测试阶段：</em><br><code>可以使用一机多控功能，进行兼容性测试；但此功能对控制的终端有要求，最好有固定的兼容环境；</code></p>
-</li>
-<li><p><em>稳定性治理/预装版本暴力回放：</em><br><code>使用重复回放功能进行暴力回放；</code></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em><strong>下一步：</strong></em></p>
-</li>
-</ul>
-<p><a href="https://github.com/alipay/SoloPi"><em>Solopi github</em>_</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>ui自动化</tag>
-        <tag>稳定性</tag>
-        <tag>前端性能</tag>
-        <tag>solopi</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>UI自动化框架说明</title>
-    <url>/posts/411091fa/</url>
-    <content><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`
-</code></pre>
-<p>___ 大纲 ___</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">框架的整体结构</span><br><span class="line">代码模块的结构，文件说明</span><br><span class="line">框架的执行过程</span><br><span class="line">框架优化&#x2F;改动以适应我们产品</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<p>___ 框架整体结构 ___<br><img src="/text_image/ui%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%B6%E6%9E%84.png" alt="alt_text"></p>
-<p><code>框架整体构成由五部分构成；分别是runner(入口)/TestCase(控制层)/PageObject(逻辑层)/日志文件/yaml配置模块/报告模块 </code></p>
-<p>___ runner(入口) ___</p>
-<p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>UI自动化基础--微软</title>
-    <url>/posts/d1646a55/</url>
-    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>UI</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HEXO 官方使用指南</title>
-    <url>/posts/4a17b156/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><span id="more"></span>
-<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<p>#开启动画<br>canvas_nest: true </p>
-]]></content>
-  </entry>
-  <entry>
     <title>Python语法-unittest</title>
     <url>/posts/5b3a24b8/</url>
     <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">unittest介绍</span><br><span class="line">unittest使用教程</span><br><span class="line">unittest中的方法说明</span><br></pre></td></tr></table></figure>
@@ -410,50 +410,6 @@
       <tags>
         <tag>unittest</tag>
         <tag>参数化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python文档管理</title>
-    <url>/posts/2020cd00/</url>
-    <content><![CDATA[<h1 id="python文档说明"><a href="#python文档说明" class="headerlink" title="python文档说明"></a>python文档说明</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">文档管理的作用</span><br><span class="line">文档管理模块pydoc介绍</span><br><span class="line">怎么使用文档管理</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<ul>
-<li><p><strong>文档管理的作用</strong></p>
-<p>  <code>  通过在模块/类/函数中进行规范化注释，可以有效的说明模块/类/函数的功能；清晰的体现程序的结构；  </code></p>
-</li>
-<li><p><strong>文档管理模块pydoc.py</strong>  </p>
-<p>  <code>  文档管理模块pydoc，是python内置的一个文档管理模块。它可以实现在线实时/离线查看。模块/类/函数（内置/第三方/自有均支持）中的注释信息，同时可以将规范的注释信息生成html文件进行查看；  </code></p>
-</li>
-<li><p><strong>怎么实现</strong> </p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">模块中注释的规范</span><br><span class="line">文档管理模块实时查看</span><br><span class="line">文档管理模块生成html文件查看</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><em>模块中注释的规范</em></li>
-</ul>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   e.g</span><br><span class="line">   # -*- coding: utf-8 -*-</span><br><span class="line">   </span><br><span class="line">   &quot;&quot;&quot;</span><br><span class="line">   @author jw</span><br><span class="line">   @desc 本模块是一个测试文件，用来说明pydoc的读取内容</span><br><span class="line">   @date 2017&#x2F;4&#x2F;13</span><br><span class="line">   &quot;&quot;&quot;</span><br><span class="line">   </span><br><span class="line">   #测试变量</span><br><span class="line">   data&#x3D;1</span><br><span class="line">   </span><br><span class="line">   class Test():</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">       测试类</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">   </span><br><span class="line">       def test_c(s):</span><br><span class="line">           &quot;&quot;&quot;</span><br><span class="line">           测试函数</span><br><span class="line">           &quot;&quot;&quot;</span><br><span class="line">           pass</span><br><span class="line">   </span><br><span class="line">   def test():</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">       测试函数</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">       pass</span><br><span class="line">       </span><br><span class="line">以上就是相对标准的注释规范，注释一般由三部分构成模块的注释，类的注释，函数的注释；以上注释在编译后，可使用pydoc进行查看，如下图，第一个区域是顶部注释；第二个区域是类注释，其中会包含类函数，第三个区域是模块函数注释；最后为模块定义的变量；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>_查看效果如下_：</li>
-</ul>
-<p>  <img src="/text_image/pydoc.jpg" alt="alt_text"></p>
-<ul>
-<li><em>实时查看模块说明文档</em></li>
-</ul>
-<p>  实时查看可使用pydoc的help方法，注意非内置模块，使用前，需要先导入模块</p>
-<p>  <img src="/text_image/help.png" alt="alt_text"></p>
-<ul>
-<li><em>离线生成html查看模块文档</em></li>
-</ul>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">生成全局html文档命令：python  -m pydoc -p *** #在通过loaclhost:****的方式访问查看</span><br><span class="line">查看特定的对象 python -m pydoc -w test&#x2F;test.Test #生成特定对象的html文件</span><br><span class="line">查找特定对象的文档 python -m pydoc -k test</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><code>PS:    上方的&quot;&quot;&quot;注释&quot;&quot;&quot;称为文档字符串，可通过对象的__doc__方法来进行查看，如Test.__doc__;</code></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>说明文档</tag>
       </tags>
   </entry>
   <entry>
@@ -532,6 +488,50 @@
       </tags>
   </entry>
   <entry>
+    <title>python文档管理</title>
+    <url>/posts/2020cd00/</url>
+    <content><![CDATA[<h1 id="python文档说明"><a href="#python文档说明" class="headerlink" title="python文档说明"></a>python文档说明</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">文档管理的作用</span><br><span class="line">文档管理模块pydoc介绍</span><br><span class="line">怎么使用文档管理</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<ul>
+<li><p><strong>文档管理的作用</strong></p>
+<p>  <code>  通过在模块/类/函数中进行规范化注释，可以有效的说明模块/类/函数的功能；清晰的体现程序的结构；  </code></p>
+</li>
+<li><p><strong>文档管理模块pydoc.py</strong>  </p>
+<p>  <code>  文档管理模块pydoc，是python内置的一个文档管理模块。它可以实现在线实时/离线查看。模块/类/函数（内置/第三方/自有均支持）中的注释信息，同时可以将规范的注释信息生成html文件进行查看；  </code></p>
+</li>
+<li><p><strong>怎么实现</strong> </p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">模块中注释的规范</span><br><span class="line">文档管理模块实时查看</span><br><span class="line">文档管理模块生成html文件查看</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><em>模块中注释的规范</em></li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   e.g</span><br><span class="line">   # -*- coding: utf-8 -*-</span><br><span class="line">   </span><br><span class="line">   &quot;&quot;&quot;</span><br><span class="line">   @author jw</span><br><span class="line">   @desc 本模块是一个测试文件，用来说明pydoc的读取内容</span><br><span class="line">   @date 2017&#x2F;4&#x2F;13</span><br><span class="line">   &quot;&quot;&quot;</span><br><span class="line">   </span><br><span class="line">   #测试变量</span><br><span class="line">   data&#x3D;1</span><br><span class="line">   </span><br><span class="line">   class Test():</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">       测试类</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">   </span><br><span class="line">       def test_c(s):</span><br><span class="line">           &quot;&quot;&quot;</span><br><span class="line">           测试函数</span><br><span class="line">           &quot;&quot;&quot;</span><br><span class="line">           pass</span><br><span class="line">   </span><br><span class="line">   def test():</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">       测试函数</span><br><span class="line">       &quot;&quot;&quot;</span><br><span class="line">       pass</span><br><span class="line">       </span><br><span class="line">以上就是相对标准的注释规范，注释一般由三部分构成模块的注释，类的注释，函数的注释；以上注释在编译后，可使用pydoc进行查看，如下图，第一个区域是顶部注释；第二个区域是类注释，其中会包含类函数，第三个区域是模块函数注释；最后为模块定义的变量；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>_查看效果如下_：</li>
+</ul>
+<p>  <img src="/text_image/pydoc.jpg" alt="alt_text"></p>
+<ul>
+<li><em>实时查看模块说明文档</em></li>
+</ul>
+<p>  实时查看可使用pydoc的help方法，注意非内置模块，使用前，需要先导入模块</p>
+<p>  <img src="/text_image/help.png" alt="alt_text"></p>
+<ul>
+<li><em>离线生成html查看模块文档</em></li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">生成全局html文档命令：python  -m pydoc -p *** #在通过loaclhost:****的方式访问查看</span><br><span class="line">查看特定的对象 python -m pydoc -w test&#x2F;test.Test #生成特定对象的html文件</span><br><span class="line">查找特定对象的文档 python -m pydoc -k test</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><code>PS:    上方的&quot;&quot;&quot;注释&quot;&quot;&quot;称为文档字符串，可通过对象的__doc__方法来进行查看，如Test.__doc__;</code></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>说明文档</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python语法-super方法</title>
     <url>/posts/7b2ded6/</url>
     <content><![CDATA[<p><code>super方法用来，继承父类，或祖父类；常用的结构为super(C,self)/python3括号内的可缩写（super()）;super方法本身是一个类，和当前所在的类（父类）无关，该类使用了mro的算法（方法查找顺序）来决定继承类的顺序</code></p>
@@ -573,33 +573,6 @@
     <url>/posts/3de87ac/</url>
     <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>优秀博客</title>
-    <url>/posts/bb158cde/</url>
-    <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ul>
-<li><a href="https://cloud.tencent.com/developer/article/1974105">自动化专家</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/3335805/activities">性能</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/1011618/activities">腾讯性能优化</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/1016462">腾讯测开</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/2059614">测开</a></li>
-</ul>
-<span id="more"></span>
-
-<h1 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h1><ul>
-<li><a href="https://cloud.tencent.com/developer/user/2398817/inventories">python</a></li>
-<li><a href="https://www.cnblogs.com/vamei/tag/Python/">行业大佬python教程</a></li>
-</ul>
-<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
-<li><a href="https://cloud.tencent.com/developer/user/1642192">K8S腾讯专家</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-      </tags>
   </entry>
   <entry>
     <title>职业--传易工作总结</title>
@@ -664,6 +637,33 @@
       </tags>
   </entry>
   <entry>
+    <title>优秀博客</title>
+    <url>/posts/bb158cde/</url>
+    <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ul>
+<li><a href="https://cloud.tencent.com/developer/article/1974105">自动化专家</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/3335805/activities">性能</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/1011618/activities">腾讯性能优化</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/1016462">腾讯测开</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/2059614">测开</a></li>
+</ul>
+<span id="more"></span>
+
+<h1 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h1><ul>
+<li><a href="https://cloud.tencent.com/developer/user/2398817/inventories">python</a></li>
+<li><a href="https://www.cnblogs.com/vamei/tag/Python/">行业大佬python教程</a></li>
+</ul>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
+<li><a href="https://cloud.tencent.com/developer/user/1642192">K8S腾讯专家</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>传音刷机</title>
     <url>/posts/a1b2e86a/</url>
     <content><![CDATA[<ol>
@@ -685,6 +685,25 @@
       </tags>
   </entry>
   <entry>
+    <title>全局函数局部函数</title>
+    <url>/posts/ae3a85c8/</url>
+    <content><![CDATA[<h1 id="全局局部函数"><a href="#全局局部函数" class="headerlink" title="全局局部函数"></a>全局局部函数</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">全局函数：global</span><br><span class="line">局部函数：nonlocal</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>global</strong></p>
+<p><code>全局函数在模块py中生效；使用时需要先定义，在声明；一次声明，模块中全局使用，全局和局部不能是同一个变量； global a a=s</code></p>
+<p><strong>nonlocal</strong></p>
+<p><code>局部变量函数在模块中局部函数中生效；需要先声明，后定义成局部变量，一旦定义成局部变量就仅在该函数中生效，离开该函数就不生效，不能和全局变量为同一个变量 a=s nonlocal a</code></p>
+<p><a href="https://www.cnblogs.com/liyang93/p/6669874.html">参考</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>变量</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>估值体系</title>
     <url>/posts/daef770e/</url>
     <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的扣非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
@@ -695,6 +714,26 @@
 <h2 id="买卖"><a href="#买卖" class="headerlink" title="买卖"></a>买卖</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">理想买点：三年后合理估值*0.5</span><br><span class="line">理想卖点：min(动态市盈率50,三年后合理估值150%)</span><br><span class="line"></span><br><span class="line">买操作：20-25倍区间都能买，仅茅台在25倍pe以上买入;到达理想买点时，分三批买完剩余资金（理想买点/理想买点-5%/理想买点-10%）</span><br><span class="line">卖操作：当年预计净利润的50/55/60三次清空；（买卖点是唐朝基于无风险收益率计算，正常超出合理估值都能卖，50%其实是预留的安全边际）</span><br><span class="line">三年后合理估值=三年后预估净利率*25（具体企业具体分析，也就是pe的中分位）</span><br><span class="line"></span><br><span class="line">全指数基金买/卖点：基于无风险收益率来，但是由于不确定性，要做净利润折算，需要进行等比例折算，折算区间在5-7折</span><br><span class="line">买点：12-15pe</span><br><span class="line">卖点：25-35pe</span><br><span class="line"></span><br><span class="line">♥卖出后买全指还是留现金取决于无风险收益率（一般2倍无风险收益率即可买pe=1/无风险收益率*2，全指唐朝仅关注沪深300/恒生指数/标普500/纳斯达克100）</span><br><span class="line">♥其他时间：企业逻辑未变时，低于买点买，高于卖点卖，其他时间坐等；但需要遵循单股不超40%原则，即三五个行业，七八家公司；</span><br><span class="line">♥不要严格按买卖价来，要接受错误和风险；确定性高的企业，越偏向合理估值之下就买，确定性低的企业越偏向理想买点才买，唐朝的理念是理想买点位置一定要买完资金；</span><br></pre></td></tr></table></figure>
 
 <h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">♥腾讯+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以300均价，买入6手；高溢价时，优先使用中概换腾讯（中概大部分公司不盈利）</span><br><span class="line">1️⃣理想买点：328</span><br><span class="line">2️⃣理想卖点：1年内720</span><br><span class="line">3️⃣纳指买点：21pe</span><br><span class="line">4️⃣纳指卖点：35pe</span><br><span class="line"></span><br><span class="line">♥银行+家电25%：计划100k,余量16k</span><br><span class="line">已持仓84k,其中家电50k&#x2F;银行34k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右，招商计划以28均价，买入5手</span><br><span class="line">2️⃣美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">3️⃣格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34</span><br><span class="line"></span><br><span class="line">♥消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利20k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣五粮液150快,理想买点150&#x2F;143&#x2F;135</span><br><span class="line">2️⃣伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下</span><br><span class="line"></span><br><span class="line">♥医药10%：计划40k,余量3k</span><br><span class="line">已持仓37k,其中恒瑞20k&#x2F;ETF17K</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣恒瑞按50倍市盈率20.07%净利润增长，卖点60（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">2️⃣300医药ETF计划0.42，买入7000个，卖点为0.7以上，对应300医药指数50倍以上的估值</span><br><span class="line">医药需要恒瑞和etf实现高低互换，高换低；</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>可变对象合并方法</title>
+    <url>/posts/def45bf2/</url>
+    <content><![CDATA[<h1 id="可变对象合并的方法"><a href="#可变对象合并的方法" class="headerlink" title="可变对象合并的方法"></a>可变对象合并的方法</h1><p>eg:list</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">+:合并</span><br><span class="line">+=：增加赋值</span><br><span class="line">append()：添加</span><br><span class="line">extend()：插入</span><br><span class="line"></span><br><span class="line">list=[1,2,3]</span><br><span class="line">l=[4]</span><br><span class="line">s=list+l</span><br><span class="line">s=list.append(l)</span><br><span class="line">s=list.extend(l)</span><br><span class="line">list+=l</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;list&#x27;</span>,list)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;l&#x27;</span>,l)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;s&#x27;</span>,s)</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>+合并</strong></p>
+<p><code> 合并方法，是影响最小，速度最慢的方法；因为他不会改变原序列，会复制后生成一个新的序列    </code></p>
+<p><strong>append()</strong><br>    <code>    添加方法，会直接将对象添加到原序列末尾；会改变原序列    </code></p>
+<p><strong>extend()</strong><br>    <code>    插入方法，会将对象的元素添加到序列末尾，而不是对象，会改变原序列    </code></p>
+<p><strong>+=</strong><br>    <code>    增强赋值方法，类似于合并=；和extend()等效，效率比其低，会改变原序列    </code></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>序列</tag>
+      </tags>
   </entry>
   <entry>
     <title>做点事</title>
@@ -735,64 +774,6 @@
 <li><strong>痛点</strong></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>全局函数局部函数</title>
-    <url>/posts/ae3a85c8/</url>
-    <content><![CDATA[<h1 id="全局局部函数"><a href="#全局局部函数" class="headerlink" title="全局局部函数"></a>全局局部函数</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">全局函数：global</span><br><span class="line">局部函数：nonlocal</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p><strong>global</strong></p>
-<p><code>全局函数在模块py中生效；使用时需要先定义，在声明；一次声明，模块中全局使用，全局和局部不能是同一个变量； global a a=s</code></p>
-<p><strong>nonlocal</strong></p>
-<p><code>局部变量函数在模块中局部函数中生效；需要先声明，后定义成局部变量，一旦定义成局部变量就仅在该函数中生效，离开该函数就不生效，不能和全局变量为同一个变量 a=s nonlocal a</code></p>
-<p><a href="https://www.cnblogs.com/liyang93/p/6669874.html">参考</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>变量</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>可变对象合并方法</title>
-    <url>/posts/def45bf2/</url>
-    <content><![CDATA[<h1 id="可变对象合并的方法"><a href="#可变对象合并的方法" class="headerlink" title="可变对象合并的方法"></a>可变对象合并的方法</h1><p>eg:list</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">+:合并</span><br><span class="line">+=：增加赋值</span><br><span class="line">append()：添加</span><br><span class="line">extend()：插入</span><br><span class="line"></span><br><span class="line">list=[1,2,3]</span><br><span class="line">l=[4]</span><br><span class="line">s=list+l</span><br><span class="line">s=list.append(l)</span><br><span class="line">s=list.extend(l)</span><br><span class="line">list+=l</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;list&#x27;</span>,list)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;l&#x27;</span>,l)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;s&#x27;</span>,s)</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p><strong>+合并</strong></p>
-<p><code> 合并方法，是影响最小，速度最慢的方法；因为他不会改变原序列，会复制后生成一个新的序列    </code></p>
-<p><strong>append()</strong><br>    <code>    添加方法，会直接将对象添加到原序列末尾；会改变原序列    </code></p>
-<p><strong>extend()</strong><br>    <code>    插入方法，会将对象的元素添加到序列末尾，而不是对象，会改变原序列    </code></p>
-<p><strong>+=</strong><br>    <code>    增强赋值方法，类似于合并=；和extend()等效，效率比其低，会改变原序列    </code></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>序列</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>大数据BI报表架构调整</title>
-    <url>/posts/10f9513d/</url>
-    <content><![CDATA[<h1 id="大数据BI报表架构调整"><a href="#大数据BI报表架构调整" class="headerlink" title="大数据BI报表架构调整"></a>大数据BI报表架构调整</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span>
-
-<h2 id="架构说明"><a href="#架构说明" class="headerlink" title="架构说明"></a>架构说明</h2><h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="覆盖范围"><a href="#覆盖范围" class="headerlink" title="覆盖范围"></a>覆盖范围</h3><p><em><strong>oms Category Analysis模块</strong></em></p>
-<ul>
-<li>覆盖前端交互</li>
-<li>覆盖报表的数据</li>
-<li>覆盖接口性能</li>
-</ul>
-<p><em><strong>Traffic Analysis</strong></em></p>
-<ul>
-<li>覆盖前端交互</li>
-<li>覆盖报表的数据</li>
-<li>覆盖接口性能</li>
-</ul>
-]]></content>
   </entry>
   <entry>
     <title>各家模拟器对比分析</title>
@@ -940,6 +921,25 @@
       </tags>
   </entry>
   <entry>
+    <title>大数据BI报表架构调整</title>
+    <url>/posts/10f9513d/</url>
+    <content><![CDATA[<h1 id="大数据BI报表架构调整"><a href="#大数据BI报表架构调整" class="headerlink" title="大数据BI报表架构调整"></a>大数据BI报表架构调整</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span>
+
+<h2 id="架构说明"><a href="#架构说明" class="headerlink" title="架构说明"></a>架构说明</h2><h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="覆盖范围"><a href="#覆盖范围" class="headerlink" title="覆盖范围"></a>覆盖范围</h3><p><em><strong>oms Category Analysis模块</strong></em></p>
+<ul>
+<li>覆盖前端交互</li>
+<li>覆盖报表的数据</li>
+<li>覆盖接口性能</li>
+</ul>
+<p><em><strong>Traffic Analysis</strong></em></p>
+<ul>
+<li>覆盖前端交互</li>
+<li>覆盖报表的数据</li>
+<li>覆盖接口性能</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>工作梳理</title>
     <url>/posts/8c69a8ec/</url>
     <content><![CDATA[<h1 id="工作梳理"><a href="#工作梳理" class="headerlink" title="工作梳理"></a>工作梳理</h1><ul>
@@ -1054,9 +1054,9 @@
       </tags>
   </entry>
   <entry>
-    <title>数据库性能测试</title>
-    <url>/posts/ab3091af/</url>
-    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
+    <title>用例管理平台</title>
+    <url>/posts/c48e9a83/</url>
+    <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -1069,6 +1069,12 @@
 <ul>
 <li>related_posts: true</li>
 </ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>数据库性能测试</title>
+    <url>/posts/ab3091af/</url>
+    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -1126,10 +1132,194 @@
       </tags>
   </entry>
   <entry>
-    <title>用例管理平台</title>
-    <url>/posts/c48e9a83/</url>
-    <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
+    <title>百度质量体系建设</title>
+    <url>/posts/bcd76c52/</url>
+    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
+<li><em><strong>介绍</strong></em></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>目录</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>稳定性治理</title>
+    <url>/posts/a30df9c8/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">概述，目的？</span><br><span class="line">怎么进行稳定性治理，稳定性治理的体系建设？</span><br><span class="line">稳定性治理的过程？</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>稳定性治理概述，目的？</strong></p>
+<p><code>稳定性是系统最核心的需求；稳定性包含最核心的，系统服务的稳定性和前端的稳定性；稳定性核心有两大快，一是系统稳定，在复杂的环境下能稳定运行；二是抛出异常能及时处理，降低异常带来的风险；本文的稳定性治理，主要考虑的是通过模仿异常环境下系统运行，及时发现问题，解决问题，提升系统的稳定性；</code></p>
+<p><strong>怎么进行稳定性治理，稳定性治理体系的建设？</strong></p>
+<p><code>稳定性治理，首要目标，是要确认稳定性的衡量指标；其次要具有构造仿真环境的能力，在复杂环境下要具有系统监控能力，同时整个体系要能实现自动化运行维护具有平台能力。</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">稳定性衡量指标？</span><br><span class="line">稳定性环境监控？</span><br><span class="line">稳定性测试策略？</span><br><span class="line">自动化稳定性平台建设？</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><em><strong>稳定性衡量指标?</strong></em><br><code>系统稳定；一般是指系统在定义的状态下稳定运行，且长时间不会出现异常状态,常见的异常如下：</code></p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">崩溃率</span><br><span class="line">anr</span><br><span class="line">内存泄露</span><br><span class="line">oom</span><br><span class="line">系统性能</span><br></pre></td></tr></table></figure>
+<ul>
+<li><em>崩溃率</em><br><code>崩溃是稳定性的最大对手；通常关注的崩溃是crash；关注崩溃率，一般关注日崩溃率和崩溃用户率； </code><ul>
+<li>日崩溃率=日崩溃次数/日打开总次数        合规标准：0.2%</li>
+<li>崩溃用户数=去重的崩溃用户数/日活跃用户数    合规标准：0.2%</li>
+</ul>
+</li>
+<li><em>anr</em><br><code>anr即(Application Not Response);常会直接暴露给用户，照成不好影响;</code></li>
+<li><em>内存泄露</em><br><code>系统占用的堆内存未及时释放或无法释放，从而导致占用的内存一直递增，从而导致环境资源不足;</code></li>
+<li><em>oom</em><br><code>app申请的内存超过最大内存的限制，系统不分配内存，导致程序崩溃;</code></li>
+<li><em>系统性能</em><br><code>指在不同场景下对系统或环境的资源消耗进行监控，常监控系统资源和消耗的资源;</code></li>
+</ul>
+</li>
+<li><p><em><strong>系统稳定性监控？</strong></em></p>
+<p>  <code>系统稳定，说明系统在全局环境下，都能长期稳定的运行；揭释了稳定性检测的核心的几个点，异常环境构造，稳定运行指标监控，长期稳定性；</code></p>
+<ul>
+<li><em>稳定性指标</em><br><code>本文的指标监控，仅对前端的相关的指标进行监控；后端服务的监控，有运维在做;</code><ul>
+<li><p>服务及时响应/且响应参数无误</p>
+<ul>
+<li>场景：如接口监控，特指对后端服务进行监控;</li>
+<li>指标：一般监控服务相关指标（如接口响应时间/参数准确性）,资源监控（cpu/内存/带宽/io），消耗资源（流量/电量）;</li>
+<li>方案：可通过仅触发服务的方式，仅对服务进行监控，如接口自动化；可通过前端触发服务来实现监控，如ui自动化实现接口覆盖；系统资源消耗可通过监控系统资源文件获取；系统监控可通过后端方案实现，如prometheus；</li>
+</ul>
+</li>
+<li><p>前端加载时间满足用户体验/呈现无误</p>
+<ul>
+<li>场景：触发前端场景，来实现对产品提供给用户的服务进行监控；</li>
+<li>指标：页面加载时间/页面UI测试/前端资源检测；</li>
+<li>方案：可通过UI自动化，UI遍历等方式实现；数据采集可通过获取activity的响应时间获取；UI测试可通过telescop植入性来实现；</li>
+</ul>
+</li>
+<li><p>前端稳定性</p>
+<ul>
+<li>场景：稳定性是最核心的指标，稳定指服务稳定不崩溃，不抛出异常；</li>
+<li>指标：<ul>
+<li>crash率：通过监控crash文件进行采集；</li>
+<li>anr率：通过监控anr文件进行采集；</li>
+<li>内存泄露：通过LeakCanary监控内存泄露,通过haha来解析hprf文件，来分析Java虚拟机的内存使用清空；</li>
+<li>hprf:hprof最初是由J2SE支持的一种二进制堆转储格式，hprof文件保存了当前java堆上所有的内存使用信息，能够完整的反映虚拟机当前的内存状态；</li>
+<li>oom：通过字节的tailor来进行监控；</li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzI1MzYzMjE0MQ==&mid=2247487203&idx=1&sn=182584b69910c843ae95f60e74127249&chksm=e9d0c501dea74c178e16f95a2ffc5007c5dbca89a02d56895ed9b05883cf0562da689ac6146b&scene=178&cur_album_id=1590413073616519171#rd">oom问题监控</a></li>
+<li>方案<ul>
+<li>稳定性在不同的场景下有着不同的表现；可以通过这些方式来实现场景的覆盖；ui遍历/暴力回放/monkey测试/流量回放；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>其他监控</p>
+<ul>
+<li>场景：除了上述指标外，我们还会对以下指标进行监控，以评估对系统的影响;</li>
+<li>指标：<ul>
+<li>UI资源监控：图片过大/图片持有/过度绘制/资源泄露/过度布局</li>
+<li>线程阻塞</li>
+<li>文件创建</li>
+<li>线程创建</li>
+<li>主线程io</li>
+<li>启动性能</li>
+</ul>
+</li>
+<li>方案：使用telescop的植入性和监控能力来监控；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em><strong>稳定性测试策略？</strong></em><br><code>稳定性测试时，有几个核心待解决的问题；如何解决真实环境下各种复杂环境的覆盖？如何保证效率，实现低投入高产出？如何保证采集的指标和问题场景结合，快速复现？</code></p>
+<ul>
+<li><p><em>如何保证覆盖率？覆盖率是如何计算的？</em><br><code>稳定性治理，在复杂环境下要保证全覆盖时不可能实现的工作；因此我们考虑实现一种可迭代优化的机制保证覆盖，保障系统的稳定，通常我们考虑系统覆盖时，从页面覆盖和代码逻辑的覆盖来实现;</code></p>
+<ul>
+<li>覆盖率指标：<ul>
+<li>页面场景覆盖：activity覆盖70%；覆盖所有的一级页面和所有的核心二级页面以及所有的主流程相关的三四级页面；覆盖所有的核心业务流程；</li>
+<li>代码行覆盖：可通过白盒走查或者代码检测工具；单测实现代码的覆盖；覆盖所有核心流程和代码的核心处理逻辑；</li>
+</ul>
+</li>
+<li>覆盖率保障策略：<ul>
+<li>终端覆盖：设备信息采集，通过埋点采集线上设备数据；至少要保证top10的设备能实现覆盖；保障top5系统版本能实现覆盖；top5-10的os版本能实现覆盖；</li>
+<li>预装版本：最好能实现需预装的机型的覆盖；否则至少要保证覆盖前一个机型，相同配置的版本的设备不低于10台；</li>
+<li>需要有问题统计/上报机制；能收集线上问题进行统计归纳，方便策略的设计和混度工程的实现；</li>
+<li>覆盖所有的核心链路，及70%的页面（所有一级页面，所有核心二级页面，所有核心三级页面）</li>
+<li>时间：看具体的策略，monkey一般不低于一天，也就是8小时；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em>测试方式？各种方式的优缺点？</em></p>
+<ul>
+<li><p>UI遍历测试<br>  <code>UI遍历，指利用爬虫和过滤策略，实现从头遍历所有页面；</code></p>
+<ul>
+<li>优点：实现所有流程/页面的覆盖，能保证较高的覆盖率；</li>
+<li>缺点：耗时太久，无法模仿真实的用户操作，对测试版本或者测试环境有要求；很难构造高压力的场景；</li>
+<li>方案：AppCrawler实现；</li>
+</ul>
+</li>
+<li><p>暴力回放<br><code>暴力回放，指通过频繁对某些场景进行循环操作，来实现对核心场景的覆盖，此策略传音要求必须要做;</code></p>
+<ul>
+<li>优点：可对核心场景进行大量覆盖，保证核心链路无误；</li>
+<li>缺点：能覆盖的场景有限，耗时较长；较难覆盖到特殊场景；</li>
+<li>场景：通过UI自动化脚本实现循环遍历；</li>
+</ul>
+</li>
+<li><p>monkey随机遍历<br><code>monkey是Android自带的稳定性治理的工具，也是稳定性治理的核心方式，能模仿用户进行随机性的点击操作；</code></p>
+<ul>
+<li>优点：实现简单，有较强的随机性，能发现一些特殊问题；</li>
+<li>缺点：过于随机，不能保证覆盖率，无法模仿真实用户的操作；</li>
+<li>方案：针对monkey过于随机的缺陷，为保证效率，可对monkey的策略进行定制化，具体实现如下：<ul>
+<li>通过黑名单策略，跳过低频操作（如新手引导、权限类操作、关闭输入法，屏蔽其他应用的activity减少无效操作）；</li>
+<li>通过白名单策略，定制执行的activity和app,减少无效操作；</li>
+<li>定制事件比例，提高测试效率；</li>
+<li>执行时间，一般不低于一天，也就是8小时；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>线上流量回放<br><code>线上流量回放，指利用线上的日志数据记录的用户行为，作为源数据来建模，模仿用户操作;</code></p>
+<ul>
+<li>优点：覆盖大量的真实用户操作，case有效性高，针对性强；</li>
+<li>缺点：需要利用大量的线上日志，对系统的要求高；利用线上日志进行回放，实现难度大；利用线上用户数据，会存在隐私安全问题；</li>
+<li>方案：可使用头条的智能化monkey工具，fastbot;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em>具体实现，如何保证效率？</em><br><code>结合上诉几种方案的优缺点，可知，最好能四种方案结合着使用；</code></p>
+<ul>
+<li>新发功能版本：最好先执行一遍UI遍历（冒烟）/monkey遍历（每日）/流量回放（bug修复版本）</li>
+<li>RC版本：可执行流量回放/暴力回放</li>
+<li>预装版本：可执行流量回放/暴力回放</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em><strong>自动化稳定性平台的建设</strong></em></p>
+</li>
+</ul>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/L7RTCzqQ-1GbNhMNHONdRw"><strong>阿里稳定性治理</strong></a></li>
+<li><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1590413073616519171&scene=173&from_msgid=2247487203&from_itemidx=1&count=3&nolastread=1#wechat_redirect"><strong>头条稳定性治理系列</strong></a></li>
+</ul>
 ]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>稳定性</tag>
+        <tag>头条</tag>
+        <tag>阿里</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>稳定性治理-暴力回放</title>
+    <url>/posts/81de0e43/</url>
+    <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
+<h4 id="覆盖场景"><a href="#覆盖场景" class="headerlink" title="覆盖场景"></a>覆盖场景</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">music首页，点击歌单播放按钮播放，然后息屏进入后台，10s后切换回前台；</span><br><span class="line">music首页，点开播放列表，然后点击music播放音乐，然后关闭播放列表，然后切换到后台，10s后切换回前台；</span><br><span class="line">music首页，进入歌单，点击全部播放，点击全部下载，然后返回首页，上下滑动一屏，然后切换回后台，10s后切换回前台；</span><br><span class="line">music首页，点击头像登录，退出，切换到后台，10s后切换回前台；</span><br><span class="line">treding首页，点击任意music播放，切换到后台，10s后回到前台，关闭播放详情页；</span><br><span class="line">首页，滑动到treding页，上下滑动一屏；然后向左滑动一屏，上下滑动一屏，然后向左滑动一屏，上下滑动一屏,然后向左滑动一屏，上下滑动一屏,然后切换到后台，停留10s;然后点击导航页到library页，然后点击导航页到search页，然后点击导航页到music页；</span><br><span class="line">搜索页，搜索music，搜索结果页左右滚动一屏；点击结果页播放，然后切换到后台休眠10s,在切换回前台;</span><br><span class="line">首页，点击导航页进入library页；点击进入喜欢的music页，点击全部播放；然后切换到后台，停留10s，在切换回前台，退出music页，切换回首页；</span><br><span class="line">首页，切换到buzz页；上下滑动两屏，点击buzz关注按钮，buzz点赞，buzz评论，点击查看buzz详情，然后回退到buzz页，然后在切换到后台，休眠10s，在切换回前台；</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>稳定性</tag>
+        <tag>暴力回放</tag>
+      </tags>
   </entry>
   <entry>
     <title>稳定性治理--智能遍历</title>
@@ -1300,32 +1490,6 @@
       </tags>
   </entry>
   <entry>
-    <title>百度质量体系建设</title>
-    <url>/posts/bcd76c52/</url>
-    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
-<li><em><strong>介绍</strong></em></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>目录</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>稳定性治理-暴力回放</title>
-    <url>/posts/81de0e43/</url>
-    <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
-<h4 id="覆盖场景"><a href="#覆盖场景" class="headerlink" title="覆盖场景"></a>覆盖场景</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">music首页，点击歌单播放按钮播放，然后息屏进入后台，10s后切换回前台；</span><br><span class="line">music首页，点开播放列表，然后点击music播放音乐，然后关闭播放列表，然后切换到后台，10s后切换回前台；</span><br><span class="line">music首页，进入歌单，点击全部播放，点击全部下载，然后返回首页，上下滑动一屏，然后切换回后台，10s后切换回前台；</span><br><span class="line">music首页，点击头像登录，退出，切换到后台，10s后切换回前台；</span><br><span class="line">treding首页，点击任意music播放，切换到后台，10s后回到前台，关闭播放详情页；</span><br><span class="line">首页，滑动到treding页，上下滑动一屏；然后向左滑动一屏，上下滑动一屏，然后向左滑动一屏，上下滑动一屏,然后向左滑动一屏，上下滑动一屏,然后切换到后台，停留10s;然后点击导航页到library页，然后点击导航页到search页，然后点击导航页到music页；</span><br><span class="line">搜索页，搜索music，搜索结果页左右滚动一屏；点击结果页播放，然后切换到后台休眠10s,在切换回前台;</span><br><span class="line">首页，点击导航页进入library页；点击进入喜欢的music页，点击全部播放；然后切换到后台，停留10s，在切换回前台，退出music页，切换回首页；</span><br><span class="line">首页，切换到buzz页；上下滑动两屏，点击buzz关注按钮，buzz点赞，buzz评论，点击查看buzz详情，然后回退到buzz页，然后在切换到后台，休眠10s，在切换回前台；</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>稳定性</tag>
-        <tag>暴力回放</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>类对象/实例对象/类方法/实例方法/静态方法</title>
     <url>/posts/93899372/</url>
     <content><![CDATA[<ul>
@@ -1380,168 +1544,18 @@
       </tags>
   </entry>
   <entry>
-    <title>稳定性治理</title>
-    <url>/posts/a30df9c8/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">概述，目的？</span><br><span class="line">怎么进行稳定性治理，稳定性治理的体系建设？</span><br><span class="line">稳定性治理的过程？</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p><strong>稳定性治理概述，目的？</strong></p>
-<p><code>稳定性是系统最核心的需求；稳定性包含最核心的，系统服务的稳定性和前端的稳定性；稳定性核心有两大快，一是系统稳定，在复杂的环境下能稳定运行；二是抛出异常能及时处理，降低异常带来的风险；本文的稳定性治理，主要考虑的是通过模仿异常环境下系统运行，及时发现问题，解决问题，提升系统的稳定性；</code></p>
-<p><strong>怎么进行稳定性治理，稳定性治理体系的建设？</strong></p>
-<p><code>稳定性治理，首要目标，是要确认稳定性的衡量指标；其次要具有构造仿真环境的能力，在复杂环境下要具有系统监控能力，同时整个体系要能实现自动化运行维护具有平台能力。</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">稳定性衡量指标？</span><br><span class="line">稳定性环境监控？</span><br><span class="line">稳定性测试策略？</span><br><span class="line">自动化稳定性平台建设？</span><br></pre></td></tr></table></figure>
+    <title>编写博客--makedown语法说明</title>
+    <url>/posts/ed6b07f3/</url>
+    <content><![CDATA[<h1 id="语法总览"><a href="#语法总览" class="headerlink" title="语法总览"></a>语法总览</h1><h2 id="正文语法"><a href="#正文语法" class="headerlink" title="正文语法"></a>正文语法</h2><pre><code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; 1.=== title ===	最顶级标题</span><br><span class="line">&gt; 2.---  title --- 二级标题</span><br><span class="line">&gt; 3.<span class="comment"># title/## title/###### title	一级/二级/六级标题</span></span><br><span class="line">&gt; * tab缩进语法</span><br><span class="line">&gt; + 字体加粗使用** text ** 或__text__</span><br><span class="line">&gt; - 排序列表，无序列表使用（+-*），有序列表使用（1.数字加点）</span><br><span class="line">&gt; - 换行，如果上下行无\n(换行操作)则不换行，如果有则换行</span><br><span class="line">&gt; - 空行，如果上下行之间有空行，则会进行换行</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="资源语法"><a href="#资源语法" class="headerlink" title="资源语法"></a>资源语法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">链接：</span><br><span class="line"></span><br><span class="line">&gt; - [链接](baidu.com <span class="string">&quot;百度这可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + [链接2][1]...[链接3][id]</span><br><span class="line">	[1]: baidu.com <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: zhihu.com <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">图片：</span><br><span class="line"></span><br><span class="line">&gt; - ![alt text](/path/.jpg <span class="string">&quot;可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + ![alt text][1]...![alt text][id可任意和下文保持一致即可]</span><br><span class="line">	[1]: /path/.jpg <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: /path/.jpg <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">代码块：</span><br><span class="line"></span><br><span class="line">&gt; 1. `中间是代码块`</span><br><span class="line">&gt; 2. ```bash 中间是代码块 ```</span><br><span class="line">&gt; 3. 四个空格/一个tab操作后面的代码</span><br><span class="line">&gt; 4.&lt;!-- more --&gt; 缩写/不展示全文</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><p><em><strong>稳定性衡量指标?</strong></em><br><code>系统稳定；一般是指系统在定义的状态下稳定运行，且长时间不会出现异常状态,常见的异常如下：</code></p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">崩溃率</span><br><span class="line">anr</span><br><span class="line">内存泄露</span><br><span class="line">oom</span><br><span class="line">系统性能</span><br></pre></td></tr></table></figure>
-<ul>
-<li><em>崩溃率</em><br><code>崩溃是稳定性的最大对手；通常关注的崩溃是crash；关注崩溃率，一般关注日崩溃率和崩溃用户率； </code><ul>
-<li>日崩溃率=日崩溃次数/日打开总次数        合规标准：0.2%</li>
-<li>崩溃用户数=去重的崩溃用户数/日活跃用户数    合规标准：0.2%</li>
+<h2 id="好看的hexo"><a href="#好看的hexo" class="headerlink" title="好看的hexo"></a>好看的hexo</h2><ul>
+<li><a href="https://blog.bill.moe/"><strong>竞赛</strong></a></li>
+<li><a href="https://diygod.me/"><strong>b站开源大佬</strong></a></li>
 </ul>
-</li>
-<li><em>anr</em><br><code>anr即(Application Not Response);常会直接暴露给用户，照成不好影响;</code></li>
-<li><em>内存泄露</em><br><code>系统占用的堆内存未及时释放或无法释放，从而导致占用的内存一直递增，从而导致环境资源不足;</code></li>
-<li><em>oom</em><br><code>app申请的内存超过最大内存的限制，系统不分配内存，导致程序崩溃;</code></li>
-<li><em>系统性能</em><br><code>指在不同场景下对系统或环境的资源消耗进行监控，常监控系统资源和消耗的资源;</code></li>
-</ul>
-</li>
-<li><p><em><strong>系统稳定性监控？</strong></em></p>
-<p>  <code>系统稳定，说明系统在全局环境下，都能长期稳定的运行；揭释了稳定性检测的核心的几个点，异常环境构造，稳定运行指标监控，长期稳定性；</code></p>
-<ul>
-<li><em>稳定性指标</em><br><code>本文的指标监控，仅对前端的相关的指标进行监控；后端服务的监控，有运维在做;</code><ul>
-<li><p>服务及时响应/且响应参数无误</p>
-<ul>
-<li>场景：如接口监控，特指对后端服务进行监控;</li>
-<li>指标：一般监控服务相关指标（如接口响应时间/参数准确性）,资源监控（cpu/内存/带宽/io），消耗资源（流量/电量）;</li>
-<li>方案：可通过仅触发服务的方式，仅对服务进行监控，如接口自动化；可通过前端触发服务来实现监控，如ui自动化实现接口覆盖；系统资源消耗可通过监控系统资源文件获取；系统监控可通过后端方案实现，如prometheus；</li>
-</ul>
-</li>
-<li><p>前端加载时间满足用户体验/呈现无误</p>
-<ul>
-<li>场景：触发前端场景，来实现对产品提供给用户的服务进行监控；</li>
-<li>指标：页面加载时间/页面UI测试/前端资源检测；</li>
-<li>方案：可通过UI自动化，UI遍历等方式实现；数据采集可通过获取activity的响应时间获取；UI测试可通过telescop植入性来实现；</li>
-</ul>
-</li>
-<li><p>前端稳定性</p>
-<ul>
-<li>场景：稳定性是最核心的指标，稳定指服务稳定不崩溃，不抛出异常；</li>
-<li>指标：<ul>
-<li>crash率：通过监控crash文件进行采集；</li>
-<li>anr率：通过监控anr文件进行采集；</li>
-<li>内存泄露：通过LeakCanary监控内存泄露,通过haha来解析hprf文件，来分析Java虚拟机的内存使用清空；</li>
-<li>hprf:hprof最初是由J2SE支持的一种二进制堆转储格式，hprof文件保存了当前java堆上所有的内存使用信息，能够完整的反映虚拟机当前的内存状态；</li>
-<li>oom：通过字节的tailor来进行监控；</li>
-<li><a href="https://mp.weixin.qq.com/s?__biz=MzI1MzYzMjE0MQ==&mid=2247487203&idx=1&sn=182584b69910c843ae95f60e74127249&chksm=e9d0c501dea74c178e16f95a2ffc5007c5dbca89a02d56895ed9b05883cf0562da689ac6146b&scene=178&cur_album_id=1590413073616519171#rd">oom问题监控</a></li>
-<li>方案<ul>
-<li>稳定性在不同的场景下有着不同的表现；可以通过这些方式来实现场景的覆盖；ui遍历/暴力回放/monkey测试/流量回放；</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>其他监控</p>
-<ul>
-<li>场景：除了上述指标外，我们还会对以下指标进行监控，以评估对系统的影响;</li>
-<li>指标：<ul>
-<li>UI资源监控：图片过大/图片持有/过度绘制/资源泄露/过度布局</li>
-<li>线程阻塞</li>
-<li>文件创建</li>
-<li>线程创建</li>
-<li>主线程io</li>
-<li>启动性能</li>
-</ul>
-</li>
-<li>方案：使用telescop的植入性和监控能力来监控；</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em><strong>稳定性测试策略？</strong></em><br><code>稳定性测试时，有几个核心待解决的问题；如何解决真实环境下各种复杂环境的覆盖？如何保证效率，实现低投入高产出？如何保证采集的指标和问题场景结合，快速复现？</code></p>
-<ul>
-<li><p><em>如何保证覆盖率？覆盖率是如何计算的？</em><br><code>稳定性治理，在复杂环境下要保证全覆盖时不可能实现的工作；因此我们考虑实现一种可迭代优化的机制保证覆盖，保障系统的稳定，通常我们考虑系统覆盖时，从页面覆盖和代码逻辑的覆盖来实现;</code></p>
-<ul>
-<li>覆盖率指标：<ul>
-<li>页面场景覆盖：activity覆盖70%；覆盖所有的一级页面和所有的核心二级页面以及所有的主流程相关的三四级页面；覆盖所有的核心业务流程；</li>
-<li>代码行覆盖：可通过白盒走查或者代码检测工具；单测实现代码的覆盖；覆盖所有核心流程和代码的核心处理逻辑；</li>
-</ul>
-</li>
-<li>覆盖率保障策略：<ul>
-<li>终端覆盖：设备信息采集，通过埋点采集线上设备数据；至少要保证top10的设备能实现覆盖；保障top5系统版本能实现覆盖；top5-10的os版本能实现覆盖；</li>
-<li>预装版本：最好能实现需预装的机型的覆盖；否则至少要保证覆盖前一个机型，相同配置的版本的设备不低于10台；</li>
-<li>需要有问题统计/上报机制；能收集线上问题进行统计归纳，方便策略的设计和混度工程的实现；</li>
-<li>覆盖所有的核心链路，及70%的页面（所有一级页面，所有核心二级页面，所有核心三级页面）</li>
-<li>时间：看具体的策略，monkey一般不低于一天，也就是8小时；</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em>测试方式？各种方式的优缺点？</em></p>
-<ul>
-<li><p>UI遍历测试<br>  <code>UI遍历，指利用爬虫和过滤策略，实现从头遍历所有页面；</code></p>
-<ul>
-<li>优点：实现所有流程/页面的覆盖，能保证较高的覆盖率；</li>
-<li>缺点：耗时太久，无法模仿真实的用户操作，对测试版本或者测试环境有要求；很难构造高压力的场景；</li>
-<li>方案：AppCrawler实现；</li>
-</ul>
-</li>
-<li><p>暴力回放<br><code>暴力回放，指通过频繁对某些场景进行循环操作，来实现对核心场景的覆盖，此策略传音要求必须要做;</code></p>
-<ul>
-<li>优点：可对核心场景进行大量覆盖，保证核心链路无误；</li>
-<li>缺点：能覆盖的场景有限，耗时较长；较难覆盖到特殊场景；</li>
-<li>场景：通过UI自动化脚本实现循环遍历；</li>
-</ul>
-</li>
-<li><p>monkey随机遍历<br><code>monkey是Android自带的稳定性治理的工具，也是稳定性治理的核心方式，能模仿用户进行随机性的点击操作；</code></p>
-<ul>
-<li>优点：实现简单，有较强的随机性，能发现一些特殊问题；</li>
-<li>缺点：过于随机，不能保证覆盖率，无法模仿真实用户的操作；</li>
-<li>方案：针对monkey过于随机的缺陷，为保证效率，可对monkey的策略进行定制化，具体实现如下：<ul>
-<li>通过黑名单策略，跳过低频操作（如新手引导、权限类操作、关闭输入法，屏蔽其他应用的activity减少无效操作）；</li>
-<li>通过白名单策略，定制执行的activity和app,减少无效操作；</li>
-<li>定制事件比例，提高测试效率；</li>
-<li>执行时间，一般不低于一天，也就是8小时；</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>线上流量回放<br><code>线上流量回放，指利用线上的日志数据记录的用户行为，作为源数据来建模，模仿用户操作;</code></p>
-<ul>
-<li>优点：覆盖大量的真实用户操作，case有效性高，针对性强；</li>
-<li>缺点：需要利用大量的线上日志，对系统的要求高；利用线上日志进行回放，实现难度大；利用线上用户数据，会存在隐私安全问题；</li>
-<li>方案：可使用头条的智能化monkey工具，fastbot;</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em>具体实现，如何保证效率？</em><br><code>结合上诉几种方案的优缺点，可知，最好能四种方案结合着使用；</code></p>
-<ul>
-<li>新发功能版本：最好先执行一遍UI遍历（冒烟）/monkey遍历（每日）/流量回放（bug修复版本）</li>
-<li>RC版本：可执行流量回放/暴力回放</li>
-<li>预装版本：可执行流量回放/暴力回放</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em><strong>自动化稳定性平台的建设</strong></em></p>
-</li>
-</ul>
-<ul>
-<li><a href="https://mp.weixin.qq.com/s/L7RTCzqQ-1GbNhMNHONdRw"><strong>阿里稳定性治理</strong></a></li>
-<li><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1590413073616519171&scene=173&from_msgid=2247487203&from_itemidx=1&count=3&nolastread=1#wechat_redirect"><strong>头条稳定性治理系列</strong></a></li>
-</ul>
+<p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>
 ]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>稳定性</tag>
-        <tag>头条</tag>
-        <tag>阿里</tag>
-      </tags>
   </entry>
   <entry>
     <title>装饰器详解</title>
@@ -1583,78 +1597,6 @@
       <tags>
         <tag>python</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>质量体系系列</title>
-    <url>/posts/6696d0e/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><code>测试的核心价值在于保障产品的质量，提效增质；要全面的保障质量，就需要一个完善的体系，从各方面入手来保障产品的质量，本次将以传易互联--音乐项目的质量保障体系进行分析，从而探索质量保障体系的设计</code></p>
-<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">传易音乐质量保障体系</span><br><span class="line">质量保障体系的设计理念</span><br><span class="line">质量保障体系落地</span><br><span class="line">传音音乐质量保障体系理想版</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<h2 id="传音音乐质量保障体系"><a href="#传音音乐质量保障体系" class="headerlink" title="传音音乐质量保障体系"></a>传音音乐质量保障体系</h2><p><code>质量保障体系是为具体业务服务的，因此需要结合业务特色设计，好的质量保障体系是兼顾质量、效率、成本，的一种综合性的设计</code></p>
-<h3 id="传易音乐业务特点"><a href="#传易音乐业务特点" class="headerlink" title="传易音乐业务特点"></a>传易音乐业务特点</h3><p><code>传易音乐提供面向非洲主要国家的，音频流媒体服务（音乐+音频直播）；主要由内容端+产品端+数据端+直播业务+商业化业务构成；主要特点是服务国家多，语种人群多，终端设备复杂，产品交付链路复杂，基于这种复杂的海外业务特点，质量保障体系，需要兼顾各类复杂场景</code></p>
-<h3 id="传音音乐产品交付体系"><a href="#传音音乐产品交付体系" class="headerlink" title="传音音乐产品交付体系"></a>传音音乐产品交付体系</h3><p><code>传易音乐的产品交互体系如下；参与方主要有产品、设计、开发、测试、项目管理人员；整个链路主要基于tapd平台来进行管理追溯，项目主要由项目管理人员协调跟踪，通过在线excel表格来排期和维护进度。整个链路整体合理，各方都有参与；但也有不足之处，问题如下：</code><br><img src="/text_image/%E4%BC%A0%E6%98%93%E4%BA%92%E8%81%94%E4%BA%A4%E4%BB%98%E4%BD%93%E7%B3%BB.png" alt="alt text"><br><strong>交互体系的缺陷</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">对用户来说：我们的产品设计风格变动极大，几乎每一个大版本风格都有极大变化；广告太多；不太稳定；</span><br><span class="line">业务：业务缺乏全局的规划，重点经常变；比如这个季度重点发力会员，下个季度就是游戏，突然重心又在广告，产品方面也是，这种混乱局面会导致一系列问题，出现这种问题的原因个人觉得还是管理层对音乐业务了解并不够深；</span><br><span class="line">需求：由于公司是由业务主导的，业务的混乱导致需求没有一个全局的规划，业务方经常会介入研发过程，会导致开发中断，转而开发新的需求；但后期项目方和业务进行了沟通后，需求由三方（项目、业务、产品）协商准入，并于每周四统一进行需求评审，一定的解决了插入问题；</span><br><span class="line">价值：由于公司内部博弈剧烈，且需求没有一个全局的规划，导致整个产品的风格变动频繁，未有效形成产品自身的品牌，且需求的价值无法量化，投入产出比无法量化分析；</span><br><span class="line">研发：需求无全局规划，研发的人员波动很大，经常会出现项目开发到一半，就出现人员抽调情况，导致原有排期受阻；不过研发在每个季度都有大方向的规划，一般是偏向架构/稳定性/成本把控的，基本都能有效落地；</span><br><span class="line">业务排期：开发/测试，排期极度紧张，且每个人手上同时期基本上都有三四个需求，导致业务很难复盘，资料/能力很难总结，人浮于事的后果就是，整个过程很难实现量化，投入产出比很难分析；且研发虽然在架构方面有大的规划，但过于紧张的人效和时间，导致落地会大打折扣，导致上线产品容易出现性能/稳定性问题；</span><br><span class="line">测试：测试方面在年度季度都会有规划，基本就是我于年终/季度末提交下一季度的规划，这些规划会转变为部门的okr由我负责完成（21年的时候，我手底下还有两个人一般意义上是由我这个组来完成），但由于从21年中开始，公司持续在裁员（一起负责测试架构的另外两个同事被裁了），且公司业务中心变动极大，我又开始负责广告业务，基本没有时间完成规划，只有在管理层有需求时，如（预装需求，必须要做稳定性）；线上出现严重性能问题（必须要进行性能治理），才有一段较时间来完成特定的非业务需求；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="传易音乐质量保障体系分析"><a href="#传易音乐质量保障体系分析" class="headerlink" title="传易音乐质量保障体系分析"></a>传易音乐质量保障体系分析</h3><p><code>传易质量保障体系在全面保障质量的情况下，还需要兼顾成本和效率；同时由于海外业务的复杂性，主要是非洲网络环境较差，普遍都是2/3G网络，终端环境配置较低；因此在设计质量保障体系时需要兼顾这种复杂场景。现有质量保障体系如下：</code></p>
-<p><img src="/text_image/%E4%BC%A0%E6%98%93%E9%9F%B3%E4%B9%90%E8%B4%A8%E9%87%8F%E4%BF%9D%E9%9A%9C%E4%BD%93%E7%B3%BB.png" alt="alt text"><br><strong>质量保障体系的缺陷</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量保障体系，未做量化分析改造，无数据产出及呈现，很难量化价值；</span><br><span class="line">且体系未制定细化的标准，效果很难衡量；</span><br><span class="line">体系缺乏完整/长期的规划，未能有效的实施和优化；</span><br><span class="line">部分环节/工具，落地不到位，效果不佳，如UI自动化，接口自动化等；</span><br><span class="line">缺失归纳整理，无wiki资料库，能力很难输出和传递；</span><br><span class="line">工具很散乱，未做平台化集成；</span><br></pre></td></tr></table></figure>
-<h2 id="质量保障体系的设计理念"><a href="#质量保障体系的设计理念" class="headerlink" title="质量保障体系的设计理念"></a>质量保障体系的设计理念</h2><p><code>质量保障体系，需要遵循全面保障质量；有效平衡质量、效率、成本的理念设计；需要做到质量有数据可量化、有标准可衡量、能落地有效果、可传承可输出使用成本低</code></p>
-<p><strong>设计理念</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">有标准可衡量</span><br><span class="line">有能力有效果</span><br><span class="line">有数据可量化</span><br><span class="line">可传承可输出使用成本低,能兼顾成本、效率、质量</span><br></pre></td></tr></table></figure>
-<p><img src="/text_image/%E9%98%BF%E9%87%8C%E8%B4%A8%E9%87%8F%E4%BF%9D%E9%9A%9C%E4%BD%93%E7%B3%BB.png" alt="alt text"></p>
-<h3 id="质量标准"><a href="#质量标准" class="headerlink" title="质量标准"></a>质量标准</h3><p><code>质量的标准简单理解就是不出问题，因此对问题的定义，就是对质量标准的定义；我们一般要考虑功能、稳定性、性能（前后端/系统性能）,易用性，因此质量标准的建立抓手就是业务，只有基于业务建立细致完善的质量标准才有意义，而有了标准体系才能有效运转</code></p>
-<p><strong>传易音乐的质量标准</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">以季度为周期，责任主体是按流程、事故原因分担的；一般的功能性故障必现且是主流程的测试承担100%责任（严重级别），用例漏测同理；非主流程的或非必现的且出现概率较高的，严重级别低一级，测试承担主要责任，开发次之；非测试环境出现的问题或发布导致的问题，开发和测试均摊责任；性能或者稳定性问题，视问题类型，来界定责任主体，此类问题测试只承担次要责任；同时问题持续时间，影响范围，也会影响问题的严重性和责任主体；</span><br><span class="line">每年度制定功能性问题合规标准、性能、系统稳定性问题的合规标准；并根据影响时长，影响范围，严重程度来划分问题等级，问题由项目经理统一收纳，并记录责任主体，在季度末由此数据来影响kpi分值；</span><br><span class="line">提测标准，业务主流程功能ok,自测用例执行通过；</span><br><span class="line">测试通过标准，尽量保证无bug遗留或无严重级别/普通级别的bug遗留；同时根据业务类型来确定，功能、性能、稳定性、安全、兼容性、回归策略是否通过；</span><br><span class="line">验收标准，测试不参与标准制定；但会提交一份验收用例给产品、设计、业务方，是否通过验收由他们自行决定；</span><br></pre></td></tr></table></figure>
-<p><strong>不足</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">标准制定的不够细致，只有大的框架；</span><br><span class="line">质量问题，只有线上严重级别的问题才会收纳、复盘；且通过在线excel维护；没有形成长期的工作，数据太少，无法持续分析，很难通过数据来进一步优化；</span><br><span class="line">整个标准落地执行不到位，尤其是提测&#x2F;验收的标准未严格实施；其针对标准不执行的情况，没有成文的解决方案，很难长期有效针对此类问题暴露风险；</span><br></pre></td></tr></table></figure>
-<p><strong>参考</strong><br><img src="/text_image/%E8%B4%A8%E9%87%8Fgoc%E6%A0%87%E5%87%86.png" alt="alt text"></p>
-<h4 id="合理的质量标准"><a href="#合理的质量标准" class="headerlink" title="合理的质量标准"></a>合理的质量标准</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">标准必须要成文，可落地的，既有大框架，也有细则且与业务贴合的；</span><br><span class="line">必须要数据支持，不建议通过一个简单的excel维护，必须要成习惯，有长期数据；</span><br><span class="line">标准必须要在每个阶段都有（自测/测试/验收/线上），且标准不仅限制于事上，对人员，流程都要有要求；</span><br><span class="line">标准必须要有效，要和kpi、升职加薪结合；</span><br></pre></td></tr></table></figure>
-
-<h3 id="覆盖范围"><a href="#覆盖范围" class="headerlink" title="覆盖范围"></a>覆盖范围</h3><p><code>理论上质量保障体系要全面的保障质量，方方面面都要覆盖，但实际工作中要均衡考虑</code><br><strong>范围</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">流程：流程把控，流程优化</span><br><span class="line">测试环节：codereview、单元、集成、系统</span><br><span class="line">类别：性能、兼容、稳定性、监控、功能、安全</span><br></pre></td></tr></table></figure>
-<h3 id="测试能力建设"><a href="#测试能力建设" class="headerlink" title="测试能力建设"></a>测试能力建设</h3><p><code>能力建设，一般是指自动化、工具或平台研发能力；但实际项目过程中，协作能力也很重要,这里讲讲工具/平台的价值</code></p>
-<p><strong>工具/平台价值</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">解决手动测试无法解决的事，如稳定性测试；</span><br><span class="line">自动化测试执行是按固定逻辑来的，能实现执行标准的统一；</span><br><span class="line">提效，可用于解决大量的重复性工作的场景，节省人力，提高效率；</span><br><span class="line">有数据，可溯源；有利于沉淀数据和能力，精准的分析解决问题；</span><br></pre></td></tr></table></figure>
-<p><strong>质量保障体系三要素：质量活动、工具平台、质量流程</strong></p>
-<p><code>以下按这三块来分别讲述质量体系的构建</code></p>
-<h4 id="质量活动及测试执行"><a href="#质量活动及测试执行" class="headerlink" title="质量活动及测试执行"></a>质量活动及测试执行</h4><p><code>在测试策略方面保障质量；主要有两种思路①根据问题设计策略，②分析流程来设计策略 </code></p>
-<h5 id="根据问题来设计策略"><a href="#根据问题来设计策略" class="headerlink" title="根据问题来设计策略"></a>根据问题来设计策略</h5><p><code>发现问题，分析问题，从而预防问题</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">需要一个记录问题的‘小本本’，记录下问题、然后分析问题（做复盘，是共性、还是特定问题、是否经常出现）、然后设计策略来预防此类问题；如app经常崩溃，那么质量活动需要包含此类检测；</span><br><span class="line">可以拉取最近一年的线上数据分析，来发现问题；</span><br></pre></td></tr></table></figure>
-<h5 id="分析流程来设计策略"><a href="#分析流程来设计策略" class="headerlink" title="分析流程来设计策略"></a>分析流程来设计策略</h5><p><code>研发过程中的各流程都有可能出问题，本着早发现早解决的原则，在各流程设置卡点，来规避风险，同时各环节也可以设置多条防线，全面的保障质量</code><br><strong>如以下情况</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Case1: 业务有很复杂的业务人员配置流程，这个环节会引入业务配置问题，可以在这个环节后定制质量活动，如配置规则校验，配置预跑等。   </span><br><span class="line"></span><br><span class="line">Case2: 业务在运行时仍有新机构/新商户接入环节，可以定制质量活动，如新接入时进行联调验证、性能压测。</span><br><span class="line"></span><br><span class="line">Case3: 业务有间隔性的数据跑批环节，那么在每次数据跑批结束后，可以定制质量活动，在每次跑批后做结果验证。典型业务有日切，月账单生成，关键报表生成等。</span><br></pre></td></tr></table></figure>
-<h4 id="工具平台建设"><a href="#工具平台建设" class="headerlink" title="工具平台建设"></a>工具平台建设</h4><p><code>建设工具平台，需要把握好成本和收益；至于如何平衡成本和收益，我的想法是这样的；有些工具是必须的如预装的压测，这种成本不是重点，先必须做出来；但有些比如前端功能测试，研发成熟的ui自动化成本比较高，那可以先考虑部署开源的成熟的产品（或者先手工替代，提前做好回归用例的有效性分析来降低成本）</code><br><strong>具体实施</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">先保障基础的平台有，如组织协作的平台，bug管理平台，代码托管平台；</span><br><span class="line">分析缺口，必要的工具优先做,但要保证效果（覆盖率，发现率，召回率，准确率等），效果越好越有价值；</span><br><span class="line">非必要的一般是提效的工具，在进一步拆分工作，分析日常工作中各快工作的耗时，以及未来的一个占比，优先覆盖重复性强场景；</span><br><span class="line">提效工具要做好性价比综合分析，对比人力或其他工具，当新开发工具的成本（一次性开发成本和维护性成本的考量：接入成本、迁移成本、培训成本、每次使用成本、维护升级成本）相对于收益有明显优势时才有价值；</span><br></pre></td></tr></table></figure>
-<h4 id="质量流程"><a href="#质量流程" class="headerlink" title="质量流程"></a>质量流程</h4><p><code>质量流程要平衡好质量防控，和效率；要贴合业务、研发体系来设计；并且要结合实际情况，及时调整</code></p>
-<h3 id="质量保障体系落地"><a href="#质量保障体系落地" class="headerlink" title="质量保障体系落地"></a>质量保障体系落地</h3><p><code>在具体落地的过程中，要把控好，质量、成本、效率，做好均衡来设计具体的质量策略</code><br><strong>具体落地的策略</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">具体的质量策略，要结合业务；最好结合业务数据，做量化分析制定；</span><br><span class="line">评估质量、效率、成本现行情况，做好平衡；</span><br><span class="line">具体的策略，能保障项目的一致性，形成共识，实现质量标准化；</span><br></pre></td></tr></table></figure>
-<p><strong>举例</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">比如，质量保障体系规定了要做灰度发布，那么怎样做灰度发布？质量策略可以进一步规定执行细节：至少要包含从1%-&gt;10%-&gt;50%-&gt;100%四个阶梯的灰度，且灰度时长不小于2小时。</span><br><span class="line"></span><br><span class="line">再比如，质量保障体系约定了低风险项目可开发自测，那么质量策略可以进一步定义低风险项目包括bug fix，页面展示修改类项目等。</span><br><span class="line"></span><br><span class="line">再比如，质量保障体系要求回归测试要完整，那么质量策略可以进一步定义完整回归的具体要求：全部P0P1用例(不区分手工自动化) or 全部自动化用例 or 人工评估的所有场景用例 or 代码变更分析的所有自动化用例 等。</span><br></pre></td></tr></table></figure>
-<p><strong>质量工具/平台具体落地的策略</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">提效；要综合提效；代码不是目的，提效才是；</span><br><span class="line">要有具体落地的场景，结合上文分析的质量活动、防线，一个质量工具平台最好能锁定某个稳定存在的质量活动、防线作为服务对象，以保证质量工具平台自身的存续性；</span><br><span class="line">维护/使用/培训成本也需要考虑；</span><br><span class="line">设计时要考虑能力沉淀和输出，最大化工具的价值；</span><br><span class="line">要尊重历史积累，考虑历史工具数据沉淀和价值挖掘；</span><br><span class="line">避免重复造轮子；要做到工具平台信息的充分共享、及时刷新，避免因信息不足导致的重复造轮子，其次在有同类工具平台新建初期，及时发起评审，确定定位和发展路线，避免发展成已有轮子的复制品。最后，要在大横向组织里阶段性review同领域工具平台，做好顶层设计（定向发展or关停并转）；</span><br><span class="line">要做好工具的服务推广，工具的价值在于使用；</span><br><span class="line">要保证工具平台体系的持续发展；服务好业务和需求，阶段性考虑质量工具平台的整合、共建、打通，串联形成工具平台体系，形成一致性的服务体系；</span><br></pre></td></tr></table></figure>
-
-<h3 id="传音音乐质量保障体系理想版"><a href="#传音音乐质量保障体系理想版" class="headerlink" title="传音音乐质量保障体系理想版"></a>传音音乐质量保障体系理想版</h3><p><code>质量保障体系是用来保障质量的，没问题或者问题变少了就是最大的价值,具体来看</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">通过量化数据分析，质量问题，通过结果来确定质量保障体系的价值；</span><br><span class="line">分析具体的问题和结果，有问题就能找到体系薄弱点，进一步优化；结果好，也需要确认价值在哪，是否能进一步细化深化优化；</span><br><span class="line">最后分析质量工具平台的支撑度和技术价值，针对性的实现价值量化可呈现；</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>质量体系</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>编写博客--makedown语法说明</title>
-    <url>/posts/ed6b07f3/</url>
-    <content><![CDATA[<h1 id="语法总览"><a href="#语法总览" class="headerlink" title="语法总览"></a>语法总览</h1><h2 id="正文语法"><a href="#正文语法" class="headerlink" title="正文语法"></a>正文语法</h2><pre><code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; 1.=== title ===	最顶级标题</span><br><span class="line">&gt; 2.---  title --- 二级标题</span><br><span class="line">&gt; 3.<span class="comment"># title/## title/###### title	一级/二级/六级标题</span></span><br><span class="line">&gt; * tab缩进语法</span><br><span class="line">&gt; + 字体加粗使用** text ** 或__text__</span><br><span class="line">&gt; - 排序列表，无序列表使用（+-*），有序列表使用（1.数字加点）</span><br><span class="line">&gt; - 换行，如果上下行无\n(换行操作)则不换行，如果有则换行</span><br><span class="line">&gt; - 空行，如果上下行之间有空行，则会进行换行</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="资源语法"><a href="#资源语法" class="headerlink" title="资源语法"></a>资源语法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">链接：</span><br><span class="line"></span><br><span class="line">&gt; - [链接](baidu.com <span class="string">&quot;百度这可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + [链接2][1]...[链接3][id]</span><br><span class="line">	[1]: baidu.com <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: zhihu.com <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">图片：</span><br><span class="line"></span><br><span class="line">&gt; - ![alt text](/path/.jpg <span class="string">&quot;可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + ![alt text][1]...![alt text][id可任意和下文保持一致即可]</span><br><span class="line">	[1]: /path/.jpg <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: /path/.jpg <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">代码块：</span><br><span class="line"></span><br><span class="line">&gt; 1. `中间是代码块`</span><br><span class="line">&gt; 2. ```bash 中间是代码块 ```</span><br><span class="line">&gt; 3. 四个空格/一个tab操作后面的代码</span><br><span class="line">&gt; 4.&lt;!-- more --&gt; 缩写/不展示全文</span><br></pre></td></tr></table></figure>
-
-<h2 id="好看的hexo"><a href="#好看的hexo" class="headerlink" title="好看的hexo"></a>好看的hexo</h2><ul>
-<li><a href="https://blog.bill.moe/"><strong>竞赛</strong></a></li>
-<li><a href="https://diygod.me/"><strong>b站开源大佬</strong></a></li>
-</ul>
-<p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>
-]]></content>
   </entry>
   <entry>
     <title>阿里测开面试题</title>
@@ -1824,6 +1766,88 @@
         <tag>稳定性</tag>
         <tag>实战</tag>
         <tag>预装</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>质量体系系列</title>
+    <url>/posts/6696d0e/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><code>测试的核心价值在于保障产品的质量，提效增质；要全面的保障质量，就需要一个完善的体系，从各方面入手来保障产品的质量，本次将以传易互联--音乐项目的质量保障体系进行分析，从而探索质量保障体系的设计</code></p>
+<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">传易音乐质量保障体系</span><br><span class="line">质量保障体系的设计理念</span><br><span class="line">质量保障体系落地</span><br><span class="line">传音音乐质量保障体系理想版</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h2 id="传音音乐质量保障体系"><a href="#传音音乐质量保障体系" class="headerlink" title="传音音乐质量保障体系"></a>传音音乐质量保障体系</h2><p><code>质量保障体系是为具体业务服务的，因此需要结合业务特色设计，好的质量保障体系是兼顾质量、效率、成本，的一种综合性的设计</code></p>
+<h3 id="传易音乐业务特点"><a href="#传易音乐业务特点" class="headerlink" title="传易音乐业务特点"></a>传易音乐业务特点</h3><p><code>传易音乐提供面向非洲主要国家的，音频流媒体服务（音乐+音频直播）；主要由内容端+产品端+数据端+直播业务+商业化业务构成；主要特点是服务国家多，语种人群多，终端设备复杂，产品交付链路复杂，基于这种复杂的海外业务特点，质量保障体系，需要兼顾各类复杂场景</code></p>
+<h3 id="传音音乐产品交付体系"><a href="#传音音乐产品交付体系" class="headerlink" title="传音音乐产品交付体系"></a>传音音乐产品交付体系</h3><p><code>传易音乐的产品交互体系如下；参与方主要有产品、设计、开发、测试、项目管理人员；整个链路主要基于tapd平台来进行管理追溯，项目主要由项目管理人员协调跟踪，通过在线excel表格来排期和维护进度。整个链路整体合理，各方都有参与；但也有不足之处，问题如下：</code><br><img src="/text_image/%E4%BC%A0%E6%98%93%E4%BA%92%E8%81%94%E4%BA%A4%E4%BB%98%E4%BD%93%E7%B3%BB.png" alt="alt text"><br><strong>交互体系的缺陷</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">对用户来说：我们的产品设计风格变动极大，几乎每一个大版本风格都有极大变化；广告太多；不太稳定；</span><br><span class="line">业务：业务缺乏全局的规划，重点经常变；比如这个季度重点发力会员，下个季度就是游戏，突然重心又在广告，产品方面也是，这种混乱局面会导致一系列问题，出现这种问题的原因个人觉得还是管理层对音乐业务了解并不够深；</span><br><span class="line">需求：由于公司是由业务主导的，业务的混乱导致需求没有一个全局的规划，业务方经常会介入研发过程，会导致开发中断，转而开发新的需求；但后期项目方和业务进行了沟通后，需求由三方（项目、业务、产品）协商准入，并于每周四统一进行需求评审，一定的解决了插入问题；</span><br><span class="line">价值：由于公司内部博弈剧烈，且需求没有一个全局的规划，导致整个产品的风格变动频繁，未有效形成产品自身的品牌，且需求的价值无法量化，投入产出比无法量化分析；</span><br><span class="line">研发：需求无全局规划，研发的人员波动很大，经常会出现项目开发到一半，就出现人员抽调情况，导致原有排期受阻；不过研发在每个季度都有大方向的规划，一般是偏向架构/稳定性/成本把控的，基本都能有效落地；</span><br><span class="line">业务排期：开发/测试，排期极度紧张，且每个人手上同时期基本上都有三四个需求，导致业务很难复盘，资料/能力很难总结，人浮于事的后果就是，整个过程很难实现量化，投入产出比很难分析；且研发虽然在架构方面有大的规划，但过于紧张的人效和时间，导致落地会大打折扣，导致上线产品容易出现性能/稳定性问题；</span><br><span class="line">测试：测试方面在年度季度都会有规划，基本就是我于年终/季度末提交下一季度的规划，这些规划会转变为部门的okr由我负责完成（21年的时候，我手底下还有两个人一般意义上是由我这个组来完成），但由于从21年中开始，公司持续在裁员（一起负责测试架构的另外两个同事被裁了），且公司业务中心变动极大，我又开始负责广告业务，基本没有时间完成规划，只有在管理层有需求时，如（预装需求，必须要做稳定性）；线上出现严重性能问题（必须要进行性能治理），才有一段较时间来完成特定的非业务需求；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="传易音乐质量保障体系分析"><a href="#传易音乐质量保障体系分析" class="headerlink" title="传易音乐质量保障体系分析"></a>传易音乐质量保障体系分析</h3><p><code>传易质量保障体系在全面保障质量的情况下，还需要兼顾成本和效率；同时由于海外业务的复杂性，主要是非洲网络环境较差，普遍都是2/3G网络，终端环境配置较低；因此在设计质量保障体系时需要兼顾这种复杂场景。现有质量保障体系如下：</code></p>
+<p><img src="/text_image/%E4%BC%A0%E6%98%93%E9%9F%B3%E4%B9%90%E8%B4%A8%E9%87%8F%E4%BF%9D%E9%9A%9C%E4%BD%93%E7%B3%BB.png" alt="alt text"><br><strong>质量保障体系的缺陷</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量保障体系，未做量化分析改造，无数据产出及呈现，很难量化价值；</span><br><span class="line">且体系未制定细化的标准，效果很难衡量；</span><br><span class="line">体系缺乏完整/长期的规划，未能有效的实施和优化；</span><br><span class="line">部分环节/工具，落地不到位，效果不佳，如UI自动化，接口自动化等；</span><br><span class="line">缺失归纳整理，无wiki资料库，能力很难输出和传递；</span><br><span class="line">工具很散乱，未做平台化集成；</span><br></pre></td></tr></table></figure>
+<h2 id="质量保障体系的设计理念"><a href="#质量保障体系的设计理念" class="headerlink" title="质量保障体系的设计理念"></a>质量保障体系的设计理念</h2><p><code>质量保障体系，需要遵循全面保障质量；有效平衡质量、效率、成本的理念设计；需要做到质量有数据可量化、有标准可衡量、能落地有效果、可传承可输出、使用成本低</code></p>
+<p><strong>设计理念</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">有标准可衡量</span><br><span class="line">有能力有效果</span><br><span class="line">有数据可量化</span><br><span class="line">可传承可输出使用成本低,能兼顾成本、效率、质量</span><br></pre></td></tr></table></figure>
+<p><img src="/text_image/%E9%98%BF%E9%87%8C%E8%B4%A8%E9%87%8F%E4%BF%9D%E9%9A%9C%E4%BD%93%E7%B3%BB.png" alt="alt text"></p>
+<h3 id="质量标准"><a href="#质量标准" class="headerlink" title="质量标准"></a>质量标准</h3><p><code>质量的标准简单理解就是不出问题，因此对问题的定义，就是对质量标准的定义；我们一般要考虑功能、稳定性、性能（前后端/系统性能）,易用性，因此质量标准的建立抓手就是业务，只有基于业务建立细致完善的质量标准才有意义，而有了标准体系才能有效运转</code></p>
+<p><strong>传易音乐的质量标准</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">以季度为周期，责任主体是按流程、事故原因分担的；一般的功能性故障必现且是主流程的测试承担100%责任（严重级别），用例漏测同理；非主流程的或非必现的且出现概率较高的，严重级别低一级，测试承担主要责任，开发次之；非测试环境出现的问题或发布导致的问题，开发和测试均摊责任；性能或者稳定性问题，视问题类型，来界定责任主体，此类问题测试只承担次要责任；同时问题持续时间，影响范围，也会影响问题的严重性和责任主体；</span><br><span class="line">每年度制定功能性问题合规标准、性能、系统稳定性问题的合规标准；并根据影响时长，影响范围，严重程度来划分问题等级，问题由项目经理统一收纳，并记录责任主体，在季度末由此数据来影响kpi分值；</span><br><span class="line">提测标准，业务主流程功能ok,自测用例执行通过；</span><br><span class="line">测试通过标准，尽量保证无bug遗留或无严重级别/普通级别的bug遗留；同时根据业务类型来确定，功能、性能、稳定性、安全、兼容性、回归策略是否通过；</span><br><span class="line">验收标准，测试不参与标准制定；但会提交一份验收用例给产品、设计、业务方，是否通过验收由他们自行决定；</span><br></pre></td></tr></table></figure>
+<p><strong>不足</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">标准制定的不够细致，只有大的框架；</span><br><span class="line">质量问题，只有线上严重级别的问题才会收纳、复盘；且通过在线excel维护；没有形成长期的工作，数据太少，无法持续分析，很难通过数据来进一步优化；</span><br><span class="line">整个标准落地执行不到位，尤其是提测&#x2F;验收的标准未严格实施；其针对标准不执行的情况，没有成文的解决方案，很难长期有效针对此类问题暴露风险；</span><br></pre></td></tr></table></figure>
+<p><strong>参考</strong><br><img src="/text_image/%E8%B4%A8%E9%87%8Fgoc%E6%A0%87%E5%87%86.png" alt="alt text"></p>
+<h4 id="合理的质量标准"><a href="#合理的质量标准" class="headerlink" title="合理的质量标准"></a>合理的质量标准</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">标准必须要成文，可落地的，既有大框架，也有细则且与业务贴合的；</span><br><span class="line">必须要数据支持，不建议通过一个简单的excel维护，必须要成习惯，有长期数据；</span><br><span class="line">标准必须要在每个阶段都有（自测/测试/验收/线上），且标准不仅限制于事上，对人员，流程都要有要求；</span><br><span class="line">标准必须要有效，要和kpi、升职加薪结合；</span><br><span class="line">除了以上情况，海外业务由于其特殊性；对系统可用性/稳定性有着更高的要求；业界对可用性通常通过Availability公式来衡量（Availability=MTBF/MTBF+MTTR=系统非故障时间/系统非故障时间+系统故障后平均修复时间）,由此可知，要提升系统的可用性，需要从系统的稳定性和系统的维护性下手；另一个衡量系统可用性的标准是1-5-10（1分钟发现、5分钟定位、10分钟修复），这对系统的架构设计有着更高的要求；</span><br><span class="line">覆盖率标准：代码覆盖率是测试度量的有效手段之一，但是要均衡覆盖和成本，做全量代码覆盖不太现实，而且很难做到精细化；在日常迭代过程中，增量代码覆盖率更加直观，可以对每次代码变更做精细化的覆盖率管理，持续提升代码覆盖率。做覆盖率分析是要考虑影响范围，需要考虑（变更导致的调用链路，及链路中受影响的函数；同时也要考虑多链路下其他的分支）</span><br><span class="line">问题率：质量体系最重要的点是保证质量，因此不出现问题才是质量保障的核心；</span><br></pre></td></tr></table></figure>
+
+<p><code>部分细节如下：</code><br><strong>增量代码覆盖率原理</strong><br><img src="/text_image/%E5%A2%9E%E9%87%8F%E4%BB%A3%E7%A0%81%E8%A6%86%E7%9B%96%E7%8E%87%E5%8E%9F%E7%90%86.jpg" alt="alt text"></p>
+<h3 id="覆盖范围"><a href="#覆盖范围" class="headerlink" title="覆盖范围"></a>覆盖范围</h3><p><code>理论上质量保障体系要全面的保障质量，方方面面都要覆盖，但实际工作中要均衡考虑</code><br><strong>范围</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">流程：流程把控，流程优化</span><br><span class="line">测试环节：codereview、单元、集成、系统</span><br><span class="line">类别：性能、兼容、稳定性、监控、功能、安全</span><br></pre></td></tr></table></figure>
+<h3 id="测试能力建设"><a href="#测试能力建设" class="headerlink" title="测试能力建设"></a>测试能力建设</h3><p><code>能力建设，一般是指自动化、工具或平台研发能力；但实际项目过程中，协作能力也很重要,这里讲讲工具/平台的建设</code></p>
+<p><strong>工具/平台价值</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">解决手动测试无法解决的事，如稳定性测试；</span><br><span class="line">自动化测试执行是按固定逻辑来的，能实现执行标准的统一；</span><br><span class="line">提效，可用于解决大量的重复性工作的场景，节省人力，提高效率；</span><br><span class="line">有数据，可溯源；有利于沉淀数据和能力，精准的分析解决问题；</span><br></pre></td></tr></table></figure>
+<p><strong>质量保障体系三要素：质量活动、工具平台、质量流程</strong></p>
+<p><code>以下按这三块来分别讲述质量体系的构建</code></p>
+<h4 id="质量活动及测试执行"><a href="#质量活动及测试执行" class="headerlink" title="质量活动及测试执行"></a>质量活动及测试执行</h4><p><code>在测试策略方面保障质量；主要有两种思路①根据问题设计策略，②分析流程来设计策略 </code></p>
+<h5 id="根据问题来设计策略"><a href="#根据问题来设计策略" class="headerlink" title="根据问题来设计策略"></a>根据问题来设计策略</h5><p><code>发现问题，分析问题，从而预防问题</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">需要一个记录问题的‘小本本’，记录下问题、然后分析问题（做复盘，是共性、还是特定问题、是否经常出现）、然后设计策略来预防此类问题；如app经常崩溃，那么质量活动需要包含此类检测；</span><br><span class="line">可以拉取最近一年的线上数据分析，来发现问题；</span><br></pre></td></tr></table></figure>
+<h5 id="分析流程来设计策略"><a href="#分析流程来设计策略" class="headerlink" title="分析流程来设计策略"></a>分析流程来设计策略</h5><p><code>研发过程中的各流程都有可能出问题，本着早发现早解决的原则，在各流程设置卡点，来规避风险，同时各环节也可以设置多条防线，全面的保障质量</code><br><strong>如以下情况</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Case1: 业务有很复杂的业务人员配置流程，这个环节会引入业务配置问题，可以在这个环节后定制质量活动，如配置规则校验，配置预跑等。   </span><br><span class="line"></span><br><span class="line">Case2: 业务在运行时仍有新机构/新商户接入环节，可以定制质量活动，如新接入时进行联调验证、性能压测。</span><br><span class="line"></span><br><span class="line">Case3: 业务有间隔性的数据跑批环节，那么在每次数据跑批结束后，可以定制质量活动，在每次跑批后做结果验证。典型业务有日切，月账单生成，关键报表生成等。</span><br></pre></td></tr></table></figure>
+<h4 id="工具平台建设"><a href="#工具平台建设" class="headerlink" title="工具平台建设"></a>工具平台建设</h4><p><code>建设工具平台，需要把握好成本和收益；至于如何平衡成本和收益，我的想法是这样的；有些工具是必须的如预装的压测，这种成本不是重点，先必须做出来；但有些比如前端功能测试，研发成熟的ui自动化成本比较高，那可以先考虑部署开源的成熟的产品（或者先手工替代，提前做好回归用例的有效性分析来降低成本）</code></p>
+<h4 id="质量流程"><a href="#质量流程" class="headerlink" title="质量流程"></a>质量流程</h4><p><code>质量流程要平衡好质量防控，和效率；要贴合业务、研发体系来设计；并且要结合实际情况，及时调整</code></p>
+<h3 id="质量保障体系落地"><a href="#质量保障体系落地" class="headerlink" title="质量保障体系落地"></a>质量保障体系落地</h3><p><code>在具体落地的过程中，要把控好，质量、成本、效率，做好均衡来设计具体的质量策略</code><br><strong>具体落地的策略</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">具体的质量策略，要结合业务；最好结合业务数据，做量化分析制定；</span><br><span class="line">评估质量、效率、成本现行情况，做好平衡；</span><br><span class="line">策略要具体，要能保障项目的一致性，形成共识，实现质量标准化；</span><br></pre></td></tr></table></figure>
+<p><strong>举例</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">比如，质量保障体系规定了要做灰度发布，那么怎样做灰度发布？质量策略可以进一步规定执行细节：至少要包含从1%-&gt;10%-&gt;50%-&gt;100%四个阶梯的灰度，且灰度时长不小于2小时。</span><br><span class="line"></span><br><span class="line">再比如，质量保障体系约定了低风险项目可开发自测，那么质量策略可以进一步定义低风险项目包括bug fix，页面展示修改类项目等。</span><br><span class="line"></span><br><span class="line">再比如，质量保障体系要求回归测试要完整，那么质量策略可以进一步定义完整回归的具体要求：全部P0P1用例(不区分手工自动化) or 全部自动化用例 or 人工评估的所有场景用例 or 代码变更分析的所有自动化用例 等。</span><br></pre></td></tr></table></figure>
+<p><strong>质量工具/平台具体落地的策略</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">提效；要综合提效；代码不是目的，提效才是；</span><br><span class="line">要有具体落地的场景，一个质量工具平台最好能锁定某个稳定存在的质量活动、防线作为服务对象，以保证质量工具平台自身的存续性；</span><br><span class="line">维护/使用/培训成本也需要考虑；</span><br><span class="line">设计时要考虑能力沉淀和输出，最大化工具的价值；</span><br><span class="line">要尊重历史积累，考虑历史工具数据沉淀和价值挖掘；</span><br><span class="line">避免重复造轮子；要做到工具平台信息的充分共享、及时刷新，避免因信息不足导致的重复造轮子，其次在有同类工具平台新建初期，及时发起评审，确定定位和发展路线，避免发展成已有轮子的复制品。最后，要在大横向组织里阶段性review同领域工具平台，做好顶层设计（定向发展or关停并转）；</span><br><span class="line">要做好工具的服务推广，工具的价值在于使用；</span><br><span class="line">要保证工具平台体系的持续发展，需要有统一的度量指标，否则难以运营迭代；服务好业务和需求，阶段性考虑质量工具平台的整合、共建、打通，串联形成工具平台体系，形成一致性的服务体系；</span><br><span class="line">需要考虑工具间的集成，结果的集成，联系，实现持续集成；</span><br><span class="line"></span><br><span class="line">先保障基础的平台有，如组织协作的平台，bug管理平台，代码托管平台；</span><br><span class="line">要做好整体规划；分析缺口，必要的工具优先做,但要保证效果（覆盖率，发现率，召回率，准确率等），效果越好越有价值；</span><br><span class="line">非必要的一般是提效的工具，在进一步拆分工作，分析日常工作中各部分工作的占比耗时，以及未来的趋势，优先覆盖重复性强场景；</span><br><span class="line">提效工具要做好性价比综合分析，对比人力或其他工具，当新开发工具的成本（一次性开发成本和维护性成本的考量：接入成本、迁移成本、培训成本、每次使用成本、维护升级成本）相对于收益有明显优势时才有价值；</span><br><span class="line">在devops研发体系、云原生等架构升级中，质量工具做好设计要支持整合同步升级；</span><br><span class="line">自动化测试体系，数据构造是一块很大的工作；可以基于线上流量采集回放的方式；为自动化各环节提供数据；</span><br></pre></td></tr></table></figure>
+<p><strong>参考：阿里国际团队质量工具平台的设计方案</strong><br><img src="/text_image/%E8%B4%A8%E9%87%8F%E5%B7%A5%E5%85%B7%E5%B9%B3%E5%8F%B0%E8%AE%BE%E8%AE%A1.png" alt="alt text"><br><img src="/text_image/%E8%B4%A8%E9%87%8F%E5%B7%A5%E5%85%B7%E5%B9%B3%E5%8F%B0%E6%96%B9%E6%A1%88.png" alt="alt text"></p>
+<p><strong>针对质量工具/平台各环节，进行了归纳</strong></p>
+<h4 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">存量老代码，缺乏单测的情况下，需要方案实现快速补全；</span><br><span class="line">复杂系统或者模块，构造数据成本很高，需要有工具支持；</span><br><span class="line">系统重构，单测溶液大面积的失效，需要在设计时考虑如何解决；</span><br></pre></td></tr></table></figure>
+<p><strong>如下是阿里国际团队的解决思路</strong><br><img src="/text_image/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6.png" alt="alt text"></p>
+<h4 id="接口测试"><a href="#接口测试" class="headerlink" title="接口测试"></a>接口测试</h4><p><code>海外业务，由于多集群，多站点的特点，用例的维护成本很高，且会持续加大；因此在用例构造上，需要加大自动化，减少人力投入</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">在用例收集上，自动收集、分析、自动去重重复用例，就可以自动沉淀用例集，同时也需要有人工输入专家维护，提升特征丰富度和用例覆盖率。</span><br><span class="line"></span><br><span class="line">在用例管理上，弱化了传统相对复杂的用例集管理功能，使用系统托管的方式进行用例维护，并且用例运行时自动根据多租户、合规等条件进行调度，保证准确性同时降低人工介入成本。</span><br><span class="line"></span><br><span class="line">在回放结果上，通过对错误、断言等聚合分析，有效减少失败分类数量，降低人工排查的成本，并在运行后提供代码覆盖率和业务覆盖率度量结果。</span><br></pre></td></tr></table></figure>
+<p><strong>如下是阿里国际团队的解决思路</strong><br><img src="/text_image/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95%E5%8E%9F%E7%90%86.png" alt="alt text"></p>
+<h4 id="集成测试"><a href="#集成测试" class="headerlink" title="集成测试"></a>集成测试</h4><p><code>集成测试是针对局部业务，或者模块单元的测试；可通过功能测试实现，但实际工程中可能会存在功能无法覆盖的情况，此时需要通过mock来构造数据，通过模块单元的代码的测试来实现覆盖，关于集成和单元的区别如下</code><br><img src="/text_image/%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95.png" alt="alt text"></p>
+<h4 id="用例-工具持续集成"><a href="#用例-工具持续集成" class="headerlink" title="用例/工具持续集成"></a>用例/工具持续集成</h4><p><code>持续集成，能实现定时/持续调度，能实现定时监控，用例有效性监控，结果聚合，同时进行串联能保证服务的一致性，形成全链路、全覆盖的质量展示，架构如下</code><br><img src="/text_image/%E4%B8%80%E4%BD%93%E5%8C%96%E7%9A%84%E7%94%A8%E4%BE%8B%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90.png" alt="alt text"></p>
+<h4 id="环境管控"><a href="#环境管控" class="headerlink" title="环境管控"></a>环境管控</h4><p><code>环境的稳定性，会直接影响开发测试的效率；同时环境还需要兼顾成本，毕竟预算有限；同时作为服务海外用户的公司，我们对海外环境也有需求；</code><br><strong>测试环境问题</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">测试效率问题：测试环境的稳定性，会严重影响上下游测试效率；</span><br><span class="line">测试环境资源问题：需求高峰期并发，涉及测试环境抢占；需求低峰期，多余测试环境被闲置；</span><br><span class="line">测试环境隔离问题：子域内需求需要相互隔离；子域之间快速支撑联调；</span><br><span class="line">测试环境使用成本：测试环境答疑成本，以及构建成本；</span><br><span class="line"></span><br><span class="line">其中的难点</span><br><span class="line">支持隔离：测试环境隔离支持同步接口/HTTP服务和异步消息隔离；</span><br><span class="line">弹性部署：测试环境资源根据需求情况，弹性占用，同时也要控制预发环境膨胀的问题；</span><br><span class="line">环境问题定位：往往业务问题、系统问题都会被上报为环境问题，导致排查耗时，如何快速定位问题？</span><br><span class="line">各环境如何保障长期有效，更新同步；</span><br><span class="line"></span><br><span class="line">魅族通过集群的方式，实现固定节点放置固定服务，进行标准化，通过代理/路由的方式灵活指向服务机器，来实现隔离，弹性部署；</span><br></pre></td></tr></table></figure>
+<p><strong>环境流转的实例（阿里）</strong><br><img src="/text_image/%E7%8E%AF%E5%A2%83%E5%BA%94%E7%94%A8%E5%AE%9E%E4%BE%8B.png" alt="alt text"><br><strong>保证环境稳定性的思路（阿里）</strong><br><img src="/text_image/%E7%8E%AF%E5%A2%83%E7%A8%B3%E5%AE%9A%E6%80%A7.png" alt="alt text"></p>
+<h4 id="针对海外-业务特点考虑的落地策略"><a href="#针对海外-业务特点考虑的落地策略" class="headerlink" title="针对海外/业务特点考虑的落地策略"></a>针对海外/业务特点考虑的落地策略</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">由于业务在海外，会有数据安全和监管的考量（数据不允许出入境）；测试数据、测试用例运行维护会面临一定挑战；</span><br><span class="line">海外业务，由于要部署多个国家，集群分散，站点众多，测试工作量会大幅提升；</span><br><span class="line">由于业务复杂度较高，且研发有着自测和联调的需求，需要提供工具支持，针对后端接口的自测和联调，现在使用的是免费的工具apifox（提供团队协作、接口管理、mock、调试、压测、联调等能力)</span><br></pre></td></tr></table></figure>
+<h4 id="质量流程-1"><a href="#质量流程-1" class="headerlink" title="质量流程"></a>质量流程</h4><p><code>要保障质量，但靠人和工具是不行的；还需要一套完善的流程，从工业界的角度考虑即SOP(标准作业程序)，即给整个交互体系，制定一个细化且可量化的流程，sop的价值如下：</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">流程可量化，有线上数据，正因为如此，才可以进一步的运营和优化；有数据才可以判定价值；</span><br><span class="line">有细致完善的标准，才可保障产品和服务的品质，才能保证有效的覆盖率；</span><br><span class="line">sop还会使整个链路更清晰，从而保证各环节互不干扰，能大幅提高交付效率；</span><br></pre></td></tr></table></figure>
+<h5 id="如何建立一个完善的sop流程"><a href="#如何建立一个完善的sop流程" class="headerlink" title="如何建立一个完善的sop流程"></a>如何建立一个完善的sop流程</h5><p><code>要建立完善的交付体系，需要从业务入手；发现现有体系中的问题，聚集关键节点；加强组织协作形成共识；通过线上流程管控沉淀数据；基于数据分析运营优化不断迭代，推导过程如下</code><br><img src="/text_image/%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8Bsop%E7%9A%84%E6%8E%A8%E5%AF%BC%E8%BF%87%E7%A8%8B.png" alt="alt text"></p>
+<p><strong>参考sop体系如下，核心：筛选关键节点/问题+线下会议对焦+线上流程管控+数据分析优化</strong><br><img src="/text_image/%E7%A0%94%E5%8F%91%E6%B5%81%E7%A8%8BSOP%E4%BD%93%E7%B3%BB.png" alt="alt text"></p>
+<p><strong>SOP研发体系运营和落地</strong><br><code>标准作业流程要想产生价值，需要做好运营和落地，但具体的实施还是要和业务结合</code></p>
+<ul>
+<li>落地方式：<ul>
+<li>①通过架构升级的方式来推动落地,建立目标，推动前进；</li>
+<li>②绑定kpi、okr指定责任人来，分阶段推动落地，在落地过程中要持续观察数据、分析效果； </li>
+</ul>
+</li>
+</ul>
+<p><strong>SOP流程运营目标（阿里参考表）</strong><br><img src="/text_image/SOP%E8%BF%90%E8%90%A5%E7%9B%AE%E6%A0%87.png" alt="alt text"><br><strong>SOP数字化参考报表</strong><br><img src="/text_image/sop%E6%95%B0%E5%AD%97%E5%8C%96%E6%8A%A5%E8%A1%A8.jpg" alt="alt text"></p>
+<h3 id="传音音乐质量保障体系理想版"><a href="#传音音乐质量保障体系理想版" class="headerlink" title="传音音乐质量保障体系理想版"></a>传音音乐质量保障体系理想版</h3><p><code>质量保障体系是用来保障质量的，没问题或者问题变少了就是最大的价值,具体来看</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">通过量化数据分析，质量问题，通过结果来确定质量保障体系的价值；</span><br><span class="line">分析具体的问题和结果，有问题就能找到体系薄弱点，进一步优化；结果好，也需要确认价值在哪，是否能进一步细化深化优化；</span><br><span class="line">最后分析质量工具平台的支撑度和技术价值，针对性的实现价值量化可呈现；</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>质量体系</tag>
       </tags>
   </entry>
 </search>
