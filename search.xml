@@ -67,123 +67,6 @@
       </tags>
   </entry>
   <entry>
-    <title>SOLOPI使用教程</title>
-    <url>/posts/49e140/</url>
-    <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<ul>
-<li><p><em><strong>介绍</strong></em></p>
-<p>  <code>solopi是支付宝团队研发的ui自动化工具;支持UI录制回放，录制脚本的编辑/扩展/转换成appium脚本/录制脚本支持分发到其他的设备执行；同时还支持性能测试和一机多控，执行采集各种性能数据，同时支持通过一台设备控制多台设备的行为；</code></p>
-</li>
-<li><p><em><strong>使用指南</strong></em></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">环境准备</span><br><span class="line">app配置</span><br><span class="line">录制</span><br><span class="line">回放</span><br><span class="line">性能测试</span><br><span class="line">一机多控</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>环境准备</strong></p>
-<ul>
-<li><p><em>下载配置Androidsdk</em></p>
-<ul>
-<li>地址:<a href="https://developer.android.com/studio/releases/platform-tools#downloads">https://developer.android.com/studio/releases/platform-tools#downloads</a></li>
-<li>操作：下载安装完Android调试工具后，在下载对应系统版本的 SDK Platform Tools，配置好环境变量，注意win10以上系统环境变量配置即生效，低版本需要重启pc才能生效；</li>
-</ul>
-</li>
-<li><p><em>给手机授权</em></p>
-<ul>
-<li>操作：进入开发者模式，并授权usb调试权限；</li>
-</ul>
-</li>
-<li><p><em>检测环境并连接wifi</em></p>
-<ul>
-<li>操作：通过adb devices命令检测，同时要连接wifi;</li>
-</ul>
-</li>
-<li><p><em>建立连接</em></p>
-<ul>
-<li>操作：通过pc的cmd启动服务,输入（adb tcpip 5555）</li>
-</ul>
-</li>
-<li><p><em>下载solopi的apk</em></p>
-<ul>
-<li>地址：<a href="https://github.com/alipay/SoloPi/releases/download/v0.11.2/SoloPi_0.11.2.apk">apk点击下载</a></li>
-<li>操作：下载安装后，通过配置授权</li>
-<li>环境配置：<a href="https://github.com/alipay/SoloPi/wiki/FirstUse">地址跳转参考内容</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>app配置</strong></p>
-<p>  <code>按需配置，一般不需要进行配置；可参考上方的环境配置</code></p>
-</li>
-<li><p><strong>录制/回放</strong></p>
-<ul>
-<li><a href="https://github.com/alipay/SoloPi/wiki/RecordCase"><em>官方教程</em></a></li>
-<li>录制：录制支持直接对收到操作进行录制，且录制的脚本支持编辑/扩展/保存/导入等操作，支持各类操作和断言，支持图像识别，简单方便；</li>
-<li>回放：回放支持单脚本回放，支持批量回放，支持重复播放；</li>
-<li>优点：操作简单，可扩展编辑定制策略，可同步到其他设备，可重复回放支持暴力遍历；</li>
-<li>缺点：不支持持续集成，需要手动触发；</li>
-</ul>
-</li>
-<li><p><strong>性能测试</strong></p>
-<ul>
-<li><a href="https://github.com/alipay/SoloPi/wiki/Performance"><em>官方教程</em></a></li>
-<li>操作：性能测试时，直接勾选需要监控的性能指标，不进行录制则可以实时查看；进行录制时，点击录制按钮开始录制，录制结束后点击录制结束按钮，录制的性能数据会存储下来，支持图表分析，可同时存储多份性能数据；</li>
-<li>优点：支持实时查看场景的性能，可和业务测试结合方便简单；支持性能录制，可和UI自动化结合，查看各场景的性能变化和差异；</li>
-<li>缺点：不支持续集成，利用脚本进行回放时不支持性能监控；</li>
-</ul>
-</li>
-<li><p><strong>一机多控</strong></p>
-<ul>
-<li>[<em>官方教程</em>]</li>
-<li>操作：多台设备上同时安装solopi和待测APP；做好配置和授权操作，同时主机（控制机）选中一机多控，选中为主机；其他设备点击一机多控，选中为从机；然后用主机扫码录入从机，然后在主机点击建立主从机的连接，然后主机点击录屏按钮，开始进行一机多控操作；原理是利用solopi的录屏回放功能，主机录屏，从机回放；</li>
-<li>优点：可以用一台机器，控制多台设备操作，能有效的覆盖兼容性测试；</li>
-<li>缺点：不支持ios系统；由于是先录制，在回放，因此所有设备都需要有网络，且必须是同一局域网，且存在延时；不支持批量操作时，同时监控性能数据；</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p><em><strong>和业务结合</strong></em></p>
-<p>  <code>和业务结合使用前，需要先梳理清楚solopi的优缺点：</code></p>
-<p>  优点：</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">支持录制UI自动化，且录制的脚本支持编辑自定义，且无环境依赖；</span><br><span class="line">录制的脚本可以导出在任意设备上回放，或者转换成appium脚本；</span><br><span class="line">支持回放管理，支持批量回放和重复回放；</span><br><span class="line">支持性能测试，实时监控APP性能和录制APP的性能；</span><br><span class="line">支持一机多控，可同时控制多台设备；</span><br></pre></td></tr></table></figure>
-
-<p>  缺点：</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">不支持iOS设备，仅支持Android设备；</span><br><span class="line">工具是一款纯功能测试辅助软件，不支持持续集成；</span><br><span class="line">功能过于离散，几个功能不能结合在一起使用；</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>和业务结合：</strong></p>
-<ul>
-<li><p><em>rc验收阶段：</em><br><code>建议功能测试完毕且无误后，最后在rc验收一遍，主流程，验收时进行功能&quot;录制&quot;,录制的脚本可定期回放/开发了相关功能时进行回放/也可以通过Jenkins触发回放;</code></p>
-</li>
-<li><p><em>灰度/线上验收阶段：</em><br><code>建议测试进行线上验收时，进行录制，录制的脚本，可通过扩展进行定期回放；</code></p>
-</li>
-<li><p><em>冒烟/功能测试/rc验收阶段：</em><br><code>建议以上阶段，进行测试验收时，打开性能测试监控，观察功能场景有没用性能问题；</code></p>
-</li>
-<li><p><em>冒烟/兼容性测试阶段：</em><br><code>可以使用一机多控功能，进行兼容性测试；但此功能对控制的终端有要求，最好有固定的兼容环境；</code></p>
-</li>
-<li><p><em>稳定性治理/预装版本暴力回放：</em><br><code>使用重复回放功能进行暴力回放；</code></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em><strong>下一步：</strong></em></p>
-</li>
-</ul>
-<p><a href="https://github.com/alipay/SoloPi"><em>Solopi github</em>_</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>ui自动化</tag>
-        <tag>稳定性</tag>
-        <tag>前端性能</tag>
-        <tag>solopi</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>UI自动化元素定位</title>
     <url>/posts/2e4c0062/</url>
     <content><![CDATA[<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">APPIUM元素定位原理</span><br><span class="line">常见的元素定位方式</span><br><span class="line">元素定位技巧/辅助工具</span><br></pre></td></tr></table></figure>
@@ -330,6 +213,123 @@
       </tags>
   </entry>
   <entry>
+    <title>SOLOPI使用教程</title>
+    <url>/posts/49e140/</url>
+    <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<ul>
+<li><p><em><strong>介绍</strong></em></p>
+<p>  <code>solopi是支付宝团队研发的ui自动化工具;支持UI录制回放，录制脚本的编辑/扩展/转换成appium脚本/录制脚本支持分发到其他的设备执行；同时还支持性能测试和一机多控，执行采集各种性能数据，同时支持通过一台设备控制多台设备的行为；</code></p>
+</li>
+<li><p><em><strong>使用指南</strong></em></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">环境准备</span><br><span class="line">app配置</span><br><span class="line">录制</span><br><span class="line">回放</span><br><span class="line">性能测试</span><br><span class="line">一机多控</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>环境准备</strong></p>
+<ul>
+<li><p><em>下载配置Androidsdk</em></p>
+<ul>
+<li>地址:<a href="https://developer.android.com/studio/releases/platform-tools#downloads">https://developer.android.com/studio/releases/platform-tools#downloads</a></li>
+<li>操作：下载安装完Android调试工具后，在下载对应系统版本的 SDK Platform Tools，配置好环境变量，注意win10以上系统环境变量配置即生效，低版本需要重启pc才能生效；</li>
+</ul>
+</li>
+<li><p><em>给手机授权</em></p>
+<ul>
+<li>操作：进入开发者模式，并授权usb调试权限；</li>
+</ul>
+</li>
+<li><p><em>检测环境并连接wifi</em></p>
+<ul>
+<li>操作：通过adb devices命令检测，同时要连接wifi;</li>
+</ul>
+</li>
+<li><p><em>建立连接</em></p>
+<ul>
+<li>操作：通过pc的cmd启动服务,输入（adb tcpip 5555）</li>
+</ul>
+</li>
+<li><p><em>下载solopi的apk</em></p>
+<ul>
+<li>地址：<a href="https://github.com/alipay/SoloPi/releases/download/v0.11.2/SoloPi_0.11.2.apk">apk点击下载</a></li>
+<li>操作：下载安装后，通过配置授权</li>
+<li>环境配置：<a href="https://github.com/alipay/SoloPi/wiki/FirstUse">地址跳转参考内容</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>app配置</strong></p>
+<p>  <code>按需配置，一般不需要进行配置；可参考上方的环境配置</code></p>
+</li>
+<li><p><strong>录制/回放</strong></p>
+<ul>
+<li><a href="https://github.com/alipay/SoloPi/wiki/RecordCase"><em>官方教程</em></a></li>
+<li>录制：录制支持直接对收到操作进行录制，且录制的脚本支持编辑/扩展/保存/导入等操作，支持各类操作和断言，支持图像识别，简单方便；</li>
+<li>回放：回放支持单脚本回放，支持批量回放，支持重复播放；</li>
+<li>优点：操作简单，可扩展编辑定制策略，可同步到其他设备，可重复回放支持暴力遍历；</li>
+<li>缺点：不支持持续集成，需要手动触发；</li>
+</ul>
+</li>
+<li><p><strong>性能测试</strong></p>
+<ul>
+<li><a href="https://github.com/alipay/SoloPi/wiki/Performance"><em>官方教程</em></a></li>
+<li>操作：性能测试时，直接勾选需要监控的性能指标，不进行录制则可以实时查看；进行录制时，点击录制按钮开始录制，录制结束后点击录制结束按钮，录制的性能数据会存储下来，支持图表分析，可同时存储多份性能数据；</li>
+<li>优点：支持实时查看场景的性能，可和业务测试结合方便简单；支持性能录制，可和UI自动化结合，查看各场景的性能变化和差异；</li>
+<li>缺点：不支持续集成，利用脚本进行回放时不支持性能监控；</li>
+</ul>
+</li>
+<li><p><strong>一机多控</strong></p>
+<ul>
+<li>[<em>官方教程</em>]</li>
+<li>操作：多台设备上同时安装solopi和待测APP；做好配置和授权操作，同时主机（控制机）选中一机多控，选中为主机；其他设备点击一机多控，选中为从机；然后用主机扫码录入从机，然后在主机点击建立主从机的连接，然后主机点击录屏按钮，开始进行一机多控操作；原理是利用solopi的录屏回放功能，主机录屏，从机回放；</li>
+<li>优点：可以用一台机器，控制多台设备操作，能有效的覆盖兼容性测试；</li>
+<li>缺点：不支持ios系统；由于是先录制，在回放，因此所有设备都需要有网络，且必须是同一局域网，且存在延时；不支持批量操作时，同时监控性能数据；</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><em><strong>和业务结合</strong></em></p>
+<p>  <code>和业务结合使用前，需要先梳理清楚solopi的优缺点：</code></p>
+<p>  优点：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">支持录制UI自动化，且录制的脚本支持编辑自定义，且无环境依赖；</span><br><span class="line">录制的脚本可以导出在任意设备上回放，或者转换成appium脚本；</span><br><span class="line">支持回放管理，支持批量回放和重复回放；</span><br><span class="line">支持性能测试，实时监控APP性能和录制APP的性能；</span><br><span class="line">支持一机多控，可同时控制多台设备；</span><br></pre></td></tr></table></figure>
+
+<p>  缺点：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">不支持iOS设备，仅支持Android设备；</span><br><span class="line">工具是一款纯功能测试辅助软件，不支持持续集成；</span><br><span class="line">功能过于离散，几个功能不能结合在一起使用；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>和业务结合：</strong></p>
+<ul>
+<li><p><em>rc验收阶段：</em><br><code>建议功能测试完毕且无误后，最后在rc验收一遍，主流程，验收时进行功能&quot;录制&quot;,录制的脚本可定期回放/开发了相关功能时进行回放/也可以通过Jenkins触发回放;</code></p>
+</li>
+<li><p><em>灰度/线上验收阶段：</em><br><code>建议测试进行线上验收时，进行录制，录制的脚本，可通过扩展进行定期回放；</code></p>
+</li>
+<li><p><em>冒烟/功能测试/rc验收阶段：</em><br><code>建议以上阶段，进行测试验收时，打开性能测试监控，观察功能场景有没用性能问题；</code></p>
+</li>
+<li><p><em>冒烟/兼容性测试阶段：</em><br><code>可以使用一机多控功能，进行兼容性测试；但此功能对控制的终端有要求，最好有固定的兼容环境；</code></p>
+</li>
+<li><p><em>稳定性治理/预装版本暴力回放：</em><br><code>使用重复回放功能进行暴力回放；</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em><strong>下一步：</strong></em></p>
+</li>
+</ul>
+<p><a href="https://github.com/alipay/SoloPi"><em>Solopi github</em>_</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>ui自动化</tag>
+        <tag>稳定性</tag>
+        <tag>前端性能</tag>
+        <tag>solopi</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>UI自动化基础--微软</title>
     <url>/posts/d1646a55/</url>
     <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
@@ -376,6 +376,46 @@
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 <p>#开启动画<br>canvas_nest: true </p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>python-多线程</title>
+    <url>/posts/b7270d4a/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">多线程是什么？</span><br><span class="line">为什么需要使用多线程，多线程的作用？</span><br><span class="line">怎么使用多线程，join方法的作用？</span><br><span class="line">python多线程弊端？</span><br><span class="line">python多线程其他机制？</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<ul>
+<li><strong>多线程是什么？</strong></li>
+</ul>
+<p><code>线程是程序的最小单元，程序运行时，实际是线程在解释器中执行工作；</code></p>
+<ul>
+<li><strong>为什么需要使用多线程，多线程的作用？</strong></li>
+</ul>
+<p><code>python的多线程是假的多线程，在进程中同时最多只能有一个线程在解释器中运行，这是由python的全局解释器（GIL）来控制的，具体过程为“生成gil-线程运行-线程休眠（gil上锁）-运行其他线程-再次运行此线程时（需要将上一个线程上锁，并解锁此线程）”，这种虽然是假的多线程，但是可以在一个线程等待时，运行另一个线程，使单核得到充分利用；</code></p>
+<ul>
+<li><strong>怎么使用多线程，join方法的作用？</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import threading</span><br><span class="line">#fun是函数，arg是参数</span><br><span class="line">t1&#x3D;threading.Thread(fun,arg)</span><br><span class="line">t1.start()</span><br><span class="line">t1.join() </span><br><span class="line">print(&quot;主线程执行&quot;)</span><br></pre></td></tr></table></figure>
+<p>join方法的作用是子线程劫持主线程，仅当子线程执行完之后，才能执行主线程，常用于爬虫，如爬取多个资源时，使用多线程，每个子线程添加join等待，仅当爬虫子线程爬取完资源后，才能进行下一步操作（运行主线程）</p>
+<ul>
+<li><strong>python 多线程的弊端</strong></li>
+</ul>
+<p><code>python多线程的GIL机制，导致python同时只能执行一个线程，只能使用单核，在多核机器上会存在巨大的资源浪费；因此多线程多用于高IO操作，尽量避免在多cpu计算场景下使用，该场景下应使用多进程；</code></p>
+<ul>
+<li><strong>python多线程其他机制？</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python守护线程？</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>python的守护线程？</strong><br>  <code>python主线程运行时，默认会等待子线程运行结束后主线程才能结束，但我们可以在子线程启动前，将子线程添加到守护线程里，这样的话哪怕该守护子线程未结束，只要主线程结束了，守护线程也会跟着结束；   </code>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import threading</span><br><span class="line">#fun是函数，arg是参数</span><br><span class="line">t1&#x3D;threading.Thread(fun,arg)</span><br><span class="line">t1.setDaemon(True)#设置守护线程必须在该子线程执行前</span><br><span class="line">t1.start()</span><br><span class="line">t1.join() </span><br><span class="line">print(&quot;主线程执行&quot;)	#主线程结束后，子线程会跟着结束，不会执行</span><br><span class="line"></span><br><span class="line">线程的其他常用方法：</span><br><span class="line"></span><br><span class="line">run():  线程被cpu调度后自动执行线程对象的run方法</span><br><span class="line">start():启动线程活动。</span><br><span class="line">isAlive(): 返回线程是否活动的。</span><br><span class="line">getName(): 返回线程名。</span><br><span class="line">setName(): 设置线程名。</span><br><span class="line"></span><br><span class="line">threading模块提供的一些方法：</span><br><span class="line">threading.currentThread(): 返回当前的线程变量。</span><br><span class="line">threading.enumerate(): 返回一个包含正在运行的线程的list。正在运行指线程启动后、结束前，不包括启动前和终止后的线程。</span><br><span class="line">threading.activeCount():返回正在运行的线程数量，与len(threading.enumerate())有相同的结果。</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>总结：python的多线程支持多任务，但多任务并不支持并行运行（同时运行），只是利用了cpu的多道技术，支持任务的切换；</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>多线程</tag>
+      </tags>
   </entry>
   <entry>
     <title>Python语法-unittest</title>
@@ -445,46 +485,6 @@
       <tags>
         <tag>python</tag>
         <tag>多进程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python-多线程</title>
-    <url>/posts/b7270d4a/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">多线程是什么？</span><br><span class="line">为什么需要使用多线程，多线程的作用？</span><br><span class="line">怎么使用多线程，join方法的作用？</span><br><span class="line">python多线程弊端？</span><br><span class="line">python多线程其他机制？</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<ul>
-<li><strong>多线程是什么？</strong></li>
-</ul>
-<p><code>线程是程序的最小单元，程序运行时，实际是线程在解释器中执行工作；</code></p>
-<ul>
-<li><strong>为什么需要使用多线程，多线程的作用？</strong></li>
-</ul>
-<p><code>python的多线程是假的多线程，在进程中同时最多只能有一个线程在解释器中运行，这是由python的全局解释器（GIL）来控制的，具体过程为“生成gil-线程运行-线程休眠（gil上锁）-运行其他线程-再次运行此线程时（需要将上一个线程上锁，并解锁此线程）”，这种虽然是假的多线程，但是可以在一个线程等待时，运行另一个线程，使单核得到充分利用；</code></p>
-<ul>
-<li><strong>怎么使用多线程，join方法的作用？</strong></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import threading</span><br><span class="line">#fun是函数，arg是参数</span><br><span class="line">t1&#x3D;threading.Thread(fun,arg)</span><br><span class="line">t1.start()</span><br><span class="line">t1.join() </span><br><span class="line">print(&quot;主线程执行&quot;)</span><br></pre></td></tr></table></figure>
-<p>join方法的作用是子线程劫持主线程，仅当子线程执行完之后，才能执行主线程，常用于爬虫，如爬取多个资源时，使用多线程，每个子线程添加join等待，仅当爬虫子线程爬取完资源后，才能进行下一步操作（运行主线程）</p>
-<ul>
-<li><strong>python 多线程的弊端</strong></li>
-</ul>
-<p><code>python多线程的GIL机制，导致python同时只能执行一个线程，只能使用单核，在多核机器上会存在巨大的资源浪费；因此多线程多用于高IO操作，尽量避免在多cpu计算场景下使用，该场景下应使用多进程；</code></p>
-<ul>
-<li><strong>python多线程其他机制？</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python守护线程？</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>python的守护线程？</strong><br>  <code>python主线程运行时，默认会等待子线程运行结束后主线程才能结束，但我们可以在子线程启动前，将子线程添加到守护线程里，这样的话哪怕该守护子线程未结束，只要主线程结束了，守护线程也会跟着结束；   </code>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import threading</span><br><span class="line">#fun是函数，arg是参数</span><br><span class="line">t1&#x3D;threading.Thread(fun,arg)</span><br><span class="line">t1.setDaemon(True)#设置守护线程必须在该子线程执行前</span><br><span class="line">t1.start()</span><br><span class="line">t1.join() </span><br><span class="line">print(&quot;主线程执行&quot;)	#主线程结束后，子线程会跟着结束，不会执行</span><br><span class="line"></span><br><span class="line">线程的其他常用方法：</span><br><span class="line"></span><br><span class="line">run():  线程被cpu调度后自动执行线程对象的run方法</span><br><span class="line">start():启动线程活动。</span><br><span class="line">isAlive(): 返回线程是否活动的。</span><br><span class="line">getName(): 返回线程名。</span><br><span class="line">setName(): 设置线程名。</span><br><span class="line"></span><br><span class="line">threading模块提供的一些方法：</span><br><span class="line">threading.currentThread(): 返回当前的线程变量。</span><br><span class="line">threading.enumerate(): 返回一个包含正在运行的线程的list。正在运行指线程启动后、结束前，不包括启动前和终止后的线程。</span><br><span class="line">threading.activeCount():返回正在运行的线程数量，与len(threading.enumerate())有相同的结果。</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>总结：python的多线程支持多任务，但多任务并不支持并行运行（同时运行），只是利用了cpu的多道技术，支持任务的切换；</p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>多线程</tag>
       </tags>
   </entry>
   <entry>
@@ -562,6 +562,19 @@
 ]]></content>
   </entry>
   <entry>
+    <title>ui自动化分布式并行运算</title>
+    <url>/posts/2be91958/</url>
+    <content><![CDATA[<p><a href="https://cloud.tencent.com/developer/article/1974105">Gird</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>UI</tag>
+        <tag>gird</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>优秀博客</title>
     <url>/posts/bb158cde/</url>
     <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ul>
@@ -589,16 +602,77 @@
       </tags>
   </entry>
   <entry>
-    <title>ui自动化分布式并行运算</title>
-    <url>/posts/2be91958/</url>
-    <content><![CDATA[<p><a href="https://cloud.tencent.com/developer/article/1974105">Gird</a></p>
+    <title>2023/7月新工作准备</title>
+    <url>/posts/59e78ab6/</url>
+    <content><![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><pre><code>通过半个季度的学习，达到准高级工程师水准，进入大厂（BAT/TMDJKXB）;
+</code></pre>
+<h2 id="学习计划"><a href="#学习计划" class="headerlink" title="学习计划"></a>学习计划</h2><p><em><strong>科目</strong></em></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">语言基础</span><br><span class="line">算法</span><br><span class="line">计算机网络</span><br><span class="line">计算机系统</span><br><span class="line">数据库</span><br><span class="line">应用</span><br><span class="line">业务</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><em><strong>执行规划</strong></em></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="科目"><a href="#科目" class="headerlink" title="科目"></a>科目</h3><p><strong>语言基础</strong></p>
+<p><code>语言需要解决的问题，操作对象（支持数据类型），对象可进行哪些处理（运算/算法），语句组织（函数/类/模快），应用解决实际问题（建模/面向对象编程） </code></p>
+<p><em>书籍：</em></p>
+<ul>
+<li>python学习手册</li>
+<li><a href="https://www.cnblogs.com/vamei/archive/2012/09/13/2682778.html">python快速教程</a></li>
+<li><a href="https://github.com/daolf/Most-recommended-programming-books#methodology">最好的python技术书籍合集</a></li>
+</ul>
+<p><em>实战：</em></p>
+<ul>
+<li>leetcode</li>
+<li>牛客（对应面试企业的题）</li>
+</ul>
+<p><strong>算法</strong></p>
+<ul>
+<li>发一到两天滚一遍算法图解</li>
+<li>leetcode结合企业面试题刷算法</li>
+</ul>
+<p><strong>计算机网络</strong></p>
+<ul>
+<li><a href="https://www.cnblogs.com/1009gavin/category/1177473.html">计算机网络系列博客</a></li>
+<li>针对面试中常见的网络和协议问题进行准备</li>
+</ul>
+<p><strong>计算机系统</strong></p>
+<ul>
+<li><a href="https://www.cnblogs.com/1009gavin/p/8553995.html">shell脚本编写</a></li>
+<li>[linux常用命令]（）</li>
+<li>测试环境部署相关（docker/k8s/自动化环境部署/自动化测试后端环境问题定位）</li>
+</ul>
+<p><strong>数据库</strong></p>
+<ul>
+<li><a href="https://www.cnblogs.com/1009gavin/category/1174710.html">sql简单语法</a></li>
+<li><a href="%E6%8A%BD%E5%87%A0%E4%B8%AA%E7%9C%8B%E4%B8%80%E4%B8%8B">sql经典实例</a></li>
+<li><a href="%E6%8A%BD%E5%87%A0%E4%B8%AA%E5%81%9A%E4%B8%80%E4%B8%8B">leetcodesql题</a></li>
+<li>redis常见面试题刷几个</li>
+<li>数据库特性操作（慢查询/分表/防攻击等）</li>
+</ul>
+<p><strong>实战</strong></p>
+<ul>
+<li>ppt中规划的操作进行梳理</li>
+</ul>
+<p><strong>业务</strong></p>
+<ul>
+<li>业务梳理</li>
+</ul>
+<h2 id="面试前准备"><a href="#面试前准备" class="headerlink" title="面试前准备"></a>面试前准备</h2><ul>
+<li>✔工作梳理</li>
+<li>✔质量体系构建</li>
+<li>✔技术复盘</li>
+<li>岗位技能要求分析</li>
+<li>面试题练习</li>
+<li>准备简历</li>
+<li>人脉资源</li>
+<li>面试复盘</li>
+</ul>
 ]]></content>
       <categories>
-        <category>技术</category>
+        <category>工作</category>
       </categories>
       <tags>
-        <tag>UI</tag>
-        <tag>gird</tag>
+        <tag>找工作</tag>
       </tags>
   </entry>
   <entry>
@@ -676,45 +750,6 @@
 <h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">♥腾讯+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以300均价，买入6手；高溢价时，优先使用中概换腾讯（中概大部分公司不盈利）</span><br><span class="line">1️⃣理想买点：328</span><br><span class="line">2️⃣理想卖点：1年内720</span><br><span class="line">3️⃣纳指买点：21pe</span><br><span class="line">4️⃣纳指卖点：35pe</span><br><span class="line"></span><br><span class="line">♥银行+家电25%：计划100k,余量16k</span><br><span class="line">已持仓84k,其中家电50k&#x2F;银行34k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右，招商计划以28均价，买入5手</span><br><span class="line">2️⃣美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">3️⃣格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34</span><br><span class="line"></span><br><span class="line">♥消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利20k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣五粮液150快,理想买点150&#x2F;143&#x2F;135</span><br><span class="line">2️⃣伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下</span><br><span class="line"></span><br><span class="line">♥医药10%：计划40k,余量3k</span><br><span class="line">已持仓37k,其中恒瑞20k&#x2F;ETF17K</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣恒瑞按50倍市盈率20.07%净利润增长，卖点60（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">2️⃣300医药ETF计划0.42，买入7000个，卖点为0.7以上，对应300医药指数50倍以上的估值</span><br><span class="line">医药需要恒瑞和etf实现高低互换，高换低；</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
-    <title>可变对象合并方法</title>
-    <url>/posts/def45bf2/</url>
-    <content><![CDATA[<h1 id="可变对象合并的方法"><a href="#可变对象合并的方法" class="headerlink" title="可变对象合并的方法"></a>可变对象合并的方法</h1><p>eg:list</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">+:合并</span><br><span class="line">+=：增加赋值</span><br><span class="line">append()：添加</span><br><span class="line">extend()：插入</span><br><span class="line"></span><br><span class="line">list=[1,2,3]</span><br><span class="line">l=[4]</span><br><span class="line">s=list+l</span><br><span class="line">s=list.append(l)</span><br><span class="line">s=list.extend(l)</span><br><span class="line">list+=l</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;list&#x27;</span>,list)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;l&#x27;</span>,l)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;s&#x27;</span>,s)</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p><strong>+合并</strong></p>
-<p><code> 合并方法，是影响最小，速度最慢的方法；因为他不会改变原序列，会复制后生成一个新的序列    </code></p>
-<p><strong>append()</strong><br>    <code>    添加方法，会直接将对象添加到原序列末尾；会改变原序列    </code></p>
-<p><strong>extend()</strong><br>    <code>    插入方法，会将对象的元素添加到序列末尾，而不是对象，会改变原序列    </code></p>
-<p><strong>+=</strong><br>    <code>    增强赋值方法，类似于合并=；和extend()等效，效率比其低，会改变原序列    </code></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>序列</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>全局函数局部函数</title>
-    <url>/posts/ae3a85c8/</url>
-    <content><![CDATA[<h1 id="全局局部函数"><a href="#全局局部函数" class="headerlink" title="全局局部函数"></a>全局局部函数</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">全局函数：global</span><br><span class="line">局部函数：nonlocal</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p><strong>global</strong></p>
-<p><code>全局函数在模块py中生效；使用时需要先定义，在声明；一次声明，模块中全局使用，全局和局部不能是同一个变量； global a a=s</code></p>
-<p><strong>nonlocal</strong></p>
-<p><code>局部变量函数在模块中局部函数中生效；需要先声明，后定义成局部变量，一旦定义成局部变量就仅在该函数中生效，离开该函数就不生效，不能和全局变量为同一个变量 a=s nonlocal a</code></p>
-<p><a href="https://www.cnblogs.com/liyang93/p/6669874.html">参考</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>变量</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>传音刷机</title>
     <url>/posts/a1b2e86a/</url>
     <content><![CDATA[<ol>
@@ -774,6 +809,45 @@
 <li><strong>痛点</strong></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>全局函数局部函数</title>
+    <url>/posts/ae3a85c8/</url>
+    <content><![CDATA[<h1 id="全局局部函数"><a href="#全局局部函数" class="headerlink" title="全局局部函数"></a>全局局部函数</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">全局函数：global</span><br><span class="line">局部函数：nonlocal</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>global</strong></p>
+<p><code>全局函数在模块py中生效；使用时需要先定义，在声明；一次声明，模块中全局使用，全局和局部不能是同一个变量； global a a=s</code></p>
+<p><strong>nonlocal</strong></p>
+<p><code>局部变量函数在模块中局部函数中生效；需要先声明，后定义成局部变量，一旦定义成局部变量就仅在该函数中生效，离开该函数就不生效，不能和全局变量为同一个变量 a=s nonlocal a</code></p>
+<p><a href="https://www.cnblogs.com/liyang93/p/6669874.html">参考</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>变量</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>可变对象合并方法</title>
+    <url>/posts/def45bf2/</url>
+    <content><![CDATA[<h1 id="可变对象合并的方法"><a href="#可变对象合并的方法" class="headerlink" title="可变对象合并的方法"></a>可变对象合并的方法</h1><p>eg:list</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">+:合并</span><br><span class="line">+=：增加赋值</span><br><span class="line">append()：添加</span><br><span class="line">extend()：插入</span><br><span class="line"></span><br><span class="line">list=[1,2,3]</span><br><span class="line">l=[4]</span><br><span class="line">s=list+l</span><br><span class="line">s=list.append(l)</span><br><span class="line">s=list.extend(l)</span><br><span class="line">list+=l</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;list&#x27;</span>,list)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;l&#x27;</span>,l)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;s&#x27;</span>,s)</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>+合并</strong></p>
+<p><code> 合并方法，是影响最小，速度最慢的方法；因为他不会改变原序列，会复制后生成一个新的序列    </code></p>
+<p><strong>append()</strong><br>    <code>    添加方法，会直接将对象添加到原序列末尾；会改变原序列    </code></p>
+<p><strong>extend()</strong><br>    <code>    插入方法，会将对象的元素添加到序列末尾，而不是对象，会改变原序列    </code></p>
+<p><strong>+=</strong><br>    <code>    增强赋值方法，类似于合并=；和extend()等效，效率比其低，会改变原序列    </code></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>序列</tag>
+      </tags>
   </entry>
   <entry>
     <title>各家模拟器对比分析</title>
@@ -1027,12 +1101,6 @@
       </tags>
   </entry>
   <entry>
-    <title>数据库性能测试</title>
-    <url>/posts/ab3091af/</url>
-    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>广告--大数据模型测试</title>
     <url>/posts/d775e226/</url>
     <content><![CDATA[<p><code>模型是程序化广告的灵魂，决定着广告的点击和转化，直接影响收入；而模型由于复杂度高，标签/数据量大，是广告测试的难点，一般意义上，测试是不负责模型质量的，仅对模型中的一些定向/过滤逻辑做覆盖，模型有效性测试，模型工程师一般是通过灰度/ab测试来实现自测的，这种自我监督的实现方式有着明显缺陷，故本次对过往模型测试方面的记录，做下总结</code></p>
@@ -1069,6 +1137,31 @@
 <ul>
 <li>related_posts: true</li>
 </ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>数据库性能测试</title>
+    <url>/posts/ab3091af/</url>
+    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>百度质量体系建设</title>
+    <url>/posts/bcd76c52/</url>
+    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
+<li><em><strong>介绍</strong></em></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>目录</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>用例管理平台</title>
+    <url>/posts/c48e9a83/</url>
+    <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -1126,23 +1219,17 @@
       </tags>
   </entry>
   <entry>
-    <title>用例管理平台</title>
-    <url>/posts/c48e9a83/</url>
-    <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>百度质量体系建设</title>
-    <url>/posts/bcd76c52/</url>
-    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
-<li><em><strong>介绍</strong></em></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>目录</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
+    <title>稳定性治理-暴力回放</title>
+    <url>/posts/81de0e43/</url>
+    <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
+<h4 id="覆盖场景"><a href="#覆盖场景" class="headerlink" title="覆盖场景"></a>覆盖场景</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">music首页，点击歌单播放按钮播放，然后息屏进入后台，10s后切换回前台；</span><br><span class="line">music首页，点开播放列表，然后点击music播放音乐，然后关闭播放列表，然后切换到后台，10s后切换回前台；</span><br><span class="line">music首页，进入歌单，点击全部播放，点击全部下载，然后返回首页，上下滑动一屏，然后切换回后台，10s后切换回前台；</span><br><span class="line">music首页，点击头像登录，退出，切换到后台，10s后切换回前台；</span><br><span class="line">treding首页，点击任意music播放，切换到后台，10s后回到前台，关闭播放详情页；</span><br><span class="line">首页，滑动到treding页，上下滑动一屏；然后向左滑动一屏，上下滑动一屏，然后向左滑动一屏，上下滑动一屏,然后向左滑动一屏，上下滑动一屏,然后切换到后台，停留10s;然后点击导航页到library页，然后点击导航页到search页，然后点击导航页到music页；</span><br><span class="line">搜索页，搜索music，搜索结果页左右滚动一屏；点击结果页播放，然后切换到后台休眠10s,在切换回前台;</span><br><span class="line">首页，点击导航页进入library页；点击进入喜欢的music页，点击全部播放；然后切换到后台，停留10s，在切换回前台，退出music页，切换回首页；</span><br><span class="line">首页，切换到buzz页；上下滑动两屏，点击buzz关注按钮，buzz点赞，buzz评论，点击查看buzz详情，然后回退到buzz页，然后在切换到后台，休眠10s，在切换回前台；</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>稳定性</tag>
+        <tag>暴力回放</tag>
+      </tags>
   </entry>
   <entry>
     <title>稳定性治理--智能遍历</title>
@@ -1310,19 +1397,6 @@
       </categories>
       <tags>
         <tag>稳定性</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>稳定性治理-暴力回放</title>
-    <url>/posts/81de0e43/</url>
-    <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
-<h4 id="覆盖场景"><a href="#覆盖场景" class="headerlink" title="覆盖场景"></a>覆盖场景</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">music首页，点击歌单播放按钮播放，然后息屏进入后台，10s后切换回前台；</span><br><span class="line">music首页，点开播放列表，然后点击music播放音乐，然后关闭播放列表，然后切换到后台，10s后切换回前台；</span><br><span class="line">music首页，进入歌单，点击全部播放，点击全部下载，然后返回首页，上下滑动一屏，然后切换回后台，10s后切换回前台；</span><br><span class="line">music首页，点击头像登录，退出，切换到后台，10s后切换回前台；</span><br><span class="line">treding首页，点击任意music播放，切换到后台，10s后回到前台，关闭播放详情页；</span><br><span class="line">首页，滑动到treding页，上下滑动一屏；然后向左滑动一屏，上下滑动一屏，然后向左滑动一屏，上下滑动一屏,然后向左滑动一屏，上下滑动一屏,然后切换到后台，停留10s;然后点击导航页到library页，然后点击导航页到search页，然后点击导航页到music页；</span><br><span class="line">搜索页，搜索music，搜索结果页左右滚动一屏；点击结果页播放，然后切换到后台休眠10s,在切换回前台;</span><br><span class="line">首页，点击导航页进入library页；点击进入喜欢的music页，点击全部播放；然后切换到后台，停留10s，在切换回前台，退出music页，切换回首页；</span><br><span class="line">首页，切换到buzz页；上下滑动两屏，点击buzz关注按钮，buzz点赞，buzz评论，点击查看buzz详情，然后回退到buzz页，然后在切换到后台，休眠10s，在切换回前台；</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>稳定性</tag>
-        <tag>暴力回放</tag>
       </tags>
   </entry>
   <entry>
@@ -1544,6 +1618,20 @@
       </tags>
   </entry>
   <entry>
+    <title>编写博客--makedown语法说明</title>
+    <url>/posts/ed6b07f3/</url>
+    <content><![CDATA[<h1 id="语法总览"><a href="#语法总览" class="headerlink" title="语法总览"></a>语法总览</h1><h2 id="正文语法"><a href="#正文语法" class="headerlink" title="正文语法"></a>正文语法</h2><pre><code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; 1.=== title ===	最顶级标题</span><br><span class="line">&gt; 2.---  title --- 二级标题</span><br><span class="line">&gt; 3.<span class="comment"># title/## title/###### title	一级/二级/六级标题</span></span><br><span class="line">&gt; * tab缩进语法</span><br><span class="line">&gt; + 字体加粗使用** text ** 或__text__</span><br><span class="line">&gt; - 排序列表，无序列表使用（+-*），有序列表使用（1.数字加点）</span><br><span class="line">&gt; - 换行，如果上下行无\n(换行操作)则不换行，如果有则换行</span><br><span class="line">&gt; - 空行，如果上下行之间有空行，则会进行换行</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="资源语法"><a href="#资源语法" class="headerlink" title="资源语法"></a>资源语法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">链接：</span><br><span class="line"></span><br><span class="line">&gt; - [链接](baidu.com <span class="string">&quot;百度这可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + [链接2][1]...[链接3][id]</span><br><span class="line">	[1]: baidu.com <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: zhihu.com <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">图片：</span><br><span class="line"></span><br><span class="line">&gt; - ![alt text](/path/.jpg <span class="string">&quot;可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + ![alt text][1]...![alt text][id可任意和下文保持一致即可]</span><br><span class="line">	[1]: /path/.jpg <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: /path/.jpg <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">代码块：</span><br><span class="line"></span><br><span class="line">&gt; 1. `中间是代码块`</span><br><span class="line">&gt; 2. ```bash 中间是代码块 ```</span><br><span class="line">&gt; 3. 四个空格/一个tab操作后面的代码</span><br><span class="line">&gt; 4.&lt;!-- more --&gt; 缩写/不展示全文</span><br></pre></td></tr></table></figure>
+
+<h2 id="好看的hexo"><a href="#好看的hexo" class="headerlink" title="好看的hexo"></a>好看的hexo</h2><ul>
+<li><a href="https://blog.bill.moe/"><strong>竞赛</strong></a></li>
+<li><a href="https://diygod.me/"><strong>b站开源大佬</strong></a></li>
+</ul>
+<p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>装饰器详解</title>
     <url>/posts/1d1282f5/</url>
     <content><![CDATA[<h1 id="装饰器是什么"><a href="#装饰器是什么" class="headerlink" title="装饰器是什么"></a>装饰器是什么</h1><span id="more"></span>
@@ -1583,20 +1671,6 @@
       <tags>
         <tag>python</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>编写博客--makedown语法说明</title>
-    <url>/posts/ed6b07f3/</url>
-    <content><![CDATA[<h1 id="语法总览"><a href="#语法总览" class="headerlink" title="语法总览"></a>语法总览</h1><h2 id="正文语法"><a href="#正文语法" class="headerlink" title="正文语法"></a>正文语法</h2><pre><code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; 1.=== title ===	最顶级标题</span><br><span class="line">&gt; 2.---  title --- 二级标题</span><br><span class="line">&gt; 3.<span class="comment"># title/## title/###### title	一级/二级/六级标题</span></span><br><span class="line">&gt; * tab缩进语法</span><br><span class="line">&gt; + 字体加粗使用** text ** 或__text__</span><br><span class="line">&gt; - 排序列表，无序列表使用（+-*），有序列表使用（1.数字加点）</span><br><span class="line">&gt; - 换行，如果上下行无\n(换行操作)则不换行，如果有则换行</span><br><span class="line">&gt; - 空行，如果上下行之间有空行，则会进行换行</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="资源语法"><a href="#资源语法" class="headerlink" title="资源语法"></a>资源语法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">链接：</span><br><span class="line"></span><br><span class="line">&gt; - [链接](baidu.com <span class="string">&quot;百度这可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + [链接2][1]...[链接3][id]</span><br><span class="line">	[1]: baidu.com <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: zhihu.com <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">图片：</span><br><span class="line"></span><br><span class="line">&gt; - ![alt text](/path/.jpg <span class="string">&quot;可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + ![alt text][1]...![alt text][id可任意和下文保持一致即可]</span><br><span class="line">	[1]: /path/.jpg <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: /path/.jpg <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">代码块：</span><br><span class="line"></span><br><span class="line">&gt; 1. `中间是代码块`</span><br><span class="line">&gt; 2. ```bash 中间是代码块 ```</span><br><span class="line">&gt; 3. 四个空格/一个tab操作后面的代码</span><br><span class="line">&gt; 4.&lt;!-- more --&gt; 缩写/不展示全文</span><br></pre></td></tr></table></figure>
-
-<h2 id="好看的hexo"><a href="#好看的hexo" class="headerlink" title="好看的hexo"></a>好看的hexo</h2><ul>
-<li><a href="https://blog.bill.moe/"><strong>竞赛</strong></a></li>
-<li><a href="https://diygod.me/"><strong>b站开源大佬</strong></a></li>
-</ul>
-<p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>
-]]></content>
   </entry>
   <entry>
     <title>阿里测开面试题</title>
