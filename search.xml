@@ -1,6 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>UI自动化元素定位</title>
+    <url>/posts/2e4c0062/</url>
+    <content><![CDATA[<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">APPIUM元素定位原理</span><br><span class="line">常见的元素定位方式</span><br><span class="line">元素定位技巧/辅助工具</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<h2 id="APPIUM元素定位原理"><a href="#APPIUM元素定位原理" class="headerlink" title="APPIUM元素定位原理"></a>APPIUM元素定位原理</h2><p><code>目前的UI自动化测试，使用Appium进行页面元素的定位和操作。如下图所示，AppiumServer和UiAutomator2的手机端进行通信后完成元素的操作。</code></p>
+<p><img src="/text_image/appium%E6%B5%81%E7%A8%8B.png" alt="alt text"></p>
+<p><code>底层实现过程</code><br><img src="/text_image/appium%E5%BA%95%E5%B1%82.png" alt="alt text"></p>
+<ul>
+<li>首先，Appium通过调用findElement的方式进行元素定位。</li>
+<li>然后，调用Android提供UIDevice对象的findObject方法。</li>
+<li>最终，通过PartialMatch.accept完成元素的查找。</li>
+</ul>
+<p>接下来我们看一下，这个PartialMatch.accept到底是如何完成元素定位的。通过对于<a href="https://android.googlesource.com/platform/frameworks/uiautomator/+/android-support-test/src/main/java/android/support/test/uiautomator/ByMatcher.java">源码</a>的研究，我们发现元素的信息都是存储在一个叫做AccessibilityNodeInfo的对象里面。源码中使用大量node.getXXX方法中的信息，大家是否眼熟呢？这些信息其实就是我们日常自动化测试中可以获取UI元素的属性。从这我们知道了appium元素定位的工作过程；<br><img src="/text_image/meitun%E5%85%83%E7%B4%A0.png" alt="alt_text"></p>
+<h2 id="常见元素定位方式"><a href="#常见元素定位方式" class="headerlink" title="常见元素定位方式"></a>常见元素定位方式</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">id定位</span><br><span class="line">xpath定位</span><br><span class="line">classname定位</span><br><span class="line">text定位</span><br><span class="line">坐标定位</span><br><span class="line">accessibility_id定位</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>1、id定位</strong></em></p>
+<p><code>id定位是最常用的定位方式，在选择ID时需要验证ID唯一，此方法仅可用于Android，ios不可用</code></p>
+<p><code>id定位示例：driver.find_element_by_id(&quot;id属性值&quot;)</code></p>
+<ul>
+<li>查找ID方式：①为使用uiautomatorviewer②为使用Appium Inspector</li>
+</ul>
+<p><img src="/text_image/id.png" alt="alt_text"><br><img src="/text_image/appium_id.png" alt="alt_text"></p>
+<ul>
+<li>ID查找性能</li>
+</ul>
+<p><code>由上方的appium定位原理可知，查找页面元素位置，是在AccessibilityNodeInfo对象里查找的，这个对象维护的各属性值是字典，因此通过ID查询的性能是较快的</code></p>
+<ul>
+<li>boomplay UI自动化框架的使用<br><img src="/text_image/b_id.png" alt="alt_text"></li>
+</ul>
+<p><em><strong>2、xpath定位</strong></em></p>
+<p><code>xpath定位也是最常用的定位方式之一，xpath是根据页面层级来定位元素位置，此方法仅可用于Android和iOS</code></p>
+<p><code>xpath定位示例：driver.find_element_by_xpath(&quot;xpath表达式&quot;)</code></p>
+<ul>
+<li>查找xpath方式：①为使用uiautomatorviewer②为使用Appium Inspector</li>
+</ul>
+<p><img src="/text_image/id.png" alt="alt_text"><br><img src="/text_image/appium_id.png" alt="alt_text"></p>
+<ul>
+<li>xpath查找性能</li>
+</ul>
+<p><code>由于xpath是根据元素位置来查找的，从头开始查找，因此xpath查找的性能一般较差，且不同写法查找范围不同，性能差异很大，一般通过id/name属性值来定位；参考</code><a href="https://www.runoob.com/xpath/xpath-syntax.html">xpath语法</a></p>
+<ul>
+<li>boomplay UI自动化框架的使用<br><img src="/text_image/b_id.png" alt="alt_text"></li>
+</ul>
+<p><em><strong>3、classname定位</strong></em></p>
+<p><code>classname是基于classname值来定位元素，由于classname一般不唯一，一般不使用此值定位，使用的话也是结合xpath来使用,ios和Android均支持</code></p>
+<p><code>class_name定位示例：driver.find_element_by_class_name(&quot;class_name属性值&quot;)</code></p>
+<ul>
+<li>查找classname方式：①为使用uiautomatorviewer②为使用Appium Inspector</li>
+</ul>
+<p><img src="/text_image/id.png" alt="alt_text"><br><img src="/text_image/appium_id.png" alt="alt_text"></p>
+<ul>
+<li>classname查找性能</li>
+</ul>
+<p><code>classname是页面的classname属性值，用它来定位元素时，由于classname值一般不唯一，因此一般不直接用其定位，一般和xpath一起使用，将classname作为xpath的属性值，性能由于xpath和ID定位性能接近</code></p>
+<ul>
+<li>boomplay UI自动化框架的使用<br><img src="/text_image/b_id.png" alt="alt_text"></li>
+</ul>
+<p><em><strong>4、name定位</strong></em></p>
+<p><code>name定位是使用页面text值来进行定位的，Android从5.5开始不支持name定位，iOS支持name定位</code></p>
+<p><code>name定位示例：driver.find_element_by_name(&quot;text值&quot;)</code></p>
+<ul>
+<li>查找name方式：ios使用Appium Inspector</li>
+</ul>
+<p><img src="/text_image/appium_id.png" alt="alt_text"></p>
+<ul>
+<li>name查找性能</li>
+</ul>
+<p><code>name查找性能较快，和id查找接近</code></p>
+<ul>
+<li>boomplay UI自动化框架的使用<br>不支持</li>
+</ul>
+<p><em><strong>5、accessibility_id定位</strong></em></p>
+<p><code>accessibility_id定位是使用页面content-desc属性值来进行定位的，android和ios均支持</code></p>
+<p><code>accessibility_id定位示例：driver.find_element_by_accessibility_id(&quot;content-desc值&quot;)</code></p>
+<ul>
+<li>查找content-desc方式：①为使用uiautomatorviewer②为使用Appium Inspector</li>
+</ul>
+<p><img src="/text_image/id.png" alt="alt_text"><br><img src="/text_image/appium_id.png" alt="alt_text"></p>
+<ul>
+<li>accessibility_id查找性能</li>
+</ul>
+<p><code>accessibility_id查找性能较快，和id查找接近</code></p>
+<ul>
+<li>boomplay UI自动化框架的使用<br><img src="/text_image/b_id.png" alt="alt_text"></li>
+</ul>
+<p><em><strong>6、指定uiautomator工具定位</strong></em></p>
+<p><code>uiautomator定位方式是直接指定uiautomator工具来进行定位，可利用工具对象的属性来进行定位（支持ID/xpath/class_name等属性值来进行定位），仅支持Android，在Android环境下和driver.find_element_by_是完全一样的</code></p>
+<p><code>accessibility_id定位示例：driver.find_element_by_android_uiautomator(&quot;UiSelector工具属性值来进行定位&quot;)</code></p>
+<ul>
+<li>查找属性值方式：①为使用uiautomatorviewer②为使用Appium Inspector</li>
+</ul>
+<p><img src="/text_image/id.png" alt="alt_text"><br><img src="/text_image/appium_id.png" alt="alt_text"></p>
+<ul>
+<li>uiautomator工具查找性能</li>
+</ul>
+<p><code>Android环境下根据定位的属性值来区分，性能和driver.find_element_by_是完全一样的</code></p>
+<ul>
+<li>boomplay UI自动化框架的使用<br>不支持，可扩展</li>
+</ul>
+<p><em><strong>7、css_selector定位</strong></em></p>
+<p><code>css属性定位，支持通过页面的各类css属性来进行定位元素，支持单个属性和多个属性值组合定位，仅支持web</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 1.用 标签名 定位查找</span><br><span class="line">driver.find_element_by_css_selector(&quot;input&quot;)</span><br><span class="line"></span><br><span class="line"># 2.用 id 属性定位查找 </span><br><span class="line">driver.find_element_by_css_selector(&quot;kw&quot;)</span><br><span class="line"></span><br><span class="line"># 3.用 class 属性定位查找</span><br><span class="line">driver.find_element_by_css_selector(&quot;s_ipt&quot;)</span><br><span class="line"></span><br><span class="line"># 4.其他属性定位</span><br><span class="line">driver.find_element_by_css_selector(&quot;[name&#x3D;&quot;wd&quot;]&quot;)</span><br><span class="line"></span><br><span class="line"># 5.标签名及id属性值组合定位</span><br><span class="line">driver.find_element_by_css_selector(&quot;input#kw&quot;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查找属性值方式：①为使用uiautomatorviewer②为使用Appium Inspector</li>
+</ul>
+<p><img src="/text_image/id.png" alt="alt_text"><br><img src="/text_image/appium_id.png" alt="alt_text"></p>
+<ul>
+<li>uiautomator工具查找性能</li>
+</ul>
+<p><code>性能根据定位的属性值来区分，性能和driver.find_element_by_是完全一样的</code></p>
+<ul>
+<li>boomplay UI自动化框架的使用<br><img src="/text_image/b_id.png" alt="alt_text"></li>
+</ul>
+<p><em><strong>8、单数定位和复数定位</strong></em></p>
+<p><code>单数定位示例：driver.find_element_by_(&quot;值&quot;)</code></p>
+<p><code>复数定位示例：driver.find_elements_by_(&quot;值&quot;).get(6)</code></p>
+<p><strong>单数定位时定位到第一个元素即返回，返回单个对象；复数定位会定位到页面的所有对象，返回一个数组;现在支持id和xpath的单复数定位；复数定位主要用于某些位置无唯一元素的场景，可通过第几个来进行定位</strong><br><img src="/text_image/%E5%8D%95%E5%A4%8D.png" alt="alt_text"></p>
+<p><em><strong>9、坐标定位</strong></em></p>
+<p><code>APPIUM提供tap方法支持通过元素坐标进行点击，提供了一个adb_tap方法给大家获取元素坐标</code></p>
+<ul>
+<li>boomplay UI自动化框架的使用<br><img src="/text_image/%E5%9D%90%E6%A0%87.png" alt="alt_text"></li>
+</ul>
+<p><em><strong>10、图像识别</strong></em></p>
+<p><code>APPIUM从1.9.0版本开始支持识别图像来进行查找对象，暂未调研。后续补充</code></p>
+<ul>
+<li>boomplay UI自动化框架的使用<br><img src="/text_image/%E5%9D%90%E6%A0%87.png" alt="alt_text"></li>
+</ul>
+<h2 id="元素定位工具和技巧"><a href="#元素定位工具和技巧" class="headerlink" title="元素定位工具和技巧"></a>元素定位工具和技巧</h2><ul>
+<li>辅助工具<ul>
+<li>Android：uiautomatorviewer/Appium Inspector</li>
+<li>iOS：Appium Inspector</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>ui元素定位</tag>
+        <tag>UI自动化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Android资源采集</title>
     <url>/posts/0/</url>
     <content><![CDATA[<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><span id="more"></span>
@@ -184,152 +330,6 @@
       </tags>
   </entry>
   <entry>
-    <title>UI自动化元素定位</title>
-    <url>/posts/2e4c0062/</url>
-    <content><![CDATA[<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">APPIUM元素定位原理</span><br><span class="line">常见的元素定位方式</span><br><span class="line">元素定位技巧/辅助工具</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<h2 id="APPIUM元素定位原理"><a href="#APPIUM元素定位原理" class="headerlink" title="APPIUM元素定位原理"></a>APPIUM元素定位原理</h2><p><code>目前的UI自动化测试，使用Appium进行页面元素的定位和操作。如下图所示，AppiumServer和UiAutomator2的手机端进行通信后完成元素的操作。</code></p>
-<p><img src="/text_image/appium%E6%B5%81%E7%A8%8B.png" alt="alt text"></p>
-<p><code>底层实现过程</code><br><img src="/text_image/appium%E5%BA%95%E5%B1%82.png" alt="alt text"></p>
-<ul>
-<li>首先，Appium通过调用findElement的方式进行元素定位。</li>
-<li>然后，调用Android提供UIDevice对象的findObject方法。</li>
-<li>最终，通过PartialMatch.accept完成元素的查找。</li>
-</ul>
-<p>接下来我们看一下，这个PartialMatch.accept到底是如何完成元素定位的。通过对于<a href="https://android.googlesource.com/platform/frameworks/uiautomator/+/android-support-test/src/main/java/android/support/test/uiautomator/ByMatcher.java">源码</a>的研究，我们发现元素的信息都是存储在一个叫做AccessibilityNodeInfo的对象里面。源码中使用大量node.getXXX方法中的信息，大家是否眼熟呢？这些信息其实就是我们日常自动化测试中可以获取UI元素的属性。从这我们知道了appium元素定位的工作过程；<br><img src="/text_image/meitun%E5%85%83%E7%B4%A0.png" alt="alt_text"></p>
-<h2 id="常见元素定位方式"><a href="#常见元素定位方式" class="headerlink" title="常见元素定位方式"></a>常见元素定位方式</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">id定位</span><br><span class="line">xpath定位</span><br><span class="line">classname定位</span><br><span class="line">text定位</span><br><span class="line">坐标定位</span><br><span class="line">accessibility_id定位</span><br></pre></td></tr></table></figure>
-
-<p><em><strong>1、id定位</strong></em></p>
-<p><code>id定位是最常用的定位方式，在选择ID时需要验证ID唯一，此方法仅可用于Android，ios不可用</code></p>
-<p><code>id定位示例：driver.find_element_by_id(&quot;id属性值&quot;)</code></p>
-<ul>
-<li>查找ID方式：①为使用uiautomatorviewer②为使用Appium Inspector</li>
-</ul>
-<p><img src="/text_image/id.png" alt="alt_text"><br><img src="/text_image/appium_id.png" alt="alt_text"></p>
-<ul>
-<li>ID查找性能</li>
-</ul>
-<p><code>由上方的appium定位原理可知，查找页面元素位置，是在AccessibilityNodeInfo对象里查找的，这个对象维护的各属性值是字典，因此通过ID查询的性能是较快的</code></p>
-<ul>
-<li>boomplay UI自动化框架的使用<br><img src="/text_image/b_id.png" alt="alt_text"></li>
-</ul>
-<p><em><strong>2、xpath定位</strong></em></p>
-<p><code>xpath定位也是最常用的定位方式之一，xpath是根据页面层级来定位元素位置，此方法仅可用于Android和iOS</code></p>
-<p><code>xpath定位示例：driver.find_element_by_xpath(&quot;xpath表达式&quot;)</code></p>
-<ul>
-<li>查找xpath方式：①为使用uiautomatorviewer②为使用Appium Inspector</li>
-</ul>
-<p><img src="/text_image/id.png" alt="alt_text"><br><img src="/text_image/appium_id.png" alt="alt_text"></p>
-<ul>
-<li>xpath查找性能</li>
-</ul>
-<p><code>由于xpath是根据元素位置来查找的，从头开始查找，因此xpath查找的性能一般较差，且不同写法查找范围不同，性能差异很大，一般通过id/name属性值来定位；参考</code><a href="https://www.runoob.com/xpath/xpath-syntax.html">xpath语法</a></p>
-<ul>
-<li>boomplay UI自动化框架的使用<br><img src="/text_image/b_id.png" alt="alt_text"></li>
-</ul>
-<p><em><strong>3、classname定位</strong></em></p>
-<p><code>classname是基于classname值来定位元素，由于classname一般不唯一，一般不使用此值定位，使用的话也是结合xpath来使用,ios和Android均支持</code></p>
-<p><code>class_name定位示例：driver.find_element_by_class_name(&quot;class_name属性值&quot;)</code></p>
-<ul>
-<li>查找classname方式：①为使用uiautomatorviewer②为使用Appium Inspector</li>
-</ul>
-<p><img src="/text_image/id.png" alt="alt_text"><br><img src="/text_image/appium_id.png" alt="alt_text"></p>
-<ul>
-<li>classname查找性能</li>
-</ul>
-<p><code>classname是页面的classname属性值，用它来定位元素时，由于classname值一般不唯一，因此一般不直接用其定位，一般和xpath一起使用，将classname作为xpath的属性值，性能由于xpath和ID定位性能接近</code></p>
-<ul>
-<li>boomplay UI自动化框架的使用<br><img src="/text_image/b_id.png" alt="alt_text"></li>
-</ul>
-<p><em><strong>4、name定位</strong></em></p>
-<p><code>name定位是使用页面text值来进行定位的，Android从5.5开始不支持name定位，iOS支持name定位</code></p>
-<p><code>name定位示例：driver.find_element_by_name(&quot;text值&quot;)</code></p>
-<ul>
-<li>查找name方式：ios使用Appium Inspector</li>
-</ul>
-<p><img src="/text_image/appium_id.png" alt="alt_text"></p>
-<ul>
-<li>name查找性能</li>
-</ul>
-<p><code>name查找性能较快，和id查找接近</code></p>
-<ul>
-<li>boomplay UI自动化框架的使用<br>不支持</li>
-</ul>
-<p><em><strong>5、accessibility_id定位</strong></em></p>
-<p><code>accessibility_id定位是使用页面content-desc属性值来进行定位的，android和ios均支持</code></p>
-<p><code>accessibility_id定位示例：driver.find_element_by_accessibility_id(&quot;content-desc值&quot;)</code></p>
-<ul>
-<li>查找content-desc方式：①为使用uiautomatorviewer②为使用Appium Inspector</li>
-</ul>
-<p><img src="/text_image/id.png" alt="alt_text"><br><img src="/text_image/appium_id.png" alt="alt_text"></p>
-<ul>
-<li>accessibility_id查找性能</li>
-</ul>
-<p><code>accessibility_id查找性能较快，和id查找接近</code></p>
-<ul>
-<li>boomplay UI自动化框架的使用<br><img src="/text_image/b_id.png" alt="alt_text"></li>
-</ul>
-<p><em><strong>6、指定uiautomator工具定位</strong></em></p>
-<p><code>uiautomator定位方式是直接指定uiautomator工具来进行定位，可利用工具对象的属性来进行定位（支持ID/xpath/class_name等属性值来进行定位），仅支持Android，在Android环境下和driver.find_element_by_是完全一样的</code></p>
-<p><code>accessibility_id定位示例：driver.find_element_by_android_uiautomator(&quot;UiSelector工具属性值来进行定位&quot;)</code></p>
-<ul>
-<li>查找属性值方式：①为使用uiautomatorviewer②为使用Appium Inspector</li>
-</ul>
-<p><img src="/text_image/id.png" alt="alt_text"><br><img src="/text_image/appium_id.png" alt="alt_text"></p>
-<ul>
-<li>uiautomator工具查找性能</li>
-</ul>
-<p><code>Android环境下根据定位的属性值来区分，性能和driver.find_element_by_是完全一样的</code></p>
-<ul>
-<li>boomplay UI自动化框架的使用<br>不支持，可扩展</li>
-</ul>
-<p><em><strong>7、css_selector定位</strong></em></p>
-<p><code>css属性定位，支持通过页面的各类css属性来进行定位元素，支持单个属性和多个属性值组合定位，仅支持web</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 1.用 标签名 定位查找</span><br><span class="line">driver.find_element_by_css_selector(&quot;input&quot;)</span><br><span class="line"></span><br><span class="line"># 2.用 id 属性定位查找 </span><br><span class="line">driver.find_element_by_css_selector(&quot;kw&quot;)</span><br><span class="line"></span><br><span class="line"># 3.用 class 属性定位查找</span><br><span class="line">driver.find_element_by_css_selector(&quot;s_ipt&quot;)</span><br><span class="line"></span><br><span class="line"># 4.其他属性定位</span><br><span class="line">driver.find_element_by_css_selector(&quot;[name&#x3D;&quot;wd&quot;]&quot;)</span><br><span class="line"></span><br><span class="line"># 5.标签名及id属性值组合定位</span><br><span class="line">driver.find_element_by_css_selector(&quot;input#kw&quot;)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查找属性值方式：①为使用uiautomatorviewer②为使用Appium Inspector</li>
-</ul>
-<p><img src="/text_image/id.png" alt="alt_text"><br><img src="/text_image/appium_id.png" alt="alt_text"></p>
-<ul>
-<li>uiautomator工具查找性能</li>
-</ul>
-<p><code>性能根据定位的属性值来区分，性能和driver.find_element_by_是完全一样的</code></p>
-<ul>
-<li>boomplay UI自动化框架的使用<br><img src="/text_image/b_id.png" alt="alt_text"></li>
-</ul>
-<p><em><strong>8、单数定位和复数定位</strong></em></p>
-<p><code>单数定位示例：driver.find_element_by_(&quot;值&quot;)</code></p>
-<p><code>复数定位示例：driver.find_elements_by_(&quot;值&quot;).get(6)</code></p>
-<p><strong>单数定位时定位到第一个元素即返回，返回单个对象；复数定位会定位到页面的所有对象，返回一个数组;现在支持id和xpath的单复数定位；复数定位主要用于某些位置无唯一元素的场景，可通过第几个来进行定位</strong><br><img src="/text_image/%E5%8D%95%E5%A4%8D.png" alt="alt_text"></p>
-<p><em><strong>9、坐标定位</strong></em></p>
-<p><code>APPIUM提供tap方法支持通过元素坐标进行点击，提供了一个adb_tap方法给大家获取元素坐标</code></p>
-<ul>
-<li>boomplay UI自动化框架的使用<br><img src="/text_image/%E5%9D%90%E6%A0%87.png" alt="alt_text"></li>
-</ul>
-<p><em><strong>10、图像识别</strong></em></p>
-<p><code>APPIUM从1.9.0版本开始支持识别图像来进行查找对象，暂未调研。后续补充</code></p>
-<ul>
-<li>boomplay UI自动化框架的使用<br><img src="/text_image/%E5%9D%90%E6%A0%87.png" alt="alt_text"></li>
-</ul>
-<h2 id="元素定位工具和技巧"><a href="#元素定位工具和技巧" class="headerlink" title="元素定位工具和技巧"></a>元素定位工具和技巧</h2><ul>
-<li>辅助工具<ul>
-<li>Android：uiautomatorviewer/Appium Inspector</li>
-<li>iOS：Appium Inspector</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>ui元素定位</tag>
-        <tag>UI自动化</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>UI自动化基础--微软</title>
     <url>/posts/d1646a55/</url>
     <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
@@ -488,6 +488,18 @@
       </tags>
   </entry>
   <entry>
+    <title>python语法特性</title>
+    <url>/posts/d641bafc/</url>
+    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python文档管理</title>
     <url>/posts/2020cd00/</url>
     <content><![CDATA[<h1 id="python文档说明"><a href="#python文档说明" class="headerlink" title="python文档说明"></a>python文档说明</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">文档管理的作用</span><br><span class="line">文档管理模块pydoc介绍</span><br><span class="line">怎么使用文档管理</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -532,36 +544,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python语法-super方法</title>
-    <url>/posts/7b2ded6/</url>
-    <content><![CDATA[<p><code>super方法用来，继承父类，或祖父类；常用的结构为super(C,self)/python3括号内的可缩写（super()）;super方法本身是一个类，和当前所在的类（父类）无关，该类使用了mro的算法（方法查找顺序）来决定继承类的顺序</code></p>
-<span id="more"></span>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A():</span><br><span class="line"></span><br><span class="line">	def __init__(self):</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">&quot;---A---&quot;</span>)</span><br><span class="line"></span><br><span class="line">class B(A):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---B---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super(B,self).__init__()</span><br><span class="line"></span><br><span class="line">class C(A):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---C---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super(C,self).__init__()</span><br><span class="line"></span><br><span class="line">class D(B,C):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---D---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super().__init__()</span><br><span class="line">D()</span><br></pre></td></tr></table></figure>
-<p><strong>方法查找顺序说明:</strong></p>
-<pre><code>super.mro策略；采用的是查找继承类的上一个节点的方式来实现继承，如super(D,self).__init__();实际上继承的是上一个节点类B；Python2和Python3使用super来继承时，使用上存在差异，Python必须使用super(C,self)方式继承，python3则可同时使用super()和super(C,self)来进行继承；同时Python2存在class A:/class A(object):这两种经典类和新式类；Python3只有新式类；经典类和新式类的mro策略不一样，虽然两者都是使用从左到右的广度遍历，经典类在某类已继承时，后续在查找到这个类，也不在继承；新式类，在某类已经继承时，后续在查找到改类，会继承最新查找到的；
-</code></pre>
-]]></content>
-  </entry>
-  <entry>
-    <title>python语法特性</title>
-    <url>/posts/d641bafc/</url>
-    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
-<span id="more"></span>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>uwnc</title>
-    <url>/posts/3de87ac/</url>
-    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>ui自动化分布式并行运算</title>
     <url>/posts/2be91958/</url>
     <content><![CDATA[<p><a href="https://cloud.tencent.com/developer/article/1974105">Gird</a></p>
@@ -575,18 +557,53 @@
       </tags>
   </entry>
   <entry>
+    <title>python语法-super方法</title>
+    <url>/posts/7b2ded6/</url>
+    <content><![CDATA[<p><code>super方法用来，继承父类，或祖父类；常用的结构为super(C,self)/python3括号内的可缩写（super()）;super方法本身是一个类，和当前所在的类（父类）无关，该类使用了mro的算法（方法查找顺序）来决定继承类的顺序</code></p>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A():</span><br><span class="line"></span><br><span class="line">	def __init__(self):</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">&quot;---A---&quot;</span>)</span><br><span class="line"></span><br><span class="line">class B(A):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---B---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super(B,self).__init__()</span><br><span class="line"></span><br><span class="line">class C(A):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---C---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super(C,self).__init__()</span><br><span class="line"></span><br><span class="line">class D(B,C):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---D---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super().__init__()</span><br><span class="line">D()</span><br></pre></td></tr></table></figure>
+<p><strong>方法查找顺序说明:</strong></p>
+<pre><code>super.mro策略；采用的是查找继承类的上一个节点的方式来实现继承，如super(D,self).__init__();实际上继承的是上一个节点类B；Python2和Python3使用super来继承时，使用上存在差异，Python必须使用super(C,self)方式继承，python3则可同时使用super()和super(C,self)来进行继承；同时Python2存在class A:/class A(object):这两种经典类和新式类；Python3只有新式类；经典类和新式类的mro策略不一样，虽然两者都是使用从左到右的广度遍历，经典类在某类已继承时，后续在查找到这个类，也不在继承；新式类，在某类已经继承时，后续在查找到改类，会继承最新查找到的；
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
+    <title>uwnc</title>
+    <url>/posts/3de87ac/</url>
+    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>2023/7月新工作准备</title>
     <url>/posts/59e78ab6/</url>
     <content><![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><pre><code>通过半个季度的学习，达到准高级工程师水准，进入大厂（BAT/TMDJKXB）;
 </code></pre>
 <h2 id="学习计划"><a href="#学习计划" class="headerlink" title="学习计划"></a>学习计划</h2><p><em><strong>科目</strong></em></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">语言基础</span><br><span class="line">算法</span><br><span class="line">计算机网络</span><br><span class="line">计算机系统</span><br><span class="line">数据库</span><br><span class="line">应用</span><br><span class="line">业务</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
+<ul>
+<li>✔语言基础</li>
+<li>算法</li>
+<li>计算机网络</li>
+<li>计算机系统/云原生体系</li>
+<li>数据库</li>
+<li>大数据架构</li>
+<li>前端</li>
+</ul>
 <p><em><strong>执行规划</strong></em></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>✔工作梳理</li>
+<li>✔质量体系构建</li>
+<li>✔技术复盘</li>
+<li>✔期望岗位</li>
+<li>✔岗位技能要求分析</li>
+<li>面试题练习</li>
+<li>准备简历</li>
+<li>人脉资源</li>
+<li>面试复盘</li>
+</ul>
+<span id="more"></span>
 
-<h3 id="科目"><a href="#科目" class="headerlink" title="科目"></a>科目</h3><p><strong>语言基础</strong></p>
-<p><code>语言需要解决的问题，操作对象（支持数据类型），对象可进行哪些处理（运算/算法），语句组织（函数/类/模快），应用解决实际问题（建模/面向对象编程） </code></p>
+<h3 id="科目"><a href="#科目" class="headerlink" title="科目"></a>科目</h3><h4 id="语言基础"><a href="#语言基础" class="headerlink" title="语言基础"></a>语言基础</h4><p><code>语言需要解决的问题，操作对象（支持数据类型），对象可进行哪些处理（运算/算法），语句组织（函数/类/模快），应用解决实际问题（建模/面向对象编程） </code></p>
 <p><em>书籍：</em></p>
 <ul>
 <li>python学习手册</li>
@@ -598,50 +615,27 @@
 <li>leetcode</li>
 <li>牛客（对应面试企业的题）</li>
 </ul>
-<p><strong>算法</strong></p>
-<ul>
+<h4 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h4><ul>
 <li>发一到两天滚一遍算法图解</li>
 <li>leetcode结合企业面试题刷算法</li>
 </ul>
-<p><strong>计算机网络</strong></p>
-<ul>
+<h4 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h4><ul>
 <li><a href="https://www.cnblogs.com/1009gavin/category/1177473.html">计算机网络系列博客</a></li>
 <li>针对面试中常见的网络和协议问题进行准备</li>
 </ul>
-<p><strong>计算机系统</strong></p>
-<ul>
+<h4 id="系统-云原生体系"><a href="#系统-云原生体系" class="headerlink" title="系统/云原生体系"></a>系统/云原生体系</h4><ul>
 <li><a href="https://www.cnblogs.com/1009gavin/p/8553995.html">shell脚本编写</a></li>
 <li>[linux常用命令]（）</li>
 <li>测试环境部署相关（docker/k8s/自动化环境部署/自动化测试后端环境问题定位）</li>
 </ul>
-<p><strong>数据库</strong></p>
-<ul>
+<h4 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h4><ul>
 <li><a href="https://www.cnblogs.com/1009gavin/category/1174710.html">sql简单语法</a></li>
 <li><a href="%E6%8A%BD%E5%87%A0%E4%B8%AA%E7%9C%8B%E4%B8%80%E4%B8%8B">sql经典实例</a></li>
 <li><a href="%E6%8A%BD%E5%87%A0%E4%B8%AA%E5%81%9A%E4%B8%80%E4%B8%8B">leetcodesql题</a></li>
 <li>redis常见面试题刷几个</li>
 <li>数据库特性操作（慢查询/分表/防攻击等）</li>
 </ul>
-<p><strong>实战</strong></p>
-<ul>
-<li>ppt中规划的操作进行梳理</li>
-</ul>
-<p><strong>业务</strong></p>
-<ul>
-<li>业务梳理</li>
-</ul>
-<h2 id="面试前准备"><a href="#面试前准备" class="headerlink" title="面试前准备"></a>面试前准备</h2><ul>
-<li>✔工作梳理</li>
-<li>✔质量体系构建</li>
-<li>✔技术复盘</li>
-<li>期望岗位</li>
-<li>岗位技能要求分析</li>
-<li>面试题练习</li>
-<li>准备简历</li>
-<li>人脉资源</li>
-<li>面试复盘</li>
-</ul>
-<h3 id="工作梳理"><a href="#工作梳理" class="headerlink" title="工作梳理"></a>工作梳理</h3><p><a href="https://www.bujiaban.xyz/posts/c184c696/">传易工作总结</a></p>
+<h4 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h4><h2 id="执行规划"><a href="#执行规划" class="headerlink" title="执行规划"></a>执行规划</h2><h3 id="工作梳理"><a href="#工作梳理" class="headerlink" title="工作梳理"></a>工作梳理</h3><p><a href="https://www.bujiaban.xyz/posts/c184c696/">传易工作总结</a></p>
 <h3 id="质量体系构建"><a href="#质量体系构建" class="headerlink" title="质量体系构建"></a>质量体系构建</h3><p><a href="https://www.bujiaban.xyz/posts/274713e6/">质量保障体系</a></p>
 <h3 id="技术复盘"><a href="#技术复盘" class="headerlink" title="技术复盘"></a>技术复盘</h3><p><strong>见上方</strong></p>
 <h3 id="期望岗位"><a href="#期望岗位" class="headerlink" title="期望岗位"></a>期望岗位</h3><ul>
@@ -693,6 +687,7 @@
       </categories>
       <tags>
         <tag>找工作</tag>
+        <tag>规划</tag>
       </tags>
   </entry>
   <entry>
@@ -877,26 +872,6 @@
       </tags>
   </entry>
   <entry>
-    <title>可变对象合并方法</title>
-    <url>/posts/def45bf2/</url>
-    <content><![CDATA[<h1 id="可变对象合并的方法"><a href="#可变对象合并的方法" class="headerlink" title="可变对象合并的方法"></a>可变对象合并的方法</h1><p>eg:list</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">+:合并</span><br><span class="line">+=：增加赋值</span><br><span class="line">append()：添加</span><br><span class="line">extend()：插入</span><br><span class="line"></span><br><span class="line">list=[1,2,3]</span><br><span class="line">l=[4]</span><br><span class="line">s=list+l</span><br><span class="line">s=list.append(l)</span><br><span class="line">s=list.extend(l)</span><br><span class="line">list+=l</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;list&#x27;</span>,list)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;l&#x27;</span>,l)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;s&#x27;</span>,s)</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p><strong>+合并</strong></p>
-<p><code> 合并方法，是影响最小，速度最慢的方法；因为他不会改变原序列，会复制后生成一个新的序列    </code></p>
-<p><strong>append()</strong><br>    <code>    添加方法，会直接将对象添加到原序列末尾；会改变原序列    </code></p>
-<p><strong>extend()</strong><br>    <code>    插入方法，会将对象的元素添加到序列末尾，而不是对象，会改变原序列    </code></p>
-<p><strong>+=</strong><br>    <code>    增强赋值方法，类似于合并=；和extend()等效，效率比其低，会改变原序列    </code></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>序列</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>各家模拟器对比分析</title>
     <url>/posts/83661fed/</url>
     <content><![CDATA[<h1 id="各家模拟器对比分析"><a href="#各家模拟器对比分析" class="headerlink" title="各家模拟器对比分析"></a>各家模拟器对比分析</h1><ul>
@@ -1042,6 +1017,26 @@
       </tags>
   </entry>
   <entry>
+    <title>可变对象合并方法</title>
+    <url>/posts/def45bf2/</url>
+    <content><![CDATA[<h1 id="可变对象合并的方法"><a href="#可变对象合并的方法" class="headerlink" title="可变对象合并的方法"></a>可变对象合并的方法</h1><p>eg:list</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">+:合并</span><br><span class="line">+=：增加赋值</span><br><span class="line">append()：添加</span><br><span class="line">extend()：插入</span><br><span class="line"></span><br><span class="line">list=[1,2,3]</span><br><span class="line">l=[4]</span><br><span class="line">s=list+l</span><br><span class="line">s=list.append(l)</span><br><span class="line">s=list.extend(l)</span><br><span class="line">list+=l</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;list&#x27;</span>,list)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;l&#x27;</span>,l)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;s&#x27;</span>,s)</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>+合并</strong></p>
+<p><code> 合并方法，是影响最小，速度最慢的方法；因为他不会改变原序列，会复制后生成一个新的序列    </code></p>
+<p><strong>append()</strong><br>    <code>    添加方法，会直接将对象添加到原序列末尾；会改变原序列    </code></p>
+<p><strong>extend()</strong><br>    <code>    插入方法，会将对象的元素添加到序列末尾，而不是对象，会改变原序列    </code></p>
+<p><strong>+=</strong><br>    <code>    增强赋值方法，类似于合并=；和extend()等效，效率比其低，会改变原序列    </code></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>序列</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>大数据BI报表架构调整</title>
     <url>/posts/10f9513d/</url>
     <content><![CDATA[<h1 id="大数据BI报表架构调整"><a href="#大数据BI报表架构调整" class="headerlink" title="大数据BI报表架构调整"></a>大数据BI报表架构调整</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span>
@@ -1059,6 +1054,19 @@
 <li>覆盖接口性能</li>
 </ul>
 ]]></content>
+  </entry>
+  <entry>
+    <title>传易--性能测试</title>
+    <url>/posts/56a1ed73/</url>
+    <content><![CDATA[<p><a href="https://docs.qq.com/doc/DSWZnVGNka29qa1lJ">内部项目，需找我授权</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>性能</tag>
+        <tag>实战</tag>
+      </tags>
   </entry>
   <entry>
     <title>工作梳理</title>
@@ -1147,32 +1155,10 @@
       </tags>
   </entry>
   <entry>
-    <title>常用app测试工具</title>
-    <url>/posts/28eebda3/</url>
-    <content><![CDATA[<h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
-<span id="more"></span>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">参考回答：</span><br><span class="line">功能测试自动化</span><br><span class="line">a) 轻量接口自动化测试</span><br><span class="line"></span><br><span class="line">jmeter，</span><br><span class="line"></span><br><span class="line">b) APP UI层面的自动化</span><br><span class="line"></span><br><span class="line">android：UI Automator Viewer，Android Junit，Instrumentation，UIAutomator，</span><br><span class="line"></span><br><span class="line">iOS:基于Instrument的iOS UI自动化，</span><br><span class="line"></span><br><span class="line">性能测试</span><br><span class="line"></span><br><span class="line">a) Web前端性能测试</span><br><span class="line"></span><br><span class="line">网络抓包工具：Wireshark</span><br><span class="line"></span><br><span class="line">网页文件大小</span><br><span class="line"></span><br><span class="line">webpagetest</span><br><span class="line"></span><br><span class="line">pagespeed insight</span><br><span class="line"></span><br><span class="line">chrome adb</span><br><span class="line"></span><br><span class="line">b) APP端性能测试</span><br><span class="line"></span><br><span class="line">Android内存占用分析：MAT</span><br><span class="line"></span><br><span class="line">iOS内存问题分析：ARC模式</span><br><span class="line"></span><br><span class="line">Android WebView性能分析：</span><br><span class="line"></span><br><span class="line">iOS WebView性能分析</span><br><span class="line"></span><br><span class="line">c) 后台服务性能测试</span><br><span class="line"></span><br><span class="line">负载，压力，耐久性</span><br><span class="line"></span><br><span class="line">可拓展性，基准</span><br><span class="line"></span><br><span class="line">工具：apacheAB，Jmeter，LoadRunner，</span><br><span class="line"></span><br><span class="line">专项测试</span><br><span class="line"></span><br><span class="line">a) 兼容性测试</span><br><span class="line"></span><br><span class="line">手工测试：操作系统，分辨率，rom，网络类型</span><br><span class="line"></span><br><span class="line">云平台：testin，脚本编写，Android。</span><br><span class="line"></span><br><span class="line">b) 流量测试</span><br><span class="line"></span><br><span class="line">Android自带的流量管理，</span><br><span class="line"></span><br><span class="line">iOS自带的Network</span><br><span class="line"></span><br><span class="line">tcpdump抓包</span><br><span class="line"></span><br><span class="line">WiFi代理抓包：Fiddler</span><br><span class="line"></span><br><span class="line">流量节省方法：压缩数据，json优于xml；WebP优于传统的JPG，PNG；控制访问的频次；只获取必要的数据；缓存；</span><br><span class="line"></span><br><span class="line">c) 电量测试</span><br><span class="line"></span><br><span class="line">基于测试设备的方法，购买电量表进行测试。</span><br><span class="line"></span><br><span class="line">GSam Battery Monitoe Pro</span><br><span class="line"></span><br><span class="line">iOS基于Instrument Energy工具</span><br><span class="line"></span><br><span class="line">d) 弱网络测试</span><br><span class="line"></span><br><span class="line">手机自带的网络状况模拟工具</span><br><span class="line"></span><br><span class="line">基于代理的弱网络的模拟:</span><br><span class="line"></span><br><span class="line">工具：windows：Network Delay Simulator</span><br><span class="line"></span><br><span class="line">Mac：Network Link Conditioner</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>app测试</tag>
-        <tag>工具</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>传易--性能测试</title>
-    <url>/posts/56a1ed73/</url>
-    <content><![CDATA[<p><a href="https://docs.qq.com/doc/DSWZnVGNka29qa1lJ">内部项目，需找我授权</a></p>
+    <title>数据库性能测试</title>
+    <url>/posts/ab3091af/</url>
+    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
 ]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
-        <tag>实战</tag>
-      </tags>
   </entry>
   <entry>
     <title>搭建hexo博客</title>
@@ -1184,12 +1170,6 @@
 <ul>
 <li>related_posts: true</li>
 </ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>数据库性能测试</title>
-    <url>/posts/ab3091af/</url>
-    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -1244,6 +1224,21 @@
       </categories>
       <tags>
         <tag>混沌工程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常用app测试工具</title>
+    <url>/posts/28eebda3/</url>
+    <content><![CDATA[<h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">参考回答：</span><br><span class="line">功能测试自动化</span><br><span class="line">a) 轻量接口自动化测试</span><br><span class="line"></span><br><span class="line">jmeter，</span><br><span class="line"></span><br><span class="line">b) APP UI层面的自动化</span><br><span class="line"></span><br><span class="line">android：UI Automator Viewer，Android Junit，Instrumentation，UIAutomator，</span><br><span class="line"></span><br><span class="line">iOS:基于Instrument的iOS UI自动化，</span><br><span class="line"></span><br><span class="line">性能测试</span><br><span class="line"></span><br><span class="line">a) Web前端性能测试</span><br><span class="line"></span><br><span class="line">网络抓包工具：Wireshark</span><br><span class="line"></span><br><span class="line">网页文件大小</span><br><span class="line"></span><br><span class="line">webpagetest</span><br><span class="line"></span><br><span class="line">pagespeed insight</span><br><span class="line"></span><br><span class="line">chrome adb</span><br><span class="line"></span><br><span class="line">b) APP端性能测试</span><br><span class="line"></span><br><span class="line">Android内存占用分析：MAT</span><br><span class="line"></span><br><span class="line">iOS内存问题分析：ARC模式</span><br><span class="line"></span><br><span class="line">Android WebView性能分析：</span><br><span class="line"></span><br><span class="line">iOS WebView性能分析</span><br><span class="line"></span><br><span class="line">c) 后台服务性能测试</span><br><span class="line"></span><br><span class="line">负载，压力，耐久性</span><br><span class="line"></span><br><span class="line">可拓展性，基准</span><br><span class="line"></span><br><span class="line">工具：apacheAB，Jmeter，LoadRunner，</span><br><span class="line"></span><br><span class="line">专项测试</span><br><span class="line"></span><br><span class="line">a) 兼容性测试</span><br><span class="line"></span><br><span class="line">手工测试：操作系统，分辨率，rom，网络类型</span><br><span class="line"></span><br><span class="line">云平台：testin，脚本编写，Android。</span><br><span class="line"></span><br><span class="line">b) 流量测试</span><br><span class="line"></span><br><span class="line">Android自带的流量管理，</span><br><span class="line"></span><br><span class="line">iOS自带的Network</span><br><span class="line"></span><br><span class="line">tcpdump抓包</span><br><span class="line"></span><br><span class="line">WiFi代理抓包：Fiddler</span><br><span class="line"></span><br><span class="line">流量节省方法：压缩数据，json优于xml；WebP优于传统的JPG，PNG；控制访问的频次；只获取必要的数据；缓存；</span><br><span class="line"></span><br><span class="line">c) 电量测试</span><br><span class="line"></span><br><span class="line">基于测试设备的方法，购买电量表进行测试。</span><br><span class="line"></span><br><span class="line">GSam Battery Monitoe Pro</span><br><span class="line"></span><br><span class="line">iOS基于Instrument Energy工具</span><br><span class="line"></span><br><span class="line">d) 弱网络测试</span><br><span class="line"></span><br><span class="line">手机自带的网络状况模拟工具</span><br><span class="line"></span><br><span class="line">基于代理的弱网络的模拟:</span><br><span class="line"></span><br><span class="line">工具：windows：Network Delay Simulator</span><br><span class="line"></span><br><span class="line">Mac：Network Link Conditioner</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>app测试</tag>
+        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -1434,19 +1429,6 @@
       </tags>
   </entry>
   <entry>
-    <title>稳定性治理-暴力回放</title>
-    <url>/posts/81de0e43/</url>
-    <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
-<h4 id="覆盖场景"><a href="#覆盖场景" class="headerlink" title="覆盖场景"></a>覆盖场景</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">music首页，点击歌单播放按钮播放，然后息屏进入后台，10s后切换回前台；</span><br><span class="line">music首页，点开播放列表，然后点击music播放音乐，然后关闭播放列表，然后切换到后台，10s后切换回前台；</span><br><span class="line">music首页，进入歌单，点击全部播放，点击全部下载，然后返回首页，上下滑动一屏，然后切换回后台，10s后切换回前台；</span><br><span class="line">music首页，点击头像登录，退出，切换到后台，10s后切换回前台；</span><br><span class="line">treding首页，点击任意music播放，切换到后台，10s后回到前台，关闭播放详情页；</span><br><span class="line">首页，滑动到treding页，上下滑动一屏；然后向左滑动一屏，上下滑动一屏，然后向左滑动一屏，上下滑动一屏,然后向左滑动一屏，上下滑动一屏,然后切换到后台，停留10s;然后点击导航页到library页，然后点击导航页到search页，然后点击导航页到music页；</span><br><span class="line">搜索页，搜索music，搜索结果页左右滚动一屏；点击结果页播放，然后切换到后台休眠10s,在切换回前台;</span><br><span class="line">首页，点击导航页进入library页；点击进入喜欢的music页，点击全部播放；然后切换到后台，停留10s，在切换回前台，退出music页，切换回首页；</span><br><span class="line">首页，切换到buzz页；上下滑动两屏，点击buzz关注按钮，buzz点赞，buzz评论，点击查看buzz详情，然后回退到buzz页，然后在切换到后台，休眠10s，在切换回前台；</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>稳定性</tag>
-        <tag>暴力回放</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>稳定性治理</title>
     <url>/posts/a30df9c8/</url>
     <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">概述，目的？</span><br><span class="line">怎么进行稳定性治理，稳定性治理的体系建设？</span><br><span class="line">稳定性治理的过程？</span><br></pre></td></tr></table></figure>
@@ -1611,6 +1593,33 @@
       </tags>
   </entry>
   <entry>
+    <title>稳定性治理-暴力回放</title>
+    <url>/posts/81de0e43/</url>
+    <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
+<h4 id="覆盖场景"><a href="#覆盖场景" class="headerlink" title="覆盖场景"></a>覆盖场景</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">music首页，点击歌单播放按钮播放，然后息屏进入后台，10s后切换回前台；</span><br><span class="line">music首页，点开播放列表，然后点击music播放音乐，然后关闭播放列表，然后切换到后台，10s后切换回前台；</span><br><span class="line">music首页，进入歌单，点击全部播放，点击全部下载，然后返回首页，上下滑动一屏，然后切换回后台，10s后切换回前台；</span><br><span class="line">music首页，点击头像登录，退出，切换到后台，10s后切换回前台；</span><br><span class="line">treding首页，点击任意music播放，切换到后台，10s后回到前台，关闭播放详情页；</span><br><span class="line">首页，滑动到treding页，上下滑动一屏；然后向左滑动一屏，上下滑动一屏，然后向左滑动一屏，上下滑动一屏,然后向左滑动一屏，上下滑动一屏,然后切换到后台，停留10s;然后点击导航页到library页，然后点击导航页到search页，然后点击导航页到music页；</span><br><span class="line">搜索页，搜索music，搜索结果页左右滚动一屏；点击结果页播放，然后切换到后台休眠10s,在切换回前台;</span><br><span class="line">首页，点击导航页进入library页；点击进入喜欢的music页，点击全部播放；然后切换到后台，停留10s，在切换回前台，退出music页，切换回首页；</span><br><span class="line">首页，切换到buzz页；上下滑动两屏，点击buzz关注按钮，buzz点赞，buzz评论，点击查看buzz详情，然后回退到buzz页，然后在切换到后台，休眠10s，在切换回前台；</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>稳定性</tag>
+        <tag>暴力回放</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>编写博客--makedown语法说明</title>
+    <url>/posts/ed6b07f3/</url>
+    <content><![CDATA[<h1 id="语法总览"><a href="#语法总览" class="headerlink" title="语法总览"></a>语法总览</h1><h2 id="正文语法"><a href="#正文语法" class="headerlink" title="正文语法"></a>正文语法</h2><pre><code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; 1.=== title ===	最顶级标题</span><br><span class="line">&gt; 2.---  title --- 二级标题</span><br><span class="line">&gt; 3.<span class="comment"># title/## title/###### title	一级/二级/六级标题</span></span><br><span class="line">&gt; * tab缩进语法</span><br><span class="line">&gt; + 字体加粗使用** text ** 或__text__</span><br><span class="line">&gt; - 排序列表，无序列表使用（+-*），有序列表使用（1.数字加点）</span><br><span class="line">&gt; - 换行，如果上下行无\n(换行操作)则不换行，如果有则换行</span><br><span class="line">&gt; - 空行，如果上下行之间有空行，则会进行换行</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="资源语法"><a href="#资源语法" class="headerlink" title="资源语法"></a>资源语法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">链接：</span><br><span class="line"></span><br><span class="line">&gt; - [链接](baidu.com <span class="string">&quot;百度这可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + [链接2][1]...[链接3][id]</span><br><span class="line">	[1]: baidu.com <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: zhihu.com <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">图片：</span><br><span class="line"></span><br><span class="line">&gt; - ![alt text](/path/.jpg <span class="string">&quot;可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + ![alt text][1]...![alt text][id可任意和下文保持一致即可]</span><br><span class="line">	[1]: /path/.jpg <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: /path/.jpg <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">代码块：</span><br><span class="line"></span><br><span class="line">&gt; 1. `中间是代码块`</span><br><span class="line">&gt; 2. ```bash 中间是代码块 ```</span><br><span class="line">&gt; 3. 四个空格/一个tab操作后面的代码</span><br><span class="line">&gt; 4.&lt;!-- more --&gt; 缩写/不展示全文</span><br></pre></td></tr></table></figure>
+
+<h2 id="好看的hexo"><a href="#好看的hexo" class="headerlink" title="好看的hexo"></a>好看的hexo</h2><ul>
+<li><a href="https://blog.bill.moe/"><strong>竞赛</strong></a></li>
+<li><a href="https://diygod.me/"><strong>b站开源大佬</strong></a></li>
+</ul>
+<p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>类对象/实例对象/类方法/实例方法/静态方法</title>
     <url>/posts/93899372/</url>
     <content><![CDATA[<ul>
@@ -1663,20 +1672,6 @@
       <tags>
         <tag>python</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>编写博客--makedown语法说明</title>
-    <url>/posts/ed6b07f3/</url>
-    <content><![CDATA[<h1 id="语法总览"><a href="#语法总览" class="headerlink" title="语法总览"></a>语法总览</h1><h2 id="正文语法"><a href="#正文语法" class="headerlink" title="正文语法"></a>正文语法</h2><pre><code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; 1.=== title ===	最顶级标题</span><br><span class="line">&gt; 2.---  title --- 二级标题</span><br><span class="line">&gt; 3.<span class="comment"># title/## title/###### title	一级/二级/六级标题</span></span><br><span class="line">&gt; * tab缩进语法</span><br><span class="line">&gt; + 字体加粗使用** text ** 或__text__</span><br><span class="line">&gt; - 排序列表，无序列表使用（+-*），有序列表使用（1.数字加点）</span><br><span class="line">&gt; - 换行，如果上下行无\n(换行操作)则不换行，如果有则换行</span><br><span class="line">&gt; - 空行，如果上下行之间有空行，则会进行换行</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="资源语法"><a href="#资源语法" class="headerlink" title="资源语法"></a>资源语法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">链接：</span><br><span class="line"></span><br><span class="line">&gt; - [链接](baidu.com <span class="string">&quot;百度这可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + [链接2][1]...[链接3][id]</span><br><span class="line">	[1]: baidu.com <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: zhihu.com <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">图片：</span><br><span class="line"></span><br><span class="line">&gt; - ![alt text](/path/.jpg <span class="string">&quot;可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + ![alt text][1]...![alt text][id可任意和下文保持一致即可]</span><br><span class="line">	[1]: /path/.jpg <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: /path/.jpg <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">代码块：</span><br><span class="line"></span><br><span class="line">&gt; 1. `中间是代码块`</span><br><span class="line">&gt; 2. ```bash 中间是代码块 ```</span><br><span class="line">&gt; 3. 四个空格/一个tab操作后面的代码</span><br><span class="line">&gt; 4.&lt;!-- more --&gt; 缩写/不展示全文</span><br></pre></td></tr></table></figure>
-
-<h2 id="好看的hexo"><a href="#好看的hexo" class="headerlink" title="好看的hexo"></a>好看的hexo</h2><ul>
-<li><a href="https://blog.bill.moe/"><strong>竞赛</strong></a></li>
-<li><a href="https://diygod.me/"><strong>b站开源大佬</strong></a></li>
-</ul>
-<p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>
-]]></content>
   </entry>
   <entry>
     <title>装饰器详解</title>
