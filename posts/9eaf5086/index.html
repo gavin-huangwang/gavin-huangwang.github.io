@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"fenqian.xyz","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="作为一个测试，最核心的工作是保障产品&#x2F;服务的质量；不管是通过流程，手工测试，还是脚本工具，都是为最终目的服务的，我写这篇文章的最终目的，是为了测试设计能成为一个标准作业；测试一个产品&#x2F;需求的标准链路如下： 大纲 收集信息 分析信息 测试设计 测试执行 归纳并标准化 各单功能的标准件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="质量体系--测试设计">
+<meta property="og:url" content="https://fenqian.xyz/posts/9eaf5086/index.html">
+<meta property="og:site_name" content="Fen Qian Web">
+<meta property="og:description" content="作为一个测试，最核心的工作是保障产品&#x2F;服务的质量；不管是通过流程，手工测试，还是脚本工具，都是为最终目的服务的，我写这篇文章的最终目的，是为了测试设计能成为一个标准作业；测试一个产品&#x2F;需求的标准链路如下： 大纲 收集信息 分析信息 测试设计 测试执行 归纳并标准化 各单功能的标准件">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fenqian.xyz/text_image/%E6%B5%8B%E8%AF%95%E4%BB%BB%E5%8A%A1%E4%BF%A1%E6%81%AF%E6%9D%A5%E6%BA%90.png">
+<meta property="og:image" content="https://fenqian.xyz/text_image/SFDIPOT.png">
+<meta property="og:image" content="https://fenqian.xyz/text_image/SFDIPOT%E5%AE%9E%E4%BE%8B.png">
+<meta property="og:image" content="https://fenqian.xyz/text_image/MFQ%E6%A8%A1%E5%9E%8B.png">
+<meta property="og:image" content="https://fenqian.xyz/text_image/MFQ%E5%AE%9E%E4%BE%8B.png">
+<meta property="og:image" content="https://fenqian.xyz/text_image/Q%E9%9D%9E%E5%8A%9F%E8%83%BD%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7.png">
+<meta property="og:image" content="https://fenqian.xyz/text_image/%E5%9B%A0%E6%9E%9C%E5%9B%BE.jpg">
+<meta property="og:image" content="https://fenqian.xyz/text_image/%E5%88%A4%E5%AE%9A%E8%A1%A8.png">
+<meta property="og:image" content="https://fenqian.xyz/text_image/%E6%B5%8B%E8%AF%95%E6%B7%B1%E5%BA%A6%E5%9B%BE.png">
+<meta property="og:image" content="https://fenqian.xyz/text_image/%E5%81%9A%E6%9C%89%E4%BB%B7%E5%80%BC%E7%9A%84%E4%BA%8B.png">
+<meta property="og:image" content="https://fenqian.xyz/text_image/%E5%8F%8D%E9%A6%88%E6%9C%BA%E5%88%B6.png">
+<meta property="article:published_time" content="2023-07-18T12:42:25.000Z">
+<meta property="article:modified_time" content="2023-07-21T14:53:57.182Z">
+<meta property="article:author" content="GAVIN HUANG">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fenqian.xyz/text_image/%E6%B5%8B%E8%AF%95%E4%BB%BB%E5%8A%A1%E4%BF%A1%E6%81%AF%E6%9D%A5%E6%BA%90.png">
+
+<link rel="canonical" href="https://fenqian.xyz/posts/9eaf5086/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>质量体系--测试设计 | Fen Qian Web</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0c0805c7973dc17cabb0b51e3386ffc0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Fen Qian Web" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Fen Qian Web</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">HELLO,YOU</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://fenqian.xyz/posts/9eaf5086/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/me.jpg">
+      <meta itemprop="name" content="GAVIN HUANG">
+      <meta itemprop="description" content="此地无银三百两">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fen Qian Web">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          质量体系--测试设计<a href="https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name_posts/%E8%B4%A8%E9%87%8F%E4%BD%93%E7%B3%BB-%E6%B5%8B%E8%AF%95%E8%AE%BE%E8%AE%A1.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-18 20:42:25" itemprop="dateCreated datePublished" datetime="2023-07-18T20:42:25+08:00">2023-07-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-21 22:53:57" itemprop="dateModified" datetime="2023-07-21T22:53:57+08:00">2023-07-21</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/9eaf5086/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/9eaf5086/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><code>作为一个测试，最核心的工作是保障产品/服务的质量；不管是通过流程，手工测试，还是脚本工具，都是为最终目的服务的，我写这篇文章的最终目的，是为了测试设计能成为一个标准作业；测试一个产品/需求的标准链路如下：</code></p>
+<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><ul>
+<li><strong>收集信息</strong></li>
+<li><strong>分析信息</strong></li>
+<li><strong>测试设计</strong></li>
+<li><strong>测试执行</strong></li>
+<li><strong>归纳并标准化</strong></li>
+<li>各单功能的标准件 <span id="more"></span></li>
+</ul>
+<h2 id="收集信息"><a href="#收集信息" class="headerlink" title="收集信息"></a><strong>收集信息</strong></h2><p><code>要保证充足的测试，仅仅依赖需求和设计文档是不够的；尤其是我们的需求往往是不够完善的；可参考的信息来源如下，其组织形式也体现了信息收集和提炼过程：</code><br><img src="/text_image/%E6%B5%8B%E8%AF%95%E4%BB%BB%E5%8A%A1%E4%BF%A1%E6%81%AF%E6%9D%A5%E6%BA%90.png" alt="alt text"></p>
+<h2 id="分析信息"><a href="#分析信息" class="headerlink" title="分析信息"></a><strong>分析信息</strong></h2><p><code>分析信息是将收集到的信息，提炼、重组、输出成测试大纲的过程；快速信息提炼可用SFDIPOT方法；但一般还是会用MFQ方法来建立测试大纲；具体如下：</code></p>
+<ul>
+<li>SFDIPOT模型<br><img src="/text_image/SFDIPOT.png" alt="alt text"></li>
+<li>SFDIPOT实例<br><img src="/text_image/SFDIPOT%E5%AE%9E%E4%BE%8B.png" alt="alt text"></li>
+<li>MFQ模型：<code>M指单功能、F指单功能间的交互、Q质量属性（非功能）</code><br><img src="/text_image/MFQ%E6%A8%A1%E5%9E%8B.png" alt="alt text"></li>
+<li>MFQ实例<br><img src="/text_image/MFQ%E5%AE%9E%E4%BE%8B.png" alt="alt text"></li>
+<li>MFQ中，Q质量属性，参考大纲<br><img src="/text_image/Q%E9%9D%9E%E5%8A%9F%E8%83%BD%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7.png" alt="alt text"><br><code>以上模型，其实是信息组织方式；具体的分析策略如下，供参考：</code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">尽早尽快：问题发现的越早越好，信息获取的越快越好；</span><br><span class="line">获取的信息越多，信息源越多越好；</span><br><span class="line">疑问；收集疑问，解决疑问，很有价值，质疑一切；</span><br><span class="line">仔细阅读，关注关键字，多思考；</span><br><span class="line">寻找矛盾、漏洞和容易被误解的东西；</span><br><span class="line">除非式探索 —— 在你的产品、流程或者模型的任何你关心的表述后面加上 “除非……”。然后看看新增的部分引导你到了那些方面；</span><br><span class="line">要和业务结合，脱离实际是不行的；</span><br><span class="line">相关性判断 —— 你认为它重要吗？其他人认为这很重要吗？会变得重要吗？用户是否会对这个问题感到不安/恼火？</span><br><span class="line">假设问题；如果…怎么办？–就可能发生的事情或经验进行头脑风暴；</span><br><span class="line">横向思维 —— 人工分离，类比，寻找替代品，相反方面，随机刺激 — 任何有用的东西都可以做；</span><br><span class="line">关键点；——让自己暴露在你认为能产生好想法的信息/情境中；</span><br><span class="line">拉近拉远 —— 放大或缩小详细程度，并检查内容；</span><br><span class="line">图/立体信息组织；以重要的方式将不同的知识、细节和大局结合起来；什么值得仔细研究？让信息变的更立体，更容易理解；</span><br><span class="line">建模；利用测试方法分析，如等价类、因果图、流程等；得到实例；</span><br><span class="line">挖掘隐藏的信息；用户的隐藏需求。隐藏的问题等；</span><br><span class="line">多样性；从多个方面考虑问题；</span><br><span class="line">松弛式探索 —— “让你自己分心吧……因为你永远不知道你会发现什么……但是要定期根据任务来评估你的状态 “</span><br><span class="line">投入并退出 —— 从最困难的部分开始，看看会发生什么，想退出就退出；</span><br><span class="line">拉姆斯菲尔德式探索 —— 调查已知的未知，考虑未知的未知；</span><br><span class="line">不要停下来 —— 当你找到你要找的东西时，多想想看是否有更好的东西等着你；</span><br><span class="line">总是暂停 —— 分析（和设计）是一个连续的活动，是不是暂停一下；</span><br><span class="line">由他人完成–找出由他人执行的测试类型；您可以跳过或轻松覆盖它们（复用）；</span><br><span class="line">上下文分析 - 找出当前情况下哪些因素可以指导你的测试工作。</span><br><span class="line">测试框架 —— 将你的测试活动与你的测试任务联系起来，并了解更多信息（整体联系）；</span><br><span class="line">我做了什么假设 —— 解释你的测试活动，并提出质疑（质疑自己）；</span><br></pre></td></tr></table></figure>
+<strong>以上分析过程都是围绕着‘理解什么是重要的’展开的</strong><h2 id="测试设计"><a href="#测试设计" class="headerlink" title="测试设计"></a><strong>测试设计</strong></h2><code>测试设计一定要基于上下文、基于风险，有的放矢的；常用的测试设计方法有（等价类/边界值/流程图/状态转换法/组合（因果图+判定表、正交实验法）/错误推导法）</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">等价类：输入数值，有多种类型时；分类取值，用局部代替整体实现覆盖；注意既要覆盖有效等价类，又要覆盖无效等价类；</span><br><span class="line">边界值：常和等价类一起使用，取各类数据的边界值或极值，以覆盖极限情况；</span><br><span class="line">流程图：画流程图覆盖业务的所有流程，通常要覆盖主要流程/次要流程/异常流程等；</span><br><span class="line">状态转换法：列出需求的所有状态、并整理转换关系；以实现对所有状态关系的覆盖，如登录；状态转换和流程法的主要区别是，流程的链路方向是固定的，状态转换的方向是可逆的；</span><br><span class="line">正交实验法：是一种在众多组合输入数据中，取样本的方法；以实现样本（均匀且全面）表示整体；具体操作制作‘混合’正交表。表的列为输入参数，列的值为参数值；行为执行次数，每一行为该次执行的参数组合；当参数不够时为空；</span><br><span class="line">错误推导：根据收集/推测的可能错误，验证是否存在相关错误；（参考常见错误list）</span><br><span class="line">因果图+判定表法：两种方法常一起使用，根据因果关系生成判定表；在根据判定表进行测试；因果图是这样的，利用输入的组合关系、多个输入及多输出各自的逻辑关系（常见的逻辑关系有等/非/或/与/异或/包含/排他等），来画因果图，并生成判定表；判定表的列即为测试用例,因果图法和判定表如下；</span><br></pre></td></tr></table></figure>
+<p><img src="/text_image/%E5%9B%A0%E6%9E%9C%E5%9B%BE.jpg" alt="alt text"><br><strong>判定表</strong><br><img src="/text_image/%E5%88%A4%E5%AE%9A%E8%A1%A8.png" alt="alt text"><br><code>至于方法怎么使用，这需理解这些方法的价值；方法其实是一种套路，用来解决特定问题的；因此每种方法都有最适合的场景；重点是我们要明白场景的特征和方法的匹配关系；具体如下：</code><br><strong>注意不同方法覆盖率计算特征不同，但总归都是覆盖率=覆盖场景/所有场景；这种覆盖率只是相对覆盖率</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">等价类+边界值（数据）：最适合的场景是，输入之间彼此独立，且输入可能有多种类型时，试用它；</span><br><span class="line">流程图（流程）：场景是分步骤的流程时，考虑用流程法覆盖；</span><br><span class="line">状态转换法（状态）:如果场景是包含多个状态，且状态直接能互相装换，那状态转换法就比流程法适用；</span><br><span class="line">因果图+判定表（规则）：适用于多参数组合的场景，且参数间存在逻辑关系；先画因果图，在做判定表；</span><br><span class="line">正交实验法（组合）：使用输入参数众多，但参数间相对独立，且需要组合输入的场景；</span><br></pre></td></tr></table></figure>
+<p><strong>如何找到需求的特征呢：基于经验，通过收集到的信息；查找关键词、抓住核心功能、围绕既定目标、尝试其他特征的方式判断；注意一个场景，往往有多个特征，抓主干，同时在一个特征无法保障覆盖时，可以覆盖多个特征。</strong></p>
+<p><code>测试设计（建模），往往得到的是测试点，需要我们进一步把测试点具体成可执行的测试用例；在测试分析过程中可参考的经验如下：</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">所有的分析启发法都可以用作设计启发法；</span><br><span class="line">信息要及时更新—— 尽可能的保持测试的规范细节为最新。事情都会发生变换，你会从最新的信息中了解更多；</span><br><span class="line">各样的半度量方式 —— “与其完美地进行一两种测试，不如在相当好的水平上进行更多不同类型的测试。”</span><br><span class="line">越快越好 —— 这样你就可以从产品中获得更多信息；</span><br><span class="line">“把所有应该自动化的测试都实现自动化。”—至少完成一次测试后，你会更清楚这一点；</span><br><span class="line">不玩花活：</span><br><span class="line">  使用简单的测试也能达到目标；</span><br><span class="line">  你不必使用花哨的测试技术，特别是在不需要的时候；</span><br><span class="line">复杂度：</span><br><span class="line">  复杂测试能够让你更有效率；</span><br><span class="line">  在设计复杂的测试时不能太小心；</span><br><span class="line">自由覆盖 —— 通过一次测试，就可以覆盖很多不同的内容。利用质量特征的持续性测试想法，将这些方法保留在你的意识深处，关注异常的发生；</span><br><span class="line">适当的粒度 - 考虑测试的详细级别，以提高可评审性；</span><br><span class="line">最具代表性–使用最常见、最容易出错、包罗万象、最重要的示例；</span><br><span class="line">重要性原则 - 将大多数测试集中在主要目的上，但要寻找其他目的和可能的错误；</span><br><span class="line">偶然性——如果测试能发现我们不知道的重要事情，那就更好了；</span><br><span class="line">可以丢弃 —— 不要害怕丢弃你不再相信有相关性的测试；</span><br><span class="line">实践出真知——试一下这个软件，你就会感觉到什么是重要的，什么是容易出错的，以及如何测试它；</span><br><span class="line">直觉——“当你在思考难以预测的事情并且信息很少的时候，相信你的直觉。”</span><br><span class="line">从软件测试中收获课程的五个例子 —— “在边界测试…测试每个错误消息…测试不同于程序员的配置…执行设置很烦人的测试…避免冗余测试。”</span><br><span class="line">与信息目标保持一致—测试是否可以针对不同的信息目标进行调整？</span><br><span class="line">良好的测试 —— 强大、有效、有价值、可信、可能、非冗余、激励、可执行、可维护、可重复、重要、易于评估、支持故障排除、适当复杂、负责任、性价比高、易于理解、能够实现偶然性；</span><br><span class="line">改变策略——如果你的测试没有揭示新的、有趣的信息，那么是时候改变策略了；</span><br><span class="line">用在别处？ —— 这个伟大的测试想法能否用与于领域的测试？</span><br><span class="line">谁能做到？–你可能会包含你无法执行的测试想法。</span><br><span class="line">多样性审查（结对）——如果审查者提供新的内容，请找一个想法更为不同的人。</span><br><span class="line">未读测试设计 —— 如果开发人员没有阅读你的高等级的测试设计，请询问他们原因。</span><br><span class="line">最喜欢的技巧 —— 你最好的测试设计技巧可能不是完美的匹配，但它可能会给你最好的结果；</span><br><span class="line">任何与探索性测试、基于经验的测试或错误猜测相关的技能都是有用的；</span><br><span class="line">元问题 —— 对于棘手的设计问题，您可以使用诸如 CIA Phoenix 清单之类的问题；</span><br></pre></td></tr></table></figure>
+<h2 id="测试执行"><a href="#测试执行" class="headerlink" title="测试执行"></a><strong>测试执行</strong></h2><p><code>测试执行阶段，也存在着信息获取；纠错的过程；当然获取信息-决策-反馈-优化是贯穿质量活动始终的； 在执行活动中关注的较多的‘覆盖’和‘用例有效性’的问题；判断的依据是‘风险（风险发生的概率/后果）’，虽然每种模型都有一定的覆盖率，但同时任何模型也无法保证100%的覆盖率(测试是一个混沌工程)，因此在执行时，我会尝试覆盖所有被认为重要的东西</code></p>
+<p><strong>覆盖率模型–广度/深度判断</strong><br><img src="/text_image/%E6%B5%8B%E8%AF%95%E6%B7%B1%E5%BA%A6%E5%9B%BE.png" alt="alt text"><br><strong>覆盖率模型–执行价值</strong><br><img src="/text_image/%E5%81%9A%E6%9C%89%E4%BB%B7%E5%80%BC%E7%9A%84%E4%BA%8B.png" alt="alt text"></p>
+<p><code>测试执行可参考的经验：</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">所有的分析启发式和设计启发式都可以用作执行启发式；</span><br><span class="line">基本的启发 —— 如果它存在，我想测试它；</span><br><span class="line">重要问题优先——先找出最重要的问题；</span><br><span class="line">主干——如果方便的话，首先看看大的功能工作是否正常；</span><br><span class="line">更宽泛的区分——如果 “这个” 可以或不可以，我们可以跳过 “那个”；</span><br><span class="line">多信息源——使用比需求更复杂的 “文档”；</span><br><span class="line">再做一件事——另外做一些容易出错的、大众的或者用户可能会做的事情。不要想太多，做点什么，看看会发生什么；</span><br><span class="line">死亡蜜蜂启发 - 如果我改变了一个数据文件，发现我正在测试的应用程序不再发生崩溃，下一步我要做的就是再次改变它，这样我就可以再次看到崩溃；</span><br><span class="line">隆隆作响——当产品做了奇怪的事情，一个大灾难可能会发生；</span><br><span class="line">慢慢挪动——以一种刻意过度精细的方式做某事；</span><br><span class="line">用户错误——研究无意（典型）错误；</span><br><span class="line">行动方法——成为一个 “真正” 的用户；</span><br><span class="line">二分法——当有奇怪的事情发生时，去掉 “一半”，直到找到必要的成分；</span><br><span class="line">可翻转性启发——尝试从意外使用中获得价值；</span><br><span class="line">基本配置矩阵——确定跨越 “边界” 的几个平台；</span><br><span class="line">并发测试执行——同时运行多个测试想法以获得新的交互和想法；</span><br><span class="line">似曾相识的启发式方法——当遇到错误消息时，多重复一次（如果不完全相同，代码是可疑的）；</span><br><span class="line">看看很多地方——测试结果可以通过几个地方来解释；</span><br><span class="line">其他地方是否存在问题——发现的问题是否存在于其他地方？</span><br><span class="line">直觉 - “相信你的直觉。尝试任何感觉有希望的测试”</span><br><span class="line">结对测试——协同测试执行激发新的更快的思考；</span><br><span class="line">测试辅助——有工具可以立刻帮助我吗？</span><br><span class="line">极性动态——在谨慎与快速、嬉戏与严肃、客观与主观等之间切换；</span><br><span class="line">现在——“我现在能做的最好的测试是什么？</span><br><span class="line">情绪——运用你的感官。</span><br><span class="line">新视角发现失败——看看新的东西；让别人看看你的东西；</span><br><span class="line">即兴表演</span><br><span class="line">（不）确定性问题——总是有问题，但它们可能并不重要</span><br><span class="line">我可能用错了启发——如果我发现许多问题，可能是我的模型是错误的；</span><br></pre></td></tr></table></figure>
+<p><strong>快速测试 :</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">用一些快速的，并不总是有效果的测试来刺激你的执行（这些测试来自 Kaner&#x2F;Bach 等.);</span><br><span class="line">鞋子测试——找到一个输入字段，将光标移到它上，将鞋子放在键盘上，然后去吃午饭;</span><br><span class="line">边界测试——测试边界值因为边界的错误编码是一个常见的错误。</span><br><span class="line">Whittaker 攻击</span><br><span class="line">  输入：强制错误消息、默认值、浏览数据、溢出缓冲区、查找交互、重复多次。</span><br><span class="line">  输出：强制不同、无效、属性更改、屏幕刷新。探索存储的数据和计算。填充或损坏文件系统；无效&#x2F;不可访问的文件。</span><br><span class="line">干扰测试——取消、暂停、交换、中止、后退&#x2F;下一步、竞争、删除、注销。</span><br><span class="line">跟踪最近的变化——意外的副作用。</span><br><span class="line">探索数据关系——利用依赖关系，跟踪数据，干扰，删除。</span><br><span class="line">变化之旅——尽可能在各个维度上变化;</span><br><span class="line">复杂度之旅——查找最复杂的功能和数据，创建复杂的文件。</span><br><span class="line">示例数据之旅——尽可能使用任何示例数据。越复杂越好。</span><br><span class="line">持续使用 - 测试时，不要重置系统。打开窗口和文件。让磁盘和内存使用量增加。你希望随着时间的推移，这个系统会自己打结。</span><br><span class="line">调整 - 将某些参数设置为某个值，然后在以后的任何时间将该值重置为其他值，而不重置或重新创建包含的文档或数据结构。</span><br><span class="line">Dog Pilling——一次运行更多进程；同时存在更多状态。</span><br><span class="line">减弱——当系统处于适当的状态时开始使用一个函数，然后将状态部分更改为不适当的状态。</span><br><span class="line">错误消息处理——使错误消息发生。重点测试错误被忽略后的情况。</span><br><span class="line">点击狂热——测试不仅仅是 “敲击键盘”，但这句话并非空穴来风。试着敲击键盘。试着到处点击。</span><br><span class="line">多个实例——同时运行应用程序的许多实例。打开相同的文件。</span><br><span class="line">功能交互——发现各个功能交互或共享数据的位置。寻找任何相互依赖的关系。浏览他们。给他们压力。</span><br><span class="line">便宜的工具！–了解如何使用 InCtrl5, Filemon, Regmon, AppVerifier, Perfmon, Task Manager, Threadhijacker, Zed Attack Proxy, Color Oracle（所有这些都是免费的）</span><br><span class="line">资源匮乏——逐渐降低内存和其他资源，直到产品优雅得降级或不优雅得崩溃。</span><br><span class="line">执行 “作者说”——查看联机帮助或用户手册，找到有关如何执行一些有趣活动的说明。做那些动作。然后即兴表演。</span><br><span class="line">疯狂配置——在安装产品之前或之后以非标准或非默认方式修改 O&#x2F;S 配置。</span><br><span class="line">摸索——找到产品中产生大量数据或执行某些操作非常快的方面;</span><br></pre></td></tr></table></figure>
+<h2 id="归纳并标准化"><a href="#归纳并标准化" class="headerlink" title="归纳并标准化"></a><strong>归纳并标准化</strong></h2><p><code>以上的过程，就是一个完整的‘测试过程’；其中每一步都是独立的，但都有其价值；无论如何，测试本质都是基于‘上下文’和‘风险’的活动；获取信息-分析-决策-反馈-优化，永远贯穿质量活动的始终，本节的目的是让较小的单功能/独立的功能，测试活动，能实现标准作业；这个想法的依据是由于，任何产品功能都是大同小异的，都是由相似的各个小功能组成的，本节考虑输出各小功能的checklist来实现标准作业</code><br><img src="/text_image/%E5%8F%8D%E9%A6%88%E6%9C%BA%E5%88%B6.png" alt="alt text"><br><strong>看到这是不是有种感觉，测试工作流程，越来越像工厂的流水线；这其实就是互联网的发展方向，未来估计行业的发展趋势也会和制造业趋同；不知是行业的幸运，还是个人的不幸！！！</strong></p>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/qian.png" alt="GAVIN HUANG 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/wechat.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/377e71de/" rel="prev" title="2023-7月新工作准备">
+      <i class="fa fa-chevron-left"></i> 2023-7月新工作准备
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%A7%E7%BA%B2"><span class="nav-number">1.</span> <span class="nav-text">大纲</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B6%E9%9B%86%E4%BF%A1%E6%81%AF"><span class="nav-number">1.1.</span> <span class="nav-text">收集信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E4%BF%A1%E6%81%AF"><span class="nav-number">1.2.</span> <span class="nav-text">分析信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.3.</span> <span class="nav-text">测试设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%89%A7%E8%A1%8C"><span class="nav-number">1.4.</span> <span class="nav-text">测试执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%92%E7%BA%B3%E5%B9%B6%E6%A0%87%E5%87%86%E5%8C%96"><span class="nav-number">1.5.</span> <span class="nav-text">归纳并标准化</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GAVIN HUANG"
+      src="/me.jpg">
+  <p class="site-author-name" itemprop="name">GAVIN HUANG</p>
+  <div class="site-description" itemprop="description">此地无银三百两</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="http://gavin-log.herokuapp.com/" title="Ynote → http:&#x2F;&#x2F;gavin-log.herokuapp.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>Ynote</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/1009gavin/" title="Blog → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;1009gavin&#x2F;" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/gavin-huangwang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gavin-huangwang" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  <!-- 音乐播放器 -->
+	<div>
+		
+			<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=442009412&auto=1&height=66"></iframe>
+		
+	</div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GAVIN HUANG</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">96k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:27</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '7SnCyhwFab6OJHulh0SsCRHv-gzGzoHsz',
+      appKey     : 'MlToRxXyU1kGTgW6WHSJOnCL',
+      placeholder: "Just go go",
+      avatar     : 'wavatar',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+<!-- 雪花特效 -->
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.8.3/jquery.js"></script>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="\js\snow.js"></script> 
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
