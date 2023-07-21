@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>稳定性--ANR治理</title>
+    <url>/posts/1ee32bf1/</url>
+    <content><![CDATA[<h1 id="ANR治理"><a href="#ANR治理" class="headerlink" title="ANR治理"></a>ANR治理</h1><ul>
+<li><em><strong>大纲</strong></em></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">anr是什么？</span><br><span class="line">为什么会产生anr?</span><br><span class="line">anr是怎样产生的，哪些场景下会产生？</span><br><span class="line">anr如何治理？</span><br><span class="line">解决anr问题的价值？</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<ul>
+<li><strong>anr是什么？</strong><br>  <code>anr(Applicatipon No Response),即应用无响应；本质是一个性能问题；在用户和app进行交互时，常会遇到长时间无响应/卡顿的场景；为了改善性能，Android设计了anr的机制，即保证交互能在一定时间内完成，如果未完成，就抛出异常，也就是ANR;   </code></li>
+<li><strong>anr设计机制：</strong><br>  <code>是系统通过与之交互的组件(Activity，Service，Receiver，Provider)以及用户交互(InputEvent)进行超时监控，以判断应用进程(主线程)是否存在卡死或响应过慢的问题，通俗来说就是很多系统中看门狗(watchdog)的设计思想。   </code><ul>
+<li><strong>不同的组件，系统设置的超时时间是不同的，这个时间不同手机厂商的os可能也会做调整：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
+<li><strong>系统抛出anr的机制：</strong><br><code>在进行相关的操作前，系统会基于当前的时间戳和这个类型组件的超时时间设置，计算出超时时间戳；并将超时时间戳传递给anr触发函数，组件若未超时启动，则会在启动成功后，在传递一个参数给anr函数来阻止触发anr;若到超时时间，anr函数还未收到阻止信号，就会触发ANR(类似构建了个定时触发的任务)； </code></li>
+<li><strong>超时触发流程如下：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
+</ul>
+</li>
+</ul>
+<p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1780091311874686979&scene=173&from_msgid=2247488558&from_itemidx=1&count=3&nolastread=1&uin=&key=&devicetype=Windows+10+x64&version=63030532&lang=zh_CN&ascene=0&fontgear=2">头条anr治理系列</a></p>
+<p><a href="https://mp.weixin.qq.com/s/L30s7rOyn6NcPC2y9XNZIQ">百度anr治理</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>anr</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Android资源采集</title>
     <url>/posts/0/</url>
     <content><![CDATA[<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><span id="more"></span>
@@ -36,151 +64,6 @@
       </categories>
       <tags>
         <tag>Android</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SOLOPI使用教程</title>
-    <url>/posts/49e140/</url>
-    <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<ul>
-<li><p><em><strong>介绍</strong></em></p>
-<p>  <code>solopi是支付宝团队研发的ui自动化工具;支持UI录制回放，录制脚本的编辑/扩展/转换成appium脚本/录制脚本支持分发到其他的设备执行；同时还支持性能测试和一机多控，执行采集各种性能数据，同时支持通过一台设备控制多台设备的行为；</code></p>
-</li>
-<li><p><em><strong>使用指南</strong></em></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">环境准备</span><br><span class="line">app配置</span><br><span class="line">录制</span><br><span class="line">回放</span><br><span class="line">性能测试</span><br><span class="line">一机多控</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>环境准备</strong></p>
-<ul>
-<li><p><em>下载配置Androidsdk</em></p>
-<ul>
-<li>地址:<a href="https://developer.android.com/studio/releases/platform-tools#downloads">https://developer.android.com/studio/releases/platform-tools#downloads</a></li>
-<li>操作：下载安装完Android调试工具后，在下载对应系统版本的 SDK Platform Tools，配置好环境变量，注意win10以上系统环境变量配置即生效，低版本需要重启pc才能生效；</li>
-</ul>
-</li>
-<li><p><em>给手机授权</em></p>
-<ul>
-<li>操作：进入开发者模式，并授权usb调试权限；</li>
-</ul>
-</li>
-<li><p><em>检测环境并连接wifi</em></p>
-<ul>
-<li>操作：通过adb devices命令检测，同时要连接wifi;</li>
-</ul>
-</li>
-<li><p><em>建立连接</em></p>
-<ul>
-<li>操作：通过pc的cmd启动服务,输入（adb tcpip 5555）</li>
-</ul>
-</li>
-<li><p><em>下载solopi的apk</em></p>
-<ul>
-<li>地址：<a href="https://github.com/alipay/SoloPi/releases/download/v0.11.2/SoloPi_0.11.2.apk">apk点击下载</a></li>
-<li>操作：下载安装后，通过配置授权</li>
-<li>环境配置：<a href="https://github.com/alipay/SoloPi/wiki/FirstUse">地址跳转参考内容</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>app配置</strong></p>
-<p>  <code>按需配置，一般不需要进行配置；可参考上方的环境配置</code></p>
-</li>
-<li><p><strong>录制/回放</strong></p>
-<ul>
-<li><a href="https://github.com/alipay/SoloPi/wiki/RecordCase"><em>官方教程</em></a></li>
-<li>录制：录制支持直接对收到操作进行录制，且录制的脚本支持编辑/扩展/保存/导入等操作，支持各类操作和断言，支持图像识别，简单方便；</li>
-<li>回放：回放支持单脚本回放，支持批量回放，支持重复播放；</li>
-<li>优点：操作简单，可扩展编辑定制策略，可同步到其他设备，可重复回放支持暴力遍历；</li>
-<li>缺点：不支持持续集成，需要手动触发；</li>
-</ul>
-</li>
-<li><p><strong>性能测试</strong></p>
-<ul>
-<li><a href="https://github.com/alipay/SoloPi/wiki/Performance"><em>官方教程</em></a></li>
-<li>操作：性能测试时，直接勾选需要监控的性能指标，不进行录制则可以实时查看；进行录制时，点击录制按钮开始录制，录制结束后点击录制结束按钮，录制的性能数据会存储下来，支持图表分析，可同时存储多份性能数据；</li>
-<li>优点：支持实时查看场景的性能，可和业务测试结合方便简单；支持性能录制，可和UI自动化结合，查看各场景的性能变化和差异；</li>
-<li>缺点：不支持续集成，利用脚本进行回放时不支持性能监控；</li>
-</ul>
-</li>
-<li><p><strong>一机多控</strong></p>
-<ul>
-<li>[<em>官方教程</em>]</li>
-<li>操作：多台设备上同时安装solopi和待测APP；做好配置和授权操作，同时主机（控制机）选中一机多控，选中为主机；其他设备点击一机多控，选中为从机；然后用主机扫码录入从机，然后在主机点击建立主从机的连接，然后主机点击录屏按钮，开始进行一机多控操作；原理是利用solopi的录屏回放功能，主机录屏，从机回放；</li>
-<li>优点：可以用一台机器，控制多台设备操作，能有效的覆盖兼容性测试；</li>
-<li>缺点：不支持ios系统；由于是先录制，在回放，因此所有设备都需要有网络，且必须是同一局域网，且存在延时；不支持批量操作时，同时监控性能数据；</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p><em><strong>和业务结合</strong></em></p>
-<p>  <code>和业务结合使用前，需要先梳理清楚solopi的优缺点：</code></p>
-<p>  优点：</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">支持录制UI自动化，且录制的脚本支持编辑自定义，且无环境依赖；</span><br><span class="line">录制的脚本可以导出在任意设备上回放，或者转换成appium脚本；</span><br><span class="line">支持回放管理，支持批量回放和重复回放；</span><br><span class="line">支持性能测试，实时监控APP性能和录制APP的性能；</span><br><span class="line">支持一机多控，可同时控制多台设备；</span><br></pre></td></tr></table></figure>
-
-<p>  缺点：</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">不支持iOS设备，仅支持Android设备；</span><br><span class="line">工具是一款纯功能测试辅助软件，不支持持续集成；</span><br><span class="line">功能过于离散，几个功能不能结合在一起使用；</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>和业务结合：</strong></p>
-<ul>
-<li><p><em>rc验收阶段：</em><br><code>建议功能测试完毕且无误后，最后在rc验收一遍，主流程，验收时进行功能&quot;录制&quot;,录制的脚本可定期回放/开发了相关功能时进行回放/也可以通过Jenkins触发回放;</code></p>
-</li>
-<li><p><em>灰度/线上验收阶段：</em><br><code>建议测试进行线上验收时，进行录制，录制的脚本，可通过扩展进行定期回放；</code></p>
-</li>
-<li><p><em>冒烟/功能测试/rc验收阶段：</em><br><code>建议以上阶段，进行测试验收时，打开性能测试监控，观察功能场景有没用性能问题；</code></p>
-</li>
-<li><p><em>冒烟/兼容性测试阶段：</em><br><code>可以使用一机多控功能，进行兼容性测试；但此功能对控制的终端有要求，最好有固定的兼容环境；</code></p>
-</li>
-<li><p><em>稳定性治理/预装版本暴力回放：</em><br><code>使用重复回放功能进行暴力回放；</code></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em><strong>下一步：</strong></em></p>
-</li>
-</ul>
-<p><a href="https://github.com/alipay/SoloPi"><em>Solopi github</em>_</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>ui自动化</tag>
-        <tag>稳定性</tag>
-        <tag>前端性能</tag>
-        <tag>solopi</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>稳定性--ANR治理</title>
-    <url>/posts/1ee32bf1/</url>
-    <content><![CDATA[<h1 id="ANR治理"><a href="#ANR治理" class="headerlink" title="ANR治理"></a>ANR治理</h1><ul>
-<li><em><strong>大纲</strong></em></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">anr是什么？</span><br><span class="line">为什么会产生anr?</span><br><span class="line">anr是怎样产生的，哪些场景下会产生？</span><br><span class="line">anr如何治理？</span><br><span class="line">解决anr问题的价值？</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<ul>
-<li><strong>anr是什么？</strong><br>  <code>anr(Applicatipon No Response),即应用无响应；本质是一个性能问题；在用户和app进行交互时，常会遇到长时间无响应/卡顿的场景；为了改善性能，Android设计了anr的机制，即保证交互能在一定时间内完成，如果未完成，就抛出异常，也就是ANR;   </code></li>
-<li><strong>anr设计机制：</strong><br>  <code>是系统通过与之交互的组件(Activity，Service，Receiver，Provider)以及用户交互(InputEvent)进行超时监控，以判断应用进程(主线程)是否存在卡死或响应过慢的问题，通俗来说就是很多系统中看门狗(watchdog)的设计思想。   </code><ul>
-<li><strong>不同的组件，系统设置的超时时间是不同的，这个时间不同手机厂商的os可能也会做调整：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
-<li><strong>系统抛出anr的机制：</strong><br><code>在进行相关的操作前，系统会基于当前的时间戳和这个类型组件的超时时间设置，计算出超时时间戳；并将超时时间戳传递给anr触发函数，组件若未超时启动，则会在启动成功后，在传递一个参数给anr函数来阻止触发anr;若到超时时间，anr函数还未收到阻止信号，就会触发ANR(类似构建了个定时触发的任务)； </code></li>
-<li><strong>超时触发流程如下：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
-</ul>
-</li>
-</ul>
-<p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1780091311874686979&scene=173&from_msgid=2247488558&from_itemidx=1&count=3&nolastread=1&uin=&key=&devicetype=Windows+10+x64&version=63030532&lang=zh_CN&ascene=0&fontgear=2">头条anr治理系列</a></p>
-<p><a href="https://mp.weixin.qq.com/s/L30s7rOyn6NcPC2y9XNZIQ">百度anr治理</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>anr</tag>
       </tags>
   </entry>
   <entry>
@@ -339,6 +222,123 @@
       </categories>
       <tags>
         <tag>UI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SOLOPI使用教程</title>
+    <url>/posts/49e140/</url>
+    <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<ul>
+<li><p><em><strong>介绍</strong></em></p>
+<p>  <code>solopi是支付宝团队研发的ui自动化工具;支持UI录制回放，录制脚本的编辑/扩展/转换成appium脚本/录制脚本支持分发到其他的设备执行；同时还支持性能测试和一机多控，执行采集各种性能数据，同时支持通过一台设备控制多台设备的行为；</code></p>
+</li>
+<li><p><em><strong>使用指南</strong></em></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">环境准备</span><br><span class="line">app配置</span><br><span class="line">录制</span><br><span class="line">回放</span><br><span class="line">性能测试</span><br><span class="line">一机多控</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>环境准备</strong></p>
+<ul>
+<li><p><em>下载配置Androidsdk</em></p>
+<ul>
+<li>地址:<a href="https://developer.android.com/studio/releases/platform-tools#downloads">https://developer.android.com/studio/releases/platform-tools#downloads</a></li>
+<li>操作：下载安装完Android调试工具后，在下载对应系统版本的 SDK Platform Tools，配置好环境变量，注意win10以上系统环境变量配置即生效，低版本需要重启pc才能生效；</li>
+</ul>
+</li>
+<li><p><em>给手机授权</em></p>
+<ul>
+<li>操作：进入开发者模式，并授权usb调试权限；</li>
+</ul>
+</li>
+<li><p><em>检测环境并连接wifi</em></p>
+<ul>
+<li>操作：通过adb devices命令检测，同时要连接wifi;</li>
+</ul>
+</li>
+<li><p><em>建立连接</em></p>
+<ul>
+<li>操作：通过pc的cmd启动服务,输入（adb tcpip 5555）</li>
+</ul>
+</li>
+<li><p><em>下载solopi的apk</em></p>
+<ul>
+<li>地址：<a href="https://github.com/alipay/SoloPi/releases/download/v0.11.2/SoloPi_0.11.2.apk">apk点击下载</a></li>
+<li>操作：下载安装后，通过配置授权</li>
+<li>环境配置：<a href="https://github.com/alipay/SoloPi/wiki/FirstUse">地址跳转参考内容</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>app配置</strong></p>
+<p>  <code>按需配置，一般不需要进行配置；可参考上方的环境配置</code></p>
+</li>
+<li><p><strong>录制/回放</strong></p>
+<ul>
+<li><a href="https://github.com/alipay/SoloPi/wiki/RecordCase"><em>官方教程</em></a></li>
+<li>录制：录制支持直接对收到操作进行录制，且录制的脚本支持编辑/扩展/保存/导入等操作，支持各类操作和断言，支持图像识别，简单方便；</li>
+<li>回放：回放支持单脚本回放，支持批量回放，支持重复播放；</li>
+<li>优点：操作简单，可扩展编辑定制策略，可同步到其他设备，可重复回放支持暴力遍历；</li>
+<li>缺点：不支持持续集成，需要手动触发；</li>
+</ul>
+</li>
+<li><p><strong>性能测试</strong></p>
+<ul>
+<li><a href="https://github.com/alipay/SoloPi/wiki/Performance"><em>官方教程</em></a></li>
+<li>操作：性能测试时，直接勾选需要监控的性能指标，不进行录制则可以实时查看；进行录制时，点击录制按钮开始录制，录制结束后点击录制结束按钮，录制的性能数据会存储下来，支持图表分析，可同时存储多份性能数据；</li>
+<li>优点：支持实时查看场景的性能，可和业务测试结合方便简单；支持性能录制，可和UI自动化结合，查看各场景的性能变化和差异；</li>
+<li>缺点：不支持续集成，利用脚本进行回放时不支持性能监控；</li>
+</ul>
+</li>
+<li><p><strong>一机多控</strong></p>
+<ul>
+<li>[<em>官方教程</em>]</li>
+<li>操作：多台设备上同时安装solopi和待测APP；做好配置和授权操作，同时主机（控制机）选中一机多控，选中为主机；其他设备点击一机多控，选中为从机；然后用主机扫码录入从机，然后在主机点击建立主从机的连接，然后主机点击录屏按钮，开始进行一机多控操作；原理是利用solopi的录屏回放功能，主机录屏，从机回放；</li>
+<li>优点：可以用一台机器，控制多台设备操作，能有效的覆盖兼容性测试；</li>
+<li>缺点：不支持ios系统；由于是先录制，在回放，因此所有设备都需要有网络，且必须是同一局域网，且存在延时；不支持批量操作时，同时监控性能数据；</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><em><strong>和业务结合</strong></em></p>
+<p>  <code>和业务结合使用前，需要先梳理清楚solopi的优缺点：</code></p>
+<p>  优点：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">支持录制UI自动化，且录制的脚本支持编辑自定义，且无环境依赖；</span><br><span class="line">录制的脚本可以导出在任意设备上回放，或者转换成appium脚本；</span><br><span class="line">支持回放管理，支持批量回放和重复回放；</span><br><span class="line">支持性能测试，实时监控APP性能和录制APP的性能；</span><br><span class="line">支持一机多控，可同时控制多台设备；</span><br></pre></td></tr></table></figure>
+
+<p>  缺点：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">不支持iOS设备，仅支持Android设备；</span><br><span class="line">工具是一款纯功能测试辅助软件，不支持持续集成；</span><br><span class="line">功能过于离散，几个功能不能结合在一起使用；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>和业务结合：</strong></p>
+<ul>
+<li><p><em>rc验收阶段：</em><br><code>建议功能测试完毕且无误后，最后在rc验收一遍，主流程，验收时进行功能&quot;录制&quot;,录制的脚本可定期回放/开发了相关功能时进行回放/也可以通过Jenkins触发回放;</code></p>
+</li>
+<li><p><em>灰度/线上验收阶段：</em><br><code>建议测试进行线上验收时，进行录制，录制的脚本，可通过扩展进行定期回放；</code></p>
+</li>
+<li><p><em>冒烟/功能测试/rc验收阶段：</em><br><code>建议以上阶段，进行测试验收时，打开性能测试监控，观察功能场景有没用性能问题；</code></p>
+</li>
+<li><p><em>冒烟/兼容性测试阶段：</em><br><code>可以使用一机多控功能，进行兼容性测试；但此功能对控制的终端有要求，最好有固定的兼容环境；</code></p>
+</li>
+<li><p><em>稳定性治理/预装版本暴力回放：</em><br><code>使用重复回放功能进行暴力回放；</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em><strong>下一步：</strong></em></p>
+</li>
+</ul>
+<p><a href="https://github.com/alipay/SoloPi"><em>Solopi github</em>_</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>ui自动化</tag>
+        <tag>稳定性</tag>
+        <tag>前端性能</tag>
+        <tag>solopi</tag>
       </tags>
   </entry>
   <entry>
@@ -563,6 +563,33 @@
 ]]></content>
   </entry>
   <entry>
+    <title>优秀博客</title>
+    <url>/posts/bb158cde/</url>
+    <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ul>
+<li><a href="https://cloud.tencent.com/developer/article/1974105">自动化专家</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/3335805/activities">性能</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/1011618/activities">腾讯性能优化</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/1016462">腾讯测开</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/2059614">测开</a></li>
+</ul>
+<span id="more"></span>
+
+<h1 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h1><ul>
+<li><a href="https://cloud.tencent.com/developer/user/2398817/inventories">python</a></li>
+<li><a href="https://www.cnblogs.com/vamei/tag/Python/">行业大佬python教程</a></li>
+</ul>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
+<li><a href="https://cloud.tencent.com/developer/user/1642192">K8S腾讯专家</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python语法特性</title>
     <url>/posts/d641bafc/</url>
     <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
@@ -634,33 +661,6 @@
       </tags>
   </entry>
   <entry>
-    <title>优秀博客</title>
-    <url>/posts/bb158cde/</url>
-    <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ul>
-<li><a href="https://cloud.tencent.com/developer/article/1974105">自动化专家</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/3335805/activities">性能</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/1011618/activities">腾讯性能优化</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/1016462">腾讯测开</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/2059614">测开</a></li>
-</ul>
-<span id="more"></span>
-
-<h1 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h1><ul>
-<li><a href="https://cloud.tencent.com/developer/user/2398817/inventories">python</a></li>
-<li><a href="https://www.cnblogs.com/vamei/tag/Python/">行业大佬python教程</a></li>
-</ul>
-<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
-<li><a href="https://cloud.tencent.com/developer/user/1642192">K8S腾讯专家</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>估值体系</title>
     <url>/posts/daef770e/</url>
     <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的扣非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
@@ -671,6 +671,46 @@
 <h2 id="买卖"><a href="#买卖" class="headerlink" title="买卖"></a>买卖</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">理想买点：三年后合理估值*0.5</span><br><span class="line">理想卖点：min(动态市盈率50,三年后合理估值150%)</span><br><span class="line"></span><br><span class="line">买操作：20-25倍区间都能买，仅茅台在25倍pe以上买入;到达理想买点时，分三批买完剩余资金（理想买点/理想买点-5%/理想买点-10%）</span><br><span class="line">卖操作：当年预计净利润的50/55/60三次清空；（买卖点是唐朝基于无风险收益率计算，正常超出合理估值都能卖，50%其实是预留的安全边际）</span><br><span class="line">三年后合理估值=三年后预估净利率*25（具体企业具体分析，也就是pe的中分位）</span><br><span class="line"></span><br><span class="line">全指数基金买/卖点：基于无风险收益率来，但是由于不确定性，要做净利润折算，需要进行等比例折算，折算区间在5-7折</span><br><span class="line">买点：12-15pe</span><br><span class="line">卖点：25-35pe</span><br><span class="line"></span><br><span class="line">♥卖出后买全指还是留现金取决于无风险收益率（一般2倍无风险收益率即可买pe=1/无风险收益率*2，全指唐朝仅关注沪深300/恒生指数/标普500/纳斯达克100）</span><br><span class="line">♥其他时间：企业逻辑未变时，低于买点买，高于卖点卖，其他时间坐等；但需要遵循单股不超40%原则，即三五个行业，七八家公司；</span><br><span class="line">♥不要严格按买卖价来，要接受错误和风险；确定性高的企业，越偏向合理估值之下就买，确定性低的企业越偏向理想买点才买，唐朝的理念是理想买点位置一定要买完资金；</span><br></pre></td></tr></table></figure>
 
 <h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">♥腾讯+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以300均价，买入6手；高溢价时，优先使用中概换腾讯（中概大部分公司不盈利）</span><br><span class="line">1️⃣理想买点：328</span><br><span class="line">2️⃣理想卖点：1年内720</span><br><span class="line">3️⃣纳指买点：21pe</span><br><span class="line">4️⃣纳指卖点：35pe</span><br><span class="line"></span><br><span class="line">♥银行+家电25%：计划100k,余量16k</span><br><span class="line">已持仓84k,其中家电50k&#x2F;银行34k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右，招商计划以28均价，买入5手</span><br><span class="line">2️⃣美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">3️⃣格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34</span><br><span class="line"></span><br><span class="line">♥消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利20k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣五粮液150快,理想买点150&#x2F;143&#x2F;135</span><br><span class="line">2️⃣伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下；此刻的分红在投资收益率为9.56%；</span><br><span class="line"></span><br><span class="line">♥医药10%：计划40k,余量3k</span><br><span class="line">已持仓37k,其中恒瑞20k&#x2F;ETF17K</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣恒瑞按50倍市盈率20.07%净利润增长，卖点60（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">2️⃣300医药ETF计划0.42，买入7000个，卖点为0.7以上，对应300医药指数50倍以上的估值</span><br><span class="line">医药需要恒瑞和etf实现高低互换，高换低；</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>传音刷机</title>
+    <url>/posts/a1b2e86a/</url>
+    <content><![CDATA[<ol>
+<li>设置 -&gt; 开发者模式打开 oem unlock<br>输入 adb reboot bootloader</li>
+<li>进入fastboot模式输入 fastboot flashing unlock。按住音量上键确认unlock</li>
+<li>fastboot reboot 重启</li>
+<li>开机后,输入 adb root</li>
+<li>执行 adb disable-verity</li>
+<li>执行 adb reboot</li>
+<li>重启后 执行 adb root</li>
+<li>执行 adb remount</li>
+</ol>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>刷机</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>全局函数局部函数</title>
+    <url>/posts/ae3a85c8/</url>
+    <content><![CDATA[<h1 id="全局局部函数"><a href="#全局局部函数" class="headerlink" title="全局局部函数"></a>全局局部函数</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">全局函数：global</span><br><span class="line">局部函数：nonlocal</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>global</strong></p>
+<p><code>全局函数在模块py中生效；使用时需要先定义，在声明；一次声明，模块中全局使用，全局和局部不能是同一个变量； global a a=s</code></p>
+<p><strong>nonlocal</strong></p>
+<p><code>局部变量函数在模块中局部函数中生效；需要先声明，后定义成局部变量，一旦定义成局部变量就仅在该函数中生效，离开该函数就不生效，不能和全局变量为同一个变量 a=s nonlocal a</code></p>
+<p><a href="https://www.cnblogs.com/liyang93/p/6669874.html">参考</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>变量</tag>
+      </tags>
   </entry>
   <entry>
     <title>做点事</title>
@@ -713,43 +753,23 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
-    <title>传音刷机</title>
-    <url>/posts/a1b2e86a/</url>
-    <content><![CDATA[<ol>
-<li>设置 -&gt; 开发者模式打开 oem unlock<br>输入 adb reboot bootloader</li>
-<li>进入fastboot模式输入 fastboot flashing unlock。按住音量上键确认unlock</li>
-<li>fastboot reboot 重启</li>
-<li>开机后,输入 adb root</li>
-<li>执行 adb disable-verity</li>
-<li>执行 adb reboot</li>
-<li>重启后 执行 adb root</li>
-<li>执行 adb remount</li>
-</ol>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>刷机</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>全局函数局部函数</title>
-    <url>/posts/ae3a85c8/</url>
-    <content><![CDATA[<h1 id="全局局部函数"><a href="#全局局部函数" class="headerlink" title="全局局部函数"></a>全局局部函数</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">全局函数：global</span><br><span class="line">局部函数：nonlocal</span><br></pre></td></tr></table></figure>
+    <title>可变对象合并方法</title>
+    <url>/posts/def45bf2/</url>
+    <content><![CDATA[<h1 id="可变对象合并的方法"><a href="#可变对象合并的方法" class="headerlink" title="可变对象合并的方法"></a>可变对象合并的方法</h1><p>eg:list</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">+:合并</span><br><span class="line">+=：增加赋值</span><br><span class="line">append()：添加</span><br><span class="line">extend()：插入</span><br><span class="line"></span><br><span class="line">list=[1,2,3]</span><br><span class="line">l=[4]</span><br><span class="line">s=list+l</span><br><span class="line">s=list.append(l)</span><br><span class="line">s=list.extend(l)</span><br><span class="line">list+=l</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;list&#x27;</span>,list)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;l&#x27;</span>,l)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;s&#x27;</span>,s)</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
-<p><strong>global</strong></p>
-<p><code>全局函数在模块py中生效；使用时需要先定义，在声明；一次声明，模块中全局使用，全局和局部不能是同一个变量； global a a=s</code></p>
-<p><strong>nonlocal</strong></p>
-<p><code>局部变量函数在模块中局部函数中生效；需要先声明，后定义成局部变量，一旦定义成局部变量就仅在该函数中生效，离开该函数就不生效，不能和全局变量为同一个变量 a=s nonlocal a</code></p>
-<p><a href="https://www.cnblogs.com/liyang93/p/6669874.html">参考</a></p>
+<p><strong>+合并</strong></p>
+<p><code> 合并方法，是影响最小，速度最慢的方法；因为他不会改变原序列，会复制后生成一个新的序列    </code></p>
+<p><strong>append()</strong><br>    <code>    添加方法，会直接将对象添加到原序列末尾；会改变原序列    </code></p>
+<p><strong>extend()</strong><br>    <code>    插入方法，会将对象的元素添加到序列末尾，而不是对象，会改变原序列    </code></p>
+<p><strong>+=</strong><br>    <code>    增强赋值方法，类似于合并=；和extend()等效，效率比其低，会改变原序列    </code></p>
 ]]></content>
       <categories>
         <category>技术</category>
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>变量</tag>
+        <tag>序列</tag>
       </tags>
   </entry>
   <entry>
@@ -917,26 +937,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>可变对象合并方法</title>
-    <url>/posts/def45bf2/</url>
-    <content><![CDATA[<h1 id="可变对象合并的方法"><a href="#可变对象合并的方法" class="headerlink" title="可变对象合并的方法"></a>可变对象合并的方法</h1><p>eg:list</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">+:合并</span><br><span class="line">+=：增加赋值</span><br><span class="line">append()：添加</span><br><span class="line">extend()：插入</span><br><span class="line"></span><br><span class="line">list=[1,2,3]</span><br><span class="line">l=[4]</span><br><span class="line">s=list+l</span><br><span class="line">s=list.append(l)</span><br><span class="line">s=list.extend(l)</span><br><span class="line">list+=l</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;list&#x27;</span>,list)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;l&#x27;</span>,l)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;s&#x27;</span>,s)</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p><strong>+合并</strong></p>
-<p><code> 合并方法，是影响最小，速度最慢的方法；因为他不会改变原序列，会复制后生成一个新的序列    </code></p>
-<p><strong>append()</strong><br>    <code>    添加方法，会直接将对象添加到原序列末尾；会改变原序列    </code></p>
-<p><strong>extend()</strong><br>    <code>    插入方法，会将对象的元素添加到序列末尾，而不是对象，会改变原序列    </code></p>
-<p><strong>+=</strong><br>    <code>    增强赋值方法，类似于合并=；和extend()等效，效率比其低，会改变原序列    </code></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>序列</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>工作梳理</title>
     <url>/posts/8c69a8ec/</url>
     <content><![CDATA[<h1 id="工作梳理"><a href="#工作梳理" class="headerlink" title="工作梳理"></a>工作梳理</h1><ul>
@@ -1011,6 +1011,19 @@
       </tags>
   </entry>
   <entry>
+    <title>传易--性能测试</title>
+    <url>/posts/56a1ed73/</url>
+    <content><![CDATA[<p><a href="https://docs.qq.com/doc/DSWZnVGNka29qa1lJ">内部项目，需找我授权</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>性能</tag>
+        <tag>实战</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>广告--大数据模型测试</title>
     <url>/posts/d775e226/</url>
     <content><![CDATA[<p><code>模型是程序化广告的灵魂，决定着广告的点击和转化，直接影响收入；而模型由于复杂度高，标签/数据量大，是广告测试的难点，一般意义上，测试是不负责模型质量的，仅对模型中的一些定向/过滤逻辑做覆盖，模型有效性测试，模型工程师一般是通过灰度/ab测试来实现自测的，这种自我监督的实现方式有着明显缺陷，故本次对过往模型测试方面的记录，做下总结</code></p>
@@ -1035,19 +1048,6 @@
       <tags>
         <tag>广告</tag>
         <tag>模型</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>传易--性能测试</title>
-    <url>/posts/56a1ed73/</url>
-    <content><![CDATA[<p><a href="https://docs.qq.com/doc/DSWZnVGNka29qa1lJ">内部项目，需找我授权</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
-        <tag>实战</tag>
       </tags>
   </entry>
   <entry>
@@ -1140,6 +1140,170 @@
 <li><strong>目录</strong></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>稳定性治理</title>
+    <url>/posts/a30df9c8/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">概述，目的？</span><br><span class="line">怎么进行稳定性治理，稳定性治理的体系建设？</span><br><span class="line">稳定性治理的过程？</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>稳定性治理概述，目的？</strong></p>
+<p><code>稳定性是系统最核心的需求；稳定性包含最核心的，系统服务的稳定性和前端的稳定性；稳定性核心有两大快，一是系统稳定，在复杂的环境下能稳定运行；二是抛出异常能及时处理，降低异常带来的风险；本文的稳定性治理，主要考虑的是通过模仿异常环境下系统运行，及时发现问题，解决问题，提升系统的稳定性；</code></p>
+<p><strong>怎么进行稳定性治理，稳定性治理体系的建设？</strong></p>
+<p><code>稳定性治理，首要目标，是要确认稳定性的衡量指标；其次要具有构造仿真环境的能力，在复杂环境下要具有系统监控能力，同时整个体系要能实现自动化运行维护具有平台能力。</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">稳定性衡量指标？</span><br><span class="line">稳定性环境监控？</span><br><span class="line">稳定性测试策略？</span><br><span class="line">自动化稳定性平台建设？</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><em><strong>稳定性衡量指标?</strong></em><br><code>系统稳定；一般是指系统在定义的状态下稳定运行，且长时间不会出现异常状态,常见的异常如下：</code></p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">崩溃率</span><br><span class="line">anr</span><br><span class="line">内存泄露</span><br><span class="line">oom</span><br><span class="line">系统性能</span><br></pre></td></tr></table></figure>
+<ul>
+<li><em>崩溃率</em><br><code>崩溃是稳定性的最大对手；通常关注的崩溃是crash；关注崩溃率，一般关注日崩溃率和崩溃用户率； </code><ul>
+<li>日崩溃率=日崩溃次数/日打开总次数        合规标准：0.2%</li>
+<li>崩溃用户数=去重的崩溃用户数/日活跃用户数    合规标准：0.2%</li>
+</ul>
+</li>
+<li><em>anr</em><br><code>anr即(Application Not Response);常会直接暴露给用户，照成不好影响;</code></li>
+<li><em>内存泄露</em><br><code>系统占用的堆内存未及时释放或无法释放，从而导致占用的内存一直递增，从而导致环境资源不足;</code></li>
+<li><em>oom</em><br><code>app申请的内存超过最大内存的限制，系统不分配内存，导致程序崩溃;</code></li>
+<li><em>系统性能</em><br><code>指在不同场景下对系统或环境的资源消耗进行监控，常监控系统资源和消耗的资源;</code></li>
+</ul>
+</li>
+<li><p><em><strong>系统稳定性监控？</strong></em></p>
+<p>  <code>系统稳定，说明系统在全局环境下，都能长期稳定的运行；揭释了稳定性检测的核心的几个点，异常环境构造，稳定运行指标监控，长期稳定性；</code></p>
+<ul>
+<li><em>稳定性指标</em><br><code>本文的指标监控，仅对前端的相关的指标进行监控；后端服务的监控，有运维在做;</code><ul>
+<li><p>服务及时响应/且响应参数无误</p>
+<ul>
+<li>场景：如接口监控，特指对后端服务进行监控;</li>
+<li>指标：一般监控服务相关指标（如接口响应时间/参数准确性）,资源监控（cpu/内存/带宽/io），消耗资源（流量/电量）;</li>
+<li>方案：可通过仅触发服务的方式，仅对服务进行监控，如接口自动化；可通过前端触发服务来实现监控，如ui自动化实现接口覆盖；系统资源消耗可通过监控系统资源文件获取；系统监控可通过后端方案实现，如prometheus；</li>
+</ul>
+</li>
+<li><p>前端加载时间满足用户体验/呈现无误</p>
+<ul>
+<li>场景：触发前端场景，来实现对产品提供给用户的服务进行监控；</li>
+<li>指标：页面加载时间/页面UI测试/前端资源检测；</li>
+<li>方案：可通过UI自动化，UI遍历等方式实现；数据采集可通过获取activity的响应时间获取；UI测试可通过telescop植入性来实现；</li>
+</ul>
+</li>
+<li><p>前端稳定性</p>
+<ul>
+<li>场景：稳定性是最核心的指标，稳定指服务稳定不崩溃，不抛出异常；</li>
+<li>指标：<ul>
+<li>crash率：通过监控crash文件进行采集；</li>
+<li>anr率：通过监控anr文件进行采集；</li>
+<li>内存泄露：通过LeakCanary监控内存泄露,通过haha来解析hprf文件，来分析Java虚拟机的内存使用清空；</li>
+<li>hprf:hprof最初是由J2SE支持的一种二进制堆转储格式，hprof文件保存了当前java堆上所有的内存使用信息，能够完整的反映虚拟机当前的内存状态；</li>
+<li>oom：通过字节的tailor来进行监控；</li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzI1MzYzMjE0MQ==&mid=2247487203&idx=1&sn=182584b69910c843ae95f60e74127249&chksm=e9d0c501dea74c178e16f95a2ffc5007c5dbca89a02d56895ed9b05883cf0562da689ac6146b&scene=178&cur_album_id=1590413073616519171#rd">oom问题监控</a></li>
+<li>方案<ul>
+<li>稳定性在不同的场景下有着不同的表现；可以通过这些方式来实现场景的覆盖；ui遍历/暴力回放/monkey测试/流量回放；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>其他监控</p>
+<ul>
+<li>场景：除了上述指标外，我们还会对以下指标进行监控，以评估对系统的影响;</li>
+<li>指标：<ul>
+<li>UI资源监控：图片过大/图片持有/过度绘制/资源泄露/过度布局</li>
+<li>线程阻塞</li>
+<li>文件创建</li>
+<li>线程创建</li>
+<li>主线程io</li>
+<li>启动性能</li>
+</ul>
+</li>
+<li>方案：使用telescop的植入性和监控能力来监控；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em><strong>稳定性测试策略？</strong></em><br><code>稳定性测试时，有几个核心待解决的问题；如何解决真实环境下各种复杂环境的覆盖？如何保证效率，实现低投入高产出？如何保证采集的指标和问题场景结合，快速复现？</code></p>
+<ul>
+<li><p><em>如何保证覆盖率？覆盖率是如何计算的？</em><br><code>稳定性治理，在复杂环境下要保证全覆盖时不可能实现的工作；因此我们考虑实现一种可迭代优化的机制保证覆盖，保障系统的稳定，通常我们考虑系统覆盖时，从页面覆盖和代码逻辑的覆盖来实现;</code></p>
+<ul>
+<li>覆盖率指标：<ul>
+<li>页面场景覆盖：activity覆盖70%；覆盖所有的一级页面和所有的核心二级页面以及所有的主流程相关的三四级页面；覆盖所有的核心业务流程；</li>
+<li>代码行覆盖：可通过白盒走查或者代码检测工具；单测实现代码的覆盖；覆盖所有核心流程和代码的核心处理逻辑；</li>
+</ul>
+</li>
+<li>覆盖率保障策略：<ul>
+<li>终端覆盖：设备信息采集，通过埋点采集线上设备数据；至少要保证top10的设备能实现覆盖；保障top5系统版本能实现覆盖；top5-10的os版本能实现覆盖；</li>
+<li>预装版本：最好能实现需预装的机型的覆盖；否则至少要保证覆盖前一个机型，相同配置的版本的设备不低于10台；</li>
+<li>需要有问题统计/上报机制；能收集线上问题进行统计归纳，方便策略的设计和混度工程的实现；</li>
+<li>覆盖所有的核心链路，及70%的页面（所有一级页面，所有核心二级页面，所有核心三级页面）</li>
+<li>时间：看具体的策略，monkey一般不低于一天，也就是8小时；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em>测试方式？各种方式的优缺点？</em></p>
+<ul>
+<li><p>UI遍历测试<br>  <code>UI遍历，指利用爬虫和过滤策略，实现从头遍历所有页面；</code></p>
+<ul>
+<li>优点：实现所有流程/页面的覆盖，能保证较高的覆盖率；</li>
+<li>缺点：耗时太久，无法模仿真实的用户操作，对测试版本或者测试环境有要求；很难构造高压力的场景；</li>
+<li>方案：AppCrawler实现；</li>
+</ul>
+</li>
+<li><p>暴力回放<br><code>暴力回放，指通过频繁对某些场景进行循环操作，来实现对核心场景的覆盖，此策略传音要求必须要做;</code></p>
+<ul>
+<li>优点：可对核心场景进行大量覆盖，保证核心链路无误；</li>
+<li>缺点：能覆盖的场景有限，耗时较长；较难覆盖到特殊场景；</li>
+<li>场景：通过UI自动化脚本实现循环遍历；</li>
+</ul>
+</li>
+<li><p>monkey随机遍历<br><code>monkey是Android自带的稳定性治理的工具，也是稳定性治理的核心方式，能模仿用户进行随机性的点击操作；</code></p>
+<ul>
+<li>优点：实现简单，有较强的随机性，能发现一些特殊问题；</li>
+<li>缺点：过于随机，不能保证覆盖率，无法模仿真实用户的操作；</li>
+<li>方案：针对monkey过于随机的缺陷，为保证效率，可对monkey的策略进行定制化，具体实现如下：<ul>
+<li>通过黑名单策略，跳过低频操作（如新手引导、权限类操作、关闭输入法，屏蔽其他应用的activity减少无效操作）；</li>
+<li>通过白名单策略，定制执行的activity和app,减少无效操作；</li>
+<li>定制事件比例，提高测试效率；</li>
+<li>执行时间，一般不低于一天，也就是8小时；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>线上流量回放<br><code>线上流量回放，指利用线上的日志数据记录的用户行为，作为源数据来建模，模仿用户操作;</code></p>
+<ul>
+<li>优点：覆盖大量的真实用户操作，case有效性高，针对性强；</li>
+<li>缺点：需要利用大量的线上日志，对系统的要求高；利用线上日志进行回放，实现难度大；利用线上用户数据，会存在隐私安全问题；</li>
+<li>方案：可使用头条的智能化monkey工具，fastbot;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em>具体实现，如何保证效率？</em><br><code>结合上诉几种方案的优缺点，可知，最好能四种方案结合着使用；</code></p>
+<ul>
+<li>新发功能版本：最好先执行一遍UI遍历（冒烟）/monkey遍历（每日）/流量回放（bug修复版本）</li>
+<li>RC版本：可执行流量回放/暴力回放</li>
+<li>预装版本：可执行流量回放/暴力回放</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em><strong>自动化稳定性平台的建设</strong></em></p>
+</li>
+</ul>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/L7RTCzqQ-1GbNhMNHONdRw"><strong>阿里稳定性治理</strong></a></li>
+<li><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1590413073616519171&scene=173&from_msgid=2247487203&from_itemidx=1&count=3&nolastread=1#wechat_redirect"><strong>头条稳定性治理系列</strong></a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>稳定性</tag>
+        <tag>头条</tag>
+        <tag>阿里</tag>
+      </tags>
   </entry>
   <entry>
     <title>稳定性治理--智能遍历</title>
@@ -1310,183 +1474,6 @@
       </tags>
   </entry>
   <entry>
-    <title>稳定性治理-暴力回放</title>
-    <url>/posts/81de0e43/</url>
-    <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
-<h4 id="覆盖场景"><a href="#覆盖场景" class="headerlink" title="覆盖场景"></a>覆盖场景</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">music首页，点击歌单播放按钮播放，然后息屏进入后台，10s后切换回前台；</span><br><span class="line">music首页，点开播放列表，然后点击music播放音乐，然后关闭播放列表，然后切换到后台，10s后切换回前台；</span><br><span class="line">music首页，进入歌单，点击全部播放，点击全部下载，然后返回首页，上下滑动一屏，然后切换回后台，10s后切换回前台；</span><br><span class="line">music首页，点击头像登录，退出，切换到后台，10s后切换回前台；</span><br><span class="line">treding首页，点击任意music播放，切换到后台，10s后回到前台，关闭播放详情页；</span><br><span class="line">首页，滑动到treding页，上下滑动一屏；然后向左滑动一屏，上下滑动一屏，然后向左滑动一屏，上下滑动一屏,然后向左滑动一屏，上下滑动一屏,然后切换到后台，停留10s;然后点击导航页到library页，然后点击导航页到search页，然后点击导航页到music页；</span><br><span class="line">搜索页，搜索music，搜索结果页左右滚动一屏；点击结果页播放，然后切换到后台休眠10s,在切换回前台;</span><br><span class="line">首页，点击导航页进入library页；点击进入喜欢的music页，点击全部播放；然后切换到后台，停留10s，在切换回前台，退出music页，切换回首页；</span><br><span class="line">首页，切换到buzz页；上下滑动两屏，点击buzz关注按钮，buzz点赞，buzz评论，点击查看buzz详情，然后回退到buzz页，然后在切换到后台，休眠10s，在切换回前台；</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>稳定性</tag>
-        <tag>暴力回放</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>稳定性治理</title>
-    <url>/posts/a30df9c8/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">概述，目的？</span><br><span class="line">怎么进行稳定性治理，稳定性治理的体系建设？</span><br><span class="line">稳定性治理的过程？</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p><strong>稳定性治理概述，目的？</strong></p>
-<p><code>稳定性是系统最核心的需求；稳定性包含最核心的，系统服务的稳定性和前端的稳定性；稳定性核心有两大快，一是系统稳定，在复杂的环境下能稳定运行；二是抛出异常能及时处理，降低异常带来的风险；本文的稳定性治理，主要考虑的是通过模仿异常环境下系统运行，及时发现问题，解决问题，提升系统的稳定性；</code></p>
-<p><strong>怎么进行稳定性治理，稳定性治理体系的建设？</strong></p>
-<p><code>稳定性治理，首要目标，是要确认稳定性的衡量指标；其次要具有构造仿真环境的能力，在复杂环境下要具有系统监控能力，同时整个体系要能实现自动化运行维护具有平台能力。</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">稳定性衡量指标？</span><br><span class="line">稳定性环境监控？</span><br><span class="line">稳定性测试策略？</span><br><span class="line">自动化稳定性平台建设？</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><em><strong>稳定性衡量指标?</strong></em><br><code>系统稳定；一般是指系统在定义的状态下稳定运行，且长时间不会出现异常状态,常见的异常如下：</code></p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">崩溃率</span><br><span class="line">anr</span><br><span class="line">内存泄露</span><br><span class="line">oom</span><br><span class="line">系统性能</span><br></pre></td></tr></table></figure>
-<ul>
-<li><em>崩溃率</em><br><code>崩溃是稳定性的最大对手；通常关注的崩溃是crash；关注崩溃率，一般关注日崩溃率和崩溃用户率； </code><ul>
-<li>日崩溃率=日崩溃次数/日打开总次数        合规标准：0.2%</li>
-<li>崩溃用户数=去重的崩溃用户数/日活跃用户数    合规标准：0.2%</li>
-</ul>
-</li>
-<li><em>anr</em><br><code>anr即(Application Not Response);常会直接暴露给用户，照成不好影响;</code></li>
-<li><em>内存泄露</em><br><code>系统占用的堆内存未及时释放或无法释放，从而导致占用的内存一直递增，从而导致环境资源不足;</code></li>
-<li><em>oom</em><br><code>app申请的内存超过最大内存的限制，系统不分配内存，导致程序崩溃;</code></li>
-<li><em>系统性能</em><br><code>指在不同场景下对系统或环境的资源消耗进行监控，常监控系统资源和消耗的资源;</code></li>
-</ul>
-</li>
-<li><p><em><strong>系统稳定性监控？</strong></em></p>
-<p>  <code>系统稳定，说明系统在全局环境下，都能长期稳定的运行；揭释了稳定性检测的核心的几个点，异常环境构造，稳定运行指标监控，长期稳定性；</code></p>
-<ul>
-<li><em>稳定性指标</em><br><code>本文的指标监控，仅对前端的相关的指标进行监控；后端服务的监控，有运维在做;</code><ul>
-<li><p>服务及时响应/且响应参数无误</p>
-<ul>
-<li>场景：如接口监控，特指对后端服务进行监控;</li>
-<li>指标：一般监控服务相关指标（如接口响应时间/参数准确性）,资源监控（cpu/内存/带宽/io），消耗资源（流量/电量）;</li>
-<li>方案：可通过仅触发服务的方式，仅对服务进行监控，如接口自动化；可通过前端触发服务来实现监控，如ui自动化实现接口覆盖；系统资源消耗可通过监控系统资源文件获取；系统监控可通过后端方案实现，如prometheus；</li>
-</ul>
-</li>
-<li><p>前端加载时间满足用户体验/呈现无误</p>
-<ul>
-<li>场景：触发前端场景，来实现对产品提供给用户的服务进行监控；</li>
-<li>指标：页面加载时间/页面UI测试/前端资源检测；</li>
-<li>方案：可通过UI自动化，UI遍历等方式实现；数据采集可通过获取activity的响应时间获取；UI测试可通过telescop植入性来实现；</li>
-</ul>
-</li>
-<li><p>前端稳定性</p>
-<ul>
-<li>场景：稳定性是最核心的指标，稳定指服务稳定不崩溃，不抛出异常；</li>
-<li>指标：<ul>
-<li>crash率：通过监控crash文件进行采集；</li>
-<li>anr率：通过监控anr文件进行采集；</li>
-<li>内存泄露：通过LeakCanary监控内存泄露,通过haha来解析hprf文件，来分析Java虚拟机的内存使用清空；</li>
-<li>hprf:hprof最初是由J2SE支持的一种二进制堆转储格式，hprof文件保存了当前java堆上所有的内存使用信息，能够完整的反映虚拟机当前的内存状态；</li>
-<li>oom：通过字节的tailor来进行监控；</li>
-<li><a href="https://mp.weixin.qq.com/s?__biz=MzI1MzYzMjE0MQ==&mid=2247487203&idx=1&sn=182584b69910c843ae95f60e74127249&chksm=e9d0c501dea74c178e16f95a2ffc5007c5dbca89a02d56895ed9b05883cf0562da689ac6146b&scene=178&cur_album_id=1590413073616519171#rd">oom问题监控</a></li>
-<li>方案<ul>
-<li>稳定性在不同的场景下有着不同的表现；可以通过这些方式来实现场景的覆盖；ui遍历/暴力回放/monkey测试/流量回放；</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>其他监控</p>
-<ul>
-<li>场景：除了上述指标外，我们还会对以下指标进行监控，以评估对系统的影响;</li>
-<li>指标：<ul>
-<li>UI资源监控：图片过大/图片持有/过度绘制/资源泄露/过度布局</li>
-<li>线程阻塞</li>
-<li>文件创建</li>
-<li>线程创建</li>
-<li>主线程io</li>
-<li>启动性能</li>
-</ul>
-</li>
-<li>方案：使用telescop的植入性和监控能力来监控；</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em><strong>稳定性测试策略？</strong></em><br><code>稳定性测试时，有几个核心待解决的问题；如何解决真实环境下各种复杂环境的覆盖？如何保证效率，实现低投入高产出？如何保证采集的指标和问题场景结合，快速复现？</code></p>
-<ul>
-<li><p><em>如何保证覆盖率？覆盖率是如何计算的？</em><br><code>稳定性治理，在复杂环境下要保证全覆盖时不可能实现的工作；因此我们考虑实现一种可迭代优化的机制保证覆盖，保障系统的稳定，通常我们考虑系统覆盖时，从页面覆盖和代码逻辑的覆盖来实现;</code></p>
-<ul>
-<li>覆盖率指标：<ul>
-<li>页面场景覆盖：activity覆盖70%；覆盖所有的一级页面和所有的核心二级页面以及所有的主流程相关的三四级页面；覆盖所有的核心业务流程；</li>
-<li>代码行覆盖：可通过白盒走查或者代码检测工具；单测实现代码的覆盖；覆盖所有核心流程和代码的核心处理逻辑；</li>
-</ul>
-</li>
-<li>覆盖率保障策略：<ul>
-<li>终端覆盖：设备信息采集，通过埋点采集线上设备数据；至少要保证top10的设备能实现覆盖；保障top5系统版本能实现覆盖；top5-10的os版本能实现覆盖；</li>
-<li>预装版本：最好能实现需预装的机型的覆盖；否则至少要保证覆盖前一个机型，相同配置的版本的设备不低于10台；</li>
-<li>需要有问题统计/上报机制；能收集线上问题进行统计归纳，方便策略的设计和混度工程的实现；</li>
-<li>覆盖所有的核心链路，及70%的页面（所有一级页面，所有核心二级页面，所有核心三级页面）</li>
-<li>时间：看具体的策略，monkey一般不低于一天，也就是8小时；</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em>测试方式？各种方式的优缺点？</em></p>
-<ul>
-<li><p>UI遍历测试<br>  <code>UI遍历，指利用爬虫和过滤策略，实现从头遍历所有页面；</code></p>
-<ul>
-<li>优点：实现所有流程/页面的覆盖，能保证较高的覆盖率；</li>
-<li>缺点：耗时太久，无法模仿真实的用户操作，对测试版本或者测试环境有要求；很难构造高压力的场景；</li>
-<li>方案：AppCrawler实现；</li>
-</ul>
-</li>
-<li><p>暴力回放<br><code>暴力回放，指通过频繁对某些场景进行循环操作，来实现对核心场景的覆盖，此策略传音要求必须要做;</code></p>
-<ul>
-<li>优点：可对核心场景进行大量覆盖，保证核心链路无误；</li>
-<li>缺点：能覆盖的场景有限，耗时较长；较难覆盖到特殊场景；</li>
-<li>场景：通过UI自动化脚本实现循环遍历；</li>
-</ul>
-</li>
-<li><p>monkey随机遍历<br><code>monkey是Android自带的稳定性治理的工具，也是稳定性治理的核心方式，能模仿用户进行随机性的点击操作；</code></p>
-<ul>
-<li>优点：实现简单，有较强的随机性，能发现一些特殊问题；</li>
-<li>缺点：过于随机，不能保证覆盖率，无法模仿真实用户的操作；</li>
-<li>方案：针对monkey过于随机的缺陷，为保证效率，可对monkey的策略进行定制化，具体实现如下：<ul>
-<li>通过黑名单策略，跳过低频操作（如新手引导、权限类操作、关闭输入法，屏蔽其他应用的activity减少无效操作）；</li>
-<li>通过白名单策略，定制执行的activity和app,减少无效操作；</li>
-<li>定制事件比例，提高测试效率；</li>
-<li>执行时间，一般不低于一天，也就是8小时；</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>线上流量回放<br><code>线上流量回放，指利用线上的日志数据记录的用户行为，作为源数据来建模，模仿用户操作;</code></p>
-<ul>
-<li>优点：覆盖大量的真实用户操作，case有效性高，针对性强；</li>
-<li>缺点：需要利用大量的线上日志，对系统的要求高；利用线上日志进行回放，实现难度大；利用线上用户数据，会存在隐私安全问题；</li>
-<li>方案：可使用头条的智能化monkey工具，fastbot;</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em>具体实现，如何保证效率？</em><br><code>结合上诉几种方案的优缺点，可知，最好能四种方案结合着使用；</code></p>
-<ul>
-<li>新发功能版本：最好先执行一遍UI遍历（冒烟）/monkey遍历（每日）/流量回放（bug修复版本）</li>
-<li>RC版本：可执行流量回放/暴力回放</li>
-<li>预装版本：可执行流量回放/暴力回放</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em><strong>自动化稳定性平台的建设</strong></em></p>
-</li>
-</ul>
-<ul>
-<li><a href="https://mp.weixin.qq.com/s/L7RTCzqQ-1GbNhMNHONdRw"><strong>阿里稳定性治理</strong></a></li>
-<li><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1590413073616519171&scene=173&from_msgid=2247487203&from_itemidx=1&count=3&nolastread=1#wechat_redirect"><strong>头条稳定性治理系列</strong></a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>稳定性</tag>
-        <tag>头条</tag>
-        <tag>阿里</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>类对象/实例对象/类方法/实例方法/静态方法</title>
     <url>/posts/93899372/</url>
     <content><![CDATA[<ul>
@@ -1538,6 +1525,19 @@
       </categories>
       <tags>
         <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>稳定性治理-暴力回放</title>
+    <url>/posts/81de0e43/</url>
+    <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
+<h4 id="覆盖场景"><a href="#覆盖场景" class="headerlink" title="覆盖场景"></a>覆盖场景</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">music首页，点击歌单播放按钮播放，然后息屏进入后台，10s后切换回前台；</span><br><span class="line">music首页，点开播放列表，然后点击music播放音乐，然后关闭播放列表，然后切换到后台，10s后切换回前台；</span><br><span class="line">music首页，进入歌单，点击全部播放，点击全部下载，然后返回首页，上下滑动一屏，然后切换回后台，10s后切换回前台；</span><br><span class="line">music首页，点击头像登录，退出，切换到后台，10s后切换回前台；</span><br><span class="line">treding首页，点击任意music播放，切换到后台，10s后回到前台，关闭播放详情页；</span><br><span class="line">首页，滑动到treding页，上下滑动一屏；然后向左滑动一屏，上下滑动一屏，然后向左滑动一屏，上下滑动一屏,然后向左滑动一屏，上下滑动一屏,然后切换到后台，停留10s;然后点击导航页到library页，然后点击导航页到search页，然后点击导航页到music页；</span><br><span class="line">搜索页，搜索music，搜索结果页左右滚动一屏；点击结果页播放，然后切换到后台休眠10s,在切换回前台;</span><br><span class="line">首页，点击导航页进入library页；点击进入喜欢的music页，点击全部播放；然后切换到后台，停留10s，在切换回前台，退出music页，切换回首页；</span><br><span class="line">首页，切换到buzz页；上下滑动两屏，点击buzz关注按钮，buzz点赞，buzz评论，点击查看buzz详情，然后回退到buzz页，然后在切换到后台，休眠10s，在切换回前台；</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>稳定性</tag>
+        <tag>暴力回放</tag>
       </tags>
   </entry>
   <entry>
@@ -1801,6 +1801,14 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">用一些快速的，并不总是有效果的测试来刺激你的执行（这些测试来自 Kaner&#x2F;Bach 等.);</span><br><span class="line">鞋子测试——找到一个输入字段，将光标移到它上，将鞋子放在键盘上，然后去吃午饭;</span><br><span class="line">边界测试——测试边界值因为边界的错误编码是一个常见的错误。</span><br><span class="line">Whittaker 攻击</span><br><span class="line">  输入：强制错误消息、默认值、浏览数据、溢出缓冲区、查找交互、重复多次。</span><br><span class="line">  输出：强制不同、无效、属性更改、屏幕刷新。探索存储的数据和计算。填充或损坏文件系统；无效&#x2F;不可访问的文件。</span><br><span class="line">干扰测试——取消、暂停、交换、中止、后退&#x2F;下一步、竞争、删除、注销。</span><br><span class="line">跟踪最近的变化——意外的副作用。</span><br><span class="line">探索数据关系——利用依赖关系，跟踪数据，干扰，删除。</span><br><span class="line">变化之旅——尽可能在各个维度上变化;</span><br><span class="line">复杂度之旅——查找最复杂的功能和数据，创建复杂的文件。</span><br><span class="line">示例数据之旅——尽可能使用任何示例数据。越复杂越好。</span><br><span class="line">持续使用 - 测试时，不要重置系统。打开窗口和文件。让磁盘和内存使用量增加。你希望随着时间的推移，这个系统会自己打结。</span><br><span class="line">调整 - 将某些参数设置为某个值，然后在以后的任何时间将该值重置为其他值，而不重置或重新创建包含的文档或数据结构。</span><br><span class="line">Dog Pilling——一次运行更多进程；同时存在更多状态。</span><br><span class="line">减弱——当系统处于适当的状态时开始使用一个函数，然后将状态部分更改为不适当的状态。</span><br><span class="line">错误消息处理——使错误消息发生。重点测试错误被忽略后的情况。</span><br><span class="line">点击狂热——测试不仅仅是 “敲击键盘”，但这句话并非空穴来风。试着敲击键盘。试着到处点击。</span><br><span class="line">多个实例——同时运行应用程序的许多实例。打开相同的文件。</span><br><span class="line">功能交互——发现各个功能交互或共享数据的位置。寻找任何相互依赖的关系。浏览他们。给他们压力。</span><br><span class="line">便宜的工具！–了解如何使用 InCtrl5, Filemon, Regmon, AppVerifier, Perfmon, Task Manager, Threadhijacker, Zed Attack Proxy, Color Oracle（所有这些都是免费的）</span><br><span class="line">资源匮乏——逐渐降低内存和其他资源，直到产品优雅得降级或不优雅得崩溃。</span><br><span class="line">执行 “作者说”——查看联机帮助或用户手册，找到有关如何执行一些有趣活动的说明。做那些动作。然后即兴表演。</span><br><span class="line">疯狂配置——在安装产品之前或之后以非标准或非默认方式修改 O&#x2F;S 配置。</span><br><span class="line">摸索——找到产品中产生大量数据或执行某些操作非常快的方面;</span><br></pre></td></tr></table></figure>
 <h2 id="归纳并标准化"><a href="#归纳并标准化" class="headerlink" title="归纳并标准化"></a><strong>归纳并标准化</strong></h2><p><code>以上的过程，就是一个完整的‘测试过程’；其中每一步都是独立的，但都有其价值；无论如何，测试本质都是基于‘上下文’和‘风险’的活动；获取信息-分析-决策-反馈-优化，永远贯穿质量活动的始终，本节的目的是让较小的单功能/独立的功能，测试活动，能实现标准作业；这个想法的依据是由于，任何产品功能都是大同小异的，都是由相似的各个小功能组成的，本节考虑输出各小功能的checklist来实现标准作业</code><br><img src="/text_image/%E5%8F%8D%E9%A6%88%E6%9C%BA%E5%88%B6.png" alt="alt text"><br><strong>看到这是不是有种感觉，测试工作流程，越来越像工厂的流水线；这其实就是互联网的发展方向，未来估计行业的发展趋势也会和制造业趋同；不知是行业的幸运，还是个人的不幸！！！</strong></p>
 ]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>实战</tag>
+        <tag>质量体系</tag>
+        <tag>测试设计</tag>
+      </tags>
   </entry>
   <entry>
     <title>质量保障体系--2023/07/10</title>
