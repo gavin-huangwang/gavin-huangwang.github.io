@@ -67,6 +67,150 @@
       </tags>
   </entry>
   <entry>
+    <title>SOLOPI使用教程</title>
+    <url>/posts/49e140/</url>
+    <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<ul>
+<li><p><em><strong>介绍</strong></em></p>
+<p>  <code>solopi是支付宝团队研发的ui自动化工具;支持UI录制回放，录制脚本的编辑/扩展/转换成appium脚本/录制脚本支持分发到其他的设备执行；同时还支持性能测试和一机多控，执行采集各种性能数据，同时支持通过一台设备控制多台设备的行为；</code></p>
+</li>
+<li><p><em><strong>使用指南</strong></em></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">环境准备</span><br><span class="line">app配置</span><br><span class="line">录制</span><br><span class="line">回放</span><br><span class="line">性能测试</span><br><span class="line">一机多控</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>环境准备</strong></p>
+<ul>
+<li><p><em>下载配置Androidsdk</em></p>
+<ul>
+<li>地址:<a href="https://developer.android.com/studio/releases/platform-tools#downloads">https://developer.android.com/studio/releases/platform-tools#downloads</a></li>
+<li>操作：下载安装完Android调试工具后，在下载对应系统版本的 SDK Platform Tools，配置好环境变量，注意win10以上系统环境变量配置即生效，低版本需要重启pc才能生效；</li>
+</ul>
+</li>
+<li><p><em>给手机授权</em></p>
+<ul>
+<li>操作：进入开发者模式，并授权usb调试权限；</li>
+</ul>
+</li>
+<li><p><em>检测环境并连接wifi</em></p>
+<ul>
+<li>操作：通过adb devices命令检测，同时要连接wifi;</li>
+</ul>
+</li>
+<li><p><em>建立连接</em></p>
+<ul>
+<li>操作：通过pc的cmd启动服务,输入（adb tcpip 5555）</li>
+</ul>
+</li>
+<li><p><em>下载solopi的apk</em></p>
+<ul>
+<li>地址：<a href="https://github.com/alipay/SoloPi/releases/download/v0.11.2/SoloPi_0.11.2.apk">apk点击下载</a></li>
+<li>操作：下载安装后，通过配置授权</li>
+<li>环境配置：<a href="https://github.com/alipay/SoloPi/wiki/FirstUse">地址跳转参考内容</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>app配置</strong></p>
+<p>  <code>按需配置，一般不需要进行配置；可参考上方的环境配置</code></p>
+</li>
+<li><p><strong>录制/回放</strong></p>
+<ul>
+<li><a href="https://github.com/alipay/SoloPi/wiki/RecordCase"><em>官方教程</em></a></li>
+<li>录制：录制支持直接对收到操作进行录制，且录制的脚本支持编辑/扩展/保存/导入等操作，支持各类操作和断言，支持图像识别，简单方便；</li>
+<li>回放：回放支持单脚本回放，支持批量回放，支持重复播放；</li>
+<li>优点：操作简单，可扩展编辑定制策略，可同步到其他设备，可重复回放支持暴力遍历；</li>
+<li>缺点：不支持持续集成，需要手动触发；</li>
+</ul>
+</li>
+<li><p><strong>性能测试</strong></p>
+<ul>
+<li><a href="https://github.com/alipay/SoloPi/wiki/Performance"><em>官方教程</em></a></li>
+<li>操作：性能测试时，直接勾选需要监控的性能指标，不进行录制则可以实时查看；进行录制时，点击录制按钮开始录制，录制结束后点击录制结束按钮，录制的性能数据会存储下来，支持图表分析，可同时存储多份性能数据；</li>
+<li>优点：支持实时查看场景的性能，可和业务测试结合方便简单；支持性能录制，可和UI自动化结合，查看各场景的性能变化和差异；</li>
+<li>缺点：不支持续集成，利用脚本进行回放时不支持性能监控；</li>
+</ul>
+</li>
+<li><p><strong>一机多控</strong></p>
+<ul>
+<li>[<em>官方教程</em>]</li>
+<li>操作：多台设备上同时安装solopi和待测APP；做好配置和授权操作，同时主机（控制机）选中一机多控，选中为主机；其他设备点击一机多控，选中为从机；然后用主机扫码录入从机，然后在主机点击建立主从机的连接，然后主机点击录屏按钮，开始进行一机多控操作；原理是利用solopi的录屏回放功能，主机录屏，从机回放；</li>
+<li>优点：可以用一台机器，控制多台设备操作，能有效的覆盖兼容性测试；</li>
+<li>缺点：不支持ios系统；由于是先录制，在回放，因此所有设备都需要有网络，且必须是同一局域网，且存在延时；不支持批量操作时，同时监控性能数据；</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><em><strong>和业务结合</strong></em></p>
+<p>  <code>和业务结合使用前，需要先梳理清楚solopi的优缺点：</code></p>
+<p>  优点：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">支持录制UI自动化，且录制的脚本支持编辑自定义，且无环境依赖；</span><br><span class="line">录制的脚本可以导出在任意设备上回放，或者转换成appium脚本；</span><br><span class="line">支持回放管理，支持批量回放和重复回放；</span><br><span class="line">支持性能测试，实时监控APP性能和录制APP的性能；</span><br><span class="line">支持一机多控，可同时控制多台设备；</span><br></pre></td></tr></table></figure>
+
+<p>  缺点：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">不支持iOS设备，仅支持Android设备；</span><br><span class="line">工具是一款纯功能测试辅助软件，不支持持续集成；</span><br><span class="line">功能过于离散，几个功能不能结合在一起使用；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>和业务结合：</strong></p>
+<ul>
+<li><p><em>rc验收阶段：</em><br><code>建议功能测试完毕且无误后，最后在rc验收一遍，主流程，验收时进行功能&quot;录制&quot;,录制的脚本可定期回放/开发了相关功能时进行回放/也可以通过Jenkins触发回放;</code></p>
+</li>
+<li><p><em>灰度/线上验收阶段：</em><br><code>建议测试进行线上验收时，进行录制，录制的脚本，可通过扩展进行定期回放；</code></p>
+</li>
+<li><p><em>冒烟/功能测试/rc验收阶段：</em><br><code>建议以上阶段，进行测试验收时，打开性能测试监控，观察功能场景有没用性能问题；</code></p>
+</li>
+<li><p><em>冒烟/兼容性测试阶段：</em><br><code>可以使用一机多控功能，进行兼容性测试；但此功能对控制的终端有要求，最好有固定的兼容环境；</code></p>
+</li>
+<li><p><em>稳定性治理/预装版本暴力回放：</em><br><code>使用重复回放功能进行暴力回放；</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em><strong>下一步：</strong></em></p>
+</li>
+</ul>
+<p><a href="https://github.com/alipay/SoloPi"><em>Solopi github</em>_</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>ui自动化</tag>
+        <tag>稳定性</tag>
+        <tag>前端性能</tag>
+        <tag>solopi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UI自动化基础--微软</title>
+    <url>/posts/d1646a55/</url>
+    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>UI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UI自动化框架说明</title>
+    <url>/posts/411091fa/</url>
+    <content><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`
+</code></pre>
+<p>___ 大纲 ___</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">框架的整体结构</span><br><span class="line">代码模块的结构，文件说明</span><br><span class="line">框架的执行过程</span><br><span class="line">框架优化&#x2F;改动以适应我们产品</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<p>___ 框架整体结构 ___<br><img src="/text_image/ui%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%B6%E6%9E%84.png" alt="alt_text"></p>
+<p><code>框架整体构成由五部分构成；分别是runner(入口)/TestCase(控制层)/PageObject(逻辑层)/日志文件/yaml配置模块/报告模块 </code></p>
+<p>___ runner(入口) ___</p>
+<p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
     <title>UI自动化元素定位</title>
     <url>/posts/2e4c0062/</url>
     <content><![CDATA[<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">APPIUM元素定位原理</span><br><span class="line">常见的元素定位方式</span><br><span class="line">元素定位技巧/辅助工具</span><br></pre></td></tr></table></figure>
@@ -213,150 +357,6 @@
       </tags>
   </entry>
   <entry>
-    <title>UI自动化基础--微软</title>
-    <url>/posts/d1646a55/</url>
-    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>UI</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SOLOPI使用教程</title>
-    <url>/posts/49e140/</url>
-    <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<ul>
-<li><p><em><strong>介绍</strong></em></p>
-<p>  <code>solopi是支付宝团队研发的ui自动化工具;支持UI录制回放，录制脚本的编辑/扩展/转换成appium脚本/录制脚本支持分发到其他的设备执行；同时还支持性能测试和一机多控，执行采集各种性能数据，同时支持通过一台设备控制多台设备的行为；</code></p>
-</li>
-<li><p><em><strong>使用指南</strong></em></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">环境准备</span><br><span class="line">app配置</span><br><span class="line">录制</span><br><span class="line">回放</span><br><span class="line">性能测试</span><br><span class="line">一机多控</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>环境准备</strong></p>
-<ul>
-<li><p><em>下载配置Androidsdk</em></p>
-<ul>
-<li>地址:<a href="https://developer.android.com/studio/releases/platform-tools#downloads">https://developer.android.com/studio/releases/platform-tools#downloads</a></li>
-<li>操作：下载安装完Android调试工具后，在下载对应系统版本的 SDK Platform Tools，配置好环境变量，注意win10以上系统环境变量配置即生效，低版本需要重启pc才能生效；</li>
-</ul>
-</li>
-<li><p><em>给手机授权</em></p>
-<ul>
-<li>操作：进入开发者模式，并授权usb调试权限；</li>
-</ul>
-</li>
-<li><p><em>检测环境并连接wifi</em></p>
-<ul>
-<li>操作：通过adb devices命令检测，同时要连接wifi;</li>
-</ul>
-</li>
-<li><p><em>建立连接</em></p>
-<ul>
-<li>操作：通过pc的cmd启动服务,输入（adb tcpip 5555）</li>
-</ul>
-</li>
-<li><p><em>下载solopi的apk</em></p>
-<ul>
-<li>地址：<a href="https://github.com/alipay/SoloPi/releases/download/v0.11.2/SoloPi_0.11.2.apk">apk点击下载</a></li>
-<li>操作：下载安装后，通过配置授权</li>
-<li>环境配置：<a href="https://github.com/alipay/SoloPi/wiki/FirstUse">地址跳转参考内容</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>app配置</strong></p>
-<p>  <code>按需配置，一般不需要进行配置；可参考上方的环境配置</code></p>
-</li>
-<li><p><strong>录制/回放</strong></p>
-<ul>
-<li><a href="https://github.com/alipay/SoloPi/wiki/RecordCase"><em>官方教程</em></a></li>
-<li>录制：录制支持直接对收到操作进行录制，且录制的脚本支持编辑/扩展/保存/导入等操作，支持各类操作和断言，支持图像识别，简单方便；</li>
-<li>回放：回放支持单脚本回放，支持批量回放，支持重复播放；</li>
-<li>优点：操作简单，可扩展编辑定制策略，可同步到其他设备，可重复回放支持暴力遍历；</li>
-<li>缺点：不支持持续集成，需要手动触发；</li>
-</ul>
-</li>
-<li><p><strong>性能测试</strong></p>
-<ul>
-<li><a href="https://github.com/alipay/SoloPi/wiki/Performance"><em>官方教程</em></a></li>
-<li>操作：性能测试时，直接勾选需要监控的性能指标，不进行录制则可以实时查看；进行录制时，点击录制按钮开始录制，录制结束后点击录制结束按钮，录制的性能数据会存储下来，支持图表分析，可同时存储多份性能数据；</li>
-<li>优点：支持实时查看场景的性能，可和业务测试结合方便简单；支持性能录制，可和UI自动化结合，查看各场景的性能变化和差异；</li>
-<li>缺点：不支持续集成，利用脚本进行回放时不支持性能监控；</li>
-</ul>
-</li>
-<li><p><strong>一机多控</strong></p>
-<ul>
-<li>[<em>官方教程</em>]</li>
-<li>操作：多台设备上同时安装solopi和待测APP；做好配置和授权操作，同时主机（控制机）选中一机多控，选中为主机；其他设备点击一机多控，选中为从机；然后用主机扫码录入从机，然后在主机点击建立主从机的连接，然后主机点击录屏按钮，开始进行一机多控操作；原理是利用solopi的录屏回放功能，主机录屏，从机回放；</li>
-<li>优点：可以用一台机器，控制多台设备操作，能有效的覆盖兼容性测试；</li>
-<li>缺点：不支持ios系统；由于是先录制，在回放，因此所有设备都需要有网络，且必须是同一局域网，且存在延时；不支持批量操作时，同时监控性能数据；</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p><em><strong>和业务结合</strong></em></p>
-<p>  <code>和业务结合使用前，需要先梳理清楚solopi的优缺点：</code></p>
-<p>  优点：</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">支持录制UI自动化，且录制的脚本支持编辑自定义，且无环境依赖；</span><br><span class="line">录制的脚本可以导出在任意设备上回放，或者转换成appium脚本；</span><br><span class="line">支持回放管理，支持批量回放和重复回放；</span><br><span class="line">支持性能测试，实时监控APP性能和录制APP的性能；</span><br><span class="line">支持一机多控，可同时控制多台设备；</span><br></pre></td></tr></table></figure>
-
-<p>  缺点：</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">不支持iOS设备，仅支持Android设备；</span><br><span class="line">工具是一款纯功能测试辅助软件，不支持持续集成；</span><br><span class="line">功能过于离散，几个功能不能结合在一起使用；</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>和业务结合：</strong></p>
-<ul>
-<li><p><em>rc验收阶段：</em><br><code>建议功能测试完毕且无误后，最后在rc验收一遍，主流程，验收时进行功能&quot;录制&quot;,录制的脚本可定期回放/开发了相关功能时进行回放/也可以通过Jenkins触发回放;</code></p>
-</li>
-<li><p><em>灰度/线上验收阶段：</em><br><code>建议测试进行线上验收时，进行录制，录制的脚本，可通过扩展进行定期回放；</code></p>
-</li>
-<li><p><em>冒烟/功能测试/rc验收阶段：</em><br><code>建议以上阶段，进行测试验收时，打开性能测试监控，观察功能场景有没用性能问题；</code></p>
-</li>
-<li><p><em>冒烟/兼容性测试阶段：</em><br><code>可以使用一机多控功能，进行兼容性测试；但此功能对控制的终端有要求，最好有固定的兼容环境；</code></p>
-</li>
-<li><p><em>稳定性治理/预装版本暴力回放：</em><br><code>使用重复回放功能进行暴力回放；</code></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em><strong>下一步：</strong></em></p>
-</li>
-</ul>
-<p><a href="https://github.com/alipay/SoloPi"><em>Solopi github</em>_</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>ui自动化</tag>
-        <tag>稳定性</tag>
-        <tag>前端性能</tag>
-        <tag>solopi</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>UI自动化框架说明</title>
-    <url>/posts/411091fa/</url>
-    <content><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`
-</code></pre>
-<p>___ 大纲 ___</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">框架的整体结构</span><br><span class="line">代码模块的结构，文件说明</span><br><span class="line">框架的执行过程</span><br><span class="line">框架优化&#x2F;改动以适应我们产品</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<p>___ 框架整体结构 ___<br><img src="/text_image/ui%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%B6%E6%9E%84.png" alt="alt_text"></p>
-<p><code>框架整体构成由五部分构成；分别是runner(入口)/TestCase(控制层)/PageObject(逻辑层)/日志文件/yaml配置模块/报告模块 </code></p>
-<p>___ runner(入口) ___</p>
-<p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
     <title>HEXO 官方使用指南</title>
     <url>/posts/4a17b156/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -410,6 +410,41 @@
       <tags>
         <tag>unittest</tag>
         <tag>参数化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python-多进程</title>
+    <url>/posts/a1c10886/</url>
+    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python多进程简述</span><br><span class="line">python多进程模块方法介绍</span><br><span class="line">python多进程使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<ul>
+<li><p><em><strong>python多进程模块简述：</strong></em></p>
+<p>  <code>python由于GIL机制，多线程，实际仅消耗一个内核资源；因此效率较低，python要实现并发，提高性能，只能使用多进程模块，python的多进程模块为multiprocessing，通过使用Pool类实现多进程；   </code></p>
+</li>
+<li><p><em><strong>python多进程模块方法介绍：</strong></em></p>
+<p>  <code>   python多进程模块为multiprocessing，为python的内置模块；通过该模块封装的Pool()对象实现多进程，Pool类的属性介绍如下：</code></p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()	#需要被执行的方法&#x2F;任务</span><br><span class="line">iter&#x3D;iter	#迭代对象，list&#x2F;变量值</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(3)	#创建一个仅容纳3个进程的进程池，一旦工作任务超出进程的数量，则需等待，进程池中的进程被释放，任务才能进入进程池；</span><br><span class="line">__init__(self, group&#x3D;None, target&#x3D;None, name&#x3D;None, args&#x3D;(), kwargs&#x3D;&#123;&#125;)	#进程池的构造方法</span><br><span class="line">group：进程池所属的进程组，一旦不需要给值；</span><br><span class="line">target：待处理的任务或方法；</span><br><span class="line">name：进程池的别名，默认不给值；</span><br><span class="line">args：调用对象的位置参数，可给值元组&#x2F;列表等可迭代对象或者参数值；</span><br><span class="line">kwargs：调用对象的字典参数；</span><br><span class="line"></span><br><span class="line">使用：在win环境下，进程池必须在当前模块下执行，即必须在 if __name__&#x3D;&#x3D;main:下执行；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Pool()类中拥有的属性方法如下：</strong></li>
+</ul>
+<ul>
+<li>pool.map()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br></pre></td></tr></table></figure></li>
+<li>pool.map_async(run,iter)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map_async(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map_async(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br><span class="line">---效果和pool.map()不相同，mapasyc效率更高；mapasyc主进程未阻塞进程池，不需要等该批次的进程全执行完，新的任务就能进入进程池执行；常用pool.map()</span><br></pre></td></tr></table></figure></li>
+<li>pool.apply()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]])</span><br><span class="line">apply,参数需要为具体的变量值，且仅在python2支持；</span><br><span class="line">apply方法的原理是，阻塞进程池，一次仅让一个任务进入进程池，该任务完成后，才能执行下一个任务，实际是串行；</span><br></pre></td></tr></table></figure></li>
+<li>pool.applyasyc()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]],[, callback&#x3D;None]]])</span><br><span class="line">   applyasyc,参数需要为具体的变量值，在python3上支持；</span><br><span class="line">   applyasyc方法的原理是，进程池非阻塞，一次可以让多个任务进入进程池，且未对该批次任务进行阻塞，只要其中一个进程执行完后，就能释放资源，让新的任务进入进程池，实际是并行的,效率等同于mapasyc()；</span><br><span class="line">回调使用：pool.applyasyc(run,kwargs,callback&#x3D;func2)，run的返回作为func2的参数，执行完返回func2的值；</span><br><span class="line">   ---applyasyc效果等同于mapasyc()，只是他具有回调功能，且入参的变量不能是可迭代对象，必须为具体的变量值；</span><br></pre></td></tr></table></figure></li>
+<li>pool.terminal()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用：结束工作进程，不在处理未完成的任务</span><br><span class="line">pool.map(run,iter)</span><br><span class="line">pool.close()</span><br><span class="line">pool.run()</span><br><span class="line">sleep(2)</span><br><span class="line">pool.terminal()		#执行两秒后，哪怕进程未执行完，也结束该主进程</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><em><strong>python多进程使用：</strong></em></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()</span><br><span class="line">iter&#x3D;iter</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(multiprocessing.cpu_count())</span><br><span class="line">pool.map(run(),iter)</span><br><span class="line">pool.join()</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>python</tag>
+        <tag>多进程</tag>
       </tags>
   </entry>
   <entry>
@@ -497,38 +532,15 @@
       </tags>
   </entry>
   <entry>
-    <title>python-多进程</title>
-    <url>/posts/a1c10886/</url>
-    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python多进程简述</span><br><span class="line">python多进程模块方法介绍</span><br><span class="line">python多进程使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<ul>
-<li><p><em><strong>python多进程模块简述：</strong></em></p>
-<p>  <code>python由于GIL机制，多线程，实际仅消耗一个内核资源；因此效率较低，python要实现并发，提高性能，只能使用多进程模块，python的多进程模块为multiprocessing，通过使用Pool类实现多进程；   </code></p>
-</li>
-<li><p><em><strong>python多进程模块方法介绍：</strong></em></p>
-<p>  <code>   python多进程模块为multiprocessing，为python的内置模块；通过该模块封装的Pool()对象实现多进程，Pool类的属性介绍如下：</code></p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()	#需要被执行的方法&#x2F;任务</span><br><span class="line">iter&#x3D;iter	#迭代对象，list&#x2F;变量值</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(3)	#创建一个仅容纳3个进程的进程池，一旦工作任务超出进程的数量，则需等待，进程池中的进程被释放，任务才能进入进程池；</span><br><span class="line">__init__(self, group&#x3D;None, target&#x3D;None, name&#x3D;None, args&#x3D;(), kwargs&#x3D;&#123;&#125;)	#进程池的构造方法</span><br><span class="line">group：进程池所属的进程组，一旦不需要给值；</span><br><span class="line">target：待处理的任务或方法；</span><br><span class="line">name：进程池的别名，默认不给值；</span><br><span class="line">args：调用对象的位置参数，可给值元组&#x2F;列表等可迭代对象或者参数值；</span><br><span class="line">kwargs：调用对象的字典参数；</span><br><span class="line"></span><br><span class="line">使用：在win环境下，进程池必须在当前模块下执行，即必须在 if __name__&#x3D;&#x3D;main:下执行；</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>Pool()类中拥有的属性方法如下：</strong></li>
-</ul>
-<ul>
-<li>pool.map()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br></pre></td></tr></table></figure></li>
-<li>pool.map_async(run,iter)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map_async(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map_async(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br><span class="line">---效果和pool.map()不相同，mapasyc效率更高；mapasyc主进程未阻塞进程池，不需要等该批次的进程全执行完，新的任务就能进入进程池执行；常用pool.map()</span><br></pre></td></tr></table></figure></li>
-<li>pool.apply()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]])</span><br><span class="line">apply,参数需要为具体的变量值，且仅在python2支持；</span><br><span class="line">apply方法的原理是，阻塞进程池，一次仅让一个任务进入进程池，该任务完成后，才能执行下一个任务，实际是串行；</span><br></pre></td></tr></table></figure></li>
-<li>pool.applyasyc()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]],[, callback&#x3D;None]]])</span><br><span class="line">   applyasyc,参数需要为具体的变量值，在python3上支持；</span><br><span class="line">   applyasyc方法的原理是，进程池非阻塞，一次可以让多个任务进入进程池，且未对该批次任务进行阻塞，只要其中一个进程执行完后，就能释放资源，让新的任务进入进程池，实际是并行的,效率等同于mapasyc()；</span><br><span class="line">回调使用：pool.applyasyc(run,kwargs,callback&#x3D;func2)，run的返回作为func2的参数，执行完返回func2的值；</span><br><span class="line">   ---applyasyc效果等同于mapasyc()，只是他具有回调功能，且入参的变量不能是可迭代对象，必须为具体的变量值；</span><br></pre></td></tr></table></figure></li>
-<li>pool.terminal()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用：结束工作进程，不在处理未完成的任务</span><br><span class="line">pool.map(run,iter)</span><br><span class="line">pool.close()</span><br><span class="line">pool.run()</span><br><span class="line">sleep(2)</span><br><span class="line">pool.terminal()		#执行两秒后，哪怕进程未执行完，也结束该主进程</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p><em><strong>python多进程使用：</strong></em></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()</span><br><span class="line">iter&#x3D;iter</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(multiprocessing.cpu_count())</span><br><span class="line">pool.map(run(),iter)</span><br><span class="line">pool.join()</span><br></pre></td></tr></table></figure>
-]]></content>
+    <title>python语法特性</title>
+    <url>/posts/d641bafc/</url>
+    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
       <tags>
         <tag>python</tag>
-        <tag>多进程</tag>
       </tags>
   </entry>
   <entry>
@@ -544,6 +556,12 @@
 ]]></content>
   </entry>
   <entry>
+    <title>uwnc</title>
+    <url>/posts/3de87ac/</url>
+    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>ui自动化分布式并行运算</title>
     <url>/posts/2be91958/</url>
     <content><![CDATA[<p><a href="https://cloud.tencent.com/developer/article/1974105">Gird</a></p>
@@ -555,12 +573,6 @@
         <tag>UI</tag>
         <tag>gird</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>uwnc</title>
-    <url>/posts/3de87ac/</url>
-    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
-]]></content>
   </entry>
   <entry>
     <title>优秀博客</title>
@@ -590,89 +602,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python语法特性</title>
-    <url>/posts/d641bafc/</url>
-    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
-<span id="more"></span>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>职业--传易工作总结</title>
-    <url>/posts/c184c696/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><code>2020/9月入职传易，2023/6月离职，近三年的工作回顾；含工作内容，职场</code></p>
-<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">工作</span><br><span class="line">职场</span><br><span class="line">总结&#x2F;反思</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<h2 id="工作"><a href="#工作" class="headerlink" title="工作"></a>工作</h2><p><strong>前后工作内容经历了，音乐服务端测试/大数据侧功能测试/广告业务测试/自动化体系建设</strong></p>
-<h3 id="测试能力建设"><a href="#测试能力建设" class="headerlink" title="测试能力建设"></a>测试能力建设</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">测试自动化</span><br><span class="line">服务性能测试</span><br><span class="line">客户端性能测试</span><br><span class="line">客户端稳定性</span><br><span class="line">CD能力建设</span><br></pre></td></tr></table></figure>
-<h4 id="测试自动化"><a href="#测试自动化" class="headerlink" title="测试自动化"></a>测试自动化</h4><p><code>自动化能力，按我的理解应该属于研发CD体系中的重要一环，核心是提效/保障质量；但实现目标不仅仅需要自动化能力，云，研发体系，产品交互体系，线上质量保障体系，都是为了最终目标服务的</code></p>
-<h5 id="单元自动化–代码审查"><a href="#单元自动化–代码审查" class="headerlink" title="单元自动化–代码审查"></a>单元自动化–代码审查</h5><p><code>代码质量保障，主要由开发负责，主要是引入代码检查框架，在编码/合并时暴露问题，以及在代码进行部署时，通过Jenkins调度审查策略实现代码覆盖</code><br><strong>实现</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">开发团队通过Junit各自负责单测代码</span><br><span class="line">开发团队，针对新/大模块，核心代码，邀请运维，技术负责人，相关测试进行代码审查</span><br><span class="line">针对，代码合并，发布有严格的审核机制，和自审查机制</span><br></pre></td></tr></table></figure>
-<h5 id="集成自动化–接口测试"><a href="#集成自动化–接口测试" class="headerlink" title="集成自动化–接口测试"></a>集成自动化–接口测试</h5><p><img src="/text_image/%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96.png" alt="alt text"><br><strong>优缺点</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">实现/维护成本低</span><br><span class="line">定制化程度低</span><br><span class="line">无法对问题溯源，无法定位问题</span><br><span class="line">总结：在运维有使用普罗米修斯对接口做监控的情况下，仅对回归测试有效果，意义不大</span><br></pre></td></tr></table></figure>
-<h5 id="系统自动化–UI自动化"><a href="#系统自动化–UI自动化" class="headerlink" title="系统自动化–UI自动化"></a>系统自动化–UI自动化</h5><p><code>UI层级的自动化，是典型的功能自动化；核心点在于页面操作，页面元素的检查；难点在于稳定性和灵活性；常见的应用场景有功能回归，ui遍历，暴力操作</code></p>
-<h6 id="ui自动化"><a href="#ui自动化" class="headerlink" title="ui自动化"></a>ui自动化</h6><p><img src="/text_image/ui%E6%9E%B6%E6%9E%84.png" alt="alt text"><br><img src="/text_image/UI%E8%87%AA%E5%8A%A8%E5%8C%96.png" alt="alt text"></p>
-<h6 id="ui录制回放"><a href="#ui录制回放" class="headerlink" title="ui录制回放"></a>ui录制回放</h6><p><code>录制回放的核心点，在于怎么将录制信息转换成用例，已及回放时的用例反序列化操作</code><br><strong>优缺点</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">优点是，可维护，可定制化</span><br><span class="line">现行脚本缺点是，稳定性较差；维护成本高，实用性差，代码耦合度高，可扩展性差</span><br></pre></td></tr></table></figure>
-
-<h4 id="服务性能测试"><a href="#服务性能测试" class="headerlink" title="服务性能测试"></a>服务性能测试</h4><p><code>压测的依据是模拟线上的（极端）环境施压，以求将问题暴露出来；操作上基于对业务和架构的了解，试探性加压，到达瓶颈点之后，结合资源消耗，压力变化，处理能力等分析瓶颈点，并针对瓶颈进行验证，对优化后结果进行校验</code><br><strong><a href="https://docs.qq.com/s/EV0o-FmljRU-VIBxtTWYCW">压测报告合集</a></strong><br><strong>优缺点</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">通过Jenkins调度jmeter加压，可对每次的结果进行维护/推送，灵活方便，也可以进行持续集成</span><br><span class="line">缺点也很多，首先需要结合其他的监控，比如skywalking/普罗米修斯，查看结果及维护不方便</span><br><span class="line">其次需要专门的性能环境，成本极高</span><br><span class="line">由于事先不清楚瓶颈点，需要一点点加压，试探性的去找瓶颈，效率较低</span><br></pre></td></tr></table></figure>
-<h4 id="客户端性能测试"><a href="#客户端性能测试" class="headerlink" title="客户端性能测试"></a>客户端性能测试</h4><p><code>客户端性能测试，和服务端理念上是相同的，都是模拟线上操作来进行施压，以求问题前置暴露；区别在，施压方式，监控指标上</code><br><strong>难点</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">模拟线上操作较难，我前期是通过性能狗实现的，性能狗收费后，通过solopi来操作</span><br><span class="line">监控数据采集难度不小，由于客户端不像服务端，存在skywalking，这类注入式全生命周期的监控工具，在监控数据采集上，仅能基于adb命令或者开源工具提供的能力，采集的成本较高，尤其是像耗时</span><br><span class="line">分析/定位问题的成本较高，内存、cpu问题，需要查看堆栈，且都需要dump数据，dump数据分析的难度也较大，尤其是在无应用错误抛出时，分析定位问题，极其的依赖经验，成本很高</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong><a href="https://www.bujiaban.xyz/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/">客户端性能合集</a></strong></li>
-</ul>
-<h4 id="客户端稳定性"><a href="#客户端稳定性" class="headerlink" title="客户端稳定性"></a>客户端稳定性</h4><p><code>稳定性，是性能的子类；因为一般在极端场景下，稳定性问题才能暴露，稳定性问题常见的有crash/anr/内存泄露/oom等</code><br><strong>核心</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">异常场景的挖掘是核心，这块需要在整个产品的生命周期入手；我现在的思路，主要是依赖传音的成熟能力（标准）设计覆盖场景，同时基于功能体验，项目组同事反馈，线上反馈，分析可能存在问题的点，来设计覆盖场景</span><br><span class="line">操作上，主要通过定制monkey,ui遍历，暴力回放等实现覆盖</span><br><span class="line">实施工具，主要是monkey,solopi,字节的fastbot,各有利弊，总的来说，monkey是最灵活，且成本最低</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong><a href="https://www.bujiaban.xyz/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/">客户端性能合集</a></strong></li>
-</ul>
-<h4 id="CI-CD能力建设"><a href="#CI-CD能力建设" class="headerlink" title="CI/CD能力建设"></a>CI/CD能力建设</h4><p><code>持续集成/持续交互/持续部署；一体化的研发体系需要依赖众多的外部能力，这快主要由研发和运维实现；核心组件有，Jenkins，服务中间件，云原生及K8S，gitlab，监控能力（skywalking/普罗米修斯/zabbix）</code></p>
-<h4 id="质量体系建设"><a href="#质量体系建设" class="headerlink" title="质量体系建设"></a>质量体系建设</h4><p><code>高效的质量体系，必然是高产出，能全面覆盖产品生命周期的，且有效率的；这不是一个平台或者一个脚本就能实现的；需要深入研发体系中，结合公司情况，输出符合实际的测试能力</code><br><strong>核心</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">需要有话语权，有能力推动体系前进；能获取资源，能取得其他部门的信任和合作</span><br><span class="line">自动化能力是有效的，有产出，有回报的，这要求这块的建设是要符合项目需求，可持续迭代的</span><br><span class="line">针对核心问题需要有回溯机制，针对问题或者能力需要能深化总结成组内标准，如果不能形成标准，就不可复用和推广，则意义不大</span><br><span class="line">测试能力需要能集成进研发体系中，因为测试本质还是为研发体系服务的，如果不能集成，则产出有限</span><br></pre></td></tr></table></figure>
-
-<h3 id="广告业务测试"><a href="#广告业务测试" class="headerlink" title="广告业务测试"></a>广告业务测试</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">boomplay客户端广告</span><br><span class="line">boomplay web广告</span><br><span class="line">sdk广告</span><br><span class="line">web js广告</span><br><span class="line">自营广告</span><br><span class="line">聚合广告</span><br><span class="line">谷歌定制广告</span><br><span class="line">程序化广告</span><br><span class="line">广告归因</span><br></pre></td></tr></table></figure>
-<p><strong><a href="https://www.processon.com/view/link/645a0dddfb0ea17d3a90b724">广告业务架构</a></strong><br><strong>广告推荐架构</strong><br><img src="/text_image/ad%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F.png" alt="alt text"></p>
-<h3 id="音乐大数据能力测试"><a href="#音乐大数据能力测试" class="headerlink" title="音乐大数据能力测试"></a>音乐大数据能力测试</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">版权音乐资源同步</span><br><span class="line">埋点数据ETL（kafka/flink）</span><br><span class="line">数据报表</span><br><span class="line">音乐推荐</span><br><span class="line">广告推荐</span><br><span class="line">标签系统</span><br></pre></td></tr></table></figure>
-<h4 id="音乐资源同步"><a href="#音乐资源同步" class="headerlink" title="音乐资源同步"></a>音乐资源同步</h4><h4 id="埋点数据ETL"><a href="#埋点数据ETL" class="headerlink" title="埋点数据ETL"></a>埋点数据ETL</h4><h4 id="数据报表"><a href="#数据报表" class="headerlink" title="数据报表"></a>数据报表</h4><h4 id="音乐推荐"><a href="#音乐推荐" class="headerlink" title="音乐推荐"></a>音乐推荐</h4><h4 id="广告推荐"><a href="#广告推荐" class="headerlink" title="广告推荐"></a>广告推荐</h4><h4 id="标签系统"><a href="#标签系统" class="headerlink" title="标签系统"></a>标签系统</h4><p><strong>大数据架构</strong><br><img src="/text_image/biddate.png" alt="alt text"><br><strong>数仓架构</strong><br><img src="/text_image/bigdate_%E6%95%B0%E4%BB%93%E6%9E%B6%E6%9E%84.png" alt="alt text"><br><strong>数据架构</strong><br><img src="/text_image/bigdata_%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84.png" alt="alt text"></p>
-<ul>
-<li><strong>横向数据分层</strong><br><img src="/text_image/%E6%A8%AA%E5%90%91%E6%95%B0%E6%8D%AE%E5%88%86%E5%B1%82.png" alt="alt text"></li>
-<li><strong>纵向数据分层</strong><br><img src="/text_image/%E7%BA%B5%E5%90%91%E6%95%B0%E6%8D%AE%E5%88%86%E5%B1%82.png" alt="alt text"><br><strong>推荐系统</strong><br><img src="/text_image/boomplay_biddate%E6%8E%A8%E8%8D%90.png" alt="alt text"></li>
-</ul>
-<h3 id="音乐服务端功能测试"><a href="#音乐服务端功能测试" class="headerlink" title="音乐服务端功能测试"></a>音乐服务端功能测试</h3><p><strong>C端服务</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1️⃣网关服务</span><br><span class="line">2️⃣首页内容服务</span><br><span class="line">3️⃣推荐服务</span><br><span class="line">4️⃣内容基础服务</span><br><span class="line">5️⃣计数服务</span><br><span class="line">6️⃣埋点服务（通用异步）</span><br><span class="line">⑦播客服务</span><br><span class="line">8️⃣账户服务</span><br><span class="line">9️⃣订阅服务</span><br><span class="line">1️⃣0️⃣分布式ID获取服务（资源）</span><br><span class="line">1️⃣1️⃣FCM消息推送服务</span><br><span class="line">1️⃣2️⃣BUZZ服务</span><br><span class="line">1️⃣3️⃣活动服务</span><br><span class="line">1️⃣4️⃣内部消息服务</span><br><span class="line">1️⃣5️⃣电商服务</span><br><span class="line">1️⃣6️⃣游戏服务</span><br><span class="line">1️⃣⑦广告服务</span><br></pre></td></tr></table></figure>
-<p><strong>服务架构</strong><br><img src="/text_image/boomplay_server.png" alt="alt text"><br><img src="/text_image/boomplay_server2.png" alt="alt text"><br><strong>服务db模型</strong><br><img src="/text_image/boomplay_server_db.png" alt="alt text"><br><strong>B端服务</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">oms</span><br><span class="line">cms</span><br><span class="line">ams</span><br><span class="line">ads</span><br><span class="line">ssp</span><br><span class="line">adx</span><br></pre></td></tr></table></figure>
-
-<h2 id="职场"><a href="#职场" class="headerlink" title="职场"></a>职场</h2><h3 id="魅族"><a href="#魅族" class="headerlink" title="魅族"></a>魅族</h3><p><code>在魅族工作一年左右离职，离职的原因是疫情期间，魅族现金流出现了严重问题，周围同事纷纷离职，于是离职，另某出路；</code><br><code>在期间遇到过一些问题：领导批判，主动性不够，不能及时的暴露问题；实际情况是，项目线上遇到的问题，如产品需求设计有误，项目上线代码合并有误，或者带bug上线（bug已暴露），等会归咎于测试；</code><br><code>结合其他同事的工作情况反思，主要是由于；自己本身有一些瑕疵（如自己偶尔会迟到，且有一些摸鱼行为），同时本身和小组长关系不太好，由于这些瑕疵，导致领导不太信任自己；同时自己在项目中存在感太低，没有话语权，导致一些本身和测试无关的问题，也会压在测试身上，从而将问题带给组长，形成了负面循环；</code></p>
-<h3 id="传易"><a href="#传易" class="headerlink" title="传易"></a>传易</h3><p><code>传易工作三年左右，职场也不太顺利；研发部老大对我意见很大，期间直属上级提了两次升职，都被他给打回去了；</code><br><code>导致上述状况的原因有几点，我工作状态比较懒散（说是我因为经常躺在椅子上工作），经常迟到，经常到花园摸鱼，工作产出不够，出了一些事；</code><br><code>总的来说，还是因为我个人的风格，陆总不太喜欢，然后把压力传导给了我的直属上级，然后工作中得不到支持，处处碰壁，且自己产出也不够；</code></p>
-<h2 id="总结-反思"><a href="#总结-反思" class="headerlink" title="总结/反思"></a>总结/反思</h2><h3 id="专业"><a href="#专业" class="headerlink" title="专业"></a>专业</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">职业规划，未来还是要走专业路线，期望的发展方向还是devops和性能岗；但这类岗位较少，因此我在求职时，在核心突出的前提下，测开的各细分方向，我都需要有了解；</span><br><span class="line">职业技能方面，尤其是编码能力，算法能力，大数据架构能力，是我后续前进的方向；</span><br><span class="line">基础是基石，基础不牢固；很多想法就无法落地；</span><br></pre></td></tr></table></figure>
-
-<h3 id="职场-1"><a href="#职场-1" class="headerlink" title="职场"></a>职场</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">过去两份工作，由于自己在工作中有明显的瑕疵，导致容易授人以柄，因此对于后续的工作，一定要严抓职场纪律，不能迟到，最好在领导到之前到达公司，且不能有明显的问题被人拿捏；</span><br><span class="line">工作中，不受领导青睐，对于测开/架构类工作，工作是无法开展的；因此后续工作还是要和领导走近一点，要会来事，捧人，同时入职时，也要考虑下上级的为人，有些领导我是注定无法在他们手底下工作的；</span><br><span class="line">工作中，产出是核心，如果没有产出，专业素养不过关，注定得不到重视，获取不到话语权和资源；</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>传易</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>估值体系</title>
-    <url>/posts/daef770e/</url>
-    <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的扣非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
-<span id="more"></span>
-
-<h2 id="理念"><a href="#理念" class="headerlink" title="理念"></a>理念</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">高收益的前提是持续稳定的复利，即好企业是时间的朋友，坏企业是时间的敌人；</span><br><span class="line">30pe是合理估值的上限，这是由无风险收益率决定的，如果在高，买入收益就低于无风险收益率了；同理合理估值一般给到20-25，而我不买25倍以上的企业(这想法绝对是错的。只关乎个人的安全边际)；</span><br><span class="line">股权和债券的差异，主要体现在确定性和成长里；股市需要利用成长优势抵消不确定性；</span><br><span class="line">收益率=利润/本金（股价）=1/pe；合理估值的锚其实就是无风险收益率（1/无风险收益率）；</span><br><span class="line">无分红公司的净资产收益率=净利润增速（可能净利润要打折）；</span><br><span class="line">分红在投入公司的净资产真实收益率=roe(1/pb*分红金额比例+留存金额比例)；</span><br><span class="line">年化收益率=年份√总收益率；</span><br><span class="line">由收益率公式可知；收益率一般不会超过净利润增速（仅当市净率低于1时超过，但这种现金流会受负债等因素损耗）；且要提高投资收益率，只有提高净利润的增速、降低分红比例、在分红比例固定时则只有降低pb也就是估值才能有效提高收益率；</span><br></pre></td></tr></table></figure>
-
-<h2 id="买卖"><a href="#买卖" class="headerlink" title="买卖"></a>买卖</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">理想买点：三年后合理估值*0.5</span><br><span class="line">理想卖点：min(动态市盈率50,三年后合理估值150%)</span><br><span class="line"></span><br><span class="line">买操作：20-25倍区间都能买，仅茅台在25倍pe以上买入;到达理想买点时，分三批买完剩余资金（理想买点/理想买点-5%/理想买点-10%）</span><br><span class="line">卖操作：当年预计净利润的50/55/60三次清空；（买卖点是唐朝基于无风险收益率计算，正常超出合理估值都能卖，50%其实是预留的安全边际）</span><br><span class="line">三年后合理估值=三年后预估净利率*25（具体企业具体分析，也就是pe的中分位）</span><br><span class="line"></span><br><span class="line">全指数基金买/卖点：基于无风险收益率来，但是由于不确定性，要做净利润折算，需要进行等比例折算，折算区间在5-7折</span><br><span class="line">买点：12-15pe</span><br><span class="line">卖点：25-35pe</span><br><span class="line"></span><br><span class="line">♥卖出后买全指还是留现金取决于无风险收益率（一般2倍无风险收益率即可买pe=1/无风险收益率*2，全指唐朝仅关注沪深300/恒生指数/标普500/纳斯达克100）</span><br><span class="line">♥其他时间：企业逻辑未变时，低于买点买，高于卖点卖，其他时间坐等；但需要遵循单股不超40%原则，即三五个行业，七八家公司；</span><br><span class="line">♥不要严格按买卖价来，要接受错误和风险；确定性高的企业，越偏向合理估值之下就买，确定性低的企业越偏向理想买点才买，唐朝的理念是理想买点位置一定要买完资金；</span><br></pre></td></tr></table></figure>
-
-<h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">♥腾讯+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以300均价，买入6手；高溢价时，优先使用中概换腾讯（中概大部分公司不盈利）</span><br><span class="line">1️⃣理想买点：328</span><br><span class="line">2️⃣理想卖点：1年内720</span><br><span class="line">3️⃣纳指买点：21pe</span><br><span class="line">4️⃣纳指卖点：35pe</span><br><span class="line"></span><br><span class="line">♥银行+家电25%：计划100k,余量16k</span><br><span class="line">已持仓84k,其中家电50k&#x2F;银行34k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右，招商计划以28均价，买入5手</span><br><span class="line">2️⃣美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">3️⃣格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34</span><br><span class="line"></span><br><span class="line">♥消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利20k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣五粮液150快,理想买点150&#x2F;143&#x2F;135</span><br><span class="line">2️⃣伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下；此刻的分红在投资收益率为9.56%；</span><br><span class="line"></span><br><span class="line">♥医药10%：计划40k,余量3k</span><br><span class="line">已持仓37k,其中恒瑞20k&#x2F;ETF17K</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣恒瑞按50倍市盈率20.07%净利润增长，卖点60（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">2️⃣300医药ETF计划0.42，买入7000个，卖点为0.7以上，对应300医药指数50倍以上的估值</span><br><span class="line">医药需要恒瑞和etf实现高低互换，高换低；</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
     <title>传音刷机</title>
     <url>/posts/a1b2e86a/</url>
     <content><![CDATA[<ol>
@@ -694,23 +623,16 @@
       </tags>
   </entry>
   <entry>
-    <title>全局函数局部函数</title>
-    <url>/posts/ae3a85c8/</url>
-    <content><![CDATA[<h1 id="全局局部函数"><a href="#全局局部函数" class="headerlink" title="全局局部函数"></a>全局局部函数</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">全局函数：global</span><br><span class="line">局部函数：nonlocal</span><br></pre></td></tr></table></figure>
+    <title>估值体系</title>
+    <url>/posts/daef770e/</url>
+    <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的扣非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
 <span id="more"></span>
-<p><strong>global</strong></p>
-<p><code>全局函数在模块py中生效；使用时需要先定义，在声明；一次声明，模块中全局使用，全局和局部不能是同一个变量； global a a=s</code></p>
-<p><strong>nonlocal</strong></p>
-<p><code>局部变量函数在模块中局部函数中生效；需要先声明，后定义成局部变量，一旦定义成局部变量就仅在该函数中生效，离开该函数就不生效，不能和全局变量为同一个变量 a=s nonlocal a</code></p>
-<p><a href="https://www.cnblogs.com/liyang93/p/6669874.html">参考</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>变量</tag>
-      </tags>
+
+<h2 id="理念"><a href="#理念" class="headerlink" title="理念"></a>理念</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">高收益的前提是持续稳定的复利，即好企业是时间的朋友，坏企业是时间的敌人；</span><br><span class="line">30pe是合理估值的上限，这是由无风险收益率决定的，如果在高，买入收益就低于无风险收益率了；同理合理估值一般给到20-25，而我不买25倍以上的企业(这想法绝对是错的。只关乎个人的安全边际)；</span><br><span class="line">股权和债券的差异，主要体现在确定性和成长里；股市需要利用成长优势抵消不确定性；</span><br><span class="line">收益率=利润/本金（股价）=1/pe；合理估值的锚其实就是无风险收益率（1/无风险收益率）；</span><br><span class="line">无分红公司的净资产收益率=净利润增速（可能净利润要打折）；</span><br><span class="line">分红在投入公司的净资产真实收益率=roe(1/pb*分红金额比例+留存金额比例)；</span><br><span class="line">年化收益率=年份√总收益率；</span><br><span class="line">由收益率公式可知；收益率一般不会超过净利润增速（仅当市净率低于1时超过，但这种现金流会受负债等因素损耗）；且要提高投资收益率，只有提高净利润的增速、降低分红比例、在分红比例固定时则只有降低pb也就是估值才能有效提高收益率；</span><br></pre></td></tr></table></figure>
+
+<h2 id="买卖"><a href="#买卖" class="headerlink" title="买卖"></a>买卖</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">理想买点：三年后合理估值*0.5</span><br><span class="line">理想卖点：min(动态市盈率50,三年后合理估值150%)</span><br><span class="line"></span><br><span class="line">买操作：20-25倍区间都能买，仅茅台在25倍pe以上买入;到达理想买点时，分三批买完剩余资金（理想买点/理想买点-5%/理想买点-10%）</span><br><span class="line">卖操作：当年预计净利润的50/55/60三次清空；（买卖点是唐朝基于无风险收益率计算，正常超出合理估值都能卖，50%其实是预留的安全边际）</span><br><span class="line">三年后合理估值=三年后预估净利率*25（具体企业具体分析，也就是pe的中分位）</span><br><span class="line"></span><br><span class="line">全指数基金买/卖点：基于无风险收益率来，但是由于不确定性，要做净利润折算，需要进行等比例折算，折算区间在5-7折</span><br><span class="line">买点：12-15pe</span><br><span class="line">卖点：25-35pe</span><br><span class="line"></span><br><span class="line">♥卖出后买全指还是留现金取决于无风险收益率（一般2倍无风险收益率即可买pe=1/无风险收益率*2，全指唐朝仅关注沪深300/恒生指数/标普500/纳斯达克100）</span><br><span class="line">♥其他时间：企业逻辑未变时，低于买点买，高于卖点卖，其他时间坐等；但需要遵循单股不超40%原则，即三五个行业，七八家公司；</span><br><span class="line">♥不要严格按买卖价来，要接受错误和风险；确定性高的企业，越偏向合理估值之下就买，确定性低的企业越偏向理想买点才买，唐朝的理念是理想买点位置一定要买完资金；</span><br></pre></td></tr></table></figure>
+
+<h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">♥腾讯+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以300均价，买入6手；高溢价时，优先使用中概换腾讯（中概大部分公司不盈利）</span><br><span class="line">1️⃣理想买点：328</span><br><span class="line">2️⃣理想卖点：1年内720</span><br><span class="line">3️⃣纳指买点：21pe</span><br><span class="line">4️⃣纳指卖点：35pe</span><br><span class="line"></span><br><span class="line">♥银行+家电25%：计划100k,余量16k</span><br><span class="line">已持仓84k,其中家电50k&#x2F;银行34k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右，招商计划以28均价，买入5手</span><br><span class="line">2️⃣美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">3️⃣格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34</span><br><span class="line"></span><br><span class="line">♥消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利20k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣五粮液150快,理想买点150&#x2F;143&#x2F;135</span><br><span class="line">2️⃣伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下；此刻的分红在投资收益率为9.56%；</span><br><span class="line"></span><br><span class="line">♥医药10%：计划40k,余量3k</span><br><span class="line">已持仓37k,其中恒瑞20k&#x2F;ETF17K</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣恒瑞按50倍市盈率20.07%净利润增长，卖点60（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">2️⃣300医药ETF计划0.42，买入7000个，卖点为0.7以上，对应300医药指数50倍以上的估值</span><br><span class="line">医药需要恒瑞和etf实现高低互换，高换低；</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>做点事</title>
@@ -751,6 +673,25 @@
 <li><strong>痛点</strong></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>全局函数局部函数</title>
+    <url>/posts/ae3a85c8/</url>
+    <content><![CDATA[<h1 id="全局局部函数"><a href="#全局局部函数" class="headerlink" title="全局局部函数"></a>全局局部函数</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">全局函数：global</span><br><span class="line">局部函数：nonlocal</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>global</strong></p>
+<p><code>全局函数在模块py中生效；使用时需要先定义，在声明；一次声明，模块中全局使用，全局和局部不能是同一个变量； global a a=s</code></p>
+<p><strong>nonlocal</strong></p>
+<p><code>局部变量函数在模块中局部函数中生效；需要先声明，后定义成局部变量，一旦定义成局部变量就仅在该函数中生效，离开该函数就不生效，不能和全局变量为同一个变量 a=s nonlocal a</code></p>
+<p><a href="https://www.cnblogs.com/liyang93/p/6669874.html">参考</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>变量</tag>
+      </tags>
   </entry>
   <entry>
     <title>可变对象合并方法</title>
@@ -937,6 +878,21 @@
 ]]></content>
   </entry>
   <entry>
+    <title>常用app测试工具</title>
+    <url>/posts/28eebda3/</url>
+    <content><![CDATA[<h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">参考回答：</span><br><span class="line">功能测试自动化</span><br><span class="line">a) 轻量接口自动化测试</span><br><span class="line"></span><br><span class="line">jmeter，</span><br><span class="line"></span><br><span class="line">b) APP UI层面的自动化</span><br><span class="line"></span><br><span class="line">android：UI Automator Viewer，Android Junit，Instrumentation，UIAutomator，</span><br><span class="line"></span><br><span class="line">iOS:基于Instrument的iOS UI自动化，</span><br><span class="line"></span><br><span class="line">性能测试</span><br><span class="line"></span><br><span class="line">a) Web前端性能测试</span><br><span class="line"></span><br><span class="line">网络抓包工具：Wireshark</span><br><span class="line"></span><br><span class="line">网页文件大小</span><br><span class="line"></span><br><span class="line">webpagetest</span><br><span class="line"></span><br><span class="line">pagespeed insight</span><br><span class="line"></span><br><span class="line">chrome adb</span><br><span class="line"></span><br><span class="line">b) APP端性能测试</span><br><span class="line"></span><br><span class="line">Android内存占用分析：MAT</span><br><span class="line"></span><br><span class="line">iOS内存问题分析：ARC模式</span><br><span class="line"></span><br><span class="line">Android WebView性能分析：</span><br><span class="line"></span><br><span class="line">iOS WebView性能分析</span><br><span class="line"></span><br><span class="line">c) 后台服务性能测试</span><br><span class="line"></span><br><span class="line">负载，压力，耐久性</span><br><span class="line"></span><br><span class="line">可拓展性，基准</span><br><span class="line"></span><br><span class="line">工具：apacheAB，Jmeter，LoadRunner，</span><br><span class="line"></span><br><span class="line">专项测试</span><br><span class="line"></span><br><span class="line">a) 兼容性测试</span><br><span class="line"></span><br><span class="line">手工测试：操作系统，分辨率，rom，网络类型</span><br><span class="line"></span><br><span class="line">云平台：testin，脚本编写，Android。</span><br><span class="line"></span><br><span class="line">b) 流量测试</span><br><span class="line"></span><br><span class="line">Android自带的流量管理，</span><br><span class="line"></span><br><span class="line">iOS自带的Network</span><br><span class="line"></span><br><span class="line">tcpdump抓包</span><br><span class="line"></span><br><span class="line">WiFi代理抓包：Fiddler</span><br><span class="line"></span><br><span class="line">流量节省方法：压缩数据，json优于xml；WebP优于传统的JPG，PNG；控制访问的频次；只获取必要的数据；缓存；</span><br><span class="line"></span><br><span class="line">c) 电量测试</span><br><span class="line"></span><br><span class="line">基于测试设备的方法，购买电量表进行测试。</span><br><span class="line"></span><br><span class="line">GSam Battery Monitoe Pro</span><br><span class="line"></span><br><span class="line">iOS基于Instrument Energy工具</span><br><span class="line"></span><br><span class="line">d) 弱网络测试</span><br><span class="line"></span><br><span class="line">手机自带的网络状况模拟工具</span><br><span class="line"></span><br><span class="line">基于代理的弱网络的模拟:</span><br><span class="line"></span><br><span class="line">工具：windows：Network Delay Simulator</span><br><span class="line"></span><br><span class="line">Mac：Network Link Conditioner</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>app测试</tag>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>工作梳理</title>
     <url>/posts/8c69a8ec/</url>
     <content><![CDATA[<h1 id="工作梳理"><a href="#工作梳理" class="headerlink" title="工作梳理"></a>工作梳理</h1><ul>
@@ -996,34 +952,6 @@
       </tags>
   </entry>
   <entry>
-    <title>常用app测试工具</title>
-    <url>/posts/28eebda3/</url>
-    <content><![CDATA[<h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
-<span id="more"></span>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">参考回答：</span><br><span class="line">功能测试自动化</span><br><span class="line">a) 轻量接口自动化测试</span><br><span class="line"></span><br><span class="line">jmeter，</span><br><span class="line"></span><br><span class="line">b) APP UI层面的自动化</span><br><span class="line"></span><br><span class="line">android：UI Automator Viewer，Android Junit，Instrumentation，UIAutomator，</span><br><span class="line"></span><br><span class="line">iOS:基于Instrument的iOS UI自动化，</span><br><span class="line"></span><br><span class="line">性能测试</span><br><span class="line"></span><br><span class="line">a) Web前端性能测试</span><br><span class="line"></span><br><span class="line">网络抓包工具：Wireshark</span><br><span class="line"></span><br><span class="line">网页文件大小</span><br><span class="line"></span><br><span class="line">webpagetest</span><br><span class="line"></span><br><span class="line">pagespeed insight</span><br><span class="line"></span><br><span class="line">chrome adb</span><br><span class="line"></span><br><span class="line">b) APP端性能测试</span><br><span class="line"></span><br><span class="line">Android内存占用分析：MAT</span><br><span class="line"></span><br><span class="line">iOS内存问题分析：ARC模式</span><br><span class="line"></span><br><span class="line">Android WebView性能分析：</span><br><span class="line"></span><br><span class="line">iOS WebView性能分析</span><br><span class="line"></span><br><span class="line">c) 后台服务性能测试</span><br><span class="line"></span><br><span class="line">负载，压力，耐久性</span><br><span class="line"></span><br><span class="line">可拓展性，基准</span><br><span class="line"></span><br><span class="line">工具：apacheAB，Jmeter，LoadRunner，</span><br><span class="line"></span><br><span class="line">专项测试</span><br><span class="line"></span><br><span class="line">a) 兼容性测试</span><br><span class="line"></span><br><span class="line">手工测试：操作系统，分辨率，rom，网络类型</span><br><span class="line"></span><br><span class="line">云平台：testin，脚本编写，Android。</span><br><span class="line"></span><br><span class="line">b) 流量测试</span><br><span class="line"></span><br><span class="line">Android自带的流量管理，</span><br><span class="line"></span><br><span class="line">iOS自带的Network</span><br><span class="line"></span><br><span class="line">tcpdump抓包</span><br><span class="line"></span><br><span class="line">WiFi代理抓包：Fiddler</span><br><span class="line"></span><br><span class="line">流量节省方法：压缩数据，json优于xml；WebP优于传统的JPG，PNG；控制访问的频次；只获取必要的数据；缓存；</span><br><span class="line"></span><br><span class="line">c) 电量测试</span><br><span class="line"></span><br><span class="line">基于测试设备的方法，购买电量表进行测试。</span><br><span class="line"></span><br><span class="line">GSam Battery Monitoe Pro</span><br><span class="line"></span><br><span class="line">iOS基于Instrument Energy工具</span><br><span class="line"></span><br><span class="line">d) 弱网络测试</span><br><span class="line"></span><br><span class="line">手机自带的网络状况模拟工具</span><br><span class="line"></span><br><span class="line">基于代理的弱网络的模拟:</span><br><span class="line"></span><br><span class="line">工具：windows：Network Delay Simulator</span><br><span class="line"></span><br><span class="line">Mac：Network Link Conditioner</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>app测试</tag>
-        <tag>工具</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>传易--性能测试</title>
-    <url>/posts/56a1ed73/</url>
-    <content><![CDATA[<p><a href="https://docs.qq.com/doc/DSWZnVGNka29qa1lJ">内部项目，需找我授权</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
-        <tag>实战</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>广告--大数据模型测试</title>
     <url>/posts/d775e226/</url>
     <content><![CDATA[<p><code>模型是程序化广告的灵魂，决定着广告的点击和转化，直接影响收入；而模型由于复杂度高，标签/数据量大，是广告测试的难点，一般意义上，测试是不负责模型质量的，仅对模型中的一些定向/过滤逻辑做覆盖，模型有效性测试，模型工程师一般是通过灰度/ab测试来实现自测的，这种自我监督的实现方式有着明显缺陷，故本次对过往模型测试方面的记录，做下总结</code></p>
@@ -1051,10 +979,17 @@
       </tags>
   </entry>
   <entry>
-    <title>数据库性能测试</title>
-    <url>/posts/ab3091af/</url>
-    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
+    <title>传易--性能测试</title>
+    <url>/posts/56a1ed73/</url>
+    <content><![CDATA[<p><a href="https://docs.qq.com/doc/DSWZnVGNka29qa1lJ">内部项目，需找我授权</a></p>
 ]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>性能</tag>
+        <tag>实战</tag>
+      </tags>
   </entry>
   <entry>
     <title>搭建hexo博客</title>
@@ -1066,6 +1001,12 @@
 <ul>
 <li>related_posts: true</li>
 </ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>数据库性能测试</title>
+    <url>/posts/ab3091af/</url>
+    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -1123,12 +1064,6 @@
       </tags>
   </entry>
   <entry>
-    <title>用例管理平台</title>
-    <url>/posts/c48e9a83/</url>
-    <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>百度质量体系建设</title>
     <url>/posts/bcd76c52/</url>
     <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
@@ -1142,167 +1077,22 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
-    <title>稳定性治理</title>
-    <url>/posts/a30df9c8/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">概述，目的？</span><br><span class="line">怎么进行稳定性治理，稳定性治理的体系建设？</span><br><span class="line">稳定性治理的过程？</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p><strong>稳定性治理概述，目的？</strong></p>
-<p><code>稳定性是系统最核心的需求；稳定性包含最核心的，系统服务的稳定性和前端的稳定性；稳定性核心有两大快，一是系统稳定，在复杂的环境下能稳定运行；二是抛出异常能及时处理，降低异常带来的风险；本文的稳定性治理，主要考虑的是通过模仿异常环境下系统运行，及时发现问题，解决问题，提升系统的稳定性；</code></p>
-<p><strong>怎么进行稳定性治理，稳定性治理体系的建设？</strong></p>
-<p><code>稳定性治理，首要目标，是要确认稳定性的衡量指标；其次要具有构造仿真环境的能力，在复杂环境下要具有系统监控能力，同时整个体系要能实现自动化运行维护具有平台能力。</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">稳定性衡量指标？</span><br><span class="line">稳定性环境监控？</span><br><span class="line">稳定性测试策略？</span><br><span class="line">自动化稳定性平台建设？</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><em><strong>稳定性衡量指标?</strong></em><br><code>系统稳定；一般是指系统在定义的状态下稳定运行，且长时间不会出现异常状态,常见的异常如下：</code></p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">崩溃率</span><br><span class="line">anr</span><br><span class="line">内存泄露</span><br><span class="line">oom</span><br><span class="line">系统性能</span><br></pre></td></tr></table></figure>
-<ul>
-<li><em>崩溃率</em><br><code>崩溃是稳定性的最大对手；通常关注的崩溃是crash；关注崩溃率，一般关注日崩溃率和崩溃用户率； </code><ul>
-<li>日崩溃率=日崩溃次数/日打开总次数        合规标准：0.2%</li>
-<li>崩溃用户数=去重的崩溃用户数/日活跃用户数    合规标准：0.2%</li>
-</ul>
-</li>
-<li><em>anr</em><br><code>anr即(Application Not Response);常会直接暴露给用户，照成不好影响;</code></li>
-<li><em>内存泄露</em><br><code>系统占用的堆内存未及时释放或无法释放，从而导致占用的内存一直递增，从而导致环境资源不足;</code></li>
-<li><em>oom</em><br><code>app申请的内存超过最大内存的限制，系统不分配内存，导致程序崩溃;</code></li>
-<li><em>系统性能</em><br><code>指在不同场景下对系统或环境的资源消耗进行监控，常监控系统资源和消耗的资源;</code></li>
-</ul>
-</li>
-<li><p><em><strong>系统稳定性监控？</strong></em></p>
-<p>  <code>系统稳定，说明系统在全局环境下，都能长期稳定的运行；揭释了稳定性检测的核心的几个点，异常环境构造，稳定运行指标监控，长期稳定性；</code></p>
-<ul>
-<li><em>稳定性指标</em><br><code>本文的指标监控，仅对前端的相关的指标进行监控；后端服务的监控，有运维在做;</code><ul>
-<li><p>服务及时响应/且响应参数无误</p>
-<ul>
-<li>场景：如接口监控，特指对后端服务进行监控;</li>
-<li>指标：一般监控服务相关指标（如接口响应时间/参数准确性）,资源监控（cpu/内存/带宽/io），消耗资源（流量/电量）;</li>
-<li>方案：可通过仅触发服务的方式，仅对服务进行监控，如接口自动化；可通过前端触发服务来实现监控，如ui自动化实现接口覆盖；系统资源消耗可通过监控系统资源文件获取；系统监控可通过后端方案实现，如prometheus；</li>
-</ul>
-</li>
-<li><p>前端加载时间满足用户体验/呈现无误</p>
-<ul>
-<li>场景：触发前端场景，来实现对产品提供给用户的服务进行监控；</li>
-<li>指标：页面加载时间/页面UI测试/前端资源检测；</li>
-<li>方案：可通过UI自动化，UI遍历等方式实现；数据采集可通过获取activity的响应时间获取；UI测试可通过telescop植入性来实现；</li>
-</ul>
-</li>
-<li><p>前端稳定性</p>
-<ul>
-<li>场景：稳定性是最核心的指标，稳定指服务稳定不崩溃，不抛出异常；</li>
-<li>指标：<ul>
-<li>crash率：通过监控crash文件进行采集；</li>
-<li>anr率：通过监控anr文件进行采集；</li>
-<li>内存泄露：通过LeakCanary监控内存泄露,通过haha来解析hprf文件，来分析Java虚拟机的内存使用清空；</li>
-<li>hprf:hprof最初是由J2SE支持的一种二进制堆转储格式，hprof文件保存了当前java堆上所有的内存使用信息，能够完整的反映虚拟机当前的内存状态；</li>
-<li>oom：通过字节的tailor来进行监控；</li>
-<li><a href="https://mp.weixin.qq.com/s?__biz=MzI1MzYzMjE0MQ==&mid=2247487203&idx=1&sn=182584b69910c843ae95f60e74127249&chksm=e9d0c501dea74c178e16f95a2ffc5007c5dbca89a02d56895ed9b05883cf0562da689ac6146b&scene=178&cur_album_id=1590413073616519171#rd">oom问题监控</a></li>
-<li>方案<ul>
-<li>稳定性在不同的场景下有着不同的表现；可以通过这些方式来实现场景的覆盖；ui遍历/暴力回放/monkey测试/流量回放；</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>其他监控</p>
-<ul>
-<li>场景：除了上述指标外，我们还会对以下指标进行监控，以评估对系统的影响;</li>
-<li>指标：<ul>
-<li>UI资源监控：图片过大/图片持有/过度绘制/资源泄露/过度布局</li>
-<li>线程阻塞</li>
-<li>文件创建</li>
-<li>线程创建</li>
-<li>主线程io</li>
-<li>启动性能</li>
-</ul>
-</li>
-<li>方案：使用telescop的植入性和监控能力来监控；</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em><strong>稳定性测试策略？</strong></em><br><code>稳定性测试时，有几个核心待解决的问题；如何解决真实环境下各种复杂环境的覆盖？如何保证效率，实现低投入高产出？如何保证采集的指标和问题场景结合，快速复现？</code></p>
-<ul>
-<li><p><em>如何保证覆盖率？覆盖率是如何计算的？</em><br><code>稳定性治理，在复杂环境下要保证全覆盖时不可能实现的工作；因此我们考虑实现一种可迭代优化的机制保证覆盖，保障系统的稳定，通常我们考虑系统覆盖时，从页面覆盖和代码逻辑的覆盖来实现;</code></p>
-<ul>
-<li>覆盖率指标：<ul>
-<li>页面场景覆盖：activity覆盖70%；覆盖所有的一级页面和所有的核心二级页面以及所有的主流程相关的三四级页面；覆盖所有的核心业务流程；</li>
-<li>代码行覆盖：可通过白盒走查或者代码检测工具；单测实现代码的覆盖；覆盖所有核心流程和代码的核心处理逻辑；</li>
-</ul>
-</li>
-<li>覆盖率保障策略：<ul>
-<li>终端覆盖：设备信息采集，通过埋点采集线上设备数据；至少要保证top10的设备能实现覆盖；保障top5系统版本能实现覆盖；top5-10的os版本能实现覆盖；</li>
-<li>预装版本：最好能实现需预装的机型的覆盖；否则至少要保证覆盖前一个机型，相同配置的版本的设备不低于10台；</li>
-<li>需要有问题统计/上报机制；能收集线上问题进行统计归纳，方便策略的设计和混度工程的实现；</li>
-<li>覆盖所有的核心链路，及70%的页面（所有一级页面，所有核心二级页面，所有核心三级页面）</li>
-<li>时间：看具体的策略，monkey一般不低于一天，也就是8小时；</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em>测试方式？各种方式的优缺点？</em></p>
-<ul>
-<li><p>UI遍历测试<br>  <code>UI遍历，指利用爬虫和过滤策略，实现从头遍历所有页面；</code></p>
-<ul>
-<li>优点：实现所有流程/页面的覆盖，能保证较高的覆盖率；</li>
-<li>缺点：耗时太久，无法模仿真实的用户操作，对测试版本或者测试环境有要求；很难构造高压力的场景；</li>
-<li>方案：AppCrawler实现；</li>
-</ul>
-</li>
-<li><p>暴力回放<br><code>暴力回放，指通过频繁对某些场景进行循环操作，来实现对核心场景的覆盖，此策略传音要求必须要做;</code></p>
-<ul>
-<li>优点：可对核心场景进行大量覆盖，保证核心链路无误；</li>
-<li>缺点：能覆盖的场景有限，耗时较长；较难覆盖到特殊场景；</li>
-<li>场景：通过UI自动化脚本实现循环遍历；</li>
-</ul>
-</li>
-<li><p>monkey随机遍历<br><code>monkey是Android自带的稳定性治理的工具，也是稳定性治理的核心方式，能模仿用户进行随机性的点击操作；</code></p>
-<ul>
-<li>优点：实现简单，有较强的随机性，能发现一些特殊问题；</li>
-<li>缺点：过于随机，不能保证覆盖率，无法模仿真实用户的操作；</li>
-<li>方案：针对monkey过于随机的缺陷，为保证效率，可对monkey的策略进行定制化，具体实现如下：<ul>
-<li>通过黑名单策略，跳过低频操作（如新手引导、权限类操作、关闭输入法，屏蔽其他应用的activity减少无效操作）；</li>
-<li>通过白名单策略，定制执行的activity和app,减少无效操作；</li>
-<li>定制事件比例，提高测试效率；</li>
-<li>执行时间，一般不低于一天，也就是8小时；</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>线上流量回放<br><code>线上流量回放，指利用线上的日志数据记录的用户行为，作为源数据来建模，模仿用户操作;</code></p>
-<ul>
-<li>优点：覆盖大量的真实用户操作，case有效性高，针对性强；</li>
-<li>缺点：需要利用大量的线上日志，对系统的要求高；利用线上日志进行回放，实现难度大；利用线上用户数据，会存在隐私安全问题；</li>
-<li>方案：可使用头条的智能化monkey工具，fastbot;</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em>具体实现，如何保证效率？</em><br><code>结合上诉几种方案的优缺点，可知，最好能四种方案结合着使用；</code></p>
-<ul>
-<li>新发功能版本：最好先执行一遍UI遍历（冒烟）/monkey遍历（每日）/流量回放（bug修复版本）</li>
-<li>RC版本：可执行流量回放/暴力回放</li>
-<li>预装版本：可执行流量回放/暴力回放</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em><strong>自动化稳定性平台的建设</strong></em></p>
-</li>
-</ul>
-<ul>
-<li><a href="https://mp.weixin.qq.com/s/L7RTCzqQ-1GbNhMNHONdRw"><strong>阿里稳定性治理</strong></a></li>
-<li><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1590413073616519171&scene=173&from_msgid=2247487203&from_itemidx=1&count=3&nolastread=1#wechat_redirect"><strong>头条稳定性治理系列</strong></a></li>
-</ul>
+    <title>用例管理平台</title>
+    <url>/posts/c48e9a83/</url>
+    <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>稳定性治理-暴力回放</title>
+    <url>/posts/81de0e43/</url>
+    <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
+<h4 id="覆盖场景"><a href="#覆盖场景" class="headerlink" title="覆盖场景"></a>覆盖场景</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">music首页，点击歌单播放按钮播放，然后息屏进入后台，10s后切换回前台；</span><br><span class="line">music首页，点开播放列表，然后点击music播放音乐，然后关闭播放列表，然后切换到后台，10s后切换回前台；</span><br><span class="line">music首页，进入歌单，点击全部播放，点击全部下载，然后返回首页，上下滑动一屏，然后切换回后台，10s后切换回前台；</span><br><span class="line">music首页，点击头像登录，退出，切换到后台，10s后切换回前台；</span><br><span class="line">treding首页，点击任意music播放，切换到后台，10s后回到前台，关闭播放详情页；</span><br><span class="line">首页，滑动到treding页，上下滑动一屏；然后向左滑动一屏，上下滑动一屏，然后向左滑动一屏，上下滑动一屏,然后向左滑动一屏，上下滑动一屏,然后切换到后台，停留10s;然后点击导航页到library页，然后点击导航页到search页，然后点击导航页到music页；</span><br><span class="line">搜索页，搜索music，搜索结果页左右滚动一屏；点击结果页播放，然后切换到后台休眠10s,在切换回前台;</span><br><span class="line">首页，点击导航页进入library页；点击进入喜欢的music页，点击全部播放；然后切换到后台，停留10s，在切换回前台，退出music页，切换回首页；</span><br><span class="line">首页，切换到buzz页；上下滑动两屏，点击buzz关注按钮，buzz点赞，buzz评论，点击查看buzz详情，然后回退到buzz页，然后在切换到后台，休眠10s，在切换回前台；</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>技术</category>
       </categories>
       <tags>
         <tag>稳定性</tag>
-        <tag>头条</tag>
-        <tag>阿里</tag>
+        <tag>暴力回放</tag>
       </tags>
   </entry>
   <entry>
@@ -1474,6 +1264,170 @@
       </tags>
   </entry>
   <entry>
+    <title>稳定性治理</title>
+    <url>/posts/a30df9c8/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">概述，目的？</span><br><span class="line">怎么进行稳定性治理，稳定性治理的体系建设？</span><br><span class="line">稳定性治理的过程？</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>稳定性治理概述，目的？</strong></p>
+<p><code>稳定性是系统最核心的需求；稳定性包含最核心的，系统服务的稳定性和前端的稳定性；稳定性核心有两大快，一是系统稳定，在复杂的环境下能稳定运行；二是抛出异常能及时处理，降低异常带来的风险；本文的稳定性治理，主要考虑的是通过模仿异常环境下系统运行，及时发现问题，解决问题，提升系统的稳定性；</code></p>
+<p><strong>怎么进行稳定性治理，稳定性治理体系的建设？</strong></p>
+<p><code>稳定性治理，首要目标，是要确认稳定性的衡量指标；其次要具有构造仿真环境的能力，在复杂环境下要具有系统监控能力，同时整个体系要能实现自动化运行维护具有平台能力。</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">稳定性衡量指标？</span><br><span class="line">稳定性环境监控？</span><br><span class="line">稳定性测试策略？</span><br><span class="line">自动化稳定性平台建设？</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><em><strong>稳定性衡量指标?</strong></em><br><code>系统稳定；一般是指系统在定义的状态下稳定运行，且长时间不会出现异常状态,常见的异常如下：</code></p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">崩溃率</span><br><span class="line">anr</span><br><span class="line">内存泄露</span><br><span class="line">oom</span><br><span class="line">系统性能</span><br></pre></td></tr></table></figure>
+<ul>
+<li><em>崩溃率</em><br><code>崩溃是稳定性的最大对手；通常关注的崩溃是crash；关注崩溃率，一般关注日崩溃率和崩溃用户率； </code><ul>
+<li>日崩溃率=日崩溃次数/日打开总次数        合规标准：0.2%</li>
+<li>崩溃用户数=去重的崩溃用户数/日活跃用户数    合规标准：0.2%</li>
+</ul>
+</li>
+<li><em>anr</em><br><code>anr即(Application Not Response);常会直接暴露给用户，照成不好影响;</code></li>
+<li><em>内存泄露</em><br><code>系统占用的堆内存未及时释放或无法释放，从而导致占用的内存一直递增，从而导致环境资源不足;</code></li>
+<li><em>oom</em><br><code>app申请的内存超过最大内存的限制，系统不分配内存，导致程序崩溃;</code></li>
+<li><em>系统性能</em><br><code>指在不同场景下对系统或环境的资源消耗进行监控，常监控系统资源和消耗的资源;</code></li>
+</ul>
+</li>
+<li><p><em><strong>系统稳定性监控？</strong></em></p>
+<p>  <code>系统稳定，说明系统在全局环境下，都能长期稳定的运行；揭释了稳定性检测的核心的几个点，异常环境构造，稳定运行指标监控，长期稳定性；</code></p>
+<ul>
+<li><em>稳定性指标</em><br><code>本文的指标监控，仅对前端的相关的指标进行监控；后端服务的监控，有运维在做;</code><ul>
+<li><p>服务及时响应/且响应参数无误</p>
+<ul>
+<li>场景：如接口监控，特指对后端服务进行监控;</li>
+<li>指标：一般监控服务相关指标（如接口响应时间/参数准确性）,资源监控（cpu/内存/带宽/io），消耗资源（流量/电量）;</li>
+<li>方案：可通过仅触发服务的方式，仅对服务进行监控，如接口自动化；可通过前端触发服务来实现监控，如ui自动化实现接口覆盖；系统资源消耗可通过监控系统资源文件获取；系统监控可通过后端方案实现，如prometheus；</li>
+</ul>
+</li>
+<li><p>前端加载时间满足用户体验/呈现无误</p>
+<ul>
+<li>场景：触发前端场景，来实现对产品提供给用户的服务进行监控；</li>
+<li>指标：页面加载时间/页面UI测试/前端资源检测；</li>
+<li>方案：可通过UI自动化，UI遍历等方式实现；数据采集可通过获取activity的响应时间获取；UI测试可通过telescop植入性来实现；</li>
+</ul>
+</li>
+<li><p>前端稳定性</p>
+<ul>
+<li>场景：稳定性是最核心的指标，稳定指服务稳定不崩溃，不抛出异常；</li>
+<li>指标：<ul>
+<li>crash率：通过监控crash文件进行采集；</li>
+<li>anr率：通过监控anr文件进行采集；</li>
+<li>内存泄露：通过LeakCanary监控内存泄露,通过haha来解析hprf文件，来分析Java虚拟机的内存使用清空；</li>
+<li>hprf:hprof最初是由J2SE支持的一种二进制堆转储格式，hprof文件保存了当前java堆上所有的内存使用信息，能够完整的反映虚拟机当前的内存状态；</li>
+<li>oom：通过字节的tailor来进行监控；</li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzI1MzYzMjE0MQ==&mid=2247487203&idx=1&sn=182584b69910c843ae95f60e74127249&chksm=e9d0c501dea74c178e16f95a2ffc5007c5dbca89a02d56895ed9b05883cf0562da689ac6146b&scene=178&cur_album_id=1590413073616519171#rd">oom问题监控</a></li>
+<li>方案<ul>
+<li>稳定性在不同的场景下有着不同的表现；可以通过这些方式来实现场景的覆盖；ui遍历/暴力回放/monkey测试/流量回放；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>其他监控</p>
+<ul>
+<li>场景：除了上述指标外，我们还会对以下指标进行监控，以评估对系统的影响;</li>
+<li>指标：<ul>
+<li>UI资源监控：图片过大/图片持有/过度绘制/资源泄露/过度布局</li>
+<li>线程阻塞</li>
+<li>文件创建</li>
+<li>线程创建</li>
+<li>主线程io</li>
+<li>启动性能</li>
+</ul>
+</li>
+<li>方案：使用telescop的植入性和监控能力来监控；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em><strong>稳定性测试策略？</strong></em><br><code>稳定性测试时，有几个核心待解决的问题；如何解决真实环境下各种复杂环境的覆盖？如何保证效率，实现低投入高产出？如何保证采集的指标和问题场景结合，快速复现？</code></p>
+<ul>
+<li><p><em>如何保证覆盖率？覆盖率是如何计算的？</em><br><code>稳定性治理，在复杂环境下要保证全覆盖时不可能实现的工作；因此我们考虑实现一种可迭代优化的机制保证覆盖，保障系统的稳定，通常我们考虑系统覆盖时，从页面覆盖和代码逻辑的覆盖来实现;</code></p>
+<ul>
+<li>覆盖率指标：<ul>
+<li>页面场景覆盖：activity覆盖70%；覆盖所有的一级页面和所有的核心二级页面以及所有的主流程相关的三四级页面；覆盖所有的核心业务流程；</li>
+<li>代码行覆盖：可通过白盒走查或者代码检测工具；单测实现代码的覆盖；覆盖所有核心流程和代码的核心处理逻辑；</li>
+</ul>
+</li>
+<li>覆盖率保障策略：<ul>
+<li>终端覆盖：设备信息采集，通过埋点采集线上设备数据；至少要保证top10的设备能实现覆盖；保障top5系统版本能实现覆盖；top5-10的os版本能实现覆盖；</li>
+<li>预装版本：最好能实现需预装的机型的覆盖；否则至少要保证覆盖前一个机型，相同配置的版本的设备不低于10台；</li>
+<li>需要有问题统计/上报机制；能收集线上问题进行统计归纳，方便策略的设计和混度工程的实现；</li>
+<li>覆盖所有的核心链路，及70%的页面（所有一级页面，所有核心二级页面，所有核心三级页面）</li>
+<li>时间：看具体的策略，monkey一般不低于一天，也就是8小时；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em>测试方式？各种方式的优缺点？</em></p>
+<ul>
+<li><p>UI遍历测试<br>  <code>UI遍历，指利用爬虫和过滤策略，实现从头遍历所有页面；</code></p>
+<ul>
+<li>优点：实现所有流程/页面的覆盖，能保证较高的覆盖率；</li>
+<li>缺点：耗时太久，无法模仿真实的用户操作，对测试版本或者测试环境有要求；很难构造高压力的场景；</li>
+<li>方案：AppCrawler实现；</li>
+</ul>
+</li>
+<li><p>暴力回放<br><code>暴力回放，指通过频繁对某些场景进行循环操作，来实现对核心场景的覆盖，此策略传音要求必须要做;</code></p>
+<ul>
+<li>优点：可对核心场景进行大量覆盖，保证核心链路无误；</li>
+<li>缺点：能覆盖的场景有限，耗时较长；较难覆盖到特殊场景；</li>
+<li>场景：通过UI自动化脚本实现循环遍历；</li>
+</ul>
+</li>
+<li><p>monkey随机遍历<br><code>monkey是Android自带的稳定性治理的工具，也是稳定性治理的核心方式，能模仿用户进行随机性的点击操作；</code></p>
+<ul>
+<li>优点：实现简单，有较强的随机性，能发现一些特殊问题；</li>
+<li>缺点：过于随机，不能保证覆盖率，无法模仿真实用户的操作；</li>
+<li>方案：针对monkey过于随机的缺陷，为保证效率，可对monkey的策略进行定制化，具体实现如下：<ul>
+<li>通过黑名单策略，跳过低频操作（如新手引导、权限类操作、关闭输入法，屏蔽其他应用的activity减少无效操作）；</li>
+<li>通过白名单策略，定制执行的activity和app,减少无效操作；</li>
+<li>定制事件比例，提高测试效率；</li>
+<li>执行时间，一般不低于一天，也就是8小时；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>线上流量回放<br><code>线上流量回放，指利用线上的日志数据记录的用户行为，作为源数据来建模，模仿用户操作;</code></p>
+<ul>
+<li>优点：覆盖大量的真实用户操作，case有效性高，针对性强；</li>
+<li>缺点：需要利用大量的线上日志，对系统的要求高；利用线上日志进行回放，实现难度大；利用线上用户数据，会存在隐私安全问题；</li>
+<li>方案：可使用头条的智能化monkey工具，fastbot;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em>具体实现，如何保证效率？</em><br><code>结合上诉几种方案的优缺点，可知，最好能四种方案结合着使用；</code></p>
+<ul>
+<li>新发功能版本：最好先执行一遍UI遍历（冒烟）/monkey遍历（每日）/流量回放（bug修复版本）</li>
+<li>RC版本：可执行流量回放/暴力回放</li>
+<li>预装版本：可执行流量回放/暴力回放</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em><strong>自动化稳定性平台的建设</strong></em></p>
+</li>
+</ul>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/L7RTCzqQ-1GbNhMNHONdRw"><strong>阿里稳定性治理</strong></a></li>
+<li><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1590413073616519171&scene=173&from_msgid=2247487203&from_itemidx=1&count=3&nolastread=1#wechat_redirect"><strong>头条稳定性治理系列</strong></a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>稳定性</tag>
+        <tag>头条</tag>
+        <tag>阿里</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>类对象/实例对象/类方法/实例方法/静态方法</title>
     <url>/posts/93899372/</url>
     <content><![CDATA[<ul>
@@ -1525,19 +1479,6 @@
       </categories>
       <tags>
         <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>稳定性治理-暴力回放</title>
-    <url>/posts/81de0e43/</url>
-    <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
-<h4 id="覆盖场景"><a href="#覆盖场景" class="headerlink" title="覆盖场景"></a>覆盖场景</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">music首页，点击歌单播放按钮播放，然后息屏进入后台，10s后切换回前台；</span><br><span class="line">music首页，点开播放列表，然后点击music播放音乐，然后关闭播放列表，然后切换到后台，10s后切换回前台；</span><br><span class="line">music首页，进入歌单，点击全部播放，点击全部下载，然后返回首页，上下滑动一屏，然后切换回后台，10s后切换回前台；</span><br><span class="line">music首页，点击头像登录，退出，切换到后台，10s后切换回前台；</span><br><span class="line">treding首页，点击任意music播放，切换到后台，10s后回到前台，关闭播放详情页；</span><br><span class="line">首页，滑动到treding页，上下滑动一屏；然后向左滑动一屏，上下滑动一屏，然后向左滑动一屏，上下滑动一屏,然后向左滑动一屏，上下滑动一屏,然后切换到后台，停留10s;然后点击导航页到library页，然后点击导航页到search页，然后点击导航页到music页；</span><br><span class="line">搜索页，搜索music，搜索结果页左右滚动一屏；点击结果页播放，然后切换到后台休眠10s,在切换回前台;</span><br><span class="line">首页，点击导航页进入library页；点击进入喜欢的music页，点击全部播放；然后切换到后台，停留10s，在切换回前台，退出music页，切换回首页；</span><br><span class="line">首页，切换到buzz页；上下滑动两屏，点击buzz关注按钮，buzz点赞，buzz评论，点击查看buzz详情，然后回退到buzz页，然后在切换到后台，休眠10s，在切换回前台；</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>稳定性</tag>
-        <tag>暴力回放</tag>
       </tags>
   </entry>
   <entry>
@@ -1766,7 +1707,7 @@
       </tags>
   </entry>
   <entry>
-    <title>质量体系--测试设计</title>
+    <title>质量保障体系--测试设计</title>
     <url>/posts/9eaf5086/</url>
     <content><![CDATA[<p><code>作为一个测试，最核心的工作是保障产品/服务的质量；不管是通过流程，手工测试，还是脚本工具，都是为最终目的服务的，我写这篇文章的最终目的，是为了测试设计能成为一个标准作业；测试一个产品/需求的标准链路如下：</code></p>
 <h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><ul>
@@ -1774,8 +1715,10 @@
 <li><strong>分析信息</strong></li>
 <li><strong>测试设计</strong></li>
 <li><strong>测试执行</strong></li>
-<li><strong>归纳并标准化</strong></li>
-<li>各单功能的标准件 <span id="more"></span></li>
+<li><strong>归纳并标准化</strong><ul>
+<li><strong>各单功能的标准件</strong> <span id="more"></span></li>
+</ul>
+</li>
 </ul>
 <h2 id="收集信息"><a href="#收集信息" class="headerlink" title="收集信息"></a><strong>收集信息</strong></h2><p><code>要保证充足的测试，仅仅依赖需求和设计文档是不够的；尤其是我们的需求往往是不够完善的；可参考的信息来源如下，其组织形式也体现了信息收集和提炼过程：</code><br><img src="/text_image/%E6%B5%8B%E8%AF%95%E4%BB%BB%E5%8A%A1%E4%BF%A1%E6%81%AF%E6%9D%A5%E6%BA%90.png" alt="alt text"></p>
 <h2 id="分析信息"><a href="#分析信息" class="headerlink" title="分析信息"></a><strong>分析信息</strong></h2><p><code>分析信息是将收集到的信息，提炼、重组、输出成测试大纲的过程；快速信息提炼可用SFDIPOT方法；但一般还是会用MFQ方法来建立测试大纲；具体如下：</code></p>
