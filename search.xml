@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>职业--传易工作总结</title>
+    <url>/posts/1f2a7309/</url>
+    <content><![CDATA[<p><strong>重要文件，无权限访问，请联系站长授权</strong></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>稳定性--ANR治理</title>
+    <url>/posts/1ee32bf1/</url>
+    <content><![CDATA[<h1 id="ANR治理"><a href="#ANR治理" class="headerlink" title="ANR治理"></a>ANR治理</h1><ul>
+<li><em><strong>大纲</strong></em></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">anr是什么？</span><br><span class="line">为什么会产生anr?</span><br><span class="line">anr是怎样产生的，哪些场景下会产生？</span><br><span class="line">anr如何治理？</span><br><span class="line">解决anr问题的价值？</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<ul>
+<li><strong>anr是什么？</strong><br>  <code>anr(Applicatipon No Response),即应用无响应；本质是一个性能问题；在用户和app进行交互时，常会遇到长时间无响应/卡顿的场景；为了改善性能，Android设计了anr的机制，即保证交互能在一定时间内完成，如果未完成，就抛出异常，也就是ANR;   </code></li>
+<li><strong>anr设计机制：</strong><br>  <code>是系统通过与之交互的组件(Activity，Service，Receiver，Provider)以及用户交互(InputEvent)进行超时监控，以判断应用进程(主线程)是否存在卡死或响应过慢的问题，通俗来说就是很多系统中看门狗(watchdog)的设计思想。   </code><ul>
+<li><strong>不同的组件，系统设置的超时时间是不同的，这个时间不同手机厂商的os可能也会做调整：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
+<li><strong>系统抛出anr的机制：</strong><br><code>在进行相关的操作前，系统会基于当前的时间戳和这个类型组件的超时时间设置，计算出超时时间戳；并将超时时间戳传递给anr触发函数，组件若未超时启动，则会在启动成功后，在传递一个参数给anr函数来阻止触发anr;若到超时时间，anr函数还未收到阻止信号，就会触发ANR(类似构建了个定时触发的任务)； </code></li>
+<li><strong>超时触发流程如下：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
+</ul>
+</li>
+</ul>
+<p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1780091311874686979&scene=173&from_msgid=2247488558&from_itemidx=1&count=3&nolastread=1&uin=&key=&devicetype=Windows+10+x64&version=63030532&lang=zh_CN&ascene=0&fontgear=2">头条anr治理系列</a></p>
+<p><a href="https://mp.weixin.qq.com/s/L30s7rOyn6NcPC2y9XNZIQ">百度anr治理</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>anr</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Android资源采集</title>
     <url>/posts/0/</url>
     <content><![CDATA[<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><span id="more"></span>
@@ -36,178 +70,6 @@
       </categories>
       <tags>
         <tag>Android</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>稳定性--ANR治理</title>
-    <url>/posts/1ee32bf1/</url>
-    <content><![CDATA[<h1 id="ANR治理"><a href="#ANR治理" class="headerlink" title="ANR治理"></a>ANR治理</h1><ul>
-<li><em><strong>大纲</strong></em></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">anr是什么？</span><br><span class="line">为什么会产生anr?</span><br><span class="line">anr是怎样产生的，哪些场景下会产生？</span><br><span class="line">anr如何治理？</span><br><span class="line">解决anr问题的价值？</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<ul>
-<li><strong>anr是什么？</strong><br>  <code>anr(Applicatipon No Response),即应用无响应；本质是一个性能问题；在用户和app进行交互时，常会遇到长时间无响应/卡顿的场景；为了改善性能，Android设计了anr的机制，即保证交互能在一定时间内完成，如果未完成，就抛出异常，也就是ANR;   </code></li>
-<li><strong>anr设计机制：</strong><br>  <code>是系统通过与之交互的组件(Activity，Service，Receiver，Provider)以及用户交互(InputEvent)进行超时监控，以判断应用进程(主线程)是否存在卡死或响应过慢的问题，通俗来说就是很多系统中看门狗(watchdog)的设计思想。   </code><ul>
-<li><strong>不同的组件，系统设置的超时时间是不同的，这个时间不同手机厂商的os可能也会做调整：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
-<li><strong>系统抛出anr的机制：</strong><br><code>在进行相关的操作前，系统会基于当前的时间戳和这个类型组件的超时时间设置，计算出超时时间戳；并将超时时间戳传递给anr触发函数，组件若未超时启动，则会在启动成功后，在传递一个参数给anr函数来阻止触发anr;若到超时时间，anr函数还未收到阻止信号，就会触发ANR(类似构建了个定时触发的任务)； </code></li>
-<li><strong>超时触发流程如下：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
-</ul>
-</li>
-</ul>
-<p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1780091311874686979&scene=173&from_msgid=2247488558&from_itemidx=1&count=3&nolastread=1&uin=&key=&devicetype=Windows+10+x64&version=63030532&lang=zh_CN&ascene=0&fontgear=2">头条anr治理系列</a></p>
-<p><a href="https://mp.weixin.qq.com/s/L30s7rOyn6NcPC2y9XNZIQ">百度anr治理</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>anr</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SOLOPI使用教程</title>
-    <url>/posts/49e140/</url>
-    <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<ul>
-<li><p><em><strong>介绍</strong></em></p>
-<p>  <code>solopi是支付宝团队研发的ui自动化工具;支持UI录制回放，录制脚本的编辑/扩展/转换成appium脚本/录制脚本支持分发到其他的设备执行；同时还支持性能测试和一机多控，执行采集各种性能数据，同时支持通过一台设备控制多台设备的行为；</code></p>
-</li>
-<li><p><em><strong>使用指南</strong></em></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">环境准备</span><br><span class="line">app配置</span><br><span class="line">录制</span><br><span class="line">回放</span><br><span class="line">性能测试</span><br><span class="line">一机多控</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>环境准备</strong></p>
-<ul>
-<li><p><em>下载配置Androidsdk</em></p>
-<ul>
-<li>地址:<a href="https://developer.android.com/studio/releases/platform-tools#downloads">https://developer.android.com/studio/releases/platform-tools#downloads</a></li>
-<li>操作：下载安装完Android调试工具后，在下载对应系统版本的 SDK Platform Tools，配置好环境变量，注意win10以上系统环境变量配置即生效，低版本需要重启pc才能生效；</li>
-</ul>
-</li>
-<li><p><em>给手机授权</em></p>
-<ul>
-<li>操作：进入开发者模式，并授权usb调试权限；</li>
-</ul>
-</li>
-<li><p><em>检测环境并连接wifi</em></p>
-<ul>
-<li>操作：通过adb devices命令检测，同时要连接wifi;</li>
-</ul>
-</li>
-<li><p><em>建立连接</em></p>
-<ul>
-<li>操作：通过pc的cmd启动服务,输入（adb tcpip 5555）</li>
-</ul>
-</li>
-<li><p><em>下载solopi的apk</em></p>
-<ul>
-<li>地址：<a href="https://github.com/alipay/SoloPi/releases/download/v0.11.2/SoloPi_0.11.2.apk">apk点击下载</a></li>
-<li>操作：下载安装后，通过配置授权</li>
-<li>环境配置：<a href="https://github.com/alipay/SoloPi/wiki/FirstUse">地址跳转参考内容</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>app配置</strong></p>
-<p>  <code>按需配置，一般不需要进行配置；可参考上方的环境配置</code></p>
-</li>
-<li><p><strong>录制/回放</strong></p>
-<ul>
-<li><a href="https://github.com/alipay/SoloPi/wiki/RecordCase"><em>官方教程</em></a></li>
-<li>录制：录制支持直接对收到操作进行录制，且录制的脚本支持编辑/扩展/保存/导入等操作，支持各类操作和断言，支持图像识别，简单方便；</li>
-<li>回放：回放支持单脚本回放，支持批量回放，支持重复播放；</li>
-<li>优点：操作简单，可扩展编辑定制策略，可同步到其他设备，可重复回放支持暴力遍历；</li>
-<li>缺点：不支持持续集成，需要手动触发；</li>
-</ul>
-</li>
-<li><p><strong>性能测试</strong></p>
-<ul>
-<li><a href="https://github.com/alipay/SoloPi/wiki/Performance"><em>官方教程</em></a></li>
-<li>操作：性能测试时，直接勾选需要监控的性能指标，不进行录制则可以实时查看；进行录制时，点击录制按钮开始录制，录制结束后点击录制结束按钮，录制的性能数据会存储下来，支持图表分析，可同时存储多份性能数据；</li>
-<li>优点：支持实时查看场景的性能，可和业务测试结合方便简单；支持性能录制，可和UI自动化结合，查看各场景的性能变化和差异；</li>
-<li>缺点：不支持续集成，利用脚本进行回放时不支持性能监控；</li>
-</ul>
-</li>
-<li><p><strong>一机多控</strong></p>
-<ul>
-<li>[<em>官方教程</em>]</li>
-<li>操作：多台设备上同时安装solopi和待测APP；做好配置和授权操作，同时主机（控制机）选中一机多控，选中为主机；其他设备点击一机多控，选中为从机；然后用主机扫码录入从机，然后在主机点击建立主从机的连接，然后主机点击录屏按钮，开始进行一机多控操作；原理是利用solopi的录屏回放功能，主机录屏，从机回放；</li>
-<li>优点：可以用一台机器，控制多台设备操作，能有效的覆盖兼容性测试；</li>
-<li>缺点：不支持ios系统；由于是先录制，在回放，因此所有设备都需要有网络，且必须是同一局域网，且存在延时；不支持批量操作时，同时监控性能数据；</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p><em><strong>和业务结合</strong></em></p>
-<p>  <code>和业务结合使用前，需要先梳理清楚solopi的优缺点：</code></p>
-<p>  优点：</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">支持录制UI自动化，且录制的脚本支持编辑自定义，且无环境依赖；</span><br><span class="line">录制的脚本可以导出在任意设备上回放，或者转换成appium脚本；</span><br><span class="line">支持回放管理，支持批量回放和重复回放；</span><br><span class="line">支持性能测试，实时监控APP性能和录制APP的性能；</span><br><span class="line">支持一机多控，可同时控制多台设备；</span><br></pre></td></tr></table></figure>
-
-<p>  缺点：</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">不支持iOS设备，仅支持Android设备；</span><br><span class="line">工具是一款纯功能测试辅助软件，不支持持续集成；</span><br><span class="line">功能过于离散，几个功能不能结合在一起使用；</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>和业务结合：</strong></p>
-<ul>
-<li><p><em>rc验收阶段：</em><br><code>建议功能测试完毕且无误后，最后在rc验收一遍，主流程，验收时进行功能&quot;录制&quot;,录制的脚本可定期回放/开发了相关功能时进行回放/也可以通过Jenkins触发回放;</code></p>
-</li>
-<li><p><em>灰度/线上验收阶段：</em><br><code>建议测试进行线上验收时，进行录制，录制的脚本，可通过扩展进行定期回放；</code></p>
-</li>
-<li><p><em>冒烟/功能测试/rc验收阶段：</em><br><code>建议以上阶段，进行测试验收时，打开性能测试监控，观察功能场景有没用性能问题；</code></p>
-</li>
-<li><p><em>冒烟/兼容性测试阶段：</em><br><code>可以使用一机多控功能，进行兼容性测试；但此功能对控制的终端有要求，最好有固定的兼容环境；</code></p>
-</li>
-<li><p><em>稳定性治理/预装版本暴力回放：</em><br><code>使用重复回放功能进行暴力回放；</code></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em><strong>下一步：</strong></em></p>
-</li>
-</ul>
-<p><a href="https://github.com/alipay/SoloPi"><em>Solopi github</em>_</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>ui自动化</tag>
-        <tag>稳定性</tag>
-        <tag>前端性能</tag>
-        <tag>solopi</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>UI自动化框架说明</title>
-    <url>/posts/411091fa/</url>
-    <content><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`
-</code></pre>
-<p>___ 大纲 ___</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">框架的整体结构</span><br><span class="line">代码模块的结构，文件说明</span><br><span class="line">框架的执行过程</span><br><span class="line">框架优化&#x2F;改动以适应我们产品</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<p>___ 框架整体结构 ___<br><img src="/text_image/ui%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%B6%E6%9E%84.png" alt="alt_text"></p>
-<p><code>框架整体构成由五部分构成；分别是runner(入口)/TestCase(控制层)/PageObject(逻辑层)/日志文件/yaml配置模块/报告模块 </code></p>
-<p>___ runner(入口) ___</p>
-<p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>UI自动化基础--微软</title>
-    <url>/posts/d1646a55/</url>
-    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>UI</tag>
       </tags>
   </entry>
   <entry>
@@ -357,6 +219,150 @@
       </tags>
   </entry>
   <entry>
+    <title>UI自动化基础--微软</title>
+    <url>/posts/d1646a55/</url>
+    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>UI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UI自动化框架说明</title>
+    <url>/posts/411091fa/</url>
+    <content><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`
+</code></pre>
+<p>___ 大纲 ___</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">框架的整体结构</span><br><span class="line">代码模块的结构，文件说明</span><br><span class="line">框架的执行过程</span><br><span class="line">框架优化&#x2F;改动以适应我们产品</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<p>___ 框架整体结构 ___<br><img src="/text_image/ui%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%B6%E6%9E%84.png" alt="alt_text"></p>
+<p><code>框架整体构成由五部分构成；分别是runner(入口)/TestCase(控制层)/PageObject(逻辑层)/日志文件/yaml配置模块/报告模块 </code></p>
+<p>___ runner(入口) ___</p>
+<p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>SOLOPI使用教程</title>
+    <url>/posts/49e140/</url>
+    <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<ul>
+<li><p><em><strong>介绍</strong></em></p>
+<p>  <code>solopi是支付宝团队研发的ui自动化工具;支持UI录制回放，录制脚本的编辑/扩展/转换成appium脚本/录制脚本支持分发到其他的设备执行；同时还支持性能测试和一机多控，执行采集各种性能数据，同时支持通过一台设备控制多台设备的行为；</code></p>
+</li>
+<li><p><em><strong>使用指南</strong></em></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">环境准备</span><br><span class="line">app配置</span><br><span class="line">录制</span><br><span class="line">回放</span><br><span class="line">性能测试</span><br><span class="line">一机多控</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>环境准备</strong></p>
+<ul>
+<li><p><em>下载配置Androidsdk</em></p>
+<ul>
+<li>地址:<a href="https://developer.android.com/studio/releases/platform-tools#downloads">https://developer.android.com/studio/releases/platform-tools#downloads</a></li>
+<li>操作：下载安装完Android调试工具后，在下载对应系统版本的 SDK Platform Tools，配置好环境变量，注意win10以上系统环境变量配置即生效，低版本需要重启pc才能生效；</li>
+</ul>
+</li>
+<li><p><em>给手机授权</em></p>
+<ul>
+<li>操作：进入开发者模式，并授权usb调试权限；</li>
+</ul>
+</li>
+<li><p><em>检测环境并连接wifi</em></p>
+<ul>
+<li>操作：通过adb devices命令检测，同时要连接wifi;</li>
+</ul>
+</li>
+<li><p><em>建立连接</em></p>
+<ul>
+<li>操作：通过pc的cmd启动服务,输入（adb tcpip 5555）</li>
+</ul>
+</li>
+<li><p><em>下载solopi的apk</em></p>
+<ul>
+<li>地址：<a href="https://github.com/alipay/SoloPi/releases/download/v0.11.2/SoloPi_0.11.2.apk">apk点击下载</a></li>
+<li>操作：下载安装后，通过配置授权</li>
+<li>环境配置：<a href="https://github.com/alipay/SoloPi/wiki/FirstUse">地址跳转参考内容</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>app配置</strong></p>
+<p>  <code>按需配置，一般不需要进行配置；可参考上方的环境配置</code></p>
+</li>
+<li><p><strong>录制/回放</strong></p>
+<ul>
+<li><a href="https://github.com/alipay/SoloPi/wiki/RecordCase"><em>官方教程</em></a></li>
+<li>录制：录制支持直接对收到操作进行录制，且录制的脚本支持编辑/扩展/保存/导入等操作，支持各类操作和断言，支持图像识别，简单方便；</li>
+<li>回放：回放支持单脚本回放，支持批量回放，支持重复播放；</li>
+<li>优点：操作简单，可扩展编辑定制策略，可同步到其他设备，可重复回放支持暴力遍历；</li>
+<li>缺点：不支持持续集成，需要手动触发；</li>
+</ul>
+</li>
+<li><p><strong>性能测试</strong></p>
+<ul>
+<li><a href="https://github.com/alipay/SoloPi/wiki/Performance"><em>官方教程</em></a></li>
+<li>操作：性能测试时，直接勾选需要监控的性能指标，不进行录制则可以实时查看；进行录制时，点击录制按钮开始录制，录制结束后点击录制结束按钮，录制的性能数据会存储下来，支持图表分析，可同时存储多份性能数据；</li>
+<li>优点：支持实时查看场景的性能，可和业务测试结合方便简单；支持性能录制，可和UI自动化结合，查看各场景的性能变化和差异；</li>
+<li>缺点：不支持续集成，利用脚本进行回放时不支持性能监控；</li>
+</ul>
+</li>
+<li><p><strong>一机多控</strong></p>
+<ul>
+<li>[<em>官方教程</em>]</li>
+<li>操作：多台设备上同时安装solopi和待测APP；做好配置和授权操作，同时主机（控制机）选中一机多控，选中为主机；其他设备点击一机多控，选中为从机；然后用主机扫码录入从机，然后在主机点击建立主从机的连接，然后主机点击录屏按钮，开始进行一机多控操作；原理是利用solopi的录屏回放功能，主机录屏，从机回放；</li>
+<li>优点：可以用一台机器，控制多台设备操作，能有效的覆盖兼容性测试；</li>
+<li>缺点：不支持ios系统；由于是先录制，在回放，因此所有设备都需要有网络，且必须是同一局域网，且存在延时；不支持批量操作时，同时监控性能数据；</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><em><strong>和业务结合</strong></em></p>
+<p>  <code>和业务结合使用前，需要先梳理清楚solopi的优缺点：</code></p>
+<p>  优点：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">支持录制UI自动化，且录制的脚本支持编辑自定义，且无环境依赖；</span><br><span class="line">录制的脚本可以导出在任意设备上回放，或者转换成appium脚本；</span><br><span class="line">支持回放管理，支持批量回放和重复回放；</span><br><span class="line">支持性能测试，实时监控APP性能和录制APP的性能；</span><br><span class="line">支持一机多控，可同时控制多台设备；</span><br></pre></td></tr></table></figure>
+
+<p>  缺点：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">不支持iOS设备，仅支持Android设备；</span><br><span class="line">工具是一款纯功能测试辅助软件，不支持持续集成；</span><br><span class="line">功能过于离散，几个功能不能结合在一起使用；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>和业务结合：</strong></p>
+<ul>
+<li><p><em>rc验收阶段：</em><br><code>建议功能测试完毕且无误后，最后在rc验收一遍，主流程，验收时进行功能&quot;录制&quot;,录制的脚本可定期回放/开发了相关功能时进行回放/也可以通过Jenkins触发回放;</code></p>
+</li>
+<li><p><em>灰度/线上验收阶段：</em><br><code>建议测试进行线上验收时，进行录制，录制的脚本，可通过扩展进行定期回放；</code></p>
+</li>
+<li><p><em>冒烟/功能测试/rc验收阶段：</em><br><code>建议以上阶段，进行测试验收时，打开性能测试监控，观察功能场景有没用性能问题；</code></p>
+</li>
+<li><p><em>冒烟/兼容性测试阶段：</em><br><code>可以使用一机多控功能，进行兼容性测试；但此功能对控制的终端有要求，最好有固定的兼容环境；</code></p>
+</li>
+<li><p><em>稳定性治理/预装版本暴力回放：</em><br><code>使用重复回放功能进行暴力回放；</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em><strong>下一步：</strong></em></p>
+</li>
+</ul>
+<p><a href="https://github.com/alipay/SoloPi"><em>Solopi github</em>_</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>ui自动化</tag>
+        <tag>稳定性</tag>
+        <tag>前端性能</tag>
+        <tag>solopi</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>HEXO 官方使用指南</title>
     <url>/posts/4a17b156/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -378,38 +384,38 @@
 ]]></content>
   </entry>
   <entry>
-    <title>python-多进程</title>
-    <url>/posts/a1c10886/</url>
-    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python多进程简述</span><br><span class="line">python多进程模块方法介绍</span><br><span class="line">python多进程使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    <title>Python语法-unittest</title>
+    <url>/posts/5b3a24b8/</url>
+    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">unittest介绍</span><br><span class="line">unittest使用教程</span><br><span class="line">unittest中的方法说明</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
 
-<ul>
-<li><p><em><strong>python多进程模块简述：</strong></em></p>
-<p>  <code>python由于GIL机制，多线程，实际仅消耗一个内核资源；因此效率较低，python要实现并发，提高性能，只能使用多进程模块，python的多进程模块为multiprocessing，通过使用Pool类实现多进程；   </code></p>
-</li>
-<li><p><em><strong>python多进程模块方法介绍：</strong></em></p>
-<p>  <code>   python多进程模块为multiprocessing，为python的内置模块；通过该模块封装的Pool()对象实现多进程，Pool类的属性介绍如下：</code></p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()	#需要被执行的方法&#x2F;任务</span><br><span class="line">iter&#x3D;iter	#迭代对象，list&#x2F;变量值</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(3)	#创建一个仅容纳3个进程的进程池，一旦工作任务超出进程的数量，则需等待，进程池中的进程被释放，任务才能进入进程池；</span><br><span class="line">__init__(self, group&#x3D;None, target&#x3D;None, name&#x3D;None, args&#x3D;(), kwargs&#x3D;&#123;&#125;)	#进程池的构造方法</span><br><span class="line">group：进程池所属的进程组，一旦不需要给值；</span><br><span class="line">target：待处理的任务或方法；</span><br><span class="line">name：进程池的别名，默认不给值；</span><br><span class="line">args：调用对象的位置参数，可给值元组&#x2F;列表等可迭代对象或者参数值；</span><br><span class="line">kwargs：调用对象的字典参数；</span><br><span class="line"></span><br><span class="line">使用：在win环境下，进程池必须在当前模块下执行，即必须在 if __name__&#x3D;&#x3D;main:下执行；</span><br></pre></td></tr></table></figure>
 
+<h4 id="unittest介绍"><a href="#unittest介绍" class="headerlink" title="unittest介绍"></a>unittest介绍</h4><p><code>unnittest是Python中使用的单测模块，能实现对模块，类，方法的自动调用执行，断言测试，环境管理，结果输出的功能</code></p>
+<p><strong>原理:</strong></p>
+<p>unittest构成要素，主要由以下几部分组成:</p>
 <ul>
-<li><strong>Pool()类中拥有的属性方法如下：</strong></li>
-</ul>
-<ul>
-<li>pool.map()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br></pre></td></tr></table></figure></li>
-<li>pool.map_async(run,iter)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map_async(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map_async(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br><span class="line">---效果和pool.map()不相同，mapasyc效率更高；mapasyc主进程未阻塞进程池，不需要等该批次的进程全执行完，新的任务就能进入进程池执行；常用pool.map()</span><br></pre></td></tr></table></figure></li>
-<li>pool.apply()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]])</span><br><span class="line">apply,参数需要为具体的变量值，且仅在python2支持；</span><br><span class="line">apply方法的原理是，阻塞进程池，一次仅让一个任务进入进程池，该任务完成后，才能执行下一个任务，实际是串行；</span><br></pre></td></tr></table></figure></li>
-<li>pool.applyasyc()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]],[, callback&#x3D;None]]])</span><br><span class="line">   applyasyc,参数需要为具体的变量值，在python3上支持；</span><br><span class="line">   applyasyc方法的原理是，进程池非阻塞，一次可以让多个任务进入进程池，且未对该批次任务进行阻塞，只要其中一个进程执行完后，就能释放资源，让新的任务进入进程池，实际是并行的,效率等同于mapasyc()；</span><br><span class="line">回调使用：pool.applyasyc(run,kwargs,callback&#x3D;func2)，run的返回作为func2的参数，执行完返回func2的值；</span><br><span class="line">   ---applyasyc效果等同于mapasyc()，只是他具有回调功能，且入参的变量不能是可迭代对象，必须为具体的变量值；</span><br></pre></td></tr></table></figure></li>
-<li>pool.terminal()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用：结束工作进程，不在处理未完成的任务</span><br><span class="line">pool.map(run,iter)</span><br><span class="line">pool.close()</span><br><span class="line">pool.run()</span><br><span class="line">sleep(2)</span><br><span class="line">pool.terminal()		#执行两秒后，哪怕进程未执行完，也结束该主进程</span><br></pre></td></tr></table></figure></li>
+<li>testcase:待测对象，待测对象必须要以test，类方法必须含test开头命名;</li>
+<li>TestLoader类：unittest中的类，用来获取模块中的待测对象；返回待测对象的列表；</li>
+<li>TestSuit：测试套件，将测试case加到套件，套件会根据加入的顺序来确认执行顺序；<ul>
+<li>该类的addTest方法，可将测试对象加到套件中，但对结构有要求，必须保持addTest(测试类(具体测试方法))，这种实现方案能保证最先加入套件的最先被执行；</li>
+<li>该类的另一个方法addTests,也可将测试对象加到套件中，但其对结构也有要求，必须保持addTests([测试类1(测试方法1)，测试类1（测试方法2）])</li>
+<li>这种方法能保证直接将获取的对象加入测试套件，执行顺序按加入套件的顺序，一般是按test的命名顺序：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">	testloader &#x3D; unittest.TestLoader()</span><br><span class="line">	# 获取测试类里面case名，以固定顺序数组返回</span><br><span class="line">	testnames &#x3D; testloader.loadTestsFromTestCase(t)</span><br><span class="line">	print(testnames)</span><br><span class="line">	suite &#x3D; unittest.TestSuite()</span><br><span class="line">	suite.addTest&#x2F;addTests(testnames)  </span><br><span class="line">	runn &#x3D; unittest.TextTestRunner(verbosity&#x3D;2)</span><br><span class="line">	runn.run(suite)</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">   suite &#x3D; unittest.TestSuite()</span><br><span class="line">   suite.addTest(sui.pa(Test_ap))	#支持加入对象是一个套件，以实现二次封装</span><br><span class="line">   runn &#x3D; unittest.TextTestRunner(verbosity&#x3D;2)</span><br><span class="line">   runn.run(suite)</span><br><span class="line">   </span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
-<li><p><em><strong>python多进程使用：</strong></em></p>
-</li>
+<li>TextTestRunner()类：unittest中的类；用来执行suit，控制测试case的执行，执行生成的是text的报告；如果是需要生成htmlt报告，则使用htmltestrunner;</li>
+<li>执行顺序：默认按case名称顺序来确认执行顺序，也可手动定制顺序，各suit来确定执行顺序；</li>
+<li>环境/前置/后置处理：使用unittest自带的方法，setUp/setDown,setUpClass setDownClass,其中前两个每个case执行前后都会分别执行前置后置处理；后两个在套件执行前后，分别执行签字和后置处理，且仅执行一次；</li>
+<li>断言：unittest提供了个钟断言方法，如下图:<br> <img src="/text_image/unitest%E6%96%AD%E8%A8%80.png" alt="alt_text"></li>
+<li>跳过某些测试case：可以使用unittest的skip装饰器，其中skip装饰器主要有3种;(@unittest.skip(reason)/@unittest.skipIf(condition,reason)/@unittest.skipUnless(condition,reason)/即在满足condition条件下跳过该用例，reason用于描述跳过的原因)</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()</span><br><span class="line">iter&#x3D;iter</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(multiprocessing.cpu_count())</span><br><span class="line">pool.map(run(),iter)</span><br><span class="line">pool.join()</span><br></pre></td></tr></table></figure>
+<p><a href="https://blog.51cto.com/u_2681882/2123613"><strong>参考：unitest使用详解</strong></a></p>
 ]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
       <tags>
-        <tag>python</tag>
-        <tag>多进程</tag>
+        <tag>unittest</tag>
+        <tag>参数化</tag>
       </tags>
   </entry>
   <entry>
@@ -453,38 +459,38 @@
       </tags>
   </entry>
   <entry>
-    <title>Python语法-unittest</title>
-    <url>/posts/5b3a24b8/</url>
-    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">unittest介绍</span><br><span class="line">unittest使用教程</span><br><span class="line">unittest中的方法说明</span><br></pre></td></tr></table></figure>
+    <title>python-多进程</title>
+    <url>/posts/a1c10886/</url>
+    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python多进程简述</span><br><span class="line">python多进程模块方法介绍</span><br><span class="line">python多进程使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <span id="more"></span>
 
-
-<h4 id="unittest介绍"><a href="#unittest介绍" class="headerlink" title="unittest介绍"></a>unittest介绍</h4><p><code>unnittest是Python中使用的单测模块，能实现对模块，类，方法的自动调用执行，断言测试，环境管理，结果输出的功能</code></p>
-<p><strong>原理:</strong></p>
-<p>unittest构成要素，主要由以下几部分组成:</p>
 <ul>
-<li>testcase:待测对象，待测对象必须要以test，类方法必须含test开头命名;</li>
-<li>TestLoader类：unittest中的类，用来获取模块中的待测对象；返回待测对象的列表；</li>
-<li>TestSuit：测试套件，将测试case加到套件，套件会根据加入的顺序来确认执行顺序；<ul>
-<li>该类的addTest方法，可将测试对象加到套件中，但对结构有要求，必须保持addTest(测试类(具体测试方法))，这种实现方案能保证最先加入套件的最先被执行；</li>
-<li>该类的另一个方法addTests,也可将测试对象加到套件中，但其对结构也有要求，必须保持addTests([测试类1(测试方法1)，测试类1（测试方法2）])</li>
-<li>这种方法能保证直接将获取的对象加入测试套件，执行顺序按加入套件的顺序，一般是按test的命名顺序：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">	testloader &#x3D; unittest.TestLoader()</span><br><span class="line">	# 获取测试类里面case名，以固定顺序数组返回</span><br><span class="line">	testnames &#x3D; testloader.loadTestsFromTestCase(t)</span><br><span class="line">	print(testnames)</span><br><span class="line">	suite &#x3D; unittest.TestSuite()</span><br><span class="line">	suite.addTest&#x2F;addTests(testnames)  </span><br><span class="line">	runn &#x3D; unittest.TextTestRunner(verbosity&#x3D;2)</span><br><span class="line">	runn.run(suite)</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">   suite &#x3D; unittest.TestSuite()</span><br><span class="line">   suite.addTest(sui.pa(Test_ap))	#支持加入对象是一个套件，以实现二次封装</span><br><span class="line">   runn &#x3D; unittest.TextTestRunner(verbosity&#x3D;2)</span><br><span class="line">   runn.run(suite)</span><br><span class="line">   </span><br></pre></td></tr></table></figure></li>
+<li><p><em><strong>python多进程模块简述：</strong></em></p>
+<p>  <code>python由于GIL机制，多线程，实际仅消耗一个内核资源；因此效率较低，python要实现并发，提高性能，只能使用多进程模块，python的多进程模块为multiprocessing，通过使用Pool类实现多进程；   </code></p>
+</li>
+<li><p><em><strong>python多进程模块方法介绍：</strong></em></p>
+<p>  <code>   python多进程模块为multiprocessing，为python的内置模块；通过该模块封装的Pool()对象实现多进程，Pool类的属性介绍如下：</code></p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()	#需要被执行的方法&#x2F;任务</span><br><span class="line">iter&#x3D;iter	#迭代对象，list&#x2F;变量值</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(3)	#创建一个仅容纳3个进程的进程池，一旦工作任务超出进程的数量，则需等待，进程池中的进程被释放，任务才能进入进程池；</span><br><span class="line">__init__(self, group&#x3D;None, target&#x3D;None, name&#x3D;None, args&#x3D;(), kwargs&#x3D;&#123;&#125;)	#进程池的构造方法</span><br><span class="line">group：进程池所属的进程组，一旦不需要给值；</span><br><span class="line">target：待处理的任务或方法；</span><br><span class="line">name：进程池的别名，默认不给值；</span><br><span class="line">args：调用对象的位置参数，可给值元组&#x2F;列表等可迭代对象或者参数值；</span><br><span class="line">kwargs：调用对象的字典参数；</span><br><span class="line"></span><br><span class="line">使用：在win环境下，进程池必须在当前模块下执行，即必须在 if __name__&#x3D;&#x3D;main:下执行；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Pool()类中拥有的属性方法如下：</strong></li>
+</ul>
+<ul>
+<li>pool.map()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br></pre></td></tr></table></figure></li>
+<li>pool.map_async(run,iter)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map_async(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map_async(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br><span class="line">---效果和pool.map()不相同，mapasyc效率更高；mapasyc主进程未阻塞进程池，不需要等该批次的进程全执行完，新的任务就能进入进程池执行；常用pool.map()</span><br></pre></td></tr></table></figure></li>
+<li>pool.apply()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]])</span><br><span class="line">apply,参数需要为具体的变量值，且仅在python2支持；</span><br><span class="line">apply方法的原理是，阻塞进程池，一次仅让一个任务进入进程池，该任务完成后，才能执行下一个任务，实际是串行；</span><br></pre></td></tr></table></figure></li>
+<li>pool.applyasyc()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]],[, callback&#x3D;None]]])</span><br><span class="line">   applyasyc,参数需要为具体的变量值，在python3上支持；</span><br><span class="line">   applyasyc方法的原理是，进程池非阻塞，一次可以让多个任务进入进程池，且未对该批次任务进行阻塞，只要其中一个进程执行完后，就能释放资源，让新的任务进入进程池，实际是并行的,效率等同于mapasyc()；</span><br><span class="line">回调使用：pool.applyasyc(run,kwargs,callback&#x3D;func2)，run的返回作为func2的参数，执行完返回func2的值；</span><br><span class="line">   ---applyasyc效果等同于mapasyc()，只是他具有回调功能，且入参的变量不能是可迭代对象，必须为具体的变量值；</span><br></pre></td></tr></table></figure></li>
+<li>pool.terminal()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用：结束工作进程，不在处理未完成的任务</span><br><span class="line">pool.map(run,iter)</span><br><span class="line">pool.close()</span><br><span class="line">pool.run()</span><br><span class="line">sleep(2)</span><br><span class="line">pool.terminal()		#执行两秒后，哪怕进程未执行完，也结束该主进程</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
-<li>TextTestRunner()类：unittest中的类；用来执行suit，控制测试case的执行，执行生成的是text的报告；如果是需要生成htmlt报告，则使用htmltestrunner;</li>
-<li>执行顺序：默认按case名称顺序来确认执行顺序，也可手动定制顺序，各suit来确定执行顺序；</li>
-<li>环境/前置/后置处理：使用unittest自带的方法，setUp/setDown,setUpClass setDownClass,其中前两个每个case执行前后都会分别执行前置后置处理；后两个在套件执行前后，分别执行签字和后置处理，且仅执行一次；</li>
-<li>断言：unittest提供了个钟断言方法，如下图:<br> <img src="/text_image/unitest%E6%96%AD%E8%A8%80.png" alt="alt_text"></li>
-<li>跳过某些测试case：可以使用unittest的skip装饰器，其中skip装饰器主要有3种;(@unittest.skip(reason)/@unittest.skipIf(condition,reason)/@unittest.skipUnless(condition,reason)/即在满足condition条件下跳过该用例，reason用于描述跳过的原因)</li>
+<li><p><em><strong>python多进程使用：</strong></em></p>
+</li>
 </ul>
-<p><a href="https://blog.51cto.com/u_2681882/2123613"><strong>参考：unitest使用详解</strong></a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()</span><br><span class="line">iter&#x3D;iter</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(multiprocessing.cpu_count())</span><br><span class="line">pool.map(run(),iter)</span><br><span class="line">pool.join()</span><br></pre></td></tr></table></figure>
 ]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
       <tags>
-        <tag>unittest</tag>
-        <tag>参数化</tag>
+        <tag>python</tag>
+        <tag>多进程</tag>
       </tags>
   </entry>
   <entry>
@@ -532,24 +538,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python语法-super方法</title>
-    <url>/posts/7b2ded6/</url>
-    <content><![CDATA[<p><code>super方法用来，继承父类，或祖父类；常用的结构为super(C,self)/python3括号内的可缩写（super()）;super方法本身是一个类，和当前所在的类（父类）无关，该类使用了mro的算法（方法查找顺序）来决定继承类的顺序</code></p>
-<span id="more"></span>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A():</span><br><span class="line"></span><br><span class="line">	def __init__(self):</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">&quot;---A---&quot;</span>)</span><br><span class="line"></span><br><span class="line">class B(A):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---B---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super(B,self).__init__()</span><br><span class="line"></span><br><span class="line">class C(A):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---C---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super(C,self).__init__()</span><br><span class="line"></span><br><span class="line">class D(B,C):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---D---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super().__init__()</span><br><span class="line">D()</span><br></pre></td></tr></table></figure>
-<p><strong>方法查找顺序说明:</strong></p>
-<pre><code>super.mro策略；采用的是查找继承类的上一个节点的方式来实现继承，如super(D,self).__init__();实际上继承的是上一个节点类B；Python2和Python3使用super来继承时，使用上存在差异，Python必须使用super(C,self)方式继承，python3则可同时使用super()和super(C,self)来进行继承；同时Python2存在class A:/class A(object):这两种经典类和新式类；Python3只有新式类；经典类和新式类的mro策略不一样，虽然两者都是使用从左到右的广度遍历，经典类在某类已继承时，后续在查找到这个类，也不在继承；新式类，在某类已经继承时，后续在查找到改类，会继承最新查找到的；
-</code></pre>
-]]></content>
-  </entry>
-  <entry>
-    <title>uwnc</title>
-    <url>/posts/3de87ac/</url>
-    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>python语法特性</title>
     <url>/posts/d641bafc/</url>
     <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
@@ -562,6 +550,18 @@
       </tags>
   </entry>
   <entry>
+    <title>python语法-super方法</title>
+    <url>/posts/7b2ded6/</url>
+    <content><![CDATA[<p><code>super方法用来，继承父类，或祖父类；常用的结构为super(C,self)/python3括号内的可缩写（super()）;super方法本身是一个类，和当前所在的类（父类）无关，该类使用了mro的算法（方法查找顺序）来决定继承类的顺序</code></p>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A():</span><br><span class="line"></span><br><span class="line">	def __init__(self):</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">&quot;---A---&quot;</span>)</span><br><span class="line"></span><br><span class="line">class B(A):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---B---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super(B,self).__init__()</span><br><span class="line"></span><br><span class="line">class C(A):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---C---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super(C,self).__init__()</span><br><span class="line"></span><br><span class="line">class D(B,C):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---D---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super().__init__()</span><br><span class="line">D()</span><br></pre></td></tr></table></figure>
+<p><strong>方法查找顺序说明:</strong></p>
+<pre><code>super.mro策略；采用的是查找继承类的上一个节点的方式来实现继承，如super(D,self).__init__();实际上继承的是上一个节点类B；Python2和Python3使用super来继承时，使用上存在差异，Python必须使用super(C,self)方式继承，python3则可同时使用super()和super(C,self)来进行继承；同时Python2存在class A:/class A(object):这两种经典类和新式类；Python3只有新式类；经典类和新式类的mro策略不一样，虽然两者都是使用从左到右的广度遍历，经典类在某类已继承时，后续在查找到这个类，也不在继承；新式类，在某类已经继承时，后续在查找到改类，会继承最新查找到的；
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
     <title>ui自动化分布式并行运算</title>
     <url>/posts/2be91958/</url>
     <content><![CDATA[<p><a href="https://cloud.tencent.com/developer/article/1974105">Gird</a></p>
@@ -572,27 +572,6 @@
       <tags>
         <tag>UI</tag>
         <tag>gird</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>传音刷机</title>
-    <url>/posts/a1b2e86a/</url>
-    <content><![CDATA[<ol>
-<li>设置 -&gt; 开发者模式打开 oem unlock<br>输入 adb reboot bootloader</li>
-<li>进入fastboot模式输入 fastboot flashing unlock。按住音量上键确认unlock</li>
-<li>fastboot reboot 重启</li>
-<li>开机后,输入 adb root</li>
-<li>执行 adb disable-verity</li>
-<li>执行 adb reboot</li>
-<li>重启后 执行 adb root</li>
-<li>执行 adb remount</li>
-</ol>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>刷机</tag>
       </tags>
   </entry>
   <entry>
@@ -620,6 +599,33 @@
       </categories>
       <tags>
         <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>uwnc</title>
+    <url>/posts/3de87ac/</url>
+    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>传音刷机</title>
+    <url>/posts/a1b2e86a/</url>
+    <content><![CDATA[<ol>
+<li>设置 -&gt; 开发者模式打开 oem unlock<br>输入 adb reboot bootloader</li>
+<li>进入fastboot模式输入 fastboot flashing unlock。按住音量上键确认unlock</li>
+<li>fastboot reboot 重启</li>
+<li>开机后,输入 adb root</li>
+<li>执行 adb disable-verity</li>
+<li>执行 adb reboot</li>
+<li>重启后 执行 adb root</li>
+<li>执行 adb remount</li>
+</ol>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>刷机</tag>
       </tags>
   </entry>
   <entry>
@@ -693,6 +699,25 @@
         <tag>python</tag>
         <tag>序列</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>大数据BI报表架构调整</title>
+    <url>/posts/10f9513d/</url>
+    <content><![CDATA[<h1 id="大数据BI报表架构调整"><a href="#大数据BI报表架构调整" class="headerlink" title="大数据BI报表架构调整"></a>大数据BI报表架构调整</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span>
+
+<h2 id="架构说明"><a href="#架构说明" class="headerlink" title="架构说明"></a>架构说明</h2><h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="覆盖范围"><a href="#覆盖范围" class="headerlink" title="覆盖范围"></a>覆盖范围</h3><p><em><strong>oms Category Analysis模块</strong></em></p>
+<ul>
+<li>覆盖前端交互</li>
+<li>覆盖报表的数据</li>
+<li>覆盖接口性能</li>
+</ul>
+<p><em><strong>Traffic Analysis</strong></em></p>
+<ul>
+<li>覆盖前端交互</li>
+<li>覆盖报表的数据</li>
+<li>覆盖接口性能</li>
+</ul>
+]]></content>
   </entry>
   <entry>
     <title>全局函数局部函数</title>
@@ -933,25 +958,6 @@
       </tags>
   </entry>
   <entry>
-    <title>大数据BI报表架构调整</title>
-    <url>/posts/10f9513d/</url>
-    <content><![CDATA[<h1 id="大数据BI报表架构调整"><a href="#大数据BI报表架构调整" class="headerlink" title="大数据BI报表架构调整"></a>大数据BI报表架构调整</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span>
-
-<h2 id="架构说明"><a href="#架构说明" class="headerlink" title="架构说明"></a>架构说明</h2><h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="覆盖范围"><a href="#覆盖范围" class="headerlink" title="覆盖范围"></a>覆盖范围</h3><p><em><strong>oms Category Analysis模块</strong></em></p>
-<ul>
-<li>覆盖前端交互</li>
-<li>覆盖报表的数据</li>
-<li>覆盖接口性能</li>
-</ul>
-<p><em><strong>Traffic Analysis</strong></em></p>
-<ul>
-<li>覆盖前端交互</li>
-<li>覆盖报表的数据</li>
-<li>覆盖接口性能</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>广告--大数据模型测试</title>
     <url>/posts/d775e226/</url>
     <content><![CDATA[<p><code>模型是程序化广告的灵魂，决定着广告的点击和转化，直接影响收入；而模型由于复杂度高，标签/数据量大，是广告测试的难点，一般意义上，测试是不负责模型质量的，仅对模型中的一些定向/过滤逻辑做覆盖，模型有效性测试，模型工程师一般是通过灰度/ab测试来实现自测的，这种自我监督的实现方式有着明显缺陷，故本次对过往模型测试方面的记录，做下总结</code></p>
@@ -979,6 +985,19 @@
       </tags>
   </entry>
   <entry>
+    <title>传易--性能测试</title>
+    <url>/posts/56a1ed73/</url>
+    <content><![CDATA[<p><a href="https://docs.qq.com/doc/DSWZnVGNka29qa1lJ">内部项目，需找我授权</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>性能</tag>
+        <tag>实战</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>搭建hexo博客</title>
     <url>/posts/8e88d59c/</url>
     <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
@@ -991,17 +1010,10 @@
 ]]></content>
   </entry>
   <entry>
-    <title>传易--性能测试</title>
-    <url>/posts/56a1ed73/</url>
-    <content><![CDATA[<p><a href="https://docs.qq.com/doc/DSWZnVGNka29qa1lJ">内部项目，需找我授权</a></p>
+    <title>数据库性能测试</title>
+    <url>/posts/ab3091af/</url>
+    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
 ]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
-        <tag>实战</tag>
-      </tags>
   </entry>
   <entry>
     <title>混沌工程</title>
@@ -1058,10 +1070,191 @@
       </tags>
   </entry>
   <entry>
-    <title>数据库性能测试</title>
-    <url>/posts/ab3091af/</url>
-    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
+    <title>百度质量体系建设</title>
+    <url>/posts/bcd76c52/</url>
+    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
+<li><em><strong>介绍</strong></em></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>目录</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>用例管理平台</title>
+    <url>/posts/c48e9a83/</url>
+    <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>稳定性治理--智能遍历</title>
+    <url>/posts/e80d13a0/</url>
+    <content><![CDATA[<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p><code>智能遍历，即通智能化的规则来访问APP的UI页面；之所以要考虑这种方式，主要是monkey随机测试，随机性太强，覆盖率不好衡量；不方便进行版本之间的对比，因此考虑其他智能遍历方案，备选的有三种方案“UI自动化实现/appcrawler自动遍历/fastbot智能遍历”</code></p>
+<span id="more"></span>
+<h1 id="方案对比"><a href="#方案对比" class="headerlink" title="方案对比"></a>方案对比</h1><ul>
+<li><p><strong>UI自动化实现</strong></p>
+<ul>
+<li><em>优点</em><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">定制化程度高，可控</span><br><span class="line">可进行持续集成</span><br></pre></td></tr></table></figure></li>
+<li><em>缺点</em><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">工作量大，稳定性差，实现难度高</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>appcrawler自动遍历</strong></p>
+<ul>
+<li><em>优点</em><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">覆盖率高，利用类爬虫机制能进行深度遍历，基本覆盖所有的页面</span><br><span class="line">可进行策略定制，灵活性较高，使用成本较低</span><br><span class="line">执行有HTML结果，支持Android和iOS渠道</span><br><span class="line">支持持续集成；</span><br></pre></td></tr></table></figure></li>
+<li><em>缺点</em><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">执行策略和版本数据相关性不大,无法利用历史策略数据</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>fastbot智能遍历</strong></p>
+<ul>
+<li><em>优点</em><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">覆盖率高，且有覆盖率指标，进行智能遍历，遍历策略较智能（每次遍历都会建模，利用深度学习会持续优化模型，作为驱动策略），现实意义较强；</span><br><span class="line">可进行定制，灵活度较高，使用成本较低；</span><br><span class="line">支持iOS和Android渠道；</span><br><span class="line">可利用数据驱动，方便进行版本间的迭代，方便优化驱动策略；</span><br><span class="line">支持持续集成；</span><br><span class="line">利用monkey来遍历，执行较快，效率高；</span><br><span class="line">支持非标准化控件，可以利用图像识别来进行断言；</span><br><span class="line">每次的模型可复用，模型文件会自动存储在 /sdcard/fastbot_[包名].fbm，换设备或者版本可复用原有模型，保证策略完全一致；只需要放在相同的位置即可；</span><br><span class="line">支持多设备</span><br></pre></td></tr></table></figure></li>
+<li><em>缺点</em><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">需要第三方工具，进行性能监控，本身不支持；</span><br><span class="line">无结果报告，只有打印的覆盖率指标，同时只有异常日志；</span><br><span class="line">后期可能会收费，一旦收费，建议转solopi或者自研；</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<p>综合考虑，最终决定采用fastbot，其中很大一个原因是其支持数据驱动，方便持续优化策略，同时据同事说shein也在使用；</p>
+<h2 id="fastBOT使用"><a href="#fastBOT使用" class="headerlink" title="fastBOT使用"></a><em><strong>fastBOT使用</strong></em></h2><h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">安装/部署</span><br><span class="line">使用指令</span><br><span class="line">定制策略</span><br><span class="line">优化策略</span><br><span class="line">结果分析</span><br><span class="line">性能采集</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>安装/部署</strong></p>
+<ul>
+<li><em>部署Java环境</em><ul>
+<li><a href="https://www.oracle.com/java/technologies/downloads/#jdk18-windows">下载java jdk</a></li>
+<li>配置Java环境变量：在系统变量中对JAVA_HOME、PATH、CLASSPATH进行配置：<ul>
+<li>JAVA_HOME:C:\Program Files (x86)\Java\jdk1.8.0_91</li>
+<li>PATH:%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin</li>
+<li>CLASSPATH:.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><em>部署Android环境</em><ul>
+<li>先部署Java环境</li>
+<li><a href="https://developer.android.google.cn/studio">安装Android studio</a></li>
+<li>通过Android studio 安装对应版本的Android sdk</li>
+<li>添加Android环境变量：系统变量中添加ANDROID_HOME，PATH：<ul>
+<li>ANDROID_HOME:C:\Users\gavin\AppData\Local\Android\Sdk</li>
+<li>PATH:%ANDROID_HOME%\platform-tools;%ANDROID_HOME%\tools;C:\Users\gavin\AppData\Local\Android\Sdk\build-tools\32.0.0（aapt命令的环境变量，其是apk解析程序）        </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><em>将jdk包，pull到手机</em><ul>
+<li>adb push * .jar /sdcard</li>
+<li>adb push libs/ * /data/local/tmp/</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>使用指令</strong></p>
+<ul>
+<li><em>举例：</em></li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">IOS:tidevice xctest -B bytedance.FastbotRunner112.xctrunner -e 	BUNDLEID:com.TranssnetMusic.Boomplay -e duration:120 -e throttle:300 --debug</span><br><span class="line"></span><br><span class="line">ANDROID:adb -s 037952588D000392 0442233974160287 shell CLASSPATH&#x3D;&#x2F;sdcard&#x2F;monkeyq.jar:&#x2F;sdcard&#x2F;framework.jar:&#x2F;sdcard&#x2F;fastbot-thirdpart.jar exec app_process &#x2F;system&#x2F;bin com.android.commands.monkey.Monkey -p com.afmobi.boomplayer --agent reuseq --running-minutes 240 --throttle 500 -v -v --output-directory &#x2F;sdcard&#x2F;fast_data</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><em>参数说明</em></li>
+</ul>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">必填参数：</span><br><span class="line">-s imei imei2:支持多设备</span><br><span class="line">-p package_name:str；“adb shell pm list package”可获取APP包名</span><br><span class="line">--agent reuseq	：遍历模式，无需更改</span><br><span class="line">--running-minutes 120：遍历时长，单位是min</span><br><span class="line">--throttle 500：和monkey中的--throttle相同，为事件频率，建议500-800</span><br><span class="line">选填参数：</span><br><span class="line">--bugreport ：<span class="comment">#发生崩溃时打印的日志</span></span><br><span class="line">--output-directory ： /sdcard/xxx <span class="comment">#输出目录的文件夹</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>定制策略</strong></p>
+<ul>
+<li><em>限定词</em><br><code>限定自动化定位到的文本只能是apk字符串池中出现的文本，否则抛出异常</code>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">操作：</span><br><span class="line">aapt2 dump strings apk路径 &gt; max.valid.strings :将apk中所有的字符创，加入到限定词文档</span><br><span class="line">adb push max.valid.strings &#x2F;sdcard:配置文件需要push到sdk卡才能生效</span><br></pre></td></tr></table></figure></li>
+<li><em>自定义事件执行顺序</em><br><code>应用于需要自定义执行顺序的场景（如登录），或者要保证一定要覆盖到的核心场景,实现方式如下：</code></li>
+</ul>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">在pc端新建 max.xpath.actions 文件</span><br><span class="line">编写事件序列的<span class="keyword">case</span>，参考我提供的max.xpath.actions文件，文件编写好之后push到/sdcard的根目录；举例说明：</span><br><span class="line">[</span><br><span class="line">&#123;</span><br><span class="line"><span class="string">&quot;prob&quot;</span>:1,										//事件发生概率，实际使用注释文件要删掉</span><br><span class="line"><span class="string">&quot;activity&quot;</span>:<span class="string">&quot;com.boomplay.ui.main.MainActivity&quot;</span>,	//作用的页面</span><br><span class="line"><span class="string">&quot;times&quot;</span>:1,										//重复次数</span><br><span class="line"><span class="string">&quot;actions&quot;</span>:[										//具体步骤的执行,同时支持多个操作</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="string">&quot;xpath&quot;</span>:<span class="string">&quot;//*[@text=&#x27;Charts&#x27;]&quot;</span>,			//尽量使用resource-id作为xpath路径，也可以组合使用比如<span class="string">&quot;xpath&quot;</span>: <span class="string">&quot;//*[@resource-id=&#x27;xxx&#x27;and @text=&#x27;xx&#x27;]&quot;</span></span><br><span class="line">		<span class="string">&quot;action&quot;</span>:<span class="string">&quot;CLICK&quot;</span>,						//动作支持的操作，必须大写（CLICK，LONG_CLICK，BACK，SCROLL_TOP_DOWN，SCROLL_BOTTOM_UP，SCROLL_LEFT_RIGHT，SCROLL_RIGHT_LEFT）</span><br><span class="line">		<span class="string">&quot;text&quot;</span>: <span class="string">&quot;打开页面成功&quot;</span>,</span><br><span class="line">		<span class="string">&quot;clearText&quot;</span>:<span class="literal">false</span>,						//明文，可不带</span><br><span class="line">		<span class="string">&quot;throttle&quot;</span>:5000							//action间隔事件（ms）					</span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;<span class="string">&quot;xpath&quot;</span>:<span class="string">&quot;//*[@text=&#x27;Artists&#x27;]&quot;</span>,</span><br><span class="line">		<span class="string">&quot;action&quot;</span>:<span class="string">&quot;CLICK&quot;</span>,</span><br><span class="line">		<span class="string">&quot;throttle&quot;</span>:5000&#125;</span><br><span class="line">	]</span><br><span class="line">&#125;,												//到不同的activity操作，需要新起一个对象</span><br><span class="line">&#123;								</span><br><span class="line"><span class="string">&quot;prob&quot;</span>:1,</span><br><span class="line"><span class="string">&quot;activity&quot;</span>:<span class="string">&quot;com.boomplay.ui.guide.GuideDialogSearchActivity&quot;</span>,</span><br><span class="line"><span class="string">&quot;times&quot;</span>:1,</span><br><span class="line"><span class="string">&quot;actions&quot;</span>:[</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="string">&quot;xpath&quot;</span>:<span class="string">&quot;//*[@text=&#x27;Charts&#x27;]&quot;</span>,</span><br><span class="line">		<span class="string">&quot;action&quot;</span>:<span class="string">&quot;CLICK&quot;</span>,</span><br><span class="line">		<span class="string">&quot;text&quot;</span>: <span class="string">&quot;打开页面成功&quot;</span>,</span><br><span class="line">		<span class="string">&quot;clearText&quot;</span>:<span class="literal">false</span>,</span><br><span class="line">		<span class="string">&quot;throttle&quot;</span>:5000</span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;<span class="string">&quot;xpath&quot;</span>:<span class="string">&quot;//*[@text=&#x27;Artists&#x27;]&quot;</span>,</span><br><span class="line">		<span class="string">&quot;action&quot;</span>:<span class="string">&quot;CLICK&quot;</span>,</span><br><span class="line">		<span class="string">&quot;throttle&quot;</span>:5000&#125;</span><br><span class="line">	]</span><br><span class="line">&#125;,</span><br><span class="line">]</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><em>配置白名单</em><br><code>作用：定制策略只在白名单页面内进行操作</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">操作：</span><br><span class="line">新建 awl.strings文件</span><br><span class="line">在文件中写入Activity的名称，如：com.boomplay.ui.main.MainActivity</span><br><span class="line">将文件push到手机&#x2F;sdcard路径下，使用时，在执行命令尾部添加：</span><br><span class="line">--act-whitelist-file &#x2F;sdcard&#x2F;awl.strings</span><br></pre></td></tr></table></figure></li>
+<li><p><em>配置黑名单</em><br><code>作用：定制策略不允许访问黑名单页面</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">操作：</span><br><span class="line">新建 abl.strings文件</span><br><span class="line">在文件中写入Activity的名称，如：com.boomplay.ui.main.MainActivity</span><br><span class="line">将文件push到手机&#x2F;sdcard路径下，使用时，在执行命令尾部添加：</span><br><span class="line">--act-blacklist-file &#x2F;sdcard&#x2F;abl.strings</span><br></pre></td></tr></table></figure>
+<p><em><strong>黑白名单不能同时配置，非黑即白</strong></em></p>
+</li>
+<li><p><em>定制需要屏蔽的按钮/区域</em><br><code>作用：如登防止登录后，中途退出</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    新建max.widget.black文件，文件配置后，push到&#x2F;sdcard路径下</span><br><span class="line">    [</span><br><span class="line">&#123;</span><br><span class="line">    &quot;activity&quot;:&quot;com.ss.android.xxx.MainActivity&quot;,</span><br><span class="line">    &quot;xpath&quot;: &quot;&#x2F;&#x2F;*[@resource-id&#x3D;&#39;com.xxx.go:id&#x2F;aaa&#39;]&quot;&#x2F;&#x2F;通过元素控制不让访问</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">    &quot;activity&quot;:&quot;com.ss.android.xxx.MainActivity&quot;,</span><br><span class="line">    &quot;bounds&quot;: 0.5									&#x2F;&#x2F;activity区域内50%区域不被点击，值为0-1</span><br><span class="line">&#125;</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p><em>通过tree屏蔽</em><br><code>原理配置xpath：查找匹配的控件，改变控件属性，从而使控件屏蔽</code></p>
+</li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">新建max.tree.pruning文件，文件配置完后，push到&#x2F;sdcard路径下</span><br><span class="line">配置实例：建github提供的文件参考配置</span><br></pre></td></tr></table></figure>
+<ul>
+<li><em>定制事件中模糊事件/突发性事件的占比</em><br><code>所谓的模糊事件，是指执行某个操作后（定制的action事件），模型会根据这个操作生成5-10个相关的操作的策略</code></li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">在max.config文件中增加模糊性事件，在总的事件中的占比，配置完成后，push到&#x2F;sdcard路径</span><br><span class="line">max.fuzzingRate &#x3D; 0.01D &#x2F;&#x2F;0.01为Fuzz事件的总概率</span><br><span class="line">模糊事件，包含以下事件，（数字为配置事件在模糊性事件中的概率，以下数值为默认值，可定制）： </span><br><span class="line">	max.doRotateFuzzing &#x3D; 0.15</span><br><span class="line">	max.doAppSwitchFuzzing &#x3D; 0.15</span><br><span class="line">	max.doTrackballFuzzing &#x3D; 0.15</span><br><span class="line">	max.doNavKeyFuzzing &#x3D; 0.15</span><br><span class="line">	max.doKeyCodeFuzzing &#x3D; 0.15</span><br><span class="line">	max.doSystemKeyFuzzing &#x3D; 0.15</span><br><span class="line">	max.doDragFuzzing &#x3D; 0.5</span><br><span class="line">	max.doPinchZoomFuzzing &#x3D; 0.15 </span><br><span class="line">	max.doClickFuzzing &#x3D; 0.7</span><br><span class="line">在max.config文件中增加随机性事件（monkey随机性事件），在总的事件中的占比，配置完成后push到&#x2F;sdcard路径下</span><br><span class="line">max.startMutation &#x3D; 0.3D &#x2F;&#x2F;启动Fastbot立刻设置mutation的几率，默认30%</span><br><span class="line">随机性事件，包含以下事件，(数字为默认概率，此概率为事件总概率，可定制)：</span><br><span class="line">	max.doMutationAirplaneFuzzing &#x3D; 0.001</span><br><span class="line">	max.doMutationMutationAlwaysFinishActivitysFuzzing &#x3D; 0.1</span><br><span class="line">	max.doMutationWifiFuzzing &#x3D; 0.001</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>优化策略</strong></p>
+<ul>
+<li><em>输入内容优化</em><br><code>输入是用户主观意愿很强的行为，为保证输入的内容是有价值的，更添近真实场景，在覆盖输入场景做一些策略优化，以屏蔽乱输入内容</code></li>
+<li><em>操作</em></li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">使用ADBKeyBoard在输入栏自动输入内容，屏蔽UI输入法：UI输入法，不同终端使用不同的输入法，不稳定（安装部署adbkeyboard见下方内容，基本所有的开源的自动化工具在输入这块都会封装输入法，为了方便复用和稳定，不建议调用手机的输入法）；</span><br><span class="line">输入随机字符串：pc建一个max.config文件；配置 max.config 中 max.randomPickFromStringList &#x3D; false，最后将文件push到手机的&#x2F;sdcard目录下；</span><br><span class="line">从文件中随机读取字符串来输入：pc建一个max.config文件；配置 max.config 中 max.randomPickFromStringList &#x3D; true，然后在建一个max.strings文件，里面放用来输入的字符串（每一行为一个对象）；最后将max.config和max.strings文件push到手机的&#x2F;sdcard目录下；</span><br><span class="line">模糊输入：模糊输入和随机输入有点类似，不过有限定范围，fastbot模糊输入的限定规则如下：</span><br><span class="line">	50% 概率输入fuzzing.strings中某个string</span><br><span class="line">	35% 概率输入被测试 App 历史页面中text&#x2F;desc文本内容（不存在max.fuzzing.strings文件时概率提高到85%）</span><br><span class="line">	15% 概率不输入</span><br><span class="line">使用文件限定的模糊输入：将git项目中的test&#x2F;max.fuzzing.strings文件push到手机&#x2F;sdcard下，此文件存在模糊搜索策略及生效，文件里放想输入的字符串；</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>部署adbkeyboard</p>
+<ul>
+<li>[下载开源包]（<a href="https://github.com/senzhk/ADBKeyBoard/archive/refs/heads/master.zip%EF%BC%89">https://github.com/senzhk/ADBKeyBoard/archive/refs/heads/master.zip）</a></li>
+<li>进入项目目录cd ADBKeyBoard</li>
+<li>设置环境变量 export ANDROID_HOME=$HOME/Android/Sdk</li>
+<li>在保证手机连接电脑，且赋予debug权限情况下，执行安装命令./gradlew installDebug</li>
+<li>如果以上方式无法安装，请安装apk包：<a href="https://github.com/senzhk/ADBKeyBoard/raw/master/ADBKeyboard.apk">地址</a></li>
+</ul>
+</li>
+<li><p><em>apk反混淆</em><br><code>是什么：混淆指的是Java混淆编译，用以防止对源码的反编译破解；反混淆，类似于解密;使得配置在 不同版本的App中可以通用 </code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">配置混淆映射文件max.mapping，push到手机&#x2F;sdcard中，以建立混淆前后ID映射关系：</span><br><span class="line">adb push resguard_mapping_NewsArticle_beta_version_v7.2.x_?????.txt &#x2F;sdcard&#x2F;max.mapping</span><br><span class="line">配置反混淆文件，以自定义事件为例，在 max.xpath.actions 中配置混淆前的 resource-id，参考示例文件</span><br></pre></td></tr></table></figure></li>
+<li><p><em>测试过程中自动截图</em><br><code>场景：当--throttle 事件频率&gt;200时，配置了截图，会对测试过程中页面进行截图</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">新建max.config配置文件，增加以下属性，配置完成后文件push到&#x2F;sdcard路径下</span><br><span class="line">max.takeScreenshot &#x3D; true</span><br><span class="line">max.takeScreenshotForEveryStep &#x3D; true</span><br><span class="line">max.saveGUITreeToXmlEveryStep &#x3D;true</span><br><span class="line">目录默认保存为手机端sdcard中，如需改变保存位置，在执行命令末尾添加 --output-directory 指定路径</span><br></pre></td></tr></table></figure></li>
+<li><p><em>支持外链跳转</em><br><code>支持第三方的外链跳转，跳转到第三方应用，或者跳转到端内页面</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">新建max.schema文件，增加配置如下，文件配置完后，push到&#x2F;sdcard路径下</span><br><span class="line">max.execSchema &#x3D; true</span><br><span class="line">max.execSchemaEveryStartup  &#x3D; true  #每次启动app先执行schema</span><br></pre></td></tr></table></figure></li>
+<li><p><em>应用自动授予权限</em><br><code>如boomplay需要获取通讯录/相机权限，fastbot启动时默认会一次性各所有权限，如需每次动态给权限，需要更改配置</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">在max.config中增加以下配置，则不会自动给所有权限；文件配置完之后push到&#x2F;sdcard路径下</span><br><span class="line">max.grantAllPermission &#x3D; false</span><br><span class="line">动态给权限的方式是，在执行的adb命令尾部增加对应的android权限授予的指令：</span><br><span class="line">-p com.android.packageinstaller </span><br><span class="line">-p com.android.permissioncontroller</span><br><span class="line">-p com.lbe.security.miui  # for (miui android 10)</span><br><span class="line">-p com.samsung.android.permissioncontroller #  for (samsung android 10)</span><br></pre></td></tr></table></figure></li>
+<li><p><em>fastbot压缩包提供了各类素材，用以在执行选取各类素材的场景中使用，如发带图片的buzz</em></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb push data&#x2F;fuzzing&#x2F; &#x2F;sdcard</span><br><span class="line">adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:&#x2F;&#x2F;&#x2F;sdcard&#x2F;fuzzing</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>结果分析</strong></p>
+<ul>
+<li>异常数据<br>  crash：Crash会以追加方式写入/sdcard/crash-dump.log文件<br>  anr：写入 /sdcard/oom-traces.log 文件</li>
+<li>覆盖率统计：coverage = testedActivity / totalActivities * 100<br>  testedActivity:本次测试的activity,会打印出来<br>  totalActivities:总的activity，会打印出来<br>  以上的所有activity，是不区分废弃，或者未使用的activity，为APP的所有的activity</li>
+</ul>
+</li>
+<li><p><strong>性能采集</strong><br><code>性能采集，主要是采集内存/CPU的数据，从而来分析APP执行case时的性能</code></p>
+</li>
+</ul>
+<ul>
+<li><p><em>方法一</em></p>
+<p>  通过火山提供的APP性能分析工具进行监控：<a href="https://www.volcengine.com/docs/6431/82895">工具地址</a>（火山引擎开始收费了，工具现在虽然免费，不排除未来收费，有使用风险）</p>
+</li>
+<li><p><em>方法二</em></p>
+<p>  借助其他的性能数据抓取工具,比如 OneApm, NewRelic（付费）；或者支付宝的solopi；使用第三方工具可能会对结果有影响，最好能统一场景，保证结果一致；</p>
+</li>
+</ul>
+<ul>
+<li><strong>常用操作</strong></li>
+</ul>
+<ul>
+<li><p><em>获取APP包名</em></p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">aapt dump badging apk_path</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><em>使用<a href="https://github.com/zhangzhao4444/Maxim">maxim</a>获取APPactivity</em></p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell CLASSPATH&#x3D;&#x2F;sdcard&#x2F;monkey.jar:&#x2F;sdcard&#x2F;framework.jar exec app_process &#x2F;system&#x2F;bin tv.panda.test.monkey.api.CurrentActivity 注意里面的文件需要push到手机对应的位置后才能使用</span><br></pre></td></tr></table></figure></li>
+<li><p><em>使用<a href="https://github.com/zhangzhao4444/Maxim">maxim</a>查看当前页面的TREE结构，来获取配置需要id等。。</em></p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell CLASSPATH&#x3D;&#x2F;sdcard&#x2F;monkey.jar:&#x2F;sdcard&#x2F;framework.jar exec app_process &#x2F;system&#x2F;bin tv.panda.test.monkey.api.Dumptree</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><em>常见问题，查看帮助文档</em></p>
+<ul>
+<li><a href="https://github.com/bytedance/Fastbot_Android/blob/main/handbook-cn.md#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题点这里</a></li>
+<li><a href="https://github.com/bytedance/Fastbot_Android/issues">其他问题可以看下issue里找下</a></li>
+<li><a href="https://github.com/bytedance/Fastbot_Android/blob/main/handbook-cn.md">官方文档点这里</a></li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>稳定性</tag>
+      </tags>
   </entry>
   <entry>
     <title>稳定性治理-暴力回放</title>
@@ -1241,207 +1434,6 @@
       </tags>
   </entry>
   <entry>
-    <title>用例管理平台</title>
-    <url>/posts/c48e9a83/</url>
-    <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>百度质量体系建设</title>
-    <url>/posts/bcd76c52/</url>
-    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
-<li><em><strong>介绍</strong></em></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>目录</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>稳定性治理--智能遍历</title>
-    <url>/posts/e80d13a0/</url>
-    <content><![CDATA[<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p><code>智能遍历，即通智能化的规则来访问APP的UI页面；之所以要考虑这种方式，主要是monkey随机测试，随机性太强，覆盖率不好衡量；不方便进行版本之间的对比，因此考虑其他智能遍历方案，备选的有三种方案“UI自动化实现/appcrawler自动遍历/fastbot智能遍历”</code></p>
-<span id="more"></span>
-<h1 id="方案对比"><a href="#方案对比" class="headerlink" title="方案对比"></a>方案对比</h1><ul>
-<li><p><strong>UI自动化实现</strong></p>
-<ul>
-<li><em>优点</em><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">定制化程度高，可控</span><br><span class="line">可进行持续集成</span><br></pre></td></tr></table></figure></li>
-<li><em>缺点</em><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">工作量大，稳定性差，实现难度高</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p><strong>appcrawler自动遍历</strong></p>
-<ul>
-<li><em>优点</em><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">覆盖率高，利用类爬虫机制能进行深度遍历，基本覆盖所有的页面</span><br><span class="line">可进行策略定制，灵活性较高，使用成本较低</span><br><span class="line">执行有HTML结果，支持Android和iOS渠道</span><br><span class="line">支持持续集成；</span><br></pre></td></tr></table></figure></li>
-<li><em>缺点</em><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">执行策略和版本数据相关性不大,无法利用历史策略数据</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p><strong>fastbot智能遍历</strong></p>
-<ul>
-<li><em>优点</em><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">覆盖率高，且有覆盖率指标，进行智能遍历，遍历策略较智能（每次遍历都会建模，利用深度学习会持续优化模型，作为驱动策略），现实意义较强；</span><br><span class="line">可进行定制，灵活度较高，使用成本较低；</span><br><span class="line">支持iOS和Android渠道；</span><br><span class="line">可利用数据驱动，方便进行版本间的迭代，方便优化驱动策略；</span><br><span class="line">支持持续集成；</span><br><span class="line">利用monkey来遍历，执行较快，效率高；</span><br><span class="line">支持非标准化控件，可以利用图像识别来进行断言；</span><br><span class="line">每次的模型可复用，模型文件会自动存储在 /sdcard/fastbot_[包名].fbm，换设备或者版本可复用原有模型，保证策略完全一致；只需要放在相同的位置即可；</span><br><span class="line">支持多设备</span><br></pre></td></tr></table></figure></li>
-<li><em>缺点</em><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">需要第三方工具，进行性能监控，本身不支持；</span><br><span class="line">无结果报告，只有打印的覆盖率指标，同时只有异常日志；</span><br><span class="line">后期可能会收费，一旦收费，建议转solopi或者自研；</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<p>综合考虑，最终决定采用fastbot，其中很大一个原因是其支持数据驱动，方便持续优化策略，同时据同事说shein也在使用；</p>
-<h2 id="fastBOT使用"><a href="#fastBOT使用" class="headerlink" title="fastBOT使用"></a><em><strong>fastBOT使用</strong></em></h2><h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">安装/部署</span><br><span class="line">使用指令</span><br><span class="line">定制策略</span><br><span class="line">优化策略</span><br><span class="line">结果分析</span><br><span class="line">性能采集</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>安装/部署</strong></p>
-<ul>
-<li><em>部署Java环境</em><ul>
-<li><a href="https://www.oracle.com/java/technologies/downloads/#jdk18-windows">下载java jdk</a></li>
-<li>配置Java环境变量：在系统变量中对JAVA_HOME、PATH、CLASSPATH进行配置：<ul>
-<li>JAVA_HOME:C:\Program Files (x86)\Java\jdk1.8.0_91</li>
-<li>PATH:%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin</li>
-<li>CLASSPATH:.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><em>部署Android环境</em><ul>
-<li>先部署Java环境</li>
-<li><a href="https://developer.android.google.cn/studio">安装Android studio</a></li>
-<li>通过Android studio 安装对应版本的Android sdk</li>
-<li>添加Android环境变量：系统变量中添加ANDROID_HOME，PATH：<ul>
-<li>ANDROID_HOME:C:\Users\gavin\AppData\Local\Android\Sdk</li>
-<li>PATH:%ANDROID_HOME%\platform-tools;%ANDROID_HOME%\tools;C:\Users\gavin\AppData\Local\Android\Sdk\build-tools\32.0.0（aapt命令的环境变量，其是apk解析程序）        </li>
-</ul>
-</li>
-</ul>
-</li>
-<li><em>将jdk包，pull到手机</em><ul>
-<li>adb push * .jar /sdcard</li>
-<li>adb push libs/ * /data/local/tmp/</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>使用指令</strong></p>
-<ul>
-<li><em>举例：</em></li>
-</ul>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">IOS:tidevice xctest -B bytedance.FastbotRunner112.xctrunner -e 	BUNDLEID:com.TranssnetMusic.Boomplay -e duration:120 -e throttle:300 --debug</span><br><span class="line"></span><br><span class="line">ANDROID:adb -s 037952588D000392 0442233974160287 shell CLASSPATH&#x3D;&#x2F;sdcard&#x2F;monkeyq.jar:&#x2F;sdcard&#x2F;framework.jar:&#x2F;sdcard&#x2F;fastbot-thirdpart.jar exec app_process &#x2F;system&#x2F;bin com.android.commands.monkey.Monkey -p com.afmobi.boomplayer --agent reuseq --running-minutes 240 --throttle 500 -v -v --output-directory &#x2F;sdcard&#x2F;fast_data</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><em>参数说明</em></li>
-</ul>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">必填参数：</span><br><span class="line">-s imei imei2:支持多设备</span><br><span class="line">-p package_name:str；“adb shell pm list package”可获取APP包名</span><br><span class="line">--agent reuseq	：遍历模式，无需更改</span><br><span class="line">--running-minutes 120：遍历时长，单位是min</span><br><span class="line">--throttle 500：和monkey中的--throttle相同，为事件频率，建议500-800</span><br><span class="line">选填参数：</span><br><span class="line">--bugreport ：<span class="comment">#发生崩溃时打印的日志</span></span><br><span class="line">--output-directory ： /sdcard/xxx <span class="comment">#输出目录的文件夹</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>定制策略</strong></p>
-<ul>
-<li><em>限定词</em><br><code>限定自动化定位到的文本只能是apk字符串池中出现的文本，否则抛出异常</code>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">操作：</span><br><span class="line">aapt2 dump strings apk路径 &gt; max.valid.strings :将apk中所有的字符创，加入到限定词文档</span><br><span class="line">adb push max.valid.strings &#x2F;sdcard:配置文件需要push到sdk卡才能生效</span><br></pre></td></tr></table></figure></li>
-<li><em>自定义事件执行顺序</em><br><code>应用于需要自定义执行顺序的场景（如登录），或者要保证一定要覆盖到的核心场景,实现方式如下：</code></li>
-</ul>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">在pc端新建 max.xpath.actions 文件</span><br><span class="line">编写事件序列的<span class="keyword">case</span>，参考我提供的max.xpath.actions文件，文件编写好之后push到/sdcard的根目录；举例说明：</span><br><span class="line">[</span><br><span class="line">&#123;</span><br><span class="line"><span class="string">&quot;prob&quot;</span>:1,										//事件发生概率，实际使用注释文件要删掉</span><br><span class="line"><span class="string">&quot;activity&quot;</span>:<span class="string">&quot;com.boomplay.ui.main.MainActivity&quot;</span>,	//作用的页面</span><br><span class="line"><span class="string">&quot;times&quot;</span>:1,										//重复次数</span><br><span class="line"><span class="string">&quot;actions&quot;</span>:[										//具体步骤的执行,同时支持多个操作</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="string">&quot;xpath&quot;</span>:<span class="string">&quot;//*[@text=&#x27;Charts&#x27;]&quot;</span>,			//尽量使用resource-id作为xpath路径，也可以组合使用比如<span class="string">&quot;xpath&quot;</span>: <span class="string">&quot;//*[@resource-id=&#x27;xxx&#x27;and @text=&#x27;xx&#x27;]&quot;</span></span><br><span class="line">		<span class="string">&quot;action&quot;</span>:<span class="string">&quot;CLICK&quot;</span>,						//动作支持的操作，必须大写（CLICK，LONG_CLICK，BACK，SCROLL_TOP_DOWN，SCROLL_BOTTOM_UP，SCROLL_LEFT_RIGHT，SCROLL_RIGHT_LEFT）</span><br><span class="line">		<span class="string">&quot;text&quot;</span>: <span class="string">&quot;打开页面成功&quot;</span>,</span><br><span class="line">		<span class="string">&quot;clearText&quot;</span>:<span class="literal">false</span>,						//明文，可不带</span><br><span class="line">		<span class="string">&quot;throttle&quot;</span>:5000							//action间隔事件（ms）					</span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;<span class="string">&quot;xpath&quot;</span>:<span class="string">&quot;//*[@text=&#x27;Artists&#x27;]&quot;</span>,</span><br><span class="line">		<span class="string">&quot;action&quot;</span>:<span class="string">&quot;CLICK&quot;</span>,</span><br><span class="line">		<span class="string">&quot;throttle&quot;</span>:5000&#125;</span><br><span class="line">	]</span><br><span class="line">&#125;,												//到不同的activity操作，需要新起一个对象</span><br><span class="line">&#123;								</span><br><span class="line"><span class="string">&quot;prob&quot;</span>:1,</span><br><span class="line"><span class="string">&quot;activity&quot;</span>:<span class="string">&quot;com.boomplay.ui.guide.GuideDialogSearchActivity&quot;</span>,</span><br><span class="line"><span class="string">&quot;times&quot;</span>:1,</span><br><span class="line"><span class="string">&quot;actions&quot;</span>:[</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="string">&quot;xpath&quot;</span>:<span class="string">&quot;//*[@text=&#x27;Charts&#x27;]&quot;</span>,</span><br><span class="line">		<span class="string">&quot;action&quot;</span>:<span class="string">&quot;CLICK&quot;</span>,</span><br><span class="line">		<span class="string">&quot;text&quot;</span>: <span class="string">&quot;打开页面成功&quot;</span>,</span><br><span class="line">		<span class="string">&quot;clearText&quot;</span>:<span class="literal">false</span>,</span><br><span class="line">		<span class="string">&quot;throttle&quot;</span>:5000</span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;<span class="string">&quot;xpath&quot;</span>:<span class="string">&quot;//*[@text=&#x27;Artists&#x27;]&quot;</span>,</span><br><span class="line">		<span class="string">&quot;action&quot;</span>:<span class="string">&quot;CLICK&quot;</span>,</span><br><span class="line">		<span class="string">&quot;throttle&quot;</span>:5000&#125;</span><br><span class="line">	]</span><br><span class="line">&#125;,</span><br><span class="line">]</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><em>配置白名单</em><br><code>作用：定制策略只在白名单页面内进行操作</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">操作：</span><br><span class="line">新建 awl.strings文件</span><br><span class="line">在文件中写入Activity的名称，如：com.boomplay.ui.main.MainActivity</span><br><span class="line">将文件push到手机&#x2F;sdcard路径下，使用时，在执行命令尾部添加：</span><br><span class="line">--act-whitelist-file &#x2F;sdcard&#x2F;awl.strings</span><br></pre></td></tr></table></figure></li>
-<li><p><em>配置黑名单</em><br><code>作用：定制策略不允许访问黑名单页面</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">操作：</span><br><span class="line">新建 abl.strings文件</span><br><span class="line">在文件中写入Activity的名称，如：com.boomplay.ui.main.MainActivity</span><br><span class="line">将文件push到手机&#x2F;sdcard路径下，使用时，在执行命令尾部添加：</span><br><span class="line">--act-blacklist-file &#x2F;sdcard&#x2F;abl.strings</span><br></pre></td></tr></table></figure>
-<p><em><strong>黑白名单不能同时配置，非黑即白</strong></em></p>
-</li>
-<li><p><em>定制需要屏蔽的按钮/区域</em><br><code>作用：如登防止登录后，中途退出</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    新建max.widget.black文件，文件配置后，push到&#x2F;sdcard路径下</span><br><span class="line">    [</span><br><span class="line">&#123;</span><br><span class="line">    &quot;activity&quot;:&quot;com.ss.android.xxx.MainActivity&quot;,</span><br><span class="line">    &quot;xpath&quot;: &quot;&#x2F;&#x2F;*[@resource-id&#x3D;&#39;com.xxx.go:id&#x2F;aaa&#39;]&quot;&#x2F;&#x2F;通过元素控制不让访问</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">    &quot;activity&quot;:&quot;com.ss.android.xxx.MainActivity&quot;,</span><br><span class="line">    &quot;bounds&quot;: 0.5									&#x2F;&#x2F;activity区域内50%区域不被点击，值为0-1</span><br><span class="line">&#125;</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li><p><em>通过tree屏蔽</em><br><code>原理配置xpath：查找匹配的控件，改变控件属性，从而使控件屏蔽</code></p>
-</li>
-</ul>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">新建max.tree.pruning文件，文件配置完后，push到&#x2F;sdcard路径下</span><br><span class="line">配置实例：建github提供的文件参考配置</span><br></pre></td></tr></table></figure>
-<ul>
-<li><em>定制事件中模糊事件/突发性事件的占比</em><br><code>所谓的模糊事件，是指执行某个操作后（定制的action事件），模型会根据这个操作生成5-10个相关的操作的策略</code></li>
-</ul>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">在max.config文件中增加模糊性事件，在总的事件中的占比，配置完成后，push到&#x2F;sdcard路径</span><br><span class="line">max.fuzzingRate &#x3D; 0.01D &#x2F;&#x2F;0.01为Fuzz事件的总概率</span><br><span class="line">模糊事件，包含以下事件，（数字为配置事件在模糊性事件中的概率，以下数值为默认值，可定制）： </span><br><span class="line">	max.doRotateFuzzing &#x3D; 0.15</span><br><span class="line">	max.doAppSwitchFuzzing &#x3D; 0.15</span><br><span class="line">	max.doTrackballFuzzing &#x3D; 0.15</span><br><span class="line">	max.doNavKeyFuzzing &#x3D; 0.15</span><br><span class="line">	max.doKeyCodeFuzzing &#x3D; 0.15</span><br><span class="line">	max.doSystemKeyFuzzing &#x3D; 0.15</span><br><span class="line">	max.doDragFuzzing &#x3D; 0.5</span><br><span class="line">	max.doPinchZoomFuzzing &#x3D; 0.15 </span><br><span class="line">	max.doClickFuzzing &#x3D; 0.7</span><br><span class="line">在max.config文件中增加随机性事件（monkey随机性事件），在总的事件中的占比，配置完成后push到&#x2F;sdcard路径下</span><br><span class="line">max.startMutation &#x3D; 0.3D &#x2F;&#x2F;启动Fastbot立刻设置mutation的几率，默认30%</span><br><span class="line">随机性事件，包含以下事件，(数字为默认概率，此概率为事件总概率，可定制)：</span><br><span class="line">	max.doMutationAirplaneFuzzing &#x3D; 0.001</span><br><span class="line">	max.doMutationMutationAlwaysFinishActivitysFuzzing &#x3D; 0.1</span><br><span class="line">	max.doMutationWifiFuzzing &#x3D; 0.001</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>优化策略</strong></p>
-<ul>
-<li><em>输入内容优化</em><br><code>输入是用户主观意愿很强的行为，为保证输入的内容是有价值的，更添近真实场景，在覆盖输入场景做一些策略优化，以屏蔽乱输入内容</code></li>
-<li><em>操作</em></li>
-</ul>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">使用ADBKeyBoard在输入栏自动输入内容，屏蔽UI输入法：UI输入法，不同终端使用不同的输入法，不稳定（安装部署adbkeyboard见下方内容，基本所有的开源的自动化工具在输入这块都会封装输入法，为了方便复用和稳定，不建议调用手机的输入法）；</span><br><span class="line">输入随机字符串：pc建一个max.config文件；配置 max.config 中 max.randomPickFromStringList &#x3D; false，最后将文件push到手机的&#x2F;sdcard目录下；</span><br><span class="line">从文件中随机读取字符串来输入：pc建一个max.config文件；配置 max.config 中 max.randomPickFromStringList &#x3D; true，然后在建一个max.strings文件，里面放用来输入的字符串（每一行为一个对象）；最后将max.config和max.strings文件push到手机的&#x2F;sdcard目录下；</span><br><span class="line">模糊输入：模糊输入和随机输入有点类似，不过有限定范围，fastbot模糊输入的限定规则如下：</span><br><span class="line">	50% 概率输入fuzzing.strings中某个string</span><br><span class="line">	35% 概率输入被测试 App 历史页面中text&#x2F;desc文本内容（不存在max.fuzzing.strings文件时概率提高到85%）</span><br><span class="line">	15% 概率不输入</span><br><span class="line">使用文件限定的模糊输入：将git项目中的test&#x2F;max.fuzzing.strings文件push到手机&#x2F;sdcard下，此文件存在模糊搜索策略及生效，文件里放想输入的字符串；</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>部署adbkeyboard</p>
-<ul>
-<li>[下载开源包]（<a href="https://github.com/senzhk/ADBKeyBoard/archive/refs/heads/master.zip%EF%BC%89">https://github.com/senzhk/ADBKeyBoard/archive/refs/heads/master.zip）</a></li>
-<li>进入项目目录cd ADBKeyBoard</li>
-<li>设置环境变量 export ANDROID_HOME=$HOME/Android/Sdk</li>
-<li>在保证手机连接电脑，且赋予debug权限情况下，执行安装命令./gradlew installDebug</li>
-<li>如果以上方式无法安装，请安装apk包：<a href="https://github.com/senzhk/ADBKeyBoard/raw/master/ADBKeyboard.apk">地址</a></li>
-</ul>
-</li>
-<li><p><em>apk反混淆</em><br><code>是什么：混淆指的是Java混淆编译，用以防止对源码的反编译破解；反混淆，类似于解密;使得配置在 不同版本的App中可以通用 </code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">配置混淆映射文件max.mapping，push到手机&#x2F;sdcard中，以建立混淆前后ID映射关系：</span><br><span class="line">adb push resguard_mapping_NewsArticle_beta_version_v7.2.x_?????.txt &#x2F;sdcard&#x2F;max.mapping</span><br><span class="line">配置反混淆文件，以自定义事件为例，在 max.xpath.actions 中配置混淆前的 resource-id，参考示例文件</span><br></pre></td></tr></table></figure></li>
-<li><p><em>测试过程中自动截图</em><br><code>场景：当--throttle 事件频率&gt;200时，配置了截图，会对测试过程中页面进行截图</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">新建max.config配置文件，增加以下属性，配置完成后文件push到&#x2F;sdcard路径下</span><br><span class="line">max.takeScreenshot &#x3D; true</span><br><span class="line">max.takeScreenshotForEveryStep &#x3D; true</span><br><span class="line">max.saveGUITreeToXmlEveryStep &#x3D;true</span><br><span class="line">目录默认保存为手机端sdcard中，如需改变保存位置，在执行命令末尾添加 --output-directory 指定路径</span><br></pre></td></tr></table></figure></li>
-<li><p><em>支持外链跳转</em><br><code>支持第三方的外链跳转，跳转到第三方应用，或者跳转到端内页面</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">新建max.schema文件，增加配置如下，文件配置完后，push到&#x2F;sdcard路径下</span><br><span class="line">max.execSchema &#x3D; true</span><br><span class="line">max.execSchemaEveryStartup  &#x3D; true  #每次启动app先执行schema</span><br></pre></td></tr></table></figure></li>
-<li><p><em>应用自动授予权限</em><br><code>如boomplay需要获取通讯录/相机权限，fastbot启动时默认会一次性各所有权限，如需每次动态给权限，需要更改配置</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">在max.config中增加以下配置，则不会自动给所有权限；文件配置完之后push到&#x2F;sdcard路径下</span><br><span class="line">max.grantAllPermission &#x3D; false</span><br><span class="line">动态给权限的方式是，在执行的adb命令尾部增加对应的android权限授予的指令：</span><br><span class="line">-p com.android.packageinstaller </span><br><span class="line">-p com.android.permissioncontroller</span><br><span class="line">-p com.lbe.security.miui  # for (miui android 10)</span><br><span class="line">-p com.samsung.android.permissioncontroller #  for (samsung android 10)</span><br></pre></td></tr></table></figure></li>
-<li><p><em>fastbot压缩包提供了各类素材，用以在执行选取各类素材的场景中使用，如发带图片的buzz</em></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb push data&#x2F;fuzzing&#x2F; &#x2F;sdcard</span><br><span class="line">adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:&#x2F;&#x2F;&#x2F;sdcard&#x2F;fuzzing</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p><strong>结果分析</strong></p>
-<ul>
-<li>异常数据<br>  crash：Crash会以追加方式写入/sdcard/crash-dump.log文件<br>  anr：写入 /sdcard/oom-traces.log 文件</li>
-<li>覆盖率统计：coverage = testedActivity / totalActivities * 100<br>  testedActivity:本次测试的activity,会打印出来<br>  totalActivities:总的activity，会打印出来<br>  以上的所有activity，是不区分废弃，或者未使用的activity，为APP的所有的activity</li>
-</ul>
-</li>
-<li><p><strong>性能采集</strong><br><code>性能采集，主要是采集内存/CPU的数据，从而来分析APP执行case时的性能</code></p>
-</li>
-</ul>
-<ul>
-<li><p><em>方法一</em></p>
-<p>  通过火山提供的APP性能分析工具进行监控：<a href="https://www.volcengine.com/docs/6431/82895">工具地址</a>（火山引擎开始收费了，工具现在虽然免费，不排除未来收费，有使用风险）</p>
-</li>
-<li><p><em>方法二</em></p>
-<p>  借助其他的性能数据抓取工具,比如 OneApm, NewRelic（付费）；或者支付宝的solopi；使用第三方工具可能会对结果有影响，最好能统一场景，保证结果一致；</p>
-</li>
-</ul>
-<ul>
-<li><strong>常用操作</strong></li>
-</ul>
-<ul>
-<li><p><em>获取APP包名</em></p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">aapt dump badging apk_path</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><em>使用<a href="https://github.com/zhangzhao4444/Maxim">maxim</a>获取APPactivity</em></p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell CLASSPATH&#x3D;&#x2F;sdcard&#x2F;monkey.jar:&#x2F;sdcard&#x2F;framework.jar exec app_process &#x2F;system&#x2F;bin tv.panda.test.monkey.api.CurrentActivity 注意里面的文件需要push到手机对应的位置后才能使用</span><br></pre></td></tr></table></figure></li>
-<li><p><em>使用<a href="https://github.com/zhangzhao4444/Maxim">maxim</a>查看当前页面的TREE结构，来获取配置需要id等。。</em></p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell CLASSPATH&#x3D;&#x2F;sdcard&#x2F;monkey.jar:&#x2F;sdcard&#x2F;framework.jar exec app_process &#x2F;system&#x2F;bin tv.panda.test.monkey.api.Dumptree</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><em>常见问题，查看帮助文档</em></p>
-<ul>
-<li><a href="https://github.com/bytedance/Fastbot_Android/blob/main/handbook-cn.md#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题点这里</a></li>
-<li><a href="https://github.com/bytedance/Fastbot_Android/issues">其他问题可以看下issue里找下</a></li>
-<li><a href="https://github.com/bytedance/Fastbot_Android/blob/main/handbook-cn.md">官方文档点这里</a></li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>稳定性</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>编写博客--makedown语法说明</title>
-    <url>/posts/ed6b07f3/</url>
-    <content><![CDATA[<h1 id="语法总览"><a href="#语法总览" class="headerlink" title="语法总览"></a>语法总览</h1><h2 id="正文语法"><a href="#正文语法" class="headerlink" title="正文语法"></a>正文语法</h2><pre><code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; 1.=== title ===	最顶级标题</span><br><span class="line">&gt; 2.---  title --- 二级标题</span><br><span class="line">&gt; 3.<span class="comment"># title/## title/###### title	一级/二级/六级标题</span></span><br><span class="line">&gt; * tab缩进语法</span><br><span class="line">&gt; + 字体加粗使用** text ** 或__text__</span><br><span class="line">&gt; - 排序列表，无序列表使用（+-*），有序列表使用（1.数字加点）</span><br><span class="line">&gt; - 换行，如果上下行无\n(换行操作)则不换行，如果有则换行</span><br><span class="line">&gt; - 空行，如果上下行之间有空行，则会进行换行</span><br></pre></td></tr></table></figure>
-</code></pre>
-<h2 id="资源语法"><a href="#资源语法" class="headerlink" title="资源语法"></a>资源语法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">链接：</span><br><span class="line"></span><br><span class="line">&gt; - [链接](baidu.com <span class="string">&quot;百度这可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + [链接2][1]...[链接3][id]</span><br><span class="line">	[1]: baidu.com <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: zhihu.com <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">图片：</span><br><span class="line"></span><br><span class="line">&gt; - ![alt text](/path/.jpg <span class="string">&quot;可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + ![alt text][1]...![alt text][id可任意和下文保持一致即可]</span><br><span class="line">	[1]: /path/.jpg <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: /path/.jpg <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">代码块：</span><br><span class="line"></span><br><span class="line">&gt; 1. `中间是代码块`</span><br><span class="line">&gt; 2. ```bash 中间是代码块 ```</span><br><span class="line">&gt; 3. 四个空格/一个tab操作后面的代码</span><br><span class="line">&gt; 4.&lt;!-- more --&gt; 缩写/不展示全文</span><br></pre></td></tr></table></figure>
-
-<h2 id="好看的hexo"><a href="#好看的hexo" class="headerlink" title="好看的hexo"></a>好看的hexo</h2><ul>
-<li><a href="https://blog.bill.moe/"><strong>竞赛</strong></a></li>
-<li><a href="https://diygod.me/"><strong>b站开源大佬</strong></a></li>
-</ul>
-<p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>类对象/实例对象/类方法/实例方法/静态方法</title>
     <url>/posts/93899372/</url>
     <content><![CDATA[<ul>
@@ -1494,6 +1486,20 @@
       <tags>
         <tag>python</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>编写博客--makedown语法说明</title>
+    <url>/posts/ed6b07f3/</url>
+    <content><![CDATA[<h1 id="语法总览"><a href="#语法总览" class="headerlink" title="语法总览"></a>语法总览</h1><h2 id="正文语法"><a href="#正文语法" class="headerlink" title="正文语法"></a>正文语法</h2><pre><code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt; 1.=== title ===	最顶级标题</span><br><span class="line">&gt; 2.---  title --- 二级标题</span><br><span class="line">&gt; 3.<span class="comment"># title/## title/###### title	一级/二级/六级标题</span></span><br><span class="line">&gt; * tab缩进语法</span><br><span class="line">&gt; + 字体加粗使用** text ** 或__text__</span><br><span class="line">&gt; - 排序列表，无序列表使用（+-*），有序列表使用（1.数字加点）</span><br><span class="line">&gt; - 换行，如果上下行无\n(换行操作)则不换行，如果有则换行</span><br><span class="line">&gt; - 空行，如果上下行之间有空行，则会进行换行</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="资源语法"><a href="#资源语法" class="headerlink" title="资源语法"></a>资源语法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">链接：</span><br><span class="line"></span><br><span class="line">&gt; - [链接](baidu.com <span class="string">&quot;百度这可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + [链接2][1]...[链接3][id]</span><br><span class="line">	[1]: baidu.com <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: zhihu.com <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">图片：</span><br><span class="line"></span><br><span class="line">&gt; - ![alt text](/path/.jpg <span class="string">&quot;可省略，添加的属性值&quot;</span>)</span><br><span class="line">&gt; + ![alt text][1]...![alt text][id可任意和下文保持一致即可]</span><br><span class="line">	[1]: /path/.jpg <span class="string">&quot;属性值1可省略&quot;</span></span><br><span class="line">	[id]: /path/.jpg <span class="string">&quot;属性值2可省略&quot;</span> </span><br><span class="line"></span><br><span class="line">代码块：</span><br><span class="line"></span><br><span class="line">&gt; 1. `中间是代码块`</span><br><span class="line">&gt; 2. ```bash 中间是代码块 ```</span><br><span class="line">&gt; 3. 四个空格/一个tab操作后面的代码</span><br><span class="line">&gt; 4.&lt;!-- more --&gt; 缩写/不展示全文</span><br></pre></td></tr></table></figure>
+
+<h2 id="好看的hexo"><a href="#好看的hexo" class="headerlink" title="好看的hexo"></a>好看的hexo</h2><ul>
+<li><a href="https://blog.bill.moe/"><strong>竞赛</strong></a></li>
+<li><a href="https://diygod.me/"><strong>b站开源大佬</strong></a></li>
+</ul>
+<p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>
+]]></content>
   </entry>
   <entry>
     <title>装饰器详解</title>
@@ -1707,57 +1713,6 @@
       </tags>
   </entry>
   <entry>
-    <title>质量保障体系--测试设计</title>
-    <url>/posts/9eaf5086/</url>
-    <content><![CDATA[<p><code>作为一个测试，最核心的工作是保障产品/服务的质量；不管是通过流程，手工测试，还是脚本工具，都是为最终目的服务的，我写这篇文章的最终目的，是为了测试设计能成为一个标准作业；测试一个产品/需求的标准链路如下：</code></p>
-<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><ul>
-<li><strong>收集信息</strong></li>
-<li><strong>分析信息</strong></li>
-<li><strong>测试设计</strong></li>
-<li><strong>测试执行</strong></li>
-<li><strong>归纳并标准化</strong><ul>
-<li><strong>各单功能的标准件</strong> <span id="more"></span></li>
-</ul>
-</li>
-</ul>
-<h2 id="收集信息"><a href="#收集信息" class="headerlink" title="收集信息"></a><strong>收集信息</strong></h2><p><code>要保证充足的测试，仅仅依赖需求和设计文档是不够的；尤其是我们的需求往往是不够完善的；可参考的信息来源如下，其组织形式也体现了信息收集和提炼过程：</code><br><img src="/text_image/%E6%B5%8B%E8%AF%95%E4%BB%BB%E5%8A%A1%E4%BF%A1%E6%81%AF%E6%9D%A5%E6%BA%90.png" alt="alt text"></p>
-<h2 id="分析信息"><a href="#分析信息" class="headerlink" title="分析信息"></a><strong>分析信息</strong></h2><p><code>分析信息是将收集到的信息，提炼、重组、输出成测试大纲的过程；快速信息提炼可用SFDIPOT方法；但一般还是会用MFQ方法来建立测试大纲；具体如下：</code></p>
-<ul>
-<li>SFDIPOT模型<br><img src="/text_image/SFDIPOT.png" alt="alt text"></li>
-<li>SFDIPOT实例<br><img src="/text_image/SFDIPOT%E5%AE%9E%E4%BE%8B.png" alt="alt text"></li>
-<li>MFQ模型：<code>M指单功能、F指单功能间的交互、Q质量属性（非功能）</code><br><img src="/text_image/MFQ%E6%A8%A1%E5%9E%8B.png" alt="alt text"></li>
-<li>MFQ实例<br><img src="/text_image/MFQ%E5%AE%9E%E4%BE%8B.png" alt="alt text"></li>
-<li>MFQ中，Q质量属性，参考大纲<br><img src="/text_image/Q%E9%9D%9E%E5%8A%9F%E8%83%BD%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7.png" alt="alt text"><br><code>以上模型，其实是信息组织方式；具体的分析策略如下，供参考：</code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">尽早尽快：问题发现的越早越好，信息获取的越快越好；</span><br><span class="line">获取的信息越多，信息源越多越好；</span><br><span class="line">疑问；收集疑问，解决疑问，很有价值，质疑一切；</span><br><span class="line">仔细阅读，关注关键字，多思考；</span><br><span class="line">寻找矛盾、漏洞和容易被误解的东西；</span><br><span class="line">除非式探索 —— 在你的产品、流程或者模型的任何你关心的表述后面加上 “除非……”。然后看看新增的部分引导你到了那些方面；</span><br><span class="line">要和业务结合，脱离实际是不行的；</span><br><span class="line">相关性判断 —— 你认为它重要吗？其他人认为这很重要吗？会变得重要吗？用户是否会对这个问题感到不安/恼火？</span><br><span class="line">假设问题；如果…怎么办？–就可能发生的事情或经验进行头脑风暴；</span><br><span class="line">横向思维 —— 人工分离，类比，寻找替代品，相反方面，随机刺激 — 任何有用的东西都可以做；</span><br><span class="line">关键点；——让自己暴露在你认为能产生好想法的信息/情境中；</span><br><span class="line">拉近拉远 —— 放大或缩小详细程度，并检查内容；</span><br><span class="line">图/立体信息组织；以重要的方式将不同的知识、细节和大局结合起来；什么值得仔细研究？让信息变的更立体，更容易理解；</span><br><span class="line">建模；利用测试方法分析，如等价类、因果图、流程等；得到实例；</span><br><span class="line">挖掘隐藏的信息；用户的隐藏需求。隐藏的问题等；</span><br><span class="line">多样性；从多个方面考虑问题；</span><br><span class="line">松弛式探索 —— “让你自己分心吧……因为你永远不知道你会发现什么……但是要定期根据任务来评估你的状态 “</span><br><span class="line">投入并退出 —— 从最困难的部分开始，看看会发生什么，想退出就退出；</span><br><span class="line">拉姆斯菲尔德式探索 —— 调查已知的未知，考虑未知的未知；</span><br><span class="line">不要停下来 —— 当你找到你要找的东西时，多想想看是否有更好的东西等着你；</span><br><span class="line">总是暂停 —— 分析（和设计）是一个连续的活动，是不是暂停一下；</span><br><span class="line">由他人完成–找出由他人执行的测试类型；您可以跳过或轻松覆盖它们（复用）；</span><br><span class="line">上下文分析 - 找出当前情况下哪些因素可以指导你的测试工作。</span><br><span class="line">测试框架 —— 将你的测试活动与你的测试任务联系起来，并了解更多信息（整体联系）；</span><br><span class="line">我做了什么假设 —— 解释你的测试活动，并提出质疑（质疑自己）；</span><br></pre></td></tr></table></figure>
-<strong>以上分析过程都是围绕着‘理解什么是重要的’展开的</strong><h2 id="测试设计"><a href="#测试设计" class="headerlink" title="测试设计"></a><strong>测试设计</strong></h2><code>测试设计一定要基于上下文、基于风险，有的放矢的；常用的测试设计方法有（等价类/边界值/流程图/状态转换法/组合（因果图+判定表、正交实验法）/错误推导法）</code></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">等价类：输入数值，有多种类型时；分类取值，用局部代替整体实现覆盖；注意既要覆盖有效等价类，又要覆盖无效等价类；</span><br><span class="line">边界值：常和等价类一起使用，取各类数据的边界值或极值，以覆盖极限情况；</span><br><span class="line">流程图：画流程图覆盖业务的所有流程，通常要覆盖主要流程/次要流程/异常流程等；</span><br><span class="line">状态转换法：列出需求的所有状态、并整理转换关系；以实现对所有状态关系的覆盖，如登录；状态转换和流程法的主要区别是，流程的链路方向是固定的，状态转换的方向是可逆的；</span><br><span class="line">正交实验法：是一种在众多组合输入数据中，取样本的方法；以实现样本（均匀且全面）表示整体；具体操作制作‘混合’正交表。表的列为输入参数，列的值为参数值；行为执行次数，每一行为该次执行的参数组合；当参数不够时为空；</span><br><span class="line">错误推导：根据收集/推测的可能错误，验证是否存在相关错误；（参考常见错误list）</span><br><span class="line">因果图+判定表法：两种方法常一起使用，根据因果关系生成判定表；在根据判定表进行测试；因果图是这样的，利用输入的组合关系、多个输入及多输出各自的逻辑关系（常见的逻辑关系有等/非/或/与/异或/包含/排他等），来画因果图，并生成判定表；判定表的列即为测试用例,因果图法和判定表如下；</span><br></pre></td></tr></table></figure>
-<p><img src="/text_image/%E5%9B%A0%E6%9E%9C%E5%9B%BE.jpg" alt="alt text"><br><strong>判定表</strong><br><img src="/text_image/%E5%88%A4%E5%AE%9A%E8%A1%A8.png" alt="alt text"><br><code>至于方法怎么使用，这需理解这些方法的价值；方法其实是一种套路，用来解决特定问题的；因此每种方法都有最适合的场景；重点是我们要明白场景的特征和方法的匹配关系；具体如下：</code><br><strong>注意不同方法覆盖率计算特征不同，但总归都是覆盖率=覆盖场景/所有场景；这种覆盖率只是相对覆盖率</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">等价类+边界值（数据）：最适合的场景是，输入之间彼此独立，且输入可能有多种类型时，试用它；</span><br><span class="line">流程图（流程）：场景是分步骤的流程时，考虑用流程法覆盖；</span><br><span class="line">状态转换法（状态）:如果场景是包含多个状态，且状态直接能互相装换，那状态转换法就比流程法适用；</span><br><span class="line">因果图+判定表（规则）：适用于多参数组合的场景，且参数间存在逻辑关系；先画因果图，在做判定表；</span><br><span class="line">正交实验法（组合）：使用输入参数众多，但参数间相对独立，且需要组合输入的场景；</span><br></pre></td></tr></table></figure>
-<p><strong>如何找到需求的特征呢：基于经验，通过收集到的信息；查找关键词、抓住核心功能、围绕既定目标、尝试其他特征的方式判断；注意一个场景，往往有多个特征，抓主干，同时在一个特征无法保障覆盖时，可以覆盖多个特征。</strong></p>
-<p><code>测试设计（建模），往往得到的是测试点，需要我们进一步把测试点具体成可执行的测试用例；在测试分析过程中可参考的经验如下：</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">所有的分析启发法都可以用作设计启发法；</span><br><span class="line">信息要及时更新—— 尽可能的保持测试的规范细节为最新。事情都会发生变换，你会从最新的信息中了解更多；</span><br><span class="line">各样的半度量方式 —— “与其完美地进行一两种测试，不如在相当好的水平上进行更多不同类型的测试。”</span><br><span class="line">越快越好 —— 这样你就可以从产品中获得更多信息；</span><br><span class="line">“把所有应该自动化的测试都实现自动化。”—至少完成一次测试后，你会更清楚这一点；</span><br><span class="line">不玩花活：</span><br><span class="line">  使用简单的测试也能达到目标；</span><br><span class="line">  你不必使用花哨的测试技术，特别是在不需要的时候；</span><br><span class="line">复杂度：</span><br><span class="line">  复杂测试能够让你更有效率；</span><br><span class="line">  在设计复杂的测试时不能太小心；</span><br><span class="line">自由覆盖 —— 通过一次测试，就可以覆盖很多不同的内容。利用质量特征的持续性测试想法，将这些方法保留在你的意识深处，关注异常的发生；</span><br><span class="line">适当的粒度 - 考虑测试的详细级别，以提高可评审性；</span><br><span class="line">最具代表性–使用最常见、最容易出错、包罗万象、最重要的示例；</span><br><span class="line">重要性原则 - 将大多数测试集中在主要目的上，但要寻找其他目的和可能的错误；</span><br><span class="line">偶然性——如果测试能发现我们不知道的重要事情，那就更好了；</span><br><span class="line">可以丢弃 —— 不要害怕丢弃你不再相信有相关性的测试；</span><br><span class="line">实践出真知——试一下这个软件，你就会感觉到什么是重要的，什么是容易出错的，以及如何测试它；</span><br><span class="line">直觉——“当你在思考难以预测的事情并且信息很少的时候，相信你的直觉。”</span><br><span class="line">从软件测试中收获课程的五个例子 —— “在边界测试…测试每个错误消息…测试不同于程序员的配置…执行设置很烦人的测试…避免冗余测试。”</span><br><span class="line">与信息目标保持一致—测试是否可以针对不同的信息目标进行调整？</span><br><span class="line">良好的测试 —— 强大、有效、有价值、可信、可能、非冗余、激励、可执行、可维护、可重复、重要、易于评估、支持故障排除、适当复杂、负责任、性价比高、易于理解、能够实现偶然性；</span><br><span class="line">改变策略——如果你的测试没有揭示新的、有趣的信息，那么是时候改变策略了；</span><br><span class="line">用在别处？ —— 这个伟大的测试想法能否用与于领域的测试？</span><br><span class="line">谁能做到？–你可能会包含你无法执行的测试想法。</span><br><span class="line">多样性审查（结对）——如果审查者提供新的内容，请找一个想法更为不同的人。</span><br><span class="line">未读测试设计 —— 如果开发人员没有阅读你的高等级的测试设计，请询问他们原因。</span><br><span class="line">最喜欢的技巧 —— 你最好的测试设计技巧可能不是完美的匹配，但它可能会给你最好的结果；</span><br><span class="line">任何与探索性测试、基于经验的测试或错误猜测相关的技能都是有用的；</span><br><span class="line">元问题 —— 对于棘手的设计问题，您可以使用诸如 CIA Phoenix 清单之类的问题；</span><br></pre></td></tr></table></figure>
-<h2 id="测试执行"><a href="#测试执行" class="headerlink" title="测试执行"></a><strong>测试执行</strong></h2><p><code>测试执行阶段，也存在着信息获取；纠错的过程；当然获取信息-决策-反馈-优化是贯穿质量活动始终的； 在执行活动中关注的较多的‘覆盖’和‘用例有效性’的问题；判断的依据是‘风险（风险发生的概率/后果）’，虽然每种模型都有一定的覆盖率，但同时任何模型也无法保证100%的覆盖率(测试是一个混沌工程)，因此在执行时，我会尝试覆盖所有被认为重要的东西</code></p>
-<p><strong>覆盖率模型–广度/深度判断</strong><br><img src="/text_image/%E6%B5%8B%E8%AF%95%E6%B7%B1%E5%BA%A6%E5%9B%BE.png" alt="alt text"><br><strong>覆盖率模型–执行价值</strong><br><img src="/text_image/%E5%81%9A%E6%9C%89%E4%BB%B7%E5%80%BC%E7%9A%84%E4%BA%8B.png" alt="alt text"></p>
-<p><code>测试执行可参考的经验：</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">所有的分析启发式和设计启发式都可以用作执行启发式；</span><br><span class="line">基本的启发 —— 如果它存在，我想测试它；</span><br><span class="line">重要问题优先——先找出最重要的问题；</span><br><span class="line">主干——如果方便的话，首先看看大的功能工作是否正常；</span><br><span class="line">更宽泛的区分——如果 “这个” 可以或不可以，我们可以跳过 “那个”；</span><br><span class="line">多信息源——使用比需求更复杂的 “文档”；</span><br><span class="line">再做一件事——另外做一些容易出错的、大众的或者用户可能会做的事情。不要想太多，做点什么，看看会发生什么；</span><br><span class="line">死亡蜜蜂启发 - 如果我改变了一个数据文件，发现我正在测试的应用程序不再发生崩溃，下一步我要做的就是再次改变它，这样我就可以再次看到崩溃；</span><br><span class="line">隆隆作响——当产品做了奇怪的事情，一个大灾难可能会发生；</span><br><span class="line">慢慢挪动——以一种刻意过度精细的方式做某事；</span><br><span class="line">用户错误——研究无意（典型）错误；</span><br><span class="line">行动方法——成为一个 “真正” 的用户；</span><br><span class="line">二分法——当有奇怪的事情发生时，去掉 “一半”，直到找到必要的成分；</span><br><span class="line">可翻转性启发——尝试从意外使用中获得价值；</span><br><span class="line">基本配置矩阵——确定跨越 “边界” 的几个平台；</span><br><span class="line">并发测试执行——同时运行多个测试想法以获得新的交互和想法；</span><br><span class="line">似曾相识的启发式方法——当遇到错误消息时，多重复一次（如果不完全相同，代码是可疑的）；</span><br><span class="line">看看很多地方——测试结果可以通过几个地方来解释；</span><br><span class="line">其他地方是否存在问题——发现的问题是否存在于其他地方？</span><br><span class="line">直觉 - “相信你的直觉。尝试任何感觉有希望的测试”</span><br><span class="line">结对测试——协同测试执行激发新的更快的思考；</span><br><span class="line">测试辅助——有工具可以立刻帮助我吗？</span><br><span class="line">极性动态——在谨慎与快速、嬉戏与严肃、客观与主观等之间切换；</span><br><span class="line">现在——“我现在能做的最好的测试是什么？</span><br><span class="line">情绪——运用你的感官。</span><br><span class="line">新视角发现失败——看看新的东西；让别人看看你的东西；</span><br><span class="line">即兴表演</span><br><span class="line">（不）确定性问题——总是有问题，但它们可能并不重要</span><br><span class="line">我可能用错了启发——如果我发现许多问题，可能是我的模型是错误的；</span><br></pre></td></tr></table></figure>
-<p><strong>快速测试 :</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">用一些快速的，并不总是有效果的测试来刺激你的执行（这些测试来自 Kaner&#x2F;Bach 等.);</span><br><span class="line">鞋子测试——找到一个输入字段，将光标移到它上，将鞋子放在键盘上，然后去吃午饭;</span><br><span class="line">边界测试——测试边界值因为边界的错误编码是一个常见的错误。</span><br><span class="line">Whittaker 攻击</span><br><span class="line">  输入：强制错误消息、默认值、浏览数据、溢出缓冲区、查找交互、重复多次。</span><br><span class="line">  输出：强制不同、无效、属性更改、屏幕刷新。探索存储的数据和计算。填充或损坏文件系统；无效&#x2F;不可访问的文件。</span><br><span class="line">干扰测试——取消、暂停、交换、中止、后退&#x2F;下一步、竞争、删除、注销。</span><br><span class="line">跟踪最近的变化——意外的副作用。</span><br><span class="line">探索数据关系——利用依赖关系，跟踪数据，干扰，删除。</span><br><span class="line">变化之旅——尽可能在各个维度上变化;</span><br><span class="line">复杂度之旅——查找最复杂的功能和数据，创建复杂的文件。</span><br><span class="line">示例数据之旅——尽可能使用任何示例数据。越复杂越好。</span><br><span class="line">持续使用 - 测试时，不要重置系统。打开窗口和文件。让磁盘和内存使用量增加。你希望随着时间的推移，这个系统会自己打结。</span><br><span class="line">调整 - 将某些参数设置为某个值，然后在以后的任何时间将该值重置为其他值，而不重置或重新创建包含的文档或数据结构。</span><br><span class="line">Dog Pilling——一次运行更多进程；同时存在更多状态。</span><br><span class="line">减弱——当系统处于适当的状态时开始使用一个函数，然后将状态部分更改为不适当的状态。</span><br><span class="line">错误消息处理——使错误消息发生。重点测试错误被忽略后的情况。</span><br><span class="line">点击狂热——测试不仅仅是 “敲击键盘”，但这句话并非空穴来风。试着敲击键盘。试着到处点击。</span><br><span class="line">多个实例——同时运行应用程序的许多实例。打开相同的文件。</span><br><span class="line">功能交互——发现各个功能交互或共享数据的位置。寻找任何相互依赖的关系。浏览他们。给他们压力。</span><br><span class="line">便宜的工具！–了解如何使用 InCtrl5, Filemon, Regmon, AppVerifier, Perfmon, Task Manager, Threadhijacker, Zed Attack Proxy, Color Oracle（所有这些都是免费的）</span><br><span class="line">资源匮乏——逐渐降低内存和其他资源，直到产品优雅得降级或不优雅得崩溃。</span><br><span class="line">执行 “作者说”——查看联机帮助或用户手册，找到有关如何执行一些有趣活动的说明。做那些动作。然后即兴表演。</span><br><span class="line">疯狂配置——在安装产品之前或之后以非标准或非默认方式修改 O&#x2F;S 配置。</span><br><span class="line">摸索——找到产品中产生大量数据或执行某些操作非常快的方面;</span><br></pre></td></tr></table></figure>
-<h2 id="归纳并标准化"><a href="#归纳并标准化" class="headerlink" title="归纳并标准化"></a><strong>归纳并标准化</strong></h2><p><code>以上的过程，就是一个完整的‘测试过程’；其中每一步都是独立的，但都有其价值；无论如何，测试本质都是基于‘上下文’和‘风险’的活动；获取信息-分析-决策-反馈-优化，永远贯穿质量活动的始终，本节的目的是让较小的单功能/独立的功能，测试活动，能实现标准作业；这个想法的依据是由于，任何产品功能都是大同小异的，都是由相似的各个小功能组成的，本节考虑输出各小功能的checklist来实现标准作业</code><br><img src="/text_image/%E5%8F%8D%E9%A6%88%E6%9C%BA%E5%88%B6.png" alt="alt text"></p>
-<h3 id="标准作业实例"><a href="#标准作业实例" class="headerlink" title="标准作业实例"></a>标准作业实例</h3><ul>
-<li><a href="https://www.processon.com/view/link/64be5dbc392b97462f4b12c9">‘大富翁游戏’</a></li>
-</ul>
-<p><strong>看到这是不是有种感觉，测试工作流程，越来越像工厂的流水线；这其实就是互联网的发展方向，未来估计行业的发展趋势也会和制造业趋同；不知是行业的幸运，还是个人的不幸！！！</strong></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>实战</tag>
-        <tag>质量体系</tag>
-        <tag>测试设计</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>质量保障体系--2023/07/10</title>
     <url>/posts/274713e6/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><code>测试的核心价值在于保障产品的质量，提效增质；要全面的保障质量，就需要一个完善的体系，从各方面入手来保障产品的质量，本次将以传易互联--音乐项目的质量保障体系进行分析，从而探索质量保障体系的设计</code></p>
@@ -1840,6 +1795,57 @@
       </tags>
   </entry>
   <entry>
+    <title>质量保障体系--测试设计</title>
+    <url>/posts/9eaf5086/</url>
+    <content><![CDATA[<p><code>作为一个测试，最核心的工作是保障产品/服务的质量；不管是通过流程，手工测试，还是脚本工具，都是为最终目的服务的，我写这篇文章的最终目的，是为了测试设计能成为一个标准作业；测试一个产品/需求的标准链路如下：</code></p>
+<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><ul>
+<li><strong>收集信息</strong></li>
+<li><strong>分析信息</strong></li>
+<li><strong>测试设计</strong></li>
+<li><strong>测试执行</strong></li>
+<li><strong>归纳并标准化</strong><ul>
+<li><strong>各单功能的标准件</strong> <span id="more"></span></li>
+</ul>
+</li>
+</ul>
+<h2 id="收集信息"><a href="#收集信息" class="headerlink" title="收集信息"></a><strong>收集信息</strong></h2><p><code>要保证充足的测试，仅仅依赖需求和设计文档是不够的；尤其是我们的需求往往是不够完善的；可参考的信息来源如下，其组织形式也体现了信息收集和提炼过程：</code><br><img src="/text_image/%E6%B5%8B%E8%AF%95%E4%BB%BB%E5%8A%A1%E4%BF%A1%E6%81%AF%E6%9D%A5%E6%BA%90.png" alt="alt text"></p>
+<h2 id="分析信息"><a href="#分析信息" class="headerlink" title="分析信息"></a><strong>分析信息</strong></h2><p><code>分析信息是将收集到的信息，提炼、重组、输出成测试大纲的过程；快速信息提炼可用SFDIPOT方法；但一般还是会用MFQ方法来建立测试大纲；具体如下：</code></p>
+<ul>
+<li>SFDIPOT模型<br><img src="/text_image/SFDIPOT.png" alt="alt text"></li>
+<li>SFDIPOT实例<br><img src="/text_image/SFDIPOT%E5%AE%9E%E4%BE%8B.png" alt="alt text"></li>
+<li>MFQ模型：<code>M指单功能、F指单功能间的交互、Q质量属性（非功能）</code><br><img src="/text_image/MFQ%E6%A8%A1%E5%9E%8B.png" alt="alt text"></li>
+<li>MFQ实例<br><img src="/text_image/MFQ%E5%AE%9E%E4%BE%8B.png" alt="alt text"></li>
+<li>MFQ中，Q质量属性，参考大纲<br><img src="/text_image/Q%E9%9D%9E%E5%8A%9F%E8%83%BD%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7.png" alt="alt text"><br><code>以上模型，其实是信息组织方式；具体的分析策略如下，供参考：</code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">尽早尽快：问题发现的越早越好，信息获取的越快越好；</span><br><span class="line">获取的信息越多，信息源越多越好；</span><br><span class="line">疑问；收集疑问，解决疑问，很有价值，质疑一切；</span><br><span class="line">仔细阅读，关注关键字，多思考；</span><br><span class="line">寻找矛盾、漏洞和容易被误解的东西；</span><br><span class="line">除非式探索 —— 在你的产品、流程或者模型的任何你关心的表述后面加上 “除非……”。然后看看新增的部分引导你到了那些方面；</span><br><span class="line">要和业务结合，脱离实际是不行的；</span><br><span class="line">相关性判断 —— 你认为它重要吗？其他人认为这很重要吗？会变得重要吗？用户是否会对这个问题感到不安/恼火？</span><br><span class="line">假设问题；如果…怎么办？–就可能发生的事情或经验进行头脑风暴；</span><br><span class="line">横向思维 —— 人工分离，类比，寻找替代品，相反方面，随机刺激 — 任何有用的东西都可以做；</span><br><span class="line">关键点；——让自己暴露在你认为能产生好想法的信息/情境中；</span><br><span class="line">拉近拉远 —— 放大或缩小详细程度，并检查内容；</span><br><span class="line">图/立体信息组织；以重要的方式将不同的知识、细节和大局结合起来；什么值得仔细研究？让信息变的更立体，更容易理解；</span><br><span class="line">建模；利用测试方法分析，如等价类、因果图、流程等；得到实例；</span><br><span class="line">挖掘隐藏的信息；用户的隐藏需求。隐藏的问题等；</span><br><span class="line">多样性；从多个方面考虑问题；</span><br><span class="line">松弛式探索 —— “让你自己分心吧……因为你永远不知道你会发现什么……但是要定期根据任务来评估你的状态 “</span><br><span class="line">投入并退出 —— 从最困难的部分开始，看看会发生什么，想退出就退出；</span><br><span class="line">拉姆斯菲尔德式探索 —— 调查已知的未知，考虑未知的未知；</span><br><span class="line">不要停下来 —— 当你找到你要找的东西时，多想想看是否有更好的东西等着你；</span><br><span class="line">总是暂停 —— 分析（和设计）是一个连续的活动，是不是暂停一下；</span><br><span class="line">由他人完成–找出由他人执行的测试类型；您可以跳过或轻松覆盖它们（复用）；</span><br><span class="line">上下文分析 - 找出当前情况下哪些因素可以指导你的测试工作。</span><br><span class="line">测试框架 —— 将你的测试活动与你的测试任务联系起来，并了解更多信息（整体联系）；</span><br><span class="line">我做了什么假设 —— 解释你的测试活动，并提出质疑（质疑自己）；</span><br></pre></td></tr></table></figure>
+<strong>以上分析过程都是围绕着‘理解什么是重要的’展开的</strong><h2 id="测试设计"><a href="#测试设计" class="headerlink" title="测试设计"></a><strong>测试设计</strong></h2><code>测试设计一定要基于上下文、基于风险，有的放矢的；常用的测试设计方法有（等价类/边界值/流程图/状态转换法/组合（因果图+判定表、正交实验法）/错误推导法）</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">等价类：输入数值，有多种类型时；分类取值，用局部代替整体实现覆盖；注意既要覆盖有效等价类，又要覆盖无效等价类；</span><br><span class="line">边界值：常和等价类一起使用，取各类数据的边界值或极值，以覆盖极限情况；</span><br><span class="line">流程图：画流程图覆盖业务的所有流程，通常要覆盖主要流程/次要流程/异常流程等；</span><br><span class="line">状态转换法：列出需求的所有状态、并整理转换关系；以实现对所有状态关系的覆盖，如登录；状态转换和流程法的主要区别是，流程的链路方向是固定的，状态转换的方向是可逆的；</span><br><span class="line">正交实验法：是一种在众多组合输入数据中，取样本的方法；以实现样本（均匀且全面）表示整体；具体操作制作‘混合’正交表。表的列为输入参数，列的值为参数值；行为执行次数，每一行为该次执行的参数组合；当参数不够时为空；</span><br><span class="line">错误推导：根据收集/推测的可能错误，验证是否存在相关错误；（参考常见错误list）</span><br><span class="line">因果图+判定表法：两种方法常一起使用，根据因果关系生成判定表；在根据判定表进行测试；因果图是这样的，利用输入的组合关系、多个输入及多输出各自的逻辑关系（常见的逻辑关系有等/非/或/与/异或/包含/排他等），来画因果图，并生成判定表；判定表的列即为测试用例,因果图法和判定表如下；</span><br></pre></td></tr></table></figure>
+<p><img src="/text_image/%E5%9B%A0%E6%9E%9C%E5%9B%BE.jpg" alt="alt text"><br><strong>判定表</strong><br><img src="/text_image/%E5%88%A4%E5%AE%9A%E8%A1%A8.png" alt="alt text"><br><code>至于方法怎么使用，这需理解这些方法的价值；方法其实是一种套路，用来解决特定问题的；因此每种方法都有最适合的场景；重点是我们要明白场景的特征和方法的匹配关系；具体如下：</code><br><strong>注意不同方法覆盖率计算特征不同，但总归都是覆盖率=覆盖场景/所有场景；这种覆盖率只是相对覆盖率</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">等价类+边界值（数据）：最适合的场景是，输入之间彼此独立，且输入可能有多种类型时，试用它；</span><br><span class="line">流程图（流程）：场景是分步骤的流程时，考虑用流程法覆盖；</span><br><span class="line">状态转换法（状态）:如果场景是包含多个状态，且状态直接能互相装换，那状态转换法就比流程法适用；</span><br><span class="line">因果图+判定表（规则）：适用于多参数组合的场景，且参数间存在逻辑关系；先画因果图，在做判定表；</span><br><span class="line">正交实验法（组合）：使用输入参数众多，但参数间相对独立，且需要组合输入的场景；</span><br></pre></td></tr></table></figure>
+<p><strong>如何找到需求的特征呢：基于经验，通过收集到的信息；查找关键词、抓住核心功能、围绕既定目标、尝试其他特征的方式判断；注意一个场景，往往有多个特征，抓主干，同时在一个特征无法保障覆盖时，可以覆盖多个特征。</strong></p>
+<p><code>测试设计（建模），往往得到的是测试点，需要我们进一步把测试点具体成可执行的测试用例；在测试分析过程中可参考的经验如下：</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">所有的分析启发法都可以用作设计启发法；</span><br><span class="line">信息要及时更新—— 尽可能的保持测试的规范细节为最新。事情都会发生变换，你会从最新的信息中了解更多；</span><br><span class="line">各样的半度量方式 —— “与其完美地进行一两种测试，不如在相当好的水平上进行更多不同类型的测试。”</span><br><span class="line">越快越好 —— 这样你就可以从产品中获得更多信息；</span><br><span class="line">“把所有应该自动化的测试都实现自动化。”—至少完成一次测试后，你会更清楚这一点；</span><br><span class="line">不玩花活：</span><br><span class="line">  使用简单的测试也能达到目标；</span><br><span class="line">  你不必使用花哨的测试技术，特别是在不需要的时候；</span><br><span class="line">复杂度：</span><br><span class="line">  复杂测试能够让你更有效率；</span><br><span class="line">  在设计复杂的测试时不能太小心；</span><br><span class="line">自由覆盖 —— 通过一次测试，就可以覆盖很多不同的内容。利用质量特征的持续性测试想法，将这些方法保留在你的意识深处，关注异常的发生；</span><br><span class="line">适当的粒度 - 考虑测试的详细级别，以提高可评审性；</span><br><span class="line">最具代表性–使用最常见、最容易出错、包罗万象、最重要的示例；</span><br><span class="line">重要性原则 - 将大多数测试集中在主要目的上，但要寻找其他目的和可能的错误；</span><br><span class="line">偶然性——如果测试能发现我们不知道的重要事情，那就更好了；</span><br><span class="line">可以丢弃 —— 不要害怕丢弃你不再相信有相关性的测试；</span><br><span class="line">实践出真知——试一下这个软件，你就会感觉到什么是重要的，什么是容易出错的，以及如何测试它；</span><br><span class="line">直觉——“当你在思考难以预测的事情并且信息很少的时候，相信你的直觉。”</span><br><span class="line">从软件测试中收获课程的五个例子 —— “在边界测试…测试每个错误消息…测试不同于程序员的配置…执行设置很烦人的测试…避免冗余测试。”</span><br><span class="line">与信息目标保持一致—测试是否可以针对不同的信息目标进行调整？</span><br><span class="line">良好的测试 —— 强大、有效、有价值、可信、可能、非冗余、激励、可执行、可维护、可重复、重要、易于评估、支持故障排除、适当复杂、负责任、性价比高、易于理解、能够实现偶然性；</span><br><span class="line">改变策略——如果你的测试没有揭示新的、有趣的信息，那么是时候改变策略了；</span><br><span class="line">用在别处？ —— 这个伟大的测试想法能否用与于领域的测试？</span><br><span class="line">谁能做到？–你可能会包含你无法执行的测试想法。</span><br><span class="line">多样性审查（结对）——如果审查者提供新的内容，请找一个想法更为不同的人。</span><br><span class="line">未读测试设计 —— 如果开发人员没有阅读你的高等级的测试设计，请询问他们原因。</span><br><span class="line">最喜欢的技巧 —— 你最好的测试设计技巧可能不是完美的匹配，但它可能会给你最好的结果；</span><br><span class="line">任何与探索性测试、基于经验的测试或错误猜测相关的技能都是有用的；</span><br><span class="line">元问题 —— 对于棘手的设计问题，您可以使用诸如 CIA Phoenix 清单之类的问题；</span><br></pre></td></tr></table></figure>
+<h2 id="测试执行"><a href="#测试执行" class="headerlink" title="测试执行"></a><strong>测试执行</strong></h2><p><code>测试执行阶段，也存在着信息获取；纠错的过程；当然获取信息-决策-反馈-优化是贯穿质量活动始终的； 在执行活动中关注的较多的‘覆盖’和‘用例有效性’的问题；判断的依据是‘风险（风险发生的概率/后果）’，虽然每种模型都有一定的覆盖率，但同时任何模型也无法保证100%的覆盖率(测试是一个混沌工程)，因此在执行时，我会尝试覆盖所有被认为重要的东西</code></p>
+<p><strong>覆盖率模型–广度/深度判断</strong><br><img src="/text_image/%E6%B5%8B%E8%AF%95%E6%B7%B1%E5%BA%A6%E5%9B%BE.png" alt="alt text"><br><strong>覆盖率模型–执行价值</strong><br><img src="/text_image/%E5%81%9A%E6%9C%89%E4%BB%B7%E5%80%BC%E7%9A%84%E4%BA%8B.png" alt="alt text"></p>
+<p><code>测试执行可参考的经验：</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">所有的分析启发式和设计启发式都可以用作执行启发式；</span><br><span class="line">基本的启发 —— 如果它存在，我想测试它；</span><br><span class="line">重要问题优先——先找出最重要的问题；</span><br><span class="line">主干——如果方便的话，首先看看大的功能工作是否正常；</span><br><span class="line">更宽泛的区分——如果 “这个” 可以或不可以，我们可以跳过 “那个”；</span><br><span class="line">多信息源——使用比需求更复杂的 “文档”；</span><br><span class="line">再做一件事——另外做一些容易出错的、大众的或者用户可能会做的事情。不要想太多，做点什么，看看会发生什么；</span><br><span class="line">死亡蜜蜂启发 - 如果我改变了一个数据文件，发现我正在测试的应用程序不再发生崩溃，下一步我要做的就是再次改变它，这样我就可以再次看到崩溃；</span><br><span class="line">隆隆作响——当产品做了奇怪的事情，一个大灾难可能会发生；</span><br><span class="line">慢慢挪动——以一种刻意过度精细的方式做某事；</span><br><span class="line">用户错误——研究无意（典型）错误；</span><br><span class="line">行动方法——成为一个 “真正” 的用户；</span><br><span class="line">二分法——当有奇怪的事情发生时，去掉 “一半”，直到找到必要的成分；</span><br><span class="line">可翻转性启发——尝试从意外使用中获得价值；</span><br><span class="line">基本配置矩阵——确定跨越 “边界” 的几个平台；</span><br><span class="line">并发测试执行——同时运行多个测试想法以获得新的交互和想法；</span><br><span class="line">似曾相识的启发式方法——当遇到错误消息时，多重复一次（如果不完全相同，代码是可疑的）；</span><br><span class="line">看看很多地方——测试结果可以通过几个地方来解释；</span><br><span class="line">其他地方是否存在问题——发现的问题是否存在于其他地方？</span><br><span class="line">直觉 - “相信你的直觉。尝试任何感觉有希望的测试”</span><br><span class="line">结对测试——协同测试执行激发新的更快的思考；</span><br><span class="line">测试辅助——有工具可以立刻帮助我吗？</span><br><span class="line">极性动态——在谨慎与快速、嬉戏与严肃、客观与主观等之间切换；</span><br><span class="line">现在——“我现在能做的最好的测试是什么？</span><br><span class="line">情绪——运用你的感官。</span><br><span class="line">新视角发现失败——看看新的东西；让别人看看你的东西；</span><br><span class="line">即兴表演</span><br><span class="line">（不）确定性问题——总是有问题，但它们可能并不重要</span><br><span class="line">我可能用错了启发——如果我发现许多问题，可能是我的模型是错误的；</span><br></pre></td></tr></table></figure>
+<p><strong>快速测试 :</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">用一些快速的，并不总是有效果的测试来刺激你的执行（这些测试来自 Kaner&#x2F;Bach 等.);</span><br><span class="line">鞋子测试——找到一个输入字段，将光标移到它上，将鞋子放在键盘上，然后去吃午饭;</span><br><span class="line">边界测试——测试边界值因为边界的错误编码是一个常见的错误。</span><br><span class="line">Whittaker 攻击</span><br><span class="line">  输入：强制错误消息、默认值、浏览数据、溢出缓冲区、查找交互、重复多次。</span><br><span class="line">  输出：强制不同、无效、属性更改、屏幕刷新。探索存储的数据和计算。填充或损坏文件系统；无效&#x2F;不可访问的文件。</span><br><span class="line">干扰测试——取消、暂停、交换、中止、后退&#x2F;下一步、竞争、删除、注销。</span><br><span class="line">跟踪最近的变化——意外的副作用。</span><br><span class="line">探索数据关系——利用依赖关系，跟踪数据，干扰，删除。</span><br><span class="line">变化之旅——尽可能在各个维度上变化;</span><br><span class="line">复杂度之旅——查找最复杂的功能和数据，创建复杂的文件。</span><br><span class="line">示例数据之旅——尽可能使用任何示例数据。越复杂越好。</span><br><span class="line">持续使用 - 测试时，不要重置系统。打开窗口和文件。让磁盘和内存使用量增加。你希望随着时间的推移，这个系统会自己打结。</span><br><span class="line">调整 - 将某些参数设置为某个值，然后在以后的任何时间将该值重置为其他值，而不重置或重新创建包含的文档或数据结构。</span><br><span class="line">Dog Pilling——一次运行更多进程；同时存在更多状态。</span><br><span class="line">减弱——当系统处于适当的状态时开始使用一个函数，然后将状态部分更改为不适当的状态。</span><br><span class="line">错误消息处理——使错误消息发生。重点测试错误被忽略后的情况。</span><br><span class="line">点击狂热——测试不仅仅是 “敲击键盘”，但这句话并非空穴来风。试着敲击键盘。试着到处点击。</span><br><span class="line">多个实例——同时运行应用程序的许多实例。打开相同的文件。</span><br><span class="line">功能交互——发现各个功能交互或共享数据的位置。寻找任何相互依赖的关系。浏览他们。给他们压力。</span><br><span class="line">便宜的工具！–了解如何使用 InCtrl5, Filemon, Regmon, AppVerifier, Perfmon, Task Manager, Threadhijacker, Zed Attack Proxy, Color Oracle（所有这些都是免费的）</span><br><span class="line">资源匮乏——逐渐降低内存和其他资源，直到产品优雅得降级或不优雅得崩溃。</span><br><span class="line">执行 “作者说”——查看联机帮助或用户手册，找到有关如何执行一些有趣活动的说明。做那些动作。然后即兴表演。</span><br><span class="line">疯狂配置——在安装产品之前或之后以非标准或非默认方式修改 O&#x2F;S 配置。</span><br><span class="line">摸索——找到产品中产生大量数据或执行某些操作非常快的方面;</span><br></pre></td></tr></table></figure>
+<h2 id="归纳并标准化"><a href="#归纳并标准化" class="headerlink" title="归纳并标准化"></a><strong>归纳并标准化</strong></h2><p><code>以上的过程，就是一个完整的‘测试过程’；其中每一步都是独立的，但都有其价值；无论如何，测试本质都是基于‘上下文’和‘风险’的活动；获取信息-分析-决策-反馈-优化，永远贯穿质量活动的始终，本节的目的是让较小的单功能/独立的功能，测试活动，能实现标准作业；这个想法的依据是由于，任何产品功能都是大同小异的，都是由相似的各个小功能组成的，本节考虑输出各小功能的checklist来实现标准作业</code><br><img src="/text_image/%E5%8F%8D%E9%A6%88%E6%9C%BA%E5%88%B6.png" alt="alt text"></p>
+<h3 id="标准作业实例"><a href="#标准作业实例" class="headerlink" title="标准作业实例"></a>标准作业实例</h3><ul>
+<li><a href="https://www.processon.com/view/link/64be5dbc392b97462f4b12c9">‘大富翁游戏’</a></li>
+</ul>
+<p><strong>看到这是不是有种感觉，测试工作流程，越来越像工厂的流水线；这其实就是互联网的发展方向，未来估计行业的发展趋势也会和制造业趋同；不知是行业的幸运，还是个人的不幸！！！</strong></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>实战</tag>
+        <tag>质量体系</tag>
+        <tag>测试设计</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2023-7月新工作准备</title>
     <url>/posts/377e71de/</url>
     <content><![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><pre><code>通过半个季度的学习，达到准高级工程师水准，进入大厂（BAT/TMDJKXB）;
@@ -1853,7 +1859,7 @@
 <li>数据库</li>
 <li>大数据架构</li>
 <li>前端</li>
-<li>测试设计</li>
+<li>✔测试设计</li>
 </ul>
 <p><em><strong>执行规划</strong></em></p>
 <ul>
@@ -1862,7 +1868,7 @@
 <li>✔技术复盘</li>
 <li>✔期望岗位</li>
 <li>✔岗位技能要求分析</li>
-<li>面试题练习</li>
+<li>✔面试题练习</li>
 <li>准备简历</li>
 <li>人脉资源</li>
 <li>面试复盘</li>
