@@ -1,6 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Android资源采集</title>
+    <url>/posts/0/</url>
+    <content><![CDATA[<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><span id="more"></span>
+
+<h3 id="命令："><a href="#命令：" class="headerlink" title="命令："></a>命令：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys cpuinfo</span><br></pre></td></tr></table></figure>
+
+<h3 id="结果解析："><a href="#结果解析：" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/cpu.png" alt="alt text"></p>
+<h5 id="第一行"><a href="#第一行" class="headerlink" title="第一行"></a>第一行</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">其中第一行：Load: 10.1 / 2.49 / 0.83</span><br><span class="line">表示系统1min/5min/10min cpu负载平均值</span><br><span class="line">标准说明：1/0.7---理论上单核满载是1，但是在真实情况下，满载会存在性能问题，一般不超过70%；四核满载则是4.</span><br></pre></td></tr></table></figure>
+<h5 id="第三行"><a href="#第三行" class="headerlink" title="第三行"></a>第三行</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">75% 593/system_server: 58% user + 16% kernel / faults: 33566 minor 473 major</span><br><span class="line">该行表示资源消耗情况；</span><br><span class="line">593/75%/58%/16%：pid/cpu负载/用户空间负载/内核空间负载</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="命令扩展"><a href="#命令扩展" class="headerlink" title="命令扩展"></a>命令扩展</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys cpuinfo | grep -w com.afmobi.boomplayer:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>参考：<a href="https://blog.csdn.net/lipanpan1030/article/details/108118685">dumpsys工具cpu采集说明</a></p>
+<h2 id="MEN"><a href="#MEN" class="headerlink" title="MEN"></a>MEN</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell  dumpsys  meminfo com.afmobi.boomplayer</span><br></pre></td></tr></table></figure>
+
+<h3 id="结果解析：-1"><a href="#结果解析：-1" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/men.png" alt="alt text"><br><strong>由图可知：</strong> 需要解析获取TOTAL之后的值，单位kb</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#脚本如下</span></span><br><span class="line"><span class="comment"># 得到men的使用情况</span></span><br><span class="line">def get_men(devices, pkg_name):</span><br><span class="line">    cmd = <span class="string">&quot;adb -s &quot;</span>+devices+<span class="string">&quot; shell  dumpsys  meminfo %s&quot;</span>  %(pkg_name)</span><br><span class="line">    total = <span class="string">&quot;TOTAL&quot;</span></span><br><span class="line">    get_cmd = os.popen(cmd).readlines()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;men:&#x27;</span>,get_cmd)</span><br><span class="line">    <span class="keyword">for</span> info <span class="keyword">in</span> get_cmd:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;men_info:&#x27;</span>,info)</span><br><span class="line">        info_sp = info.strip().split()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;info_sp:&quot;</span>,info_sp)</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> range(len(info_sp)):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;item:&quot;</span>,item)</span><br><span class="line">            <span class="keyword">if</span> info_sp[item] == total:</span><br><span class="line">                <span class="built_in">return</span> int(info_sp[item+1])</span><br><span class="line">    <span class="built_in">return</span> 0</span><br></pre></td></tr></table></figure>
+<h2 id="FPS"><a href="#FPS" class="headerlink" title="FPS"></a>FPS</h2><p><strong>fps为帧率，表示单位时间1s内屏幕刷新的次数，Android6之前存在一个相对标准，帧率不能低于60，即单帧耗时不能大于16.67ms,否则会存在丢帧</strong></p>
+<h3 id="命令-1"><a href="#命令-1" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys gfxinfo com.afmobi.boomplayer | grep -A 128 Execute | grep -v <span class="string">&#x27;[a-z]&#x27;</span> </span><br></pre></td></tr></table></figure>
+
+<h3 id="结果解析：-2"><a href="#结果解析：-2" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/fps.png" alt="alt text"><br><strong>如上图 Draw/Prepare/Process/Execute表示一帧被绘制的四个阶段，四个值相加即为一帧的耗时(无数据则很可能是手机的“GPU呈现模式分析”未打开)</strong></p>
+<p><a href="https://blog.csdn.net/weixin_43291944/article/details/98497689">fps说明</a></p>
+<h2 id="FLOW"><a href="#FLOW" class="headerlink" title="FLOW"></a>FLOW</h2><p><strong>流量获取有多个路径，比如通过在tcp_snd文件获取tcp发送流量，在tcp_rcv文件中获取tcp接受流量，在/net/dev中获取总的发送/接受流量，同时也可以通过代理获取流量值</strong></p>
+<h3 id="命令-2"><a href="#命令-2" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tcp_send_cmd=adb shell cat /proc/uid_stat/uid_cmd/tcp_snd</span><br><span class="line"></span><br><span class="line">tcp_recv_cmd=adb shell cat /proc/uid_stat/uid_cmd/tcp_rcv</span><br><span class="line"></span><br><span class="line">sum_send_cmd=adb shell cat /proc/pid_cmd/net/dev|grep <span class="string">&quot;wlan0&quot;</span>|awk <span class="string">&quot;&#123;print <span class="variable">$10</span>&#125;&quot;</span></span><br><span class="line"></span><br><span class="line">sum_recv_cmd=adb shell cat /proc/pid_cmd/net/dev|grep <span class="string">&quot;wlan0&quot;</span>|awk <span class="string">&quot;&#123;print <span class="variable">$2</span>&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://testerhome.com/topics/14310">流量命令</a></p>
+<h2 id="电量"><a href="#电量" class="headerlink" title="电量"></a>电量</h2><h3 id="命令-3"><a href="#命令-3" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb shell dumpsys batterystats --charged com.afmobi.boomplayer</span><br></pre></td></tr></table></figure>
+<p><strong>预计的电量值如下</strong><br><img src="/text_image/dian.png" alt="alt text"></p>
+<p><a href="https://source.android.com/devices/tech/power/batterystats?hl=zh-cn">电量/流量说明</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>稳定性--ANR治理</title>
+    <url>/posts/1ee32bf1/</url>
+    <content><![CDATA[<h1 id="ANR治理"><a href="#ANR治理" class="headerlink" title="ANR治理"></a>ANR治理</h1><ul>
+<li><em><strong>大纲</strong></em></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">anr是什么？</span><br><span class="line">为什么会产生anr?</span><br><span class="line">anr是怎样产生的，哪些场景下会产生？</span><br><span class="line">anr如何治理？</span><br><span class="line">解决anr问题的价值？</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<ul>
+<li><strong>anr是什么？</strong><br>  <code>anr(Applicatipon No Response),即应用无响应；本质是一个性能问题；在用户和app进行交互时，常会遇到长时间无响应/卡顿的场景；为了改善性能，Android设计了anr的机制，即保证交互能在一定时间内完成，如果未完成，就抛出异常，也就是ANR;   </code></li>
+<li><strong>anr设计机制：</strong><br>  <code>是系统通过与之交互的组件(Activity，Service，Receiver，Provider)以及用户交互(InputEvent)进行超时监控，以判断应用进程(主线程)是否存在卡死或响应过慢的问题，通俗来说就是很多系统中看门狗(watchdog)的设计思想。   </code><ul>
+<li><strong>不同的组件，系统设置的超时时间是不同的，这个时间不同手机厂商的os可能也会做调整：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
+<li><strong>系统抛出anr的机制：</strong><br><code>在进行相关的操作前，系统会基于当前的时间戳和这个类型组件的超时时间设置，计算出超时时间戳；并将超时时间戳传递给anr触发函数，组件若未超时启动，则会在启动成功后，在传递一个参数给anr函数来阻止触发anr;若到超时时间，anr函数还未收到阻止信号，就会触发ANR(类似构建了个定时触发的任务)； </code></li>
+<li><strong>超时触发流程如下：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
+</ul>
+</li>
+</ul>
+<p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1780091311874686979&scene=173&from_msgid=2247488558&from_itemidx=1&count=3&nolastread=1&uin=&key=&devicetype=Windows+10+x64&version=63030532&lang=zh_CN&ascene=0&fontgear=2">头条anr治理系列</a></p>
+<p><a href="https://mp.weixin.qq.com/s/L30s7rOyn6NcPC2y9XNZIQ">百度anr治理</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>anr</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SOLOPI使用教程</title>
     <url>/posts/49e140/</url>
     <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
@@ -116,120 +182,6 @@
         <tag>前端性能</tag>
         <tag>solopi</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Android资源采集</title>
-    <url>/posts/0/</url>
-    <content><![CDATA[<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><span id="more"></span>
-
-<h3 id="命令："><a href="#命令：" class="headerlink" title="命令："></a>命令：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys cpuinfo</span><br></pre></td></tr></table></figure>
-
-<h3 id="结果解析："><a href="#结果解析：" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/cpu.png" alt="alt text"></p>
-<h5 id="第一行"><a href="#第一行" class="headerlink" title="第一行"></a>第一行</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">其中第一行：Load: 10.1 / 2.49 / 0.83</span><br><span class="line">表示系统1min/5min/10min cpu负载平均值</span><br><span class="line">标准说明：1/0.7---理论上单核满载是1，但是在真实情况下，满载会存在性能问题，一般不超过70%；四核满载则是4.</span><br></pre></td></tr></table></figure>
-<h5 id="第三行"><a href="#第三行" class="headerlink" title="第三行"></a>第三行</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">75% 593/system_server: 58% user + 16% kernel / faults: 33566 minor 473 major</span><br><span class="line">该行表示资源消耗情况；</span><br><span class="line">593/75%/58%/16%：pid/cpu负载/用户空间负载/内核空间负载</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="命令扩展"><a href="#命令扩展" class="headerlink" title="命令扩展"></a>命令扩展</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys cpuinfo | grep -w com.afmobi.boomplayer:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>参考：<a href="https://blog.csdn.net/lipanpan1030/article/details/108118685">dumpsys工具cpu采集说明</a></p>
-<h2 id="MEN"><a href="#MEN" class="headerlink" title="MEN"></a>MEN</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell  dumpsys  meminfo com.afmobi.boomplayer</span><br></pre></td></tr></table></figure>
-
-<h3 id="结果解析：-1"><a href="#结果解析：-1" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/men.png" alt="alt text"><br><strong>由图可知：</strong> 需要解析获取TOTAL之后的值，单位kb</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#脚本如下</span></span><br><span class="line"><span class="comment"># 得到men的使用情况</span></span><br><span class="line">def get_men(devices, pkg_name):</span><br><span class="line">    cmd = <span class="string">&quot;adb -s &quot;</span>+devices+<span class="string">&quot; shell  dumpsys  meminfo %s&quot;</span>  %(pkg_name)</span><br><span class="line">    total = <span class="string">&quot;TOTAL&quot;</span></span><br><span class="line">    get_cmd = os.popen(cmd).readlines()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;men:&#x27;</span>,get_cmd)</span><br><span class="line">    <span class="keyword">for</span> info <span class="keyword">in</span> get_cmd:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;men_info:&#x27;</span>,info)</span><br><span class="line">        info_sp = info.strip().split()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;info_sp:&quot;</span>,info_sp)</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> range(len(info_sp)):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;item:&quot;</span>,item)</span><br><span class="line">            <span class="keyword">if</span> info_sp[item] == total:</span><br><span class="line">                <span class="built_in">return</span> int(info_sp[item+1])</span><br><span class="line">    <span class="built_in">return</span> 0</span><br></pre></td></tr></table></figure>
-<h2 id="FPS"><a href="#FPS" class="headerlink" title="FPS"></a>FPS</h2><p><strong>fps为帧率，表示单位时间1s内屏幕刷新的次数，Android6之前存在一个相对标准，帧率不能低于60，即单帧耗时不能大于16.67ms,否则会存在丢帧</strong></p>
-<h3 id="命令-1"><a href="#命令-1" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys gfxinfo com.afmobi.boomplayer | grep -A 128 Execute | grep -v <span class="string">&#x27;[a-z]&#x27;</span> </span><br></pre></td></tr></table></figure>
-
-<h3 id="结果解析：-2"><a href="#结果解析：-2" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/fps.png" alt="alt text"><br><strong>如上图 Draw/Prepare/Process/Execute表示一帧被绘制的四个阶段，四个值相加即为一帧的耗时(无数据则很可能是手机的“GPU呈现模式分析”未打开)</strong></p>
-<p><a href="https://blog.csdn.net/weixin_43291944/article/details/98497689">fps说明</a></p>
-<h2 id="FLOW"><a href="#FLOW" class="headerlink" title="FLOW"></a>FLOW</h2><p><strong>流量获取有多个路径，比如通过在tcp_snd文件获取tcp发送流量，在tcp_rcv文件中获取tcp接受流量，在/net/dev中获取总的发送/接受流量，同时也可以通过代理获取流量值</strong></p>
-<h3 id="命令-2"><a href="#命令-2" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tcp_send_cmd=adb shell cat /proc/uid_stat/uid_cmd/tcp_snd</span><br><span class="line"></span><br><span class="line">tcp_recv_cmd=adb shell cat /proc/uid_stat/uid_cmd/tcp_rcv</span><br><span class="line"></span><br><span class="line">sum_send_cmd=adb shell cat /proc/pid_cmd/net/dev|grep <span class="string">&quot;wlan0&quot;</span>|awk <span class="string">&quot;&#123;print <span class="variable">$10</span>&#125;&quot;</span></span><br><span class="line"></span><br><span class="line">sum_recv_cmd=adb shell cat /proc/pid_cmd/net/dev|grep <span class="string">&quot;wlan0&quot;</span>|awk <span class="string">&quot;&#123;print <span class="variable">$2</span>&#125;&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><a href="https://testerhome.com/topics/14310">流量命令</a></p>
-<h2 id="电量"><a href="#电量" class="headerlink" title="电量"></a>电量</h2><h3 id="命令-3"><a href="#命令-3" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb shell dumpsys batterystats --charged com.afmobi.boomplayer</span><br></pre></td></tr></table></figure>
-<p><strong>预计的电量值如下</strong><br><img src="/text_image/dian.png" alt="alt text"></p>
-<p><a href="https://source.android.com/devices/tech/power/batterystats?hl=zh-cn">电量/流量说明</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>Android</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>稳定性--ANR治理</title>
-    <url>/posts/1ee32bf1/</url>
-    <content><![CDATA[<h1 id="ANR治理"><a href="#ANR治理" class="headerlink" title="ANR治理"></a>ANR治理</h1><ul>
-<li><em><strong>大纲</strong></em></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">anr是什么？</span><br><span class="line">为什么会产生anr?</span><br><span class="line">anr是怎样产生的，哪些场景下会产生？</span><br><span class="line">anr如何治理？</span><br><span class="line">解决anr问题的价值？</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<ul>
-<li><strong>anr是什么？</strong><br>  <code>anr(Applicatipon No Response),即应用无响应；本质是一个性能问题；在用户和app进行交互时，常会遇到长时间无响应/卡顿的场景；为了改善性能，Android设计了anr的机制，即保证交互能在一定时间内完成，如果未完成，就抛出异常，也就是ANR;   </code></li>
-<li><strong>anr设计机制：</strong><br>  <code>是系统通过与之交互的组件(Activity，Service，Receiver，Provider)以及用户交互(InputEvent)进行超时监控，以判断应用进程(主线程)是否存在卡死或响应过慢的问题，通俗来说就是很多系统中看门狗(watchdog)的设计思想。   </code><ul>
-<li><strong>不同的组件，系统设置的超时时间是不同的，这个时间不同手机厂商的os可能也会做调整：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
-<li><strong>系统抛出anr的机制：</strong><br><code>在进行相关的操作前，系统会基于当前的时间戳和这个类型组件的超时时间设置，计算出超时时间戳；并将超时时间戳传递给anr触发函数，组件若未超时启动，则会在启动成功后，在传递一个参数给anr函数来阻止触发anr;若到超时时间，anr函数还未收到阻止信号，就会触发ANR(类似构建了个定时触发的任务)； </code></li>
-<li><strong>超时触发流程如下：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
-</ul>
-</li>
-</ul>
-<p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1780091311874686979&scene=173&from_msgid=2247488558&from_itemidx=1&count=3&nolastread=1&uin=&key=&devicetype=Windows+10+x64&version=63030532&lang=zh_CN&ascene=0&fontgear=2">头条anr治理系列</a></p>
-<p><a href="https://mp.weixin.qq.com/s/L30s7rOyn6NcPC2y9XNZIQ">百度anr治理</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>anr</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>UI自动化基础--微软</title>
-    <url>/posts/d1646a55/</url>
-    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>UI</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>UI自动化框架说明</title>
-    <url>/posts/411091fa/</url>
-    <content><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`
-</code></pre>
-<p>___ 大纲 ___</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">框架的整体结构</span><br><span class="line">代码模块的结构，文件说明</span><br><span class="line">框架的执行过程</span><br><span class="line">框架优化&#x2F;改动以适应我们产品</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<p>___ 框架整体结构 ___<br><img src="/text_image/ui%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%B6%E6%9E%84.png" alt="alt_text"></p>
-<p><code>框架整体构成由五部分构成；分别是runner(入口)/TestCase(控制层)/PageObject(逻辑层)/日志文件/yaml配置模块/报告模块 </code></p>
-<p>___ runner(入口) ___</p>
-<p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>HEXO 官方使用指南</title>
-    <url>/posts/4a17b156/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><span id="more"></span>
-<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<p>#开启动画<br>canvas_nest: true </p>
-]]></content>
   </entry>
   <entry>
     <title>UI自动化元素定位</title>
@@ -376,6 +328,54 @@
         <tag>ui元素定位</tag>
         <tag>UI自动化</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>UI自动化基础--微软</title>
+    <url>/posts/d1646a55/</url>
+    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>UI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UI自动化框架说明</title>
+    <url>/posts/411091fa/</url>
+    <content><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`
+</code></pre>
+<p>___ 大纲 ___</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">框架的整体结构</span><br><span class="line">代码模块的结构，文件说明</span><br><span class="line">框架的执行过程</span><br><span class="line">框架优化&#x2F;改动以适应我们产品</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<p>___ 框架整体结构 ___<br><img src="/text_image/ui%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%B6%E6%9E%84.png" alt="alt_text"></p>
+<p><code>框架整体构成由五部分构成；分别是runner(入口)/TestCase(控制层)/PageObject(逻辑层)/日志文件/yaml配置模块/报告模块 </code></p>
+<p>___ runner(入口) ___</p>
+<p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>HEXO 官方使用指南</title>
+    <url>/posts/4a17b156/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><span id="more"></span>
+<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>#开启动画<br>canvas_nest: true </p>
+]]></content>
   </entry>
   <entry>
     <title>Python语法-unittest</title>
@@ -532,18 +532,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python语法特性</title>
-    <url>/posts/d641bafc/</url>
-    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
-<span id="more"></span>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>python语法-super方法</title>
     <url>/posts/7b2ded6/</url>
     <content><![CDATA[<p><code>super方法用来，继承父类，或祖父类；常用的结构为super(C,self)/python3括号内的可缩写（super()）;super方法本身是一个类，和当前所在的类（父类）无关，该类使用了mro的算法（方法查找顺序）来决定继承类的顺序</code></p>
@@ -554,6 +542,18 @@
 <pre><code>super.mro策略；采用的是查找继承类的上一个节点的方式来实现继承，如super(D,self).__init__();实际上继承的是上一个节点类B；Python2和Python3使用super来继承时，使用上存在差异，Python必须使用super(C,self)方式继承，python3则可同时使用super()和super(C,self)来进行继承；同时Python2存在class A:/class A(object):这两种经典类和新式类；Python3只有新式类；经典类和新式类的mro策略不一样，虽然两者都是使用从左到右的广度遍历，经典类在某类已继承时，后续在查找到这个类，也不在继承；新式类，在某类已经继承时，后续在查找到改类，会继承最新查找到的；
 </code></pre>
 ]]></content>
+  </entry>
+  <entry>
+    <title>python语法特性</title>
+    <url>/posts/d641bafc/</url>
+    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
   </entry>
   <entry>
     <title>ui自动化分布式并行运算</title>
@@ -567,6 +567,12 @@
         <tag>UI</tag>
         <tag>gird</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>uwnc</title>
+    <url>/posts/3de87ac/</url>
+    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
+]]></content>
   </entry>
   <entry>
     <title>优秀博客</title>
@@ -593,33 +599,6 @@
       </categories>
       <tags>
         <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>uwnc</title>
-    <url>/posts/3de87ac/</url>
-    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>传音刷机</title>
-    <url>/posts/a1b2e86a/</url>
-    <content><![CDATA[<ol>
-<li>设置 -&gt; 开发者模式打开 oem unlock<br>输入 adb reboot bootloader</li>
-<li>进入fastboot模式输入 fastboot flashing unlock。按住音量上键确认unlock</li>
-<li>fastboot reboot 重启</li>
-<li>开机后,输入 adb root</li>
-<li>执行 adb disable-verity</li>
-<li>执行 adb reboot</li>
-<li>重启后 执行 adb root</li>
-<li>执行 adb remount</li>
-</ol>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>刷机</tag>
       </tags>
   </entry>
   <entry>
@@ -682,6 +661,39 @@
       </tags>
   </entry>
   <entry>
+    <title>估值体系</title>
+    <url>/posts/daef770e/</url>
+    <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的扣非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
+<span id="more"></span>
+
+<h2 id="理念"><a href="#理念" class="headerlink" title="理念"></a>理念</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">高收益的前提是持续稳定的复利，即好企业是时间的朋友，坏企业是时间的敌人；</span><br><span class="line">30pe是合理估值的上限，这是由无风险收益率决定的，如果在高，买入收益就低于无风险收益率了；同理合理估值一般给到20-25，而我不买25倍以上的企业(这想法绝对是错的。只关乎个人的安全边际)；</span><br><span class="line">股权和债券的差异，主要体现在确定性和成长里；股市需要利用成长优势抵消不确定性；</span><br><span class="line">收益率=利润/本金（股价）=1/pe；合理估值的锚其实就是无风险收益率（1/无风险收益率）；</span><br><span class="line">无分红公司的净资产收益率=净利润增速（可能净利润要打折）；</span><br><span class="line">分红在投入公司的净资产真实收益率=roe(1/pb*分红金额比例+留存金额比例)；</span><br><span class="line">年化收益率=年份√总收益率；</span><br><span class="line">由收益率公式可知；收益率一般不会超过净利润增速（仅当市净率低于1时超过，但这种现金流会受负债等因素损耗）；且要提高投资收益率，只有提高净利润的增速、降低分红比例、在分红比例固定时则只有降低pb也就是估值才能有效提高收益率；</span><br></pre></td></tr></table></figure>
+
+<h2 id="买卖"><a href="#买卖" class="headerlink" title="买卖"></a>买卖</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">理想买点：三年后合理估值*0.5</span><br><span class="line">理想卖点：min(动态市盈率50,三年后合理估值150%)</span><br><span class="line"></span><br><span class="line">买操作：20-25倍区间都能买，仅茅台在25倍pe以上买入;到达理想买点时，分三批买完剩余资金（理想买点/理想买点-5%/理想买点-10%）</span><br><span class="line">卖操作：当年预计净利润的50/55/60三次清空；（买卖点是唐朝基于无风险收益率计算，正常超出合理估值都能卖，50%其实是预留的安全边际）</span><br><span class="line">三年后合理估值=三年后预估净利率*25（具体企业具体分析，也就是pe的中分位）</span><br><span class="line"></span><br><span class="line">全指数基金买/卖点：基于无风险收益率来，但是由于不确定性，要做净利润折算，需要进行等比例折算，折算区间在5-7折</span><br><span class="line">买点：12-15pe</span><br><span class="line">卖点：25-35pe</span><br><span class="line"></span><br><span class="line">♥卖出后买全指还是留现金取决于无风险收益率（一般2倍无风险收益率即可买pe=1/无风险收益率*2，全指唐朝仅关注沪深300/恒生指数/标普500/纳斯达克100）</span><br><span class="line">♥其他时间：企业逻辑未变时，低于买点买，高于卖点卖，其他时间坐等；但需要遵循单股不超40%原则，即三五个行业，七八家公司；</span><br><span class="line">♥不要严格按买卖价来，要接受错误和风险；确定性高的企业，越偏向合理估值之下就买，确定性低的企业越偏向理想买点才买，唐朝的理念是理想买点位置一定要买完资金；</span><br></pre></td></tr></table></figure>
+
+<h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">♥腾讯+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以300均价，买入6手；高溢价时，优先使用中概换腾讯（中概大部分公司不盈利）</span><br><span class="line">1️⃣理想买点：328</span><br><span class="line">2️⃣理想卖点：1年内720</span><br><span class="line">3️⃣纳指买点：21pe</span><br><span class="line">4️⃣纳指卖点：35pe</span><br><span class="line"></span><br><span class="line">♥银行+家电25%：计划100k,余量16k</span><br><span class="line">已持仓84k,其中家电50k&#x2F;银行34k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右，招商计划以28均价，买入5手</span><br><span class="line">2️⃣美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">3️⃣格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34</span><br><span class="line"></span><br><span class="line">♥消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利20k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣五粮液150快,理想买点150&#x2F;143&#x2F;135</span><br><span class="line">2️⃣伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下；此刻的分红在投资收益率为9.56%；</span><br><span class="line"></span><br><span class="line">♥医药10%：计划40k,余量3k</span><br><span class="line">已持仓37k,其中恒瑞20k&#x2F;ETF17K</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣恒瑞按50倍市盈率20.07%净利润增长，卖点60（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">2️⃣300医药ETF计划0.42，买入7000个，卖点为0.7以上，对应300医药指数50倍以上的估值</span><br><span class="line">医药需要恒瑞和etf实现高低互换，高换低；</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>传音刷机</title>
+    <url>/posts/a1b2e86a/</url>
+    <content><![CDATA[<ol>
+<li>设置 -&gt; 开发者模式打开 oem unlock<br>输入 adb reboot bootloader</li>
+<li>进入fastboot模式输入 fastboot flashing unlock。按住音量上键确认unlock</li>
+<li>fastboot reboot 重启</li>
+<li>开机后,输入 adb root</li>
+<li>执行 adb disable-verity</li>
+<li>执行 adb reboot</li>
+<li>重启后 执行 adb root</li>
+<li>执行 adb remount</li>
+</ol>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>刷机</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>做点事</title>
     <url>/posts/2837d102/</url>
     <content><![CDATA[<h1 id="广告也是内容"><a href="#广告也是内容" class="headerlink" title="广告也是内容"></a>广告也是内容</h1><p><em><strong>广告内容加工</strong></em></p>
@@ -720,18 +732,6 @@
 <li><strong>痛点</strong></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>估值体系</title>
-    <url>/posts/daef770e/</url>
-    <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的扣非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
-<span id="more"></span>
-
-<h2 id="理念"><a href="#理念" class="headerlink" title="理念"></a>理念</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">高收益的前提是持续稳定的复利，即好企业是时间的朋友，坏企业是时间的敌人；</span><br><span class="line">30pe是合理估值的上限，这是由无风险收益率决定的，如果在高，买入收益就低于无风险收益率了；同理合理估值一般给到20-25，而我不买25倍以上的企业(这想法绝对是错的。只关乎个人的安全边际)；</span><br><span class="line">股权和债券的差异，主要体现在确定性和成长里；股市需要利用成长优势抵消不确定性；</span><br><span class="line">收益率=利润/本金（股价）=1/pe；合理估值的锚其实就是无风险收益率（1/无风险收益率）；</span><br><span class="line">无分红公司的净资产收益率=净利润增速（可能净利润要打折）；</span><br><span class="line">分红在投入公司的净资产真实收益率=roe(1/pb*分红金额比例+留存金额比例)；</span><br><span class="line">年化收益率=年份√总收益率；</span><br><span class="line">由收益率公式可知；收益率一般不会超过净利润增速（仅当市净率低于1时超过，但这种现金流会受负债等因素损耗）；且要提高投资收益率，只有提高净利润的增速、降低分红比例、在分红比例固定时则只有降低pb也就是估值才能有效提高收益率；</span><br></pre></td></tr></table></figure>
-
-<h2 id="买卖"><a href="#买卖" class="headerlink" title="买卖"></a>买卖</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">理想买点：三年后合理估值*0.5</span><br><span class="line">理想卖点：min(动态市盈率50,三年后合理估值150%)</span><br><span class="line"></span><br><span class="line">买操作：20-25倍区间都能买，仅茅台在25倍pe以上买入;到达理想买点时，分三批买完剩余资金（理想买点/理想买点-5%/理想买点-10%）</span><br><span class="line">卖操作：当年预计净利润的50/55/60三次清空；（买卖点是唐朝基于无风险收益率计算，正常超出合理估值都能卖，50%其实是预留的安全边际）</span><br><span class="line">三年后合理估值=三年后预估净利率*25（具体企业具体分析，也就是pe的中分位）</span><br><span class="line"></span><br><span class="line">全指数基金买/卖点：基于无风险收益率来，但是由于不确定性，要做净利润折算，需要进行等比例折算，折算区间在5-7折</span><br><span class="line">买点：12-15pe</span><br><span class="line">卖点：25-35pe</span><br><span class="line"></span><br><span class="line">♥卖出后买全指还是留现金取决于无风险收益率（一般2倍无风险收益率即可买pe=1/无风险收益率*2，全指唐朝仅关注沪深300/恒生指数/标普500/纳斯达克100）</span><br><span class="line">♥其他时间：企业逻辑未变时，低于买点买，高于卖点卖，其他时间坐等；但需要遵循单股不超40%原则，即三五个行业，七八家公司；</span><br><span class="line">♥不要严格按买卖价来，要接受错误和风险；确定性高的企业，越偏向合理估值之下就买，确定性低的企业越偏向理想买点才买，唐朝的理念是理想买点位置一定要买完资金；</span><br></pre></td></tr></table></figure>
-
-<h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">♥腾讯+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以300均价，买入6手；高溢价时，优先使用中概换腾讯（中概大部分公司不盈利）</span><br><span class="line">1️⃣理想买点：328</span><br><span class="line">2️⃣理想卖点：1年内720</span><br><span class="line">3️⃣纳指买点：21pe</span><br><span class="line">4️⃣纳指卖点：35pe</span><br><span class="line"></span><br><span class="line">♥银行+家电25%：计划100k,余量16k</span><br><span class="line">已持仓84k,其中家电50k&#x2F;银行34k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右，招商计划以28均价，买入5手</span><br><span class="line">2️⃣美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">3️⃣格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34</span><br><span class="line"></span><br><span class="line">♥消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利20k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣五粮液150快,理想买点150&#x2F;143&#x2F;135</span><br><span class="line">2️⃣伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下；此刻的分红在投资收益率为9.56%；</span><br><span class="line"></span><br><span class="line">♥医药10%：计划40k,余量3k</span><br><span class="line">已持仓37k,其中恒瑞20k&#x2F;ETF17K</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣恒瑞按50倍市盈率20.07%净利润增长，卖点60（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">2️⃣300医药ETF计划0.42，买入7000个，卖点为0.7以上，对应300医药指数50倍以上的估值</span><br><span class="line">医药需要恒瑞和etf实现高低互换，高换低；</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>全局函数局部函数</title>
@@ -937,21 +937,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>常用app测试工具</title>
-    <url>/posts/28eebda3/</url>
-    <content><![CDATA[<h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
-<span id="more"></span>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">参考回答：</span><br><span class="line">功能测试自动化</span><br><span class="line">a) 轻量接口自动化测试</span><br><span class="line"></span><br><span class="line">jmeter，</span><br><span class="line"></span><br><span class="line">b) APP UI层面的自动化</span><br><span class="line"></span><br><span class="line">android：UI Automator Viewer，Android Junit，Instrumentation，UIAutomator，</span><br><span class="line"></span><br><span class="line">iOS:基于Instrument的iOS UI自动化，</span><br><span class="line"></span><br><span class="line">性能测试</span><br><span class="line"></span><br><span class="line">a) Web前端性能测试</span><br><span class="line"></span><br><span class="line">网络抓包工具：Wireshark</span><br><span class="line"></span><br><span class="line">网页文件大小</span><br><span class="line"></span><br><span class="line">webpagetest</span><br><span class="line"></span><br><span class="line">pagespeed insight</span><br><span class="line"></span><br><span class="line">chrome adb</span><br><span class="line"></span><br><span class="line">b) APP端性能测试</span><br><span class="line"></span><br><span class="line">Android内存占用分析：MAT</span><br><span class="line"></span><br><span class="line">iOS内存问题分析：ARC模式</span><br><span class="line"></span><br><span class="line">Android WebView性能分析：</span><br><span class="line"></span><br><span class="line">iOS WebView性能分析</span><br><span class="line"></span><br><span class="line">c) 后台服务性能测试</span><br><span class="line"></span><br><span class="line">负载，压力，耐久性</span><br><span class="line"></span><br><span class="line">可拓展性，基准</span><br><span class="line"></span><br><span class="line">工具：apacheAB，Jmeter，LoadRunner，</span><br><span class="line"></span><br><span class="line">专项测试</span><br><span class="line"></span><br><span class="line">a) 兼容性测试</span><br><span class="line"></span><br><span class="line">手工测试：操作系统，分辨率，rom，网络类型</span><br><span class="line"></span><br><span class="line">云平台：testin，脚本编写，Android。</span><br><span class="line"></span><br><span class="line">b) 流量测试</span><br><span class="line"></span><br><span class="line">Android自带的流量管理，</span><br><span class="line"></span><br><span class="line">iOS自带的Network</span><br><span class="line"></span><br><span class="line">tcpdump抓包</span><br><span class="line"></span><br><span class="line">WiFi代理抓包：Fiddler</span><br><span class="line"></span><br><span class="line">流量节省方法：压缩数据，json优于xml；WebP优于传统的JPG，PNG；控制访问的频次；只获取必要的数据；缓存；</span><br><span class="line"></span><br><span class="line">c) 电量测试</span><br><span class="line"></span><br><span class="line">基于测试设备的方法，购买电量表进行测试。</span><br><span class="line"></span><br><span class="line">GSam Battery Monitoe Pro</span><br><span class="line"></span><br><span class="line">iOS基于Instrument Energy工具</span><br><span class="line"></span><br><span class="line">d) 弱网络测试</span><br><span class="line"></span><br><span class="line">手机自带的网络状况模拟工具</span><br><span class="line"></span><br><span class="line">基于代理的弱网络的模拟:</span><br><span class="line"></span><br><span class="line">工具：windows：Network Delay Simulator</span><br><span class="line"></span><br><span class="line">Mac：Network Link Conditioner</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>app测试</tag>
-        <tag>工具</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>工作梳理</title>
     <url>/posts/8c69a8ec/</url>
     <content><![CDATA[<h1 id="工作梳理"><a href="#工作梳理" class="headerlink" title="工作梳理"></a>工作梳理</h1><ul>
@@ -1011,23 +996,19 @@
       </tags>
   </entry>
   <entry>
-    <title>传易--性能测试</title>
-    <url>/posts/56a1ed73/</url>
-    <content><![CDATA[<p><a href="https://docs.qq.com/doc/DSWZnVGNka29qa1lJ">内部项目，需找我授权</a></p>
-]]></content>
+    <title>常用app测试工具</title>
+    <url>/posts/28eebda3/</url>
+    <content><![CDATA[<h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">参考回答：</span><br><span class="line">功能测试自动化</span><br><span class="line">a) 轻量接口自动化测试</span><br><span class="line"></span><br><span class="line">jmeter，</span><br><span class="line"></span><br><span class="line">b) APP UI层面的自动化</span><br><span class="line"></span><br><span class="line">android：UI Automator Viewer，Android Junit，Instrumentation，UIAutomator，</span><br><span class="line"></span><br><span class="line">iOS:基于Instrument的iOS UI自动化，</span><br><span class="line"></span><br><span class="line">性能测试</span><br><span class="line"></span><br><span class="line">a) Web前端性能测试</span><br><span class="line"></span><br><span class="line">网络抓包工具：Wireshark</span><br><span class="line"></span><br><span class="line">网页文件大小</span><br><span class="line"></span><br><span class="line">webpagetest</span><br><span class="line"></span><br><span class="line">pagespeed insight</span><br><span class="line"></span><br><span class="line">chrome adb</span><br><span class="line"></span><br><span class="line">b) APP端性能测试</span><br><span class="line"></span><br><span class="line">Android内存占用分析：MAT</span><br><span class="line"></span><br><span class="line">iOS内存问题分析：ARC模式</span><br><span class="line"></span><br><span class="line">Android WebView性能分析：</span><br><span class="line"></span><br><span class="line">iOS WebView性能分析</span><br><span class="line"></span><br><span class="line">c) 后台服务性能测试</span><br><span class="line"></span><br><span class="line">负载，压力，耐久性</span><br><span class="line"></span><br><span class="line">可拓展性，基准</span><br><span class="line"></span><br><span class="line">工具：apacheAB，Jmeter，LoadRunner，</span><br><span class="line"></span><br><span class="line">专项测试</span><br><span class="line"></span><br><span class="line">a) 兼容性测试</span><br><span class="line"></span><br><span class="line">手工测试：操作系统，分辨率，rom，网络类型</span><br><span class="line"></span><br><span class="line">云平台：testin，脚本编写，Android。</span><br><span class="line"></span><br><span class="line">b) 流量测试</span><br><span class="line"></span><br><span class="line">Android自带的流量管理，</span><br><span class="line"></span><br><span class="line">iOS自带的Network</span><br><span class="line"></span><br><span class="line">tcpdump抓包</span><br><span class="line"></span><br><span class="line">WiFi代理抓包：Fiddler</span><br><span class="line"></span><br><span class="line">流量节省方法：压缩数据，json优于xml；WebP优于传统的JPG，PNG；控制访问的频次；只获取必要的数据；缓存；</span><br><span class="line"></span><br><span class="line">c) 电量测试</span><br><span class="line"></span><br><span class="line">基于测试设备的方法，购买电量表进行测试。</span><br><span class="line"></span><br><span class="line">GSam Battery Monitoe Pro</span><br><span class="line"></span><br><span class="line">iOS基于Instrument Energy工具</span><br><span class="line"></span><br><span class="line">d) 弱网络测试</span><br><span class="line"></span><br><span class="line">手机自带的网络状况模拟工具</span><br><span class="line"></span><br><span class="line">基于代理的弱网络的模拟:</span><br><span class="line"></span><br><span class="line">工具：windows：Network Delay Simulator</span><br><span class="line"></span><br><span class="line">Mac：Network Link Conditioner</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>技术</category>
       </categories>
       <tags>
-        <tag>性能</tag>
-        <tag>实战</tag>
+        <tag>app测试</tag>
+        <tag>工具</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>数据库性能测试</title>
-    <url>/posts/ab3091af/</url>
-    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
-]]></content>
   </entry>
   <entry>
     <title>广告--大数据模型测试</title>
@@ -1055,6 +1036,37 @@
         <tag>广告</tag>
         <tag>模型</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>传易--性能测试</title>
+    <url>/posts/56a1ed73/</url>
+    <content><![CDATA[<p><a href="https://docs.qq.com/doc/DSWZnVGNka29qa1lJ">内部项目，需找我授权</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>性能</tag>
+        <tag>实战</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据库性能测试</title>
+    <url>/posts/ab3091af/</url>
+    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>搭建hexo博客</title>
+    <url>/posts/8e88d59c/</url>
+    <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、建立github代码库</span><br><span class="line">2、下载hexo文件</span><br><span class="line">3、下载主题，更改配置使主题生效</span><br><span class="line">4、部署配置git</span><br><span class="line">5、下载git同步工具</span><br><span class="line">6、清洗旧数据，生成新的静态文件，同步静态文件至代码库（需更改hexo部署配置）</span><br><span class="line">7、域名解析，并给github代码库配置域名</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://zhuanlan.zhihu.com/p/26625249">参考</a></p>
+<ul>
+<li>related_posts: true</li>
+</ul>
+]]></content>
   </entry>
   <entry>
     <title>混沌工程</title>
@@ -1117,16 +1129,17 @@
 ]]></content>
   </entry>
   <entry>
-    <title>搭建hexo博客</title>
-    <url>/posts/8e88d59c/</url>
-    <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、建立github代码库</span><br><span class="line">2、下载hexo文件</span><br><span class="line">3、下载主题，更改配置使主题生效</span><br><span class="line">4、部署配置git</span><br><span class="line">5、下载git同步工具</span><br><span class="line">6、清洗旧数据，生成新的静态文件，同步静态文件至代码库（需更改hexo部署配置）</span><br><span class="line">7、域名解析，并给github代码库配置域名</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://zhuanlan.zhihu.com/p/26625249">参考</a></p>
-<ul>
-<li>related_posts: true</li>
+    <title>百度质量体系建设</title>
+    <url>/posts/bcd76c52/</url>
+    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
+<li><em><strong>介绍</strong></em></li>
 </ul>
-]]></content>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>目录</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>稳定性治理--智能遍历</title>
@@ -1295,19 +1308,6 @@
       <tags>
         <tag>稳定性</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>百度质量体系建设</title>
-    <url>/posts/bcd76c52/</url>
-    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
-<li><em><strong>介绍</strong></em></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>目录</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>稳定性治理-暴力回放</title>
@@ -1854,6 +1854,57 @@
       </tags>
   </entry>
   <entry>
+    <title>质量保障体系--测试设计</title>
+    <url>/posts/9eaf5086/</url>
+    <content><![CDATA[<p><code>作为一个测试，最核心的工作是保障产品/服务的质量；不管是通过流程，手工测试，还是脚本工具，都是为最终目的服务的，我写这篇文章的最终目的，是为了测试设计能成为一个标准作业；测试一个产品/需求的标准链路如下：</code></p>
+<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><ul>
+<li><strong>收集信息</strong></li>
+<li><strong>分析信息</strong></li>
+<li><strong>测试设计</strong></li>
+<li><strong>测试执行</strong></li>
+<li><strong>归纳并标准化</strong><ul>
+<li><strong>各单功能的标准件</strong> <span id="more"></span></li>
+</ul>
+</li>
+</ul>
+<h2 id="收集信息"><a href="#收集信息" class="headerlink" title="收集信息"></a><strong>收集信息</strong></h2><p><code>要保证充足的测试，仅仅依赖需求和设计文档是不够的；尤其是我们的需求往往是不够完善的；可参考的信息来源如下，其组织形式也体现了信息收集和提炼过程：</code><br><img src="/text_image/%E6%B5%8B%E8%AF%95%E4%BB%BB%E5%8A%A1%E4%BF%A1%E6%81%AF%E6%9D%A5%E6%BA%90.png" alt="alt text"></p>
+<h2 id="分析信息"><a href="#分析信息" class="headerlink" title="分析信息"></a><strong>分析信息</strong></h2><p><code>分析信息是将收集到的信息，提炼、重组、输出成测试大纲的过程；快速信息提炼可用SFDIPOT方法；但一般还是会用MFQ方法来建立测试大纲；具体如下：</code></p>
+<ul>
+<li>SFDIPOT模型<br><img src="/text_image/SFDIPOT.png" alt="alt text"></li>
+<li>SFDIPOT实例<br><img src="/text_image/SFDIPOT%E5%AE%9E%E4%BE%8B.png" alt="alt text"></li>
+<li>MFQ模型：<code>M指单功能、F指单功能间的交互、Q质量属性（非功能）</code><br><img src="/text_image/MFQ%E6%A8%A1%E5%9E%8B.png" alt="alt text"></li>
+<li>MFQ实例<br><img src="/text_image/MFQ%E5%AE%9E%E4%BE%8B.png" alt="alt text"></li>
+<li>MFQ中，Q质量属性，参考大纲<br><img src="/text_image/Q%E9%9D%9E%E5%8A%9F%E8%83%BD%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7.png" alt="alt text"><br><code>以上模型，其实是信息组织方式；具体的分析策略如下，供参考：</code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">尽早尽快：问题发现的越早越好，信息获取的越快越好；</span><br><span class="line">获取的信息越多，信息源越多越好；</span><br><span class="line">疑问；收集疑问，解决疑问，很有价值，质疑一切；</span><br><span class="line">仔细阅读，关注关键字，多思考；</span><br><span class="line">寻找矛盾、漏洞和容易被误解的东西；</span><br><span class="line">除非式探索 —— 在你的产品、流程或者模型的任何你关心的表述后面加上 “除非……”。然后看看新增的部分引导你到了那些方面；</span><br><span class="line">要和业务结合，脱离实际是不行的；</span><br><span class="line">相关性判断 —— 你认为它重要吗？其他人认为这很重要吗？会变得重要吗？用户是否会对这个问题感到不安/恼火？</span><br><span class="line">假设问题；如果…怎么办？–就可能发生的事情或经验进行头脑风暴；</span><br><span class="line">横向思维 —— 人工分离，类比，寻找替代品，相反方面，随机刺激 — 任何有用的东西都可以做；</span><br><span class="line">关键点；——让自己暴露在你认为能产生好想法的信息/情境中；</span><br><span class="line">拉近拉远 —— 放大或缩小详细程度，并检查内容；</span><br><span class="line">图/立体信息组织；以重要的方式将不同的知识、细节和大局结合起来；什么值得仔细研究？让信息变的更立体，更容易理解；</span><br><span class="line">建模；利用测试方法分析，如等价类、因果图、流程等；得到实例；</span><br><span class="line">挖掘隐藏的信息；用户的隐藏需求。隐藏的问题等；</span><br><span class="line">多样性；从多个方面考虑问题；</span><br><span class="line">松弛式探索 —— “让你自己分心吧……因为你永远不知道你会发现什么……但是要定期根据任务来评估你的状态 “</span><br><span class="line">投入并退出 —— 从最困难的部分开始，看看会发生什么，想退出就退出；</span><br><span class="line">拉姆斯菲尔德式探索 —— 调查已知的未知，考虑未知的未知；</span><br><span class="line">不要停下来 —— 当你找到你要找的东西时，多想想看是否有更好的东西等着你；</span><br><span class="line">总是暂停 —— 分析（和设计）是一个连续的活动，是不是暂停一下；</span><br><span class="line">由他人完成–找出由他人执行的测试类型；您可以跳过或轻松覆盖它们（复用）；</span><br><span class="line">上下文分析 - 找出当前情况下哪些因素可以指导你的测试工作。</span><br><span class="line">测试框架 —— 将你的测试活动与你的测试任务联系起来，并了解更多信息（整体联系）；</span><br><span class="line">我做了什么假设 —— 解释你的测试活动，并提出质疑（质疑自己）；</span><br></pre></td></tr></table></figure>
+<strong>以上分析过程都是围绕着‘理解什么是重要的’展开的</strong><h2 id="测试设计"><a href="#测试设计" class="headerlink" title="测试设计"></a><strong>测试设计</strong></h2><code>测试设计一定要基于上下文、基于风险，有的放矢的；常用的测试设计方法有（等价类/边界值/流程图/状态转换法/组合（因果图+判定表、正交实验法）/错误推导法）</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">等价类：输入数值，有多种类型时；分类取值，用局部代替整体实现覆盖；注意既要覆盖有效等价类，又要覆盖无效等价类；</span><br><span class="line">边界值：常和等价类一起使用，取各类数据的边界值或极值，以覆盖极限情况；</span><br><span class="line">流程图：画流程图覆盖业务的所有流程，通常要覆盖主要流程/次要流程/异常流程等；</span><br><span class="line">状态转换法：列出需求的所有状态、并整理转换关系；以实现对所有状态关系的覆盖，如登录；状态转换和流程法的主要区别是，流程的链路方向是固定的，状态转换的方向是可逆的；</span><br><span class="line">正交实验法：是一种在众多组合输入数据中，取样本的方法；以实现样本（均匀且全面）表示整体；具体操作制作‘混合’正交表。表的列为输入参数，列的值为参数值；行为执行次数，每一行为该次执行的参数组合；当参数不够时为空；</span><br><span class="line">错误推导：根据收集/推测的可能错误，验证是否存在相关错误；（参考常见错误list）</span><br><span class="line">因果图+判定表法：两种方法常一起使用，根据因果关系生成判定表；在根据判定表进行测试；因果图是这样的，利用输入的组合关系、多个输入及多输出各自的逻辑关系（常见的逻辑关系有等/非/或/与/异或/包含/排他等），来画因果图，并生成判定表；判定表的列即为测试用例,因果图法和判定表如下；</span><br></pre></td></tr></table></figure>
+<p><img src="/text_image/%E5%9B%A0%E6%9E%9C%E5%9B%BE.jpg" alt="alt text"><br><strong>判定表</strong><br><img src="/text_image/%E5%88%A4%E5%AE%9A%E8%A1%A8.png" alt="alt text"><br><code>至于方法怎么使用，这需理解这些方法的价值；方法其实是一种套路，用来解决特定问题的；因此每种方法都有最适合的场景；重点是我们要明白场景的特征和方法的匹配关系；具体如下：</code><br><strong>注意不同方法覆盖率计算特征不同，但总归都是覆盖率=覆盖场景/所有场景；这种覆盖率只是相对覆盖率</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">等价类+边界值（数据）：最适合的场景是，输入之间彼此独立，且输入可能有多种类型时，试用它；</span><br><span class="line">流程图（流程）：场景是分步骤的流程时，考虑用流程法覆盖；</span><br><span class="line">状态转换法（状态）:如果场景是包含多个状态，且状态直接能互相装换，那状态转换法就比流程法适用；</span><br><span class="line">因果图+判定表（规则）：适用于多参数组合的场景，且参数间存在逻辑关系；先画因果图，在做判定表；</span><br><span class="line">正交实验法（组合）：使用输入参数众多，但参数间相对独立，且需要组合输入的场景；</span><br></pre></td></tr></table></figure>
+<p><strong>如何找到需求的特征呢：基于经验，通过收集到的信息；查找关键词、抓住核心功能、围绕既定目标、尝试其他特征的方式判断；注意一个场景，往往有多个特征，抓主干，同时在一个特征无法保障覆盖时，可以覆盖多个特征。</strong></p>
+<p><code>测试设计（建模），往往得到的是测试点，需要我们进一步把测试点具体成可执行的测试用例；在测试分析过程中可参考的经验如下：</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">所有的分析启发法都可以用作设计启发法；</span><br><span class="line">信息要及时更新—— 尽可能的保持测试的规范细节为最新。事情都会发生变换，你会从最新的信息中了解更多；</span><br><span class="line">各样的半度量方式 —— “与其完美地进行一两种测试，不如在相当好的水平上进行更多不同类型的测试。”</span><br><span class="line">越快越好 —— 这样你就可以从产品中获得更多信息；</span><br><span class="line">“把所有应该自动化的测试都实现自动化。”—至少完成一次测试后，你会更清楚这一点；</span><br><span class="line">不玩花活：</span><br><span class="line">  使用简单的测试也能达到目标；</span><br><span class="line">  你不必使用花哨的测试技术，特别是在不需要的时候；</span><br><span class="line">复杂度：</span><br><span class="line">  复杂测试能够让你更有效率；</span><br><span class="line">  在设计复杂的测试时不能太小心；</span><br><span class="line">自由覆盖 —— 通过一次测试，就可以覆盖很多不同的内容。利用质量特征的持续性测试想法，将这些方法保留在你的意识深处，关注异常的发生；</span><br><span class="line">适当的粒度 - 考虑测试的详细级别，以提高可评审性；</span><br><span class="line">最具代表性–使用最常见、最容易出错、包罗万象、最重要的示例；</span><br><span class="line">重要性原则 - 将大多数测试集中在主要目的上，但要寻找其他目的和可能的错误；</span><br><span class="line">偶然性——如果测试能发现我们不知道的重要事情，那就更好了；</span><br><span class="line">可以丢弃 —— 不要害怕丢弃你不再相信有相关性的测试；</span><br><span class="line">实践出真知——试一下这个软件，你就会感觉到什么是重要的，什么是容易出错的，以及如何测试它；</span><br><span class="line">直觉——“当你在思考难以预测的事情并且信息很少的时候，相信你的直觉。”</span><br><span class="line">从软件测试中收获课程的五个例子 —— “在边界测试…测试每个错误消息…测试不同于程序员的配置…执行设置很烦人的测试…避免冗余测试。”</span><br><span class="line">与信息目标保持一致—测试是否可以针对不同的信息目标进行调整？</span><br><span class="line">良好的测试 —— 强大、有效、有价值、可信、可能、非冗余、激励、可执行、可维护、可重复、重要、易于评估、支持故障排除、适当复杂、负责任、性价比高、易于理解、能够实现偶然性；</span><br><span class="line">改变策略——如果你的测试没有揭示新的、有趣的信息，那么是时候改变策略了；</span><br><span class="line">用在别处？ —— 这个伟大的测试想法能否用与于领域的测试？</span><br><span class="line">谁能做到？–你可能会包含你无法执行的测试想法。</span><br><span class="line">多样性审查（结对）——如果审查者提供新的内容，请找一个想法更为不同的人。</span><br><span class="line">未读测试设计 —— 如果开发人员没有阅读你的高等级的测试设计，请询问他们原因。</span><br><span class="line">最喜欢的技巧 —— 你最好的测试设计技巧可能不是完美的匹配，但它可能会给你最好的结果；</span><br><span class="line">任何与探索性测试、基于经验的测试或错误猜测相关的技能都是有用的；</span><br><span class="line">元问题 —— 对于棘手的设计问题，您可以使用诸如 CIA Phoenix 清单之类的问题；</span><br></pre></td></tr></table></figure>
+<h2 id="测试执行"><a href="#测试执行" class="headerlink" title="测试执行"></a><strong>测试执行</strong></h2><p><code>测试执行阶段，也存在着信息获取；纠错的过程；当然获取信息-决策-反馈-优化是贯穿质量活动始终的； 在执行活动中关注的较多的‘覆盖’和‘用例有效性’的问题；判断的依据是‘风险（风险发生的概率/后果）’，虽然每种模型都有一定的覆盖率，但同时任何模型也无法保证100%的覆盖率(测试是一个混沌工程)，因此在执行时，我会尝试覆盖所有被认为重要的东西</code></p>
+<p><strong>覆盖率模型–广度/深度判断</strong><br><img src="/text_image/%E6%B5%8B%E8%AF%95%E6%B7%B1%E5%BA%A6%E5%9B%BE.png" alt="alt text"><br><strong>覆盖率模型–执行价值</strong><br><img src="/text_image/%E5%81%9A%E6%9C%89%E4%BB%B7%E5%80%BC%E7%9A%84%E4%BA%8B.png" alt="alt text"></p>
+<p><code>测试执行可参考的经验：</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">所有的分析启发式和设计启发式都可以用作执行启发式；</span><br><span class="line">基本的启发 —— 如果它存在，我想测试它；</span><br><span class="line">重要问题优先——先找出最重要的问题；</span><br><span class="line">主干——如果方便的话，首先看看大的功能工作是否正常；</span><br><span class="line">更宽泛的区分——如果 “这个” 可以或不可以，我们可以跳过 “那个”；</span><br><span class="line">多信息源——使用比需求更复杂的 “文档”；</span><br><span class="line">再做一件事——另外做一些容易出错的、大众的或者用户可能会做的事情。不要想太多，做点什么，看看会发生什么；</span><br><span class="line">死亡蜜蜂启发 - 如果我改变了一个数据文件，发现我正在测试的应用程序不再发生崩溃，下一步我要做的就是再次改变它，这样我就可以再次看到崩溃；</span><br><span class="line">隆隆作响——当产品做了奇怪的事情，一个大灾难可能会发生；</span><br><span class="line">慢慢挪动——以一种刻意过度精细的方式做某事；</span><br><span class="line">用户错误——研究无意（典型）错误；</span><br><span class="line">行动方法——成为一个 “真正” 的用户；</span><br><span class="line">二分法——当有奇怪的事情发生时，去掉 “一半”，直到找到必要的成分；</span><br><span class="line">可翻转性启发——尝试从意外使用中获得价值；</span><br><span class="line">基本配置矩阵——确定跨越 “边界” 的几个平台；</span><br><span class="line">并发测试执行——同时运行多个测试想法以获得新的交互和想法；</span><br><span class="line">似曾相识的启发式方法——当遇到错误消息时，多重复一次（如果不完全相同，代码是可疑的）；</span><br><span class="line">看看很多地方——测试结果可以通过几个地方来解释；</span><br><span class="line">其他地方是否存在问题——发现的问题是否存在于其他地方？</span><br><span class="line">直觉 - “相信你的直觉。尝试任何感觉有希望的测试”</span><br><span class="line">结对测试——协同测试执行激发新的更快的思考；</span><br><span class="line">测试辅助——有工具可以立刻帮助我吗？</span><br><span class="line">极性动态——在谨慎与快速、嬉戏与严肃、客观与主观等之间切换；</span><br><span class="line">现在——“我现在能做的最好的测试是什么？</span><br><span class="line">情绪——运用你的感官。</span><br><span class="line">新视角发现失败——看看新的东西；让别人看看你的东西；</span><br><span class="line">即兴表演</span><br><span class="line">（不）确定性问题——总是有问题，但它们可能并不重要</span><br><span class="line">我可能用错了启发——如果我发现许多问题，可能是我的模型是错误的；</span><br></pre></td></tr></table></figure>
+<p><strong>快速测试 :</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">用一些快速的，并不总是有效果的测试来刺激你的执行（这些测试来自 Kaner&#x2F;Bach 等.);</span><br><span class="line">鞋子测试——找到一个输入字段，将光标移到它上，将鞋子放在键盘上，然后去吃午饭;</span><br><span class="line">边界测试——测试边界值因为边界的错误编码是一个常见的错误。</span><br><span class="line">Whittaker 攻击</span><br><span class="line">  输入：强制错误消息、默认值、浏览数据、溢出缓冲区、查找交互、重复多次。</span><br><span class="line">  输出：强制不同、无效、属性更改、屏幕刷新。探索存储的数据和计算。填充或损坏文件系统；无效&#x2F;不可访问的文件。</span><br><span class="line">干扰测试——取消、暂停、交换、中止、后退&#x2F;下一步、竞争、删除、注销。</span><br><span class="line">跟踪最近的变化——意外的副作用。</span><br><span class="line">探索数据关系——利用依赖关系，跟踪数据，干扰，删除。</span><br><span class="line">变化之旅——尽可能在各个维度上变化;</span><br><span class="line">复杂度之旅——查找最复杂的功能和数据，创建复杂的文件。</span><br><span class="line">示例数据之旅——尽可能使用任何示例数据。越复杂越好。</span><br><span class="line">持续使用 - 测试时，不要重置系统。打开窗口和文件。让磁盘和内存使用量增加。你希望随着时间的推移，这个系统会自己打结。</span><br><span class="line">调整 - 将某些参数设置为某个值，然后在以后的任何时间将该值重置为其他值，而不重置或重新创建包含的文档或数据结构。</span><br><span class="line">Dog Pilling——一次运行更多进程；同时存在更多状态。</span><br><span class="line">减弱——当系统处于适当的状态时开始使用一个函数，然后将状态部分更改为不适当的状态。</span><br><span class="line">错误消息处理——使错误消息发生。重点测试错误被忽略后的情况。</span><br><span class="line">点击狂热——测试不仅仅是 “敲击键盘”，但这句话并非空穴来风。试着敲击键盘。试着到处点击。</span><br><span class="line">多个实例——同时运行应用程序的许多实例。打开相同的文件。</span><br><span class="line">功能交互——发现各个功能交互或共享数据的位置。寻找任何相互依赖的关系。浏览他们。给他们压力。</span><br><span class="line">便宜的工具！–了解如何使用 InCtrl5, Filemon, Regmon, AppVerifier, Perfmon, Task Manager, Threadhijacker, Zed Attack Proxy, Color Oracle（所有这些都是免费的）</span><br><span class="line">资源匮乏——逐渐降低内存和其他资源，直到产品优雅得降级或不优雅得崩溃。</span><br><span class="line">执行 “作者说”——查看联机帮助或用户手册，找到有关如何执行一些有趣活动的说明。做那些动作。然后即兴表演。</span><br><span class="line">疯狂配置——在安装产品之前或之后以非标准或非默认方式修改 O&#x2F;S 配置。</span><br><span class="line">摸索——找到产品中产生大量数据或执行某些操作非常快的方面;</span><br></pre></td></tr></table></figure>
+<h2 id="归纳并标准化"><a href="#归纳并标准化" class="headerlink" title="归纳并标准化"></a><strong>归纳并标准化</strong></h2><p><code>以上的过程，就是一个完整的‘测试过程’；其中每一步都是独立的，但都有其价值；无论如何，测试本质都是基于‘上下文’和‘风险’的活动；获取信息-分析-决策-反馈-优化，永远贯穿质量活动的始终，本节的目的是让较小的单功能/独立的功能，测试活动，能实现标准作业；这个想法的依据是由于，任何产品功能都是大同小异的，都是由相似的各个小功能组成的，本节考虑输出各小功能的checklist来实现标准作业</code><br><img src="/text_image/%E5%8F%8D%E9%A6%88%E6%9C%BA%E5%88%B6.png" alt="alt text"></p>
+<h3 id="标准作业实例"><a href="#标准作业实例" class="headerlink" title="标准作业实例"></a>标准作业实例</h3><ul>
+<li><a href="https://www.processon.com/view/link/64be5dbc392b97462f4b12c9">‘大富翁游戏’</a></li>
+</ul>
+<p><strong>看到这是不是有种感觉，测试工作流程，越来越像工厂的流水线；这其实就是互联网的发展方向，未来估计行业的发展趋势也会和制造业趋同；不知是行业的幸运，还是个人的不幸！！！</strong></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>实战</tag>
+        <tag>质量体系</tag>
+        <tag>测试设计</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>质量保障体系--2023/07/10</title>
     <url>/posts/274713e6/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><code>测试的核心价值在于保障产品的质量，提效增质；要全面的保障质量，就需要一个完善的体系，从各方面入手来保障产品的质量，本次将以传易互联--音乐项目的质量保障体系进行分析，从而探索质量保障体系的设计</code></p>
@@ -1936,57 +1987,6 @@
       </tags>
   </entry>
   <entry>
-    <title>质量保障体系--测试设计</title>
-    <url>/posts/9eaf5086/</url>
-    <content><![CDATA[<p><code>作为一个测试，最核心的工作是保障产品/服务的质量；不管是通过流程，手工测试，还是脚本工具，都是为最终目的服务的，我写这篇文章的最终目的，是为了测试设计能成为一个标准作业；测试一个产品/需求的标准链路如下：</code></p>
-<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><ul>
-<li><strong>收集信息</strong></li>
-<li><strong>分析信息</strong></li>
-<li><strong>测试设计</strong></li>
-<li><strong>测试执行</strong></li>
-<li><strong>归纳并标准化</strong><ul>
-<li><strong>各单功能的标准件</strong> <span id="more"></span></li>
-</ul>
-</li>
-</ul>
-<h2 id="收集信息"><a href="#收集信息" class="headerlink" title="收集信息"></a><strong>收集信息</strong></h2><p><code>要保证充足的测试，仅仅依赖需求和设计文档是不够的；尤其是我们的需求往往是不够完善的；可参考的信息来源如下，其组织形式也体现了信息收集和提炼过程：</code><br><img src="/text_image/%E6%B5%8B%E8%AF%95%E4%BB%BB%E5%8A%A1%E4%BF%A1%E6%81%AF%E6%9D%A5%E6%BA%90.png" alt="alt text"></p>
-<h2 id="分析信息"><a href="#分析信息" class="headerlink" title="分析信息"></a><strong>分析信息</strong></h2><p><code>分析信息是将收集到的信息，提炼、重组、输出成测试大纲的过程；快速信息提炼可用SFDIPOT方法；但一般还是会用MFQ方法来建立测试大纲；具体如下：</code></p>
-<ul>
-<li>SFDIPOT模型<br><img src="/text_image/SFDIPOT.png" alt="alt text"></li>
-<li>SFDIPOT实例<br><img src="/text_image/SFDIPOT%E5%AE%9E%E4%BE%8B.png" alt="alt text"></li>
-<li>MFQ模型：<code>M指单功能、F指单功能间的交互、Q质量属性（非功能）</code><br><img src="/text_image/MFQ%E6%A8%A1%E5%9E%8B.png" alt="alt text"></li>
-<li>MFQ实例<br><img src="/text_image/MFQ%E5%AE%9E%E4%BE%8B.png" alt="alt text"></li>
-<li>MFQ中，Q质量属性，参考大纲<br><img src="/text_image/Q%E9%9D%9E%E5%8A%9F%E8%83%BD%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7.png" alt="alt text"><br><code>以上模型，其实是信息组织方式；具体的分析策略如下，供参考：</code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">尽早尽快：问题发现的越早越好，信息获取的越快越好；</span><br><span class="line">获取的信息越多，信息源越多越好；</span><br><span class="line">疑问；收集疑问，解决疑问，很有价值，质疑一切；</span><br><span class="line">仔细阅读，关注关键字，多思考；</span><br><span class="line">寻找矛盾、漏洞和容易被误解的东西；</span><br><span class="line">除非式探索 —— 在你的产品、流程或者模型的任何你关心的表述后面加上 “除非……”。然后看看新增的部分引导你到了那些方面；</span><br><span class="line">要和业务结合，脱离实际是不行的；</span><br><span class="line">相关性判断 —— 你认为它重要吗？其他人认为这很重要吗？会变得重要吗？用户是否会对这个问题感到不安/恼火？</span><br><span class="line">假设问题；如果…怎么办？–就可能发生的事情或经验进行头脑风暴；</span><br><span class="line">横向思维 —— 人工分离，类比，寻找替代品，相反方面，随机刺激 — 任何有用的东西都可以做；</span><br><span class="line">关键点；——让自己暴露在你认为能产生好想法的信息/情境中；</span><br><span class="line">拉近拉远 —— 放大或缩小详细程度，并检查内容；</span><br><span class="line">图/立体信息组织；以重要的方式将不同的知识、细节和大局结合起来；什么值得仔细研究？让信息变的更立体，更容易理解；</span><br><span class="line">建模；利用测试方法分析，如等价类、因果图、流程等；得到实例；</span><br><span class="line">挖掘隐藏的信息；用户的隐藏需求。隐藏的问题等；</span><br><span class="line">多样性；从多个方面考虑问题；</span><br><span class="line">松弛式探索 —— “让你自己分心吧……因为你永远不知道你会发现什么……但是要定期根据任务来评估你的状态 “</span><br><span class="line">投入并退出 —— 从最困难的部分开始，看看会发生什么，想退出就退出；</span><br><span class="line">拉姆斯菲尔德式探索 —— 调查已知的未知，考虑未知的未知；</span><br><span class="line">不要停下来 —— 当你找到你要找的东西时，多想想看是否有更好的东西等着你；</span><br><span class="line">总是暂停 —— 分析（和设计）是一个连续的活动，是不是暂停一下；</span><br><span class="line">由他人完成–找出由他人执行的测试类型；您可以跳过或轻松覆盖它们（复用）；</span><br><span class="line">上下文分析 - 找出当前情况下哪些因素可以指导你的测试工作。</span><br><span class="line">测试框架 —— 将你的测试活动与你的测试任务联系起来，并了解更多信息（整体联系）；</span><br><span class="line">我做了什么假设 —— 解释你的测试活动，并提出质疑（质疑自己）；</span><br></pre></td></tr></table></figure>
-<strong>以上分析过程都是围绕着‘理解什么是重要的’展开的</strong><h2 id="测试设计"><a href="#测试设计" class="headerlink" title="测试设计"></a><strong>测试设计</strong></h2><code>测试设计一定要基于上下文、基于风险，有的放矢的；常用的测试设计方法有（等价类/边界值/流程图/状态转换法/组合（因果图+判定表、正交实验法）/错误推导法）</code></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">等价类：输入数值，有多种类型时；分类取值，用局部代替整体实现覆盖；注意既要覆盖有效等价类，又要覆盖无效等价类；</span><br><span class="line">边界值：常和等价类一起使用，取各类数据的边界值或极值，以覆盖极限情况；</span><br><span class="line">流程图：画流程图覆盖业务的所有流程，通常要覆盖主要流程/次要流程/异常流程等；</span><br><span class="line">状态转换法：列出需求的所有状态、并整理转换关系；以实现对所有状态关系的覆盖，如登录；状态转换和流程法的主要区别是，流程的链路方向是固定的，状态转换的方向是可逆的；</span><br><span class="line">正交实验法：是一种在众多组合输入数据中，取样本的方法；以实现样本（均匀且全面）表示整体；具体操作制作‘混合’正交表。表的列为输入参数，列的值为参数值；行为执行次数，每一行为该次执行的参数组合；当参数不够时为空；</span><br><span class="line">错误推导：根据收集/推测的可能错误，验证是否存在相关错误；（参考常见错误list）</span><br><span class="line">因果图+判定表法：两种方法常一起使用，根据因果关系生成判定表；在根据判定表进行测试；因果图是这样的，利用输入的组合关系、多个输入及多输出各自的逻辑关系（常见的逻辑关系有等/非/或/与/异或/包含/排他等），来画因果图，并生成判定表；判定表的列即为测试用例,因果图法和判定表如下；</span><br></pre></td></tr></table></figure>
-<p><img src="/text_image/%E5%9B%A0%E6%9E%9C%E5%9B%BE.jpg" alt="alt text"><br><strong>判定表</strong><br><img src="/text_image/%E5%88%A4%E5%AE%9A%E8%A1%A8.png" alt="alt text"><br><code>至于方法怎么使用，这需理解这些方法的价值；方法其实是一种套路，用来解决特定问题的；因此每种方法都有最适合的场景；重点是我们要明白场景的特征和方法的匹配关系；具体如下：</code><br><strong>注意不同方法覆盖率计算特征不同，但总归都是覆盖率=覆盖场景/所有场景；这种覆盖率只是相对覆盖率</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">等价类+边界值（数据）：最适合的场景是，输入之间彼此独立，且输入可能有多种类型时，试用它；</span><br><span class="line">流程图（流程）：场景是分步骤的流程时，考虑用流程法覆盖；</span><br><span class="line">状态转换法（状态）:如果场景是包含多个状态，且状态直接能互相装换，那状态转换法就比流程法适用；</span><br><span class="line">因果图+判定表（规则）：适用于多参数组合的场景，且参数间存在逻辑关系；先画因果图，在做判定表；</span><br><span class="line">正交实验法（组合）：使用输入参数众多，但参数间相对独立，且需要组合输入的场景；</span><br></pre></td></tr></table></figure>
-<p><strong>如何找到需求的特征呢：基于经验，通过收集到的信息；查找关键词、抓住核心功能、围绕既定目标、尝试其他特征的方式判断；注意一个场景，往往有多个特征，抓主干，同时在一个特征无法保障覆盖时，可以覆盖多个特征。</strong></p>
-<p><code>测试设计（建模），往往得到的是测试点，需要我们进一步把测试点具体成可执行的测试用例；在测试分析过程中可参考的经验如下：</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">所有的分析启发法都可以用作设计启发法；</span><br><span class="line">信息要及时更新—— 尽可能的保持测试的规范细节为最新。事情都会发生变换，你会从最新的信息中了解更多；</span><br><span class="line">各样的半度量方式 —— “与其完美地进行一两种测试，不如在相当好的水平上进行更多不同类型的测试。”</span><br><span class="line">越快越好 —— 这样你就可以从产品中获得更多信息；</span><br><span class="line">“把所有应该自动化的测试都实现自动化。”—至少完成一次测试后，你会更清楚这一点；</span><br><span class="line">不玩花活：</span><br><span class="line">  使用简单的测试也能达到目标；</span><br><span class="line">  你不必使用花哨的测试技术，特别是在不需要的时候；</span><br><span class="line">复杂度：</span><br><span class="line">  复杂测试能够让你更有效率；</span><br><span class="line">  在设计复杂的测试时不能太小心；</span><br><span class="line">自由覆盖 —— 通过一次测试，就可以覆盖很多不同的内容。利用质量特征的持续性测试想法，将这些方法保留在你的意识深处，关注异常的发生；</span><br><span class="line">适当的粒度 - 考虑测试的详细级别，以提高可评审性；</span><br><span class="line">最具代表性–使用最常见、最容易出错、包罗万象、最重要的示例；</span><br><span class="line">重要性原则 - 将大多数测试集中在主要目的上，但要寻找其他目的和可能的错误；</span><br><span class="line">偶然性——如果测试能发现我们不知道的重要事情，那就更好了；</span><br><span class="line">可以丢弃 —— 不要害怕丢弃你不再相信有相关性的测试；</span><br><span class="line">实践出真知——试一下这个软件，你就会感觉到什么是重要的，什么是容易出错的，以及如何测试它；</span><br><span class="line">直觉——“当你在思考难以预测的事情并且信息很少的时候，相信你的直觉。”</span><br><span class="line">从软件测试中收获课程的五个例子 —— “在边界测试…测试每个错误消息…测试不同于程序员的配置…执行设置很烦人的测试…避免冗余测试。”</span><br><span class="line">与信息目标保持一致—测试是否可以针对不同的信息目标进行调整？</span><br><span class="line">良好的测试 —— 强大、有效、有价值、可信、可能、非冗余、激励、可执行、可维护、可重复、重要、易于评估、支持故障排除、适当复杂、负责任、性价比高、易于理解、能够实现偶然性；</span><br><span class="line">改变策略——如果你的测试没有揭示新的、有趣的信息，那么是时候改变策略了；</span><br><span class="line">用在别处？ —— 这个伟大的测试想法能否用与于领域的测试？</span><br><span class="line">谁能做到？–你可能会包含你无法执行的测试想法。</span><br><span class="line">多样性审查（结对）——如果审查者提供新的内容，请找一个想法更为不同的人。</span><br><span class="line">未读测试设计 —— 如果开发人员没有阅读你的高等级的测试设计，请询问他们原因。</span><br><span class="line">最喜欢的技巧 —— 你最好的测试设计技巧可能不是完美的匹配，但它可能会给你最好的结果；</span><br><span class="line">任何与探索性测试、基于经验的测试或错误猜测相关的技能都是有用的；</span><br><span class="line">元问题 —— 对于棘手的设计问题，您可以使用诸如 CIA Phoenix 清单之类的问题；</span><br></pre></td></tr></table></figure>
-<h2 id="测试执行"><a href="#测试执行" class="headerlink" title="测试执行"></a><strong>测试执行</strong></h2><p><code>测试执行阶段，也存在着信息获取；纠错的过程；当然获取信息-决策-反馈-优化是贯穿质量活动始终的； 在执行活动中关注的较多的‘覆盖’和‘用例有效性’的问题；判断的依据是‘风险（风险发生的概率/后果）’，虽然每种模型都有一定的覆盖率，但同时任何模型也无法保证100%的覆盖率(测试是一个混沌工程)，因此在执行时，我会尝试覆盖所有被认为重要的东西</code></p>
-<p><strong>覆盖率模型–广度/深度判断</strong><br><img src="/text_image/%E6%B5%8B%E8%AF%95%E6%B7%B1%E5%BA%A6%E5%9B%BE.png" alt="alt text"><br><strong>覆盖率模型–执行价值</strong><br><img src="/text_image/%E5%81%9A%E6%9C%89%E4%BB%B7%E5%80%BC%E7%9A%84%E4%BA%8B.png" alt="alt text"></p>
-<p><code>测试执行可参考的经验：</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">所有的分析启发式和设计启发式都可以用作执行启发式；</span><br><span class="line">基本的启发 —— 如果它存在，我想测试它；</span><br><span class="line">重要问题优先——先找出最重要的问题；</span><br><span class="line">主干——如果方便的话，首先看看大的功能工作是否正常；</span><br><span class="line">更宽泛的区分——如果 “这个” 可以或不可以，我们可以跳过 “那个”；</span><br><span class="line">多信息源——使用比需求更复杂的 “文档”；</span><br><span class="line">再做一件事——另外做一些容易出错的、大众的或者用户可能会做的事情。不要想太多，做点什么，看看会发生什么；</span><br><span class="line">死亡蜜蜂启发 - 如果我改变了一个数据文件，发现我正在测试的应用程序不再发生崩溃，下一步我要做的就是再次改变它，这样我就可以再次看到崩溃；</span><br><span class="line">隆隆作响——当产品做了奇怪的事情，一个大灾难可能会发生；</span><br><span class="line">慢慢挪动——以一种刻意过度精细的方式做某事；</span><br><span class="line">用户错误——研究无意（典型）错误；</span><br><span class="line">行动方法——成为一个 “真正” 的用户；</span><br><span class="line">二分法——当有奇怪的事情发生时，去掉 “一半”，直到找到必要的成分；</span><br><span class="line">可翻转性启发——尝试从意外使用中获得价值；</span><br><span class="line">基本配置矩阵——确定跨越 “边界” 的几个平台；</span><br><span class="line">并发测试执行——同时运行多个测试想法以获得新的交互和想法；</span><br><span class="line">似曾相识的启发式方法——当遇到错误消息时，多重复一次（如果不完全相同，代码是可疑的）；</span><br><span class="line">看看很多地方——测试结果可以通过几个地方来解释；</span><br><span class="line">其他地方是否存在问题——发现的问题是否存在于其他地方？</span><br><span class="line">直觉 - “相信你的直觉。尝试任何感觉有希望的测试”</span><br><span class="line">结对测试——协同测试执行激发新的更快的思考；</span><br><span class="line">测试辅助——有工具可以立刻帮助我吗？</span><br><span class="line">极性动态——在谨慎与快速、嬉戏与严肃、客观与主观等之间切换；</span><br><span class="line">现在——“我现在能做的最好的测试是什么？</span><br><span class="line">情绪——运用你的感官。</span><br><span class="line">新视角发现失败——看看新的东西；让别人看看你的东西；</span><br><span class="line">即兴表演</span><br><span class="line">（不）确定性问题——总是有问题，但它们可能并不重要</span><br><span class="line">我可能用错了启发——如果我发现许多问题，可能是我的模型是错误的；</span><br></pre></td></tr></table></figure>
-<p><strong>快速测试 :</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">用一些快速的，并不总是有效果的测试来刺激你的执行（这些测试来自 Kaner&#x2F;Bach 等.);</span><br><span class="line">鞋子测试——找到一个输入字段，将光标移到它上，将鞋子放在键盘上，然后去吃午饭;</span><br><span class="line">边界测试——测试边界值因为边界的错误编码是一个常见的错误。</span><br><span class="line">Whittaker 攻击</span><br><span class="line">  输入：强制错误消息、默认值、浏览数据、溢出缓冲区、查找交互、重复多次。</span><br><span class="line">  输出：强制不同、无效、属性更改、屏幕刷新。探索存储的数据和计算。填充或损坏文件系统；无效&#x2F;不可访问的文件。</span><br><span class="line">干扰测试——取消、暂停、交换、中止、后退&#x2F;下一步、竞争、删除、注销。</span><br><span class="line">跟踪最近的变化——意外的副作用。</span><br><span class="line">探索数据关系——利用依赖关系，跟踪数据，干扰，删除。</span><br><span class="line">变化之旅——尽可能在各个维度上变化;</span><br><span class="line">复杂度之旅——查找最复杂的功能和数据，创建复杂的文件。</span><br><span class="line">示例数据之旅——尽可能使用任何示例数据。越复杂越好。</span><br><span class="line">持续使用 - 测试时，不要重置系统。打开窗口和文件。让磁盘和内存使用量增加。你希望随着时间的推移，这个系统会自己打结。</span><br><span class="line">调整 - 将某些参数设置为某个值，然后在以后的任何时间将该值重置为其他值，而不重置或重新创建包含的文档或数据结构。</span><br><span class="line">Dog Pilling——一次运行更多进程；同时存在更多状态。</span><br><span class="line">减弱——当系统处于适当的状态时开始使用一个函数，然后将状态部分更改为不适当的状态。</span><br><span class="line">错误消息处理——使错误消息发生。重点测试错误被忽略后的情况。</span><br><span class="line">点击狂热——测试不仅仅是 “敲击键盘”，但这句话并非空穴来风。试着敲击键盘。试着到处点击。</span><br><span class="line">多个实例——同时运行应用程序的许多实例。打开相同的文件。</span><br><span class="line">功能交互——发现各个功能交互或共享数据的位置。寻找任何相互依赖的关系。浏览他们。给他们压力。</span><br><span class="line">便宜的工具！–了解如何使用 InCtrl5, Filemon, Regmon, AppVerifier, Perfmon, Task Manager, Threadhijacker, Zed Attack Proxy, Color Oracle（所有这些都是免费的）</span><br><span class="line">资源匮乏——逐渐降低内存和其他资源，直到产品优雅得降级或不优雅得崩溃。</span><br><span class="line">执行 “作者说”——查看联机帮助或用户手册，找到有关如何执行一些有趣活动的说明。做那些动作。然后即兴表演。</span><br><span class="line">疯狂配置——在安装产品之前或之后以非标准或非默认方式修改 O&#x2F;S 配置。</span><br><span class="line">摸索——找到产品中产生大量数据或执行某些操作非常快的方面;</span><br></pre></td></tr></table></figure>
-<h2 id="归纳并标准化"><a href="#归纳并标准化" class="headerlink" title="归纳并标准化"></a><strong>归纳并标准化</strong></h2><p><code>以上的过程，就是一个完整的‘测试过程’；其中每一步都是独立的，但都有其价值；无论如何，测试本质都是基于‘上下文’和‘风险’的活动；获取信息-分析-决策-反馈-优化，永远贯穿质量活动的始终，本节的目的是让较小的单功能/独立的功能，测试活动，能实现标准作业；这个想法的依据是由于，任何产品功能都是大同小异的，都是由相似的各个小功能组成的，本节考虑输出各小功能的checklist来实现标准作业</code><br><img src="/text_image/%E5%8F%8D%E9%A6%88%E6%9C%BA%E5%88%B6.png" alt="alt text"></p>
-<h3 id="标准作业实例"><a href="#标准作业实例" class="headerlink" title="标准作业实例"></a>标准作业实例</h3><ul>
-<li><a href="https://www.processon.com/view/link/64be5dbc392b97462f4b12c9">‘大富翁游戏’</a></li>
-</ul>
-<p><strong>看到这是不是有种感觉，测试工作流程，越来越像工厂的流水线；这其实就是互联网的发展方向，未来估计行业的发展趋势也会和制造业趋同；不知是行业的幸运，还是个人的不幸！！！</strong></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>实战</tag>
-        <tag>质量体系</tag>
-        <tag>测试设计</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2023-7月新工作准备</title>
     <url>/posts/377e71de/</url>
     <content><![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><pre><code>通过半个季度的学习，达到准高级工程师水准，进入大厂（BAT/TMDJKXB）;
@@ -2054,7 +2054,7 @@
 <li>数据库特性操作（慢查询/分表/防攻击等）</li>
 </ul>
 <h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><h3 id="测试设计"><a href="#测试设计" class="headerlink" title="测试设计"></a>测试设计</h3><ul>
-<li>《海盗派测试分析》看这本书学习测试思维的套路；</li>
+<li>《海盗派测试分析》看这本书学习测试思维的套路；<a href="https://www.bujiaban.xyz/posts/9eaf5086/">测试设计</a></li>
 <li><a href="https://testerhome.com/topics/24284">The Little Black Book of Test Design</a>；看这本小书学习测试思维；</li>
 <li>高级软件测试分析师</li>
 <li>高级软件测试管理<br><strong>后两本书是国际软件测试工程师高级考试的教材</strong></li>
@@ -2117,29 +2117,34 @@
 </ul>
 <h4 id="质量流程"><a href="#质量流程" class="headerlink" title="质量流程"></a><strong>质量流程</strong></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">基本的测试流程？</span><br><span class="line">测试周期是五天，今天是第三天，发现了一个主流程bug，你需要做什么？</span><br><span class="line">	评估整体问题风险，修改计划，影响范围，需要调动的修复资源</span><br><span class="line">	对交付时间的影响，整体项目是否可以接受，根据时间承受范围，做出修复方案的判断</span><br><span class="line">	完成修复计划</span><br><span class="line">	复盘整体问题，讨论为什么主流程问题会在测试后期才被发现。测试流程或总理，缺失？需求临时变更？代码无选择入库？堵住漏洞防止问题再次发生</span><br><span class="line">了解哪些测试方法；?黑盒白盒测试的测试用例设计方法都有哪些？</span><br><span class="line">介绍一下单元测试和冒烟测试？单元测试写过吗？</span><br><span class="line">项目质量的准入准出原则？</span><br><span class="line">灰度上线的标准是是么？</span><br><span class="line">平时怎么做的测试？</span><br><span class="line">现在的业务方面测试流程，质量保障方面的措施，除了自动化，人工怎么分配的?</span><br><span class="line">深问了覆盖率、接口自动化，同时也简单说了下BDA(数据测试)、CTS（android系列兼容测试（Compatibility Test suite））、PFT（），流水线一些准入要求</span><br><span class="line">如何看待peer之间观点不一致？怎么解决?</span><br></pre></td></tr></table></figure>
 <ul>
-<li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答①：需求评审阶段对需求进行分析-开发设计阶段对设计进行分析判断-设计测试方案-写才测试用例/准备测试数据/测试环境-提交自测用例给开发（辅助开发自测）-测试执行/bug跟踪-rc验收-复杂产品验收-灰度测试-线上验收-资料整理归档；（其中还涉及到部分环境的准入准出的标准的建立、事后的复盘）以上现有流程；</span><br><span class="line">测试流程，其实是质量体系很重要的一部分；需要遵循SOP标准（标准、文本、自动化）、基于上下文和风险的测试逻辑；兼顾成本和质量；因此在设计流程时，需要考虑以下方面：</span><br><span class="line">1、如何建立质量标准，OKR、KPI等工具如何和标准结合；维护质量标准，有无线上/线下问题的收集归纳机制；</span><br><span class="line">2、有没有配套工具，来运营流程；分析优化问题；</span><br><span class="line">3、如何提高流程的效率，如何建立适合公司的敏捷模式，如何和云原生、中台等相结合提效；</span><br><span class="line">4、如何根据公司的规模，人员情况，推动以上问题的处理；</span><br><span class="line"></span><br><span class="line">答②：测试的主要工作是提前发现问题，暴露风险；</span><br><span class="line">因此要赶快把风险暴露出来；先评估现阶段的风险，影响的范围；然后把风险立即暴露给项目组，组织协调资源，修改计划；</span><br><span class="line">完成修复计划；复盘问题，考虑为何没有提前发现主流程问题，是需求变更没有及时同步，还是开发私自更加了主流程代码或者其他代码合入问题，还是测试设计不合理；</span><br><span class="line">针对具体的原因，和未来可能出现的风险，优化流程，新增一些卡点策略或流程要求；</span><br><span class="line"></span><br><span class="line">我是这样理解这个问题的，我先说一下黑盒/白盒的测试方法吧，然后我在讲下我在工作中哪些场景中用到了；黑盒（等价类/边界值/判定表/因果分析/正交分解/场景/错误推导/功能图）白盒（语句覆盖/判定覆盖/条件覆盖/条件组合覆盖/路径覆盖）；然后举例说明使用情况，举例最好能体现测试设计能力（覆盖率/成本/效率）</span><br><span class="line">单测是对系统最小粒度的测试；白盒层面的测试，一般是覆盖代码的函数/类/模块/多模块的测试（讲的时候需要体现单测的标准/覆盖率/流程/量化）；我们这边的单测是由开发实现单测代码，部分功能由测试codereview，检查单测代码的覆盖率（覆盖率要达到90%）；这种方式导致了单测环境测试参与不多，对整个项目的单测覆盖率很难衡量、还有就是需要codereview测试能参与的人力比较少，考虑通过开源框架实现一个待测覆盖率的检查脚本，同时开发单测时需要一些测试数据，这块未来考虑实现一个mock工具通过测试造数，开发调用给开发提供数据；冒烟是有测试在用例设计时标记冒烟用例（通过在线excel文档维护），提交给开发执行，开发执行通过后，标记执行通过，然后在进行提测；提测时，测试会先验收一遍冒烟用例，一旦冒烟不通过则会打回，且会记录，后续项目会根据文档数据归总，会影响开发的绩效；</span><br><span class="line">（各环节标准/标准的文档量化/优化）我们质量保障的设计在各环节都有准入准出标准，依次是需求分析阶段需求进入评审必须要有原型图有文档，且同一个需求评审不能多于两次，开发/设计/测试方案评审同理（测试用例的覆盖率不低于90%）；在提测前开发必须要进行单测且单测的覆盖率不低于90%（由开发自己实现），然后就是冒烟阶段（冒烟用例通过率必须是100%），测试执行，用例必须全部执行/中高等级用例必须全部执行，低级别用例未执行率不超过10%，rc验收前用例修复率必须达到100%，或者低级别用例不能超过5个、中高级别必须全部修复，且整体bug遗留率不能超过1%；然后就是rc验收必须无问题；灰度用例必须全部通过，线上反馈的bug不能超过总bug数的1%，且不能有中高级别的bug;整个过程主要通过tapd,在线excel文档，禅道来追溯；</span><br><span class="line">测试，rc验收通过；产品/设计验收通过；无bug遗留，或无中高级别bug遗留低级别bug遗留率不超过1%；上线环境、配置完成准备，且审核通过；然后就进行灰度方便；灰度梯度加量，线上无问题，则逐步到全量；</span><br><span class="line">工作占比，体系化思维，流程；我的日常工作在不同的时间段，工作重心不一样；在前面一年左右，主要负责大数据数据相关的测试，涉及的业务主要是版税结算，音乐的效果数据报表，音乐资源去重这些；已经自动化相关的建设，ui自动化、接口自动化、性能、压测；后面主要负责广告业务的测试已经部分音乐服务端业务的测试；在自动化工作中，我一开始的目的是想先把相应的工具搭起来，先解决从未到有的问题，以实现产出，后续主要是优化，建立规范标准，优化工具，来让工具产生实际的价值，解决监控，重复性回归的问题；当时的规划是提升自动化的覆盖率。让效果可量化，建立可视化的仪表（但这一块没机会落地），因为从22年年中开始就一直有大的人员的调整；在业务测试方面，我的工作思路是先用，先体验，在依赖需求，和相应的同事，以及网上相关的资料，和现在存在和遇到的问题来熟悉产品，发现痛点，从而设计测试方案，建立质量衡量的标准；在过程中遇到相关的问题会请教leader，协商解决然后推广；</span><br><span class="line">我们人员共分了四组，一组负责主业务（音乐）客户端的测试，另一组负责音乐服务端的测试，剩下的第三组负责增值（广告）、会员、游戏、活动业务的测试，我这组负责大数据、脚本工具相关、质量体系探索相关的工作；人员分配是这样的；在质量保障方面，除了接口自动化ui自动化的定时巡检外，还有人工巡检、monkey稳定性、客户端/服务端性能、普罗米修斯的监控和服务的监控机制、已经运维相关同事的值班机制。</span><br><span class="line"></span><br><span class="line">性格、协作；要具体来看，如果是工作外的，求同存异吧，我会诚恳的表达自己的观点，但我不把说法他人作为目的；如果是工作中的分歧，我会听他说出他的观点，然后我会表达出我的观点，针对分歧的地方，我一般会从商业价值，对用户的体验和价值，成效方面来表达观点，如果仍难达成一致，我会找相应的决策人员来一起协商决定，如果最后拍板了，在我了解清楚的情况下和我的观点仍不一致，我也会积极的落实。</span><br></pre></td></tr></table></figure></li>
+<li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答①：需求评审阶段对需求进行分析-开发设计阶段对设计进行分析判断-设计测试方案-写才测试用例/准备测试数据/测试环境-提交自测用例给开发（辅助开发自测）-测试执行/bug跟踪-rc验收-复杂产品验收-灰度测试-线上验收-资料整理归档；（其中还涉及到部分环境的准入准出的标准的建立、事后的复盘）以上现有流程；</span><br><span class="line">测试流程，其实是质量体系很重要的一部分；需要遵循SOP标准（标准、文本、自动化）、基于上下文和风险的测试逻辑；兼顾成本和质量；因此在设计流程时，需要考虑以下方面：</span><br><span class="line">1、如何建立质量标准，OKR、KPI等工具如何和标准结合；维护质量标准，有无线上/线下问题的收集归纳机制；</span><br><span class="line">2、有没有配套工具，来运营流程；分析优化问题；</span><br><span class="line">3、如何提高流程的效率，如何建立适合公司的敏捷模式，如何和云原生、中台等相结合提效；</span><br><span class="line">4、如何根据公司的规模，人员情况，推动以上问题的处理；</span><br><span class="line"></span><br><span class="line">答②：测试的主要工作是提前发现问题，暴露风险；</span><br><span class="line">因此要赶快把风险暴露出来；先评估现阶段的风险，影响的范围；然后把风险立即暴露给项目组，组织协调资源，修改计划；</span><br><span class="line">完成修复计划；复盘问题，考虑为何没有提前发现主流程问题，是需求变更没有及时同步，还是开发私自更加了主流程代码或者其他代码合入问题，还是测试设计不合理；</span><br><span class="line">针对具体的原因，和未来可能出现的风险，优化流程，新增一些卡点策略或流程要求；</span><br><span class="line"></span><br><span class="line">答③：测试是一系列的活动；我理解的测试方法，应该是不局限于测试设计的；测试活动的主要过程有，测试信息收集（KYN）、测试信息分析（MFQ/SFDIPOT）、测试方法建模（PPDCS）、测试点覆盖率/有效性分析、最后是执行环节、其实每个环节都很重要需要注意，都考虑方式方法；但是我们一般问的都是测试设计/或者说是建模时候的方法；根据场景不同、特征不同使用不同的方法。比如如果是一些输入数据或者参数，具有数据/类型特征的，（如登录，注册输入的场景，就考虑使用等价类，边界值，覆盖有效等级类的各类，然后各类无效等价类边界值）；如果特征是一些状态变化的，（比如视频播放，暂停，恢复播放这些），我会考虑使用状态迁移法；如果是流程性的，（比如新手引导），我会考虑使用流程图；如果是输入直接有逻辑关系，输入输出有因果关系（比如抽奖活动的一些，IP限制，国家限制，不同国家，不同奖品不同中奖率这些），我会考虑因果图+判定表，然后使用没一列作为一条测试点；然后比如是一些数据报表，组合查询，这种输入参数没有逻辑约束，我可能直接就用组合法（也就是正交实验法）；白盒测试设计方法，主要是覆盖率方面考虑吧；考虑覆盖路径/覆盖条件/覆盖条件组合/覆盖语句这些，还是要根据具体业务和当前项目的情况来；这个问题有点大，我不确定我答的方向是否是对的；其他的一些方法，考虑其他方面，基于风险的，比如有些模块，测试/线上经常出问题，那功能迭代，过去的bug，是不是要做下参考甚至走一遍，其他的就是人员，为了保障质量是否对每个人员的开发质量，或者测试人员的质量需要做量化，如果有些人质量不好，是不是要进行一些培训或者帮助、或者调整；对提测功能大小、代码合并啊这些；当然这些都是要考虑，但一般不在测试设计环境考虑了，会在其他阶段；</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">我是这样理解这个问题的，我先说一下黑盒/白盒的测试方法吧，然后我在讲下我在工作中哪些场景中用到了；黑盒（等价类/边界值/判定表/因果分析/正交分解/场景/错误推导/功能图）白盒（语句覆盖/判定覆盖/条件覆盖/条件组合覆盖/路径覆盖）；然后举例说明使用情况，举例最好能体现测试设计能力（覆盖率/成本/效率）</span><br><span class="line">单测是对系统最小粒度的测试；白盒层面的测试，一般是覆盖代码的函数/类/模块/多模块的测试（讲的时候需要体现单测的标准/覆盖率/流程/量化）；我们这边的单测是由开发实现单测代码，部分功能由测试codereview，检查单测代码的覆盖率（覆盖率要达到90%）；这种方式导致了单测环境测试参与不多，对整个项目的单测覆盖率很难衡量、还有就是需要codereview测试能参与的人力比较少，考虑通过开源框架实现一个待测覆盖率的检查脚本，同时开发单测时需要一些测试数据，这块未来考虑实现一个mock工具通过测试造数，开发调用给开发提供数据；冒烟是有测试在用例设计时标记冒烟用例（通过在线excel文档维护），提交给开发执行，开发执行通过后，标记执行通过，然后在进行提测；提测时，测试会先验收一遍冒烟用例，一旦冒烟不通过则会打回，且会记录，后续项目会根据文档数据归总，会影响开发的绩效；</span><br><span class="line">（各环节标准/标准的文档量化/优化）我们质量保障的设计在各环节都有准入准出标准，依次是需求分析阶段需求进入评审必须要有原型图有文档，且同一个需求评审不能多于两次，开发/设计/测试方案评审同理（测试用例的覆盖率不低于90%）；在提测前开发必须要进行单测且单测的覆盖率不低于90%（由开发自己实现），然后就是冒烟阶段（冒烟用例通过率必须是100%），测试执行，用例必须全部执行/中高等级用例必须全部执行，低级别用例未执行率不超过10%，rc验收前用例修复率必须达到100%，或者低级别用例不能超过5个、中高级别必须全部修复，且整体bug遗留率不能超过1%；然后就是rc验收必须无问题；灰度用例必须全部通过，线上反馈的bug不能超过总bug数的1%，且不能有中高级别的bug;整个过程主要通过tapd,在线excel文档，禅道来追溯；</span><br><span class="line">测试，rc验收通过；产品/设计验收通过；无bug遗留，或无中高级别bug遗留低级别bug遗留率不超过1%；上线环境、配置完成准备，且审核通过；然后就进行灰度方便；灰度梯度加量，线上无问题，则逐步到全量；</span><br><span class="line">工作占比，体系化思维，流程；我的日常工作在不同的时间段，工作重心不一样；在前面一年左右，主要负责大数据数据相关的测试，涉及的业务主要是版税结算，音乐的效果数据报表，音乐资源去重这些；已经自动化相关的建设，ui自动化、接口自动化、性能、压测；后面主要负责广告业务的测试已经部分音乐服务端业务的测试；在自动化工作中，我一开始的目的是想先把相应的工具搭起来，先解决从未到有的问题，以实现产出，后续主要是优化，建立规范标准，优化工具，来让工具产生实际的价值，解决监控，重复性回归的问题；当时的规划是提升自动化的覆盖率。让效果可量化，建立可视化的仪表（但这一块没机会落地），因为从22年年中开始就一直有大的人员的调整；在业务测试方面，我的工作思路是先用，先体验，在依赖需求，和相应的同事，以及网上相关的资料，和现在存在和遇到的问题来熟悉产品，发现痛点，从而设计测试方案，建立质量衡量的标准；在过程中遇到相关的问题会请教leader，协商解决然后推广；</span><br><span class="line">我们人员共分了四组，一组负责主业务（音乐）客户端的测试，另一组负责音乐服务端的测试，剩下的第三组负责增值（广告）、会员、游戏、活动业务的测试，我这组负责大数据、脚本工具相关、质量体系探索相关的工作；人员分配是这样的；在质量保障方面，除了接口自动化ui自动化的定时巡检外，还有人工巡检、monkey稳定性、客户端/服务端性能、普罗米修斯的监控和服务的监控机制、已经运维相关同事的值班机制。</span><br><span class="line"></span><br><span class="line">性格、协作；要具体来看，如果是工作外的，求同存异吧，我会诚恳的表达自己的观点，但我不把说法他人作为目的；如果是工作中的分歧，我会听他说出他的观点，然后我会表达出我的观点，针对分歧的地方，我一般会从商业价值，对用户的体验和价值，成效方面来表达观点，如果仍难达成一致，我会找相应的决策人员来一起协商决定，如果最后拍板了，在我了解清楚的情况下和我的观点仍不一致，我也会积极的落实。</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h4 id="场景设计"><a href="#场景设计" class="headerlink" title="场景设计"></a><strong>场景设计</strong></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">一个视频红包的场景让设计一下测试用例？</span><br><span class="line">接口、性能、压测?</span><br><span class="line">怎么进行弱网测试的？</span><br><span class="line">	Qnet腾讯、fiddler</span><br><span class="line">如果要评估一个接口的性能，首先要考虑哪几个方面？    </span><br><span class="line">测试接口时发现返回和预期不一致，应该怎样分析？</span><br><span class="line">如何根据接口文档测试接口？</span><br><span class="line">登陆界面?</span><br><span class="line">深挖项目？</span><br><span class="line">如果一个网页访问速度很慢 可能是什么原因？</span><br><span class="line">网页按钮文本框文件选择框怎么测试?</span><br><span class="line">抖音评论?</span><br><span class="line">如何测试网络直播（问了大概10分钟）？</span><br><span class="line">力扣46.全排列没做出来？</span><br><span class="line">数组中倒数第2大的数？</span><br><span class="line">百度搜索测试用例?</span><br><span class="line">测抖音注册?</span><br><span class="line">测试网易云音乐搜索窗口；?</span><br><span class="line">网易云窗口搜索关键字到返回结果的过程，经历了哪些阶段；?</span><br><span class="line">jacoco怎么统计接口覆盖率?</span><br><span class="line">设计抖音发布视频的测试用例？</span><br><span class="line">如果不同安卓版本上的抖音，一个能发布视频，一个不能，可能是什么原因？</span><br><span class="line">jmeter压测?</span><br><span class="line">针对一个零售机进行测试用例设计？</span><br><span class="line">针对一个IP地址校验的接口进行测试用例设计；（答的不好，面试官后来说是想让我给出具体的关键数据的测试用例）？</span><br><span class="line">测试一个促销活动页面，两种促销活动2选1，要注意安全性？</span><br><span class="line">有什么性能测试方法？</span><br><span class="line">微信发红包测试用例？</span><br><span class="line">微信抢红包测试用例设计?</span><br><span class="line">电梯问题设计测试用例?</span><br><span class="line">收到请求后，服务端调用了哪些相关的组件？越详细越好？</span><br><span class="line">平台开发技术栈介绍；?</span><br><span class="line">自动化介绍、测试框架介绍；?</span><br><span class="line">接口自动化设计；?</span><br><span class="line">微信朋友圈点赞功能设计测试用例 ?如果A点赞了，B没看到，写出自己排查定位原因的思路?</span><br><span class="line">自己说自己熟练使用Charles，问了下都用过Charles的哪些功能，怎么修改返回的状态码?</span><br><span class="line">U I自动化了解；?</span><br><span class="line">性能测试、健壮性测试、是否了解压测；?</span><br><span class="line">线上质量运营、COE分析。?</span><br><span class="line">接口测试、如何保证接口所有分支覆盖；?</span><br><span class="line">说出自己觉得系统中容易出现的问题；?</span><br><span class="line">测试过程中使用哪些方法或工具来测试；?</span><br><span class="line">自动化所用框架。?</span><br><span class="line">mock的底层原理?</span><br><span class="line">对于微信支付的场景设计测试用例？</span><br><span class="line">支付怎么考虑高并发？</span><br><span class="line">自动化这块，Selenium的原理、PO模式的优点？</span><br><span class="line">视频通话用什么协议？</span><br><span class="line">既然提到视频通话，那么给我说一下视频通话可能会出现什么问题？</span><br><span class="line">你如何测试它？</span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答①：红包的显示；红包的位置；红包的动效；红包的倒计时；放置不同类商品红包的显示效果，未开奖时的点击效果，开奖时的点击效果；多个红包；领取红包时的交互动作；领取红包时的音效/特效，是否支持各类音效和特效；领取各类商品，领取成功的效果；领取各类商品，领取失败的效果，自定义各类失败的效果显示；红包跳转外部的场景、其他app、端内其他视频、端内其他活动页；红包埋点；红包兼容（系统、设备、系统版本）；红包接口的性能；红包安全机制（作弊策略）；红包未开奖时打开，等到开奖效果；红包未开奖时打开，且一直等待到红包有效期结束；红包开奖后一直等待有效期结束后效果；点击关闭按钮关闭红包；点击系统返回按钮关闭红包；打开红包后，切换到后台在切换回前台；打开红包后，切换到其他应用，在切换回来；打开红包后，断网进行领奖；触发领奖按钮后，应用崩溃；每日领取红包达到上限后，继续领取；切换不同系统语言后，领取红包；手机连上代理后领取红包；领取红包后，领取产品同步；领取功能是否稳定，用monkey重复动作；改功能在app不同版本内能否正常使用；或者有没有有效隔离</span><br><span class="line">答：职业--传易音乐工作总结；重点体现在架构；维护；标准；覆盖率方面</span><br><span class="line">答：两种方式，仿真模拟、另一个是真实网络环境构建；重点是弱网标准（2/3/4），弱网操作；第一种可通过fiddler配置实现，终端在通过fiddler来进行代理连接来实现弱网模拟；弱网的原理是通过延迟发送的方式来实现的即数据包/速度=时间，我可以通过变更延迟发送的时间来实现每秒的网速控制；另一种可通过搭建弱网wifi的方式实现；还有就是腾讯qnet弱网测试；覆盖场景（https://tech.kujiale.com/ku-jia-le-zhuan-xiang-ce-shi-zhi-ruo-wang-shi-zhan/https://zhuanlan.zhihu.com/p/608308463）</span><br><span class="line">答：接口性能的好坏；直观的标准就是不出问题；能处理预期内的压力，并且有好的性能体验；具体标准（响应时间（平均/最大/top95响应时间），异常率，吞吐量）；判断接口性能的好坏的方法，可以直接通过触发使用场景观察接口性能，也可以通过对接口调用观察，接口压测观察；</span><br><span class="line">答：先从请求入手，分析请求特点，在进行验证性的调用，如果有日志辅助的话，也可以看下过程日志定位；然后走读接口逻辑代码，确认问题；</span><br><span class="line">答：我一般会在读文档前先调用一下接口，看是否能返回；然后我会从接口文档的响应参数，异常响应，响应耗时、超时等入手来构造数据测试；我会基于接口文档+接口应用场景等，来对接口的请求参数进行构造，一般是通过等价类、边界值、正交、场景等方法构造，来进行验证性的测试；同时我会分析接口的处理逻辑，基于处理逻辑的特定，比如涉及到除法运算，我会在分母传0等，来做进一步测试；</span><br><span class="line">答：我会先搜集信息（通过需求/开发设计文档/业务的预期/用户的喜欢/同类竞品的实现），然后分析信息，写出测试点（考虑覆盖功能/性能/兼容/安全）ui/界面测试；</span><br></pre></td></tr></table></figure>
-<h4 id="网络协议"><a href="#网络协议" class="headerlink" title="网络协议"></a><strong>网络协议</strong></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">浏览器输入URL发生了什么？经历了哪些阶段?</span><br><span class="line">tcp工作原理；三次握手，三次挥手？tcp四次握手？为什么要四次?</span><br><span class="line">tcp udp区别，分别应用场景？</span><br><span class="line">tcpip四层?</span><br><span class="line">滑动窗口的原理；拥塞控制和滑动窗口的区别；浏览网站输入url后网络侧的行为；SSL握手的过程？</span><br><span class="line">iso七层协议？</span><br><span class="line">讲下每层中应用的协议？</span><br><span class="line">HTTP请求状态码?</span><br><span class="line">http状态码?</span><br><span class="line">get，post请求的区别?</span><br><span class="line">http和https区别？</span><br><span class="line">三次握手中服务端拒绝连接会发生什么 ？TCP第三次握手失败怎么办，即最后一次握手失败？</span><br><span class="line">http的header有哪些；http特点；cookie和session的区别？</span><br><span class="line">dns解析过程?</span><br><span class="line">如果无法打开某个网页怎么排查问答题 （先确定服务端问题还是客户端问题，最直接的就是抓包，本地网络联通情况=&gt;DNS情况=&gt;目标服务器情况）?</span><br><span class="line">session和cookie区别（深问了好多为什么，为什么session相对安全，面试官说很多没回答到重要的点上。。）?</span><br><span class="line">session可以设计失效时间吗，根据这个设计测试用例？</span><br><span class="line">IPV4和IPV6区别?</span><br><span class="line">TCP怎么保证传输可靠性的（加问了个什么是SYN攻击，不会。。）?</span><br></pre></td></tr></table></figure></li>
-<li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答①：整个过程很复杂，分为以下几个阶段如图；①应用层生成数据包并发送（浏览器解析地址，HTTP数据包构造，调用套接字方法，控制操作系统协议栈，生成TCP数据包、封装IP数据包、从而控制网卡驱动程序、生成以太数据包、信号转换发起请求）②数据链路层（子网内，请求广播给网关即路由器）③网络层（光电转换、IP协议+路由表等，数据传输给互联网路由器）④传输层（tcp(三次握手/四次挥手)+tcp ack应答机制，实现数据包传递）⑤应用层（网卡（端口、套接字、电信号转换成数字信号、包组装、缓存数据提供给应用、应用协议读取、客户端解析渲染））见上方：网络全流程图</span><br><span class="line"></span><br><span class="line">答②：见上方：网络全流程图</span><br></pre></td></tr></table></figure>
+<strong>答②: 接口/性能/压测</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">接口：</span><br><span class="line"></span><br><span class="line">架构：ant+jmeter+jenkins+shell脚本+git+DashboardReport</span><br><span class="line">集成：驱动集成到了Jenkins，脚本集成到了git</span><br><span class="line">量化：H5报告通过Jenkins工作流维护了。同时也会同步到git</span><br><span class="line">监控：异常场景，邮件通知</span><br><span class="line"></span><br><span class="line">问题：</span><br><span class="line">维护：脚本需要手动编辑、录入、或者用工具录入；不支持自动录制，维护；</span><br><span class="line">问题分析：问题没做自动化分析，只有邮件通知，而且没有异常信息（数据采集），很难定位问题；</span><br><span class="line">实际效果：只能作为一个巡检或者监控，实际这种普罗米修斯也能做，而且能和服务更好的结合，我这个意义不大；</span><br><span class="line"></span><br><span class="line">性能：</span><br><span class="line"></span><br><span class="line">架构：jmeter+Jenkins+服务架构</span><br><span class="line">服务架构：客户端+cdn+nginx负责均衡+入口网关路由服务+业务微服务+db(mysql、Redis、MongoDB、aws s3、mq消息队列)+配置（zookeeper+apollo+dubbo+定时任务平台）+监控（普罗米修斯+skyworlking+zabbix+redis监控+kafka后台）</span><br><span class="line">性能测试流程：前提（线上暴露出了性能问题或者迹象）&#x2F;(评估当前的性能，资源情况进行成本规划)；②根据问题或者线上数据，确定期望的TPS&#x2F;平均响应时间；确定预期的TPS,响应时间（不一定有）；③开发写一个设计文档，讲述实现逻辑，压测注意点，可能要覆盖的场景；④写一个测试方案，压测用例；监控数据；⑤运维那边准备性能环境，dba准备性能数据，环境隔离等；⑥准备性能环境、工具、造数据；⑦压测时关注监控数据，主要一些资源数据，性能数据啊⑧分析数据，猜测可能问题的原因；⑨调整验证，迭代；⑩功能覆盖；①①灰度+线上监控；①②复盘，分析问题，作为后续开发规范或者闭坑点；</span><br><span class="line"></span><br><span class="line">标准制定：</span><br><span class="line">性能分析：</span><br><span class="line">性能提效+集成：</span><br><span class="line">优化策略：</span><br><span class="line">具体：全链路压测+性能基线+常态压测；</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="网络协议"><a href="#网络协议" class="headerlink" title="网络协议"></a><strong>网络协议</strong></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">浏览器输入URL发生了什么？经历了哪些阶段?</span><br><span class="line">tcp工作原理；三次握手，三次挥手？tcp四次握手？为什么要四次?</span><br><span class="line">tcp udp区别，分别应用场景？</span><br><span class="line">tcpip四层?</span><br><span class="line">滑动窗口的原理；拥塞控制和滑动窗口的区别；浏览网站输入url后网络侧的行为；SSL握手的过程？</span><br><span class="line">iso七层协议？</span><br><span class="line">讲下每层中应用的协议？</span><br><span class="line">HTTP请求状态码?</span><br><span class="line">http状态码?</span><br><span class="line">get，post请求的区别?</span><br><span class="line">http和https区别？</span><br><span class="line">三次握手中服务端拒绝连接会发生什么 ？TCP第三次握手失败怎么办，即最后一次握手失败？</span><br><span class="line">http的header有哪些；http特点；cookie和session的区别？</span><br><span class="line">dns解析过程?</span><br><span class="line">如果无法打开某个网页怎么排查问答题 （先确定服务端问题还是客户端问题，最直接的就是抓包，本地网络联通情况=&gt;DNS情况=&gt;目标服务器情况）?</span><br><span class="line">session和cookie区别（深问了好多为什么，为什么session相对安全，面试官说很多没回答到重要的点上。。）?</span><br><span class="line">session可以设计失效时间吗，根据这个设计测试用例？</span><br><span class="line">IPV4和IPV6区别?</span><br><span class="line">TCP怎么保证传输可靠性的（加问了个什么是SYN攻击，不会。。）?</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答①：整个过程很复杂，分为以下几个阶段如图；①应用层生成数据包并发送（浏览器解析地址，HTTP数据包构造，调用套接字方法，控制操作系统协议栈，生成TCP数据包、封装IP数据包、从而控制网卡驱动程序、生成以太数据包、信号转换发起请求）②数据链路层（子网内，请求广播给网关即路由器）③网络层（光电转换、IP协议+路由表等，数据传输给互联网路由器）④传输层（tcp(三次握手/四次挥手)+tcp ack应答机制，实现数据包传递）⑤应用层（网卡（端口、套接字、电信号转换成数字信号、包组装、缓存数据提供给应用、应用协议读取、客户端解析渲染））见上方：网络全流程图</span><br><span class="line"></span><br><span class="line">答②：见上方：网络全流程图</span><br><span class="line"></span><br><span class="line">答③：udp和tcp最大的区别是；udp是无连接的（不用建立连接），没有应答机制，没有流控制和拥塞控制；不能保障传输的可靠性和顺序；tcp有连接，有断开，有应答，有拥塞和流控制（窗口滑动机制）；能保障传输的可靠，顺序；但正因为tcp协议如此的复杂，因此在传输速度上会比udp慢；一般情况下都会使用tcp(一般都会用)，域名解析（dns域名解析使用udp）</span><br></pre></td></tr></table></figure>
 <h4 id="系统-云原生"><a href="#系统-云原生" class="headerlink" title="系统/云原生"></a><strong>系统/云原生</strong></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">linus命令：比较两个文件内容的不同命令？</span><br><span class="line">将下linux管道<span class="built_in">kill</span>、grep?</span><br><span class="line">linus将全部文件及子文件中包含aaa的替换成bbb？</span><br><span class="line">Shell命令有哪些？</span><br><span class="line">linux常用指令 chmod?</span><br><span class="line">微服务 单体式的区别 哪个好?</span><br><span class="line">Linux查端口号，Linux查文件最后50行？</span><br><span class="line">linux 查询进程?</span><br><span class="line">ls 和ll区别?</span><br><span class="line">熟悉微服务框架吗；?</span><br><span class="line">进程和线程的区别?</span><br><span class="line">讲下Linux文件命令（is <span class="built_in">cd</span> touch mkdir mv cp ln ）?</span><br><span class="line">在A文件中查字符串“bcd”什么命令（ cat A.txt| grep -<span class="string">&quot;bcd&quot;</span>  ）?</span><br><span class="line">进程之间的通信方式?</span><br><span class="line">Liunx查看磁盘里某个大文件大小（答的 “du”  让具体说一个答的 “du -h -a/dir | grep<span class="string">&quot;[0-9]G\b”）?</span></span><br><span class="line"><span class="string">awk的用法和参数？</span></span><br><span class="line"><span class="string">Linux：查找某目录下所有.log结尾的文件，并筛选出文件中的第三个字段，进行求和？</span></span><br><span class="line"><span class="string">内存溢出和内存泄露的区别？</span></span><br><span class="line"><span class="string">cpu调度算法？</span></span><br><span class="line"><span class="string">线程死锁的原因？</span></span><br><span class="line"><span class="string">解决死锁的方法（不让答八股文，问如何在代码中实现）</span></span><br><span class="line"><span class="string">进程和线程及协程的区别？</span></span><br><span class="line"><span class="string">怎么避免服务器集群里面单点接收太多请求而其他服务器却空闲的问题?</span></span><br><span class="line"><span class="string">rabbit mq怎么设计单侧用例？</span></span><br><span class="line"><span class="string">linux怎么查找一个文件里面的某一行，用哪几个指令?</span></span><br><span class="line"><span class="string">进程、线程通信方式?</span></span><br><span class="line"><span class="string">怎么保证线程修改数据时不会冲突?</span></span><br><span class="line"><span class="string">linux内存占用过高，该怎么看是哪个进程在哪出了问题?</span></span><br><span class="line"><span class="string">讲一下在项目中Docker运用?</span></span><br><span class="line"><span class="string">K8s里node和pod是什么关系?</span></span><br><span class="line"><span class="string">Docker，问了常用命令、主机的文件复制到容器里的命令？</span></span><br><span class="line"><span class="string">讲一下K8s？</span></span><br><span class="line"><span class="string">RPC的理解，了解Dubbo么？</span></span><br><span class="line"><span class="string">负载均衡，服务器配置（实话实说没操作过，讲了下负载均衡是怎样的）？</span></span><br><span class="line"><span class="string">栈溢出的场景？</span></span><br><span class="line"><span class="string">什么时候触发FullGC？</span></span><br><span class="line"><span class="string">docker 部署，包含组件?</span></span><br><span class="line"><span class="string">操作系统原子性；页面置换算法有哪些？</span></span><br><span class="line"><span class="string">查看java相关进程所占内存大小并按升序输出 ?ps auxw --sort=%MEM | grep java</span></span><br></pre></td></tr></table></figure></li>
-<li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答①：diff txt1 text2 -y -W 50		//-y指以并列形式显示两个文件的不同，-W指单列宽度为50</span><br><span class="line"></span><br><span class="line">答②：管道符号|会将前方的输入作为标准输出，输出给后方命令（当一些命令如ls、mkdir不接受标准输出时，还需要对标准输出进行转换，如<span class="built_in">echo</span> hello| xargs ls）；</span><br><span class="line"><span class="built_in">kill</span> 用来关闭进程或线程，可在关闭时传递信号如<span class="built_in">kill</span> -9(强制信号) pid，如此命令是<span class="built_in">kill</span>掉所有相关名称的进程或线程（ps -a | grep github | awk <span class="string">&#x27;NF=1&#x27;</span> | xargs <span class="built_in">kill</span> -9）；</span><br><span class="line">grep：文本过滤函数。可过滤出文本中含关键词的行grep <span class="string">&quot;过滤关键字&quot;</span> txt;</span><br><span class="line"></span><br><span class="line">答③：替换操作使用sed命令。sed -i <span class="string">&#x27;s/替换前参数/替换后/g&#x27;</span> txt;因此整个命令为，<span class="string">&quot;grep -rl &#x27;替换前参数&#x27; 路径|xargs sed -i &#x27;s/替换前参数/替换后/g&#x27;&quot;</span>；</span><br><span class="line"></span><br><span class="line">答④：很多；常见的目录文件操作：ls 、touch、cp、vim、rm、mv；权限用户：chmod、chown、who、su、passwd；文本操作：cat、tail、head、grep、sed、awk；资源监控：du、df、free、vmstat、top、ps、netstat、tcpstat、lsof；系统：env、<span class="built_in">export</span>、dmesg、uname；时间：time、date、sleep；</span><br><span class="line"></span><br><span class="line">答⑤：chmod是授权函数；在linux文件中，权限分为读/写/执行，每个文件的权限角色有所有者/所有组/其他人，chmod能基于此规则，给不同的角色授予不同的权限；如+增加权限 （chomod -R +124/777 ./）,表示给当前文件夹及其子文件夹所有者执行权限，所有组写权限，其他人读文件权限；可通过ls -l查看；</span><br><span class="line"></span><br><span class="line">答⑥：单体式，指将一个程序系统打包成一个独立的程序单元；而微服务指将程序系统按业务分拆成不同的独立服务；单体式的优点是开发、扩展功能、部署方便，缺点是不利于维护、重用、修改；微服务会增加开发、维护的难度，但拆分后服务的复杂度低，灵活性强、可独立部署、容错性强，更方便扩展；</span><br><span class="line"></span><br><span class="line">答⑦：查端口号可以使用以下两个命令（lsof -i|grep pid/netstat -nap|grep pid）</span><br></pre></td></tr></table></figure>
+<li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答①：diff txt1 text2 -y -W 50		//-y指以并列形式显示两个文件的不同，-W指单列宽度为50</span><br><span class="line"></span><br><span class="line">答②：管道符号|会将前方的输入作为标准输出，输出给后方命令（当一些命令如ls、mkdir不接受标准输出时，还需要对标准输出进行转换，如<span class="built_in">echo</span> hello| xargs ls）；</span><br><span class="line"><span class="built_in">kill</span> 用来关闭进程或线程，可在关闭时传递信号如<span class="built_in">kill</span> -9(强制信号) pid，如此命令是<span class="built_in">kill</span>掉所有相关名称的进程或线程（ps -a | grep github | awk <span class="string">&#x27;NF=1&#x27;</span> | xargs <span class="built_in">kill</span> -9）；</span><br><span class="line">grep：文本过滤函数。可过滤出文本中含关键词的行grep <span class="string">&quot;过滤关键字&quot;</span> txt;</span><br><span class="line"></span><br><span class="line">答③：替换操作使用sed命令。sed -i <span class="string">&#x27;s/替换前参数/替换后/g&#x27;</span> txt;因此整个命令为，<span class="string">&quot;grep -rl &#x27;替换前参数&#x27; 路径|xargs sed -i &#x27;s/替换前参数/替换后/g&#x27;&quot;</span>；</span><br><span class="line"></span><br><span class="line">答④：很多；常见的目录文件操作：ls 、touch、cp、vim、rm、mv；权限用户：chmod、chown、who、su、passwd；文本操作：cat、tail、head、grep、sed、awk；资源监控：du、df、free、vmstat、top、ps、netstat、tcpstat、lsof；系统：env、<span class="built_in">export</span>、dmesg、uname；时间：time、date、sleep；</span><br><span class="line"></span><br><span class="line">答⑤：chmod是授权函数；在linux文件中，权限分为读/写/执行，每个文件的权限角色有所有者/所有组/其他人，chmod能基于此规则，给不同的角色授予不同的权限；如+增加权限 （chomod -R +124/777 ./）,表示给当前文件夹及其子文件夹所有者执行权限，所有组写权限，其他人读文件权限；可通过ls -l查看；</span><br><span class="line"></span><br><span class="line">答⑥：单体式，指将一个程序系统打包成一个独立的程序单元；而微服务指将程序系统按业务分拆成不同的独立服务；单体式的优点是开发、扩展功能、部署方便，缺点是不利于维护、重用、修改；微服务会增加开发、维护的难度，但拆分后服务的复杂度低，灵活性强、可独立部署、容错性强，更方便扩展；</span><br><span class="line"></span><br><span class="line">答⑦：查端口号可以使用以下两个命令（lsof -i|grep pid/netstat -nap|grep pid）</span><br><span class="line"></span><br><span class="line">答⑧：查询进程ps -ef|grep pro/netstat -anp|grep pid/lsof -p pid/lsof -i tcp:80</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h4 id="sql数据库"><a href="#sql数据库" class="headerlink" title="sql数据库"></a><strong>sql数据库</strong></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysql：Like Distinct?</span><br><span class="line">数据库了解吗，关键字有哪些?</span><br><span class="line">什么时候不适合用索引？</span><br><span class="line">数据库acid</span><br><span class="line">知道数据索引吗，为什么说索引能提高效率呢？</span><br><span class="line">Mysql怎么创建表，字段；查第十行到第二十行的数据关键字?</span><br><span class="line">mysql统计学生表男生的人数?</span><br><span class="line">mysql分组?</span><br><span class="line">mysql里面索引有哪些；SQL慢查询的原因；主键索引和非主键索引是如何实现的？</span><br><span class="line">mysql内联和外联?</span><br><span class="line">MySql和Redis的区别?</span><br><span class="line">Mysql 出现慢查询的原因（答的是1.先开慢日志开关     2.进行慢日志分析    3.查看硬件问题如网络速度慢，内存不足     4.没有索引或者索引失效    5.数据过多，分库分表      5服务器参数调优my.cnf）?</span><br><span class="line">数据库事务的特性（ACID）?</span><br><span class="line">写SQl，查询A表后10行数据（思路 将表中的数据以id倒序查出所需要的行数，然后将结果保存为临时表，再根据临时表的Id将结果正序排列）?</span><br><span class="line">介绍项目中Redis的使用，二次缓存的一致性保证，数据库持久化是怎么做的等等；？</span><br><span class="line">redis的大key问题怎么解决？</span><br><span class="line">怎么找出redis里面所有的大key？</span><br><span class="line">分redis的数据结构说呢&#123;string、<span class="built_in">set</span> 、<span class="built_in">hash</span>&#125;?</span><br><span class="line">分布式的热key问题?</span><br><span class="line">索引的优缺点,索引的类别?</span><br><span class="line">SQL写出创建唯一索引?</span><br><span class="line">redis的基本类型?</span><br><span class="line">redis的作用，他为什么快?</span><br><span class="line">redis怎么应对很多用户的并发访问?</span><br><span class="line">redis的锁，代码实现？</span><br><span class="line">mysql自增键的使用？</span><br><span class="line">对于<span class="string">&quot;%x%&quot;</span>和性别怎么加索引？</span><br><span class="line">数据库题目里面<span class="built_in">limit</span>的关键字是什么作用?</span><br><span class="line">索引越多越好吗?</span><br><span class="line">什么是数据库事务?</span><br><span class="line">聚簇索引和非聚簇索引?</span><br><span class="line">Redis持久化、如何保证缓存中的数据持续有效命中？</span><br><span class="line">sql，一张表，一条语句，得到成绩&gt;=60和&lt;60的人数，不能使用两条语句分别查询？</span><br><span class="line">慢查询怎么定位具体哪的问题？</span><br><span class="line">ACID?</span><br><span class="line">读锁，写锁的区别?</span><br><span class="line">死锁?</span><br></pre></td></tr></table></figure></li>
-<li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答①：like是模糊匹配函数，通常在<span class="built_in">where</span>过滤中使用；通配符有%_[]等；distinct是参数去重函数，通常在select子句中使用，能对结果集中的特定列的值去重显示；</span><br></pre></td></tr></table></figure>
+<li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答①：like是模糊匹配函数，通常在<span class="built_in">where</span>过滤中使用；通配符有%_[]等；distinct是参数去重函数，通常在select子句中使用，能对结果集中的特定列的值去重显示；</span><br><span class="line"></span><br><span class="line">答②：问题很大，不可能全部覆盖，因此需要考虑全面</span><br><span class="line">数据：增加insert into、delete/drop/update select count/sum/avg from join/right <span class="built_in">where</span> groub by union order by <span class="built_in">limit</span></span><br><span class="line">库：create databases、drop databases、show databases</span><br><span class="line">表：create table、drop table、alter table、desc table、show table(表数据)</span><br><span class="line">其他：视图create view、存储过程、事物处理的方法</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h4 id="大数据-1"><a href="#大数据-1" class="headerlink" title="大数据"></a><strong>大数据</strong></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">项目中用了Elasticsearch，其中的遇到难点是什么呢（答的 es如何跨域 和 es如何通过内网IP进行访问  ）？</span><br><span class="line">如何解决的呢 （答的是通过修改添加config.yml 参数）？</span><br><span class="line">提到过大数据，问了Hive，问了我数据倾斜（表示没听过，就讲了下数据清洗）？</span><br><span class="line">介绍下大数据架构？</span><br><span class="line">介绍下大数据的各组件？</span><br><span class="line">介绍下模型质量评测？</span><br></pre></td></tr></table></figure></li>
 <li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">先看下</span><br></pre></td></tr></table></figure>
 <h4 id="语言-算法"><a href="#语言-算法" class="headerlink" title="语言/算法"></a><strong>语言/算法</strong></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">代码题，列出一个列表中重复的元素?</span><br><span class="line">工作中遇到多进程/多线程的问题？</span><br><span class="line">代码：全排列?</span><br><span class="line">序列号生成的方式？</span><br><span class="line">字典的底层实现方式?</span><br><span class="line">并发和并行的概念，区别?</span><br><span class="line">写代码：字典排序，最长公共前缀?</span><br><span class="line">sort和sorted区别?</span><br><span class="line">了解设计模式吗；?</span><br><span class="line">大概意思：点击一个url，会包含其它url，查找其中包含图片.jpg的所有url?</span><br><span class="line">Python多线程和多进程的性能问题？</span><br><span class="line">最大连续数组的和？</span><br><span class="line">车在停车库丢了，不知道什么时间丢的你要去查监控怎么最快锁定丢车的时间?</span><br><span class="line">python的数据类型有哪些？</span><br><span class="line">1-100个数，无重复 有一个数丢失 高效查找丢失的数？</span><br><span class="line">整型占几个字节、int型数据范围?</span><br><span class="line">分布式环境，1000个子节点全部包含数值型数据 如何查找10个数值最大的？</span><br><span class="line">了解哪些排序算法，哪些是稳定的、哪些是不稳定的?</span><br><span class="line">算法题 两链表相加?</span><br><span class="line">最长不重复子串？</span><br><span class="line">字典、数组、链表、队列、堆栈了解吗?python中数组、队列、堆栈的区别和使用？</span><br><span class="line">coding：最长回文字符串？</span><br><span class="line">数据结构：对称二叉树 ，判断是否是对称二叉树 口述代码，递归的出口，算法的时间复杂度？</span><br><span class="line">科学计数方面的包，介绍用神经网络做的项目，图片分类的算法CNN，介绍CNN，二分类，为什么线性分不了(GBDT)?</span><br><span class="line">动态链接和静态链接?</span><br><span class="line">用什么模型进行分类？</span><br><span class="line">为什么选择CNN而不是SVM等其他的算法分类，选取算法的标准是什么？</span><br><span class="line">选取什么作为机器的输入？</span><br><span class="line">用CNN做了那些调优包括参数的选取方面？</span><br><span class="line">卷积的过程、卷积主要起到了什么作用？卷积的目的是什么？</span><br><span class="line">过拟合和欠拟合的区别？</span><br><span class="line">预防过拟合的方法？</span><br><span class="line">堆和栈的区别？程序运行过程中，什么会存放到栈上，什么会放在堆上？</span><br><span class="line">手撕代码：链表中是否存在环？</span><br><span class="line">python如何倒序输出数组，切片的-1是什么意思</span><br><span class="line">python字典的key能否为数组</span><br><span class="line">python的深拷贝和浅拷贝</span><br><span class="line">python的垃圾回收机制</span><br><span class="line">实现list中的数字组成的数加1，题目是英文的，list形式输出</span><br><span class="line">  举例：</span><br><span class="line">  输入[1,2,3,4] 输出[1,2,3,5]</span><br><span class="line">  输入[9,9,9]  输出[1,0,0,0]</span><br><span class="line">coding：500张牌，每次取走奇数位置的牌，最后剩下一张是多少</span><br><span class="line">测试用例设计 算法题怎么测?</span><br><span class="line">算法 最大连续子数组和？</span><br><span class="line">python 语言特性?</span><br><span class="line">最长无重复子串?</span><br><span class="line">合并两个有序数组?</span><br><span class="line">数组是连续的空间，扩容拷贝是谁做的，具体的原理。扩容的大小？</span><br><span class="line">队列、堆、栈的区别，函数调用另一个函数是用什么数据结构实现的?</span><br><span class="line">python里面有几种锁？</span><br><span class="line">青蛙跳台阶，一次可以跳1或2个台阶，问：N级的台阶总共有多少种跳法？</span><br><span class="line">分析递归方法的时间复杂度（2**n）和空间复杂度（最深路径时为n）？</span><br><span class="line">python单例模式了解嘛（没答出来）、垃圾回收机制?</span><br><span class="line">数据库修改字段语句、sql语句错误或查询慢、牵引出索引?</span><br><span class="line">二叉树知道哪些，完全二叉树、搜索二叉树，平衡二叉树，说一下完全二叉树，说一下搜索二叉树?</span><br><span class="line">手撕代码两道题，一道是判断合理的字符括号，一道是最长的增序子集长度?</span><br><span class="line">python面向对象特性?</span><br><span class="line">你怎么理解多态的?</span><br><span class="line">重载和重写的真实例子?</span><br><span class="line">函数参数传递是怎么传递的?</span><br><span class="line">如果方法中定义了一个基本类型变量和引用变量，他们的生命周期是什么样子的?</span><br><span class="line">静态方法可以访问非静态变量嘛?</span><br><span class="line">非静态方法可以访问静态变量嘛?</span><br><span class="line">静态变量，成员变量储存在哪？</span><br><span class="line">手撕代码：驼峰字符？</span><br><span class="line">力扣第3题无重复字符最长字串？</span><br><span class="line">算法快排?</span><br><span class="line">了解过其他类似Springboot的框架么?</span><br><span class="line">讲下Java和python 对于内存管理的不同?</span><br><span class="line">了解Exception和Error 的区别么?</span><br><span class="line">讲下您遇到的Exeption ?</span><br><span class="line">讲下您遇到的Error?</span><br><span class="line">归并排序？</span><br><span class="line">面向对象七大设计原则；？</span><br><span class="line">不同类型的对象在内存中怎么存储；？</span><br><span class="line">什么是泛型，泛型擦除一定会发生吗？</span><br><span class="line">什么时候服务端会发生大量time_wait和close_wait状态？</span><br><span class="line">手撕算法：实现一个算法，找到两个有序数组所有元素一起的中位数？</span><br><span class="line">知道哪些设计模式，单例模式懒汉式口述一下怎么写，volatile的作用是什么？</span><br><span class="line">手撕代码：KMP字符串匹配算法；？</span><br><span class="line">讲一个定下目标但最终放弃了的经历？</span><br><span class="line">讲一个你最讨厌室友的哪一点？</span><br><span class="line">python的装饰器？</span><br><span class="line">python：列表三个参数，切片和步长？</span><br><span class="line">密集IO型任务应该用多线程还是多进程？</span><br><span class="line">并发怎么控制？</span><br><span class="line">有哪些印象深刻的排序算法？这些算法复杂度是多少？哪些稳定？</span><br><span class="line">对于大数据上百万的数据排序怎么选择排序算法？</span><br><span class="line">堆排序相关？</span><br><span class="line">了解图论的相关知识吗？</span><br><span class="line">讲一讲最短路径、迪杰斯特拉之类的？</span><br><span class="line">hashset、hashmap？应用场景？</span><br><span class="line">两数之和，要求算法复杂度0（N）？</span><br><span class="line">怎么验证是不是o（n）的复杂度？</span><br><span class="line">进程调度算法？</span><br><span class="line">去除一段代码中所有的注释：包括//与/**/?</span><br><span class="line">要考虑//与/**/作为字符串存在的情况?</span><br><span class="line">两数之和=目标值的所有数组下标?</span><br><span class="line">aop的动态代理机制？</span><br><span class="line">n个盘子放m个水果，有多少种可能？</span><br><span class="line">怎么解决幂等的问题？</span><br><span class="line">python的深拷贝、浅拷贝的区别？</span><br><span class="line">python的内存管理机制（垃圾回收+内存池），会追问具体？</span><br><span class="line">GIL锁？</span><br><span class="line">PIL?</span><br><span class="line">可变数据类型，不可变数据类型?</span><br><span class="line">class_method的用途?</span><br><span class="line">Django 请求的过程?</span><br><span class="line">Django,Flask的区别?</span><br><span class="line">  [魔法外卖]</span><br><span class="line">  给定数组nums，长度为n，代表n个外卖的超时时间。外卖员可以花费时间t送一份外卖，一次只能送一份，也可以使用一次魔法不花费时间送一次外卖。</span><br><span class="line">  求要求所有外卖不超时需要的最少使用魔法次数。</span><br><span class="line">  1 &lt;= n &lt;= 1e5, 1 &lt;= t &lt;= 100, 1 &lt;= nums[i] &lt;= 1e7</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  输入：</span><br><span class="line">  6 5</span><br><span class="line">  5 6 7 8 9 10</span><br><span class="line">  输出：</span><br><span class="line">  4</span><br><span class="line">  输入：</span><br><span class="line">  6 5</span><br><span class="line">  101 102 103 104 105 106</span><br><span class="line">  输出：</span><br><span class="line">  0</span><br><span class="line">  代码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  import java.util.*;</span><br><span class="line"></span><br><span class="line">  public class Main &#123;</span><br><span class="line"></span><br><span class="line">      // 贪心策略</span><br><span class="line">      // 第一个t，优先送[t, 2t - 1]的外卖，其次送[2t, 3t - 1]的外卖，以此类推</span><br><span class="line">      // 第二个t，优先送[2t, 3t - 1]的外卖，其次送[3t, 4t - 1]的外卖，以此类推</span><br><span class="line">      // ...</span><br><span class="line">      public static int minOps(int[] nums, int t) &#123;</span><br><span class="line">          int max = 0;</span><br><span class="line">          int ans = 0;</span><br><span class="line">          // 有序表中存储第key个t，优先处理的外卖个数</span><br><span class="line">          // 如[5,6,7,8,9,10],t=5</span><br><span class="line">          // map里存放&#123;1=5,2=1&#125;</span><br><span class="line">          TreeMap&lt;Integer, Integer&gt; map = new TreeMap&lt;&gt;();</span><br><span class="line">          <span class="keyword">for</span> (int num : nums) &#123;</span><br><span class="line">              map.put(num / t, map.getOrDefault(num / t, 0) + 1);</span><br><span class="line">              max = Math.max(max, num);</span><br><span class="line">          &#125;</span><br><span class="line">          int cur = t;</span><br><span class="line">          <span class="keyword">while</span> (cur &lt; max + 1) &#123;</span><br><span class="line">              int num = cur / t;</span><br><span class="line">              Integer next = map.ceilingKey(num); // 找到第num个t优先处理的外卖</span><br><span class="line">              <span class="keyword">if</span> (next != null) &#123;</span><br><span class="line">                  map.put(next, map.get(next) - 1);</span><br><span class="line">                  <span class="keyword">if</span> (map.get(next) == 0) &#123;</span><br><span class="line">                      map.remove(next);</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">              cur += t;</span><br><span class="line">          &#125;</span><br><span class="line">          // 能处理的外卖已经被处理了，剩下的只能用魔法处理</span><br><span class="line">          <span class="keyword">for</span> (Integer value : map.values()) &#123;</span><br><span class="line">              ans += value;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="built_in">return</span> ans;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      public static void main(String[] args) &#123;</span><br><span class="line">          Scanner sc = new Scanner(System.in);</span><br><span class="line">          int n = sc.nextInt();</span><br><span class="line">          int t = sc.nextInt();</span><br><span class="line">          int[] nums = new int[n];</span><br><span class="line">          <span class="keyword">for</span> (int i = 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">              nums[i] = sc.nextInt();</span><br><span class="line">          &#125;</span><br><span class="line">          System.out.println(minOps(nums, t));</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  第二题</span><br><span class="line">  [扑克]</span><br><span class="line">  有n张纸牌，点数为1-n，每次将堆顶的牌拿两张放到堆底，然后取出堆顶的牌记录点数，操作完所有的牌后，会记下一个序列，根据这个序列还原最初的序列。</span><br><span class="line">  1 &lt;= n &lt;= 100000</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  输入</span><br><span class="line">  4</span><br><span class="line">  1 2 3 4</span><br><span class="line">  输出</span><br><span class="line">  4 2 1 3</span><br><span class="line">  思路：按照题目要求反向模拟即可。</span><br><span class="line"></span><br><span class="line">  代码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  import java.util.*;</span><br><span class="line"></span><br><span class="line">  public class Main &#123;</span><br><span class="line"></span><br><span class="line">      public static void main(String[] args) &#123;</span><br><span class="line">          Scanner sc = new Scanner(System.in);</span><br><span class="line">          int n = sc.nextInt();</span><br><span class="line">          int[] nums = new int[n];</span><br><span class="line">          <span class="keyword">for</span> (int i = 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">              nums[i] = sc.nextInt();</span><br><span class="line">          &#125;</span><br><span class="line">          Deque&lt;Integer&gt; deque = new ArrayDeque&lt;&gt;();</span><br><span class="line">          <span class="keyword">for</span> (int i = n - 1; i &gt;= 0; i--) &#123;</span><br><span class="line">              deque.addFirst(nums[i]);</span><br><span class="line">              int num = deque.pollLast();</span><br><span class="line">              deque.addFirst(num);</span><br><span class="line">              num = deque.pollLast();</span><br><span class="line">              deque.addFirst(num);</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">while</span> (!deque.isEmpty()) &#123;</span><br><span class="line">              System.out.print(deque.pollFirst() + <span class="string">&quot; &quot;</span>);</span><br><span class="line">          &#125;</span><br><span class="line">          System.out.println();</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">怎么修改元组?</span><br><span class="line">算法题，找到最后一个不重复字符?</span><br><span class="line">Restful 风格,什么是OpenAI?</span><br><span class="line">selenium等待?</span><br><span class="line">pytest,pass,fail,error的区别?</span><br><span class="line">abcde * 4 = edcba，求各个字母代表多少?</span><br><span class="line">深浅copy?</span><br><span class="line">垃圾回收机制（这里深问了，针对每种机制，提出自己的改进措施，回答的有点乱）?</span><br><span class="line">删除有序链表中重复的元素-II?</span><br><span class="line">顺序表和链表有什么区别？</span><br><span class="line">冒泡排序的时间复杂度，为什么是这个时间复杂度？（其实就是考察冒泡的思想）？</span><br><span class="line">算法：IEDA写反转链表、二叉树后序遍历？</span><br></pre></td></tr></table></figure></li>
 <li><strong>答案</strong></li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答：【腾讯文档】算法题①https://docs.qq.com/doc/DSVNFRU5BU3pCZ2hh</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答：【腾讯文档】算法题①https://docs.qq.com/doc/DSVNFRU5BU3pCZ2hh</span><br><span class="line"></span><br><span class="line">答②：多进程/线程：工作中主要是UI自动化，多设备执行的场景；客户端性能，monkey，资源采集多设备的场景会用到多进程；只所以这样是因为Python多线程，有gil（全局解释器锁，这是互斥锁），同时只能有一个线程能拿到锁，只能使用多核设备的一个核进行上下文切换，本质上没有并发（cpython有此机制，jpython没有）；多进程使用的模块multiprocessing模块（进程池/管道/队列/遍历）</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h4 id="管理协作"><a href="#管理协作" class="headerlink" title="管理协作"></a><strong>管理协作</strong></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">如果让我从头搭建一个团队 我将从哪几个方面开始规划?</span><br><span class="line">我的领导与下属怎么评价我 ?</span><br></pre></td></tr></table></figure>
 <ul>
-<li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答①：团队是为公司战略服务的，因此需要基于战略来规划团队；从以下方面考虑；</span><br><span class="line">规划：理解公司的战略规划，拆解到具体自己所在的组，明确负责组的短长期的职责和规划；基于规划来分配资源；</span><br><span class="line">成本：提前做好预算和成本把控，和公司财务及管理层，协商；</span><br><span class="line">资源：引入合适的人员（考虑人员风格、专业能力、性格、协作能力、解决复杂问题的能力、价值观是否是公司需要的）；</span><br><span class="line">运营：根据当前的项目、战略和资源情况，制定合适的OKR；用来运营管理人员，坚持价值驱动，一起成长的理念；本着公正、尊重、包容、身体力行的态度，做好先行者工作；</span><br><span class="line">工具：运用好管理/评测/统计类工具，使团队的工作运营能实现数字化、透明、提升团队的效率；</span><br><span class="line">迭代：做好团队的成长规划，和公司战略结合；坚持能者上，不能者下的公平原则；和业务结合，做好引导创新的工作；设计好合理的协作，优化机制。针对问题及时优化处理；</span><br></pre></td></tr></table></figure>
+<li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答①：团队是为公司战略服务的，因此需要基于战略来规划团队；从以下方面考虑；</span><br><span class="line">规划：理解公司的战略规划，拆解到具体自己所在的组，明确负责组的短长期的职责和规划；基于规划来分配资源；</span><br><span class="line">成本：提前做好预算和成本把控，和公司财务及管理层，协商；</span><br><span class="line">资源：引入合适的人员（考虑人员风格、专业能力、性格、协作能力、解决复杂问题的能力、价值观是否是公司需要的）；</span><br><span class="line">运营：根据当前的项目、战略和资源情况，制定合适的OKR；用来运营管理人员，坚持价值驱动，一起成长的理念；本着公正、尊重、包容、身体力行的态度，做好先行者工作；</span><br><span class="line">工具：运用好管理/评测/统计类工具，使团队的工作运营能实现数字化、透明、提升团队的效率；</span><br><span class="line">迭代：做好团队的成长规划，和公司战略结合；坚持能者上，不能者下的公平原则；和业务结合，做好引导创新的工作；设计好合理的协作，优化机制。针对问题及时优化处理；</span><br><span class="line"></span><br><span class="line">答②：这个问题比较复杂；考虑从上级管理/成绩/协作/风格，同时这是个匹配度问题；</span><br><span class="line">我想一下，团队之间，关系还比较亲密；除了工作私下也经常联系，会一起玩；对我的评价，我的上级莉姐，有说个几个方面吧（情商不高，太实诚，和外部对接的时候容易承诺别人，主动去抗责任；踏实，但不擅长表现工作的价值吧，不懂上级的需求吧（主要是他觉得我的PPT做的很差，向上级汇报的ppt,我记的最多的他让我改了近二十次）；同事反馈的最多的，除了上面的这两种，有时候他们会觉得我有点话痨吧；）</span><br></pre></td></tr></table></figure>
 <h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a><strong>其他</strong></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">对我们公司了解?知道和现在的公司多达区别？为什么选择我们公司？</span><br><span class="line">离职原因？</span><br><span class="line">从技术角度我给现在的公司带来了哪些改变，我为公司提供了什么价值？</span><br><span class="line">自我介绍 英文？</span><br><span class="line">为什么做测试？为什么不做开发？</span><br><span class="line">为什么要做测开，对测开的理解？</span><br><span class="line">对团队有什么价值?在团队中的职责、做了哪些事情?</span><br><span class="line">自我介绍？</span><br><span class="line">项目介绍？</span><br><span class="line">怎么自学的？</span><br><span class="line">项目、扮演什么角色？</span><br><span class="line">对新岗位的期望？</span><br><span class="line">如果你遇到一个bug，研发不承认，你怎么操作?</span><br><span class="line">印象最深的一个Bug?</span><br><span class="line">目前薪资，期望薪资?</span><br><span class="line">职业规划?</span><br></pre></td></tr></table></figure></li>
-<li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答①：风格、价值观的问题（以shein举例）；有一定的了解，了解到公司是做海外电商的，主要做快时尚服饰产品，现在在向电商平台迈进；美国是公司最大的市场，去年的营业额超过了300亿美金；很认可公司的价值观，客户至上，全力以赴，快速反映、融合协作、创新；之所以选择公司，是因为公司盛名远播，在快速发展，个人有很好的发展机会；公司和自己比较匹配，因为我也是做海外市场的，很认可公司的企业文化，来之前通过朋友也了解过团队的氛围，这也是我很喜欢的一点；</span><br></pre></td></tr></table></figure></li>
+<li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答①：风格、价值观的问题（以shein举例）；有一定的了解，了解到公司是做海外电商的，主要做快时尚服饰产品，现在在向电商平台迈进；美国是公司最大的市场，去年的营业额超过了300亿美金；很认可公司的价值观，客户至上，全力以赴，快速反映、融合协作、创新；之所以选择公司，是因为公司盛名远播，在快速发展，个人有很好的发展机会；公司和自己比较匹配，因为我也是做海外市场的，很认可公司的企业文化，来之前通过朋友也了解过团队的氛围，这也是我很喜欢的一点；</span><br><span class="line"></span><br><span class="line">答②：离职原因（实话实说，侧重客观）</span><br></pre></td></tr></table></figure></li>
 </ul>
 ]]></content>
       <categories>
