@@ -556,6 +556,12 @@
       </tags>
   </entry>
   <entry>
+    <title>uwnc</title>
+    <url>/posts/3de87ac/</url>
+    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>ui自动化分布式并行运算</title>
     <url>/posts/2be91958/</url>
     <content><![CDATA[<p><a href="https://cloud.tencent.com/developer/article/1974105">Gird</a></p>
@@ -566,39 +572,6 @@
       <tags>
         <tag>UI</tag>
         <tag>gird</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>uwnc</title>
-    <url>/posts/3de87ac/</url>
-    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>优秀博客</title>
-    <url>/posts/bb158cde/</url>
-    <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ul>
-<li><a href="https://cloud.tencent.com/developer/article/1974105">自动化专家</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/3335805/activities">性能</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/1011618/activities">腾讯性能优化</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/1016462">腾讯测开</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/2059614">测开</a></li>
-</ul>
-<span id="more"></span>
-
-<h1 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h1><ul>
-<li><a href="https://cloud.tencent.com/developer/user/2398817/inventories">python</a></li>
-<li><a href="https://www.cnblogs.com/vamei/tag/Python/">行业大佬python教程</a></li>
-</ul>
-<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
-<li><a href="https://cloud.tencent.com/developer/user/1642192">K8S腾讯专家</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
       </tags>
   </entry>
   <entry>
@@ -661,16 +634,31 @@
       </tags>
   </entry>
   <entry>
-    <title>估值体系</title>
-    <url>/posts/daef770e/</url>
-    <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的扣非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
+    <title>优秀博客</title>
+    <url>/posts/bb158cde/</url>
+    <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ul>
+<li><a href="https://cloud.tencent.com/developer/article/1974105">自动化专家</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/3335805/activities">性能</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/1011618/activities">腾讯性能优化</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/1016462">腾讯测开</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/2059614">测开</a></li>
+</ul>
 <span id="more"></span>
 
-<h2 id="理念"><a href="#理念" class="headerlink" title="理念"></a>理念</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">高收益的前提是持续稳定的复利，即好企业是时间的朋友，坏企业是时间的敌人；</span><br><span class="line">30pe是合理估值的上限，这是由无风险收益率决定的，如果在高，买入收益就低于无风险收益率了；同理合理估值一般给到20-25，而我不买25倍以上的企业(这想法绝对是错的。只关乎个人的安全边际)；</span><br><span class="line">股权和债券的差异，主要体现在确定性和成长里；股市需要利用成长优势抵消不确定性；</span><br><span class="line">收益率=利润/本金（股价）=1/pe；合理估值的锚其实就是无风险收益率（1/无风险收益率）；</span><br><span class="line">无分红公司的净资产收益率=净利润增速（可能净利润要打折）；</span><br><span class="line">分红在投入公司的净资产真实收益率=roe(1/pb*分红金额比例+留存金额比例)；</span><br><span class="line">年化收益率=年份√总收益率；</span><br><span class="line">由收益率公式可知；收益率一般不会超过净利润增速（仅当市净率低于1时超过，但这种现金流会受负债等因素损耗）；且要提高投资收益率，只有提高净利润的增速、降低分红比例、在分红比例固定时则只有降低pb也就是估值才能有效提高收益率；</span><br></pre></td></tr></table></figure>
-
-<h2 id="买卖"><a href="#买卖" class="headerlink" title="买卖"></a>买卖</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">理想买点：三年后合理估值*0.5</span><br><span class="line">理想卖点：min(动态市盈率50,三年后合理估值150%)</span><br><span class="line"></span><br><span class="line">买操作：20-25倍区间都能买，仅茅台在25倍pe以上买入;到达理想买点时，分三批买完剩余资金（理想买点/理想买点-5%/理想买点-10%）</span><br><span class="line">卖操作：当年预计净利润的50/55/60三次清空；（买卖点是唐朝基于无风险收益率计算，正常超出合理估值都能卖，50%其实是预留的安全边际）</span><br><span class="line">三年后合理估值=三年后预估净利率*25（具体企业具体分析，也就是pe的中分位）</span><br><span class="line"></span><br><span class="line">全指数基金买/卖点：基于无风险收益率来，但是由于不确定性，要做净利润折算，需要进行等比例折算，折算区间在5-7折</span><br><span class="line">买点：12-15pe</span><br><span class="line">卖点：25-35pe</span><br><span class="line"></span><br><span class="line">♥卖出后买全指还是留现金取决于无风险收益率（一般2倍无风险收益率即可买pe=1/无风险收益率*2，全指唐朝仅关注沪深300/恒生指数/标普500/纳斯达克100）</span><br><span class="line">♥其他时间：企业逻辑未变时，低于买点买，高于卖点卖，其他时间坐等；但需要遵循单股不超40%原则，即三五个行业，七八家公司；</span><br><span class="line">♥不要严格按买卖价来，要接受错误和风险；确定性高的企业，越偏向合理估值之下就买，确定性低的企业越偏向理想买点才买，唐朝的理念是理想买点位置一定要买完资金；</span><br></pre></td></tr></table></figure>
-
-<h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">♥腾讯+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以300均价，买入6手；高溢价时，优先使用中概换腾讯（中概大部分公司不盈利）</span><br><span class="line">1️⃣理想买点：328</span><br><span class="line">2️⃣理想卖点：1年内720</span><br><span class="line">3️⃣纳指买点：21pe</span><br><span class="line">4️⃣纳指卖点：35pe</span><br><span class="line"></span><br><span class="line">♥银行+家电25%：计划100k,余量16k</span><br><span class="line">已持仓84k,其中家电50k&#x2F;银行34k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右，招商计划以28均价，买入5手</span><br><span class="line">2️⃣美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">3️⃣格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34</span><br><span class="line"></span><br><span class="line">♥消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利20k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣五粮液150快,理想买点150&#x2F;143&#x2F;135</span><br><span class="line">2️⃣伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下；此刻的分红在投资收益率为9.56%；</span><br><span class="line"></span><br><span class="line">♥医药10%：计划40k,余量3k</span><br><span class="line">已持仓37k,其中恒瑞20k&#x2F;ETF17K</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣恒瑞按50倍市盈率20.07%净利润增长，卖点60（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">2️⃣300医药ETF计划0.42，买入7000个，卖点为0.7以上，对应300医药指数50倍以上的估值</span><br><span class="line">医药需要恒瑞和etf实现高低互换，高换低；</span><br></pre></td></tr></table></figure>]]></content>
+<h1 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h1><ul>
+<li><a href="https://cloud.tencent.com/developer/user/2398817/inventories">python</a></li>
+<li><a href="https://www.cnblogs.com/vamei/tag/Python/">行业大佬python教程</a></li>
+</ul>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
+<li><a href="https://cloud.tencent.com/developer/user/1642192">K8S腾讯专家</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+      </tags>
   </entry>
   <entry>
     <title>传音刷机</title>
@@ -732,6 +720,18 @@
 <li><strong>痛点</strong></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>估值体系</title>
+    <url>/posts/daef770e/</url>
+    <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的扣非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
+<span id="more"></span>
+
+<h2 id="理念"><a href="#理念" class="headerlink" title="理念"></a>理念</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">高收益的前提是持续稳定的复利，即好企业是时间的朋友，坏企业是时间的敌人；</span><br><span class="line">30pe是合理估值的上限，这是由无风险收益率决定的，如果在高，买入收益就低于无风险收益率了；同理合理估值一般给到20-25，而我不买25倍以上的企业(这想法绝对是错的。只关乎个人的安全边际)；</span><br><span class="line">股权和债券的差异，主要体现在确定性和成长里；股市需要利用成长优势抵消不确定性；</span><br><span class="line">收益率=利润/本金（股价）=1/pe；合理估值的锚其实就是无风险收益率（1/无风险收益率）；</span><br><span class="line">无分红公司的净资产收益率=净利润增速（可能净利润要打折）；</span><br><span class="line">分红在投入公司的净资产真实收益率=roe(1/pb*分红金额比例+留存金额比例)；</span><br><span class="line">年化收益率=年份√总收益率；</span><br><span class="line">由收益率公式可知；收益率一般不会超过净利润增速（仅当市净率低于1时超过，但这种现金流会受负债等因素损耗）；且要提高投资收益率，只有提高净利润的增速、降低分红比例、在分红比例固定时则只有降低pb也就是估值才能有效提高收益率；</span><br></pre></td></tr></table></figure>
+
+<h2 id="买卖"><a href="#买卖" class="headerlink" title="买卖"></a>买卖</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">理想买点：三年后合理估值*0.5</span><br><span class="line">理想卖点：min(动态市盈率50,三年后合理估值150%)</span><br><span class="line"></span><br><span class="line">买操作：20-25倍区间都能买，仅茅台在25倍pe以上买入;到达理想买点时，分三批买完剩余资金（理想买点/理想买点-5%/理想买点-10%）</span><br><span class="line">卖操作：当年预计净利润的50/55/60三次清空；（买卖点是唐朝基于无风险收益率计算，正常超出合理估值都能卖，50%其实是预留的安全边际）</span><br><span class="line">三年后合理估值=三年后预估净利率*25（具体企业具体分析，也就是pe的中分位）</span><br><span class="line"></span><br><span class="line">全指数基金买/卖点：基于无风险收益率来，但是由于不确定性，要做净利润折算，需要进行等比例折算，折算区间在5-7折</span><br><span class="line">买点：12-15pe</span><br><span class="line">卖点：25-35pe</span><br><span class="line"></span><br><span class="line">♥卖出后买全指还是留现金取决于无风险收益率（一般2倍无风险收益率即可买pe=1/无风险收益率*2，全指唐朝仅关注沪深300/恒生指数/标普500/纳斯达克100）</span><br><span class="line">♥其他时间：企业逻辑未变时，低于买点买，高于卖点卖，其他时间坐等；但需要遵循单股不超40%原则，即三五个行业，七八家公司；</span><br><span class="line">♥不要严格按买卖价来，要接受错误和风险；确定性高的企业，越偏向合理估值之下就买，确定性低的企业越偏向理想买点才买，唐朝的理念是理想买点位置一定要买完资金；</span><br></pre></td></tr></table></figure>
+
+<h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">♥腾讯+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以300均价，买入6手；高溢价时，优先使用中概换腾讯（中概大部分公司不盈利）</span><br><span class="line">1️⃣理想买点：328</span><br><span class="line">2️⃣理想卖点：1年内720</span><br><span class="line">3️⃣纳指买点：21pe</span><br><span class="line">4️⃣纳指卖点：35pe</span><br><span class="line"></span><br><span class="line">♥银行+家电25%：计划100k,余量16k</span><br><span class="line">已持仓84k,其中家电50k&#x2F;银行34k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右，招商计划以28均价，买入5手</span><br><span class="line">2️⃣美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">3️⃣格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34</span><br><span class="line"></span><br><span class="line">♥消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利20k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣五粮液150快,理想买点150&#x2F;143&#x2F;135</span><br><span class="line">2️⃣伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下；此刻的分红在投资收益率为9.56%；</span><br><span class="line"></span><br><span class="line">♥医药10%：计划40k,余量3k</span><br><span class="line">已持仓37k,其中恒瑞20k&#x2F;ETF17K</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣恒瑞按50倍市盈率20.07%净利润增长，卖点60（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">2️⃣300医药ETF计划0.42，买入7000个，卖点为0.7以上，对应300医药指数50倍以上的估值</span><br><span class="line">医药需要恒瑞和etf实现高低互换，高换低；</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>全局函数局部函数</title>
@@ -996,21 +996,6 @@
       </tags>
   </entry>
   <entry>
-    <title>常用app测试工具</title>
-    <url>/posts/28eebda3/</url>
-    <content><![CDATA[<h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
-<span id="more"></span>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">参考回答：</span><br><span class="line">功能测试自动化</span><br><span class="line">a) 轻量接口自动化测试</span><br><span class="line"></span><br><span class="line">jmeter，</span><br><span class="line"></span><br><span class="line">b) APP UI层面的自动化</span><br><span class="line"></span><br><span class="line">android：UI Automator Viewer，Android Junit，Instrumentation，UIAutomator，</span><br><span class="line"></span><br><span class="line">iOS:基于Instrument的iOS UI自动化，</span><br><span class="line"></span><br><span class="line">性能测试</span><br><span class="line"></span><br><span class="line">a) Web前端性能测试</span><br><span class="line"></span><br><span class="line">网络抓包工具：Wireshark</span><br><span class="line"></span><br><span class="line">网页文件大小</span><br><span class="line"></span><br><span class="line">webpagetest</span><br><span class="line"></span><br><span class="line">pagespeed insight</span><br><span class="line"></span><br><span class="line">chrome adb</span><br><span class="line"></span><br><span class="line">b) APP端性能测试</span><br><span class="line"></span><br><span class="line">Android内存占用分析：MAT</span><br><span class="line"></span><br><span class="line">iOS内存问题分析：ARC模式</span><br><span class="line"></span><br><span class="line">Android WebView性能分析：</span><br><span class="line"></span><br><span class="line">iOS WebView性能分析</span><br><span class="line"></span><br><span class="line">c) 后台服务性能测试</span><br><span class="line"></span><br><span class="line">负载，压力，耐久性</span><br><span class="line"></span><br><span class="line">可拓展性，基准</span><br><span class="line"></span><br><span class="line">工具：apacheAB，Jmeter，LoadRunner，</span><br><span class="line"></span><br><span class="line">专项测试</span><br><span class="line"></span><br><span class="line">a) 兼容性测试</span><br><span class="line"></span><br><span class="line">手工测试：操作系统，分辨率，rom，网络类型</span><br><span class="line"></span><br><span class="line">云平台：testin，脚本编写，Android。</span><br><span class="line"></span><br><span class="line">b) 流量测试</span><br><span class="line"></span><br><span class="line">Android自带的流量管理，</span><br><span class="line"></span><br><span class="line">iOS自带的Network</span><br><span class="line"></span><br><span class="line">tcpdump抓包</span><br><span class="line"></span><br><span class="line">WiFi代理抓包：Fiddler</span><br><span class="line"></span><br><span class="line">流量节省方法：压缩数据，json优于xml；WebP优于传统的JPG，PNG；控制访问的频次；只获取必要的数据；缓存；</span><br><span class="line"></span><br><span class="line">c) 电量测试</span><br><span class="line"></span><br><span class="line">基于测试设备的方法，购买电量表进行测试。</span><br><span class="line"></span><br><span class="line">GSam Battery Monitoe Pro</span><br><span class="line"></span><br><span class="line">iOS基于Instrument Energy工具</span><br><span class="line"></span><br><span class="line">d) 弱网络测试</span><br><span class="line"></span><br><span class="line">手机自带的网络状况模拟工具</span><br><span class="line"></span><br><span class="line">基于代理的弱网络的模拟:</span><br><span class="line"></span><br><span class="line">工具：windows：Network Delay Simulator</span><br><span class="line"></span><br><span class="line">Mac：Network Link Conditioner</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>app测试</tag>
-        <tag>工具</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>广告--大数据模型测试</title>
     <url>/posts/d775e226/</url>
     <content><![CDATA[<p><code>模型是程序化广告的灵魂，决定着广告的点击和转化，直接影响收入；而模型由于复杂度高，标签/数据量大，是广告测试的难点，一般意义上，测试是不负责模型质量的，仅对模型中的一些定向/过滤逻辑做覆盖，模型有效性测试，模型工程师一般是通过灰度/ab测试来实现自测的，这种自我监督的实现方式有着明显缺陷，故本次对过往模型测试方面的记录，做下总结</code></p>
@@ -1051,9 +1036,54 @@
       </tags>
   </entry>
   <entry>
-    <title>数据库性能测试</title>
-    <url>/posts/ab3091af/</url>
-    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
+    <title>常用app测试工具</title>
+    <url>/posts/28eebda3/</url>
+    <content><![CDATA[<h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">参考回答：</span><br><span class="line">功能测试自动化</span><br><span class="line">a) 轻量接口自动化测试</span><br><span class="line"></span><br><span class="line">jmeter，</span><br><span class="line"></span><br><span class="line">b) APP UI层面的自动化</span><br><span class="line"></span><br><span class="line">android：UI Automator Viewer，Android Junit，Instrumentation，UIAutomator，</span><br><span class="line"></span><br><span class="line">iOS:基于Instrument的iOS UI自动化，</span><br><span class="line"></span><br><span class="line">性能测试</span><br><span class="line"></span><br><span class="line">a) Web前端性能测试</span><br><span class="line"></span><br><span class="line">网络抓包工具：Wireshark</span><br><span class="line"></span><br><span class="line">网页文件大小</span><br><span class="line"></span><br><span class="line">webpagetest</span><br><span class="line"></span><br><span class="line">pagespeed insight</span><br><span class="line"></span><br><span class="line">chrome adb</span><br><span class="line"></span><br><span class="line">b) APP端性能测试</span><br><span class="line"></span><br><span class="line">Android内存占用分析：MAT</span><br><span class="line"></span><br><span class="line">iOS内存问题分析：ARC模式</span><br><span class="line"></span><br><span class="line">Android WebView性能分析：</span><br><span class="line"></span><br><span class="line">iOS WebView性能分析</span><br><span class="line"></span><br><span class="line">c) 后台服务性能测试</span><br><span class="line"></span><br><span class="line">负载，压力，耐久性</span><br><span class="line"></span><br><span class="line">可拓展性，基准</span><br><span class="line"></span><br><span class="line">工具：apacheAB，Jmeter，LoadRunner，</span><br><span class="line"></span><br><span class="line">专项测试</span><br><span class="line"></span><br><span class="line">a) 兼容性测试</span><br><span class="line"></span><br><span class="line">手工测试：操作系统，分辨率，rom，网络类型</span><br><span class="line"></span><br><span class="line">云平台：testin，脚本编写，Android。</span><br><span class="line"></span><br><span class="line">b) 流量测试</span><br><span class="line"></span><br><span class="line">Android自带的流量管理，</span><br><span class="line"></span><br><span class="line">iOS自带的Network</span><br><span class="line"></span><br><span class="line">tcpdump抓包</span><br><span class="line"></span><br><span class="line">WiFi代理抓包：Fiddler</span><br><span class="line"></span><br><span class="line">流量节省方法：压缩数据，json优于xml；WebP优于传统的JPG，PNG；控制访问的频次；只获取必要的数据；缓存；</span><br><span class="line"></span><br><span class="line">c) 电量测试</span><br><span class="line"></span><br><span class="line">基于测试设备的方法，购买电量表进行测试。</span><br><span class="line"></span><br><span class="line">GSam Battery Monitoe Pro</span><br><span class="line"></span><br><span class="line">iOS基于Instrument Energy工具</span><br><span class="line"></span><br><span class="line">d) 弱网络测试</span><br><span class="line"></span><br><span class="line">手机自带的网络状况模拟工具</span><br><span class="line"></span><br><span class="line">基于代理的弱网络的模拟:</span><br><span class="line"></span><br><span class="line">工具：windows：Network Delay Simulator</span><br><span class="line"></span><br><span class="line">Mac：Network Link Conditioner</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>app测试</tag>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>性能测试--总述</title>
+    <url>/posts/28d322d/</url>
+    <content><![CDATA[<p><code>性能测试是一个很大的话题；包含客户端、服务端性能、各中间件的性能；一般来说只要有io操作，可能存在压力的场景都可能出现性能瓶颈；同时性能测试是整个质量体系最为重要的几个专项之一，性能会影响用户体验，服务的稳定性，好的性能架构能有效的节省成本（机器）；性能的原理，是通过模拟压力来对业务场景建模，然后监控性能指标，分析数据，得出性能结论，验证问题或结论，并总结成方法论；</code></p>
+<h1 id="性能流程"><a href="#性能流程" class="headerlink" title="性能流程"></a>性能流程</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">需求分析</span><br><span class="line">设计方案</span><br><span class="line">准备环境</span><br><span class="line">构造数据</span><br><span class="line">业务建模</span><br><span class="line">执行监控</span><br><span class="line">分析优化</span><br><span class="line">结论并验证</span><br><span class="line">方法论落地</span><br></pre></td></tr></table></figure>
+
+<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p><code>分析性能需求；基于需求做后续的性能工作；这里要明白，性能测试是基于目的+架构+风险的专项测试；常见的性能需求场景如下：</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">线上出现性能问题，需定位解决；</span><br><span class="line">大促活动等端时高性能需求，需评估性能；</span><br><span class="line">容量规划；</span><br></pre></td></tr></table></figure>
+
+<h2 id="设计方案"><a href="#设计方案" class="headerlink" title="设计方案"></a>设计方案</h2><p><code>不同性能需求，出发点不一样，故着重点也不一样；设计方案要解决几个问题：</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">是什么：测试对象分析（业务/设计/架构）；测试合规指标的制定（预期性能指标（TPS/TIME/性能指标））/性能方案（建模/覆盖/监控/卡点）；人员规划（参与人员/权责/容量成本/时间）；</span><br><span class="line">怎么样：先和业务方（发起方）沟通确定目标、预期这些；同步给相关角色，让他们了解并提前准备；开会同步，确认；</span><br></pre></td></tr></table></figure>
+<p><strong>具体实施如下：</strong></p>
+<h2 id="性能标准"><a href="#性能标准" class="headerlink" title="性能标准"></a>性能标准</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用：可以基于单节点的性能数据和线上比对，判断性能环境的仿真度；卡点、性能指标，超出阈值，则触发异常分析流程；确定一个优化目标，决定什么时候结束；</span><br><span class="line">依据：当前压力，增长、预期情况（二八原则）；竞品的性能数据；线上的性能表现（最近一年峰值，最近三月&#x2F;半年的平均增长率，预估一个1.5年后的压力数据，作为tps预期值）；</span><br><span class="line">具体：QPS达到300&#x2F;top50响应时间不能超过500ms，最大响应时间不能超过2s,平均响应时间200ms以内；（不基于业务和线上数据设计的这个标准并无意义）</span><br></pre></td></tr></table></figure>
+<h2 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h2><p><code>环境最重要的一点是有效性，需要兼顾效果和成本；设计原则如下：</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">能用线上环境最优；能兼顾真实性和成本；但需要做好隔离、监控、卡点、恢复，这需要架构支持这种能力，会增加架构和代码设计成本；</span><br><span class="line">维护一个最小集群的云服务的性能镜像环境；优点是和线上隔离了，缺点需要定时同步服务数据，也需要做好隔离和拦截，需要确定有效性；</span><br><span class="line">测试环境做为性能环境；这种基本没有有效性，而且无法量化，只能单纯用来定位问题，但至少也要做到路由控制，持续集成和微服务；</span><br></pre></td></tr></table></figure>
+<h2 id="构造数据"><a href="#构造数据" class="headerlink" title="构造数据"></a>构造数据</h2><p><code>造数，需要根据业务特征、设计、数据特点来，常见的造数的方式：</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">线上快照</span><br><span class="line">代码批量生成</span><br><span class="line">随机数据</span><br></pre></td></tr></table></figure>
+<h2 id="业务建模"><a href="#业务建模" class="headerlink" title="业务建模"></a>业务建模</h2><p><code>有两块需要考虑；分析需要覆盖的施压对象，然后仿真施压，具体如下：</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">用户仿真：通过jmeter来仿真施压；施压策略需要考虑（预热、思考时间、分布式施压、依赖数据io对性能影响）；施压方式有两种按固定压力（并发）；按定量的处理能力（TPS）</span><br><span class="line"></span><br><span class="line">IO施压：</span><br><span class="line">MYSQL施压：sysbench(覆盖只读模式/读写混合模式/走或不走索引的模式)</span><br><span class="line">监控：</span><br><span class="line">Redis施压：工具redis-benchmark</span><br></pre></td></tr></table></figure>
+<h2 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h2><ul>
+<li><a href="https://mp.weixin.qq.com/s/9IEwcYKUy4DeDg6E2hVLTw">MySQL监控</a><ul>
+<li><a href="https://mp.weixin.qq.com/s/TjF8stG8UhBm_TZAaChbTA">命令</a></li>
+</ul>
+</li>
+<li>[redis监控]（监控平台）<ul>
+<li>[监控命令]（哨兵模式/命令）</li>
+</ul>
+</li>
+<li><a href="https://mp.weixin.qq.com/s/UHaCLhiIyLYVrba-nEUONA">pprof可视化工具+热力图</a></li>
+</ul>
+<h2 id="分析优化"><a href="#分析优化" class="headerlink" title="分析优化"></a>分析优化</h2><p><code>分压，动态均衡分配机制，时间换空间，常见的分析优化策略如下：</code></p>
+<p><img src="/text_image/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.png" alt="alt text"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">方向：架构、设计、容灾、代码、网络、存储、安全</span><br><span class="line">缓存策略</span><br></pre></td></tr></table></figure>
+<h3 id="常见问题："><a href="#常见问题：" class="headerlink" title="常见问题："></a>常见问题：</h3><p>1、广告请求接口耗时过长问题（原因。服务端和大数据过滤策略重叠,redis查询耗时问题）<br>2、网关接口压力太大太重，拆分<br>3、<br><a href="https://mp.weixin.qq.com/s/1Tu0jLK9GfPry_HxP079Lw">性能优化大纲</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -1066,6 +1096,18 @@
 <ul>
 <li>related_posts: true</li>
 </ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>数据库性能测试</title>
+    <url>/posts/ab3091af/</url>
+    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>用例管理平台</title>
+    <url>/posts/c48e9a83/</url>
+    <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -1121,25 +1163,6 @@
       <tags>
         <tag>混沌工程</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>用例管理平台</title>
-    <url>/posts/c48e9a83/</url>
-    <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>百度质量体系建设</title>
-    <url>/posts/bcd76c52/</url>
-    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
-<li><em><strong>介绍</strong></em></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>目录</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>稳定性治理--智能遍历</title>
@@ -1487,6 +1510,73 @@
       </tags>
   </entry>
   <entry>
+    <title>百度质量体系建设</title>
+    <url>/posts/bcd76c52/</url>
+    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
+<li><em><strong>介绍</strong></em></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>目录</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>类对象/实例对象/类方法/实例方法/静态方法</title>
+    <url>/posts/93899372/</url>
+    <content><![CDATA[<ul>
+<li><strong>类对象</strong></li>
+</ul>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A(object):</span><br><span class="line">    def m1(self, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br><span class="line"></span><br><span class="line">    @classmethod</span><br><span class="line">    def m2(cls, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br><span class="line">    @staticmethod</span><br><span class="line">    def m3(n):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.m1(1) <span class="comment"># self: &lt;__main__.A object at 0x000001E596E41A90&gt;</span></span><br><span class="line">A.m2(1) <span class="comment"># cls: &lt;class &#x27;__main__.A&#x27;&gt;</span></span><br><span class="line">A.m3(1)</span><br><span class="line"></span><br><span class="line">按顺序执行时，执行class A（）创建了A这个类对象</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>实例对象</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">a = A()</span><br><span class="line">是对类对象A的实例化，创建了实例对象a,也可以说a绑定了实例对象</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>类方法</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">@classmethod</span><br><span class="line">def m2(cls, n):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>类中@classmethod下方的是类方法，写法也是固定写法；其中cls必须要有，cls绑定了类对象A(),在类外部，需要这样引用A(类对象).类方法 ；因为类方法在类中能被直接引用，一般是这样引用self.类方法；这是由于self绑定的是实例对象，根据实例对象可以查找到类对象</code></p>
+<ul>
+<li><p>使用场景</p>
+<p>  <code>  如果希望在方法裡面调用静态类，那么把方法定义成类方法是合适的，因为要是定义成静态方法，那么你就要显示地引用类A，这对继承来说可不是一件好事情。(为了方便调用，但又为了继承方便，因此不用静态方法，显示调用)  </code></p>
+</li>
+<li><p><strong>实例方法</strong></p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def m1(self, n):</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br></pre></td></tr></table></figure>
+<p><code>实例方法，必须带self;其中self绑定的实例对象a;因此外部使用可以这样使用，a.m1()；在类的内部self绑定了实例对象，因此可以直接使用self.m1来调用</code></p>
+<ul>
+<li><p>使用场景</p>
+<p>  <code>  需要将方法作为对象属性，进行调用，继承，传递的方法，大部分类方法都会定义成实例方法；  </code></p>
+</li>
+<li><p><strong>静态方法</strong></p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@staticmethod</span><br><span class="line">def m3(n):</span><br><span class="line">	pass</span><br><span class="line">        </span><br><span class="line">静态方法，就是普通函数；和类对象和实例对象均无绑定关系；</span><br><span class="line">即可被类调用，也可通过实例调用；</span><br><span class="line">A.m3()</span><br><span class="line">a.m3()</span><br><span class="line">self.m3</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>使用场景</p>
+<p>  <code>  如果在方法中不需要访问任何实例方法和属性，纯粹地通过传入参数并返回数据的功能性方法，那么它就适合用静态方法来定义，它节省了实例化对象的开销成本，往往这种方法放在类外面的模块层作为一个函数存在也是没问题的，而放在类中，仅为这个类服务（定义了一个局部域函数仅为该类专门服务）。  </code></p>
+</li>
+<li><p><strong>装饰器</strong></p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def A(FUN):</span><br><span class="line">	<span class="built_in">return</span> FUN+1</span><br><span class="line">    </span><br><span class="line">@FUN</span><br><span class="line">def b():</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">在装饰器中@后跟的是父方法，注意类方法/静态方法/装饰器方法区别	</span><br></pre></td></tr></table></figure>
+<p><a href="https://zhuanlan.zhihu.com/p/28010894">参考</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>算法--数据结构1️⃣</title>
     <url>/posts/db1660cd/</url>
     <content><![CDATA[<h1 id="常见的数据结构有"><a href="#常见的数据结构有" class="headerlink" title="常见的数据结构有"></a>常见的数据结构有</h1><p> <code>序列（列表、链表，元祖，队列，二叉树、堆、栈）、图、集合、字典</code></p>
@@ -1572,60 +1662,6 @@
       </categories>
       <tags>
         <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>类对象/实例对象/类方法/实例方法/静态方法</title>
-    <url>/posts/93899372/</url>
-    <content><![CDATA[<ul>
-<li><strong>类对象</strong></li>
-</ul>
-<span id="more"></span>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A(object):</span><br><span class="line">    def m1(self, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br><span class="line"></span><br><span class="line">    @classmethod</span><br><span class="line">    def m2(cls, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br><span class="line">    @staticmethod</span><br><span class="line">    def m3(n):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.m1(1) <span class="comment"># self: &lt;__main__.A object at 0x000001E596E41A90&gt;</span></span><br><span class="line">A.m2(1) <span class="comment"># cls: &lt;class &#x27;__main__.A&#x27;&gt;</span></span><br><span class="line">A.m3(1)</span><br><span class="line"></span><br><span class="line">按顺序执行时，执行class A（）创建了A这个类对象</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>实例对象</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">a = A()</span><br><span class="line">是对类对象A的实例化，创建了实例对象a,也可以说a绑定了实例对象</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>类方法</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">@classmethod</span><br><span class="line">def m2(cls, n):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><code>类中@classmethod下方的是类方法，写法也是固定写法；其中cls必须要有，cls绑定了类对象A(),在类外部，需要这样引用A(类对象).类方法 ；因为类方法在类中能被直接引用，一般是这样引用self.类方法；这是由于self绑定的是实例对象，根据实例对象可以查找到类对象</code></p>
-<ul>
-<li><p>使用场景</p>
-<p>  <code>  如果希望在方法裡面调用静态类，那么把方法定义成类方法是合适的，因为要是定义成静态方法，那么你就要显示地引用类A，这对继承来说可不是一件好事情。(为了方便调用，但又为了继承方便，因此不用静态方法，显示调用)  </code></p>
-</li>
-<li><p><strong>实例方法</strong></p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def m1(self, n):</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br></pre></td></tr></table></figure>
-<p><code>实例方法，必须带self;其中self绑定的实例对象a;因此外部使用可以这样使用，a.m1()；在类的内部self绑定了实例对象，因此可以直接使用self.m1来调用</code></p>
-<ul>
-<li><p>使用场景</p>
-<p>  <code>  需要将方法作为对象属性，进行调用，继承，传递的方法，大部分类方法都会定义成实例方法；  </code></p>
-</li>
-<li><p><strong>静态方法</strong></p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@staticmethod</span><br><span class="line">def m3(n):</span><br><span class="line">	pass</span><br><span class="line">        </span><br><span class="line">静态方法，就是普通函数；和类对象和实例对象均无绑定关系；</span><br><span class="line">即可被类调用，也可通过实例调用；</span><br><span class="line">A.m3()</span><br><span class="line">a.m3()</span><br><span class="line">self.m3</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>使用场景</p>
-<p>  <code>  如果在方法中不需要访问任何实例方法和属性，纯粹地通过传入参数并返回数据的功能性方法，那么它就适合用静态方法来定义，它节省了实例化对象的开销成本，往往这种方法放在类外面的模块层作为一个函数存在也是没问题的，而放在类中，仅为这个类服务（定义了一个局部域函数仅为该类专门服务）。  </code></p>
-</li>
-<li><p><strong>装饰器</strong></p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def A(FUN):</span><br><span class="line">	<span class="built_in">return</span> FUN+1</span><br><span class="line">    </span><br><span class="line">@FUN</span><br><span class="line">def b():</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">在装饰器中@后跟的是父方法，注意类方法/静态方法/装饰器方法区别	</span><br></pre></td></tr></table></figure>
-<p><a href="https://zhuanlan.zhihu.com/p/28010894">参考</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
       </tags>
   </entry>
   <entry>
