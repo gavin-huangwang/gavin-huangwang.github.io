@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bujiaban.xyz","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="大数据测试，工作内容主要有：数据测试、模型测试；要全局的了解大数据测试，必须先明白大数据的架构，工作过程 大纲1234大数据架构数据测试模型测试数据质量体系  大数据架构常见的大数据架构主要有Hadoop（分布式文件存储、计算系统）；由分布式文件系统（HDFS）&#x2F;集群资源管理器（YARN）分布式计算框架（MR&#x2F;mapreduce）构成；其中HDFS负责管理存储数据，YARN负责管理集群中的计算资源">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据--测试">
+<meta property="og:url" content="https://bujiaban.xyz/posts/ac354d65/index.html">
+<meta property="og:site_name" content="Bu Jia Ban">
+<meta property="og:description" content="大数据测试，工作内容主要有：数据测试、模型测试；要全局的了解大数据测试，必须先明白大数据的架构，工作过程 大纲1234大数据架构数据测试模型测试数据质量体系  大数据架构常见的大数据架构主要有Hadoop（分布式文件存储、计算系统）；由分布式文件系统（HDFS）&#x2F;集群资源管理器（YARN）分布式计算框架（MR&#x2F;mapreduce）构成；其中HDFS负责管理存储数据，YARN负责管理集群中的计算资源">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bujiaban.xyz/text_image/Hadoop.png">
+<meta property="og:image" content="https://bujiaban.xyz/text_image/biddate.png">
+<meta property="og:image" content="https://bujiaban.xyz/text_image/bigdate_%E6%95%B0%E4%BB%93%E6%9E%B6%E6%9E%84.png">
+<meta property="og:image" content="https://bujiaban.xyz/text_image/bigdata_%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84.png">
+<meta property="og:image" content="https://bujiaban.xyz/text_image/%E6%A8%AA%E5%90%91%E6%95%B0%E6%8D%AE%E5%88%86%E5%B1%82.png">
+<meta property="og:image" content="https://bujiaban.xyz/text_image/%E7%BA%B5%E5%90%91%E6%95%B0%E6%8D%AE%E5%88%86%E5%B1%82.png">
+<meta property="og:image" content="https://bujiaban.xyz/text_image/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E5%8F%AF%E5%88%87%E5%85%A5%E7%9A%84%E9%98%B6%E6%AE%B5.png">
+<meta property="og:image" content="https://bujiaban.xyz/text_image/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8.png">
+<meta property="og:image" content="https://bujiaban.xyz/text_image/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E5%AE%9E%E6%96%BD.png">
+<meta property="og:image" content="https://bujiaban.xyz/text_image/%E6%95%B0%E6%8D%AE%E9%97%AE%E9%A2%98.png">
+<meta property="og:image" content="https://bujiaban.xyz/text_image/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6.png">
+<meta property="article:published_time" content="2023-08-07T08:45:23.000Z">
+<meta property="article:modified_time" content="2023-08-07T16:00:51.544Z">
+<meta property="article:author" content="GAVIN HUANG">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bujiaban.xyz/text_image/Hadoop.png">
+
+<link rel="canonical" href="https://bujiaban.xyz/posts/ac354d65/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>大数据--测试 | Bu Jia Ban</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0c0805c7973dc17cabb0b51e3386ffc0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Bu Jia Ban" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Bu Jia Ban</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">HELLO,YOU</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bujiaban.xyz/posts/ac354d65/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/me.jpg">
+      <meta itemprop="name" content="GAVIN HUANG">
+      <meta itemprop="description" content="此地无银三百两">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bu Jia Ban">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          大数据--测试<a href="https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name_posts/%E5%A4%A7%E6%95%B0%E6%8D%AE-%E6%B5%8B%E8%AF%95.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-08-07 16:45:23" itemprop="dateCreated datePublished" datetime="2023-08-07T16:45:23+08:00">2023-08-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-08-08 00:00:51" itemprop="dateModified" datetime="2023-08-08T00:00:51+08:00">2023-08-08</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/ac354d65/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/ac354d65/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><code>大数据测试，工作内容主要有：数据测试、模型测试；要全局的了解大数据测试，必须先明白大数据的架构，工作过程</code></p>
+<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">大数据架构</span><br><span class="line">数据测试</span><br><span class="line">模型测试</span><br><span class="line">数据质量体系</span><br></pre></td></tr></table></figure>
+
+<h2 id="大数据架构"><a href="#大数据架构" class="headerlink" title="大数据架构"></a>大数据架构</h2><p><code>常见的大数据架构主要有Hadoop（分布式文件存储、计算系统）；由分布式文件系统（HDFS）/集群资源管理器（YARN）分布式计算框架（MR/mapreduce）构成；其中HDFS负责管理存储数据，YARN负责管理集群中的计算资源，调度和执行工作任务；</code></p>
+<p><strong>组件：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">核心组件：</span><br><span class="line">HDFS:分布式文件系统，存储数据；</span><br><span class="line">YARN：集群资源管理器，管理计算资源，进行调度；</span><br><span class="line">MR：计算框架，一般负责离线计算；</span><br><span class="line"></span><br><span class="line">生态组件：</span><br><span class="line">PIG：数据流处理（用于并行计算的高级数据流语言和执行框架）；</span><br><span class="line">HBASE：NSQL型的分布式数据库，本质是一个键值系统,底层数据存储在文件系统HDFS上；</span><br><span class="line">SPARK：分布式计算引擎，类似MR,但在内存中计算，提供各种库，可以使开发者用来实现ETL、机器学习、数据流处理、图像计算等场景；</span><br><span class="line">FLUME：数据采集</span><br><span class="line">FLINK：针对流数据（实时数据）和批数据（离线数据）的实时处理引擎，有着高吞吐、低延迟的特点；</span><br><span class="line">SQOOP：数据导入导出</span><br><span class="line">KAFKA：分布式消息引擎及流处理平台，用来存储/传递消息（如日志或埋点）；</span><br><span class="line">AWS S3 ：静态资源存储，可能是大型的日志文件吧；</span><br><span class="line">SOLR：用于搜索索引的全文检索服务器；</span><br><span class="line"></span><br><span class="line">数据查询引擎:</span><br><span class="line">HIVE S3：数据仓库基础架构，提供数据汇总和命令行即席查询功能；</span><br><span class="line">IMPALA：高效的基于MPP架构的快速查询引擎，基于Hive并使用内存进行计算，兼顾ETL功能，具有实时、批处理、多并发等优点；</span><br><span class="line">KYLIN：开源分布式分析型数据仓库，提供Hadoop/Spark之上的SQL查询接口及多维分析（OLAP）能力，支持超大规模数据的压秒级查询（和视图有点点类似）；</span><br><span class="line">PRESTO：开源的分布式查询引擎，支持多数据源，大量级数据的场景；</span><br><span class="line"></span><br><span class="line">组件众多。不同组件提供不同能力，Hadoop框架，很像Android系统，是一个底层的数据框架。</span><br></pre></td></tr></table></figure>
+<p><img src="/text_image/Hadoop.png" alt="alt text"></p>
+<h3 id="传易音乐大数据架构"><a href="#传易音乐大数据架构" class="headerlink" title="传易音乐大数据架构"></a>传易音乐大数据架构</h3><p><strong>传易hadoop</strong><br><img src="/text_image/biddate.png" alt="alt text"></p>
+<p><strong>传易数仓架构</strong><br><img src="/text_image/bigdate_%E6%95%B0%E4%BB%93%E6%9E%B6%E6%9E%84.png" alt="alt text"></p>
+<p><strong>数据架构（数仓）</strong><br><img src="/text_image/bigdata_%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84.png" alt="alt text"></p>
+<p><strong>数据架构–横向数据分层</strong><br><img src="/text_image/%E6%A8%AA%E5%90%91%E6%95%B0%E6%8D%AE%E5%88%86%E5%B1%82.png" alt="alt text"></p>
+<p><strong>数据架构–纵向数据分层</strong><br><img src="/text_image/%E7%BA%B5%E5%90%91%E6%95%B0%E6%8D%AE%E5%88%86%E5%B1%82.png" alt="alt text"></p>
+<p><strong>传易大数据架构总述：</strong></p>
+<p><code>ps</code></p>
+<h2 id="数据测试"><a href="#数据测试" class="headerlink" title="数据测试"></a>数据测试</h2><p><code>数据测试前，需要对数据质量有认知；数据的价值在于需求方的使用，因此能满足需求方/使用方需求的数据才能称得上好数据</code></p>
+<h3 id="标准"><a href="#标准" class="headerlink" title="标准"></a>标准</h3><p><strong>数据质量评测标准：</strong></p>
+<p><code>数据质量我们一般从以下六个维度评判，同时我们往往还需求考虑数据的（+安全性）：</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">完整性：数据条数完整，类型完整，参数完整，是否有异常类型或者异常值</span><br><span class="line">准确性：结果准确，抽样准确，全局准确</span><br><span class="line">及时性：实时数据性能满足需求，各组件性能满足要求；如用户余额，抽奖次数等</span><br><span class="line">一致性：前后数据一致，参数和整体满足逻辑一致，如订阅总额=订阅单价*时长</span><br><span class="line">有效性：数据是有效的符合数据规范，如email数据、身份证数据规范</span><br><span class="line">唯一性：数据唯一，如每个用户的boom_id,每个音乐的music_id</span><br></pre></td></tr></table></figure>
+<p><strong>以上是测试时评判的定性标准，在实际工作中，结合业务，还需要考虑定量的标准(理论上标准也应该分阶段)</strong><br>待补</p>
+<p><strong>数据质量优劣的标准：</strong><br><code>除了测试时，需要考虑的场景外，还需要对整体的数据质量好坏进行评判，以下为数据质量的优劣评判标准</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">是否满足需求</span><br><span class="line">是否易于使用</span><br><span class="line">及其他非质量熟悉标准（见MFQ）</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据质量评测流程："><a href="#数据质量评测流程：" class="headerlink" title="数据质量评测流程："></a><strong>数据质量评测流程：</strong></h3><p><code>要想把控数据质量，往往需要介入数据的全生命周期；这需要有对数据监控的能力，在流程的不同阶段能进行卡点接入，针对不同阶段，不同问题，应该有异常处理/兜底机制，需要迭代能力；同时需要支持量化，自动化；流程如下：</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">业务分析--分析数据流（流程图）、数据特性（计算型/时效型）</span><br><span class="line">设计阶段--数据类型、数据处理逻辑、数据链路、数据服务</span><br><span class="line">数据标准--量化的数据标准，作为内外部的规范和约束</span><br><span class="line">数据监控--数据监控能力，是否有全链路监控能力</span><br><span class="line">数据卡点--针对不同阶段的数据（流程）是否有卡点，能进行评测和定位问题</span><br><span class="line">数据环境--如何低成本，高效的维护数据测试环境</span><br><span class="line">构造数据--如何快速有效的实现可复用数据构造能力</span><br><span class="line">数据评测--如何保障评测的有效性、覆盖率</span><br><span class="line">数据量化--如何实现数据流程、质量、评测的量化，让过程结果更公开透明</span><br><span class="line">迭代优化--如何管理问题，运营数据，归纳形成标准，持续的优化体系</span><br></pre></td></tr></table></figure>
+<p><strong>数据治理可参考的切入阶段</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E5%8F%AF%E5%88%87%E5%85%A5%E7%9A%84%E9%98%B6%E6%AE%B5.png" alt="alt text"><br><strong>数据安全</strong></p>
+<p><code>以上的数据质量评测标准未说明安全情况，数据安全需要考虑数据本身的安全（隐私脱敏），流程安全，权限管控、安全监控，故在此处说明，安全需要覆盖的场景如下：</code><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8.png" alt="alt text"></p>
+<p><strong>数据安全实施策略</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E5%AE%9E%E6%96%BD.png" alt="alt text"></p>
+<p><strong>数据质量问题处理链路:</strong></p>
+<p><img src="/text_image/%E6%95%B0%E6%8D%AE%E9%97%AE%E9%A2%98.png" alt="alt text"></p>
+<h3 id="数据治理–开源框架"><a href="#数据治理–开源框架" class="headerlink" title="数据治理–开源框架"></a><strong>数据治理–开源框架</strong></h3><p><img src="/text_image/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6.png" alt="alt text"></p>
+<p><em><strong>整个过程为：建立目标、高效执行、流程管控、效果度量优化；需要遵循：有标准、有数据（监控）、可量化（度量）、自动化的原则；需要项目一起发力，才能有望达成目标；</strong></em></p>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/qian.png" alt="GAVIN HUANG 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/wechat.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/b6242283/" rel="prev" title="云原生-K8S">
+      <i class="fa fa-chevron-left"></i> 云原生-K8S
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%A7%E7%BA%B2"><span class="nav-number">1.</span> <span class="nav-text">大纲</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">大数据架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E6%98%93%E9%9F%B3%E4%B9%90%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84"><span class="nav-number">1.1.1.</span> <span class="nav-text">传易音乐大数据架构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95"><span class="nav-number">1.2.</span> <span class="nav-text">数据测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86"><span class="nav-number">1.2.1.</span> <span class="nav-text">标准</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E8%AF%84%E6%B5%8B%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="nav-number">1.2.2.</span> <span class="nav-text">数据质量评测流程：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E2%80%93%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6"><span class="nav-number">1.2.3.</span> <span class="nav-text">数据治理–开源框架</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+	  
+	  
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GAVIN HUANG"
+      src="/me.jpg">
+  <p class="site-author-name" itemprop="name">GAVIN HUANG</p>
+  <div class="site-description" itemprop="description">此地无银三百两</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="http://gavin-log.herokuapp.com/" title="Ynote → http:&#x2F;&#x2F;gavin-log.herokuapp.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>Ynote</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/1009gavin/" title="Blog → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;1009gavin&#x2F;" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>Blog</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/gavin-huangwang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gavin-huangwang" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  <!-- 音乐播放器 -->
+	<div>
+		
+			<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=442009412&auto=1&height=66"></iframe>
+		
+	</div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GAVIN HUANG</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">111k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:41</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '7SnCyhwFab6OJHulh0SsCRHv-gzGzoHsz',
+      appKey     : 'MlToRxXyU1kGTgW6WHSJOnCL',
+      placeholder: "Just go go",
+      avatar     : 'wavatar',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+<!-- 雪花特效 -->
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.8.3/jquery.js"></script>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="\js\snow.js"></script> 
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
