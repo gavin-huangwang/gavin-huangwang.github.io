@@ -1,44 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Android资源采集</title>
-    <url>/posts/0/</url>
-    <content><![CDATA[<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><span id="more"></span>
-
-<h3 id="命令："><a href="#命令：" class="headerlink" title="命令："></a>命令：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys cpuinfo</span><br></pre></td></tr></table></figure>
-
-<h3 id="结果解析："><a href="#结果解析：" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/cpu.png" alt="alt text"></p>
-<h5 id="第一行"><a href="#第一行" class="headerlink" title="第一行"></a>第一行</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">其中第一行：Load: 10.1 / 2.49 / 0.83</span><br><span class="line">表示系统1min/5min/10min cpu负载平均值</span><br><span class="line">标准说明：1/0.7---理论上单核满载是1，但是在真实情况下，满载会存在性能问题，一般不超过70%；四核满载则是4.</span><br></pre></td></tr></table></figure>
-<h5 id="第三行"><a href="#第三行" class="headerlink" title="第三行"></a>第三行</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">75% 593/system_server: 58% user + 16% kernel / faults: 33566 minor 473 major</span><br><span class="line">该行表示资源消耗情况；</span><br><span class="line">593/75%/58%/16%：pid/cpu负载/用户空间负载/内核空间负载</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="命令扩展"><a href="#命令扩展" class="headerlink" title="命令扩展"></a>命令扩展</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys cpuinfo | grep -w com.afmobi.boomplayer:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>参考：<a href="https://blog.csdn.net/lipanpan1030/article/details/108118685">dumpsys工具cpu采集说明</a></p>
-<h2 id="MEN"><a href="#MEN" class="headerlink" title="MEN"></a>MEN</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell  dumpsys  meminfo com.afmobi.boomplayer</span><br></pre></td></tr></table></figure>
-
-<h3 id="结果解析：-1"><a href="#结果解析：-1" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/men.png" alt="alt text"><br><strong>由图可知：</strong> 需要解析获取TOTAL之后的值，单位kb</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#脚本如下</span></span><br><span class="line"><span class="comment"># 得到men的使用情况</span></span><br><span class="line">def get_men(devices, pkg_name):</span><br><span class="line">    cmd = <span class="string">&quot;adb -s &quot;</span>+devices+<span class="string">&quot; shell  dumpsys  meminfo %s&quot;</span>  %(pkg_name)</span><br><span class="line">    total = <span class="string">&quot;TOTAL&quot;</span></span><br><span class="line">    get_cmd = os.popen(cmd).readlines()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;men:&#x27;</span>,get_cmd)</span><br><span class="line">    <span class="keyword">for</span> info <span class="keyword">in</span> get_cmd:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;men_info:&#x27;</span>,info)</span><br><span class="line">        info_sp = info.strip().split()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;info_sp:&quot;</span>,info_sp)</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> range(len(info_sp)):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;item:&quot;</span>,item)</span><br><span class="line">            <span class="keyword">if</span> info_sp[item] == total:</span><br><span class="line">                <span class="built_in">return</span> int(info_sp[item+1])</span><br><span class="line">    <span class="built_in">return</span> 0</span><br></pre></td></tr></table></figure>
-<h2 id="FPS"><a href="#FPS" class="headerlink" title="FPS"></a>FPS</h2><p><strong>fps为帧率，表示单位时间1s内屏幕刷新的次数，Android6之前存在一个相对标准，帧率不能低于60，即单帧耗时不能大于16.67ms,否则会存在丢帧</strong></p>
-<h3 id="命令-1"><a href="#命令-1" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys gfxinfo com.afmobi.boomplayer | grep -A 128 Execute | grep -v <span class="string">&#x27;[a-z]&#x27;</span> </span><br></pre></td></tr></table></figure>
-
-<h3 id="结果解析：-2"><a href="#结果解析：-2" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/fps.png" alt="alt text"><br><strong>如上图 Draw/Prepare/Process/Execute表示一帧被绘制的四个阶段，四个值相加即为一帧的耗时(无数据则很可能是手机的“GPU呈现模式分析”未打开)</strong></p>
-<p><a href="https://blog.csdn.net/weixin_43291944/article/details/98497689">fps说明</a></p>
-<h2 id="FLOW"><a href="#FLOW" class="headerlink" title="FLOW"></a>FLOW</h2><p><strong>流量获取有多个路径，比如通过在tcp_snd文件获取tcp发送流量，在tcp_rcv文件中获取tcp接受流量，在/net/dev中获取总的发送/接受流量，同时也可以通过代理获取流量值</strong></p>
-<h3 id="命令-2"><a href="#命令-2" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tcp_send_cmd=adb shell cat /proc/uid_stat/uid_cmd/tcp_snd</span><br><span class="line"></span><br><span class="line">tcp_recv_cmd=adb shell cat /proc/uid_stat/uid_cmd/tcp_rcv</span><br><span class="line"></span><br><span class="line">sum_send_cmd=adb shell cat /proc/pid_cmd/net/dev|grep <span class="string">&quot;wlan0&quot;</span>|awk <span class="string">&quot;&#123;print <span class="variable">$10</span>&#125;&quot;</span></span><br><span class="line"></span><br><span class="line">sum_recv_cmd=adb shell cat /proc/pid_cmd/net/dev|grep <span class="string">&quot;wlan0&quot;</span>|awk <span class="string">&quot;&#123;print <span class="variable">$2</span>&#125;&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><a href="https://testerhome.com/topics/14310">流量命令</a></p>
-<h2 id="电量"><a href="#电量" class="headerlink" title="电量"></a>电量</h2><h3 id="命令-3"><a href="#命令-3" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb shell dumpsys batterystats --charged com.afmobi.boomplayer</span><br></pre></td></tr></table></figure>
-<p><strong>预计的电量值如下</strong><br><img src="/text_image/dian.png" alt="alt text"></p>
-<p><a href="https://source.android.com/devices/tech/power/batterystats?hl=zh-cn">电量/流量说明</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>Android</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>稳定性--ANR治理</title>
     <url>/posts/1ee32bf1/</url>
     <content><![CDATA[<h1 id="ANR治理"><a href="#ANR治理" class="headerlink" title="ANR治理"></a>ANR治理</h1><ul>
@@ -181,6 +143,56 @@
         <tag>稳定性</tag>
         <tag>前端性能</tag>
         <tag>solopi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android资源采集</title>
+    <url>/posts/0/</url>
+    <content><![CDATA[<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><span id="more"></span>
+
+<h3 id="命令："><a href="#命令：" class="headerlink" title="命令："></a>命令：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys cpuinfo</span><br></pre></td></tr></table></figure>
+
+<h3 id="结果解析："><a href="#结果解析：" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/cpu.png" alt="alt text"></p>
+<h5 id="第一行"><a href="#第一行" class="headerlink" title="第一行"></a>第一行</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">其中第一行：Load: 10.1 / 2.49 / 0.83</span><br><span class="line">表示系统1min/5min/10min cpu负载平均值</span><br><span class="line">标准说明：1/0.7---理论上单核满载是1，但是在真实情况下，满载会存在性能问题，一般不超过70%；四核满载则是4.</span><br></pre></td></tr></table></figure>
+<h5 id="第三行"><a href="#第三行" class="headerlink" title="第三行"></a>第三行</h5><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">75% 593/system_server: 58% user + 16% kernel / faults: 33566 minor 473 major</span><br><span class="line">该行表示资源消耗情况；</span><br><span class="line">593/75%/58%/16%：pid/cpu负载/用户空间负载/内核空间负载</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="命令扩展"><a href="#命令扩展" class="headerlink" title="命令扩展"></a>命令扩展</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys cpuinfo | grep -w com.afmobi.boomplayer:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>参考：<a href="https://blog.csdn.net/lipanpan1030/article/details/108118685">dumpsys工具cpu采集说明</a></p>
+<h2 id="MEN"><a href="#MEN" class="headerlink" title="MEN"></a>MEN</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell  dumpsys  meminfo com.afmobi.boomplayer</span><br></pre></td></tr></table></figure>
+
+<h3 id="结果解析：-1"><a href="#结果解析：-1" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/men.png" alt="alt text"><br><strong>由图可知：</strong> 需要解析获取TOTAL之后的值，单位kb</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#脚本如下</span></span><br><span class="line"><span class="comment"># 得到men的使用情况</span></span><br><span class="line">def get_men(devices, pkg_name):</span><br><span class="line">    cmd = <span class="string">&quot;adb -s &quot;</span>+devices+<span class="string">&quot; shell  dumpsys  meminfo %s&quot;</span>  %(pkg_name)</span><br><span class="line">    total = <span class="string">&quot;TOTAL&quot;</span></span><br><span class="line">    get_cmd = os.popen(cmd).readlines()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;men:&#x27;</span>,get_cmd)</span><br><span class="line">    <span class="keyword">for</span> info <span class="keyword">in</span> get_cmd:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;men_info:&#x27;</span>,info)</span><br><span class="line">        info_sp = info.strip().split()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;info_sp:&quot;</span>,info_sp)</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> range(len(info_sp)):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;item:&quot;</span>,item)</span><br><span class="line">            <span class="keyword">if</span> info_sp[item] == total:</span><br><span class="line">                <span class="built_in">return</span> int(info_sp[item+1])</span><br><span class="line">    <span class="built_in">return</span> 0</span><br></pre></td></tr></table></figure>
+<h2 id="FPS"><a href="#FPS" class="headerlink" title="FPS"></a>FPS</h2><p><strong>fps为帧率，表示单位时间1s内屏幕刷新的次数，Android6之前存在一个相对标准，帧率不能低于60，即单帧耗时不能大于16.67ms,否则会存在丢帧</strong></p>
+<h3 id="命令-1"><a href="#命令-1" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb -s 042461198L000964 shell dumpsys gfxinfo com.afmobi.boomplayer | grep -A 128 Execute | grep -v <span class="string">&#x27;[a-z]&#x27;</span> </span><br></pre></td></tr></table></figure>
+
+<h3 id="结果解析：-2"><a href="#结果解析：-2" class="headerlink" title="结果解析："></a>结果解析：</h3><p><img src="/text_image/fps.png" alt="alt text"><br><strong>如上图 Draw/Prepare/Process/Execute表示一帧被绘制的四个阶段，四个值相加即为一帧的耗时(无数据则很可能是手机的“GPU呈现模式分析”未打开)</strong></p>
+<p><a href="https://blog.csdn.net/weixin_43291944/article/details/98497689">fps说明</a></p>
+<h2 id="FLOW"><a href="#FLOW" class="headerlink" title="FLOW"></a>FLOW</h2><p><strong>流量获取有多个路径，比如通过在tcp_snd文件获取tcp发送流量，在tcp_rcv文件中获取tcp接受流量，在/net/dev中获取总的发送/接受流量，同时也可以通过代理获取流量值</strong></p>
+<h3 id="命令-2"><a href="#命令-2" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tcp_send_cmd=adb shell cat /proc/uid_stat/uid_cmd/tcp_snd</span><br><span class="line"></span><br><span class="line">tcp_recv_cmd=adb shell cat /proc/uid_stat/uid_cmd/tcp_rcv</span><br><span class="line"></span><br><span class="line">sum_send_cmd=adb shell cat /proc/pid_cmd/net/dev|grep <span class="string">&quot;wlan0&quot;</span>|awk <span class="string">&quot;&#123;print <span class="variable">$10</span>&#125;&quot;</span></span><br><span class="line"></span><br><span class="line">sum_recv_cmd=adb shell cat /proc/pid_cmd/net/dev|grep <span class="string">&quot;wlan0&quot;</span>|awk <span class="string">&quot;&#123;print <span class="variable">$2</span>&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://testerhome.com/topics/14310">流量命令</a></p>
+<h2 id="电量"><a href="#电量" class="headerlink" title="电量"></a>电量</h2><h3 id="命令-3"><a href="#命令-3" class="headerlink" title="命令"></a>命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">adb shell dumpsys batterystats --charged com.afmobi.boomplayer</span><br></pre></td></tr></table></figure>
+<p><strong>预计的电量值如下</strong><br><img src="/text_image/dian.png" alt="alt text"></p>
+<p><a href="https://source.android.com/devices/tech/power/batterystats?hl=zh-cn">电量/流量说明</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UI自动化基础--微软</title>
+    <url>/posts/d1646a55/</url>
+    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>UI</tag>
       </tags>
   </entry>
   <entry>
@@ -327,18 +339,6 @@
       <tags>
         <tag>ui元素定位</tag>
         <tag>UI自动化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>UI自动化基础--微软</title>
-    <url>/posts/d1646a55/</url>
-    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>UI</tag>
       </tags>
   </entry>
   <entry>
@@ -532,18 +532,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python语法-super方法</title>
-    <url>/posts/7b2ded6/</url>
-    <content><![CDATA[<p><code>super方法用来，继承父类，或祖父类；常用的结构为super(C,self)/python3括号内的可缩写（super()）;super方法本身是一个类，和当前所在的类（父类）无关，该类使用了mro的算法（方法查找顺序）来决定继承类的顺序</code></p>
-<span id="more"></span>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A():</span><br><span class="line"></span><br><span class="line">	def __init__(self):</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">&quot;---A---&quot;</span>)</span><br><span class="line"></span><br><span class="line">class B(A):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---B---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super(B,self).__init__()</span><br><span class="line"></span><br><span class="line">class C(A):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---C---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super(C,self).__init__()</span><br><span class="line"></span><br><span class="line">class D(B,C):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---D---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super().__init__()</span><br><span class="line">D()</span><br></pre></td></tr></table></figure>
-<p><strong>方法查找顺序说明:</strong></p>
-<pre><code>super.mro策略；采用的是查找继承类的上一个节点的方式来实现继承，如super(D,self).__init__();实际上继承的是上一个节点类B；Python2和Python3使用super来继承时，使用上存在差异，Python必须使用super(C,self)方式继承，python3则可同时使用super()和super(C,self)来进行继承；同时Python2存在class A:/class A(object):这两种经典类和新式类；Python3只有新式类；经典类和新式类的mro策略不一样，虽然两者都是使用从左到右的广度遍历，经典类在某类已继承时，后续在查找到这个类，也不在继承；新式类，在某类已经继承时，后续在查找到改类，会继承最新查找到的；
-</code></pre>
-]]></content>
-  </entry>
-  <entry>
     <title>python语法特性</title>
     <url>/posts/d641bafc/</url>
     <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
@@ -556,9 +544,15 @@
       </tags>
   </entry>
   <entry>
-    <title>uwnc</title>
-    <url>/posts/3de87ac/</url>
-    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
+    <title>python语法-super方法</title>
+    <url>/posts/7b2ded6/</url>
+    <content><![CDATA[<p><code>super方法用来，继承父类，或祖父类；常用的结构为super(C,self)/python3括号内的可缩写（super()）;super方法本身是一个类，和当前所在的类（父类）无关，该类使用了mro的算法（方法查找顺序）来决定继承类的顺序</code></p>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A():</span><br><span class="line"></span><br><span class="line">	def __init__(self):</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">&quot;---A---&quot;</span>)</span><br><span class="line"></span><br><span class="line">class B(A):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---B---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super(B,self).__init__()</span><br><span class="line"></span><br><span class="line">class C(A):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---C---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super(C,self).__init__()</span><br><span class="line"></span><br><span class="line">class D(B,C):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;---D---&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(super.__mro__)</span><br><span class="line">        super().__init__()</span><br><span class="line">D()</span><br></pre></td></tr></table></figure>
+<p><strong>方法查找顺序说明:</strong></p>
+<pre><code>super.mro策略；采用的是查找继承类的上一个节点的方式来实现继承，如super(D,self).__init__();实际上继承的是上一个节点类B；Python2和Python3使用super来继承时，使用上存在差异，Python必须使用super(C,self)方式继承，python3则可同时使用super()和super(C,self)来进行继承；同时Python2存在class A:/class A(object):这两种经典类和新式类；Python3只有新式类；经典类和新式类的mro策略不一样，虽然两者都是使用从左到右的广度遍历，经典类在某类已继承时，后续在查找到这个类，也不在继承；新式类，在某类已经继承时，后续在查找到改类，会继承最新查找到的；
+</code></pre>
 ]]></content>
   </entry>
   <entry>
@@ -572,6 +566,72 @@
       <tags>
         <tag>UI</tag>
         <tag>gird</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>uwnc</title>
+    <url>/posts/3de87ac/</url>
+    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>云原生-K8S</title>
+    <url>/posts/b6242283/</url>
+    <content><![CDATA[<p><code>k8s是指kubernetes；是一种容器编排系统；其中最核心的组件是docker（就是自动运维管理docker的集群），整个系统都是围绕容器，对其进行管理，扩展，部署；有以下特性：</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">容器编排，实现容器的自动部署，调度和协调。</span><br><span class="line">弹性伸缩，根据负载和资源动态调整容器的数量和位置。</span><br><span class="line">服务发现，提供服务注册和发现机制，实现容器间的通信和负载均衡。</span><br><span class="line">部署管理，支持多种部署策略，如滚动更新，回滚等。</span><br><span class="line">开源和易于拓展，支持多种云平台和操作系统，具有丰富的生态系统和社区。</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>由两部分组成，master和node,架构如下：</strong><br><img src="/text_image/k8s.jpg" alt="alt text"></p>
+<p><strong>工作原理</strong><br><img src="/text_image/k8s%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png" alt="alt text"></p>
+<p><strong>注意点</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">主节点和从节点，一般分别独立部署在不同服务器上，共同构成了k8s集群，集群可以有多个主从节点；</span><br><span class="line">主节点部署master组件，从节点部署node组件；</span><br><span class="line">K8S 的 Master Node 具备：请求入口管理（API Server），Worker Node 调度（Scheduler），监控和自动调节（Controller Manager），以及存储功能（etcd）；而 K8S 的 Worker Node 具备：状态和监控收集（Kubelet），网络和负载均衡（Kube-Proxy）、保障容器化运行环境（Container Runtime）、以及定制化功能（Add-Ons）；</span><br></pre></td></tr></table></figure>
+<p><strong>K8S 的重要概念有 Deployment、Pod、Replica Set、Service 等</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pod(仓)是服务的闭包&#x2F;集合，可以被理解成一群可以共享网络、存储和计算资源的容器化服务的集合；一个里面可以有多个docker服务；</span><br><span class="line">Deployment调度这些副本来替换 的作用是管理和控制 Pod 和 ReplicaSet，管控它们运行在用户期望的状态中。提供更新能力；</span><br><span class="line">ReplicaSet 的作用就是管理和控制 Pod，维护了pod的很多副本，当pod不可用的时候，就Deployment调度这些副本来替换；</span><br><span class="line">用户会直接操作 Deployment 部署服务，而当 Deployment 被部署的时候，K8S 会自动生成要求的 ReplicaSet 和 Pod。</span><br><span class="line">Service 就是微服务，有备份机制的，可以做流量负载均衡</span><br><span class="line">Ingress 用来在集群外部访问集群内部服务；提供负载均衡、SSL 终结和基于名称的虚拟托管；</span><br><span class="line">Kubernetes 支持多个虚拟集群，它们底层依赖于同一个物理集群。这些虚拟集群被称为名字空间。</span><br></pre></td></tr></table></figure>
+<p><strong>k8s要素关系</strong><br><img src="/text_image/k8s%E8%A6%81%E7%B4%A0.png" alt="alt text"><br><strong>ingress集群内外通信拓扑图</strong><br><img src="/text_image/ingress%E9%9B%86%E7%BE%A4%E5%86%85%E5%A4%96%E9%80%9A%E4%BF%A1%E6%8B%93%E6%89%91%E5%9B%BE.png" alt="alt text"></p>
+<h1 id="k8s使用："><a href="#k8s使用：" class="headerlink" title="k8s使用："></a>k8s使用：</h1><h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p><strong>命令结构：kubectl [command] [TYPE] [NAME] [flags]</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kubectl:k8s命令行工具；</span><br><span class="line">command：对指定对象要执行的操作；</span><br><span class="line">TYPE：对操作对象&#x2F;资源类型</span><br><span class="line">NAME：资源&#x2F;对象的名称，可省略；</span><br><span class="line">- &#96;flags&#96;: 指定可选的参数;如-s&#x2F;-server，指定服务；</span><br><span class="line">实例：</span><br><span class="line">&#96;kubectl get pods&#96;		&#x2F;&#x2F;查看所有的pods</span><br></pre></td></tr></table></figure>
+
+<h2 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h2><h3 id="部署服务"><a href="#部署服务" class="headerlink" title="部署服务"></a>部署服务</h3><ul>
+<li><strong>如何部署pod</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">准备 Pod 的 yaml 配置文件；</span><br><span class="line">执行 kubectl 命令部署：kubectl create -f <span class="variable">$&#123;POD_YAML文件&#125;</span>；</span><br></pre></td></tr></table></figure></li>
+<li><strong>如何部署Deployment</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">准备 Deployment 的 yaml 配置文件；</span><br><span class="line">执行 kubectl 命令部署：kubectl create -f <span class="variable">$&#123;DEPLOYMENT_YAML文件&#125;</span>；</span><br><span class="line">部署完以上两个对象后，就会自动的创建ReplicaSet 和pod,查看其的命令：get rs、get pod</span><br></pre></td></tr></table></figure></li>
+<li><strong>如何对服务操作</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">删</span><br><span class="line">删除资源：kubectl delete <span class="variable">$&#123;RESOURCE&#125;</span> <span class="variable">$&#123;NAME&#125;</span>		//<span class="variable">$&#123;RESOURCE&#125;</span>资源类型如pod/rs <span class="variable">$&#123;NAME&#125;</span>资源名</span><br><span class="line">删除pod：kubectl delete pod memory-demo</span><br><span class="line">删除deployment：kubectl delete deployment <span class="variable">$&#123;DEPLOYMENT_NAME&#125;</span>	//通过删除deployment来删除服务时，需要先删除deployment，然后还要在删除pod；见上方的调度结构；</span><br><span class="line">强制删除：kubectl delete pod --force --grace-period=0 <span class="variable">$&#123;POD_NAME&#125;</span></span><br><span class="line"></span><br><span class="line">改：两种方式</span><br><span class="line">改配置文件，然后重新创建：kubectl create -f <span class="variable">$&#123;YAML文件&#125;</span></span><br><span class="line">直接改：kubectl edit <span class="variable">$&#123;RESOURCE&#125;</span> <span class="variable">$&#123;NAME&#125;</span>如kubectl edit pod memory-demo</span><br><span class="line"></span><br><span class="line">查</span><br><span class="line">查看服务：$ kubectl get|describe <span class="variable">$&#123;RESOURCE&#125;</span> [-o <span class="variable">$&#123;FORMAT&#125;</span>] -n=<span class="variable">$&#123;NAMESPACE&#125;</span>		//<span class="comment"># $&#123;RESOURCE&#125;有: pod、deployment、replicaset(rs)</span></span><br><span class="line">查看服务前，必须要知道命名空间，查看命令空间：kubectl get ns；</span><br><span class="line">查看特定命令空间的deployment:kubectl get deployment -n=oona-test；</span><br><span class="line">查看特定命令空间的pod:kubectl get pod -n=oona-test；</span><br><span class="line">查看特定命令空间的rs:kubectl get rs -n=oona-test；</span><br><span class="line">获取所有命令空间的资源：kubectl get deployment/replicaset/pod --all-namespaces</span><br><span class="line">命令加[-o wide]，显示新学期更全，建议加：kubectl get deployment/replicaset/pod [-o wide] --all-namespaces</span><br><span class="line"></span><br><span class="line">查看资源信息（部署是否成功等）：kubectl describe <span class="variable">$&#123;RESOURCE&#125;</span> <span class="variable">$&#123;NAME&#125;</span></span><br><span class="line">查看舱内的服务日志：kubectl <span class="built_in">log</span> <span class="variable">$&#123;POD_NAME&#125;</span> -c <span class="variable">$&#123;CONTAINER_NAME&#125;</span>。</span><br><span class="line">进入 Pod 内部某个 container：kubectl <span class="built_in">exec</span> -it [options] <span class="variable">$&#123;POD_NAME&#125;</span> -c <span class="variable">$&#123;CONTAINER_NAME&#125;</span> [args]		//实际调用了docker容器的docker <span class="built_in">exec</span> xx进入容器内部</span><br></pre></td></tr></table></figure></li>
+<li><strong>docker常用命令：分为镜像管理/容器管理</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">容器运行命令参数</span><br><span class="line"></span><br><span class="line">1. --name 指定容器名称</span><br><span class="line">2. -d 后台运行</span><br><span class="line">3. -port 指定端口映射规则</span><br><span class="line">4. --network 指定容器运行的网路模式</span><br><span class="line">5. -v 指定需要挂载的数据卷</span><br><span class="line">6. -env  指定需要传递给容器的环境变量</span><br><span class="line"></span><br><span class="line">增</span><br><span class="line">下载镜像：docker pull busybox</span><br><span class="line">导出镜像：docker save busybox &gt; busybox.tar</span><br><span class="line">导入镜像：docker load &lt; busybox.tar</span><br><span class="line">push镜像到镜像仓库：docker push</span><br><span class="line"></span><br><span class="line">删</span><br><span class="line">删除镜像：docker rmi busybox:版本</span><br><span class="line"></span><br><span class="line">改</span><br><span class="line">改镜像名：docker tag busybox:latest busybox:<span class="built_in">test</span></span><br><span class="line">给镜像加tag:docker tag jenkins:latest jenkins:3.6.0</span><br><span class="line"></span><br><span class="line">查</span><br><span class="line">查看docker版本：docker version</span><br><span class="line">查看镜像：docker images</span><br><span class="line"></span><br><span class="line">容器：</span><br><span class="line">运行容器：docker run（运行） -d（后台方式） --name=busybox busybox:latest ping 114.114.114.114</span><br><span class="line">查看运行容器：docker ps</span><br><span class="line">查看所有容器：docker ps -a</span><br><span class="line">重新启动容器：docker restart busybox</span><br><span class="line">停止容器：docker stop busybox</span><br><span class="line">杀死容器：docker <span class="built_in">kill</span> busybox</span><br><span class="line">删除运行容器：docker rm -f busybox</span><br><span class="line">进入容器内：docker <span class="built_in">exec</span> -it busybox</span><br><span class="line">复制容器内文件：docker cp busybox:/etc/hosts hosts</span><br><span class="line">查看容器日志：docker logs -f busybox</span><br></pre></td></tr></table></figure></li>
+<li><strong>服务部署失败了怎么办？</strong><br>见k8s入门-简单好理解版本</li>
+</ul>
+<p><a href="https://mp.weixin.qq.com/s/4l0g2VI_18EuOjaYQuHYHw">k8s入门-思路清晰</a><br><a href="https://mp.weixin.qq.com/s/mUF0AEncu3T2yDqKyt-0Ow">k8s入门-简单好理解版本</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>K8S</tag>
+        <tag>环境</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>优秀博客</title>
+    <url>/posts/bb158cde/</url>
+    <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ul>
+<li><a href="https://cloud.tencent.com/developer/article/1974105">自动化专家</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/3335805/activities">性能</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/1011618/activities">腾讯性能优化</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/1016462">腾讯测开</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/2059614">测开</a></li>
+</ul>
+<span id="more"></span>
+
+<h1 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h1><ul>
+<li><a href="https://cloud.tencent.com/developer/user/2398817/inventories">python</a></li>
+<li><a href="https://www.cnblogs.com/vamei/tag/Python/">行业大佬python教程</a></li>
+</ul>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
+<li><a href="https://cloud.tencent.com/developer/user/1642192">K8S腾讯专家</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
       </tags>
   </entry>
   <entry>
@@ -634,33 +694,6 @@
       </tags>
   </entry>
   <entry>
-    <title>优秀博客</title>
-    <url>/posts/bb158cde/</url>
-    <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ul>
-<li><a href="https://cloud.tencent.com/developer/article/1974105">自动化专家</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/3335805/activities">性能</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/1011618/activities">腾讯性能优化</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/1016462">腾讯测开</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/2059614">测开</a></li>
-</ul>
-<span id="more"></span>
-
-<h1 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h1><ul>
-<li><a href="https://cloud.tencent.com/developer/user/2398817/inventories">python</a></li>
-<li><a href="https://www.cnblogs.com/vamei/tag/Python/">行业大佬python教程</a></li>
-</ul>
-<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
-<li><a href="https://cloud.tencent.com/developer/user/1642192">K8S腾讯专家</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>传音刷机</title>
     <url>/posts/a1b2e86a/</url>
     <content><![CDATA[<ol>
@@ -680,6 +713,18 @@
       <tags>
         <tag>刷机</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>估值体系</title>
+    <url>/posts/daef770e/</url>
+    <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的扣非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
+<span id="more"></span>
+
+<h2 id="理念"><a href="#理念" class="headerlink" title="理念"></a>理念</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">高收益的前提是持续稳定的复利，即好企业是时间的朋友，坏企业是时间的敌人；</span><br><span class="line">30pe是合理估值的上限，这是由无风险收益率决定的，如果在高，买入收益就低于无风险收益率了；同理合理估值一般给到20-25，而我不买25倍以上的企业(这想法绝对是错的。只关乎个人的安全边际)；</span><br><span class="line">股权和债券的差异，主要体现在确定性和成长里；股市需要利用成长优势抵消不确定性；</span><br><span class="line">收益率=利润/本金（股价）=1/pe；合理估值的锚其实就是无风险收益率（1/无风险收益率）；</span><br><span class="line">无分红公司的净资产收益率=净利润增速（可能净利润要打折）；</span><br><span class="line">分红在投入公司的净资产真实收益率=roe(1/pb*分红金额比例+留存金额比例)；</span><br><span class="line">年化收益率=年份√总收益率；</span><br><span class="line">由收益率公式可知；收益率一般不会超过净利润增速（仅当市净率低于1时超过，但这种现金流会受负债等因素损耗）；且要提高投资收益率，只有提高净利润的增速、降低分红比例、在分红比例固定时则只有降低pb也就是估值才能有效提高收益率；</span><br></pre></td></tr></table></figure>
+
+<h2 id="买卖"><a href="#买卖" class="headerlink" title="买卖"></a>买卖</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">理想买点：三年后合理估值*0.5</span><br><span class="line">理想卖点：min(动态市盈率50,三年后合理估值150%)</span><br><span class="line"></span><br><span class="line">买操作：20-25倍区间都能买，仅茅台在25倍pe以上买入;到达理想买点时，分三批买完剩余资金（理想买点/理想买点-5%/理想买点-10%）</span><br><span class="line">卖操作：当年预计净利润的50/55/60三次清空；（买卖点是唐朝基于无风险收益率计算，正常超出合理估值都能卖，50%其实是预留的安全边际）</span><br><span class="line">三年后合理估值=三年后预估净利率*25（具体企业具体分析，也就是pe的中分位）</span><br><span class="line"></span><br><span class="line">全指数基金买/卖点：基于无风险收益率来，但是由于不确定性，要做净利润折算，需要进行等比例折算，折算区间在5-7折</span><br><span class="line">买点：12-15pe</span><br><span class="line">卖点：25-35pe</span><br><span class="line"></span><br><span class="line">♥卖出后买全指还是留现金取决于无风险收益率（一般2倍无风险收益率即可买pe=1/无风险收益率*2，全指唐朝仅关注沪深300/恒生指数/标普500/纳斯达克100）</span><br><span class="line">♥其他时间：企业逻辑未变时，低于买点买，高于卖点卖，其他时间坐等；但需要遵循单股不超40%原则，即三五个行业，七八家公司；</span><br><span class="line">♥不要严格按买卖价来，要接受错误和风险；确定性高的企业，越偏向合理估值之下就买，确定性低的企业越偏向理想买点才买，唐朝的理念是理想买点位置一定要买完资金；</span><br></pre></td></tr></table></figure>
+
+<h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">♥腾讯+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以300均价，买入6手；高溢价时，优先使用中概换腾讯（中概大部分公司不盈利）</span><br><span class="line">1️⃣理想买点：328</span><br><span class="line">2️⃣理想卖点：1年内720</span><br><span class="line">3️⃣纳指买点：21pe</span><br><span class="line">4️⃣纳指卖点：35pe</span><br><span class="line"></span><br><span class="line">♥银行+家电25%：计划100k,余量16k</span><br><span class="line">已持仓84k,其中家电50k&#x2F;银行34k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右，招商计划以28均价，买入5手</span><br><span class="line">2️⃣美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">3️⃣格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34</span><br><span class="line"></span><br><span class="line">♥消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利20k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣五粮液150快,理想买点150&#x2F;143&#x2F;135</span><br><span class="line">2️⃣伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下；此刻的分红在投资收益率为9.56%；</span><br><span class="line"></span><br><span class="line">♥医药10%：计划40k,余量3k</span><br><span class="line">已持仓37k,其中恒瑞20k&#x2F;ETF17K</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣恒瑞按50倍市盈率20.07%净利润增长，卖点60（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">2️⃣300医药ETF计划0.42，买入7000个，卖点为0.7以上，对应300医药指数50倍以上的估值</span><br><span class="line">医药需要恒瑞和etf实现高低互换，高换低；</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>做点事</title>
@@ -720,18 +765,6 @@
 <li><strong>痛点</strong></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>估值体系</title>
-    <url>/posts/daef770e/</url>
-    <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的扣非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
-<span id="more"></span>
-
-<h2 id="理念"><a href="#理念" class="headerlink" title="理念"></a>理念</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">高收益的前提是持续稳定的复利，即好企业是时间的朋友，坏企业是时间的敌人；</span><br><span class="line">30pe是合理估值的上限，这是由无风险收益率决定的，如果在高，买入收益就低于无风险收益率了；同理合理估值一般给到20-25，而我不买25倍以上的企业(这想法绝对是错的。只关乎个人的安全边际)；</span><br><span class="line">股权和债券的差异，主要体现在确定性和成长里；股市需要利用成长优势抵消不确定性；</span><br><span class="line">收益率=利润/本金（股价）=1/pe；合理估值的锚其实就是无风险收益率（1/无风险收益率）；</span><br><span class="line">无分红公司的净资产收益率=净利润增速（可能净利润要打折）；</span><br><span class="line">分红在投入公司的净资产真实收益率=roe(1/pb*分红金额比例+留存金额比例)；</span><br><span class="line">年化收益率=年份√总收益率；</span><br><span class="line">由收益率公式可知；收益率一般不会超过净利润增速（仅当市净率低于1时超过，但这种现金流会受负债等因素损耗）；且要提高投资收益率，只有提高净利润的增速、降低分红比例、在分红比例固定时则只有降低pb也就是估值才能有效提高收益率；</span><br></pre></td></tr></table></figure>
-
-<h2 id="买卖"><a href="#买卖" class="headerlink" title="买卖"></a>买卖</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">理想买点：三年后合理估值*0.5</span><br><span class="line">理想卖点：min(动态市盈率50,三年后合理估值150%)</span><br><span class="line"></span><br><span class="line">买操作：20-25倍区间都能买，仅茅台在25倍pe以上买入;到达理想买点时，分三批买完剩余资金（理想买点/理想买点-5%/理想买点-10%）</span><br><span class="line">卖操作：当年预计净利润的50/55/60三次清空；（买卖点是唐朝基于无风险收益率计算，正常超出合理估值都能卖，50%其实是预留的安全边际）</span><br><span class="line">三年后合理估值=三年后预估净利率*25（具体企业具体分析，也就是pe的中分位）</span><br><span class="line"></span><br><span class="line">全指数基金买/卖点：基于无风险收益率来，但是由于不确定性，要做净利润折算，需要进行等比例折算，折算区间在5-7折</span><br><span class="line">买点：12-15pe</span><br><span class="line">卖点：25-35pe</span><br><span class="line"></span><br><span class="line">♥卖出后买全指还是留现金取决于无风险收益率（一般2倍无风险收益率即可买pe=1/无风险收益率*2，全指唐朝仅关注沪深300/恒生指数/标普500/纳斯达克100）</span><br><span class="line">♥其他时间：企业逻辑未变时，低于买点买，高于卖点卖，其他时间坐等；但需要遵循单股不超40%原则，即三五个行业，七八家公司；</span><br><span class="line">♥不要严格按买卖价来，要接受错误和风险；确定性高的企业，越偏向合理估值之下就买，确定性低的企业越偏向理想买点才买，唐朝的理念是理想买点位置一定要买完资金；</span><br></pre></td></tr></table></figure>
-
-<h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">♥腾讯+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以300均价，买入6手；高溢价时，优先使用中概换腾讯（中概大部分公司不盈利）</span><br><span class="line">1️⃣理想买点：328</span><br><span class="line">2️⃣理想卖点：1年内720</span><br><span class="line">3️⃣纳指买点：21pe</span><br><span class="line">4️⃣纳指卖点：35pe</span><br><span class="line"></span><br><span class="line">♥银行+家电25%：计划100k,余量16k</span><br><span class="line">已持仓84k,其中家电50k&#x2F;银行34k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右，招商计划以28均价，买入5手</span><br><span class="line">2️⃣美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">3️⃣格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34</span><br><span class="line"></span><br><span class="line">♥消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利20k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣五粮液150快,理想买点150&#x2F;143&#x2F;135</span><br><span class="line">2️⃣伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下；此刻的分红在投资收益率为9.56%；</span><br><span class="line"></span><br><span class="line">♥医药10%：计划40k,余量3k</span><br><span class="line">已持仓37k,其中恒瑞20k&#x2F;ETF17K</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣恒瑞按50倍市盈率20.07%净利润增长，卖点60（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">2️⃣300医药ETF计划0.42，买入7000个，卖点为0.7以上，对应300医药指数50倍以上的估值</span><br><span class="line">医药需要恒瑞和etf实现高低互换，高换低；</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>全局函数局部函数</title>
@@ -996,6 +1029,21 @@
       </tags>
   </entry>
   <entry>
+    <title>常用app测试工具</title>
+    <url>/posts/28eebda3/</url>
+    <content><![CDATA[<h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">参考回答：</span><br><span class="line">功能测试自动化</span><br><span class="line">a) 轻量接口自动化测试</span><br><span class="line"></span><br><span class="line">jmeter，</span><br><span class="line"></span><br><span class="line">b) APP UI层面的自动化</span><br><span class="line"></span><br><span class="line">android：UI Automator Viewer，Android Junit，Instrumentation，UIAutomator，</span><br><span class="line"></span><br><span class="line">iOS:基于Instrument的iOS UI自动化，</span><br><span class="line"></span><br><span class="line">性能测试</span><br><span class="line"></span><br><span class="line">a) Web前端性能测试</span><br><span class="line"></span><br><span class="line">网络抓包工具：Wireshark</span><br><span class="line"></span><br><span class="line">网页文件大小</span><br><span class="line"></span><br><span class="line">webpagetest</span><br><span class="line"></span><br><span class="line">pagespeed insight</span><br><span class="line"></span><br><span class="line">chrome adb</span><br><span class="line"></span><br><span class="line">b) APP端性能测试</span><br><span class="line"></span><br><span class="line">Android内存占用分析：MAT</span><br><span class="line"></span><br><span class="line">iOS内存问题分析：ARC模式</span><br><span class="line"></span><br><span class="line">Android WebView性能分析：</span><br><span class="line"></span><br><span class="line">iOS WebView性能分析</span><br><span class="line"></span><br><span class="line">c) 后台服务性能测试</span><br><span class="line"></span><br><span class="line">负载，压力，耐久性</span><br><span class="line"></span><br><span class="line">可拓展性，基准</span><br><span class="line"></span><br><span class="line">工具：apacheAB，Jmeter，LoadRunner，</span><br><span class="line"></span><br><span class="line">专项测试</span><br><span class="line"></span><br><span class="line">a) 兼容性测试</span><br><span class="line"></span><br><span class="line">手工测试：操作系统，分辨率，rom，网络类型</span><br><span class="line"></span><br><span class="line">云平台：testin，脚本编写，Android。</span><br><span class="line"></span><br><span class="line">b) 流量测试</span><br><span class="line"></span><br><span class="line">Android自带的流量管理，</span><br><span class="line"></span><br><span class="line">iOS自带的Network</span><br><span class="line"></span><br><span class="line">tcpdump抓包</span><br><span class="line"></span><br><span class="line">WiFi代理抓包：Fiddler</span><br><span class="line"></span><br><span class="line">流量节省方法：压缩数据，json优于xml；WebP优于传统的JPG，PNG；控制访问的频次；只获取必要的数据；缓存；</span><br><span class="line"></span><br><span class="line">c) 电量测试</span><br><span class="line"></span><br><span class="line">基于测试设备的方法，购买电量表进行测试。</span><br><span class="line"></span><br><span class="line">GSam Battery Monitoe Pro</span><br><span class="line"></span><br><span class="line">iOS基于Instrument Energy工具</span><br><span class="line"></span><br><span class="line">d) 弱网络测试</span><br><span class="line"></span><br><span class="line">手机自带的网络状况模拟工具</span><br><span class="line"></span><br><span class="line">基于代理的弱网络的模拟:</span><br><span class="line"></span><br><span class="line">工具：windows：Network Delay Simulator</span><br><span class="line"></span><br><span class="line">Mac：Network Link Conditioner</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>app测试</tag>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>广告--大数据模型测试</title>
     <url>/posts/d775e226/</url>
     <content><![CDATA[<p><code>模型是程序化广告的灵魂，决定着广告的点击和转化，直接影响收入；而模型由于复杂度高，标签/数据量大，是广告测试的难点，一般意义上，测试是不负责模型质量的，仅对模型中的一些定向/过滤逻辑做覆盖，模型有效性测试，模型工程师一般是通过灰度/ab测试来实现自测的，这种自我监督的实现方式有着明显缺陷，故本次对过往模型测试方面的记录，做下总结</code></p>
@@ -1033,21 +1081,6 @@
       <tags>
         <tag>性能</tag>
         <tag>实战</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>常用app测试工具</title>
-    <url>/posts/28eebda3/</url>
-    <content><![CDATA[<h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
-<span id="more"></span>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">参考回答：</span><br><span class="line">功能测试自动化</span><br><span class="line">a) 轻量接口自动化测试</span><br><span class="line"></span><br><span class="line">jmeter，</span><br><span class="line"></span><br><span class="line">b) APP UI层面的自动化</span><br><span class="line"></span><br><span class="line">android：UI Automator Viewer，Android Junit，Instrumentation，UIAutomator，</span><br><span class="line"></span><br><span class="line">iOS:基于Instrument的iOS UI自动化，</span><br><span class="line"></span><br><span class="line">性能测试</span><br><span class="line"></span><br><span class="line">a) Web前端性能测试</span><br><span class="line"></span><br><span class="line">网络抓包工具：Wireshark</span><br><span class="line"></span><br><span class="line">网页文件大小</span><br><span class="line"></span><br><span class="line">webpagetest</span><br><span class="line"></span><br><span class="line">pagespeed insight</span><br><span class="line"></span><br><span class="line">chrome adb</span><br><span class="line"></span><br><span class="line">b) APP端性能测试</span><br><span class="line"></span><br><span class="line">Android内存占用分析：MAT</span><br><span class="line"></span><br><span class="line">iOS内存问题分析：ARC模式</span><br><span class="line"></span><br><span class="line">Android WebView性能分析：</span><br><span class="line"></span><br><span class="line">iOS WebView性能分析</span><br><span class="line"></span><br><span class="line">c) 后台服务性能测试</span><br><span class="line"></span><br><span class="line">负载，压力，耐久性</span><br><span class="line"></span><br><span class="line">可拓展性，基准</span><br><span class="line"></span><br><span class="line">工具：apacheAB，Jmeter，LoadRunner，</span><br><span class="line"></span><br><span class="line">专项测试</span><br><span class="line"></span><br><span class="line">a) 兼容性测试</span><br><span class="line"></span><br><span class="line">手工测试：操作系统，分辨率，rom，网络类型</span><br><span class="line"></span><br><span class="line">云平台：testin，脚本编写，Android。</span><br><span class="line"></span><br><span class="line">b) 流量测试</span><br><span class="line"></span><br><span class="line">Android自带的流量管理，</span><br><span class="line"></span><br><span class="line">iOS自带的Network</span><br><span class="line"></span><br><span class="line">tcpdump抓包</span><br><span class="line"></span><br><span class="line">WiFi代理抓包：Fiddler</span><br><span class="line"></span><br><span class="line">流量节省方法：压缩数据，json优于xml；WebP优于传统的JPG，PNG；控制访问的频次；只获取必要的数据；缓存；</span><br><span class="line"></span><br><span class="line">c) 电量测试</span><br><span class="line"></span><br><span class="line">基于测试设备的方法，购买电量表进行测试。</span><br><span class="line"></span><br><span class="line">GSam Battery Monitoe Pro</span><br><span class="line"></span><br><span class="line">iOS基于Instrument Energy工具</span><br><span class="line"></span><br><span class="line">d) 弱网络测试</span><br><span class="line"></span><br><span class="line">手机自带的网络状况模拟工具</span><br><span class="line"></span><br><span class="line">基于代理的弱网络的模拟:</span><br><span class="line"></span><br><span class="line">工具：windows：Network Delay Simulator</span><br><span class="line"></span><br><span class="line">Mac：Network Link Conditioner</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>app测试</tag>
-        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -1105,12 +1138,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>用例管理平台</title>
-    <url>/posts/c48e9a83/</url>
-    <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>混沌工程</title>
     <url>/posts/7a6c2f74/</url>
     <content><![CDATA[<h1 id="混沌工程"><a href="#混沌工程" class="headerlink" title="混沌工程"></a>混沌工程</h1><ul>
@@ -1163,6 +1190,25 @@
       <tags>
         <tag>混沌工程</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>用例管理平台</title>
+    <url>/posts/c48e9a83/</url>
+    <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>百度质量体系建设</title>
+    <url>/posts/bcd76c52/</url>
+    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
+<li><em><strong>介绍</strong></em></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>目录</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>稳定性治理--智能遍历</title>
@@ -1510,73 +1556,6 @@
       </tags>
   </entry>
   <entry>
-    <title>百度质量体系建设</title>
-    <url>/posts/bcd76c52/</url>
-    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
-<li><em><strong>介绍</strong></em></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>目录</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>类对象/实例对象/类方法/实例方法/静态方法</title>
-    <url>/posts/93899372/</url>
-    <content><![CDATA[<ul>
-<li><strong>类对象</strong></li>
-</ul>
-<span id="more"></span>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A(object):</span><br><span class="line">    def m1(self, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br><span class="line"></span><br><span class="line">    @classmethod</span><br><span class="line">    def m2(cls, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br><span class="line">    @staticmethod</span><br><span class="line">    def m3(n):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.m1(1) <span class="comment"># self: &lt;__main__.A object at 0x000001E596E41A90&gt;</span></span><br><span class="line">A.m2(1) <span class="comment"># cls: &lt;class &#x27;__main__.A&#x27;&gt;</span></span><br><span class="line">A.m3(1)</span><br><span class="line"></span><br><span class="line">按顺序执行时，执行class A（）创建了A这个类对象</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>实例对象</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">a = A()</span><br><span class="line">是对类对象A的实例化，创建了实例对象a,也可以说a绑定了实例对象</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>类方法</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">@classmethod</span><br><span class="line">def m2(cls, n):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><code>类中@classmethod下方的是类方法，写法也是固定写法；其中cls必须要有，cls绑定了类对象A(),在类外部，需要这样引用A(类对象).类方法 ；因为类方法在类中能被直接引用，一般是这样引用self.类方法；这是由于self绑定的是实例对象，根据实例对象可以查找到类对象</code></p>
-<ul>
-<li><p>使用场景</p>
-<p>  <code>  如果希望在方法裡面调用静态类，那么把方法定义成类方法是合适的，因为要是定义成静态方法，那么你就要显示地引用类A，这对继承来说可不是一件好事情。(为了方便调用，但又为了继承方便，因此不用静态方法，显示调用)  </code></p>
-</li>
-<li><p><strong>实例方法</strong></p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def m1(self, n):</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br></pre></td></tr></table></figure>
-<p><code>实例方法，必须带self;其中self绑定的实例对象a;因此外部使用可以这样使用，a.m1()；在类的内部self绑定了实例对象，因此可以直接使用self.m1来调用</code></p>
-<ul>
-<li><p>使用场景</p>
-<p>  <code>  需要将方法作为对象属性，进行调用，继承，传递的方法，大部分类方法都会定义成实例方法；  </code></p>
-</li>
-<li><p><strong>静态方法</strong></p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@staticmethod</span><br><span class="line">def m3(n):</span><br><span class="line">	pass</span><br><span class="line">        </span><br><span class="line">静态方法，就是普通函数；和类对象和实例对象均无绑定关系；</span><br><span class="line">即可被类调用，也可通过实例调用；</span><br><span class="line">A.m3()</span><br><span class="line">a.m3()</span><br><span class="line">self.m3</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>使用场景</p>
-<p>  <code>  如果在方法中不需要访问任何实例方法和属性，纯粹地通过传入参数并返回数据的功能性方法，那么它就适合用静态方法来定义，它节省了实例化对象的开销成本，往往这种方法放在类外面的模块层作为一个函数存在也是没问题的，而放在类中，仅为这个类服务（定义了一个局部域函数仅为该类专门服务）。  </code></p>
-</li>
-<li><p><strong>装饰器</strong></p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def A(FUN):</span><br><span class="line">	<span class="built_in">return</span> FUN+1</span><br><span class="line">    </span><br><span class="line">@FUN</span><br><span class="line">def b():</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">在装饰器中@后跟的是父方法，注意类方法/静态方法/装饰器方法区别	</span><br></pre></td></tr></table></figure>
-<p><a href="https://zhuanlan.zhihu.com/p/28010894">参考</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>算法--数据结构1️⃣</title>
     <url>/posts/db1660cd/</url>
     <content><![CDATA[<h1 id="常见的数据结构有"><a href="#常见的数据结构有" class="headerlink" title="常见的数据结构有"></a>常见的数据结构有</h1><p> <code>序列（列表、链表，元祖，队列，二叉树、堆、栈）、图、集合、字典</code></p>
@@ -1662,6 +1641,60 @@
       </categories>
       <tags>
         <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>类对象/实例对象/类方法/实例方法/静态方法</title>
+    <url>/posts/93899372/</url>
+    <content><![CDATA[<ul>
+<li><strong>类对象</strong></li>
+</ul>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A(object):</span><br><span class="line">    def m1(self, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br><span class="line"></span><br><span class="line">    @classmethod</span><br><span class="line">    def m2(cls, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br><span class="line">    @staticmethod</span><br><span class="line">    def m3(n):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.m1(1) <span class="comment"># self: &lt;__main__.A object at 0x000001E596E41A90&gt;</span></span><br><span class="line">A.m2(1) <span class="comment"># cls: &lt;class &#x27;__main__.A&#x27;&gt;</span></span><br><span class="line">A.m3(1)</span><br><span class="line"></span><br><span class="line">按顺序执行时，执行class A（）创建了A这个类对象</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>实例对象</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">a = A()</span><br><span class="line">是对类对象A的实例化，创建了实例对象a,也可以说a绑定了实例对象</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>类方法</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">@classmethod</span><br><span class="line">def m2(cls, n):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>类中@classmethod下方的是类方法，写法也是固定写法；其中cls必须要有，cls绑定了类对象A(),在类外部，需要这样引用A(类对象).类方法 ；因为类方法在类中能被直接引用，一般是这样引用self.类方法；这是由于self绑定的是实例对象，根据实例对象可以查找到类对象</code></p>
+<ul>
+<li><p>使用场景</p>
+<p>  <code>  如果希望在方法裡面调用静态类，那么把方法定义成类方法是合适的，因为要是定义成静态方法，那么你就要显示地引用类A，这对继承来说可不是一件好事情。(为了方便调用，但又为了继承方便，因此不用静态方法，显示调用)  </code></p>
+</li>
+<li><p><strong>实例方法</strong></p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def m1(self, n):</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br></pre></td></tr></table></figure>
+<p><code>实例方法，必须带self;其中self绑定的实例对象a;因此外部使用可以这样使用，a.m1()；在类的内部self绑定了实例对象，因此可以直接使用self.m1来调用</code></p>
+<ul>
+<li><p>使用场景</p>
+<p>  <code>  需要将方法作为对象属性，进行调用，继承，传递的方法，大部分类方法都会定义成实例方法；  </code></p>
+</li>
+<li><p><strong>静态方法</strong></p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@staticmethod</span><br><span class="line">def m3(n):</span><br><span class="line">	pass</span><br><span class="line">        </span><br><span class="line">静态方法，就是普通函数；和类对象和实例对象均无绑定关系；</span><br><span class="line">即可被类调用，也可通过实例调用；</span><br><span class="line">A.m3()</span><br><span class="line">a.m3()</span><br><span class="line">self.m3</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>使用场景</p>
+<p>  <code>  如果在方法中不需要访问任何实例方法和属性，纯粹地通过传入参数并返回数据的功能性方法，那么它就适合用静态方法来定义，它节省了实例化对象的开销成本，往往这种方法放在类外面的模块层作为一个函数存在也是没问题的，而放在类中，仅为这个类服务（定义了一个局部域函数仅为该类专门服务）。  </code></p>
+</li>
+<li><p><strong>装饰器</strong></p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def A(FUN):</span><br><span class="line">	<span class="built_in">return</span> FUN+1</span><br><span class="line">    </span><br><span class="line">@FUN</span><br><span class="line">def b():</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">在装饰器中@后跟的是父方法，注意类方法/静态方法/装饰器方法区别	</span><br></pre></td></tr></table></figure>
+<p><a href="https://zhuanlan.zhihu.com/p/28010894">参考</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -2030,10 +2063,10 @@
 <h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><p><em><strong>科目</strong></em></p>
 <ul>
 <li>✔语言基础</li>
-<li>算法</li>
-<li>计算机网络</li>
+<li>✔算法</li>
+<li>✔计算机网络</li>
 <li>计算机系统/云原生体系</li>
-<li>数据库</li>
+<li>✔数据库</li>
 <li>大数据架构</li>
 <li>前端</li>
 <li>✔测试设计</li>
@@ -2045,10 +2078,10 @@
 <li>✔技术复盘</li>
 <li>✔期望岗位</li>
 <li>✔岗位技能要求分析</li>
-<li>✔面试题练习</li>
-<li>准备简历</li>
+<li>✔面试题</li>
+<li>✔准备简历</li>
 <li>人脉资源</li>
-<li>面试复盘</li>
+<li>✔面试复盘</li>
 </ul>
 <span id="more"></span>
 
@@ -2104,8 +2137,8 @@
 <p><code>小公司的管理岗（研发团队10-100）；构建sop体系，研发平台工具，管理人员；筛选出价值观、目标能达成一致的人遵循，平等、低预期、身体力行的原则来管理</code></p>
 <ul>
 <li><strong>业务岗</strong><ul>
-<li>业务方向：尽量找大数据相关的方向（大数据体系，我必须先了解下）；优先考虑广告、音乐、金融业务；</li>
-<li>技术方向：优先考虑性能、稳定性；sop流程建设；其次才是各类工具岗；</li>
+<li>业务方向：尽量找大数据相关的方向（大数据体系，我必须先了解下）；优先考虑广告、音乐（内容）、金融业务；</li>
+<li>技术方向：优先考虑性能、；sop流程建设；其次才是各类工具岗；</li>
 </ul>
 </li>
 </ul>
@@ -2141,7 +2174,7 @@
 <p><strong>岗位职责</strong></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">业务：负责海外产品/服务的业务测试，并负责各类专项测试；</span><br><span class="line">环境：负责环境治理及运营；</span><br><span class="line">工具：负责工具平台的开发、运营；</span><br><span class="line">质量体系：负责质量体系的建设优化；</span><br><span class="line">管理：复杂团队的搭建管理，沟通协作；</span><br></pre></td></tr></table></figure>
 <h5 id="效能"><a href="#效能" class="headerlink" title="效能"></a>效能</h5><p><code>效能岗主要有两类，面向业务的效能提升；另一类是面向基础架构的效能平台建设</code></p>
-<h3 id="面试题练习"><a href="#面试题练习" class="headerlink" title="面试题练习"></a>面试题练习</h3><h4 id="面试真题合集"><a href="#面试真题合集" class="headerlink" title="面试真题合集"></a>面试真题合集</h4><ul>
+<h3 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h3><h4 id="面试真题合集"><a href="#面试真题合集" class="headerlink" title="面试真题合集"></a>面试真题合集</h4><ul>
 <li><a href="http://localhost:4000/posts/7eb8636e/">部分流程问题</a></li>
 <li><a href="https://testerhome.com/topics/30721">部分测开面试技术题</a></li>
 <li><a href="https://maimai.cn/article/list?uid=222663796">脉脉-霍格沃兹面试题合集</a></li>
@@ -2171,7 +2204,7 @@
 <li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答①：like是模糊匹配函数，通常在<span class="built_in">where</span>过滤中使用；通配符有%_[]等；distinct是参数去重函数，通常在select子句中使用，能对结果集中的特定列的值去重显示；</span><br><span class="line"></span><br><span class="line">答②：问题很大，不可能全部覆盖，因此需要考虑全面</span><br><span class="line">数据：增加insert into、delete/drop/update select count/sum/avg from join/right <span class="built_in">where</span> groub by union order by <span class="built_in">limit</span></span><br><span class="line">库：create databases、drop databases、show databases</span><br><span class="line">表：create table、drop table、alter table、desc table、show table(表数据)</span><br><span class="line">其他：视图create view、存储过程、事物处理的方法</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h4 id="大数据-1"><a href="#大数据-1" class="headerlink" title="大数据"></a><strong>大数据</strong></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">项目中用了Elasticsearch，其中的遇到难点是什么呢（答的 es如何跨域 和 es如何通过内网IP进行访问  ）？</span><br><span class="line">如何解决的呢 （答的是通过修改添加config.yml 参数）？</span><br><span class="line">提到过大数据，问了Hive，问了我数据倾斜（表示没听过，就讲了下数据清洗）？</span><br><span class="line">介绍下大数据架构？</span><br><span class="line">介绍下大数据的各组件？</span><br><span class="line">介绍下模型质量评测？</span><br></pre></td></tr></table></figure></li>
 <li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">先看下</span><br></pre></td></tr></table></figure>
-<h4 id="语言-算法"><a href="#语言-算法" class="headerlink" title="语言/算法"></a><strong>语言/算法</strong></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">代码题，列出一个列表中重复的元素?</span><br><span class="line">工作中遇到多进程/多线程的问题？</span><br><span class="line">代码：全排列?</span><br><span class="line">序列号生成的方式？</span><br><span class="line">字典的底层实现方式?</span><br><span class="line">并发和并行的概念，区别?</span><br><span class="line">写代码：字典排序，最长公共前缀?</span><br><span class="line">sort和sorted区别?</span><br><span class="line">了解设计模式吗；?</span><br><span class="line">大概意思：点击一个url，会包含其它url，查找其中包含图片.jpg的所有url?</span><br><span class="line">Python多线程和多进程的性能问题？</span><br><span class="line">最大连续数组的和？</span><br><span class="line">车在停车库丢了，不知道什么时间丢的你要去查监控怎么最快锁定丢车的时间?</span><br><span class="line">python的数据类型有哪些？</span><br><span class="line">1-100个数，无重复 有一个数丢失 高效查找丢失的数？</span><br><span class="line">整型占几个字节、int型数据范围?</span><br><span class="line">分布式环境，1000个子节点全部包含数值型数据 如何查找10个数值最大的？</span><br><span class="line">了解哪些排序算法，哪些是稳定的、哪些是不稳定的?</span><br><span class="line">算法题 两链表相加?</span><br><span class="line">最长不重复子串？</span><br><span class="line">字典、数组、链表、队列、堆栈了解吗?python中数组、队列、堆栈的区别和使用？</span><br><span class="line">coding：最长回文字符串？</span><br><span class="line">数据结构：对称二叉树 ，判断是否是对称二叉树 口述代码，递归的出口，算法的时间复杂度？</span><br><span class="line">科学计数方面的包，介绍用神经网络做的项目，图片分类的算法CNN，介绍CNN，二分类，为什么线性分不了(GBDT)?</span><br><span class="line">动态链接和静态链接?</span><br><span class="line">用什么模型进行分类？</span><br><span class="line">为什么选择CNN而不是SVM等其他的算法分类，选取算法的标准是什么？</span><br><span class="line">选取什么作为机器的输入？</span><br><span class="line">用CNN做了那些调优包括参数的选取方面？</span><br><span class="line">卷积的过程、卷积主要起到了什么作用？卷积的目的是什么？</span><br><span class="line">过拟合和欠拟合的区别？</span><br><span class="line">预防过拟合的方法？</span><br><span class="line">堆和栈的区别？程序运行过程中，什么会存放到栈上，什么会放在堆上？</span><br><span class="line">手撕代码：链表中是否存在环？</span><br><span class="line">python如何倒序输出数组，切片的-1是什么意思</span><br><span class="line">python字典的key能否为数组</span><br><span class="line">python的深拷贝和浅拷贝</span><br><span class="line">python的垃圾回收机制</span><br><span class="line">实现list中的数字组成的数加1，题目是英文的，list形式输出</span><br><span class="line">  举例：</span><br><span class="line">  输入[1,2,3,4] 输出[1,2,3,5]</span><br><span class="line">  输入[9,9,9]  输出[1,0,0,0]</span><br><span class="line">coding：500张牌，每次取走奇数位置的牌，最后剩下一张是多少</span><br><span class="line">测试用例设计 算法题怎么测?</span><br><span class="line">算法 最大连续子数组和？</span><br><span class="line">python 语言特性?</span><br><span class="line">最长无重复子串?</span><br><span class="line">合并两个有序数组?</span><br><span class="line">数组是连续的空间，扩容拷贝是谁做的，具体的原理。扩容的大小？</span><br><span class="line">队列、堆、栈的区别，函数调用另一个函数是用什么数据结构实现的?</span><br><span class="line">python里面有几种锁？</span><br><span class="line">青蛙跳台阶，一次可以跳1或2个台阶，问：N级的台阶总共有多少种跳法？</span><br><span class="line">分析递归方法的时间复杂度（2**n）和空间复杂度（最深路径时为n）？</span><br><span class="line">python单例模式了解嘛（没答出来）、垃圾回收机制?</span><br><span class="line">数据库修改字段语句、sql语句错误或查询慢、牵引出索引?</span><br><span class="line">二叉树知道哪些，完全二叉树、搜索二叉树，平衡二叉树，说一下完全二叉树，说一下搜索二叉树?</span><br><span class="line">手撕代码两道题，一道是判断合理的字符括号，一道是最长的增序子集长度?</span><br><span class="line">python面向对象特性?</span><br><span class="line">你怎么理解多态的?</span><br><span class="line">重载和重写的真实例子?</span><br><span class="line">函数参数传递是怎么传递的?</span><br><span class="line">如果方法中定义了一个基本类型变量和引用变量，他们的生命周期是什么样子的?</span><br><span class="line">静态方法可以访问非静态变量嘛?</span><br><span class="line">非静态方法可以访问静态变量嘛?</span><br><span class="line">静态变量，成员变量储存在哪？</span><br><span class="line">手撕代码：驼峰字符？</span><br><span class="line">力扣第3题无重复字符最长字串？</span><br><span class="line">算法快排?</span><br><span class="line">了解过其他类似Springboot的框架么?</span><br><span class="line">讲下Java和python 对于内存管理的不同?</span><br><span class="line">了解Exception和Error 的区别么?</span><br><span class="line">讲下您遇到的Exeption ?</span><br><span class="line">讲下您遇到的Error?</span><br><span class="line">归并排序？</span><br><span class="line">面向对象七大设计原则；？</span><br><span class="line">不同类型的对象在内存中怎么存储；？</span><br><span class="line">什么是泛型，泛型擦除一定会发生吗？</span><br><span class="line">什么时候服务端会发生大量time_wait和close_wait状态？</span><br><span class="line">手撕算法：实现一个算法，找到两个有序数组所有元素一起的中位数？</span><br><span class="line">知道哪些设计模式，单例模式懒汉式口述一下怎么写，volatile的作用是什么？</span><br><span class="line">手撕代码：KMP字符串匹配算法；？</span><br><span class="line">讲一个定下目标但最终放弃了的经历？</span><br><span class="line">讲一个你最讨厌室友的哪一点？</span><br><span class="line">python的装饰器？</span><br><span class="line">python：列表三个参数，切片和步长？</span><br><span class="line">密集IO型任务应该用多线程还是多进程？</span><br><span class="line">并发怎么控制？</span><br><span class="line">有哪些印象深刻的排序算法？这些算法复杂度是多少？哪些稳定？</span><br><span class="line">对于大数据上百万的数据排序怎么选择排序算法？</span><br><span class="line">堆排序相关？</span><br><span class="line">了解图论的相关知识吗？</span><br><span class="line">讲一讲最短路径、迪杰斯特拉之类的？</span><br><span class="line">hashset、hashmap？应用场景？</span><br><span class="line">两数之和，要求算法复杂度0（N）？</span><br><span class="line">怎么验证是不是o（n）的复杂度？</span><br><span class="line">进程调度算法？</span><br><span class="line">去除一段代码中所有的注释：包括//与/**/?</span><br><span class="line">要考虑//与/**/作为字符串存在的情况?</span><br><span class="line">两数之和=目标值的所有数组下标?</span><br><span class="line">aop的动态代理机制？</span><br><span class="line">n个盘子放m个水果，有多少种可能？</span><br><span class="line">怎么解决幂等的问题？</span><br><span class="line">python的深拷贝、浅拷贝的区别？</span><br><span class="line">python的内存管理机制（垃圾回收+内存池），会追问具体？</span><br><span class="line">GIL锁？</span><br><span class="line">PIL?</span><br><span class="line">可变数据类型，不可变数据类型?</span><br><span class="line">class_method的用途?</span><br><span class="line">Django 请求的过程?</span><br><span class="line">Django,Flask的区别?</span><br><span class="line">  [魔法外卖]</span><br><span class="line">  给定数组nums，长度为n，代表n个外卖的超时时间。外卖员可以花费时间t送一份外卖，一次只能送一份，也可以使用一次魔法不花费时间送一次外卖。</span><br><span class="line">  求要求所有外卖不超时需要的最少使用魔法次数。</span><br><span class="line">  1 &lt;= n &lt;= 1e5, 1 &lt;= t &lt;= 100, 1 &lt;= nums[i] &lt;= 1e7</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  输入：</span><br><span class="line">  6 5</span><br><span class="line">  5 6 7 8 9 10</span><br><span class="line">  输出：</span><br><span class="line">  4</span><br><span class="line">  输入：</span><br><span class="line">  6 5</span><br><span class="line">  101 102 103 104 105 106</span><br><span class="line">  输出：</span><br><span class="line">  0</span><br><span class="line">  代码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  import java.util.*;</span><br><span class="line"></span><br><span class="line">  public class Main &#123;</span><br><span class="line"></span><br><span class="line">      // 贪心策略</span><br><span class="line">      // 第一个t，优先送[t, 2t - 1]的外卖，其次送[2t, 3t - 1]的外卖，以此类推</span><br><span class="line">      // 第二个t，优先送[2t, 3t - 1]的外卖，其次送[3t, 4t - 1]的外卖，以此类推</span><br><span class="line">      // ...</span><br><span class="line">      public static int minOps(int[] nums, int t) &#123;</span><br><span class="line">          int max = 0;</span><br><span class="line">          int ans = 0;</span><br><span class="line">          // 有序表中存储第key个t，优先处理的外卖个数</span><br><span class="line">          // 如[5,6,7,8,9,10],t=5</span><br><span class="line">          // map里存放&#123;1=5,2=1&#125;</span><br><span class="line">          TreeMap&lt;Integer, Integer&gt; map = new TreeMap&lt;&gt;();</span><br><span class="line">          <span class="keyword">for</span> (int num : nums) &#123;</span><br><span class="line">              map.put(num / t, map.getOrDefault(num / t, 0) + 1);</span><br><span class="line">              max = Math.max(max, num);</span><br><span class="line">          &#125;</span><br><span class="line">          int cur = t;</span><br><span class="line">          <span class="keyword">while</span> (cur &lt; max + 1) &#123;</span><br><span class="line">              int num = cur / t;</span><br><span class="line">              Integer next = map.ceilingKey(num); // 找到第num个t优先处理的外卖</span><br><span class="line">              <span class="keyword">if</span> (next != null) &#123;</span><br><span class="line">                  map.put(next, map.get(next) - 1);</span><br><span class="line">                  <span class="keyword">if</span> (map.get(next) == 0) &#123;</span><br><span class="line">                      map.remove(next);</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">              cur += t;</span><br><span class="line">          &#125;</span><br><span class="line">          // 能处理的外卖已经被处理了，剩下的只能用魔法处理</span><br><span class="line">          <span class="keyword">for</span> (Integer value : map.values()) &#123;</span><br><span class="line">              ans += value;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="built_in">return</span> ans;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      public static void main(String[] args) &#123;</span><br><span class="line">          Scanner sc = new Scanner(System.in);</span><br><span class="line">          int n = sc.nextInt();</span><br><span class="line">          int t = sc.nextInt();</span><br><span class="line">          int[] nums = new int[n];</span><br><span class="line">          <span class="keyword">for</span> (int i = 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">              nums[i] = sc.nextInt();</span><br><span class="line">          &#125;</span><br><span class="line">          System.out.println(minOps(nums, t));</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  第二题</span><br><span class="line">  [扑克]</span><br><span class="line">  有n张纸牌，点数为1-n，每次将堆顶的牌拿两张放到堆底，然后取出堆顶的牌记录点数，操作完所有的牌后，会记下一个序列，根据这个序列还原最初的序列。</span><br><span class="line">  1 &lt;= n &lt;= 100000</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  输入</span><br><span class="line">  4</span><br><span class="line">  1 2 3 4</span><br><span class="line">  输出</span><br><span class="line">  4 2 1 3</span><br><span class="line">  思路：按照题目要求反向模拟即可。</span><br><span class="line"></span><br><span class="line">  代码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  import java.util.*;</span><br><span class="line"></span><br><span class="line">  public class Main &#123;</span><br><span class="line"></span><br><span class="line">      public static void main(String[] args) &#123;</span><br><span class="line">          Scanner sc = new Scanner(System.in);</span><br><span class="line">          int n = sc.nextInt();</span><br><span class="line">          int[] nums = new int[n];</span><br><span class="line">          <span class="keyword">for</span> (int i = 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">              nums[i] = sc.nextInt();</span><br><span class="line">          &#125;</span><br><span class="line">          Deque&lt;Integer&gt; deque = new ArrayDeque&lt;&gt;();</span><br><span class="line">          <span class="keyword">for</span> (int i = n - 1; i &gt;= 0; i--) &#123;</span><br><span class="line">              deque.addFirst(nums[i]);</span><br><span class="line">              int num = deque.pollLast();</span><br><span class="line">              deque.addFirst(num);</span><br><span class="line">              num = deque.pollLast();</span><br><span class="line">              deque.addFirst(num);</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">while</span> (!deque.isEmpty()) &#123;</span><br><span class="line">              System.out.print(deque.pollFirst() + <span class="string">&quot; &quot;</span>);</span><br><span class="line">          &#125;</span><br><span class="line">          System.out.println();</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">怎么修改元组?</span><br><span class="line">算法题，找到最后一个不重复字符?</span><br><span class="line">Restful 风格,什么是OpenAI?</span><br><span class="line">selenium等待?</span><br><span class="line">pytest,pass,fail,error的区别?</span><br><span class="line">abcde * 4 = edcba，求各个字母代表多少?</span><br><span class="line">深浅copy?</span><br><span class="line">垃圾回收机制（这里深问了，针对每种机制，提出自己的改进措施，回答的有点乱）?</span><br><span class="line">删除有序链表中重复的元素-II?</span><br><span class="line">顺序表和链表有什么区别？</span><br><span class="line">冒泡排序的时间复杂度，为什么是这个时间复杂度？（其实就是考察冒泡的思想）？</span><br><span class="line">算法：IEDA写反转链表、二叉树后序遍历？</span><br></pre></td></tr></table></figure></li>
+<h4 id="语言-算法"><a href="#语言-算法" class="headerlink" title="语言/算法"></a><strong>语言/算法</strong></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">代码题，列出一个列表中重复的元素?</span><br><span class="line">工作中遇到多进程/多线程的问题？</span><br><span class="line">代码：全排列?</span><br><span class="line">序列号生成的方式？</span><br><span class="line">字典的底层实现方式?</span><br><span class="line">并发和并行的概念，区别?</span><br><span class="line">写代码：字典排序，最长公共前缀?</span><br><span class="line">sort和sorted区别?</span><br><span class="line">了解设计模式吗；?</span><br><span class="line">大概意思：点击一个url，会包含其它url，查找其中包含图片.jpg的所有url?</span><br><span class="line">Python多线程和多进程的性能问题？</span><br><span class="line">最大连续数组的和？</span><br><span class="line">车在停车库丢了，不知道什么时间丢的你要去查监控怎么最快锁定丢车的时间?</span><br><span class="line">python的数据类型有哪些？</span><br><span class="line">1-100个数，无重复 有一个数丢失 高效查找丢失的数？</span><br><span class="line">整型占几个字节、int型数据范围?</span><br><span class="line">分布式环境，1000个子节点全部包含数值型数据 如何查找10个数值最大的？</span><br><span class="line">了解哪些排序算法，哪些是稳定的、哪些是不稳定的?</span><br><span class="line">算法题 两链表相加?</span><br><span class="line">最长不重复子串？</span><br><span class="line">字典、数组、链表、队列、堆栈了解吗?python中数组、队列、堆栈的区别和使用？</span><br><span class="line">coding：最长回文字符串？</span><br><span class="line">数据结构：对称二叉树 ，判断是否是对称二叉树 口述代码，递归的出口，算法的时间复杂度？</span><br><span class="line">科学计数方面的包，介绍用神经网络做的项目，图片分类的算法CNN，介绍CNN，二分类，为什么线性分不了(GBDT)?</span><br><span class="line">动态链接和静态链接?</span><br><span class="line">用什么模型进行分类？</span><br><span class="line">为什么选择CNN而不是SVM等其他的算法分类，选取算法的标准是什么？</span><br><span class="line">选取什么作为机器的输入？</span><br><span class="line">用CNN做了那些调优包括参数的选取方面？</span><br><span class="line">卷积的过程、卷积主要起到了什么作用？卷积的目的是什么？</span><br><span class="line">过拟合和欠拟合的区别？</span><br><span class="line">预防过拟合的方法？</span><br><span class="line">堆和栈的区别？程序运行过程中，什么会存放到栈上，什么会放在堆上？</span><br><span class="line">手撕代码：链表中是否存在环？</span><br><span class="line">python如何倒序输出数组，切片的-1是什么意思</span><br><span class="line">python字典的key能否为数组</span><br><span class="line">python的深拷贝和浅拷贝</span><br><span class="line">python的垃圾回收机制</span><br><span class="line">实现list中的数字组成的数加1，题目是英文的，list形式输出</span><br><span class="line">  举例：</span><br><span class="line">  输入[1,2,3,4] 输出[1,2,3,5]</span><br><span class="line">  输入[9,9,9]  输出[1,0,0,0]</span><br><span class="line">coding：500张牌，每次取走奇数位置的牌，最后剩下一张是多少</span><br><span class="line">测试用例设计 算法题怎么测?</span><br><span class="line">算法 最大连续子数组和？</span><br><span class="line">python 语言特性?</span><br><span class="line">最长无重复子串?</span><br><span class="line">合并两个有序数组?</span><br><span class="line">数组是连续的空间，扩容拷贝是谁做的，具体的原理。扩容的大小？</span><br><span class="line">队列、堆、栈的区别，函数调用另一个函数是用什么数据结构实现的?</span><br><span class="line">python里面有几种锁？</span><br><span class="line">青蛙跳台阶，一次可以跳1或2个台阶，问：N级的台阶总共有多少种跳法？</span><br><span class="line">分析递归方法的时间复杂度（2**n）和空间复杂度（最深路径时为n）？</span><br><span class="line">python单例模式了解嘛（没答出来）、垃圾回收机制?</span><br><span class="line">数据库修改字段语句、sql语句错误或查询慢、牵引出索引?</span><br><span class="line">二叉树知道哪些，完全二叉树、搜索二叉树，平衡二叉树，说一下完全二叉树，说一下搜索二叉树?</span><br><span class="line">手撕代码两道题，一道是判断合理的字符括号，一道是最长的增序子集长度?</span><br><span class="line">python面向对象特性?</span><br><span class="line"> Collections合集介绍下？</span><br><span class="line">你怎么理解多态的?</span><br><span class="line">重载和重写的真实例子?</span><br><span class="line">函数参数传递是怎么传递的?</span><br><span class="line">如果方法中定义了一个基本类型变量和引用变量，他们的生命周期是什么样子的?</span><br><span class="line">静态方法可以访问非静态变量嘛?</span><br><span class="line">非静态方法可以访问静态变量嘛?</span><br><span class="line">静态变量，成员变量储存在哪？</span><br><span class="line">手撕代码：驼峰字符？</span><br><span class="line">力扣第3题无重复字符最长字串？</span><br><span class="line">算法快排?</span><br><span class="line">了解过其他类似Springboot的框架么?</span><br><span class="line">讲下Java和python 对于内存管理的不同?</span><br><span class="line">了解Exception和Error 的区别么?</span><br><span class="line">讲下您遇到的Exeption ?</span><br><span class="line">讲下您遇到的Error?</span><br><span class="line">归并排序？</span><br><span class="line">面向对象七大设计原则；？</span><br><span class="line">不同类型的对象在内存中怎么存储；？</span><br><span class="line">什么是泛型，泛型擦除一定会发生吗？</span><br><span class="line">什么时候服务端会发生大量time_wait和close_wait状态？</span><br><span class="line">手撕算法：实现一个算法，找到两个有序数组所有元素一起的中位数？</span><br><span class="line">知道哪些设计模式，单例模式懒汉式口述一下怎么写，volatile的作用是什么？</span><br><span class="line">手撕代码：KMP字符串匹配算法；？</span><br><span class="line">讲一个定下目标但最终放弃了的经历？</span><br><span class="line">讲一个你最讨厌室友的哪一点？</span><br><span class="line">python的装饰器？</span><br><span class="line">python：列表三个参数，切片和步长？</span><br><span class="line">密集IO型任务应该用多线程还是多进程？</span><br><span class="line">并发怎么控制？</span><br><span class="line">有哪些印象深刻的排序算法？这些算法复杂度是多少？哪些稳定？</span><br><span class="line">对于大数据上百万的数据排序怎么选择排序算法？</span><br><span class="line">堆排序相关？</span><br><span class="line">了解图论的相关知识吗？</span><br><span class="line">讲一讲最短路径、迪杰斯特拉之类的？</span><br><span class="line">hashset、hashmap？应用场景？</span><br><span class="line">两数之和，要求算法复杂度0（N）？</span><br><span class="line">怎么验证是不是o（n）的复杂度？</span><br><span class="line">进程调度算法？</span><br><span class="line">去除一段代码中所有的注释：包括//与/**/?</span><br><span class="line">要考虑//与/**/作为字符串存在的情况?</span><br><span class="line">两数之和=目标值的所有数组下标?</span><br><span class="line">aop的动态代理机制？</span><br><span class="line">n个盘子放m个水果，有多少种可能？</span><br><span class="line">怎么解决幂等的问题？</span><br><span class="line">python的深拷贝、浅拷贝的区别？</span><br><span class="line">python的内存管理机制（垃圾回收+内存池），会追问具体？</span><br><span class="line">GIL锁？</span><br><span class="line">PIL?</span><br><span class="line">可变数据类型，不可变数据类型?</span><br><span class="line">class_method的用途?</span><br><span class="line">Django 请求的过程?</span><br><span class="line">Django,Flask的区别?</span><br><span class="line">  [魔法外卖]</span><br><span class="line">  给定数组nums，长度为n，代表n个外卖的超时时间。外卖员可以花费时间t送一份外卖，一次只能送一份，也可以使用一次魔法不花费时间送一次外卖。</span><br><span class="line">  求要求所有外卖不超时需要的最少使用魔法次数。</span><br><span class="line">  1 &lt;= n &lt;= 1e5, 1 &lt;= t &lt;= 100, 1 &lt;= nums[i] &lt;= 1e7</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  输入：</span><br><span class="line">  6 5</span><br><span class="line">  5 6 7 8 9 10</span><br><span class="line">  输出：</span><br><span class="line">  4</span><br><span class="line">  输入：</span><br><span class="line">  6 5</span><br><span class="line">  101 102 103 104 105 106</span><br><span class="line">  输出：</span><br><span class="line">  0</span><br><span class="line">  代码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  import java.util.*;</span><br><span class="line"></span><br><span class="line">  public class Main &#123;</span><br><span class="line"></span><br><span class="line">      // 贪心策略</span><br><span class="line">      // 第一个t，优先送[t, 2t - 1]的外卖，其次送[2t, 3t - 1]的外卖，以此类推</span><br><span class="line">      // 第二个t，优先送[2t, 3t - 1]的外卖，其次送[3t, 4t - 1]的外卖，以此类推</span><br><span class="line">      // ...</span><br><span class="line">      public static int minOps(int[] nums, int t) &#123;</span><br><span class="line">          int max = 0;</span><br><span class="line">          int ans = 0;</span><br><span class="line">          // 有序表中存储第key个t，优先处理的外卖个数</span><br><span class="line">          // 如[5,6,7,8,9,10],t=5</span><br><span class="line">          // map里存放&#123;1=5,2=1&#125;</span><br><span class="line">          TreeMap&lt;Integer, Integer&gt; map = new TreeMap&lt;&gt;();</span><br><span class="line">          <span class="keyword">for</span> (int num : nums) &#123;</span><br><span class="line">              map.put(num / t, map.getOrDefault(num / t, 0) + 1);</span><br><span class="line">              max = Math.max(max, num);</span><br><span class="line">          &#125;</span><br><span class="line">          int cur = t;</span><br><span class="line">          <span class="keyword">while</span> (cur &lt; max + 1) &#123;</span><br><span class="line">              int num = cur / t;</span><br><span class="line">              Integer next = map.ceilingKey(num); // 找到第num个t优先处理的外卖</span><br><span class="line">              <span class="keyword">if</span> (next != null) &#123;</span><br><span class="line">                  map.put(next, map.get(next) - 1);</span><br><span class="line">                  <span class="keyword">if</span> (map.get(next) == 0) &#123;</span><br><span class="line">                      map.remove(next);</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">              cur += t;</span><br><span class="line">          &#125;</span><br><span class="line">          // 能处理的外卖已经被处理了，剩下的只能用魔法处理</span><br><span class="line">          <span class="keyword">for</span> (Integer value : map.values()) &#123;</span><br><span class="line">              ans += value;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="built_in">return</span> ans;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      public static void main(String[] args) &#123;</span><br><span class="line">          Scanner sc = new Scanner(System.in);</span><br><span class="line">          int n = sc.nextInt();</span><br><span class="line">          int t = sc.nextInt();</span><br><span class="line">          int[] nums = new int[n];</span><br><span class="line">          <span class="keyword">for</span> (int i = 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">              nums[i] = sc.nextInt();</span><br><span class="line">          &#125;</span><br><span class="line">          System.out.println(minOps(nums, t));</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  第二题</span><br><span class="line">  [扑克]</span><br><span class="line">  有n张纸牌，点数为1-n，每次将堆顶的牌拿两张放到堆底，然后取出堆顶的牌记录点数，操作完所有的牌后，会记下一个序列，根据这个序列还原最初的序列。</span><br><span class="line">  1 &lt;= n &lt;= 100000</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  输入</span><br><span class="line">  4</span><br><span class="line">  1 2 3 4</span><br><span class="line">  输出</span><br><span class="line">  4 2 1 3</span><br><span class="line">  思路：按照题目要求反向模拟即可。</span><br><span class="line"></span><br><span class="line">  代码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  import java.util.*;</span><br><span class="line"></span><br><span class="line">  public class Main &#123;</span><br><span class="line"></span><br><span class="line">      public static void main(String[] args) &#123;</span><br><span class="line">          Scanner sc = new Scanner(System.in);</span><br><span class="line">          int n = sc.nextInt();</span><br><span class="line">          int[] nums = new int[n];</span><br><span class="line">          <span class="keyword">for</span> (int i = 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">              nums[i] = sc.nextInt();</span><br><span class="line">          &#125;</span><br><span class="line">          Deque&lt;Integer&gt; deque = new ArrayDeque&lt;&gt;();</span><br><span class="line">          <span class="keyword">for</span> (int i = n - 1; i &gt;= 0; i--) &#123;</span><br><span class="line">              deque.addFirst(nums[i]);</span><br><span class="line">              int num = deque.pollLast();</span><br><span class="line">              deque.addFirst(num);</span><br><span class="line">              num = deque.pollLast();</span><br><span class="line">              deque.addFirst(num);</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">while</span> (!deque.isEmpty()) &#123;</span><br><span class="line">              System.out.print(deque.pollFirst() + <span class="string">&quot; &quot;</span>);</span><br><span class="line">          &#125;</span><br><span class="line">          System.out.println();</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">怎么修改元组?</span><br><span class="line">算法题，找到最后一个不重复字符?</span><br><span class="line">Restful 风格,什么是OpenAI?</span><br><span class="line">selenium等待?</span><br><span class="line">pytest,pass,fail,error的区别?</span><br><span class="line">abcde * 4 = edcba，求各个字母代表多少?</span><br><span class="line">深浅copy?</span><br><span class="line">垃圾回收机制（这里深问了，针对每种机制，提出自己的改进措施，回答的有点乱）?</span><br><span class="line">删除有序链表中重复的元素-II?</span><br><span class="line">顺序表和链表有什么区别？</span><br><span class="line">冒泡排序的时间复杂度，为什么是这个时间复杂度？（其实就是考察冒泡的思想）？</span><br><span class="line">算法：IEDA写反转链表、二叉树后序遍历？</span><br></pre></td></tr></table></figure></li>
 <li><strong>答案</strong></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答：【腾讯文档】算法题①https://docs.qq.com/doc/DSVNFRU5BU3pCZ2hh</span><br><span class="line"></span><br><span class="line">答②：多进程/线程：工作中主要是UI自动化，多设备执行的场景；客户端性能，monkey，资源采集多设备的场景会用到多进程；只所以这样是因为Python多线程，有gil（全局解释器锁，这是互斥锁），同时只能有一个线程能拿到锁，只能使用多核设备的一个核进行上下文切换，本质上没有并发（cpython有此机制，jpython没有）；多进程使用的模块multiprocessing模块（进程池/管道/队列/遍历）</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -2180,9 +2213,16 @@
 <ul>
 <li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答①：团队是为公司战略服务的，因此需要基于战略来规划团队；从以下方面考虑；</span><br><span class="line">规划：理解公司的战略规划，拆解到具体自己所在的组，明确负责组的短长期的职责和规划；基于规划来分配资源；</span><br><span class="line">成本：提前做好预算和成本把控，和公司财务及管理层，协商；</span><br><span class="line">资源：引入合适的人员（考虑人员风格、专业能力、性格、协作能力、解决复杂问题的能力、价值观是否是公司需要的）；</span><br><span class="line">运营：根据当前的项目、战略和资源情况，制定合适的OKR；用来运营管理人员，坚持价值驱动，一起成长的理念；本着公正、尊重、包容、身体力行的态度，做好先行者工作；</span><br><span class="line">工具：运用好管理/评测/统计类工具，使团队的工作运营能实现数字化、透明、提升团队的效率；</span><br><span class="line">迭代：做好团队的成长规划，和公司战略结合；坚持能者上，不能者下的公平原则；和业务结合，做好引导创新的工作；设计好合理的协作，优化机制。针对问题及时优化处理；</span><br><span class="line"></span><br><span class="line">答②：这个问题比较复杂；考虑从上级管理/成绩/协作/风格，同时这是个匹配度问题；</span><br><span class="line">我想一下，团队之间，关系还比较亲密；除了工作私下也经常联系，会一起玩；对我的评价，我的上级莉姐，有说个几个方面吧（情商不高，太实诚，和外部对接的时候容易承诺别人，主动去抗责任；踏实，但不擅长表现工作的价值吧，不懂上级的需求吧（主要是他觉得我的PPT做的很差，向上级汇报的ppt,我记的最多的他让我改了近二十次）；同事反馈的最多的，除了上面的这两种，有时候他们会觉得我有点话痨吧；）</span><br></pre></td></tr></table></figure>
 <h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a><strong>其他</strong></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">对我们公司了解?知道和现在的公司多达区别？为什么选择我们公司？</span><br><span class="line">离职原因？</span><br><span class="line">从技术角度我给现在的公司带来了哪些改变，我为公司提供了什么价值？</span><br><span class="line">自我介绍 英文？</span><br><span class="line">为什么做测试？为什么不做开发？</span><br><span class="line">为什么要做测开，对测开的理解？</span><br><span class="line">对团队有什么价值?在团队中的职责、做了哪些事情?</span><br><span class="line">自我介绍？</span><br><span class="line">项目介绍？</span><br><span class="line">怎么自学的？</span><br><span class="line">项目、扮演什么角色？</span><br><span class="line">对新岗位的期望？</span><br><span class="line">如果你遇到一个bug，研发不承认，你怎么操作?</span><br><span class="line">印象最深的一个Bug?</span><br><span class="line">目前薪资，期望薪资?</span><br><span class="line">职业规划?</span><br></pre></td></tr></table></figure></li>
-<li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答①：风格、价值观的问题（以shein举例）；有一定的了解，了解到公司是做海外电商的，主要做快时尚服饰产品，现在在向电商平台迈进；美国是公司最大的市场，去年的营业额超过了300亿美金；很认可公司的价值观，客户至上，全力以赴，快速反映、融合协作、创新；之所以选择公司，是因为公司盛名远播，在快速发展，个人有很好的发展机会；公司和自己比较匹配，因为我也是做海外市场的，很认可公司的企业文化，来之前通过朋友也了解过团队的氛围，这也是我很喜欢的一点；</span><br><span class="line"></span><br><span class="line">答②：离职原因（实话实说，侧重客观）</span><br></pre></td></tr></table></figure></li>
+<li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答①：风格、价值观的问题（以shein举例）；有一定的了解，了解到公司是做海外电商的，主要做快时尚服饰产品，现在在向电商平台迈进；美国是公司最大的市场，去年的营业额超过了300亿美金；很认可公司的价值观，客户至上，全力以赴，快速反映、融合协作、创新；之所以选择公司，是因为公司盛名远播，在快速发展，个人有很好的发展机会；公司和自己比较匹配，因为我也是做海外市场的，很认可公司的企业文化，来之前通过朋友也了解过团队的氛围，这也是我很喜欢的一点；</span><br><span class="line"></span><br><span class="line">答②：离职原因（实话实说，侧重客观）</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ul>
-]]></content>
+<h3 id="面试复盘"><a href="#面试复盘" class="headerlink" title="面试复盘"></a>面试复盘</h3><p><strong>2023/08/04    海外小说公司STARY        测试工程师    结论：通过面试；婉拒</strong></p>
+<p><code>公司规模较小，深圳这边可能就一百人左右，研发共四十多人，其中测试七人；需要招一个提升团队技术的测试人员（确定？）；</code></p>
+<p><strong>问题</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">思路不太清晰；</span><br><span class="line">简历没有吃透，其中的云原生，大数据相关问题说不上来；</span><br><span class="line">针对问题，没有系统的整理；</span><br></pre></td></tr></table></figure>
+
+<p><strong>2023/08/06    客路旅行    高级性能测试        结论：应该未通过面试</strong><br><code>公司规模很大，应该类似于传易集团；业务线很多，其中测试总人数有60人，分各业务线和基础效能部门；</code></p>
+<p><strong>问题</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">k8s介绍未答出来；</span><br><span class="line">索引有哪些未答出来；</span><br><span class="line">协程介绍未答出来；</span><br><span class="line">装饰器答的不好；</span><br><span class="line">面试过程中，我太急了，没理解问题，和面试官的目的就答了；</span><br><span class="line">思路不清晰，反复问的时候，我有点不记得了（真实/思路）；</span><br><span class="line">```��；</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>面试</category>
       </categories>
