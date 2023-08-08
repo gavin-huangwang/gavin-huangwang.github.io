@@ -67,6 +67,18 @@
       </tags>
   </entry>
   <entry>
+    <title>UI自动化基础--微软</title>
+    <url>/posts/d1646a55/</url>
+    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>UI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SOLOPI使用教程</title>
     <url>/posts/49e140/</url>
     <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
@@ -330,33 +342,6 @@
       </tags>
   </entry>
   <entry>
-    <title>UI自动化基础--微软</title>
-    <url>/posts/d1646a55/</url>
-    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>UI</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>UI自动化框架说明</title>
-    <url>/posts/411091fa/</url>
-    <content><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`
-</code></pre>
-<p>___ 大纲 ___</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">框架的整体结构</span><br><span class="line">代码模块的结构，文件说明</span><br><span class="line">框架的执行过程</span><br><span class="line">框架优化&#x2F;改动以适应我们产品</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<p>___ 框架整体结构 ___<br><img src="/text_image/ui%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%B6%E6%9E%84.png" alt="alt_text"></p>
-<p><code>框架整体构成由五部分构成；分别是runner(入口)/TestCase(控制层)/PageObject(逻辑层)/日志文件/yaml配置模块/报告模块 </code></p>
-<p>___ runner(入口) ___</p>
-<p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
     <title>HEXO 官方使用指南</title>
     <url>/posts/4a17b156/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -378,38 +363,53 @@
 ]]></content>
   </entry>
   <entry>
-    <title>python-多进程</title>
-    <url>/posts/a1c10886/</url>
-    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python多进程简述</span><br><span class="line">python多进程模块方法介绍</span><br><span class="line">python多进程使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    <title>UI自动化框架说明</title>
+    <url>/posts/411091fa/</url>
+    <content><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`
+</code></pre>
+<p>___ 大纲 ___</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">框架的整体结构</span><br><span class="line">代码模块的结构，文件说明</span><br><span class="line">框架的执行过程</span><br><span class="line">框架优化&#x2F;改动以适应我们产品</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
 
-<ul>
-<li><p><em><strong>python多进程模块简述：</strong></em></p>
-<p>  <code>python由于GIL机制，多线程，实际仅消耗一个内核资源；因此效率较低，python要实现并发，提高性能，只能使用多进程模块，python的多进程模块为multiprocessing，通过使用Pool类实现多进程；   </code></p>
-</li>
-<li><p><em><strong>python多进程模块方法介绍：</strong></em></p>
-<p>  <code>   python多进程模块为multiprocessing，为python的内置模块；通过该模块封装的Pool()对象实现多进程，Pool类的属性介绍如下：</code></p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()	#需要被执行的方法&#x2F;任务</span><br><span class="line">iter&#x3D;iter	#迭代对象，list&#x2F;变量值</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(3)	#创建一个仅容纳3个进程的进程池，一旦工作任务超出进程的数量，则需等待，进程池中的进程被释放，任务才能进入进程池；</span><br><span class="line">__init__(self, group&#x3D;None, target&#x3D;None, name&#x3D;None, args&#x3D;(), kwargs&#x3D;&#123;&#125;)	#进程池的构造方法</span><br><span class="line">group：进程池所属的进程组，一旦不需要给值；</span><br><span class="line">target：待处理的任务或方法；</span><br><span class="line">name：进程池的别名，默认不给值；</span><br><span class="line">args：调用对象的位置参数，可给值元组&#x2F;列表等可迭代对象或者参数值；</span><br><span class="line">kwargs：调用对象的字典参数；</span><br><span class="line"></span><br><span class="line">使用：在win环境下，进程池必须在当前模块下执行，即必须在 if __name__&#x3D;&#x3D;main:下执行；</span><br></pre></td></tr></table></figure>
+<p>___ 框架整体结构 ___<br><img src="/text_image/ui%E8%87%AA%E5%8A%A8%E5%8C%96%E6%9E%B6%E6%9E%84.png" alt="alt_text"></p>
+<p><code>框架整体构成由五部分构成；分别是runner(入口)/TestCase(控制层)/PageObject(逻辑层)/日志文件/yaml配置模块/报告模块 </code></p>
+<p>___ runner(入口) ___</p>
+<p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>Python语法-unittest</title>
+    <url>/posts/5b3a24b8/</url>
+    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">unittest介绍</span><br><span class="line">unittest使用教程</span><br><span class="line">unittest中的方法说明</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
 
+
+<h4 id="unittest介绍"><a href="#unittest介绍" class="headerlink" title="unittest介绍"></a>unittest介绍</h4><p><code>unnittest是Python中使用的单测模块，能实现对模块，类，方法的自动调用执行，断言测试，环境管理，结果输出的功能</code></p>
+<p><strong>原理:</strong></p>
+<p>unittest构成要素，主要由以下几部分组成:</p>
 <ul>
-<li><strong>Pool()类中拥有的属性方法如下：</strong></li>
-</ul>
-<ul>
-<li>pool.map()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br></pre></td></tr></table></figure></li>
-<li>pool.map_async(run,iter)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map_async(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map_async(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br><span class="line">---效果和pool.map()不相同，mapasyc效率更高；mapasyc主进程未阻塞进程池，不需要等该批次的进程全执行完，新的任务就能进入进程池执行；常用pool.map()</span><br></pre></td></tr></table></figure></li>
-<li>pool.apply()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]])</span><br><span class="line">apply,参数需要为具体的变量值，且仅在python2支持；</span><br><span class="line">apply方法的原理是，阻塞进程池，一次仅让一个任务进入进程池，该任务完成后，才能执行下一个任务，实际是串行；</span><br></pre></td></tr></table></figure></li>
-<li>pool.applyasyc()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]],[, callback&#x3D;None]]])</span><br><span class="line">   applyasyc,参数需要为具体的变量值，在python3上支持；</span><br><span class="line">   applyasyc方法的原理是，进程池非阻塞，一次可以让多个任务进入进程池，且未对该批次任务进行阻塞，只要其中一个进程执行完后，就能释放资源，让新的任务进入进程池，实际是并行的,效率等同于mapasyc()；</span><br><span class="line">回调使用：pool.applyasyc(run,kwargs,callback&#x3D;func2)，run的返回作为func2的参数，执行完返回func2的值；</span><br><span class="line">   ---applyasyc效果等同于mapasyc()，只是他具有回调功能，且入参的变量不能是可迭代对象，必须为具体的变量值；</span><br></pre></td></tr></table></figure></li>
-<li>pool.terminal()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用：结束工作进程，不在处理未完成的任务</span><br><span class="line">pool.map(run,iter)</span><br><span class="line">pool.close()</span><br><span class="line">pool.run()</span><br><span class="line">sleep(2)</span><br><span class="line">pool.terminal()		#执行两秒后，哪怕进程未执行完，也结束该主进程</span><br></pre></td></tr></table></figure></li>
+<li>testcase:待测对象，待测对象必须要以test，类方法必须含test开头命名;</li>
+<li>TestLoader类：unittest中的类，用来获取模块中的待测对象；返回待测对象的列表；</li>
+<li>TestSuit：测试套件，将测试case加到套件，套件会根据加入的顺序来确认执行顺序；<ul>
+<li>该类的addTest方法，可将测试对象加到套件中，但对结构有要求，必须保持addTest(测试类(具体测试方法))，这种实现方案能保证最先加入套件的最先被执行；</li>
+<li>该类的另一个方法addTests,也可将测试对象加到套件中，但其对结构也有要求，必须保持addTests([测试类1(测试方法1)，测试类1（测试方法2）])</li>
+<li>这种方法能保证直接将获取的对象加入测试套件，执行顺序按加入套件的顺序，一般是按test的命名顺序：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">	testloader &#x3D; unittest.TestLoader()</span><br><span class="line">	# 获取测试类里面case名，以固定顺序数组返回</span><br><span class="line">	testnames &#x3D; testloader.loadTestsFromTestCase(t)</span><br><span class="line">	print(testnames)</span><br><span class="line">	suite &#x3D; unittest.TestSuite()</span><br><span class="line">	suite.addTest&#x2F;addTests(testnames)  </span><br><span class="line">	runn &#x3D; unittest.TextTestRunner(verbosity&#x3D;2)</span><br><span class="line">	runn.run(suite)</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">   suite &#x3D; unittest.TestSuite()</span><br><span class="line">   suite.addTest(sui.pa(Test_ap))	#支持加入对象是一个套件，以实现二次封装</span><br><span class="line">   runn &#x3D; unittest.TextTestRunner(verbosity&#x3D;2)</span><br><span class="line">   runn.run(suite)</span><br><span class="line">   </span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
-<li><p><em><strong>python多进程使用：</strong></em></p>
-</li>
+<li>TextTestRunner()类：unittest中的类；用来执行suit，控制测试case的执行，执行生成的是text的报告；如果是需要生成htmlt报告，则使用htmltestrunner;</li>
+<li>执行顺序：默认按case名称顺序来确认执行顺序，也可手动定制顺序，各suit来确定执行顺序；</li>
+<li>环境/前置/后置处理：使用unittest自带的方法，setUp/setDown,setUpClass setDownClass,其中前两个每个case执行前后都会分别执行前置后置处理；后两个在套件执行前后，分别执行签字和后置处理，且仅执行一次；</li>
+<li>断言：unittest提供了个钟断言方法，如下图:<br> <img src="/text_image/unitest%E6%96%AD%E8%A8%80.png" alt="alt_text"></li>
+<li>跳过某些测试case：可以使用unittest的skip装饰器，其中skip装饰器主要有3种;(@unittest.skip(reason)/@unittest.skipIf(condition,reason)/@unittest.skipUnless(condition,reason)/即在满足condition条件下跳过该用例，reason用于描述跳过的原因)</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()</span><br><span class="line">iter&#x3D;iter</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(multiprocessing.cpu_count())</span><br><span class="line">pool.map(run(),iter)</span><br><span class="line">pool.join()</span><br></pre></td></tr></table></figure>
+<p><a href="https://blog.51cto.com/u_2681882/2123613"><strong>参考：unitest使用详解</strong></a></p>
 ]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
       <tags>
-        <tag>python</tag>
-        <tag>多进程</tag>
+        <tag>unittest</tag>
+        <tag>参数化</tag>
       </tags>
   </entry>
   <entry>
@@ -453,38 +453,38 @@
       </tags>
   </entry>
   <entry>
-    <title>Python语法-unittest</title>
-    <url>/posts/5b3a24b8/</url>
-    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">unittest介绍</span><br><span class="line">unittest使用教程</span><br><span class="line">unittest中的方法说明</span><br></pre></td></tr></table></figure>
+    <title>python-多进程</title>
+    <url>/posts/a1c10886/</url>
+    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python多进程简述</span><br><span class="line">python多进程模块方法介绍</span><br><span class="line">python多进程使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <span id="more"></span>
 
-
-<h4 id="unittest介绍"><a href="#unittest介绍" class="headerlink" title="unittest介绍"></a>unittest介绍</h4><p><code>unnittest是Python中使用的单测模块，能实现对模块，类，方法的自动调用执行，断言测试，环境管理，结果输出的功能</code></p>
-<p><strong>原理:</strong></p>
-<p>unittest构成要素，主要由以下几部分组成:</p>
 <ul>
-<li>testcase:待测对象，待测对象必须要以test，类方法必须含test开头命名;</li>
-<li>TestLoader类：unittest中的类，用来获取模块中的待测对象；返回待测对象的列表；</li>
-<li>TestSuit：测试套件，将测试case加到套件，套件会根据加入的顺序来确认执行顺序；<ul>
-<li>该类的addTest方法，可将测试对象加到套件中，但对结构有要求，必须保持addTest(测试类(具体测试方法))，这种实现方案能保证最先加入套件的最先被执行；</li>
-<li>该类的另一个方法addTests,也可将测试对象加到套件中，但其对结构也有要求，必须保持addTests([测试类1(测试方法1)，测试类1（测试方法2）])</li>
-<li>这种方法能保证直接将获取的对象加入测试套件，执行顺序按加入套件的顺序，一般是按test的命名顺序：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">	testloader &#x3D; unittest.TestLoader()</span><br><span class="line">	# 获取测试类里面case名，以固定顺序数组返回</span><br><span class="line">	testnames &#x3D; testloader.loadTestsFromTestCase(t)</span><br><span class="line">	print(testnames)</span><br><span class="line">	suite &#x3D; unittest.TestSuite()</span><br><span class="line">	suite.addTest&#x2F;addTests(testnames)  </span><br><span class="line">	runn &#x3D; unittest.TextTestRunner(verbosity&#x3D;2)</span><br><span class="line">	runn.run(suite)</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">   suite &#x3D; unittest.TestSuite()</span><br><span class="line">   suite.addTest(sui.pa(Test_ap))	#支持加入对象是一个套件，以实现二次封装</span><br><span class="line">   runn &#x3D; unittest.TextTestRunner(verbosity&#x3D;2)</span><br><span class="line">   runn.run(suite)</span><br><span class="line">   </span><br></pre></td></tr></table></figure></li>
+<li><p><em><strong>python多进程模块简述：</strong></em></p>
+<p>  <code>python由于GIL机制，多线程，实际仅消耗一个内核资源；因此效率较低，python要实现并发，提高性能，只能使用多进程模块，python的多进程模块为multiprocessing，通过使用Pool类实现多进程；   </code></p>
+</li>
+<li><p><em><strong>python多进程模块方法介绍：</strong></em></p>
+<p>  <code>   python多进程模块为multiprocessing，为python的内置模块；通过该模块封装的Pool()对象实现多进程，Pool类的属性介绍如下：</code></p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()	#需要被执行的方法&#x2F;任务</span><br><span class="line">iter&#x3D;iter	#迭代对象，list&#x2F;变量值</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(3)	#创建一个仅容纳3个进程的进程池，一旦工作任务超出进程的数量，则需等待，进程池中的进程被释放，任务才能进入进程池；</span><br><span class="line">__init__(self, group&#x3D;None, target&#x3D;None, name&#x3D;None, args&#x3D;(), kwargs&#x3D;&#123;&#125;)	#进程池的构造方法</span><br><span class="line">group：进程池所属的进程组，一旦不需要给值；</span><br><span class="line">target：待处理的任务或方法；</span><br><span class="line">name：进程池的别名，默认不给值；</span><br><span class="line">args：调用对象的位置参数，可给值元组&#x2F;列表等可迭代对象或者参数值；</span><br><span class="line">kwargs：调用对象的字典参数；</span><br><span class="line"></span><br><span class="line">使用：在win环境下，进程池必须在当前模块下执行，即必须在 if __name__&#x3D;&#x3D;main:下执行；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Pool()类中拥有的属性方法如下：</strong></li>
+</ul>
+<ul>
+<li>pool.map()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br></pre></td></tr></table></figure></li>
+<li>pool.map_async(run,iter)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map_async(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map_async(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br><span class="line">---效果和pool.map()不相同，mapasyc效率更高；mapasyc主进程未阻塞进程池，不需要等该批次的进程全执行完，新的任务就能进入进程池执行；常用pool.map()</span><br></pre></td></tr></table></figure></li>
+<li>pool.apply()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]])</span><br><span class="line">apply,参数需要为具体的变量值，且仅在python2支持；</span><br><span class="line">apply方法的原理是，阻塞进程池，一次仅让一个任务进入进程池，该任务完成后，才能执行下一个任务，实际是串行；</span><br></pre></td></tr></table></figure></li>
+<li>pool.applyasyc()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]],[, callback&#x3D;None]]])</span><br><span class="line">   applyasyc,参数需要为具体的变量值，在python3上支持；</span><br><span class="line">   applyasyc方法的原理是，进程池非阻塞，一次可以让多个任务进入进程池，且未对该批次任务进行阻塞，只要其中一个进程执行完后，就能释放资源，让新的任务进入进程池，实际是并行的,效率等同于mapasyc()；</span><br><span class="line">回调使用：pool.applyasyc(run,kwargs,callback&#x3D;func2)，run的返回作为func2的参数，执行完返回func2的值；</span><br><span class="line">   ---applyasyc效果等同于mapasyc()，只是他具有回调功能，且入参的变量不能是可迭代对象，必须为具体的变量值；</span><br></pre></td></tr></table></figure></li>
+<li>pool.terminal()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用：结束工作进程，不在处理未完成的任务</span><br><span class="line">pool.map(run,iter)</span><br><span class="line">pool.close()</span><br><span class="line">pool.run()</span><br><span class="line">sleep(2)</span><br><span class="line">pool.terminal()		#执行两秒后，哪怕进程未执行完，也结束该主进程</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
-<li>TextTestRunner()类：unittest中的类；用来执行suit，控制测试case的执行，执行生成的是text的报告；如果是需要生成htmlt报告，则使用htmltestrunner;</li>
-<li>执行顺序：默认按case名称顺序来确认执行顺序，也可手动定制顺序，各suit来确定执行顺序；</li>
-<li>环境/前置/后置处理：使用unittest自带的方法，setUp/setDown,setUpClass setDownClass,其中前两个每个case执行前后都会分别执行前置后置处理；后两个在套件执行前后，分别执行签字和后置处理，且仅执行一次；</li>
-<li>断言：unittest提供了个钟断言方法，如下图:<br> <img src="/text_image/unitest%E6%96%AD%E8%A8%80.png" alt="alt_text"></li>
-<li>跳过某些测试case：可以使用unittest的skip装饰器，其中skip装饰器主要有3种;(@unittest.skip(reason)/@unittest.skipIf(condition,reason)/@unittest.skipUnless(condition,reason)/即在满足condition条件下跳过该用例，reason用于描述跳过的原因)</li>
+<li><p><em><strong>python多进程使用：</strong></em></p>
+</li>
 </ul>
-<p><a href="https://blog.51cto.com/u_2681882/2123613"><strong>参考：unitest使用详解</strong></a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()</span><br><span class="line">iter&#x3D;iter</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(multiprocessing.cpu_count())</span><br><span class="line">pool.map(run(),iter)</span><br><span class="line">pool.join()</span><br></pre></td></tr></table></figure>
 ]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
       <tags>
-        <tag>unittest</tag>
-        <tag>参数化</tag>
+        <tag>python</tag>
+        <tag>多进程</tag>
       </tags>
   </entry>
   <entry>
@@ -557,12 +557,6 @@
       </tags>
   </entry>
   <entry>
-    <title>uwnc</title>
-    <url>/posts/3de87ac/</url>
-    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>python语法特性</title>
     <url>/posts/d641bafc/</url>
     <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
@@ -575,30 +569,22 @@
       </tags>
   </entry>
   <entry>
-    <title>优秀博客</title>
-    <url>/posts/bb158cde/</url>
-    <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ul>
-<li><a href="https://cloud.tencent.com/developer/article/1974105">自动化专家</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/3335805/activities">性能</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/1011618/activities">腾讯性能优化</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/1016462">腾讯测开</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/2059614">测开</a></li>
-</ul>
-<span id="more"></span>
-
-<h1 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h1><ul>
-<li><a href="https://cloud.tencent.com/developer/user/2398817/inventories">python</a></li>
-<li><a href="https://www.cnblogs.com/vamei/tag/Python/">行业大佬python教程</a></li>
-</ul>
-<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
-<li><a href="https://cloud.tencent.com/developer/user/1642192">K8S腾讯专家</a></li>
-</ul>
+    <title>uwnc</title>
+    <url>/posts/3de87ac/</url>
+    <content><![CDATA[<p><a href="https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc">https://test.boomplay.com/TestUWNC/?bp_wvt=1&amp;bp_noc=1#/test-uwnc</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>专项--音视频质量评测</title>
+    <url>/posts/907af9b9/</url>
+    <content><![CDATA[<p><a href="https://mp.weixin.qq.com/s/KNJF2562R4cLCaMSxfsRLg">参考文章</a></p>
 ]]></content>
       <categories>
         <category>技术</category>
       </categories>
       <tags>
-        <tag>博客</tag>
+        <tag>专项</tag>
+        <tag>音视频专项</tag>
       </tags>
   </entry>
   <entry>
@@ -632,6 +618,33 @@
       <tags>
         <tag>K8S</tag>
         <tag>环境</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>优秀博客</title>
+    <url>/posts/bb158cde/</url>
+    <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ul>
+<li><a href="https://cloud.tencent.com/developer/article/1974105">自动化专家</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/3335805/activities">性能</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/1011618/activities">腾讯性能优化</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/1016462">腾讯测开</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/2059614">测开</a></li>
+</ul>
+<span id="more"></span>
+
+<h1 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h1><ul>
+<li><a href="https://cloud.tencent.com/developer/user/2398817/inventories">python</a></li>
+<li><a href="https://www.cnblogs.com/vamei/tag/Python/">行业大佬python教程</a></li>
+</ul>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
+<li><a href="https://cloud.tencent.com/developer/user/1642192">K8S腾讯专家</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
       </tags>
   </entry>
   <entry>
@@ -727,6 +740,45 @@
 <h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">♥腾讯+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以300均价，买入6手；高溢价时，优先使用中概换腾讯（中概大部分公司不盈利）</span><br><span class="line">1️⃣理想买点：328</span><br><span class="line">2️⃣理想卖点：1年内720</span><br><span class="line">3️⃣纳指买点：21pe</span><br><span class="line">4️⃣纳指卖点：35pe</span><br><span class="line"></span><br><span class="line">♥银行+家电25%：计划100k,余量16k</span><br><span class="line">已持仓84k,其中家电50k&#x2F;银行34k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右，招商计划以28均价，买入5手</span><br><span class="line">2️⃣美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">3️⃣格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34</span><br><span class="line"></span><br><span class="line">♥消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利20k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣五粮液150快,理想买点150&#x2F;143&#x2F;135</span><br><span class="line">2️⃣伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下；此刻的分红在投资收益率为9.56%；</span><br><span class="line"></span><br><span class="line">♥医药10%：计划40k,余量3k</span><br><span class="line">已持仓37k,其中恒瑞20k&#x2F;ETF17K</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣恒瑞按50倍市盈率20.07%净利润增长，卖点60（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">2️⃣300医药ETF计划0.42，买入7000个，卖点为0.7以上，对应300医药指数50倍以上的估值</span><br><span class="line">医药需要恒瑞和etf实现高低互换，高换低；</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
+    <title>可变对象合并方法</title>
+    <url>/posts/def45bf2/</url>
+    <content><![CDATA[<h1 id="可变对象合并的方法"><a href="#可变对象合并的方法" class="headerlink" title="可变对象合并的方法"></a>可变对象合并的方法</h1><p>eg:list</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">+:合并</span><br><span class="line">+=：增加赋值</span><br><span class="line">append()：添加</span><br><span class="line">extend()：插入</span><br><span class="line"></span><br><span class="line">list=[1,2,3]</span><br><span class="line">l=[4]</span><br><span class="line">s=list+l</span><br><span class="line">s=list.append(l)</span><br><span class="line">s=list.extend(l)</span><br><span class="line">list+=l</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;list&#x27;</span>,list)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;l&#x27;</span>,l)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;s&#x27;</span>,s)</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>+合并</strong></p>
+<p><code> 合并方法，是影响最小，速度最慢的方法；因为他不会改变原序列，会复制后生成一个新的序列    </code></p>
+<p><strong>append()</strong><br>    <code>    添加方法，会直接将对象添加到原序列末尾；会改变原序列    </code></p>
+<p><strong>extend()</strong><br>    <code>    插入方法，会将对象的元素添加到序列末尾，而不是对象，会改变原序列    </code></p>
+<p><strong>+=</strong><br>    <code>    增强赋值方法，类似于合并=；和extend()等效，效率比其低，会改变原序列    </code></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>序列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>全局函数局部函数</title>
+    <url>/posts/ae3a85c8/</url>
+    <content><![CDATA[<h1 id="全局局部函数"><a href="#全局局部函数" class="headerlink" title="全局局部函数"></a>全局局部函数</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">全局函数：global</span><br><span class="line">局部函数：nonlocal</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>global</strong></p>
+<p><code>全局函数在模块py中生效；使用时需要先定义，在声明；一次声明，模块中全局使用，全局和局部不能是同一个变量； global a a=s</code></p>
+<p><strong>nonlocal</strong></p>
+<p><code>局部变量函数在模块中局部函数中生效；需要先声明，后定义成局部变量，一旦定义成局部变量就仅在该函数中生效，离开该函数就不生效，不能和全局变量为同一个变量 a=s nonlocal a</code></p>
+<p><a href="https://www.cnblogs.com/liyang93/p/6669874.html">参考</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>变量</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>做点事</title>
     <url>/posts/2837d102/</url>
     <content><![CDATA[<h1 id="广告也是内容"><a href="#广告也是内容" class="headerlink" title="广告也是内容"></a>广告也是内容</h1><p><em><strong>广告内容加工</strong></em></p>
@@ -765,25 +817,6 @@
 <li><strong>痛点</strong></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>全局函数局部函数</title>
-    <url>/posts/ae3a85c8/</url>
-    <content><![CDATA[<h1 id="全局局部函数"><a href="#全局局部函数" class="headerlink" title="全局局部函数"></a>全局局部函数</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">全局函数：global</span><br><span class="line">局部函数：nonlocal</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p><strong>global</strong></p>
-<p><code>全局函数在模块py中生效；使用时需要先定义，在声明；一次声明，模块中全局使用，全局和局部不能是同一个变量； global a a=s</code></p>
-<p><strong>nonlocal</strong></p>
-<p><code>局部变量函数在模块中局部函数中生效；需要先声明，后定义成局部变量，一旦定义成局部变量就仅在该函数中生效，离开该函数就不生效，不能和全局变量为同一个变量 a=s nonlocal a</code></p>
-<p><a href="https://www.cnblogs.com/liyang93/p/6669874.html">参考</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>变量</tag>
-      </tags>
   </entry>
   <entry>
     <title>各家模拟器对比分析</title>
@@ -931,69 +964,6 @@
       </tags>
   </entry>
   <entry>
-    <title>可变对象合并方法</title>
-    <url>/posts/def45bf2/</url>
-    <content><![CDATA[<h1 id="可变对象合并的方法"><a href="#可变对象合并的方法" class="headerlink" title="可变对象合并的方法"></a>可变对象合并的方法</h1><p>eg:list</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">+:合并</span><br><span class="line">+=：增加赋值</span><br><span class="line">append()：添加</span><br><span class="line">extend()：插入</span><br><span class="line"></span><br><span class="line">list=[1,2,3]</span><br><span class="line">l=[4]</span><br><span class="line">s=list+l</span><br><span class="line">s=list.append(l)</span><br><span class="line">s=list.extend(l)</span><br><span class="line">list+=l</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;list&#x27;</span>,list)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;l&#x27;</span>,l)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;s&#x27;</span>,s)</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p><strong>+合并</strong></p>
-<p><code> 合并方法，是影响最小，速度最慢的方法；因为他不会改变原序列，会复制后生成一个新的序列    </code></p>
-<p><strong>append()</strong><br>    <code>    添加方法，会直接将对象添加到原序列末尾；会改变原序列    </code></p>
-<p><strong>extend()</strong><br>    <code>    插入方法，会将对象的元素添加到序列末尾，而不是对象，会改变原序列    </code></p>
-<p><strong>+=</strong><br>    <code>    增强赋值方法，类似于合并=；和extend()等效，效率比其低，会改变原序列    </code></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>序列</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>大数据--测试</title>
-    <url>/posts/ac354d65/</url>
-    <content><![CDATA[<p><code>大数据测试，工作内容主要有：数据测试、模型测试；要全局的了解大数据测试，必须先明白大数据的架构，工作过程</code></p>
-<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">大数据架构</span><br><span class="line">数据测试</span><br><span class="line">模型测试</span><br><span class="line">数据质量体系</span><br></pre></td></tr></table></figure>
-
-<h2 id="大数据架构"><a href="#大数据架构" class="headerlink" title="大数据架构"></a>大数据架构</h2><p><code>常见的大数据架构主要有Hadoop（分布式文件存储、计算系统）；由分布式文件系统（HDFS）/集群资源管理器（YARN）分布式计算框架（MR/mapreduce）构成；其中HDFS负责管理存储数据，YARN负责管理集群中的计算资源，调度和执行工作任务；</code></p>
-<p><strong>组件：</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">核心组件：</span><br><span class="line">HDFS:分布式文件系统，存储数据；</span><br><span class="line">YARN：集群资源管理器，管理计算资源，进行调度；</span><br><span class="line">MR：计算框架，一般负责离线计算；</span><br><span class="line"></span><br><span class="line">生态组件：</span><br><span class="line">PIG：数据流处理（用于并行计算的高级数据流语言和执行框架）；</span><br><span class="line">HBASE：NSQL型的分布式数据库，本质是一个键值系统,底层数据存储在文件系统HDFS上；</span><br><span class="line">SPARK：分布式计算引擎，类似MR,但在内存中计算，提供各种库，可以使开发者用来实现ETL、机器学习、数据流处理、图像计算等场景；</span><br><span class="line">FLUME：数据采集</span><br><span class="line">FLINK：针对流数据（实时数据）和批数据（离线数据）的实时处理引擎，有着高吞吐、低延迟的特点；</span><br><span class="line">SQOOP：数据导入导出</span><br><span class="line">KAFKA：分布式消息引擎及流处理平台，用来存储/传递消息（如日志或埋点）；</span><br><span class="line">AWS S3 ：静态资源存储，可能是大型的日志文件吧；</span><br><span class="line">SOLR：用于搜索索引的全文检索服务器；</span><br><span class="line"></span><br><span class="line">数据查询引擎:</span><br><span class="line">HIVE S3：数据仓库基础架构，提供数据汇总和命令行即席查询功能；</span><br><span class="line">IMPALA：高效的基于MPP架构的快速查询引擎，基于Hive并使用内存进行计算，兼顾ETL功能，具有实时、批处理、多并发等优点；</span><br><span class="line">KYLIN：开源分布式分析型数据仓库，提供Hadoop/Spark之上的SQL查询接口及多维分析（OLAP）能力，支持超大规模数据的压秒级查询（和视图有点点类似）；</span><br><span class="line">PRESTO：开源的分布式查询引擎，支持多数据源，大量级数据的场景；</span><br><span class="line"></span><br><span class="line">组件众多。不同组件提供不同能力，Hadoop框架，很像Android系统，是一个底层的数据框架。</span><br></pre></td></tr></table></figure>
-<p><img src="/text_image/Hadoop.png" alt="alt text"></p>
-<h3 id="传易音乐大数据架构"><a href="#传易音乐大数据架构" class="headerlink" title="传易音乐大数据架构"></a>传易音乐大数据架构</h3><p><strong>传易hadoop</strong><br><img src="/text_image/biddate.png" alt="alt text"></p>
-<p><strong>传易数仓架构</strong><br><img src="/text_image/bigdate_%E6%95%B0%E4%BB%93%E6%9E%B6%E6%9E%84.png" alt="alt text"></p>
-<p><strong>数据架构（数仓）</strong><br><img src="/text_image/bigdata_%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84.png" alt="alt text"></p>
-<p><strong>数据架构–横向数据分层</strong><br><img src="/text_image/%E6%A8%AA%E5%90%91%E6%95%B0%E6%8D%AE%E5%88%86%E5%B1%82.png" alt="alt text"></p>
-<p><strong>数据架构–纵向数据分层</strong><br><img src="/text_image/%E7%BA%B5%E5%90%91%E6%95%B0%E6%8D%AE%E5%88%86%E5%B1%82.png" alt="alt text"></p>
-<p><strong>传易大数据架构总述：</strong></p>
-<p><code>ps</code></p>
-<h2 id="数据测试"><a href="#数据测试" class="headerlink" title="数据测试"></a>数据测试</h2><p><code>数据测试前，需要对数据质量有认知；数据的价值在于需求方的使用，因此能满足需求方/使用方需求的数据才能称得上好数据</code></p>
-<h3 id="标准"><a href="#标准" class="headerlink" title="标准"></a>标准</h3><p><strong>数据质量评测标准：</strong></p>
-<p><code>数据质量我们一般从以下六个维度评判，同时我们往往还需求考虑数据的（+安全性）：</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">完整性：数据条数完整，类型完整，参数完整，是否有异常类型或者异常值</span><br><span class="line">准确性：结果准确，抽样准确，全局准确</span><br><span class="line">及时性：实时数据性能满足需求，各组件性能满足要求；如用户余额，抽奖次数等</span><br><span class="line">一致性：前后数据一致，参数和整体满足逻辑一致，如订阅总额=订阅单价*时长</span><br><span class="line">有效性：数据是有效的符合数据规范，如email数据、身份证数据规范</span><br><span class="line">唯一性：数据唯一，如每个用户的boom_id,每个音乐的music_id</span><br></pre></td></tr></table></figure>
-<p><strong>以上是测试时评判的定性标准，在实际工作中，结合业务，还需要考虑定量的标准(理论上标准也应该分阶段)</strong><br>待补</p>
-<p><strong>数据质量优劣的标准：</strong><br><code>除了测试时，需要考虑的场景外，还需要对整体的数据质量好坏进行评判，以下为数据质量的优劣评判标准</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">是否满足需求</span><br><span class="line">是否易于使用</span><br><span class="line">及其他非质量熟悉标准（见MFQ）</span><br></pre></td></tr></table></figure>
-
-<h3 id="数据质量评测流程："><a href="#数据质量评测流程：" class="headerlink" title="数据质量评测流程："></a><strong>数据质量评测流程：</strong></h3><p><code>要想把控数据质量，往往需要介入数据的全生命周期；这需要有对数据监控的能力，在流程的不同阶段能进行卡点接入，针对不同阶段，不同问题，应该有异常处理/兜底机制，需要迭代能力；同时需要支持量化，自动化；流程如下：</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">业务分析--分析数据流（流程图）、数据特性（计算型/时效型）</span><br><span class="line">设计阶段--数据类型、数据处理逻辑、数据链路、数据服务</span><br><span class="line">数据标准--量化的数据标准，作为内外部的规范和约束</span><br><span class="line">数据监控--数据监控能力，是否有全链路监控能力</span><br><span class="line">数据卡点--针对不同阶段的数据（流程）是否有卡点，能进行评测和定位问题</span><br><span class="line">数据环境--如何低成本，高效的维护数据测试环境</span><br><span class="line">构造数据--如何快速有效的实现可复用数据构造能力</span><br><span class="line">数据评测--如何保障评测的有效性、覆盖率</span><br><span class="line">数据量化--如何实现数据流程、质量、评测的量化，让过程结果更公开透明</span><br><span class="line">迭代优化--如何管理问题，运营数据，归纳形成标准，持续的优化体系</span><br></pre></td></tr></table></figure>
-<p><strong>数据治理可参考的切入阶段</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E5%8F%AF%E5%88%87%E5%85%A5%E7%9A%84%E9%98%B6%E6%AE%B5.png" alt="alt text"><br><strong>数据安全</strong></p>
-<p><code>以上的数据质量评测标准未说明安全情况，数据安全需要考虑数据本身的安全（隐私脱敏），流程安全，权限管控、安全监控，故在此处说明，安全需要覆盖的场景如下：</code><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8.png" alt="alt text"></p>
-<p><strong>数据安全实施策略</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E5%AE%9E%E6%96%BD.png" alt="alt text"></p>
-<p><strong>数据质量问题处理链路:</strong></p>
-<p><img src="/text_image/%E6%95%B0%E6%8D%AE%E9%97%AE%E9%A2%98.png" alt="alt text"></p>
-<h3 id="数据治理–开源框架"><a href="#数据治理–开源框架" class="headerlink" title="数据治理–开源框架"></a><strong>数据治理–开源框架</strong></h3><p><img src="/text_image/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6.png" alt="alt text"></p>
-<p><em><strong>整个过程为：建立目标、高效执行、流程管控、效果度量优化；需要遵循：有标准、有数据（监控）、可量化（度量）、自动化的原则；需要项目一起发力，才能有望达成目标；</strong></em></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>数据测试</tag>
-        <tag>大数据</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>大数据BI报表架构调整</title>
     <url>/posts/10f9513d/</url>
     <content><![CDATA[<h1 id="大数据BI报表架构调整"><a href="#大数据BI报表架构调整" class="headerlink" title="大数据BI报表架构调整"></a>大数据BI报表架构调整</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span>
@@ -1013,18 +983,55 @@
 ]]></content>
   </entry>
   <entry>
-    <title>常用app测试工具</title>
-    <url>/posts/28eebda3/</url>
-    <content><![CDATA[<h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
+    <title>大数据--测试</title>
+    <url>/posts/ac354d65/</url>
+    <content><![CDATA[<p><code>大数据测试，工作内容主要有：数据测试、模型测试；同时在不同的业务阶段，工作的重心不同，数据质量体系也会有不同的倾向，要全局的了解大数据测试，必须先明白大数据的架构，工作过程</code></p>
+<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">大数据架构</span><br><span class="line">数据测试</span><br><span class="line">模型测试</span><br><span class="line">数据质量体系</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
+<h2 id="大数据架构"><a href="#大数据架构" class="headerlink" title="大数据架构"></a>大数据架构</h2><p><code>常见的大数据架构主要有Hadoop（分布式文件存储、计算系统）；由分布式文件系统（HDFS）/集群资源管理器（YARN）分布式计算框架（MR/mapreduce）构成；其中HDFS负责管理存储数据，YARN负责管理集群中的计算资源，调度和执行工作任务；</code></p>
+<p><strong>组件：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">核心组件：</span><br><span class="line">HDFS:分布式文件系统，存储数据；</span><br><span class="line">YARN：集群资源管理器，管理计算资源，进行调度；</span><br><span class="line">MR：计算框架，一般负责离线计算；</span><br><span class="line"></span><br><span class="line">生态组件：</span><br><span class="line">PIG：数据流处理（用于并行计算的高级数据流语言和执行框架）；</span><br><span class="line">HBASE：NSQL型的分布式数据库，本质是一个键值系统,底层数据存储在文件系统HDFS上；</span><br><span class="line">SPARK：分布式计算引擎，类似MR,但在内存中计算，提供各种库，可以使开发者用来实现ETL、机器学习、数据流处理、图像计算等场景；</span><br><span class="line">FLUME：数据采集</span><br><span class="line">FLINK：针对流数据（实时数据）和批数据（离线数据）的实时处理引擎，有着高吞吐、低延迟的特点；</span><br><span class="line">SQOOP：数据导入导出</span><br><span class="line">KAFKA：分布式消息引擎及流处理平台，用来存储/传递消息（如日志或埋点）；</span><br><span class="line">AWS S3 ：静态资源存储，可能是大型的日志文件吧；</span><br><span class="line">SOLR：用于搜索索引的全文检索服务器；</span><br><span class="line"></span><br><span class="line">数据查询引擎:</span><br><span class="line">HIVE S3：数据仓库基础架构，提供数据汇总和命令行即席查询功能；</span><br><span class="line">IMPALA：高效的基于MPP架构的快速查询引擎，基于Hive并使用内存进行计算，兼顾ETL功能，具有实时、批处理、多并发等优点；</span><br><span class="line">KYLIN：开源分布式分析型数据仓库，提供Hadoop/Spark之上的SQL查询接口及多维分析（OLAP）能力，支持超大规模数据的压秒级查询（和视图有点点类似）；</span><br><span class="line">PRESTO：开源的分布式查询引擎，支持多数据源，大量级数据的场景；</span><br><span class="line"></span><br><span class="line">ETL：数据处理的过程，指数据提取（extract）、转换（transform）、加载（load）的过程；</span><br><span class="line">组件众多。不同组件提供不同能力，Hadoop框架，很像Android系统，是一个底层的数据框架。</span><br></pre></td></tr></table></figure>
+<p>参考架构：<br><img src="/text_image/Hadoop.png" alt="alt text"><br><img src="/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6.png" alt="alt text"></p>
+<h3 id="传易音乐大数据架构"><a href="#传易音乐大数据架构" class="headerlink" title="传易音乐大数据架构"></a>传易音乐大数据架构</h3><p><strong>传易hadoop</strong><br><img src="/text_image/biddate.png" alt="alt text"></p>
+<p><strong>传易数仓架构</strong><br><img src="/text_image/bigdate_%E6%95%B0%E4%BB%93%E6%9E%B6%E6%9E%84.png" alt="alt text"></p>
+<p><strong>数据架构（数仓）</strong><br><img src="/text_image/bigdata_%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84.png" alt="alt text"></p>
+<p><strong>数据架构–横向数据分层</strong><br><img src="/text_image/%E6%A8%AA%E5%90%91%E6%95%B0%E6%8D%AE%E5%88%86%E5%B1%82.png" alt="alt text"></p>
+<p><strong>数据架构–纵向数据分层</strong><br><img src="/text_image/%E7%BA%B5%E5%90%91%E6%95%B0%E6%8D%AE%E5%88%86%E5%B1%82.png" alt="alt text"></p>
+<p><strong>传易大数据架构总述：</strong></p>
+<p><code>传易架构的特点是处理的数据量大，数据来源复杂，人员多，业务应用广；存在无文档资料维护；测试介入低，质量不可度量；无测试环境，依赖线上数据开发测试，流程不规范，安全性差；缺乏标准和度量体系，投入产出比无法度量等问题；</code></p>
+<h2 id="数据测试"><a href="#数据测试" class="headerlink" title="数据测试"></a>数据测试</h2><p><code>数据测试前，需要对数据质量形成共识；数据的价值是由需求方决定的，能满足需求方/使用方需求的数据才能称得上好数据</code></p>
+<h3 id="标准"><a href="#标准" class="headerlink" title="标准"></a>标准</h3><h4 id="数据质量评测方向"><a href="#数据质量评测方向" class="headerlink" title="数据质量评测方向"></a>数据质量评测方向</h4><p><code>数据质量我们一般从以下六个维度评判，同时我们往往还需求考虑数据的（+安全性）：</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">完整性：数据不多不少。数据条数完整，类型完整，参数完整；不重复，看是否有异常类型或者异常值（枚举外）；</span><br><span class="line">准确性：结果准确，抽样准；表内横向准确，表间/数据链路间的数据准备或一致，参数数据分布准确；</span><br><span class="line">及时性：实时数据性能满足需求，各组件性能满足要求；如用户余额，抽奖次数等，主要受任务调度、优先级、处理耗时影响，一般关注整体和局部的耗时情况；</span><br><span class="line">一致性：前后数据一致，参数和总体满足逻辑一致，如订阅总额=订阅单价*时长</span><br><span class="line">有效性：数据是有效的符合数据规范，如email数据、身份证数据规范</span><br><span class="line">唯一性：数据唯一，如每个用户的boom_id,每个音乐的music_id</span><br></pre></td></tr></table></figure>
+<p><img src="/text_image/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E5%85%AD%E7%BB%B4%E5%BA%A6.jpg" alt="alt text"><br><strong>以上是测试时评判的方向，测试过程也需要有标准来评判有效性,如下：(理论不同对象/不同阶段都应该有标准)</strong></p>
+<h4 id="测试活动度量标准"><a href="#测试活动度量标准" class="headerlink" title="测试活动度量标准"></a>测试活动度量标准</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">覆盖率</span><br><span class="line">测试效果-产出度量</span><br><span class="line">测试件的质量</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">参考回答：</span><br><span class="line">功能测试自动化</span><br><span class="line">a) 轻量接口自动化测试</span><br><span class="line"></span><br><span class="line">jmeter，</span><br><span class="line"></span><br><span class="line">b) APP UI层面的自动化</span><br><span class="line"></span><br><span class="line">android：UI Automator Viewer，Android Junit，Instrumentation，UIAutomator，</span><br><span class="line"></span><br><span class="line">iOS:基于Instrument的iOS UI自动化，</span><br><span class="line"></span><br><span class="line">性能测试</span><br><span class="line"></span><br><span class="line">a) Web前端性能测试</span><br><span class="line"></span><br><span class="line">网络抓包工具：Wireshark</span><br><span class="line"></span><br><span class="line">网页文件大小</span><br><span class="line"></span><br><span class="line">webpagetest</span><br><span class="line"></span><br><span class="line">pagespeed insight</span><br><span class="line"></span><br><span class="line">chrome adb</span><br><span class="line"></span><br><span class="line">b) APP端性能测试</span><br><span class="line"></span><br><span class="line">Android内存占用分析：MAT</span><br><span class="line"></span><br><span class="line">iOS内存问题分析：ARC模式</span><br><span class="line"></span><br><span class="line">Android WebView性能分析：</span><br><span class="line"></span><br><span class="line">iOS WebView性能分析</span><br><span class="line"></span><br><span class="line">c) 后台服务性能测试</span><br><span class="line"></span><br><span class="line">负载，压力，耐久性</span><br><span class="line"></span><br><span class="line">可拓展性，基准</span><br><span class="line"></span><br><span class="line">工具：apacheAB，Jmeter，LoadRunner，</span><br><span class="line"></span><br><span class="line">专项测试</span><br><span class="line"></span><br><span class="line">a) 兼容性测试</span><br><span class="line"></span><br><span class="line">手工测试：操作系统，分辨率，rom，网络类型</span><br><span class="line"></span><br><span class="line">云平台：testin，脚本编写，Android。</span><br><span class="line"></span><br><span class="line">b) 流量测试</span><br><span class="line"></span><br><span class="line">Android自带的流量管理，</span><br><span class="line"></span><br><span class="line">iOS自带的Network</span><br><span class="line"></span><br><span class="line">tcpdump抓包</span><br><span class="line"></span><br><span class="line">WiFi代理抓包：Fiddler</span><br><span class="line"></span><br><span class="line">流量节省方法：压缩数据，json优于xml；WebP优于传统的JPG，PNG；控制访问的频次；只获取必要的数据；缓存；</span><br><span class="line"></span><br><span class="line">c) 电量测试</span><br><span class="line"></span><br><span class="line">基于测试设备的方法，购买电量表进行测试。</span><br><span class="line"></span><br><span class="line">GSam Battery Monitoe Pro</span><br><span class="line"></span><br><span class="line">iOS基于Instrument Energy工具</span><br><span class="line"></span><br><span class="line">d) 弱网络测试</span><br><span class="line"></span><br><span class="line">手机自带的网络状况模拟工具</span><br><span class="line"></span><br><span class="line">基于代理的弱网络的模拟:</span><br><span class="line"></span><br><span class="line">工具：windows：Network Delay Simulator</span><br><span class="line"></span><br><span class="line">Mac：Network Link Conditioner</span><br></pre></td></tr></table></figure>]]></content>
+<h4 id="数据质量度量标准"><a href="#数据质量度量标准" class="headerlink" title="数据质量度量标准"></a>数据质量度量标准</h4><p><code>除了测试时，需要考虑的场景外，还需要对整体的数据质量好坏进行评判，以下为数据质量的优劣评判标准</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">98%：全年可用天数达到98%以上，即服务不达标天数全年不超过7天。</span><br><span class="line">基线时间：核心 SLA 基线产出时间需满足业务要求。</span><br><span class="line">是否易于使用：及其他非质量熟悉标准（见MFQ）</span><br></pre></td></tr></table></figure>
+
+<p><strong>以上指标为传易的定量的标准，以下为美团的定量的标准</strong><br><img src="/text_image/%E7%BE%8E%E5%9B%A2%E9%87%8F%E5%8C%96%E6%8C%87%E6%A0%87.png" alt="alt text"></p>
+<h3 id="数据质量评测流程"><a href="#数据质量评测流程" class="headerlink" title="数据质量评测流程"></a>数据质量评测流程</h3><p><code>要想把控数据质量，往往需要介入数据的全生命周期；需要有标准可依，有规范进行约束，有监控数据可查，有工具可用来进行评测，流程结果可量化，并且可以持续运营迭代体系：</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">业务分析--分析数据流（流程图）、数据特性（计算型/时效型）</span><br><span class="line">设计阶段--数据类型、数据处理逻辑、数据链路、数据服务</span><br><span class="line">数据标准--量化的数据标准，作为内外部的规范和约束</span><br><span class="line">数据监控--数据监控能力，是否有全链路监控能力</span><br><span class="line">数据卡点--针对不同阶段的数据（流程）是否有卡点，能进行评测和定位问题</span><br><span class="line">数据环境--如何低成本，高效的维护数据测试环境</span><br><span class="line">构造数据--如何快速有效的实现可复用数据构造能力</span><br><span class="line">数据评测--如何保障评测的有效性、覆盖率、标准化</span><br><span class="line">数据量化--如何实现数据流程、质量、评测的量化，让过程结果更公开透明</span><br><span class="line">迭代优化--如何管理问题，运营数据，归纳形成标准，持续的优化体系</span><br></pre></td></tr></table></figure>
+<h3 id="测试执行"><a href="#测试执行" class="headerlink" title="测试执行"></a>测试执行</h3><p><strong>数据治理可参考的切入阶段</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E5%8F%AF%E5%88%87%E5%85%A5%E7%9A%84%E9%98%B6%E6%AE%B5.png" alt="alt text"></p>
+<h4 id="数据功能测试"><a href="#数据功能测试" class="headerlink" title="数据功能测试"></a><strong>数据功能测试</strong></h4><p><img src="/text_image/%E6%95%B0%E6%8D%AE%E5%8A%9F%E8%83%BD.jpg" alt="alt text"><br><strong>功能测试，很重要的一环是数据处理的测试即ETL</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E5%8A%9F%E8%83%BD.jpg" alt="alt text"></p>
+<h4 id="数据性能测试"><a href="#数据性能测试" class="headerlink" title="数据性能测试"></a><strong>数据性能测试</strong></h4><p><img src="/text_image/%E6%95%B0%E6%8D%AE%E6%80%A7%E8%83%BD.png" alt="alt text"></p>
+<h4 id="数据安全测试"><a href="#数据安全测试" class="headerlink" title="数据安全测试"></a><strong>数据安全测试</strong></h4><p><code>以上的数据质量评测标准未说明安全情况，数据安全需要考虑数据本身的安全（隐私脱敏），流程安全，权限管控、安全监控，故在此处说明，安全需要覆盖的场景如下：</code><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8.png" alt="alt text"></p>
+<p><strong>数据安全实施策略</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E5%AE%9E%E6%96%BD.png" alt="alt text"></p>
+<h4 id="数据质量问题处理链路"><a href="#数据质量问题处理链路" class="headerlink" title="数据质量问题处理链路"></a><strong>数据质量问题处理链路</strong></h4><p><img src="/text_image/%E6%95%B0%E6%8D%AE%E9%97%AE%E9%A2%98.png" alt="alt text"></p>
+<h3 id="数据治理–开源框架"><a href="#数据治理–开源框架" class="headerlink" title="数据治理–开源框架"></a><strong>数据治理–开源框架</strong></h3><p><img src="/text_image/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6.png" alt="alt text"></p>
+<p><em><strong>数据质量活动需要遵循：有标准、有数据（监控）、可量化（度量）、自动化的原则；整个过程总结如下：</strong></em><br><img src="/text_image/%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93.jpg" alt="alt text"></p>
+<ul>
+<li><a href="">大数据治理规划</a></li>
+<li><a href="https://mp.weixin.qq.com/s/AlxIMPnKcWSyhOSe8-OfTQ">美团–业务数据治理体系化思考与实践</a></li>
+</ul>
+<h2 id="模型测试"><a href="#模型测试" class="headerlink" title="模型测试"></a>模型测试</h2><p><a href="https://www.bujiaban.xyz/posts/d775e226/">广告-模型测试</a></p>
+<h2 id="大数据质量体系"><a href="#大数据质量体系" class="headerlink" title="大数据质量体系"></a>大数据质量体系</h2><p>PS:待补</p>
+]]></content>
       <categories>
         <category>技术</category>
       </categories>
       <tags>
-        <tag>app测试</tag>
-        <tag>工具</tag>
+        <tag>数据测试</tag>
+        <tag>大数据</tag>
       </tags>
   </entry>
   <entry>
@@ -1127,6 +1134,21 @@
       </tags>
   </entry>
   <entry>
+    <title>常用app测试工具</title>
+    <url>/posts/28eebda3/</url>
+    <content><![CDATA[<h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">参考回答：</span><br><span class="line">功能测试自动化</span><br><span class="line">a) 轻量接口自动化测试</span><br><span class="line"></span><br><span class="line">jmeter，</span><br><span class="line"></span><br><span class="line">b) APP UI层面的自动化</span><br><span class="line"></span><br><span class="line">android：UI Automator Viewer，Android Junit，Instrumentation，UIAutomator，</span><br><span class="line"></span><br><span class="line">iOS:基于Instrument的iOS UI自动化，</span><br><span class="line"></span><br><span class="line">性能测试</span><br><span class="line"></span><br><span class="line">a) Web前端性能测试</span><br><span class="line"></span><br><span class="line">网络抓包工具：Wireshark</span><br><span class="line"></span><br><span class="line">网页文件大小</span><br><span class="line"></span><br><span class="line">webpagetest</span><br><span class="line"></span><br><span class="line">pagespeed insight</span><br><span class="line"></span><br><span class="line">chrome adb</span><br><span class="line"></span><br><span class="line">b) APP端性能测试</span><br><span class="line"></span><br><span class="line">Android内存占用分析：MAT</span><br><span class="line"></span><br><span class="line">iOS内存问题分析：ARC模式</span><br><span class="line"></span><br><span class="line">Android WebView性能分析：</span><br><span class="line"></span><br><span class="line">iOS WebView性能分析</span><br><span class="line"></span><br><span class="line">c) 后台服务性能测试</span><br><span class="line"></span><br><span class="line">负载，压力，耐久性</span><br><span class="line"></span><br><span class="line">可拓展性，基准</span><br><span class="line"></span><br><span class="line">工具：apacheAB，Jmeter，LoadRunner，</span><br><span class="line"></span><br><span class="line">专项测试</span><br><span class="line"></span><br><span class="line">a) 兼容性测试</span><br><span class="line"></span><br><span class="line">手工测试：操作系统，分辨率，rom，网络类型</span><br><span class="line"></span><br><span class="line">云平台：testin，脚本编写，Android。</span><br><span class="line"></span><br><span class="line">b) 流量测试</span><br><span class="line"></span><br><span class="line">Android自带的流量管理，</span><br><span class="line"></span><br><span class="line">iOS自带的Network</span><br><span class="line"></span><br><span class="line">tcpdump抓包</span><br><span class="line"></span><br><span class="line">WiFi代理抓包：Fiddler</span><br><span class="line"></span><br><span class="line">流量节省方法：压缩数据，json优于xml；WebP优于传统的JPG，PNG；控制访问的频次；只获取必要的数据；缓存；</span><br><span class="line"></span><br><span class="line">c) 电量测试</span><br><span class="line"></span><br><span class="line">基于测试设备的方法，购买电量表进行测试。</span><br><span class="line"></span><br><span class="line">GSam Battery Monitoe Pro</span><br><span class="line"></span><br><span class="line">iOS基于Instrument Energy工具</span><br><span class="line"></span><br><span class="line">d) 弱网络测试</span><br><span class="line"></span><br><span class="line">手机自带的网络状况模拟工具</span><br><span class="line"></span><br><span class="line">基于代理的弱网络的模拟:</span><br><span class="line"></span><br><span class="line">工具：windows：Network Delay Simulator</span><br><span class="line"></span><br><span class="line">Mac：Network Link Conditioner</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>app测试</tag>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>搭建hexo博客</title>
     <url>/posts/8e88d59c/</url>
     <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
@@ -1143,7 +1165,7 @@
     <url>/posts/28d322d/</url>
     <content><![CDATA[<p><code>性能测试是一个很大的话题；包含客户端、服务端性能、各中间件的性能；一般来说只要有io操作，可能存在压力的场景都可能出现性能瓶颈；同时性能测试是整个质量体系最为重要的几个专项之一，性能会影响用户体验，服务的稳定性，好的性能架构能有效的节省成本（机器）；性能的原理，是通过模拟压力来对业务场景建模，然后监控性能指标，分析数据，得出性能结论，验证问题或结论，并总结成方法论；</code></p>
 <h1 id="性能流程"><a href="#性能流程" class="headerlink" title="性能流程"></a>性能流程</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">需求分析</span><br><span class="line">设计方案</span><br><span class="line">准备环境</span><br><span class="line">构造数据</span><br><span class="line">业务建模</span><br><span class="line">执行监控</span><br><span class="line">分析优化</span><br><span class="line">结论并验证</span><br><span class="line">方法论落地</span><br></pre></td></tr></table></figure>
-
+<span id="more"></span>
 <h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p><code>分析性能需求；基于需求做后续的性能工作；这里要明白，性能测试是基于目的+架构+风险的专项测试；常见的性能需求场景如下：</code></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">线上出现性能问题，需定位解决；</span><br><span class="line">大促活动等端时高性能需求，需评估性能；</span><br><span class="line">容量规划；</span><br></pre></td></tr></table></figure>
 
@@ -1178,25 +1200,6 @@
     <title>数据库性能测试</title>
     <url>/posts/ab3091af/</url>
     <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>百度质量体系建设</title>
-    <url>/posts/bcd76c52/</url>
-    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
-<li><em><strong>介绍</strong></em></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>目录</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>用例管理平台</title>
-    <url>/posts/c48e9a83/</url>
-    <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -1251,6 +1254,38 @@
       </categories>
       <tags>
         <tag>混沌工程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>用例管理平台</title>
+    <url>/posts/c48e9a83/</url>
+    <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>百度质量体系建设</title>
+    <url>/posts/bcd76c52/</url>
+    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
+<li><em><strong>介绍</strong></em></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>目录</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>稳定性治理-暴力回放</title>
+    <url>/posts/81de0e43/</url>
+    <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
+<h4 id="覆盖场景"><a href="#覆盖场景" class="headerlink" title="覆盖场景"></a>覆盖场景</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">music首页，点击歌单播放按钮播放，然后息屏进入后台，10s后切换回前台；</span><br><span class="line">music首页，点开播放列表，然后点击music播放音乐，然后关闭播放列表，然后切换到后台，10s后切换回前台；</span><br><span class="line">music首页，进入歌单，点击全部播放，点击全部下载，然后返回首页，上下滑动一屏，然后切换回后台，10s后切换回前台；</span><br><span class="line">music首页，点击头像登录，退出，切换到后台，10s后切换回前台；</span><br><span class="line">treding首页，点击任意music播放，切换到后台，10s后回到前台，关闭播放详情页；</span><br><span class="line">首页，滑动到treding页，上下滑动一屏；然后向左滑动一屏，上下滑动一屏，然后向左滑动一屏，上下滑动一屏,然后向左滑动一屏，上下滑动一屏,然后切换到后台，停留10s;然后点击导航页到library页，然后点击导航页到search页，然后点击导航页到music页；</span><br><span class="line">搜索页，搜索music，搜索结果页左右滚动一屏；点击结果页播放，然后切换到后台休眠10s,在切换回前台;</span><br><span class="line">首页，点击导航页进入library页；点击进入喜欢的music页，点击全部播放；然后切换到后台，停留10s，在切换回前台，退出music页，切换回首页；</span><br><span class="line">首页，切换到buzz页；上下滑动两屏，点击buzz关注按钮，buzz点赞，buzz评论，点击查看buzz详情，然后回退到buzz页，然后在切换到后台，休眠10s，在切换回前台；</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>稳定性</tag>
+        <tag>暴力回放</tag>
       </tags>
   </entry>
   <entry>
@@ -1422,19 +1457,6 @@
       </tags>
   </entry>
   <entry>
-    <title>稳定性治理-暴力回放</title>
-    <url>/posts/81de0e43/</url>
-    <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
-<h4 id="覆盖场景"><a href="#覆盖场景" class="headerlink" title="覆盖场景"></a>覆盖场景</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">music首页，点击歌单播放按钮播放，然后息屏进入后台，10s后切换回前台；</span><br><span class="line">music首页，点开播放列表，然后点击music播放音乐，然后关闭播放列表，然后切换到后台，10s后切换回前台；</span><br><span class="line">music首页，进入歌单，点击全部播放，点击全部下载，然后返回首页，上下滑动一屏，然后切换回后台，10s后切换回前台；</span><br><span class="line">music首页，点击头像登录，退出，切换到后台，10s后切换回前台；</span><br><span class="line">treding首页，点击任意music播放，切换到后台，10s后回到前台，关闭播放详情页；</span><br><span class="line">首页，滑动到treding页，上下滑动一屏；然后向左滑动一屏，上下滑动一屏，然后向左滑动一屏，上下滑动一屏,然后向左滑动一屏，上下滑动一屏,然后切换到后台，停留10s;然后点击导航页到library页，然后点击导航页到search页，然后点击导航页到music页；</span><br><span class="line">搜索页，搜索music，搜索结果页左右滚动一屏；点击结果页播放，然后切换到后台休眠10s,在切换回前台;</span><br><span class="line">首页，点击导航页进入library页；点击进入喜欢的music页，点击全部播放；然后切换到后台，停留10s，在切换回前台，退出music页，切换回首页；</span><br><span class="line">首页，切换到buzz页；上下滑动两屏，点击buzz关注按钮，buzz点赞，buzz评论，点击查看buzz详情，然后回退到buzz页，然后在切换到后台，休眠10s，在切换回前台；</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>稳定性</tag>
-        <tag>暴力回放</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>稳定性治理</title>
     <url>/posts/a30df9c8/</url>
     <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">概述，目的？</span><br><span class="line">怎么进行稳定性治理，稳定性治理的体系建设？</span><br><span class="line">稳定性治理的过程？</span><br></pre></td></tr></table></figure>
@@ -1599,60 +1621,6 @@
       </tags>
   </entry>
   <entry>
-    <title>类对象/实例对象/类方法/实例方法/静态方法</title>
-    <url>/posts/93899372/</url>
-    <content><![CDATA[<ul>
-<li><strong>类对象</strong></li>
-</ul>
-<span id="more"></span>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A(object):</span><br><span class="line">    def m1(self, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br><span class="line"></span><br><span class="line">    @classmethod</span><br><span class="line">    def m2(cls, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br><span class="line">    @staticmethod</span><br><span class="line">    def m3(n):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.m1(1) <span class="comment"># self: &lt;__main__.A object at 0x000001E596E41A90&gt;</span></span><br><span class="line">A.m2(1) <span class="comment"># cls: &lt;class &#x27;__main__.A&#x27;&gt;</span></span><br><span class="line">A.m3(1)</span><br><span class="line"></span><br><span class="line">按顺序执行时，执行class A（）创建了A这个类对象</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>实例对象</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">a = A()</span><br><span class="line">是对类对象A的实例化，创建了实例对象a,也可以说a绑定了实例对象</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>类方法</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">@classmethod</span><br><span class="line">def m2(cls, n):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><code>类中@classmethod下方的是类方法，写法也是固定写法；其中cls必须要有，cls绑定了类对象A(),在类外部，需要这样引用A(类对象).类方法 ；因为类方法在类中能被直接引用，一般是这样引用self.类方法；这是由于self绑定的是实例对象，根据实例对象可以查找到类对象</code></p>
-<ul>
-<li><p>使用场景</p>
-<p>  <code>  如果希望在方法裡面调用静态类，那么把方法定义成类方法是合适的，因为要是定义成静态方法，那么你就要显示地引用类A，这对继承来说可不是一件好事情。(为了方便调用，但又为了继承方便，因此不用静态方法，显示调用)  </code></p>
-</li>
-<li><p><strong>实例方法</strong></p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def m1(self, n):</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br></pre></td></tr></table></figure>
-<p><code>实例方法，必须带self;其中self绑定的实例对象a;因此外部使用可以这样使用，a.m1()；在类的内部self绑定了实例对象，因此可以直接使用self.m1来调用</code></p>
-<ul>
-<li><p>使用场景</p>
-<p>  <code>  需要将方法作为对象属性，进行调用，继承，传递的方法，大部分类方法都会定义成实例方法；  </code></p>
-</li>
-<li><p><strong>静态方法</strong></p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@staticmethod</span><br><span class="line">def m3(n):</span><br><span class="line">	pass</span><br><span class="line">        </span><br><span class="line">静态方法，就是普通函数；和类对象和实例对象均无绑定关系；</span><br><span class="line">即可被类调用，也可通过实例调用；</span><br><span class="line">A.m3()</span><br><span class="line">a.m3()</span><br><span class="line">self.m3</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>使用场景</p>
-<p>  <code>  如果在方法中不需要访问任何实例方法和属性，纯粹地通过传入参数并返回数据的功能性方法，那么它就适合用静态方法来定义，它节省了实例化对象的开销成本，往往这种方法放在类外面的模块层作为一个函数存在也是没问题的，而放在类中，仅为这个类服务（定义了一个局部域函数仅为该类专门服务）。  </code></p>
-</li>
-<li><p><strong>装饰器</strong></p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def A(FUN):</span><br><span class="line">	<span class="built_in">return</span> FUN+1</span><br><span class="line">    </span><br><span class="line">@FUN</span><br><span class="line">def b():</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">在装饰器中@后跟的是父方法，注意类方法/静态方法/装饰器方法区别	</span><br></pre></td></tr></table></figure>
-<p><a href="https://zhuanlan.zhihu.com/p/28010894">参考</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>算法--数据结构1️⃣</title>
     <url>/posts/db1660cd/</url>
     <content><![CDATA[<h1 id="常见的数据结构有"><a href="#常见的数据结构有" class="headerlink" title="常见的数据结构有"></a>常见的数据结构有</h1><p> <code>序列（列表、链表，元祖，队列，二叉树、堆、栈）、图、集合、字典</code></p>
@@ -1753,6 +1721,60 @@
 </ul>
 <p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>类对象/实例对象/类方法/实例方法/静态方法</title>
+    <url>/posts/93899372/</url>
+    <content><![CDATA[<ul>
+<li><strong>类对象</strong></li>
+</ul>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A(object):</span><br><span class="line">    def m1(self, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br><span class="line"></span><br><span class="line">    @classmethod</span><br><span class="line">    def m2(cls, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br><span class="line">    @staticmethod</span><br><span class="line">    def m3(n):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.m1(1) <span class="comment"># self: &lt;__main__.A object at 0x000001E596E41A90&gt;</span></span><br><span class="line">A.m2(1) <span class="comment"># cls: &lt;class &#x27;__main__.A&#x27;&gt;</span></span><br><span class="line">A.m3(1)</span><br><span class="line"></span><br><span class="line">按顺序执行时，执行class A（）创建了A这个类对象</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>实例对象</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">a = A()</span><br><span class="line">是对类对象A的实例化，创建了实例对象a,也可以说a绑定了实例对象</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>类方法</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">@classmethod</span><br><span class="line">def m2(cls, n):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>类中@classmethod下方的是类方法，写法也是固定写法；其中cls必须要有，cls绑定了类对象A(),在类外部，需要这样引用A(类对象).类方法 ；因为类方法在类中能被直接引用，一般是这样引用self.类方法；这是由于self绑定的是实例对象，根据实例对象可以查找到类对象</code></p>
+<ul>
+<li><p>使用场景</p>
+<p>  <code>  如果希望在方法裡面调用静态类，那么把方法定义成类方法是合适的，因为要是定义成静态方法，那么你就要显示地引用类A，这对继承来说可不是一件好事情。(为了方便调用，但又为了继承方便，因此不用静态方法，显示调用)  </code></p>
+</li>
+<li><p><strong>实例方法</strong></p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def m1(self, n):</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br></pre></td></tr></table></figure>
+<p><code>实例方法，必须带self;其中self绑定的实例对象a;因此外部使用可以这样使用，a.m1()；在类的内部self绑定了实例对象，因此可以直接使用self.m1来调用</code></p>
+<ul>
+<li><p>使用场景</p>
+<p>  <code>  需要将方法作为对象属性，进行调用，继承，传递的方法，大部分类方法都会定义成实例方法；  </code></p>
+</li>
+<li><p><strong>静态方法</strong></p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@staticmethod</span><br><span class="line">def m3(n):</span><br><span class="line">	pass</span><br><span class="line">        </span><br><span class="line">静态方法，就是普通函数；和类对象和实例对象均无绑定关系；</span><br><span class="line">即可被类调用，也可通过实例调用；</span><br><span class="line">A.m3()</span><br><span class="line">a.m3()</span><br><span class="line">self.m3</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>使用场景</p>
+<p>  <code>  如果在方法中不需要访问任何实例方法和属性，纯粹地通过传入参数并返回数据的功能性方法，那么它就适合用静态方法来定义，它节省了实例化对象的开销成本，往往这种方法放在类外面的模块层作为一个函数存在也是没问题的，而放在类中，仅为这个类服务（定义了一个局部域函数仅为该类专门服务）。  </code></p>
+</li>
+<li><p><strong>装饰器</strong></p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def A(FUN):</span><br><span class="line">	<span class="built_in">return</span> FUN+1</span><br><span class="line">    </span><br><span class="line">@FUN</span><br><span class="line">def b():</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">在装饰器中@后跟的是父方法，注意类方法/静态方法/装饰器方法区别	</span><br></pre></td></tr></table></figure>
+<p><a href="https://zhuanlan.zhihu.com/p/28010894">参考</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
   </entry>
   <entry>
     <title>装饰器详解</title>
