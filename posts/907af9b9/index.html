@@ -22,19 +22,21 @@
     var CONFIG = {"hostname":"bujiaban.xyz","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="参考文章">
+  <meta name="description" content="音视频评测，主要涉及到编解码，网络传输，原生资源的前后置处理；传输流程如下： 音频 先确定音频的质量评测维度（由于是流媒体，网络是决定因素，因此需要覆盖不同网络下的这些指标）： 性能、码率、抗性、时延、音质、响度、连麦通话、音效：（由 SDK 服务保障并提供技术指标） 卡顿（流畅度）：手机终端测试，通过卡顿率来评估，为卡顿率 &#x3D; sum (&gt;200ms 卡顿时间) &#x2F; 通话时间； 流畅度评估">
 <meta property="og:type" content="article">
 <meta property="og:title" content="专项--音视频质量评测">
 <meta property="og:url" content="https://bujiaban.xyz/posts/907af9b9/index.html">
 <meta property="og:site_name" content="Bu Jia Ban">
-<meta property="og:description" content="参考文章">
+<meta property="og:description" content="音视频评测，主要涉及到编解码，网络传输，原生资源的前后置处理；传输流程如下： 音频 先确定音频的质量评测维度（由于是流媒体，网络是决定因素，因此需要覆盖不同网络下的这些指标）： 性能、码率、抗性、时延、音质、响度、连麦通话、音效：（由 SDK 服务保障并提供技术指标） 卡顿（流畅度）：手机终端测试，通过卡顿率来评估，为卡顿率 &#x3D; sum (&gt;200ms 卡顿时间) &#x2F; 通话时间； 流畅度评估">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bujiaban.xyz/text_image/%E9%9F%B3%E8%A7%86%E9%A2%91%E4%BC%A0%E8%BE%93%E6%B5%81%E7%A8%8B.png">
 <meta property="article:published_time" content="2023-08-08T04:41:00.000Z">
-<meta property="article:modified_time" content="2023-08-08T07:48:44.207Z">
+<meta property="article:modified_time" content="2023-08-08T14:37:45.478Z">
 <meta property="article:author" content="GAVIN HUANG">
 <meta property="article:tag" content="专项">
 <meta property="article:tag" content="音视频专项">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bujiaban.xyz/text_image/%E9%9F%B3%E8%A7%86%E9%A2%91%E4%BC%A0%E8%BE%93%E6%B5%81%E7%A8%8B.png">
 
 <link rel="canonical" href="https://bujiaban.xyz/posts/907af9b9/">
 
@@ -223,7 +225,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-08-08 12:41:00 / 修改时间：15:48:44" itemprop="dateCreated datePublished" datetime="2023-08-08T12:41:00+08:00">2023-08-08</time>
+              <time title="创建时间：2023-08-08 12:41:00 / 修改时间：22:37:45" itemprop="dateCreated datePublished" datetime="2023-08-08T12:41:00+08:00">2023-08-08</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,7 +257,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -274,7 +276,64 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/KNJF2562R4cLCaMSxfsRLg">参考文章</a></p>
+        <p><code>音视频评测，主要涉及到编解码，网络传输，原生资源的前后置处理；传输流程如下：</code><br><img src="/text_image/%E9%9F%B3%E8%A7%86%E9%A2%91%E4%BC%A0%E8%BE%93%E6%B5%81%E7%A8%8B.png" alt="alt text"></p>
+<h1 id="音频"><a href="#音频" class="headerlink" title="音频"></a>音频</h1><ul>
+<li>先确定音频的质量评测维度（由于是流媒体，网络是决定因素，因此需要覆盖不同网络下的这些指标）：<ul>
+<li>性能、码率、抗性、时延、音质、响度、连麦通话、音效：（由 SDK 服务保障并提供技术指标）</li>
+<li>卡顿（流畅度）：手机终端测试，通过卡顿率来评估，为卡顿率 = sum (&gt;200ms 卡顿时间) / 通话时间；<ul>
+<li>流畅度评估原理（安卓）：通过获取 gfxinfo 中的帧信息，统计帧耗时和卡顿率</li>
+</ul>
+</li>
+<li>除以上的常规维度外，还有音频专属的：绝对等级评分(MOS)、失真等级评分(DCR)、相对等级评分（CCR）等维度;通过以下算法评估：<ul>
+<li>python-pesq（PESQ）</li>
+<li>分段信噪比（SegSNR）</li>
+<li>对数似然比测度（LLR）</li>
+<li>对数谱距离（LSD）</li>
+<li>可短时客观可懂（STOI）</li>
+<li>加权谱倾斜测度（WSS）</li>
+<li>感知客观语音质量评估（POLQA）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>然后确定合规的质量标准</li>
+<li>分析评测数据，对比质量标准，得出评测结果<br><code>ps:音频的格式分为有损格式、无损格式、私有格式，部分有损格式如下：wav、MP3、oog、aac、ac3；原始文件格式为pcm</code></li>
+</ul>
+<h1 id="视频"><a href="#视频" class="headerlink" title="视频"></a>视频</h1><ul>
+<li><p>先确定音频的质量评测维度（由于是流媒体，网络是决定因素，因此需要覆盖不同网络下的这些指标:）</p>
+<ul>
+<li>性能、码率、抗性、时延、音画同步：（由 SDK 服务保障并提供技术指标）</li>
+<li>卡顿（流畅度）：手机终端测试，通过卡顿率来评估，为卡顿率 = sum (&gt;200ms 卡顿时间) / 通话时间；<ul>
+<li>流畅度评估原理（安卓）：通过获取 gfxinfo 中的帧信息，统计帧耗时和卡顿率</li>
+</ul>
+</li>
+<li>视频质量：分为主观评测(人工)和客观评测,通过开源算法进行评估；<ul>
+<li>主观评测：依赖人眼观看并打分</li>
+<li>客观评测：客观评测算法，主要分为全参考、无参考、部分参考算法，参考的是源资源，算法如下<ul>
+<li>PLCC指标：Pearson 线性相关系数，代表模型的线性相关性。</li>
+<li>SROCC指标：Spearman 秩序相关系数，用来衡量秩序的相关性的，代表模型的非线性相关性。假设有两组序列 X 和 Y，其秩序为 R(X)和 R(Y)，则 SROCC(X, Y) = PLCC(R(X), R(Y))。</li>
+<li>全参考算法：netflix VMAF、腾讯的DVQA</li>
+<li>netflix VMAF测试的指标：视觉信息逼真度(VIF)+视觉信息逼真度(VIF)+Motion</li>
+<li>DVQA:<a target="_blank" rel="noopener" href="https://github.com/Tencent/DVQA">https://github.com/Tencent/DVQA</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>然后确定合规的质量标准</p>
+</li>
+<li><p>分析评测数据，对比质量标准，得出评测结果<br><code>MP4、FLV（在线视频格式）、AVI、MOV、ASF、WMV、RM、RMVB等</code></p>
+</li>
+<li><p><strong>音视频评测辅助评测和定位问题使用的工具:</strong></p>
+<ul>
+<li>弱网测试工具：QNET</li>
+<li>弱网测试工具：network emulator，微软开源，可实现带宽、丢包、延时、抖动、综合网络等弱网参数的限制。</li>
+<li>音视频处理工具 FFmpeg：统计码率、</li>
+</ul>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/KNJF2562R4cLCaMSxfsRLg">参考文章</a></p>
 
     </div>
 
@@ -403,6 +462,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9F%B3%E9%A2%91"><span class="nav-number">1.</span> <span class="nav-text">音频</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%86%E9%A2%91"><span class="nav-number">2.</span> <span class="nav-text">视频</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 	  
@@ -489,12 +549,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">112k</span>
+    <span title="站点总字数">113k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:42</span>
+    <span title="站点阅读时长">1:43</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

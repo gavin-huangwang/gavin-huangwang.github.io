@@ -6,7 +6,7 @@
   <link href="https://bujiaban.xyz/atom.xml" rel="self"/>
   
   <link href="https://bujiaban.xyz/"/>
-  <updated>2023-08-08T07:48:44.207Z</updated>
+  <updated>2023-08-08T14:37:45.478Z</updated>
   <id>https://bujiaban.xyz/</id>
   
   <author>
@@ -21,15 +21,14 @@
     <link href="https://bujiaban.xyz/posts/907af9b9/"/>
     <id>https://bujiaban.xyz/posts/907af9b9/</id>
     <published>2023-08-08T04:41:00.000Z</published>
-    <updated>2023-08-08T07:48:44.207Z</updated>
+    <updated>2023-08-08T14:37:45.478Z</updated>
     
-    <content type="html"><![CDATA[<p><a href="https://mp.weixin.qq.com/s/KNJF2562R4cLCaMSxfsRLg">参考文章</a></p>]]></content>
+    <content type="html"><![CDATA[<p><code>音视频评测，主要涉及到编解码，网络传输，原生资源的前后置处理；传输流程如下：</code><br><img src="/text_image/%E9%9F%B3%E8%A7%86%E9%A2%91%E4%BC%A0%E8%BE%93%E6%B5%81%E7%A8%8B.png" alt="alt text"></p><h1 id="音频"><a href="#音频" class="headerlink" title="音频"></a>音频</h1><ul><li>先确定音频的质量评测维度（由于是流媒体，网络是决定因素，因此需要覆盖不同网络下的这些指标）：<ul><li>性能、码率、抗性、时延、音质、响度、连麦通话、音效：（由 SDK 服务保障并提供技术指标）</li><li>卡顿（流畅度）：手机终端测试，通过卡顿率来评估，为卡顿率 = sum (&gt;200ms 卡顿时间) / 通话时间；<ul><li>流畅度评估原理（安卓）：通过获取 gfxinfo 中的帧信息，统计帧耗时和卡顿率</li></ul></li><li>除以上的常规维度外，还有音频专属的：绝对等级评分(MOS)、失真等级评分(DCR)、相对等级评分（CCR）等维度;通过以下算法评估：<ul><li>python-pesq（PESQ）</li><li>分段信噪比（SegSNR）</li><li>对数似然比测度（LLR）</li><li>对数谱距离（LSD）</li><li>可短时客观可懂（STOI）</li><li>加权谱倾斜测度（WSS）</li><li>感知客观语音质量评估（POLQA）</li></ul></li></ul></li><li>然后确定合规的质量标准</li><li>分析评测数据，对比质量标准，得出评测结果<br><code>ps:音频的格式分为有损格式、无损格式、私有格式，部分有损格式如下：wav、MP3、oog、aac、ac3；原始文件格式为pcm</code></li></ul><h1 id="视频"><a href="#视频" class="headerlink" title="视频"></a>视频</h1><ul><li><p>先确定音频的质量评测维度（由于是流媒体，网络是决定因素，因此需要覆盖不同网络下的这些指标:）</p><ul><li>性能、码率、抗性、时延、音画同步：（由 SDK 服务保障并提供技术指标）</li><li>卡顿（流畅度）：手机终端测试，通过卡顿率来评估，为卡顿率 = sum (&gt;200ms 卡顿时间) / 通话时间；<ul><li>流畅度评估原理（安卓）：通过获取 gfxinfo 中的帧信息，统计帧耗时和卡顿率</li></ul></li><li>视频质量：分为主观评测(人工)和客观评测,通过开源算法进行评估；<ul><li>主观评测：依赖人眼观看并打分</li><li>客观评测：客观评测算法，主要分为全参考、无参考、部分参考算法，参考的是源资源，算法如下<ul><li>PLCC指标：Pearson 线性相关系数，代表模型的线性相关性。</li><li>SROCC指标：Spearman 秩序相关系数，用来衡量秩序的相关性的，代表模型的非线性相关性。假设有两组序列 X 和 Y，其秩序为 R(X)和 R(Y)，则 SROCC(X, Y) = PLCC(R(X), R(Y))。</li><li>全参考算法：netflix VMAF、腾讯的DVQA</li><li>netflix VMAF测试的指标：视觉信息逼真度(VIF)+视觉信息逼真度(VIF)+Motion</li><li>DVQA:<a href="https://github.com/Tencent/DVQA">https://github.com/Tencent/DVQA</a></li></ul></li></ul></li></ul></li><li><p>然后确定合规的质量标准</p></li><li><p>分析评测数据，对比质量标准，得出评测结果<br><code>MP4、FLV（在线视频格式）、AVI、MOV、ASF、WMV、RM、RMVB等</code></p></li><li><p><strong>音视频评测辅助评测和定位问题使用的工具:</strong></p><ul><li>弱网测试工具：QNET</li><li>弱网测试工具：network emulator，微软开源，可实现带宽、丢包、延时、抖动、综合网络等弱网参数的限制。</li><li>音视频处理工具 FFmpeg：统计码率、</li></ul></li></ul><p><a href="https://mp.weixin.qq.com/s/KNJF2562R4cLCaMSxfsRLg">参考文章</a></p>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s/KNJF2562R4cLCaMSxfsRLg&quot;&gt;参考文章&lt;/a&gt;&lt;/p&gt;
-</summary>
+    <summary type="html">&lt;p&gt;&lt;code&gt;音视频评测，主要涉及到编解码，网络传输，原生资源的前后置处理；传输流程如下：&lt;/code&gt;&lt;br&gt;&lt;img src=&quot;/text_image/%E9%9F%B3%E8%A7%86%E9%A2%91%E4%BC%A0%E8%BE%93%E6%B5%81%E7%A8</summary>
       
     
     
