@@ -219,7 +219,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-08-09 11:37:00 / 修改时间：12:29:32" itemprop="dateCreated datePublished" datetime="2023-08-09T11:37:00+08:00">2023-08-09</time>
+              <time title="创建时间：2023-08-09 11:37:00 / 修改时间：13:31:44" itemprop="dateCreated datePublished" datetime="2023-08-09T11:37:00+08:00">2023-08-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -260,16 +260,14 @@
       
           <p><code>索引是一种优化db查询的技巧，一种将表数据排序的结构；通过将db的单列/多列值设定为索引，在查询时就能根据索引值，直接查询到索引所在行的内存地址，不用查询全表了，从而大幅提供查询的速度</code></p>
 <h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">索引的底层（原理）</span><br><span class="line">索引的类型</span><br><span class="line">索引的操作</span><br><span class="line">索引的使用</span><br></pre></td></tr></table></figure>
-<h2 id="索引的底层"><a href="#索引的底层" class="headerlink" title="索引的底层"></a>索引的底层</h2><p><code>底层主要维护了一个排序的数组，其中含有索引值和所在行内存地址的一组数据；索引底层有两种数据结构，B+数索引、哈希索引</code></p>
-<ul>
-<li>B+树索引：是一个平衡树，下标是索引，值是内存地址；查询的时间复杂度为O(log（n）)；可以用于排序（索引表是数据有顺序），和范围查找</li>
-<li>哈希索引：是哈希的键值对，键是索引值，值为内存地址；查询的时间复杂度为O(1)；只能用于等值比较（键值）</li>
-</ul>
-<h2 id="索引的类型"><a href="#索引的类型" class="headerlink" title="索引的类型"></a>索引的类型</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">普通索引：任何列都能做索引，索引无值要求，可重复或为空</span><br><span class="line">唯一索引：索引所在列的值必须唯一，但列值可为空</span><br><span class="line">主键索引：将列的主键作为索引，所在列，值唯一，且不能为空</span><br><span class="line">组合索引：将多个列组合视作索引；如果一个表中的数据在查询时有多个字段总是同时出现则这些字段就可以作为复合索引,形成索引覆盖可以提高查询的效率（实际提高的是<span class="built_in">where</span>过滤的效率）</span><br><span class="line">全文索引：只有用于Innodb、MyIsam 表格，并且只能对 CHAR、VARCHAR、TEXT 列建全文索引；用于当索引的字段值很长，且用like模糊匹配效率较低时；语法</span><br><span class="line">前缀索引：当索引列是字符串时，可以使用字符串前缀作为索引，减少索引长度</span><br></pre></td></tr></table></figure>
-<h2 id="索引的操作"><a href="#索引的操作" class="headerlink" title="索引的操作"></a>索引的操作</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">创建索引：create index index_name on table_name(列名)</span><br><span class="line">删除索引：drop index index_name on table_name</span><br><span class="line">修改索引：alter table </span><br><span class="line">  添加普通/组合索引：alter table table_name add INDEX index_name(列1，列2)</span><br><span class="line">  添加唯一索引：alter tablet table_name ADD UNIQUE index_name (列1)</span><br><span class="line">  添加主键索引：alter table table_name ADD PRIMARY KEY index_name(列1)</span><br><span class="line">  添加全表索引：alter table table_name ADD DULLTEXT index_name (列1)</span><br><span class="line">  添加前缀索引：alt table table_name add INDEX index_name(email(6))	//这里以email列的键值前6位作为索引</span><br><span class="line">  编辑索引：先删除--后添加</span><br><span class="line">查询索引：show index from table_name</span><br></pre></td></tr></table></figure>
-<h2 id="索引的使用"><a href="#索引的使用" class="headerlink" title="索引的使用"></a>索引的使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">使用于大量数据、或大表查询的场景；</span><br><span class="line">将经常使用的列作为索引；</span><br><span class="line">尽量使用短索引；</span><br><span class="line">如果用字符串值的列，最好使用前缀索引，防止索引值过长，前缀索引可以用来实现短索引；</span><br></pre></td></tr></table></figure>
-<p><strong>索引的优势是对索引列进行了排序，不用全表查询，有查询优势；但对数据量很小的表，还有写入时，由于要改所有的索引，其实会降低写入性能；因此应该用于大表查询场景，不能用于频繁写入场景</strong></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/939ecb54/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -311,10 +309,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-08-08 12:41:00 / 修改时间：22:37:45" itemprop="dateCreated datePublished" datetime="2023-08-08T12:41:00+08:00">2023-08-08</time>
+              <time title="创建时间：2023-08-08 12:41:00" itemprop="dateCreated datePublished" datetime="2023-08-08T12:41:00+08:00">2023-08-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-08-09 13:32:03" itemprop="dateModified" datetime="2023-08-09T13:32:03+08:00">2023-08-09</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -353,64 +357,14 @@
 
       
           <p><code>音视频评测，主要涉及到编解码，网络传输，原生资源的前后置处理；传输流程如下：</code><br><img src="/text_image/%E9%9F%B3%E8%A7%86%E9%A2%91%E4%BC%A0%E8%BE%93%E6%B5%81%E7%A8%8B.png" alt="alt text"></p>
-<h1 id="音频"><a href="#音频" class="headerlink" title="音频"></a>音频</h1><ul>
-<li>先确定音频的质量评测维度（由于是流媒体，网络是决定因素，因此需要覆盖不同网络下的这些指标）：<ul>
-<li>性能、码率、抗性、时延、音质、响度、连麦通话、音效：（由 SDK 服务保障并提供技术指标）</li>
-<li>卡顿（流畅度）：手机终端测试，通过卡顿率来评估，为卡顿率 = sum (&gt;200ms 卡顿时间) / 通话时间；<ul>
-<li>流畅度评估原理（安卓）：通过获取 gfxinfo 中的帧信息，统计帧耗时和卡顿率</li>
-</ul>
-</li>
-<li>除以上的常规维度外，还有音频专属的：绝对等级评分(MOS)、失真等级评分(DCR)、相对等级评分（CCR）等维度;通过以下算法评估：<ul>
-<li>python-pesq（PESQ）</li>
-<li>分段信噪比（SegSNR）</li>
-<li>对数似然比测度（LLR）</li>
-<li>对数谱距离（LSD）</li>
-<li>可短时客观可懂（STOI）</li>
-<li>加权谱倾斜测度（WSS）</li>
-<li>感知客观语音质量评估（POLQA）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>然后确定合规的质量标准</li>
-<li>分析评测数据，对比质量标准，得出评测结果<br><code>ps:音频的格式分为有损格式、无损格式、私有格式，部分有损格式如下：wav、MP3、oog、aac、ac3；原始文件格式为pcm</code></li>
-</ul>
-<h1 id="视频"><a href="#视频" class="headerlink" title="视频"></a>视频</h1><ul>
-<li><p>先确定音频的质量评测维度（由于是流媒体，网络是决定因素，因此需要覆盖不同网络下的这些指标:）</p>
-<ul>
-<li>性能、码率、抗性、时延、音画同步：（由 SDK 服务保障并提供技术指标）</li>
-<li>卡顿（流畅度）：手机终端测试，通过卡顿率来评估，为卡顿率 = sum (&gt;200ms 卡顿时间) / 通话时间；<ul>
-<li>流畅度评估原理（安卓）：通过获取 gfxinfo 中的帧信息，统计帧耗时和卡顿率</li>
-</ul>
-</li>
-<li>视频质量：分为主观评测(人工)和客观评测,通过开源算法进行评估；<ul>
-<li>主观评测：依赖人眼观看并打分</li>
-<li>客观评测：客观评测算法，主要分为全参考、无参考、部分参考算法，参考的是源资源，算法如下<ul>
-<li>PLCC指标：Pearson 线性相关系数，代表模型的线性相关性。</li>
-<li>SROCC指标：Spearman 秩序相关系数，用来衡量秩序的相关性的，代表模型的非线性相关性。假设有两组序列 X 和 Y，其秩序为 R(X)和 R(Y)，则 SROCC(X, Y) = PLCC(R(X), R(Y))。</li>
-<li>全参考算法：netflix VMAF、腾讯的DVQA</li>
-<li>netflix VMAF测试的指标：视觉信息逼真度(VIF)+视觉信息逼真度(VIF)+Motion</li>
-<li>DVQA:<a target="_blank" rel="noopener" href="https://github.com/Tencent/DVQA">https://github.com/Tencent/DVQA</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>然后确定合规的质量标准</p>
-</li>
-<li><p>分析评测数据，对比质量标准，得出评测结果<br><code>MP4、FLV（在线视频格式）、AVI、MOV、ASF、WMV、RM、RMVB等</code></p>
-</li>
-<li><p><strong>音视频评测辅助评测和定位问题使用的工具:</strong></p>
-<ul>
-<li>弱网测试工具：QNET</li>
-<li>弱网测试工具：network emulator，微软开源，可实现带宽、丢包、延时、抖动、综合网络等弱网参数的限制。</li>
-<li>音视频处理工具 FFmpeg：统计码率、</li>
-</ul>
-</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/KNJF2562R4cLCaMSxfsRLg">参考文章</a></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/907af9b9/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

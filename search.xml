@@ -67,123 +67,6 @@
       </tags>
   </entry>
   <entry>
-    <title>SOLOPI使用教程</title>
-    <url>/posts/49e140/</url>
-    <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<ul>
-<li><p><em><strong>介绍</strong></em></p>
-<p>  <code>solopi是支付宝团队研发的ui自动化工具;支持UI录制回放，录制脚本的编辑/扩展/转换成appium脚本/录制脚本支持分发到其他的设备执行；同时还支持性能测试和一机多控，执行采集各种性能数据，同时支持通过一台设备控制多台设备的行为；</code></p>
-</li>
-<li><p><em><strong>使用指南</strong></em></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">环境准备</span><br><span class="line">app配置</span><br><span class="line">录制</span><br><span class="line">回放</span><br><span class="line">性能测试</span><br><span class="line">一机多控</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>环境准备</strong></p>
-<ul>
-<li><p><em>下载配置Androidsdk</em></p>
-<ul>
-<li>地址:<a href="https://developer.android.com/studio/releases/platform-tools#downloads">https://developer.android.com/studio/releases/platform-tools#downloads</a></li>
-<li>操作：下载安装完Android调试工具后，在下载对应系统版本的 SDK Platform Tools，配置好环境变量，注意win10以上系统环境变量配置即生效，低版本需要重启pc才能生效；</li>
-</ul>
-</li>
-<li><p><em>给手机授权</em></p>
-<ul>
-<li>操作：进入开发者模式，并授权usb调试权限；</li>
-</ul>
-</li>
-<li><p><em>检测环境并连接wifi</em></p>
-<ul>
-<li>操作：通过adb devices命令检测，同时要连接wifi;</li>
-</ul>
-</li>
-<li><p><em>建立连接</em></p>
-<ul>
-<li>操作：通过pc的cmd启动服务,输入（adb tcpip 5555）</li>
-</ul>
-</li>
-<li><p><em>下载solopi的apk</em></p>
-<ul>
-<li>地址：<a href="https://github.com/alipay/SoloPi/releases/download/v0.11.2/SoloPi_0.11.2.apk">apk点击下载</a></li>
-<li>操作：下载安装后，通过配置授权</li>
-<li>环境配置：<a href="https://github.com/alipay/SoloPi/wiki/FirstUse">地址跳转参考内容</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>app配置</strong></p>
-<p>  <code>按需配置，一般不需要进行配置；可参考上方的环境配置</code></p>
-</li>
-<li><p><strong>录制/回放</strong></p>
-<ul>
-<li><a href="https://github.com/alipay/SoloPi/wiki/RecordCase"><em>官方教程</em></a></li>
-<li>录制：录制支持直接对收到操作进行录制，且录制的脚本支持编辑/扩展/保存/导入等操作，支持各类操作和断言，支持图像识别，简单方便；</li>
-<li>回放：回放支持单脚本回放，支持批量回放，支持重复播放；</li>
-<li>优点：操作简单，可扩展编辑定制策略，可同步到其他设备，可重复回放支持暴力遍历；</li>
-<li>缺点：不支持持续集成，需要手动触发；</li>
-</ul>
-</li>
-<li><p><strong>性能测试</strong></p>
-<ul>
-<li><a href="https://github.com/alipay/SoloPi/wiki/Performance"><em>官方教程</em></a></li>
-<li>操作：性能测试时，直接勾选需要监控的性能指标，不进行录制则可以实时查看；进行录制时，点击录制按钮开始录制，录制结束后点击录制结束按钮，录制的性能数据会存储下来，支持图表分析，可同时存储多份性能数据；</li>
-<li>优点：支持实时查看场景的性能，可和业务测试结合方便简单；支持性能录制，可和UI自动化结合，查看各场景的性能变化和差异；</li>
-<li>缺点：不支持续集成，利用脚本进行回放时不支持性能监控；</li>
-</ul>
-</li>
-<li><p><strong>一机多控</strong></p>
-<ul>
-<li>[<em>官方教程</em>]</li>
-<li>操作：多台设备上同时安装solopi和待测APP；做好配置和授权操作，同时主机（控制机）选中一机多控，选中为主机；其他设备点击一机多控，选中为从机；然后用主机扫码录入从机，然后在主机点击建立主从机的连接，然后主机点击录屏按钮，开始进行一机多控操作；原理是利用solopi的录屏回放功能，主机录屏，从机回放；</li>
-<li>优点：可以用一台机器，控制多台设备操作，能有效的覆盖兼容性测试；</li>
-<li>缺点：不支持ios系统；由于是先录制，在回放，因此所有设备都需要有网络，且必须是同一局域网，且存在延时；不支持批量操作时，同时监控性能数据；</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p><em><strong>和业务结合</strong></em></p>
-<p>  <code>和业务结合使用前，需要先梳理清楚solopi的优缺点：</code></p>
-<p>  优点：</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">支持录制UI自动化，且录制的脚本支持编辑自定义，且无环境依赖；</span><br><span class="line">录制的脚本可以导出在任意设备上回放，或者转换成appium脚本；</span><br><span class="line">支持回放管理，支持批量回放和重复回放；</span><br><span class="line">支持性能测试，实时监控APP性能和录制APP的性能；</span><br><span class="line">支持一机多控，可同时控制多台设备；</span><br></pre></td></tr></table></figure>
-
-<p>  缺点：</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">不支持iOS设备，仅支持Android设备；</span><br><span class="line">工具是一款纯功能测试辅助软件，不支持持续集成；</span><br><span class="line">功能过于离散，几个功能不能结合在一起使用；</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>和业务结合：</strong></p>
-<ul>
-<li><p><em>rc验收阶段：</em><br><code>建议功能测试完毕且无误后，最后在rc验收一遍，主流程，验收时进行功能&quot;录制&quot;,录制的脚本可定期回放/开发了相关功能时进行回放/也可以通过Jenkins触发回放;</code></p>
-</li>
-<li><p><em>灰度/线上验收阶段：</em><br><code>建议测试进行线上验收时，进行录制，录制的脚本，可通过扩展进行定期回放；</code></p>
-</li>
-<li><p><em>冒烟/功能测试/rc验收阶段：</em><br><code>建议以上阶段，进行测试验收时，打开性能测试监控，观察功能场景有没用性能问题；</code></p>
-</li>
-<li><p><em>冒烟/兼容性测试阶段：</em><br><code>可以使用一机多控功能，进行兼容性测试；但此功能对控制的终端有要求，最好有固定的兼容环境；</code></p>
-</li>
-<li><p><em>稳定性治理/预装版本暴力回放：</em><br><code>使用重复回放功能进行暴力回放；</code></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em><strong>下一步：</strong></em></p>
-</li>
-</ul>
-<p><a href="https://github.com/alipay/SoloPi"><em>Solopi github</em>_</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>ui自动化</tag>
-        <tag>稳定性</tag>
-        <tag>前端性能</tag>
-        <tag>solopi</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>UI自动化元素定位</title>
     <url>/posts/2e4c0062/</url>
     <content><![CDATA[<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">APPIUM元素定位原理</span><br><span class="line">常见的元素定位方式</span><br><span class="line">元素定位技巧/辅助工具</span><br></pre></td></tr></table></figure>
@@ -330,6 +213,135 @@
       </tags>
   </entry>
   <entry>
+    <title>SOLOPI使用教程</title>
+    <url>/posts/49e140/</url>
+    <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<ul>
+<li><p><em><strong>介绍</strong></em></p>
+<p>  <code>solopi是支付宝团队研发的ui自动化工具;支持UI录制回放，录制脚本的编辑/扩展/转换成appium脚本/录制脚本支持分发到其他的设备执行；同时还支持性能测试和一机多控，执行采集各种性能数据，同时支持通过一台设备控制多台设备的行为；</code></p>
+</li>
+<li><p><em><strong>使用指南</strong></em></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">环境准备</span><br><span class="line">app配置</span><br><span class="line">录制</span><br><span class="line">回放</span><br><span class="line">性能测试</span><br><span class="line">一机多控</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>环境准备</strong></p>
+<ul>
+<li><p><em>下载配置Androidsdk</em></p>
+<ul>
+<li>地址:<a href="https://developer.android.com/studio/releases/platform-tools#downloads">https://developer.android.com/studio/releases/platform-tools#downloads</a></li>
+<li>操作：下载安装完Android调试工具后，在下载对应系统版本的 SDK Platform Tools，配置好环境变量，注意win10以上系统环境变量配置即生效，低版本需要重启pc才能生效；</li>
+</ul>
+</li>
+<li><p><em>给手机授权</em></p>
+<ul>
+<li>操作：进入开发者模式，并授权usb调试权限；</li>
+</ul>
+</li>
+<li><p><em>检测环境并连接wifi</em></p>
+<ul>
+<li>操作：通过adb devices命令检测，同时要连接wifi;</li>
+</ul>
+</li>
+<li><p><em>建立连接</em></p>
+<ul>
+<li>操作：通过pc的cmd启动服务,输入（adb tcpip 5555）</li>
+</ul>
+</li>
+<li><p><em>下载solopi的apk</em></p>
+<ul>
+<li>地址：<a href="https://github.com/alipay/SoloPi/releases/download/v0.11.2/SoloPi_0.11.2.apk">apk点击下载</a></li>
+<li>操作：下载安装后，通过配置授权</li>
+<li>环境配置：<a href="https://github.com/alipay/SoloPi/wiki/FirstUse">地址跳转参考内容</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>app配置</strong></p>
+<p>  <code>按需配置，一般不需要进行配置；可参考上方的环境配置</code></p>
+</li>
+<li><p><strong>录制/回放</strong></p>
+<ul>
+<li><a href="https://github.com/alipay/SoloPi/wiki/RecordCase"><em>官方教程</em></a></li>
+<li>录制：录制支持直接对收到操作进行录制，且录制的脚本支持编辑/扩展/保存/导入等操作，支持各类操作和断言，支持图像识别，简单方便；</li>
+<li>回放：回放支持单脚本回放，支持批量回放，支持重复播放；</li>
+<li>优点：操作简单，可扩展编辑定制策略，可同步到其他设备，可重复回放支持暴力遍历；</li>
+<li>缺点：不支持持续集成，需要手动触发；</li>
+</ul>
+</li>
+<li><p><strong>性能测试</strong></p>
+<ul>
+<li><a href="https://github.com/alipay/SoloPi/wiki/Performance"><em>官方教程</em></a></li>
+<li>操作：性能测试时，直接勾选需要监控的性能指标，不进行录制则可以实时查看；进行录制时，点击录制按钮开始录制，录制结束后点击录制结束按钮，录制的性能数据会存储下来，支持图表分析，可同时存储多份性能数据；</li>
+<li>优点：支持实时查看场景的性能，可和业务测试结合方便简单；支持性能录制，可和UI自动化结合，查看各场景的性能变化和差异；</li>
+<li>缺点：不支持续集成，利用脚本进行回放时不支持性能监控；</li>
+</ul>
+</li>
+<li><p><strong>一机多控</strong></p>
+<ul>
+<li>[<em>官方教程</em>]</li>
+<li>操作：多台设备上同时安装solopi和待测APP；做好配置和授权操作，同时主机（控制机）选中一机多控，选中为主机；其他设备点击一机多控，选中为从机；然后用主机扫码录入从机，然后在主机点击建立主从机的连接，然后主机点击录屏按钮，开始进行一机多控操作；原理是利用solopi的录屏回放功能，主机录屏，从机回放；</li>
+<li>优点：可以用一台机器，控制多台设备操作，能有效的覆盖兼容性测试；</li>
+<li>缺点：不支持ios系统；由于是先录制，在回放，因此所有设备都需要有网络，且必须是同一局域网，且存在延时；不支持批量操作时，同时监控性能数据；</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><em><strong>和业务结合</strong></em></p>
+<p>  <code>和业务结合使用前，需要先梳理清楚solopi的优缺点：</code></p>
+<p>  优点：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">支持录制UI自动化，且录制的脚本支持编辑自定义，且无环境依赖；</span><br><span class="line">录制的脚本可以导出在任意设备上回放，或者转换成appium脚本；</span><br><span class="line">支持回放管理，支持批量回放和重复回放；</span><br><span class="line">支持性能测试，实时监控APP性能和录制APP的性能；</span><br><span class="line">支持一机多控，可同时控制多台设备；</span><br></pre></td></tr></table></figure>
+
+<p>  缺点：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">不支持iOS设备，仅支持Android设备；</span><br><span class="line">工具是一款纯功能测试辅助软件，不支持持续集成；</span><br><span class="line">功能过于离散，几个功能不能结合在一起使用；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>和业务结合：</strong></p>
+<ul>
+<li><p><em>rc验收阶段：</em><br><code>建议功能测试完毕且无误后，最后在rc验收一遍，主流程，验收时进行功能&quot;录制&quot;,录制的脚本可定期回放/开发了相关功能时进行回放/也可以通过Jenkins触发回放;</code></p>
+</li>
+<li><p><em>灰度/线上验收阶段：</em><br><code>建议测试进行线上验收时，进行录制，录制的脚本，可通过扩展进行定期回放；</code></p>
+</li>
+<li><p><em>冒烟/功能测试/rc验收阶段：</em><br><code>建议以上阶段，进行测试验收时，打开性能测试监控，观察功能场景有没用性能问题；</code></p>
+</li>
+<li><p><em>冒烟/兼容性测试阶段：</em><br><code>可以使用一机多控功能，进行兼容性测试；但此功能对控制的终端有要求，最好有固定的兼容环境；</code></p>
+</li>
+<li><p><em>稳定性治理/预装版本暴力回放：</em><br><code>使用重复回放功能进行暴力回放；</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em><strong>下一步：</strong></em></p>
+</li>
+</ul>
+<p><a href="https://github.com/alipay/SoloPi"><em>Solopi github</em>_</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>ui自动化</tag>
+        <tag>稳定性</tag>
+        <tag>前端性能</tag>
+        <tag>solopi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UI自动化基础--微软</title>
+    <url>/posts/d1646a55/</url>
+    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>UI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>UI自动化框架说明</title>
     <url>/posts/411091fa/</url>
     <content><![CDATA[<h1 id="UI自动化框架说明"><a href="#UI自动化框架说明" class="headerlink" title="UI自动化框架说明"></a>UI自动化框架说明</h1><pre><code>`本帖的ui自动化框架，取材于github上某个湖南老乡的框架；结构清晰，遵循PO模式，通过逻辑层-处理层-用例配置整个结构结构清晰明了；实现了处理逻辑和数据分离；有利于平台化`
@@ -343,18 +355,6 @@
 <p>___ runner(入口) ___</p>
 <p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>UI自动化基础--微软</title>
-    <url>/posts/d1646a55/</url>
-    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>UI</tag>
-      </tags>
   </entry>
   <entry>
     <title>HEXO 官方使用指南</title>
@@ -413,6 +413,41 @@
       </tags>
   </entry>
   <entry>
+    <title>python-多进程</title>
+    <url>/posts/a1c10886/</url>
+    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python多进程简述</span><br><span class="line">python多进程模块方法介绍</span><br><span class="line">python多进程使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<ul>
+<li><p><em><strong>python多进程模块简述：</strong></em></p>
+<p>  <code>python由于GIL机制，多线程，实际仅消耗一个内核资源；因此效率较低，python要实现并发，提高性能，只能使用多进程模块，python的多进程模块为multiprocessing，通过使用Pool类实现多进程；   </code></p>
+</li>
+<li><p><em><strong>python多进程模块方法介绍：</strong></em></p>
+<p>  <code>   python多进程模块为multiprocessing，为python的内置模块；通过该模块封装的Pool()对象实现多进程，Pool类的属性介绍如下：</code></p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()	#需要被执行的方法&#x2F;任务</span><br><span class="line">iter&#x3D;iter	#迭代对象，list&#x2F;变量值</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(3)	#创建一个仅容纳3个进程的进程池，一旦工作任务超出进程的数量，则需等待，进程池中的进程被释放，任务才能进入进程池；</span><br><span class="line">__init__(self, group&#x3D;None, target&#x3D;None, name&#x3D;None, args&#x3D;(), kwargs&#x3D;&#123;&#125;)	#进程池的构造方法</span><br><span class="line">group：进程池所属的进程组，一旦不需要给值；</span><br><span class="line">target：待处理的任务或方法；</span><br><span class="line">name：进程池的别名，默认不给值；</span><br><span class="line">args：调用对象的位置参数，可给值元组&#x2F;列表等可迭代对象或者参数值；</span><br><span class="line">kwargs：调用对象的字典参数；</span><br><span class="line"></span><br><span class="line">使用：在win环境下，进程池必须在当前模块下执行，即必须在 if __name__&#x3D;&#x3D;main:下执行；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Pool()类中拥有的属性方法如下：</strong></li>
+</ul>
+<ul>
+<li>pool.map()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br></pre></td></tr></table></figure></li>
+<li>pool.map_async(run,iter)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map_async(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map_async(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br><span class="line">---效果和pool.map()不相同，mapasyc效率更高；mapasyc主进程未阻塞进程池，不需要等该批次的进程全执行完，新的任务就能进入进程池执行；常用pool.map()</span><br></pre></td></tr></table></figure></li>
+<li>pool.apply()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]])</span><br><span class="line">apply,参数需要为具体的变量值，且仅在python2支持；</span><br><span class="line">apply方法的原理是，阻塞进程池，一次仅让一个任务进入进程池，该任务完成后，才能执行下一个任务，实际是串行；</span><br></pre></td></tr></table></figure></li>
+<li>pool.applyasyc()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]],[, callback&#x3D;None]]])</span><br><span class="line">   applyasyc,参数需要为具体的变量值，在python3上支持；</span><br><span class="line">   applyasyc方法的原理是，进程池非阻塞，一次可以让多个任务进入进程池，且未对该批次任务进行阻塞，只要其中一个进程执行完后，就能释放资源，让新的任务进入进程池，实际是并行的,效率等同于mapasyc()；</span><br><span class="line">回调使用：pool.applyasyc(run,kwargs,callback&#x3D;func2)，run的返回作为func2的参数，执行完返回func2的值；</span><br><span class="line">   ---applyasyc效果等同于mapasyc()，只是他具有回调功能，且入参的变量不能是可迭代对象，必须为具体的变量值；</span><br></pre></td></tr></table></figure></li>
+<li>pool.terminal()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用：结束工作进程，不在处理未完成的任务</span><br><span class="line">pool.map(run,iter)</span><br><span class="line">pool.close()</span><br><span class="line">pool.run()</span><br><span class="line">sleep(2)</span><br><span class="line">pool.terminal()		#执行两秒后，哪怕进程未执行完，也结束该主进程</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><em><strong>python多进程使用：</strong></em></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()</span><br><span class="line">iter&#x3D;iter</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(multiprocessing.cpu_count())</span><br><span class="line">pool.map(run(),iter)</span><br><span class="line">pool.join()</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>python</tag>
+        <tag>多进程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python-多线程</title>
     <url>/posts/b7270d4a/</url>
     <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">多线程是什么？</span><br><span class="line">为什么需要使用多线程，多线程的作用？</span><br><span class="line">怎么使用多线程，join方法的作用？</span><br><span class="line">python多线程弊端？</span><br><span class="line">python多线程其他机制？</span><br></pre></td></tr></table></figure>
@@ -450,41 +485,6 @@
       <tags>
         <tag>python</tag>
         <tag>多线程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python-多进程</title>
-    <url>/posts/a1c10886/</url>
-    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python多进程简述</span><br><span class="line">python多进程模块方法介绍</span><br><span class="line">python多进程使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<ul>
-<li><p><em><strong>python多进程模块简述：</strong></em></p>
-<p>  <code>python由于GIL机制，多线程，实际仅消耗一个内核资源；因此效率较低，python要实现并发，提高性能，只能使用多进程模块，python的多进程模块为multiprocessing，通过使用Pool类实现多进程；   </code></p>
-</li>
-<li><p><em><strong>python多进程模块方法介绍：</strong></em></p>
-<p>  <code>   python多进程模块为multiprocessing，为python的内置模块；通过该模块封装的Pool()对象实现多进程，Pool类的属性介绍如下：</code></p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()	#需要被执行的方法&#x2F;任务</span><br><span class="line">iter&#x3D;iter	#迭代对象，list&#x2F;变量值</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(3)	#创建一个仅容纳3个进程的进程池，一旦工作任务超出进程的数量，则需等待，进程池中的进程被释放，任务才能进入进程池；</span><br><span class="line">__init__(self, group&#x3D;None, target&#x3D;None, name&#x3D;None, args&#x3D;(), kwargs&#x3D;&#123;&#125;)	#进程池的构造方法</span><br><span class="line">group：进程池所属的进程组，一旦不需要给值；</span><br><span class="line">target：待处理的任务或方法；</span><br><span class="line">name：进程池的别名，默认不给值；</span><br><span class="line">args：调用对象的位置参数，可给值元组&#x2F;列表等可迭代对象或者参数值；</span><br><span class="line">kwargs：调用对象的字典参数；</span><br><span class="line"></span><br><span class="line">使用：在win环境下，进程池必须在当前模块下执行，即必须在 if __name__&#x3D;&#x3D;main:下执行；</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>Pool()类中拥有的属性方法如下：</strong></li>
-</ul>
-<ul>
-<li>pool.map()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br></pre></td></tr></table></figure></li>
-<li>pool.map_async(run,iter)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map_async(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map_async(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br><span class="line">---效果和pool.map()不相同，mapasyc效率更高；mapasyc主进程未阻塞进程池，不需要等该批次的进程全执行完，新的任务就能进入进程池执行；常用pool.map()</span><br></pre></td></tr></table></figure></li>
-<li>pool.apply()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]])</span><br><span class="line">apply,参数需要为具体的变量值，且仅在python2支持；</span><br><span class="line">apply方法的原理是，阻塞进程池，一次仅让一个任务进入进程池，该任务完成后，才能执行下一个任务，实际是串行；</span><br></pre></td></tr></table></figure></li>
-<li>pool.applyasyc()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]],[, callback&#x3D;None]]])</span><br><span class="line">   applyasyc,参数需要为具体的变量值，在python3上支持；</span><br><span class="line">   applyasyc方法的原理是，进程池非阻塞，一次可以让多个任务进入进程池，且未对该批次任务进行阻塞，只要其中一个进程执行完后，就能释放资源，让新的任务进入进程池，实际是并行的,效率等同于mapasyc()；</span><br><span class="line">回调使用：pool.applyasyc(run,kwargs,callback&#x3D;func2)，run的返回作为func2的参数，执行完返回func2的值；</span><br><span class="line">   ---applyasyc效果等同于mapasyc()，只是他具有回调功能，且入参的变量不能是可迭代对象，必须为具体的变量值；</span><br></pre></td></tr></table></figure></li>
-<li>pool.terminal()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用：结束工作进程，不在处理未完成的任务</span><br><span class="line">pool.map(run,iter)</span><br><span class="line">pool.close()</span><br><span class="line">pool.run()</span><br><span class="line">sleep(2)</span><br><span class="line">pool.terminal()		#执行两秒后，哪怕进程未执行完，也结束该主进程</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p><em><strong>python多进程使用：</strong></em></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()</span><br><span class="line">iter&#x3D;iter</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(multiprocessing.cpu_count())</span><br><span class="line">pool.map(run(),iter)</span><br><span class="line">pool.join()</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>python</tag>
-        <tag>多进程</tag>
       </tags>
   </entry>
   <entry>
@@ -575,9 +575,38 @@
 ]]></content>
   </entry>
   <entry>
+    <title>优秀博客</title>
+    <url>/posts/bb158cde/</url>
+    <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ul>
+<li><a href="https://cloud.tencent.com/developer/article/1974105">自动化专家</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/3335805/activities">性能</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/1011618/activities">腾讯性能优化</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/1016462">腾讯测开</a></li>
+<li><a href="https://cloud.tencent.com/developer/user/2059614">测开</a></li>
+</ul>
+<span id="more"></span>
+
+<h1 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h1><ul>
+<li><a href="https://cloud.tencent.com/developer/user/2398817/inventories">python</a></li>
+<li><a href="https://www.cnblogs.com/vamei/tag/Python/">行业大佬python教程</a></li>
+</ul>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
+<li><a href="https://cloud.tencent.com/developer/user/1642192">K8S腾讯专家</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>专项--音视频质量评测</title>
     <url>/posts/907af9b9/</url>
     <content><![CDATA[<p><code>音视频评测，主要涉及到编解码，网络传输，原生资源的前后置处理；传输流程如下：</code><br><img src="/text_image/%E9%9F%B3%E8%A7%86%E9%A2%91%E4%BC%A0%E8%BE%93%E6%B5%81%E7%A8%8B.png" alt="alt text"></p>
+<span id="more"></span>
+
 <h1 id="音频"><a href="#音频" class="headerlink" title="音频"></a>音频</h1><ul>
 <li>先确定音频的质量评测维度（由于是流媒体，网络是决定因素，因此需要覆盖不同网络下的这些指标）：<ul>
 <li>性能、码率、抗性、时延、音质、响度、连麦通话、音效：（由 SDK 服务保障并提供技术指标）</li>
@@ -678,31 +707,37 @@
       </tags>
   </entry>
   <entry>
-    <title>优秀博客</title>
-    <url>/posts/bb158cde/</url>
-    <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ul>
-<li><a href="https://cloud.tencent.com/developer/article/1974105">自动化专家</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/3335805/activities">性能</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/1011618/activities">腾讯性能优化</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/1016462">腾讯测开</a></li>
-<li><a href="https://cloud.tencent.com/developer/user/2059614">测开</a></li>
-</ul>
-<span id="more"></span>
-
-<h1 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h1><ul>
-<li><a href="https://cloud.tencent.com/developer/user/2398817/inventories">python</a></li>
-<li><a href="https://www.cnblogs.com/vamei/tag/Python/">行业大佬python教程</a></li>
-</ul>
-<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
-<li><a href="https://cloud.tencent.com/developer/user/1642192">K8S腾讯专家</a></li>
-</ul>
+    <title>传音刷机</title>
+    <url>/posts/a1b2e86a/</url>
+    <content><![CDATA[<ol>
+<li>设置 -&gt; 开发者模式打开 oem unlock<br>输入 adb reboot bootloader</li>
+<li>进入fastboot模式输入 fastboot flashing unlock。按住音量上键确认unlock</li>
+<li>fastboot reboot 重启</li>
+<li>开机后,输入 adb root</li>
+<li>执行 adb disable-verity</li>
+<li>执行 adb reboot</li>
+<li>重启后 执行 adb root</li>
+<li>执行 adb remount</li>
+</ol>
 ]]></content>
       <categories>
-        <category>技术</category>
+        <category>工具</category>
       </categories>
       <tags>
-        <tag>博客</tag>
+        <tag>刷机</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>估值体系</title>
+    <url>/posts/daef770e/</url>
+    <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的扣非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
+<span id="more"></span>
+
+<h2 id="理念"><a href="#理念" class="headerlink" title="理念"></a>理念</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">高收益的前提是持续稳定的复利，即好企业是时间的朋友，坏企业是时间的敌人；</span><br><span class="line">30pe是合理估值的上限，这是由无风险收益率决定的，如果在高，买入收益就低于无风险收益率了；同理合理估值一般给到20-25，而我不买25倍以上的企业(这想法绝对是错的。只关乎个人的安全边际)；</span><br><span class="line">股权和债券的差异，主要体现在确定性和成长里；股市需要利用成长优势抵消不确定性；</span><br><span class="line">收益率=利润/本金（股价）=1/pe；合理估值的锚其实就是无风险收益率（1/无风险收益率）；</span><br><span class="line">无分红公司的净资产收益率=净利润增速（可能净利润要打折）；</span><br><span class="line">分红在投入公司的净资产真实收益率=roe(1/pb*分红金额比例+留存金额比例)；</span><br><span class="line">年化收益率=年份√总收益率；</span><br><span class="line">由收益率公式可知；收益率一般不会超过净利润增速（仅当市净率低于1时超过，但这种现金流会受负债等因素损耗）；且要提高投资收益率，只有提高净利润的增速、降低分红比例、在分红比例固定时则只有降低pb也就是估值才能有效提高收益率；</span><br></pre></td></tr></table></figure>
+
+<h2 id="买卖"><a href="#买卖" class="headerlink" title="买卖"></a>买卖</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">理想买点：三年后合理估值*0.5</span><br><span class="line">理想卖点：min(动态市盈率50,三年后合理估值150%)</span><br><span class="line"></span><br><span class="line">买操作：20-25倍区间都能买，仅茅台在25倍pe以上买入;到达理想买点时，分三批买完剩余资金（理想买点/理想买点-5%/理想买点-10%）</span><br><span class="line">卖操作：当年预计净利润的50/55/60三次清空；（买卖点是唐朝基于无风险收益率计算，正常超出合理估值都能卖，50%其实是预留的安全边际）</span><br><span class="line">三年后合理估值=三年后预估净利率*25（具体企业具体分析，也就是pe的中分位）</span><br><span class="line"></span><br><span class="line">全指数基金买/卖点：基于无风险收益率来，但是由于不确定性，要做净利润折算，需要进行等比例折算，折算区间在5-7折</span><br><span class="line">买点：12-15pe</span><br><span class="line">卖点：25-35pe</span><br><span class="line"></span><br><span class="line">♥卖出后买全指还是留现金取决于无风险收益率（一般2倍无风险收益率即可买pe=1/无风险收益率*2，全指唐朝仅关注沪深300/恒生指数/标普500/纳斯达克100）</span><br><span class="line">♥其他时间：企业逻辑未变时，低于买点买，高于卖点卖，其他时间坐等；但需要遵循单股不超40%原则，即三五个行业，七八家公司；</span><br><span class="line">♥不要严格按买卖价来，要接受错误和风险；确定性高的企业，越偏向合理估值之下就买，确定性低的企业越偏向理想买点才买，唐朝的理念是理想买点位置一定要买完资金；</span><br></pre></td></tr></table></figure>
+
+<h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">♥腾讯+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以300均价，买入6手；高溢价时，优先使用中概换腾讯（中概大部分公司不盈利）</span><br><span class="line">1️⃣理想买点：328</span><br><span class="line">2️⃣理想卖点：1年内720</span><br><span class="line">3️⃣纳指买点：21pe</span><br><span class="line">4️⃣纳指卖点：35pe</span><br><span class="line"></span><br><span class="line">♥银行+家电25%：计划100k,余量16k</span><br><span class="line">已持仓84k,其中家电50k&#x2F;银行34k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右，招商计划以28均价，买入5手</span><br><span class="line">2️⃣美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">3️⃣格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34</span><br><span class="line"></span><br><span class="line">♥消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利20k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣五粮液150快,理想买点150&#x2F;143&#x2F;135</span><br><span class="line">2️⃣伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下；此刻的分红在投资收益率为9.56%；</span><br><span class="line"></span><br><span class="line">♥医药10%：计划40k,余量3k</span><br><span class="line">已持仓37k,其中恒瑞20k&#x2F;ETF17K</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣恒瑞按50倍市盈率20.07%净利润增长，卖点60（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">2️⃣300医药ETF计划0.42，买入7000个，卖点为0.7以上，对应300医药指数50倍以上的估值</span><br><span class="line">医药需要恒瑞和etf实现高低互换，高换低；</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>职业--传易工作总结</title>
@@ -761,39 +796,6 @@
       </categories>
       <tags>
         <tag>传易</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>估值体系</title>
-    <url>/posts/daef770e/</url>
-    <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的扣非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
-<span id="more"></span>
-
-<h2 id="理念"><a href="#理念" class="headerlink" title="理念"></a>理念</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">高收益的前提是持续稳定的复利，即好企业是时间的朋友，坏企业是时间的敌人；</span><br><span class="line">30pe是合理估值的上限，这是由无风险收益率决定的，如果在高，买入收益就低于无风险收益率了；同理合理估值一般给到20-25，而我不买25倍以上的企业(这想法绝对是错的。只关乎个人的安全边际)；</span><br><span class="line">股权和债券的差异，主要体现在确定性和成长里；股市需要利用成长优势抵消不确定性；</span><br><span class="line">收益率=利润/本金（股价）=1/pe；合理估值的锚其实就是无风险收益率（1/无风险收益率）；</span><br><span class="line">无分红公司的净资产收益率=净利润增速（可能净利润要打折）；</span><br><span class="line">分红在投入公司的净资产真实收益率=roe(1/pb*分红金额比例+留存金额比例)；</span><br><span class="line">年化收益率=年份√总收益率；</span><br><span class="line">由收益率公式可知；收益率一般不会超过净利润增速（仅当市净率低于1时超过，但这种现金流会受负债等因素损耗）；且要提高投资收益率，只有提高净利润的增速、降低分红比例、在分红比例固定时则只有降低pb也就是估值才能有效提高收益率；</span><br></pre></td></tr></table></figure>
-
-<h2 id="买卖"><a href="#买卖" class="headerlink" title="买卖"></a>买卖</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">理想买点：三年后合理估值*0.5</span><br><span class="line">理想卖点：min(动态市盈率50,三年后合理估值150%)</span><br><span class="line"></span><br><span class="line">买操作：20-25倍区间都能买，仅茅台在25倍pe以上买入;到达理想买点时，分三批买完剩余资金（理想买点/理想买点-5%/理想买点-10%）</span><br><span class="line">卖操作：当年预计净利润的50/55/60三次清空；（买卖点是唐朝基于无风险收益率计算，正常超出合理估值都能卖，50%其实是预留的安全边际）</span><br><span class="line">三年后合理估值=三年后预估净利率*25（具体企业具体分析，也就是pe的中分位）</span><br><span class="line"></span><br><span class="line">全指数基金买/卖点：基于无风险收益率来，但是由于不确定性，要做净利润折算，需要进行等比例折算，折算区间在5-7折</span><br><span class="line">买点：12-15pe</span><br><span class="line">卖点：25-35pe</span><br><span class="line"></span><br><span class="line">♥卖出后买全指还是留现金取决于无风险收益率（一般2倍无风险收益率即可买pe=1/无风险收益率*2，全指唐朝仅关注沪深300/恒生指数/标普500/纳斯达克100）</span><br><span class="line">♥其他时间：企业逻辑未变时，低于买点买，高于卖点卖，其他时间坐等；但需要遵循单股不超40%原则，即三五个行业，七八家公司；</span><br><span class="line">♥不要严格按买卖价来，要接受错误和风险；确定性高的企业，越偏向合理估值之下就买，确定性低的企业越偏向理想买点才买，唐朝的理念是理想买点位置一定要买完资金；</span><br></pre></td></tr></table></figure>
-
-<h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">♥腾讯+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以300均价，买入6手；高溢价时，优先使用中概换腾讯（中概大部分公司不盈利）</span><br><span class="line">1️⃣理想买点：328</span><br><span class="line">2️⃣理想卖点：1年内720</span><br><span class="line">3️⃣纳指买点：21pe</span><br><span class="line">4️⃣纳指卖点：35pe</span><br><span class="line"></span><br><span class="line">♥银行+家电25%：计划100k,余量16k</span><br><span class="line">已持仓84k,其中家电50k&#x2F;银行34k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右，招商计划以28均价，买入5手</span><br><span class="line">2️⃣美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">3️⃣格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34</span><br><span class="line"></span><br><span class="line">♥消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利20k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣五粮液150快,理想买点150&#x2F;143&#x2F;135</span><br><span class="line">2️⃣伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下；此刻的分红在投资收益率为9.56%；</span><br><span class="line"></span><br><span class="line">♥医药10%：计划40k,余量3k</span><br><span class="line">已持仓37k,其中恒瑞20k&#x2F;ETF17K</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣恒瑞按50倍市盈率20.07%净利润增长，卖点60（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">2️⃣300医药ETF计划0.42，买入7000个，卖点为0.7以上，对应300医药指数50倍以上的估值</span><br><span class="line">医药需要恒瑞和etf实现高低互换，高换低；</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>传音刷机</title>
-    <url>/posts/a1b2e86a/</url>
-    <content><![CDATA[<ol>
-<li>设置 -&gt; 开发者模式打开 oem unlock<br>输入 adb reboot bootloader</li>
-<li>进入fastboot模式输入 fastboot flashing unlock。按住音量上键确认unlock</li>
-<li>fastboot reboot 重启</li>
-<li>开机后,输入 adb root</li>
-<li>执行 adb disable-verity</li>
-<li>执行 adb reboot</li>
-<li>重启后 执行 adb root</li>
-<li>执行 adb remount</li>
-</ol>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>刷机</tag>
       </tags>
   </entry>
   <entry>
@@ -1021,25 +1023,6 @@
       </tags>
   </entry>
   <entry>
-    <title>大数据BI报表架构调整</title>
-    <url>/posts/10f9513d/</url>
-    <content><![CDATA[<h1 id="大数据BI报表架构调整"><a href="#大数据BI报表架构调整" class="headerlink" title="大数据BI报表架构调整"></a>大数据BI报表架构调整</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span>
-
-<h2 id="架构说明"><a href="#架构说明" class="headerlink" title="架构说明"></a>架构说明</h2><h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="覆盖范围"><a href="#覆盖范围" class="headerlink" title="覆盖范围"></a>覆盖范围</h3><p><em><strong>oms Category Analysis模块</strong></em></p>
-<ul>
-<li>覆盖前端交互</li>
-<li>覆盖报表的数据</li>
-<li>覆盖接口性能</li>
-</ul>
-<p><em><strong>Traffic Analysis</strong></em></p>
-<ul>
-<li>覆盖前端交互</li>
-<li>覆盖报表的数据</li>
-<li>覆盖接口性能</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>大数据--测试</title>
     <url>/posts/ac354d65/</url>
     <content><![CDATA[<p><code>大数据测试，工作内容主要有：数据测试、模型测试；同时在不同的业务阶段，工作的重心不同，数据质量体系也会有不同的倾向，要全局的了解大数据测试，必须先明白大数据的架构，工作过程</code></p>
@@ -1090,6 +1073,25 @@
         <tag>数据测试</tag>
         <tag>大数据</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>大数据BI报表架构调整</title>
+    <url>/posts/10f9513d/</url>
+    <content><![CDATA[<h1 id="大数据BI报表架构调整"><a href="#大数据BI报表架构调整" class="headerlink" title="大数据BI报表架构调整"></a>大数据BI报表架构调整</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span>
+
+<h2 id="架构说明"><a href="#架构说明" class="headerlink" title="架构说明"></a>架构说明</h2><h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="覆盖范围"><a href="#覆盖范围" class="headerlink" title="覆盖范围"></a>覆盖范围</h3><p><em><strong>oms Category Analysis模块</strong></em></p>
+<ul>
+<li>覆盖前端交互</li>
+<li>覆盖报表的数据</li>
+<li>覆盖接口性能</li>
+</ul>
+<p><em><strong>Traffic Analysis</strong></em></p>
+<ul>
+<li>覆盖前端交互</li>
+<li>覆盖报表的数据</li>
+<li>覆盖接口性能</li>
+</ul>
+]]></content>
   </entry>
   <entry>
     <title>工作梳理</title>
@@ -1166,6 +1168,30 @@
       </tags>
   </entry>
   <entry>
+    <title>性能优化--索引</title>
+    <url>/posts/939ecb54/</url>
+    <content><![CDATA[<p><code>索引是一种优化db查询的技巧，一种将表数据排序的结构；通过将db的单列/多列值设定为索引，在查询时就能根据索引值，直接查询到索引所在行的内存地址，不用查询全表了，从而大幅提供查询的速度</code></p>
+<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">索引的底层（原理）</span><br><span class="line">索引的类型</span><br><span class="line">索引的操作</span><br><span class="line">索引的使用</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h2 id="索引的底层"><a href="#索引的底层" class="headerlink" title="索引的底层"></a>索引的底层</h2><p><code>底层主要维护了一个排序的数组，其中含有索引值和所在行内存地址的一组数据；索引底层有两种数据结构，B+数索引、哈希索引</code></p>
+<ul>
+<li>B+树索引：是一个平衡树，下标是索引，值是内存地址；查询的时间复杂度为O(log（n）)；可以用于排序（索引表是数据有顺序），和范围查找</li>
+<li>哈希索引：是哈希的键值对，键是索引值，值为内存地址；查询的时间复杂度为O(1)；只能用于等值比较（键值）</li>
+</ul>
+<h2 id="索引的类型"><a href="#索引的类型" class="headerlink" title="索引的类型"></a>索引的类型</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">普通索引：任何列都能做索引，索引无值要求，可重复或为空</span><br><span class="line">唯一索引：索引所在列的值必须唯一，但列值可为空</span><br><span class="line">主键索引：将列的主键作为索引，所在列，值唯一，且不能为空</span><br><span class="line">组合索引：将多个列组合视作索引；如果一个表中的数据在查询时有多个字段总是同时出现则这些字段就可以作为复合索引,形成索引覆盖可以提高查询的效率（实际提高的是<span class="built_in">where</span>过滤的效率）</span><br><span class="line">全文索引：只有用于Innodb、MyIsam 表格，并且只能对 CHAR、VARCHAR、TEXT 列建全文索引；用于当索引的字段值很长，且用like模糊匹配效率较低时；语法</span><br><span class="line">前缀索引：当索引列是字符串时，可以使用字符串前缀作为索引，减少索引长度</span><br></pre></td></tr></table></figure>
+<h2 id="索引的操作"><a href="#索引的操作" class="headerlink" title="索引的操作"></a>索引的操作</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">创建索引：create index index_name on table_name(列名)</span><br><span class="line">删除索引：drop index index_name on table_name</span><br><span class="line">修改索引：alter table </span><br><span class="line">  添加普通/组合索引：alter table table_name add INDEX index_name(列1，列2)</span><br><span class="line">  添加唯一索引：alter tablet table_name ADD UNIQUE index_name (列1)</span><br><span class="line">  添加主键索引：alter table table_name ADD PRIMARY KEY index_name(列1)</span><br><span class="line">  添加全表索引：alter table table_name ADD DULLTEXT index_name (列1)</span><br><span class="line">  添加前缀索引：alt table table_name add INDEX index_name(email(6))	//这里以email列的键值前6位作为索引</span><br><span class="line">  编辑索引：先删除--后添加</span><br><span class="line">查询索引：show index from table_name</span><br></pre></td></tr></table></figure>
+<h2 id="索引的使用"><a href="#索引的使用" class="headerlink" title="索引的使用"></a>索引的使用</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">使用于大量数据、或大表查询的场景；</span><br><span class="line">将经常使用的列作为索引；</span><br><span class="line">尽量使用短索引；</span><br><span class="line">如果用字符串值的列，最好使用前缀索引，防止索引值过长，前缀索引可以用来实现短索引；</span><br></pre></td></tr></table></figure>
+<p><strong>索引的优势是对索引列进行了排序，不用全表查询，有查询优势；但对数据量很小的表，还有写入时，由于要改所有的索引，其实会降低写入性能；因此应该用于大表查询场景，不能用于频繁写入场景</strong></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>索引</tag>
+        <tag>性能</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>大数据--广告--模型测试</title>
     <url>/posts/d775e226/</url>
     <content><![CDATA[<p><code>模型是程序化广告的灵魂，决定着广告的点击和转化，直接影响收入；而模型由于复杂度高，标签/数据量大，是广告测试的难点，一般意义上，测试是不负责模型质量的，仅对模型中的一些定向/过滤逻辑做覆盖，模型有效性测试，模型工程师一般是通过灰度/ab测试来实现自测的，这种自我监督的实现方式有着明显缺陷，故本次对过往模型测试方面的记录，做下总结</code></p>
@@ -1193,27 +1219,35 @@
       </tags>
   </entry>
   <entry>
-    <title>性能优化--索引</title>
-    <url>/posts/939ecb54/</url>
-    <content><![CDATA[<p><code>索引是一种优化db查询的技巧，一种将表数据排序的结构；通过将db的单列/多列值设定为索引，在查询时就能根据索引值，直接查询到索引所在行的内存地址，不用查询全表了，从而大幅提供查询的速度</code></p>
-<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">索引的底层（原理）</span><br><span class="line">索引的类型</span><br><span class="line">索引的操作</span><br><span class="line">索引的使用</span><br></pre></td></tr></table></figure>
-<h2 id="索引的底层"><a href="#索引的底层" class="headerlink" title="索引的底层"></a>索引的底层</h2><p><code>底层主要维护了一个排序的数组，其中含有索引值和所在行内存地址的一组数据；索引底层有两种数据结构，B+数索引、哈希索引</code></p>
-<ul>
-<li>B+树索引：是一个平衡树，下标是索引，值是内存地址；查询的时间复杂度为O(log（n）)；可以用于排序（索引表是数据有顺序），和范围查找</li>
-<li>哈希索引：是哈希的键值对，键是索引值，值为内存地址；查询的时间复杂度为O(1)；只能用于等值比较（键值）</li>
-</ul>
-<h2 id="索引的类型"><a href="#索引的类型" class="headerlink" title="索引的类型"></a>索引的类型</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">普通索引：任何列都能做索引，索引无值要求，可重复或为空</span><br><span class="line">唯一索引：索引所在列的值必须唯一，但列值可为空</span><br><span class="line">主键索引：将列的主键作为索引，所在列，值唯一，且不能为空</span><br><span class="line">组合索引：将多个列组合视作索引；如果一个表中的数据在查询时有多个字段总是同时出现则这些字段就可以作为复合索引,形成索引覆盖可以提高查询的效率（实际提高的是<span class="built_in">where</span>过滤的效率）</span><br><span class="line">全文索引：只有用于Innodb、MyIsam 表格，并且只能对 CHAR、VARCHAR、TEXT 列建全文索引；用于当索引的字段值很长，且用like模糊匹配效率较低时；语法</span><br><span class="line">前缀索引：当索引列是字符串时，可以使用字符串前缀作为索引，减少索引长度</span><br></pre></td></tr></table></figure>
-<h2 id="索引的操作"><a href="#索引的操作" class="headerlink" title="索引的操作"></a>索引的操作</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">创建索引：create index index_name on table_name(列名)</span><br><span class="line">删除索引：drop index index_name on table_name</span><br><span class="line">修改索引：alter table </span><br><span class="line">  添加普通/组合索引：alter table table_name add INDEX index_name(列1，列2)</span><br><span class="line">  添加唯一索引：alter tablet table_name ADD UNIQUE index_name (列1)</span><br><span class="line">  添加主键索引：alter table table_name ADD PRIMARY KEY index_name(列1)</span><br><span class="line">  添加全表索引：alter table table_name ADD DULLTEXT index_name (列1)</span><br><span class="line">  添加前缀索引：alt table table_name add INDEX index_name(email(6))	//这里以email列的键值前6位作为索引</span><br><span class="line">  编辑索引：先删除--后添加</span><br><span class="line">查询索引：show index from table_name</span><br></pre></td></tr></table></figure>
-<h2 id="索引的使用"><a href="#索引的使用" class="headerlink" title="索引的使用"></a>索引的使用</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">使用于大量数据、或大表查询的场景；</span><br><span class="line">将经常使用的列作为索引；</span><br><span class="line">尽量使用短索引；</span><br><span class="line">如果用字符串值的列，最好使用前缀索引，防止索引值过长，前缀索引可以用来实现短索引；</span><br></pre></td></tr></table></figure>
-<p><strong>索引的优势是对索引列进行了排序，不用全表查询，有查询优势；但对数据量很小的表，还有写入时，由于要改所有的索引，其实会降低写入性能；因此应该用于大表查询场景，不能用于频繁写入场景</strong></p>
+    <title>传易--性能测试</title>
+    <url>/posts/56a1ed73/</url>
+    <content><![CDATA[<p><a href="https://docs.qq.com/doc/DSWZnVGNka29qa1lJ">内部项目，需找我授权</a></p>
 ]]></content>
       <categories>
         <category>技术</category>
       </categories>
       <tags>
-        <tag>索引</tag>
         <tag>性能</tag>
+        <tag>实战</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>搭建hexo博客</title>
+    <url>/posts/8e88d59c/</url>
+    <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、建立github代码库</span><br><span class="line">2、下载hexo文件</span><br><span class="line">3、下载主题，更改配置使主题生效</span><br><span class="line">4、部署配置git</span><br><span class="line">5、下载git同步工具</span><br><span class="line">6、清洗旧数据，生成新的静态文件，同步静态文件至代码库（需更改hexo部署配置）</span><br><span class="line">7、域名解析，并给github代码库配置域名</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://zhuanlan.zhihu.com/p/26625249">参考</a></p>
+<ul>
+<li>related_posts: true</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>数据库性能测试</title>
+    <url>/posts/ab3091af/</url>
+    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
+]]></content>
   </entry>
   <entry>
     <title>性能测试--总述</title>
@@ -1249,25 +1283,6 @@
 <p><img src="/text_image/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.png" alt="alt text"></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">方向：架构、设计、容灾、代码、网络、存储、安全</span><br><span class="line">缓存策略</span><br></pre></td></tr></table></figure>
 <h3 id="常见问题："><a href="#常见问题：" class="headerlink" title="常见问题："></a>常见问题：</h3><p>1、广告请求接口耗时过长问题（原因。服务端和大数据过滤策略重叠,redis查询耗时问题）<br>2、网关接口压力太大太重，拆分<br>3、<br><a href="https://mp.weixin.qq.com/s/1Tu0jLK9GfPry_HxP079Lw">性能优化大纲</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>传易--性能测试</title>
-    <url>/posts/56a1ed73/</url>
-    <content><![CDATA[<p><a href="https://docs.qq.com/doc/DSWZnVGNka29qa1lJ">内部项目，需找我授权</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
-        <tag>实战</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数据库性能测试</title>
-    <url>/posts/ab3091af/</url>
-    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -1325,22 +1340,23 @@
       </tags>
   </entry>
   <entry>
-    <title>搭建hexo博客</title>
-    <url>/posts/8e88d59c/</url>
-    <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、建立github代码库</span><br><span class="line">2、下载hexo文件</span><br><span class="line">3、下载主题，更改配置使主题生效</span><br><span class="line">4、部署配置git</span><br><span class="line">5、下载git同步工具</span><br><span class="line">6、清洗旧数据，生成新的静态文件，同步静态文件至代码库（需更改hexo部署配置）</span><br><span class="line">7、域名解析，并给github代码库配置域名</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://zhuanlan.zhihu.com/p/26625249">参考</a></p>
-<ul>
-<li>related_posts: true</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>用例管理平台</title>
     <url>/posts/c48e9a83/</url>
     <content><![CDATA[<p><a href="https://github.com/didi/AgileTC/blob/master/README_zh-CN.md">用例管理平台agiletc</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>百度质量体系建设</title>
+    <url>/posts/bcd76c52/</url>
+    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
+<li><em><strong>介绍</strong></em></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>目录</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>稳定性治理--智能遍历</title>
@@ -1511,19 +1527,6 @@
       </tags>
   </entry>
   <entry>
-    <title>百度质量体系建设</title>
-    <url>/posts/bcd76c52/</url>
-    <content><![CDATA[<h1 id="百度质量体系建设"><a href="#百度质量体系建设" class="headerlink" title="百度质量体系建设"></a>百度质量体系建设</h1><ul>
-<li><em><strong>介绍</strong></em></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">本系列介绍百度质量体系建设的核心理念，体系建设过程，以及具体的实操方案</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>目录</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
     <title>稳定性治理-暴力回放</title>
     <url>/posts/81de0e43/</url>
     <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
@@ -1534,6 +1537,60 @@
       <tags>
         <tag>稳定性</tag>
         <tag>暴力回放</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>类对象/实例对象/类方法/实例方法/静态方法</title>
+    <url>/posts/93899372/</url>
+    <content><![CDATA[<ul>
+<li><strong>类对象</strong></li>
+</ul>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A(object):</span><br><span class="line">    def m1(self, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br><span class="line"></span><br><span class="line">    @classmethod</span><br><span class="line">    def m2(cls, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br><span class="line">    @staticmethod</span><br><span class="line">    def m3(n):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.m1(1) <span class="comment"># self: &lt;__main__.A object at 0x000001E596E41A90&gt;</span></span><br><span class="line">A.m2(1) <span class="comment"># cls: &lt;class &#x27;__main__.A&#x27;&gt;</span></span><br><span class="line">A.m3(1)</span><br><span class="line"></span><br><span class="line">按顺序执行时，执行class A（）创建了A这个类对象</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>实例对象</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">a = A()</span><br><span class="line">是对类对象A的实例化，创建了实例对象a,也可以说a绑定了实例对象</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>类方法</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">@classmethod</span><br><span class="line">def m2(cls, n):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>类中@classmethod下方的是类方法，写法也是固定写法；其中cls必须要有，cls绑定了类对象A(),在类外部，需要这样引用A(类对象).类方法 ；因为类方法在类中能被直接引用，一般是这样引用self.类方法；这是由于self绑定的是实例对象，根据实例对象可以查找到类对象</code></p>
+<ul>
+<li><p>使用场景</p>
+<p>  <code>  如果希望在方法裡面调用静态类，那么把方法定义成类方法是合适的，因为要是定义成静态方法，那么你就要显示地引用类A，这对继承来说可不是一件好事情。(为了方便调用，但又为了继承方便，因此不用静态方法，显示调用)  </code></p>
+</li>
+<li><p><strong>实例方法</strong></p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def m1(self, n):</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br></pre></td></tr></table></figure>
+<p><code>实例方法，必须带self;其中self绑定的实例对象a;因此外部使用可以这样使用，a.m1()；在类的内部self绑定了实例对象，因此可以直接使用self.m1来调用</code></p>
+<ul>
+<li><p>使用场景</p>
+<p>  <code>  需要将方法作为对象属性，进行调用，继承，传递的方法，大部分类方法都会定义成实例方法；  </code></p>
+</li>
+<li><p><strong>静态方法</strong></p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@staticmethod</span><br><span class="line">def m3(n):</span><br><span class="line">	pass</span><br><span class="line">        </span><br><span class="line">静态方法，就是普通函数；和类对象和实例对象均无绑定关系；</span><br><span class="line">即可被类调用，也可通过实例调用；</span><br><span class="line">A.m3()</span><br><span class="line">a.m3()</span><br><span class="line">self.m3</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>使用场景</p>
+<p>  <code>  如果在方法中不需要访问任何实例方法和属性，纯粹地通过传入参数并返回数据的功能性方法，那么它就适合用静态方法来定义，它节省了实例化对象的开销成本，往往这种方法放在类外面的模块层作为一个函数存在也是没问题的，而放在类中，仅为这个类服务（定义了一个局部域函数仅为该类专门服务）。  </code></p>
+</li>
+<li><p><strong>装饰器</strong></p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def A(FUN):</span><br><span class="line">	<span class="built_in">return</span> FUN+1</span><br><span class="line">    </span><br><span class="line">@FUN</span><br><span class="line">def b():</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">在装饰器中@后跟的是父方法，注意类方法/静态方法/装饰器方法区别	</span><br></pre></td></tr></table></figure>
+<p><a href="https://zhuanlan.zhihu.com/p/28010894">参考</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -1786,60 +1843,6 @@
       </categories>
       <tags>
         <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>类对象/实例对象/类方法/实例方法/静态方法</title>
-    <url>/posts/93899372/</url>
-    <content><![CDATA[<ul>
-<li><strong>类对象</strong></li>
-</ul>
-<span id="more"></span>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class A(object):</span><br><span class="line">    def m1(self, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br><span class="line"></span><br><span class="line">    @classmethod</span><br><span class="line">    def m2(cls, n):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br><span class="line">    @staticmethod</span><br><span class="line">    def m3(n):</span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.m1(1) <span class="comment"># self: &lt;__main__.A object at 0x000001E596E41A90&gt;</span></span><br><span class="line">A.m2(1) <span class="comment"># cls: &lt;class &#x27;__main__.A&#x27;&gt;</span></span><br><span class="line">A.m3(1)</span><br><span class="line"></span><br><span class="line">按顺序执行时，执行class A（）创建了A这个类对象</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>实例对象</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">a = A()</span><br><span class="line">是对类对象A的实例化，创建了实例对象a,也可以说a绑定了实例对象</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>类方法</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#接源码</span></span><br><span class="line">@classmethod</span><br><span class="line">def m2(cls, n):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;cls:&quot;</span>, cls)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><code>类中@classmethod下方的是类方法，写法也是固定写法；其中cls必须要有，cls绑定了类对象A(),在类外部，需要这样引用A(类对象).类方法 ；因为类方法在类中能被直接引用，一般是这样引用self.类方法；这是由于self绑定的是实例对象，根据实例对象可以查找到类对象</code></p>
-<ul>
-<li><p>使用场景</p>
-<p>  <code>  如果希望在方法裡面调用静态类，那么把方法定义成类方法是合适的，因为要是定义成静态方法，那么你就要显示地引用类A，这对继承来说可不是一件好事情。(为了方便调用，但又为了继承方便，因此不用静态方法，显示调用)  </code></p>
-</li>
-<li><p><strong>实例方法</strong></p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def m1(self, n):</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;self:&quot;</span>, self)</span><br></pre></td></tr></table></figure>
-<p><code>实例方法，必须带self;其中self绑定的实例对象a;因此外部使用可以这样使用，a.m1()；在类的内部self绑定了实例对象，因此可以直接使用self.m1来调用</code></p>
-<ul>
-<li><p>使用场景</p>
-<p>  <code>  需要将方法作为对象属性，进行调用，继承，传递的方法，大部分类方法都会定义成实例方法；  </code></p>
-</li>
-<li><p><strong>静态方法</strong></p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@staticmethod</span><br><span class="line">def m3(n):</span><br><span class="line">	pass</span><br><span class="line">        </span><br><span class="line">静态方法，就是普通函数；和类对象和实例对象均无绑定关系；</span><br><span class="line">即可被类调用，也可通过实例调用；</span><br><span class="line">A.m3()</span><br><span class="line">a.m3()</span><br><span class="line">self.m3</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>使用场景</p>
-<p>  <code>  如果在方法中不需要访问任何实例方法和属性，纯粹地通过传入参数并返回数据的功能性方法，那么它就适合用静态方法来定义，它节省了实例化对象的开销成本，往往这种方法放在类外面的模块层作为一个函数存在也是没问题的，而放在类中，仅为这个类服务（定义了一个局部域函数仅为该类专门服务）。  </code></p>
-</li>
-<li><p><strong>装饰器</strong></p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def A(FUN):</span><br><span class="line">	<span class="built_in">return</span> FUN+1</span><br><span class="line">    </span><br><span class="line">@FUN</span><br><span class="line">def b():</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">在装饰器中@后跟的是父方法，注意类方法/静态方法/装饰器方法区别	</span><br></pre></td></tr></table></figure>
-<p><a href="https://zhuanlan.zhihu.com/p/28010894">参考</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
       </tags>
   </entry>
   <entry>
