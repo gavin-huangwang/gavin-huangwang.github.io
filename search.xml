@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>稳定性--ANR治理</title>
+    <url>/posts/1ee32bf1/</url>
+    <content><![CDATA[<h1 id="ANR治理"><a href="#ANR治理" class="headerlink" title="ANR治理"></a>ANR治理</h1><ul>
+<li><em><strong>大纲</strong></em></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">anr是什么？</span><br><span class="line">为什么会产生anr?</span><br><span class="line">anr是怎样产生的，哪些场景下会产生？</span><br><span class="line">anr如何治理？</span><br><span class="line">解决anr问题的价值？</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<ul>
+<li><strong>anr是什么？</strong><br>  <code>anr(Applicatipon No Response),即应用无响应；本质是一个性能问题；在用户和app进行交互时，常会遇到长时间无响应/卡顿的场景；为了改善性能，Android设计了anr的机制，即保证交互能在一定时间内完成，如果未完成，就抛出异常，也就是ANR;   </code></li>
+<li><strong>anr设计机制：</strong><br>  <code>是系统通过与之交互的组件(Activity，Service，Receiver，Provider)以及用户交互(InputEvent)进行超时监控，以判断应用进程(主线程)是否存在卡死或响应过慢的问题，通俗来说就是很多系统中看门狗(watchdog)的设计思想。   </code><ul>
+<li><strong>不同的组件，系统设置的超时时间是不同的，这个时间不同手机厂商的os可能也会做调整：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
+<li><strong>系统抛出anr的机制：</strong><br><code>在进行相关的操作前，系统会基于当前的时间戳和这个类型组件的超时时间设置，计算出超时时间戳；并将超时时间戳传递给anr触发函数，组件若未超时启动，则会在启动成功后，在传递一个参数给anr函数来阻止触发anr;若到超时时间，anr函数还未收到阻止信号，就会触发ANR(类似构建了个定时触发的任务)； </code></li>
+<li><strong>超时触发流程如下：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
+</ul>
+</li>
+</ul>
+<p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1780091311874686979&scene=173&from_msgid=2247488558&from_itemidx=1&count=3&nolastread=1&uin=&key=&devicetype=Windows+10+x64&version=63030532&lang=zh_CN&ascene=0&fontgear=2">头条anr治理系列</a></p>
+<p><a href="https://mp.weixin.qq.com/s/L30s7rOyn6NcPC2y9XNZIQ">百度anr治理</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>anr</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Android资源采集</title>
     <url>/posts/0/</url>
     <content><![CDATA[<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><span id="more"></span>
@@ -36,34 +64,6 @@
       </categories>
       <tags>
         <tag>Android</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>稳定性--ANR治理</title>
-    <url>/posts/1ee32bf1/</url>
-    <content><![CDATA[<h1 id="ANR治理"><a href="#ANR治理" class="headerlink" title="ANR治理"></a>ANR治理</h1><ul>
-<li><em><strong>大纲</strong></em></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">anr是什么？</span><br><span class="line">为什么会产生anr?</span><br><span class="line">anr是怎样产生的，哪些场景下会产生？</span><br><span class="line">anr如何治理？</span><br><span class="line">解决anr问题的价值？</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<ul>
-<li><strong>anr是什么？</strong><br>  <code>anr(Applicatipon No Response),即应用无响应；本质是一个性能问题；在用户和app进行交互时，常会遇到长时间无响应/卡顿的场景；为了改善性能，Android设计了anr的机制，即保证交互能在一定时间内完成，如果未完成，就抛出异常，也就是ANR;   </code></li>
-<li><strong>anr设计机制：</strong><br>  <code>是系统通过与之交互的组件(Activity，Service，Receiver，Provider)以及用户交互(InputEvent)进行超时监控，以判断应用进程(主线程)是否存在卡死或响应过慢的问题，通俗来说就是很多系统中看门狗(watchdog)的设计思想。   </code><ul>
-<li><strong>不同的组件，系统设置的超时时间是不同的，这个时间不同手机厂商的os可能也会做调整：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
-<li><strong>系统抛出anr的机制：</strong><br><code>在进行相关的操作前，系统会基于当前的时间戳和这个类型组件的超时时间设置，计算出超时时间戳；并将超时时间戳传递给anr触发函数，组件若未超时启动，则会在启动成功后，在传递一个参数给anr函数来阻止触发anr;若到超时时间，anr函数还未收到阻止信号，就会触发ANR(类似构建了个定时触发的任务)； </code></li>
-<li><strong>超时触发流程如下：</strong><br><img src="/text_image/anr_%E7%BB%84%E4%BB%B6_%E8%B6%85%E6%97%B6.png" alt="alt text"></li>
-</ul>
-</li>
-</ul>
-<p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1MzYzMjE0MQ==&action=getalbum&album_id=1780091311874686979&scene=173&from_msgid=2247488558&from_itemidx=1&count=3&nolastread=1&uin=&key=&devicetype=Windows+10+x64&version=63030532&lang=zh_CN&ascene=0&fontgear=2">头条anr治理系列</a></p>
-<p><a href="https://mp.weixin.qq.com/s/L30s7rOyn6NcPC2y9XNZIQ">百度anr治理</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>anr</tag>
       </tags>
   </entry>
   <entry>
@@ -413,46 +413,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python-多线程</title>
-    <url>/posts/b7270d4a/</url>
-    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">多线程是什么？</span><br><span class="line">为什么需要使用多线程，多线程的作用？</span><br><span class="line">怎么使用多线程，join方法的作用？</span><br><span class="line">python多线程弊端？</span><br><span class="line">python多线程其他机制？</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<ul>
-<li><strong>多线程是什么？</strong></li>
-</ul>
-<p><code>线程是程序的最小单元，程序运行时，实际是线程在解释器中执行工作；</code></p>
-<ul>
-<li><strong>为什么需要使用多线程，多线程的作用？</strong></li>
-</ul>
-<p><code>python的多线程是假的多线程，在进程中同时最多只能有一个线程在解释器中运行，这是由python的全局解释器（GIL）来控制的，具体过程为“生成gil-线程运行-线程休眠（gil上锁）-运行其他线程-再次运行此线程时（需要将上一个线程上锁，并解锁此线程）”，这种虽然是假的多线程，但是可以在一个线程等待时，运行另一个线程，使单核得到充分利用；</code></p>
-<ul>
-<li><strong>怎么使用多线程，join方法的作用？</strong></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import threading</span><br><span class="line">#fun是函数，arg是参数</span><br><span class="line">t1&#x3D;threading.Thread(fun,arg)</span><br><span class="line">t1.start()</span><br><span class="line">t1.join() </span><br><span class="line">print(&quot;主线程执行&quot;)</span><br></pre></td></tr></table></figure>
-<p>join方法的作用是子线程劫持主线程，仅当子线程执行完之后，才能执行主线程，常用于爬虫，如爬取多个资源时，使用多线程，每个子线程添加join等待，仅当爬虫子线程爬取完资源后，才能进行下一步操作（运行主线程）</p>
-<ul>
-<li><strong>python 多线程的弊端</strong></li>
-</ul>
-<p><code>python多线程的GIL机制，导致python同时只能执行一个线程，只能使用单核，在多核机器上会存在巨大的资源浪费；因此多线程多用于高IO操作，尽量避免在多cpu计算场景下使用，该场景下应使用多进程；</code></p>
-<ul>
-<li><strong>python多线程其他机制？</strong></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python守护线程？</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>python的守护线程？</strong><br>  <code>python主线程运行时，默认会等待子线程运行结束后主线程才能结束，但我们可以在子线程启动前，将子线程添加到守护线程里，这样的话哪怕该守护子线程未结束，只要主线程结束了，守护线程也会跟着结束；   </code>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import threading</span><br><span class="line">#fun是函数，arg是参数</span><br><span class="line">t1&#x3D;threading.Thread(fun,arg)</span><br><span class="line">t1.setDaemon(True)#设置守护线程必须在该子线程执行前</span><br><span class="line">t1.start()</span><br><span class="line">t1.join() </span><br><span class="line">print(&quot;主线程执行&quot;)	#主线程结束后，子线程会跟着结束，不会执行</span><br><span class="line"></span><br><span class="line">线程的其他常用方法：</span><br><span class="line"></span><br><span class="line">run():  线程被cpu调度后自动执行线程对象的run方法</span><br><span class="line">start():启动线程活动。</span><br><span class="line">isAlive(): 返回线程是否活动的。</span><br><span class="line">getName(): 返回线程名。</span><br><span class="line">setName(): 设置线程名。</span><br><span class="line"></span><br><span class="line">threading模块提供的一些方法：</span><br><span class="line">threading.currentThread(): 返回当前的线程变量。</span><br><span class="line">threading.enumerate(): 返回一个包含正在运行的线程的list。正在运行指线程启动后、结束前，不包括启动前和终止后的线程。</span><br><span class="line">threading.activeCount():返回正在运行的线程数量，与len(threading.enumerate())有相同的结果。</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>总结：python的多线程支持多任务，但多任务并不支持并行运行（同时运行），只是利用了cpu的多道技术，支持任务的切换；</p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>多线程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>python-协程</title>
     <url>/posts/62a5b225/</url>
     <content><![CDATA[<p><code>python的协程，是一种协作（异步）工作方式；类似于多线程，但不是多线程，实际是在一个线程中工作；工作过程实际是利用协程模块（标准库asyncio），构建协程对象；当协程对象执行时，其中可以构造专属的等待方法，处于等待时，会调度其他的协程对象执行，当等待时间过后，又会恢复到原来的协程对象上来工作，类似于多线程的上下文切换，可以在使用维度上理解成微线程，特性如下：</code></p>
@@ -472,41 +432,6 @@
       <tags>
         <tag>python</tag>
         <tag>协程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python-多进程</title>
-    <url>/posts/a1c10886/</url>
-    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python多进程简述</span><br><span class="line">python多进程模块方法介绍</span><br><span class="line">python多进程使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-<ul>
-<li><p><em><strong>python多进程模块简述：</strong></em></p>
-<p>  <code>python由于GIL机制，多线程，实际仅消耗一个内核资源；因此效率较低，python要实现并发，提高性能，只能使用多进程模块，python的多进程模块为multiprocessing，通过使用Pool类实现多进程；   </code></p>
-</li>
-<li><p><em><strong>python多进程模块方法介绍：</strong></em></p>
-<p>  <code>   python多进程模块为multiprocessing，为python的内置模块；通过该模块封装的Pool()对象实现多进程，Pool类的属性介绍如下：</code></p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()	#需要被执行的方法&#x2F;任务</span><br><span class="line">iter&#x3D;iter	#迭代对象，list&#x2F;变量值</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(3)	#创建一个仅容纳3个进程的进程池，一旦工作任务超出进程的数量，则需等待，进程池中的进程被释放，任务才能进入进程池；</span><br><span class="line">__init__(self, group&#x3D;None, target&#x3D;None, name&#x3D;None, args&#x3D;(), kwargs&#x3D;&#123;&#125;)	#进程池的构造方法</span><br><span class="line">group：进程池所属的进程组，一旦不需要给值；</span><br><span class="line">target：待处理的任务或方法；</span><br><span class="line">name：进程池的别名，默认不给值；</span><br><span class="line">args：调用对象的位置参数，可给值元组&#x2F;列表等可迭代对象或者参数值；</span><br><span class="line">kwargs：调用对象的字典参数；</span><br><span class="line"></span><br><span class="line">使用：在win环境下，进程池必须在当前模块下执行，即必须在 if __name__&#x3D;&#x3D;main:下执行；</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>Pool()类中拥有的属性方法如下：</strong></li>
-</ul>
-<ul>
-<li>pool.map()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br></pre></td></tr></table></figure></li>
-<li>pool.map_async(run,iter)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map_async(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map_async(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br><span class="line">---效果和pool.map()不相同，mapasyc效率更高；mapasyc主进程未阻塞进程池，不需要等该批次的进程全执行完，新的任务就能进入进程池执行；常用pool.map()</span><br></pre></td></tr></table></figure></li>
-<li>pool.apply()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]])</span><br><span class="line">apply,参数需要为具体的变量值，且仅在python2支持；</span><br><span class="line">apply方法的原理是，阻塞进程池，一次仅让一个任务进入进程池，该任务完成后，才能执行下一个任务，实际是串行；</span><br></pre></td></tr></table></figure></li>
-<li>pool.applyasyc()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]],[, callback&#x3D;None]]])</span><br><span class="line">   applyasyc,参数需要为具体的变量值，在python3上支持；</span><br><span class="line">   applyasyc方法的原理是，进程池非阻塞，一次可以让多个任务进入进程池，且未对该批次任务进行阻塞，只要其中一个进程执行完后，就能释放资源，让新的任务进入进程池，实际是并行的,效率等同于mapasyc()；</span><br><span class="line">回调使用：pool.applyasyc(run,kwargs,callback&#x3D;func2)，run的返回作为func2的参数，执行完返回func2的值；</span><br><span class="line">   ---applyasyc效果等同于mapasyc()，只是他具有回调功能，且入参的变量不能是可迭代对象，必须为具体的变量值；</span><br></pre></td></tr></table></figure></li>
-<li>pool.terminal()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用：结束工作进程，不在处理未完成的任务</span><br><span class="line">pool.map(run,iter)</span><br><span class="line">pool.close()</span><br><span class="line">pool.run()</span><br><span class="line">sleep(2)</span><br><span class="line">pool.terminal()		#执行两秒后，哪怕进程未执行完，也结束该主进程</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p><em><strong>python多进程使用：</strong></em></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()</span><br><span class="line">iter&#x3D;iter</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(multiprocessing.cpu_count())</span><br><span class="line">pool.map(run(),iter)</span><br><span class="line">pool.join()</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>python</tag>
-        <tag>多进程</tag>
       </tags>
   </entry>
   <entry>
@@ -554,6 +479,46 @@
       </tags>
   </entry>
   <entry>
+    <title>python-多线程</title>
+    <url>/posts/b7270d4a/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">多线程是什么？</span><br><span class="line">为什么需要使用多线程，多线程的作用？</span><br><span class="line">怎么使用多线程，join方法的作用？</span><br><span class="line">python多线程弊端？</span><br><span class="line">python多线程其他机制？</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<ul>
+<li><strong>多线程是什么？</strong></li>
+</ul>
+<p><code>线程是程序的最小单元，程序运行时，实际是线程在解释器中执行工作；</code></p>
+<ul>
+<li><strong>为什么需要使用多线程，多线程的作用？</strong></li>
+</ul>
+<p><code>python的多线程是假的多线程，在进程中同时最多只能有一个线程在解释器中运行，这是由python的全局解释器（GIL）来控制的，具体过程为“生成gil-线程运行-线程休眠（gil上锁）-运行其他线程-再次运行此线程时（需要将上一个线程上锁，并解锁此线程）”，这种虽然是假的多线程，但是可以在一个线程等待时，运行另一个线程，使单核得到充分利用；</code></p>
+<ul>
+<li><strong>怎么使用多线程，join方法的作用？</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import threading</span><br><span class="line">#fun是函数，arg是参数</span><br><span class="line">t1&#x3D;threading.Thread(fun,arg)</span><br><span class="line">t1.start()</span><br><span class="line">t1.join() </span><br><span class="line">print(&quot;主线程执行&quot;)</span><br></pre></td></tr></table></figure>
+<p>join方法的作用是子线程劫持主线程，仅当子线程执行完之后，才能执行主线程，常用于爬虫，如爬取多个资源时，使用多线程，每个子线程添加join等待，仅当爬虫子线程爬取完资源后，才能进行下一步操作（运行主线程）</p>
+<ul>
+<li><strong>python 多线程的弊端</strong></li>
+</ul>
+<p><code>python多线程的GIL机制，导致python同时只能执行一个线程，只能使用单核，在多核机器上会存在巨大的资源浪费；因此多线程多用于高IO操作，尽量避免在多cpu计算场景下使用，该场景下应使用多进程；</code></p>
+<ul>
+<li><strong>python多线程其他机制？</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python守护线程？</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>python的守护线程？</strong><br>  <code>python主线程运行时，默认会等待子线程运行结束后主线程才能结束，但我们可以在子线程启动前，将子线程添加到守护线程里，这样的话哪怕该守护子线程未结束，只要主线程结束了，守护线程也会跟着结束；   </code>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import threading</span><br><span class="line">#fun是函数，arg是参数</span><br><span class="line">t1&#x3D;threading.Thread(fun,arg)</span><br><span class="line">t1.setDaemon(True)#设置守护线程必须在该子线程执行前</span><br><span class="line">t1.start()</span><br><span class="line">t1.join() </span><br><span class="line">print(&quot;主线程执行&quot;)	#主线程结束后，子线程会跟着结束，不会执行</span><br><span class="line"></span><br><span class="line">线程的其他常用方法：</span><br><span class="line"></span><br><span class="line">run():  线程被cpu调度后自动执行线程对象的run方法</span><br><span class="line">start():启动线程活动。</span><br><span class="line">isAlive(): 返回线程是否活动的。</span><br><span class="line">getName(): 返回线程名。</span><br><span class="line">setName(): 设置线程名。</span><br><span class="line"></span><br><span class="line">threading模块提供的一些方法：</span><br><span class="line">threading.currentThread(): 返回当前的线程变量。</span><br><span class="line">threading.enumerate(): 返回一个包含正在运行的线程的list。正在运行指线程启动后、结束前，不包括启动前和终止后的线程。</span><br><span class="line">threading.activeCount():返回正在运行的线程数量，与len(threading.enumerate())有相同的结果。</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>总结：python的多线程支持多任务，但多任务并不支持并行运行（同时运行），只是利用了cpu的多道技术，支持任务的切换；</p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>多线程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python语法-super方法</title>
     <url>/posts/7b2ded6/</url>
     <content><![CDATA[<p><code>super方法用来，继承父类，或祖父类；常用的结构为super(C,self)/python3括号内的可缩写（super()）;super方法本身是一个类，和当前所在的类（父类）无关，该类使用了mro的算法（方法查找顺序）来决定继承类的顺序</code></p>
@@ -575,6 +540,41 @@
       </categories>
       <tags>
         <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python-多进程</title>
+    <url>/posts/a1c10886/</url>
+    <content><![CDATA[<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python多进程简述</span><br><span class="line">python多进程模块方法介绍</span><br><span class="line">python多进程使用</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<ul>
+<li><p><em><strong>python多进程模块简述：</strong></em></p>
+<p>  <code>python由于GIL机制，多线程，实际仅消耗一个内核资源；因此效率较低，python要实现并发，提高性能，只能使用多进程模块，python的多进程模块为multiprocessing，通过使用Pool类实现多进程；   </code></p>
+</li>
+<li><p><em><strong>python多进程模块方法介绍：</strong></em></p>
+<p>  <code>   python多进程模块为multiprocessing，为python的内置模块；通过该模块封装的Pool()对象实现多进程，Pool类的属性介绍如下：</code></p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()	#需要被执行的方法&#x2F;任务</span><br><span class="line">iter&#x3D;iter	#迭代对象，list&#x2F;变量值</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(3)	#创建一个仅容纳3个进程的进程池，一旦工作任务超出进程的数量，则需等待，进程池中的进程被释放，任务才能进入进程池；</span><br><span class="line">__init__(self, group&#x3D;None, target&#x3D;None, name&#x3D;None, args&#x3D;(), kwargs&#x3D;&#123;&#125;)	#进程池的构造方法</span><br><span class="line">group：进程池所属的进程组，一旦不需要给值；</span><br><span class="line">target：待处理的任务或方法；</span><br><span class="line">name：进程池的别名，默认不给值；</span><br><span class="line">args：调用对象的位置参数，可给值元组&#x2F;列表等可迭代对象或者参数值；</span><br><span class="line">kwargs：调用对象的字典参数；</span><br><span class="line"></span><br><span class="line">使用：在win环境下，进程池必须在当前模块下执行，即必须在 if __name__&#x3D;&#x3D;main:下执行；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Pool()类中拥有的属性方法如下：</strong></li>
+</ul>
+<ul>
+<li>pool.map()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br></pre></td></tr></table></figure></li>
+<li>pool.map_async(run,iter)<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：map_async(func, iterable[, chunksize&#x3D;None])</span><br><span class="line">pool.map_async(run,iter)		#使用进程池中的进程来同步构造任务为run,参数为iter的对象，具体效果等同于map()方法；</span><br><span class="line">pool.close()	#通过主进程，关闭进程池，子进程任务未完成时，进程池不能接受新的子进程；</span><br><span class="line">pool.join()		$通过执行子进程，并等待所有子进程执行完，才进行下一步操作；</span><br><span class="line">---效果和pool.map()不相同，mapasyc效率更高；mapasyc主进程未阻塞进程池，不需要等该批次的进程全执行完，新的任务就能进入进程池执行；常用pool.map()</span><br></pre></td></tr></table></figure></li>
+<li>pool.apply()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]])</span><br><span class="line">apply,参数需要为具体的变量值，且仅在python2支持；</span><br><span class="line">apply方法的原理是，阻塞进程池，一次仅让一个任务进入进程池，该任务完成后，才能执行下一个任务，实际是串行；</span><br></pre></td></tr></table></figure></li>
+<li>pool.applyasyc()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   函数原型：apply(func[, args&#x3D;()[, kwds&#x3D;&#123;&#125;]],[, callback&#x3D;None]]])</span><br><span class="line">   applyasyc,参数需要为具体的变量值，在python3上支持；</span><br><span class="line">   applyasyc方法的原理是，进程池非阻塞，一次可以让多个任务进入进程池，且未对该批次任务进行阻塞，只要其中一个进程执行完后，就能释放资源，让新的任务进入进程池，实际是并行的,效率等同于mapasyc()；</span><br><span class="line">回调使用：pool.applyasyc(run,kwargs,callback&#x3D;func2)，run的返回作为func2的参数，执行完返回func2的值；</span><br><span class="line">   ---applyasyc效果等同于mapasyc()，只是他具有回调功能，且入参的变量不能是可迭代对象，必须为具体的变量值；</span><br></pre></td></tr></table></figure></li>
+<li>pool.terminal()<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用：结束工作进程，不在处理未完成的任务</span><br><span class="line">pool.map(run,iter)</span><br><span class="line">pool.close()</span><br><span class="line">pool.run()</span><br><span class="line">sleep(2)</span><br><span class="line">pool.terminal()		#执行两秒后，哪怕进程未执行完，也结束该主进程</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><em><strong>python多进程使用：</strong></em></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line"></span><br><span class="line">run&#x3D;run()</span><br><span class="line">iter&#x3D;iter</span><br><span class="line"></span><br><span class="line">pool&#x3D;Pool(multiprocessing.cpu_count())</span><br><span class="line">pool.map(run(),iter)</span><br><span class="line">pool.join()</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>python</tag>
+        <tag>多进程</tag>
       </tags>
   </entry>
   <entry>
@@ -702,27 +702,6 @@
       </tags>
   </entry>
   <entry>
-    <title>传音刷机</title>
-    <url>/posts/a1b2e86a/</url>
-    <content><![CDATA[<ol>
-<li>设置 -&gt; 开发者模式打开 oem unlock<br>输入 adb reboot bootloader</li>
-<li>进入fastboot模式输入 fastboot flashing unlock。按住音量上键确认unlock</li>
-<li>fastboot reboot 重启</li>
-<li>开机后,输入 adb root</li>
-<li>执行 adb disable-verity</li>
-<li>执行 adb reboot</li>
-<li>重启后 执行 adb root</li>
-<li>执行 adb remount</li>
-</ol>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>刷机</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>优秀博客</title>
     <url>/posts/bb158cde/</url>
     <content><![CDATA[<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ul>
@@ -809,6 +788,27 @@
       </tags>
   </entry>
   <entry>
+    <title>传音刷机</title>
+    <url>/posts/a1b2e86a/</url>
+    <content><![CDATA[<ol>
+<li>设置 -&gt; 开发者模式打开 oem unlock<br>输入 adb reboot bootloader</li>
+<li>进入fastboot模式输入 fastboot flashing unlock。按住音量上键确认unlock</li>
+<li>fastboot reboot 重启</li>
+<li>开机后,输入 adb root</li>
+<li>执行 adb disable-verity</li>
+<li>执行 adb reboot</li>
+<li>重启后 执行 adb root</li>
+<li>执行 adb remount</li>
+</ol>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>刷机</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>估值体系</title>
     <url>/posts/daef770e/</url>
     <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的扣非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
@@ -859,26 +859,6 @@
 <li><strong>痛点</strong></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>可变对象合并方法</title>
-    <url>/posts/def45bf2/</url>
-    <content><![CDATA[<h1 id="可变对象合并的方法"><a href="#可变对象合并的方法" class="headerlink" title="可变对象合并的方法"></a>可变对象合并的方法</h1><p>eg:list</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">+:合并</span><br><span class="line">+=：增加赋值</span><br><span class="line">append()：添加</span><br><span class="line">extend()：插入</span><br><span class="line"></span><br><span class="line">list=[1,2,3]</span><br><span class="line">l=[4]</span><br><span class="line">s=list+l</span><br><span class="line">s=list.append(l)</span><br><span class="line">s=list.extend(l)</span><br><span class="line">list+=l</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;list&#x27;</span>,list)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;l&#x27;</span>,l)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;s&#x27;</span>,s)</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p><strong>+合并</strong></p>
-<p><code> 合并方法，是影响最小，速度最慢的方法；因为他不会改变原序列，会复制后生成一个新的序列    </code></p>
-<p><strong>append()</strong><br>    <code>    添加方法，会直接将对象添加到原序列末尾；会改变原序列    </code></p>
-<p><strong>extend()</strong><br>    <code>    插入方法，会将对象的元素添加到序列末尾，而不是对象，会改变原序列    </code></p>
-<p><strong>+=</strong><br>    <code>    增强赋值方法，类似于合并=；和extend()等效，效率比其低，会改变原序列    </code></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>序列</tag>
-      </tags>
   </entry>
   <entry>
     <title>全局函数局部函数</title>
@@ -1045,6 +1025,45 @@
       </tags>
   </entry>
   <entry>
+    <title>大数据BI报表架构调整</title>
+    <url>/posts/10f9513d/</url>
+    <content><![CDATA[<h1 id="大数据BI报表架构调整"><a href="#大数据BI报表架构调整" class="headerlink" title="大数据BI报表架构调整"></a>大数据BI报表架构调整</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span>
+
+<h2 id="架构说明"><a href="#架构说明" class="headerlink" title="架构说明"></a>架构说明</h2><h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="覆盖范围"><a href="#覆盖范围" class="headerlink" title="覆盖范围"></a>覆盖范围</h3><p><em><strong>oms Category Analysis模块</strong></em></p>
+<ul>
+<li>覆盖前端交互</li>
+<li>覆盖报表的数据</li>
+<li>覆盖接口性能</li>
+</ul>
+<p><em><strong>Traffic Analysis</strong></em></p>
+<ul>
+<li>覆盖前端交互</li>
+<li>覆盖报表的数据</li>
+<li>覆盖接口性能</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>可变对象合并方法</title>
+    <url>/posts/def45bf2/</url>
+    <content><![CDATA[<h1 id="可变对象合并的方法"><a href="#可变对象合并的方法" class="headerlink" title="可变对象合并的方法"></a>可变对象合并的方法</h1><p>eg:list</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">+:合并</span><br><span class="line">+=：增加赋值</span><br><span class="line">append()：添加</span><br><span class="line">extend()：插入</span><br><span class="line"></span><br><span class="line">list=[1,2,3]</span><br><span class="line">l=[4]</span><br><span class="line">s=list+l</span><br><span class="line">s=list.append(l)</span><br><span class="line">s=list.extend(l)</span><br><span class="line">list+=l</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;list&#x27;</span>,list)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;l&#x27;</span>,l)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;s&#x27;</span>,s)</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>+合并</strong></p>
+<p><code> 合并方法，是影响最小，速度最慢的方法；因为他不会改变原序列，会复制后生成一个新的序列    </code></p>
+<p><strong>append()</strong><br>    <code>    添加方法，会直接将对象添加到原序列末尾；会改变原序列    </code></p>
+<p><strong>extend()</strong><br>    <code>    插入方法，会将对象的元素添加到序列末尾，而不是对象，会改变原序列    </code></p>
+<p><strong>+=</strong><br>    <code>    增强赋值方法，类似于合并=；和extend()等效，效率比其低，会改变原序列    </code></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>序列</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>大数据--测试</title>
     <url>/posts/ac354d65/</url>
     <content><![CDATA[<p><code>大数据测试，工作内容主要有：数据测试、模型测试；同时在不同的业务阶段，工作的重心不同，数据质量体系也会有不同的倾向，要全局的了解大数据测试，必须先明白大数据的架构，工作过程</code></p>
@@ -1099,25 +1118,6 @@
         <tag>数据测试</tag>
         <tag>大数据</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>大数据BI报表架构调整</title>
-    <url>/posts/10f9513d/</url>
-    <content><![CDATA[<h1 id="大数据BI报表架构调整"><a href="#大数据BI报表架构调整" class="headerlink" title="大数据BI报表架构调整"></a>大数据BI报表架构调整</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span>
-
-<h2 id="架构说明"><a href="#架构说明" class="headerlink" title="架构说明"></a>架构说明</h2><h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="覆盖范围"><a href="#覆盖范围" class="headerlink" title="覆盖范围"></a>覆盖范围</h3><p><em><strong>oms Category Analysis模块</strong></em></p>
-<ul>
-<li>覆盖前端交互</li>
-<li>覆盖报表的数据</li>
-<li>覆盖接口性能</li>
-</ul>
-<p><em><strong>Traffic Analysis</strong></em></p>
-<ul>
-<li>覆盖前端交互</li>
-<li>覆盖报表的数据</li>
-<li>覆盖接口性能</li>
-</ul>
-]]></content>
   </entry>
   <entry>
     <title>工作梳理</title>
@@ -1179,6 +1179,30 @@
       </tags>
   </entry>
   <entry>
+    <title>性能优化--索引</title>
+    <url>/posts/939ecb54/</url>
+    <content><![CDATA[<p><code>索引是一种优化db查询的技巧，一种将表数据排序的结构；通过将db的单列/多列值设定为索引，在查询时就能根据索引值，直接查询到索引所在行的内存地址，不用查询全表了，从而大幅提供查询的速度</code></p>
+<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">索引的底层（原理）</span><br><span class="line">索引的类型</span><br><span class="line">索引的操作</span><br><span class="line">索引的使用</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h2 id="索引的底层"><a href="#索引的底层" class="headerlink" title="索引的底层"></a>索引的底层</h2><p><code>底层主要维护了一个排序的数组，其中含有索引值和所在行内存地址的一组数据；索引底层有两种数据结构，B+数索引、哈希索引</code></p>
+<ul>
+<li>B+树索引：是一个平衡树，下标是索引，值是内存地址；查询的时间复杂度为O(log（n）)；可以用于排序（索引表是数据有顺序），和范围查找</li>
+<li>哈希索引：是哈希的键值对，键是索引值，值为内存地址；查询的时间复杂度为O(1)；只能用于等值比较（键值）</li>
+</ul>
+<h2 id="索引的类型"><a href="#索引的类型" class="headerlink" title="索引的类型"></a>索引的类型</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">普通索引：任何列都能做索引，索引无值要求，可重复或为空</span><br><span class="line">唯一索引：索引所在列的值必须唯一，但列值可为空</span><br><span class="line">主键索引：将列的主键作为索引，所在列，值唯一，且不能为空</span><br><span class="line">组合索引：将多个列组合视作索引；如果一个表中的数据在查询时有多个字段总是同时出现则这些字段就可以作为复合索引,形成索引覆盖可以提高查询的效率（实际提高的是<span class="built_in">where</span>过滤的效率）</span><br><span class="line">全文索引：只有用于Innodb、MyIsam 表格，并且只能对 CHAR、VARCHAR、TEXT 列建全文索引；用于当索引的字段值很长，且用like模糊匹配效率较低时；语法</span><br><span class="line">前缀索引：当索引列是字符串时，可以使用字符串前缀作为索引，减少索引长度</span><br></pre></td></tr></table></figure>
+<h2 id="索引的操作"><a href="#索引的操作" class="headerlink" title="索引的操作"></a>索引的操作</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">创建索引：create index index_name on table_name(列名)</span><br><span class="line">删除索引：drop index index_name on table_name</span><br><span class="line">修改索引：alter table </span><br><span class="line">  添加普通/组合索引：alter table table_name add INDEX index_name(列1，列2)</span><br><span class="line">  添加唯一索引：alter tablet table_name ADD UNIQUE index_name (列1)</span><br><span class="line">  添加主键索引：alter table table_name ADD PRIMARY KEY index_name(列1)</span><br><span class="line">  添加全表索引：alter table table_name ADD DULLTEXT index_name (列1)</span><br><span class="line">  添加前缀索引：alt table table_name add INDEX index_name(email(6))	//这里以email列的键值前6位作为索引</span><br><span class="line">  编辑索引：先删除--后添加</span><br><span class="line">查询索引：show index from table_name</span><br></pre></td></tr></table></figure>
+<h2 id="索引的使用"><a href="#索引的使用" class="headerlink" title="索引的使用"></a>索引的使用</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">使用于大量数据、或大表查询的场景；</span><br><span class="line">将经常使用的列作为索引；</span><br><span class="line">尽量使用短索引；</span><br><span class="line">如果用字符串值的列，最好使用前缀索引，防止索引值过长，前缀索引可以用来实现短索引；</span><br></pre></td></tr></table></figure>
+<p><strong>索引的优势是对索引列进行了排序，不用全表查询，有查询优势；但对数据量很小的表，还有写入时，由于要改所有的索引，其实会降低写入性能；因此应该用于大表查询场景，不能用于频繁写入场景</strong></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>索引</tag>
+        <tag>性能</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>常用app测试工具</title>
     <url>/posts/28eebda3/</url>
     <content><![CDATA[<h1 id="常用app测试工具"><a href="#常用app测试工具" class="headerlink" title="常用app测试工具"></a>常用app测试工具</h1><p>常用测试工具</p>
@@ -1234,48 +1258,6 @@
       </tags>
   </entry>
   <entry>
-    <title>性能优化--索引</title>
-    <url>/posts/939ecb54/</url>
-    <content><![CDATA[<p><code>索引是一种优化db查询的技巧，一种将表数据排序的结构；通过将db的单列/多列值设定为索引，在查询时就能根据索引值，直接查询到索引所在行的内存地址，不用查询全表了，从而大幅提供查询的速度</code></p>
-<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">索引的底层（原理）</span><br><span class="line">索引的类型</span><br><span class="line">索引的操作</span><br><span class="line">索引的使用</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<h2 id="索引的底层"><a href="#索引的底层" class="headerlink" title="索引的底层"></a>索引的底层</h2><p><code>底层主要维护了一个排序的数组，其中含有索引值和所在行内存地址的一组数据；索引底层有两种数据结构，B+数索引、哈希索引</code></p>
-<ul>
-<li>B+树索引：是一个平衡树，下标是索引，值是内存地址；查询的时间复杂度为O(log（n）)；可以用于排序（索引表是数据有顺序），和范围查找</li>
-<li>哈希索引：是哈希的键值对，键是索引值，值为内存地址；查询的时间复杂度为O(1)；只能用于等值比较（键值）</li>
-</ul>
-<h2 id="索引的类型"><a href="#索引的类型" class="headerlink" title="索引的类型"></a>索引的类型</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">普通索引：任何列都能做索引，索引无值要求，可重复或为空</span><br><span class="line">唯一索引：索引所在列的值必须唯一，但列值可为空</span><br><span class="line">主键索引：将列的主键作为索引，所在列，值唯一，且不能为空</span><br><span class="line">组合索引：将多个列组合视作索引；如果一个表中的数据在查询时有多个字段总是同时出现则这些字段就可以作为复合索引,形成索引覆盖可以提高查询的效率（实际提高的是<span class="built_in">where</span>过滤的效率）</span><br><span class="line">全文索引：只有用于Innodb、MyIsam 表格，并且只能对 CHAR、VARCHAR、TEXT 列建全文索引；用于当索引的字段值很长，且用like模糊匹配效率较低时；语法</span><br><span class="line">前缀索引：当索引列是字符串时，可以使用字符串前缀作为索引，减少索引长度</span><br></pre></td></tr></table></figure>
-<h2 id="索引的操作"><a href="#索引的操作" class="headerlink" title="索引的操作"></a>索引的操作</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">创建索引：create index index_name on table_name(列名)</span><br><span class="line">删除索引：drop index index_name on table_name</span><br><span class="line">修改索引：alter table </span><br><span class="line">  添加普通/组合索引：alter table table_name add INDEX index_name(列1，列2)</span><br><span class="line">  添加唯一索引：alter tablet table_name ADD UNIQUE index_name (列1)</span><br><span class="line">  添加主键索引：alter table table_name ADD PRIMARY KEY index_name(列1)</span><br><span class="line">  添加全表索引：alter table table_name ADD DULLTEXT index_name (列1)</span><br><span class="line">  添加前缀索引：alt table table_name add INDEX index_name(email(6))	//这里以email列的键值前6位作为索引</span><br><span class="line">  编辑索引：先删除--后添加</span><br><span class="line">查询索引：show index from table_name</span><br></pre></td></tr></table></figure>
-<h2 id="索引的使用"><a href="#索引的使用" class="headerlink" title="索引的使用"></a>索引的使用</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">使用于大量数据、或大表查询的场景；</span><br><span class="line">将经常使用的列作为索引；</span><br><span class="line">尽量使用短索引；</span><br><span class="line">如果用字符串值的列，最好使用前缀索引，防止索引值过长，前缀索引可以用来实现短索引；</span><br></pre></td></tr></table></figure>
-<p><strong>索引的优势是对索引列进行了排序，不用全表查询，有查询优势；但对数据量很小的表，还有写入时，由于要改所有的索引，其实会降低写入性能；因此应该用于大表查询场景，不能用于频繁写入场景</strong></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>性能</tag>
-        <tag>索引</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数据库性能测试</title>
-    <url>/posts/ab3091af/</url>
-    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>搭建hexo博客</title>
-    <url>/posts/8e88d59c/</url>
-    <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、建立github代码库</span><br><span class="line">2、下载hexo文件</span><br><span class="line">3、下载主题，更改配置使主题生效</span><br><span class="line">4、部署配置git</span><br><span class="line">5、下载git同步工具</span><br><span class="line">6、清洗旧数据，生成新的静态文件，同步静态文件至代码库（需更改hexo部署配置）</span><br><span class="line">7、域名解析，并给github代码库配置域名</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://zhuanlan.zhihu.com/p/26625249">参考</a></p>
-<ul>
-<li>related_posts: true</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>性能测试--总述</title>
     <url>/posts/28d322d/</url>
     <content><![CDATA[<p><code>性能测试是一个很大的话题；包含客户端、服务端性能、各中间件的性能；一般来说只要有io操作，可能存在压力的场景都可能出现性能瓶颈；同时性能测试是整个质量体系最为重要的几个专项之一，性能会影响用户体验，服务的稳定性，好的性能架构能有效的节省成本（机器）；性能的原理，是通过模拟压力来对业务场景建模，然后监控性能指标，分析数据，得出性能结论，验证问题或结论，并总结成方法论；</code></p>
@@ -1309,6 +1291,24 @@
 <p><img src="/text_image/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.png" alt="alt text"></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">方向：架构、设计、容灾、代码、网络、存储、安全</span><br><span class="line">缓存策略</span><br></pre></td></tr></table></figure>
 <h3 id="常见问题："><a href="#常见问题：" class="headerlink" title="常见问题："></a>常见问题：</h3><p>1、广告请求接口耗时过长问题（原因。服务端和大数据过滤策略重叠,redis查询耗时问题）<br>2、网关接口压力太大太重，拆分<br>3、<br><a href="https://mp.weixin.qq.com/s/1Tu0jLK9GfPry_HxP079Lw">性能优化大纲</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>搭建hexo博客</title>
+    <url>/posts/8e88d59c/</url>
+    <content><![CDATA[<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><span id="more"></span>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、建立github代码库</span><br><span class="line">2、下载hexo文件</span><br><span class="line">3、下载主题，更改配置使主题生效</span><br><span class="line">4、部署配置git</span><br><span class="line">5、下载git同步工具</span><br><span class="line">6、清洗旧数据，生成新的静态文件，同步静态文件至代码库（需更改hexo部署配置）</span><br><span class="line">7、域名解析，并给github代码库配置域名</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://zhuanlan.zhihu.com/p/26625249">参考</a></p>
+<ul>
+<li>related_posts: true</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>数据库性能测试</title>
+    <url>/posts/ab3091af/</url>
+    <content><![CDATA[<p><a href="https://www.cnblogs.com/klb561/p/10513620.html">sysbench对mysql数据库的性能测试</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -1383,19 +1383,6 @@
 <li><strong>目录</strong></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">质量的评判标准</span><br><span class="line">质量体系建设	</span><br><span class="line">质量贴合业务</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>稳定性治理-暴力回放</title>
-    <url>/posts/81de0e43/</url>
-    <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
-<h4 id="覆盖场景"><a href="#覆盖场景" class="headerlink" title="覆盖场景"></a>覆盖场景</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">music首页，点击歌单播放按钮播放，然后息屏进入后台，10s后切换回前台；</span><br><span class="line">music首页，点开播放列表，然后点击music播放音乐，然后关闭播放列表，然后切换到后台，10s后切换回前台；</span><br><span class="line">music首页，进入歌单，点击全部播放，点击全部下载，然后返回首页，上下滑动一屏，然后切换回后台，10s后切换回前台；</span><br><span class="line">music首页，点击头像登录，退出，切换到后台，10s后切换回前台；</span><br><span class="line">treding首页，点击任意music播放，切换到后台，10s后回到前台，关闭播放详情页；</span><br><span class="line">首页，滑动到treding页，上下滑动一屏；然后向左滑动一屏，上下滑动一屏，然后向左滑动一屏，上下滑动一屏,然后向左滑动一屏，上下滑动一屏,然后切换到后台，停留10s;然后点击导航页到library页，然后点击导航页到search页，然后点击导航页到music页；</span><br><span class="line">搜索页，搜索music，搜索结果页左右滚动一屏；点击结果页播放，然后切换到后台休眠10s,在切换回前台;</span><br><span class="line">首页，点击导航页进入library页；点击进入喜欢的music页，点击全部播放；然后切换到后台，停留10s，在切换回前台，退出music页，切换回首页；</span><br><span class="line">首页，切换到buzz页；上下滑动两屏，点击buzz关注按钮，buzz点赞，buzz评论，点击查看buzz详情，然后回退到buzz页，然后在切换到后台，休眠10s，在切换回前台；</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>稳定性</tag>
-        <tag>暴力回放</tag>
-      </tags>
   </entry>
   <entry>
     <title>稳定性治理--智能遍历</title>
@@ -1563,6 +1550,19 @@
       </categories>
       <tags>
         <tag>稳定性</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>稳定性治理-暴力回放</title>
+    <url>/posts/81de0e43/</url>
+    <content><![CDATA[<p><code>暴力回放，是指重复执行某些操作；这种重复执行主流程操作，能极大程度的覆盖主流程的功能，保证系统核心功能的质量；</code></p>
+<h4 id="覆盖场景"><a href="#覆盖场景" class="headerlink" title="覆盖场景"></a>覆盖场景</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">music首页，点击歌单播放按钮播放，然后息屏进入后台，10s后切换回前台；</span><br><span class="line">music首页，点开播放列表，然后点击music播放音乐，然后关闭播放列表，然后切换到后台，10s后切换回前台；</span><br><span class="line">music首页，进入歌单，点击全部播放，点击全部下载，然后返回首页，上下滑动一屏，然后切换回后台，10s后切换回前台；</span><br><span class="line">music首页，点击头像登录，退出，切换到后台，10s后切换回前台；</span><br><span class="line">treding首页，点击任意music播放，切换到后台，10s后回到前台，关闭播放详情页；</span><br><span class="line">首页，滑动到treding页，上下滑动一屏；然后向左滑动一屏，上下滑动一屏，然后向左滑动一屏，上下滑动一屏,然后向左滑动一屏，上下滑动一屏,然后切换到后台，停留10s;然后点击导航页到library页，然后点击导航页到search页，然后点击导航页到music页；</span><br><span class="line">搜索页，搜索music，搜索结果页左右滚动一屏；点击结果页播放，然后切换到后台休眠10s,在切换回前台;</span><br><span class="line">首页，点击导航页进入library页；点击进入喜欢的music页，点击全部播放；然后切换到后台，停留10s，在切换回前台，退出music页，切换回首页；</span><br><span class="line">首页，切换到buzz页；上下滑动两屏，点击buzz关注按钮，buzz点赞，buzz评论，点击查看buzz详情，然后回退到buzz页，然后在切换到后台，休眠10s，在切换回前台；</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>稳定性</tag>
+        <tag>暴力回放</tag>
       </tags>
   </entry>
   <entry>
@@ -2017,104 +2017,124 @@
     <url>/posts/7e188ca1/</url>
     <content><![CDATA[<p><code>pytest是一个单测框架；能对定义的测试对象进行测试，并且可以针对测试对象进行前后置处理，对测试结果进行断言，对执行过程中的异常进行干预，并且可以收集测试结果以生成xml格式的测试报告</code></p>
 <h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">原理</span><br><span class="line">使用场景</span><br><span class="line">如何使用</span><br><span class="line">①调度/执行</span><br><span class="line">②前后置处理（固件）</span><br><span class="line">③用例断言</span><br><span class="line">④异常处理</span><br><span class="line">⑤参数化</span><br><span class="line">⑥定制报告</span><br><span class="line">⑦性能-缓存</span><br></pre></td></tr></table></figure>
-
+<span id="more"></span>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><code>pytest是一套单测框架；有着自己的巡检方法，他会自动查找整个包中以test开头/结尾的模块，并查找其中test开头/结尾的方法/类（类很特殊必须要以Test开头，且类中不能有__init__方法），全部保存在内存中，在触发执行时，会根据调度指令来确定自动执行的用例范围，来进行执行； 同时执行用例时做了装饰器操作，将用例作为参数传递到pytest框架中执行。</code></p>
 <h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
-<li>__用例自动单测场景：__如接口自动化、UI自动化、各类用例场景；</li>
-<li>__通用前后置处理场景：__如数据库操作前的建立连接，操作完成后的断开连接；</li>
-<li>__参数化操作场景：__如多设备操作、各种UI操作、各种接口操作；</li>
+<li><strong>用例自动单测场景：</strong> 如接口自动化、UI自动化、各类用例场景；</li>
+<li><strong>通用前后置处理场景：</strong> 如数据库操作前的建立连接，操作完成后的断开连接；</li>
+<li><strong>参数化操作场景：</strong> 如多设备操作、各种UI操作、各种接口操作；</li>
 </ul>
-<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p><code>分为：调度/执行、前后置处理（固件）、断言操作、异常处理、参数化、定制报告、性能（缓存操作）</code></p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p><code>分为：调度/执行、前后置处理（固件）、用例(断言+异常处理+跳过+标记)、参数化、定制报告、性能（缓存操作）</code></p>
 <h3 id="调度-执行"><a href="#调度-执行" class="headerlink" title="调度/执行"></a>调度/执行</h3><p><strong>调度有两种方式：命令行、pytest.main()</strong></p>
 <ul>
-<li><p><strong>pytest.main()：</strong><code>实际也是调用命令行来进行的操作，我们程序一般使用pytest.main()来进行调度；注意pytest.main([&#39;-m&#39;,&#39;对象&#39;]);第一个参数是选项，第二个参数是对象；pytest.main()会将当前模块加入缓存，因此不建议执行过程中调用多次，最好只调用一次。</code></p>
+<li><p><strong>pytest.main()：</strong><code>实际也是调用命令行来进行的操作，我们程序一般使用pytest.main()来调度；注意pytest.main([&#39;-m&#39;,&#39;对象&#39;]);第一个参数是选项，第二个参数是对象；pytest.main()会将当前模块加入缓存，因此不建议执行过程中调用多次，最好只调用一次，示例如下。</code></p>
+<ul>
+<li>pytest.main([“-qq”], plugins=[MyPlugin()])        //指定一个插件运行</li>
+<li>pytest.main([‘-sq’,’test_nodeid.py::TestNodeId::test_two[1-1]’])</li>
+</ul>
 </li>
 <li><p><strong>命令行调用：</strong><code>pytest 各选项如-rx 对象如test_1.py::test_fun </code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">对象：可通过命令行执行特定包内的用例/特定目录下/特定模块/特定方法/特定方法的特定参数化参数</span><br><span class="line">pytest –pyargs pkg.testing</span><br><span class="line">pytest testing/pytest test_mod.py/pytest test_mod.py::test_fun</span><br><span class="line">pytest -q -s test_nodeid.py::TestNodeId::test_two[1-1]</span><br><span class="line"></span><br><span class="line">模糊匹配：执行含特定字符或（也可以是和）不含特定字符的模块/类/函数：</span><br><span class="line">pytest -k “_class and/or not two”</span><br><span class="line"></span><br><span class="line">还可以为用例添加标记。从而指定特定标记的用例:pytest -m 标记名</span><br><span class="line">@pytest.mark.标记名</span><br><span class="line">def test_one()</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>pytest自动巡检机制：</strong><code>pytest会自动化去查找到测试用例，他是按模块的首尾是否是test来判断的，模块中的类（类很特殊必须要以Test开头，且类中不能有__init__方法）/方法首尾是test则判定为测试用例，这些测试用例维护在内存中，以数组的形式维护，触发执行时会自动执行这些用例；用例执行顺序是按测试用例的名称从大到小来的，可以利用pytest-ordering插件来定制用例的执行顺序； 默认情况下执行pytest.main()时仅执行当前模块的用例，如果需要执行其他路径下的用例，可以指定路径。</code></p>
 </li>
-<li><p>__命令行执行的各选项++</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pytest -x							//pytest遇到第一个失败时退出执行</span><br><span class="line">pytest --maxfail==2					//设定允许失败的最大次数</span><br><span class="line">pytest -q							//-q选项可以查看精简版的测试报告</span><br><span class="line">pytest -r							//显示精简的总结报告-r后还要加一个参数，表示需要显示的内容，其他过滤，如-rfs(f是失败的，s是跳过的，因此总结会显示失败的和跳过的)</span><br><span class="line">pytest -s							//-s是--capture=no的快捷方式，是用来关闭输出(标准输出/标准错误)捕获，使得可以看到<span class="built_in">print</span>()输出的内容。</span><br><span class="line">--capture=fd（默认捕获行为）						//指定只捕获文件/接口层面的标准输出/标准错误</span><br><span class="line">--capture=sys						//指定只捕获系统级别的标准输出/标准错误</span><br><span class="line"></span><br><span class="line">pytest ::							//执行指定的模块方法/类</span><br><span class="line">pytest path							//执行指定路径及子路径下的所有以<span class="built_in">test</span>开头或结尾的模块中，以<span class="built_in">test</span>开头或结尾的方法/类</span><br><span class="line">pytest -k 							//模糊匹配要执行的用例</span><br><span class="line">pytest -m							//执行指定标记用例</span><br><span class="line">pytest -l, --showlocals         <span class="comment"># 打印本地变量</span></span><br><span class="line">pytest --tb=auto              <span class="comment"># 默认模式</span></span><br><span class="line">pytest --tb=long              <span class="comment"># 尽可能详细的输出</span></span><br><span class="line">pytest --full-trace				   //比--tb=long更详细的输出模式</span><br><span class="line">pytest --tb=short             <span class="comment"># 更简短的输出</span></span><br><span class="line">pytest --tb=line              <span class="comment"># 每个失败信息总结在一行中</span></span><br><span class="line">pytest --tb=native             <span class="comment"># python的标准输出</span></span><br><span class="line">pytest --tb=no               <span class="comment"># 不打印失败信息</span></span><br><span class="line">pytest --pdb                 //失败时进入pdb诊断器模式</span><br><span class="line">pytest --trace						//启动时就进入pdb诊断器模式</span><br><span class="line">pytest --durations=10				//获取执行最慢的十个测试用例</span><br><span class="line">pytest -vv							//获取用例的执行时间</span><br><span class="line"></span><br><span class="line">--show-capture					  //定义是否显示，标准输出、标准错误、或异常堆栈；支持的选项值有[no,stdout,stderr,<span class="built_in">log</span>,all，默认为all]</span><br><span class="line">pytest --assert=plain选项			//关闭断言失败提示信息</span><br><span class="line">python  -p no:faulthandler 		  //默认是打开的，可以通过此命令关闭回溯信息当用例执行出现断错误或超时，faulthandler模块，可以展示Python脚本的回溯信息（回溯不是错误信息，此时程序也不会中断，只是打印此时的相关信息，类似监控）;当用例执行出现断错误或超时，faulthandler模块，可以展示Python脚本的回溯信息（回溯不是错误信息，此时程序也不会中断，只是打印此时的相关信息，类似监控）</span><br><span class="line">faulthandler_timeout=5			//（pytest.ini文件配置）可以配置超时时间，一旦超时则显示所有线程的回溯信息</span><br><span class="line">pytest -o faulthandler_timeout=X //命令行配置超时时间</span><br><span class="line">pytest --junitxml=path  		//在path路径生成一个xml格式的测试报告</span><br><span class="line">junit_suite_name = pytest_chinese_doc（pytest.ini文件）		//自定义XML文件中testsuite根节点的name信息</span><br><span class="line">junit_duration_report = call（pytest.ini）	//报告只记录测试用例时间，不含前后置时间，默认time属性是含所有时间的</span><br><span class="line">pytest -p mypluginmodule		//-p尽早加载插件，插件可以是本地的插件，也可以是公共插件</span><br><span class="line">pytest -p no:doctest			//加no提前阻止插件的加载</span><br><span class="line">pytest.main([<span class="string">&quot;-qq&quot;</span>], plugins=[MyPlugin()])		//指定一个插件运行</span><br><span class="line">pytest -q -s --collect-only test_params.py	//collect-only显示测试ID（固件创建的实例的测试ID）不执行用例</span><br><span class="line">设置固件实例的测试ID，使用ids @pytest.fixture(params=[0, 1], ids=[<span class="string">&#x27;spam&#x27;</span>, <span class="string">&#x27;ham&#x27;</span>]),也可以用一个函数来动态生成测试ID@pytest.fixture(params=[0, 1], ids=fun())</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>特殊场景</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@pytest.mark.skipif：用例上方</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="固件-前后置处理"><a href="#固件-前后置处理" class="headerlink" title="固件-前后置处理"></a>固件-前后置处理</h3><h3 id="用例-断言-异常处理-跳过-标记"><a href="#用例-断言-异常处理-跳过-标记" class="headerlink" title="用例-断言+异常处理+跳过+标记"></a>用例-断言+异常处理+跳过+标记</h3><h4 id="标记"><a href="#标记" class="headerlink" title="标记"></a>标记</h4><p>skip()只有满足定义条件才执行，否则跳过<br>失败的标记：xfail<br>使用 pytest -r来定制显示不同标记的用例；支持的标记有<br>(f)ailed, (E)rror, (s)kipped, (x)failed, (X)passed, (p)assed, (P)assed with output, (a)ll except passed(p/P), or (A)ll</p>
-<h3 id="跳过"><a href="#跳过" class="headerlink" title="跳过"></a>跳过</h3><p>@pytest.mark.skip(reason=”no way of currently testing this”)用这个装饰器来定义要跳过的用例，reason是注释表明跳过的原因<br>pytest.skip(“skipping windows-only tests”, allow_module_level=True)用来表示跳过后续的代码执行，只有为True时才跳过，False不跳过，前面的是跳过的原因的注释<br>（满足条件时才跳过）使用@pytest.mark.skipif(sys.version_info &lt; (3, 8),<br>                                reason=’请使用 python 3.8 或者更高的版本。’)，也可以将他赋值，然后@赋值变量的方式使用装饰器，一个用例可以有多个条件跳过，满足任意一个即跳过<br>引入模块失败后就跳过后续代码：docutils = pytest.importorskip(“docutils”, minversion=”0.3”) 这里实际是import  docutils 模块，如果import出现异常，则会跳过后续执行；注意这里指定了版本如果import的版本不对也会跳过后续<br>@pytest.mark.skip或@pytest.mark.skipif除了用来指定跳过测试用例，还可以用来指定跳过测试类<br>跳过测试模块可以使用：pytestmark=pytest.mark.skip(‘要放在顶层’)<br>或者在模块的顶层使用：pytest.skip(‘在用例收集阶段就已经跳出了，所以不会收集到任何用例。’, allow_module_level=True)<br>要跳过指定的文件/目录：在conftest.py中配置collect_ignore_glob = [‘test*.py’, ‘config/sub’]实现<br><img src="/text_image/pytest_skip.png" alt="alt text"><br>@pytest.mark.xfail()用来标记预期是失败的用例，如果满足预期的失败，则结果为xfail,如果是成功，则结果一般是xpass，可能是FAILED，详情如下<br><img src="/text_image/pytest_xfail.png" alt="alt text"></p>
-<p>标记可以和参数化装饰器结合，他提供了一个方法 pytest.param，可以给每个参数对应的实例打一个标记，并给一个测试id</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@pytest.mark.parametrize(</span><br><span class="line">    (<span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;expected&#x27;</span>),</span><br><span class="line">    [(2, 1),</span><br><span class="line">     pytest.param(2, 1, marks=pytest.mark.xfail(), id=<span class="string">&#x27;XPASS&#x27;</span>),</span><br><span class="line">     pytest.param(0, 1, marks=pytest.mark.xfail(raises=ZeroDivisionError), id=<span class="string">&#x27;XFAIL&#x27;</span>),</span><br><span class="line">     pytest.param(1, 2, marks=pytest.mark.skip(reason=<span class="string">&#x27;无效的参数，跳过执行&#x27;</span>)),</span><br><span class="line">     pytest.param(1, 2, marks=pytest.mark.skipif(sys.version_info &lt;= (3, 8), reason=<span class="string">&#x27;请使用3.8及以上版本的python。&#x27;</span>))])</span><br><span class="line">def test_params(n, expected):</span><br><span class="line">    assert 2 / n == expected</span><br></pre></td></tr></table></figure>
-<h3 id="参数化"><a href="#参数化" class="headerlink" title="参数化"></a>参数化</h3><h4 id="固件的参数化"><a href="#固件的参数化" class="headerlink" title="固件的参数化"></a>固件的参数化</h4><h4 id="测试用例参数化"><a href="#测试用例参数化" class="headerlink" title="测试用例参数化"></a>测试用例参数化</h4><p><code>参数化是指对用例的参数传递不同的值，来执行多次，从而覆盖用例不同的场景（不同值）</code></p>
+<li><p><strong>常用命令行选项</strong></p>
 <ul>
-<li>对象<ul>
+<li><strong>查看结果</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pytest -q							//-q选项可以查看精简版的测试报告</span><br><span class="line">pytest -r							//(同-q只是可以过滤)显示精简的总结报告；-r后还要加一个参数，表示需要显示的内容，其他的会过滤，如-rfs(f是失败的，s是跳过的，显示失败的和跳过的实例)</span><br><span class="line">pytest -s							//-s是--capture=no的快捷方式，是用来关闭输出(标准输出/标准错误)捕获，使得可以看到<span class="built_in">print</span>()输出的内容</span><br><span class="line">pytest --capture=fd（默认捕获行为）	//指定只捕获文件/接口层面的标准输出/标准错误</span><br><span class="line">pytest --capture=sys				//指定只捕获系统级别的标准输出/标准错误</span><br><span class="line">pytest -l, --showlocals         <span class="comment"># 打印本地变量</span></span><br><span class="line">pytest --tb=auto              <span class="comment"># 默认模式</span></span><br><span class="line">pytest --tb=long              <span class="comment"># 尽可能详细的输出</span></span><br><span class="line">pytest --full-trace				   //比--tb=long更详细的输出模式</span><br><span class="line">pytest --tb=short             <span class="comment"># 更简短的输出</span></span><br><span class="line">pytest --tb=line              <span class="comment"># 每个失败信息总结在一行中</span></span><br><span class="line">pytest --tb=native             <span class="comment"># python的标准输出</span></span><br><span class="line">pytest --tb=no               <span class="comment"># 不打印失败信息</span></span><br><span class="line">pytest --pdb                 //失败时进入pdb诊断器模式</span><br><span class="line">pytest --trace						 //启动时就进入pdb诊断器模式</span><br><span class="line">pytest --durations=10				 //获取执行最慢的十个测试用例</span><br><span class="line">pytest -vv							 //获取用例的执行时间</span><br><span class="line">pytest --show-capture				 //定义是否显示，标准输出、标准错误、或异常堆栈；支持的选项值有[no,stdout,stderr,<span class="built_in">log</span>,all，默认为all]</span><br><span class="line">pytest --assert=plain选项			  //关闭断言失败提示信息</span><br><span class="line">python  -p no:faulthandler 		   //默认是打开的，可以通过此命令关闭回溯信息当用例执行出现断错误或超时，faulthandler模块，可以展示Python脚本的回溯信息（回溯不是错误信息，此时程序也不会中断，只是打印此时的相关信息，类似监控）;</span><br><span class="line">faulthandler_timeout=5			   //（pytest.ini文件配置）可以配置超时时间，一旦超时则显示所有线程的回溯信息</span><br><span class="line">pytest -o faulthandler_timeout=X   //命令行配置超时时间</span><br><span class="line">pytest --disable-warnings			//命令行选项来阻止，告警信息的显示（有捕获告警只是不显示）</span><br><span class="line">pytest -p no:warnings          //命令行，直接禁止告警的捕获；</span><br><span class="line"></span><br><span class="line">pytest -q -s --collect-only test_params.py	//collect-only仅显示测试ID，不执行用例（用来收集测试用例的名称）</span><br><span class="line">设置固件的测试ID：使用ids @pytest.fixture(params=[0, 1], ids=[<span class="string">&#x27;spam&#x27;</span>, <span class="string">&#x27;ham&#x27;</span>]),也可以用一个函数来动态生成测试ID@pytest.fixture(params=[0, 1], ids=fun());</span><br><span class="line">同理也可以设置用例的测试ID：@pytest.mark.parametrize(argnames, argvalues, indirect=False, ids=None, scope=None) 参数化时ids是每个测试的实例的测试ID，报告可以记录，默认值是每一个实例的argvalue_拼接，如上是1_2；手动定义时ids值长度必须和argvalue长度保持一致；默认所有的id都进行了ascii编码，可以在pytest.ini中禁用ascii编码</span><br><span class="line">（disable_test_id_escaping_and_forfeit_all_rights_to_community_support = True）</span><br></pre></td></tr></table></figure></li>
+<li><strong>执行</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pytest ::							//执行指定的模块方法/类</span><br><span class="line">pytest path							//执行指定路径及子路径下的所有以<span class="built_in">test</span>开头或结尾的模块中，以<span class="built_in">test</span>开头或结尾的方法/类</span><br><span class="line">pytest -k 							//模糊匹配要执行的用例</span><br><span class="line">pytest -m							//执行指定标记用例</span><br><span class="line"></span><br><span class="line">pytest -x							//pytest遇到第一个失败时退出执行</span><br><span class="line">pytest --maxfail==2					//设定允许失败的最大次数</span><br><span class="line">pytest -p mypluginmodule		//-p尽早加载插件，插件可以是本地的插件，也可以是公共插件</span><br><span class="line">pytest -p no:doctest			//加no提前阻止插件的加载</span><br></pre></td></tr></table></figure></li>
+<li><strong>结果</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pytest --junitxml=path  		//在path路径生成一个xml格式的测试报告</span><br><span class="line">junit_suite_name = 节点名   	//（pytest.ini中）自定义XML文件中testsuite根节点的名称</span><br><span class="line">junit_duration_report = call	   //（pytest.ini）报告只记录测试用例时间，不含前后置时间，默认time属性是含所有时间的</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="固件-前后置处理"><a href="#固件-前后置处理" class="headerlink" title="固件-前后置处理"></a>固件-前后置处理</h3><p><code>固件的作用是提供了一个固定的基线，能重复的运行；固件装饰器(@pytest.fixture)的作用是注册一个固件，测试用例可以通过显示调用的方式使用固件（固件作为入参），调用的是固件的形参，实际生效的是固件的返回对象作为入参；默认可以不调用固件，因为固件默认配置了自动调用</code></p>
+<ul>
+<li><p><strong>作用：固件的作用主要是进行用例的前后置处理</strong><br><code>固件根本作用域的不同，可以分别针对session/包/模块/类/方法进行前后置处理</code></p>
+</li>
+<li><p><strong>前后置处理</strong></p>
+<ul>
+<li><strong>实现示例：前后置处理有三种实现方式：</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#前后置处理方法1-yield</span></span><br><span class="line">@pytest.fixture()</span><br><span class="line">def smtp_connection_yield():</span><br><span class="line">    smtp_connection = smtplib.SMTP(<span class="string">&quot;smtp.163.com&quot;</span>, 25, timeout=5)</span><br><span class="line">    yield smtp_connection</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;关闭SMTP连接&quot;</span>)</span><br><span class="line">    smtp_connection.close()</span><br><span class="line">   </span><br><span class="line"><span class="comment">#前后置处理方法2-利用上下文自动关闭对象</span></span><br><span class="line">@pytest.fixture()</span><br><span class="line">def smtp_connection_yield():</span><br><span class="line">    with smtplib.SMTP(<span class="string">&quot;smtp.163.com&quot;</span>, 25, timeout=5) as smtp_connection:</span><br><span class="line">        yield smtp_connection</span><br><span class="line">        </span><br><span class="line"><span class="comment">#利用注册的方式，来注册后置处理</span></span><br><span class="line">@pytest.fixture()</span><br><span class="line">def smtp_connection_fin(request):</span><br><span class="line">    smtp_connection = smtplib.SMTP(<span class="string">&quot;smtp.163.com&quot;</span>, 25, timeout=5)</span><br><span class="line"></span><br><span class="line">    def fin():</span><br><span class="line">        smtp_connection.close()</span><br><span class="line"></span><br><span class="line">    request.addfinalizer(fin)</span><br><span class="line">    <span class="built_in">return</span> smtp_connection</span><br><span class="line">    </span><br><span class="line">//(这个后置操作，只能对前置产生的实例对象生效)    </span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>固件的使用</strong></p>
+<ul>
+<li><strong>放置位置：</strong> 固件一般是放置在conftest.py模块中统一维护；当然也可以在用例模块中定义固件；固件是支持显示调用（作为测试用例的入参）和自动调用的（默认就支持@pytest.fixture(autouse=True）autouse=True可省略）</li>
+<li><strong>作用域</strong><br><code>固件一般放置在conftest.py模块中，而此模块一般放置根目录/功能目录的顶层（可以放置多个此模块，按就近原则生效，也就是在用例当前目录找到固件后就不去上一级查找）；可以为每个固件定义作用域，定义完后，固件分别在作用域的范围内执行，默认的作用域是@pytest.fixture(scope=&#39;function&#39;),作用域主要决定的是执行次数和执行顺序</code></li>
+</ul>
+<p><strong>支持的作用域有：@pytest.fixture(scope=’function/class/module/session/package’,autouse=True)</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@pytest.fixture(scope=<span class="string">&#x27;function&#x27;</span>）			//每个用例方法都执行一遍固件的前后置处理</span><br><span class="line">@pytest.fixture(scope=<span class="string">&#x27;class&#x27;</span>）				//每个用例类仅执行一遍固件的前后置处理</span><br><span class="line">@pytest.fixture(scope=<span class="string">&#x27;module&#x27;</span>）				//每个模块仅执行一遍固件的前后置处理</span><br><span class="line">@pytest.fixture(scope=<span class="string">&#x27;session&#x27;</span>）			//每个会话对象仅执行一遍固件的前后置处理</span><br><span class="line">@pytest.fixture(scope=<span class="string">&#x27;package&#x27;</span>）			//每个包仅执行一遍固件的前后置处理</span><br><span class="line"></span><br><span class="line">类显示的调用固件：@pytest.mark.usefixtures(<span class="string">&#x27;固件名&#x27;</span>,<span class="string">&#x27;第二个固件&#x27;</span>)，此装饰器也可以给fun使用；</span><br><span class="line">模块显示的调用固件：<span class="built_in">test</span>=pytest.mark.usefixtures(<span class="string">&quot;transact&quot;</span>)</span><br><span class="line"></span><br><span class="line">可以使用固件来生成工厂函数，从而实现模块化，和函数定制（此时固件是可以接受参数的）；</span><br><span class="line"></span><br><span class="line">固件可以进行参数化：如下，固件进行参数化后会创建多个实例，因此使用这些实例的测试用例也会执行多次</span><br><span class="line">@pytest.fixture(params=[(<span class="string">&#x27;3+5&#x27;</span>, 8),pytest.param((<span class="string">&#x27;6*9&#x27;</span>, 42),</span><br><span class="line">              marks=pytest.mark.xfail,id=<span class="string">&#x27;failed&#x27;</span>)])</span><br><span class="line"> 如果不想执行多次，可以使用模糊匹配来匹配具体到具体的实例： pytest -k 163 用例       //固件进行参数化时，一定是一个实例执行完后（含前后置处理，才开始新的实例工作）    </span><br><span class="line">//同上固件可以打标记，配置测试ID；使用参数化装饰器等价的方法如下：</span><br><span class="line">@pytest.mark.parametrize(<span class="string">&#x27;test_input, expected&#x27;</span>,[(<span class="string">&#x27;3+5&#x27;</span>, 8),</span><br><span class="line">     pytest.param(<span class="string">&#x27;6*9&#x27;</span>, 42, marks=pytest.mark.xfail,id=<span class="string">&#x27;failed&#x27;</span>)])	</span><br><span class="line">//给固件重命名后，原来的名字不可用，只能使用新的名称来显示的调用固件：@pytest.fixture(name=<span class="string">&quot;my_fixture_alias&quot;</span>)</span><br><span class="line">用例按条件执行固件：@pytest.mark.parametrize(<span class="string">&quot;condition&quot;</span>, [True, False])</span><br><span class="line">//复写操作，除了在conftest中，用例模块中，还可以在用例的参数化中进行复写(不做特殊配置时，参数名会覆盖同名固件)</span><br><span class="line">@pytest.mark.parametrize(<span class="string">&#x27;已定义固件名&#x27;</span>, [<span class="string">&#x27;directly-overridden-username&#x27;</span>])</span><br><span class="line"></span><br><span class="line">每个用例可以执行多个固件；执行顺序是显示调用优先级&gt;自动调用；按作用域大小来，作用域越大越优先；作用域相同时，按从上到下的顺序来，不过，固件中参数是固件时调用的固件要优先执行；查找固件的顺序则按就近原则；</span><br></pre></td></tr></table></figure>
+<ul>
+<li>pytest内置的固件<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pytest有现成的一些固件，可以直接在测试用例中调用，或者在自定义的固件中调用；</span><br><span class="line">查看现成的固件的方法：pytest -q -v --fixtures；</span><br><span class="line">在程序执行时，动态的修改对象（使用固件monkeypatch）;这种修改是临时性的，不改本地代码；</span><br><span class="line">创建临时文件/目录，（使用tmp_path）；</span><br><span class="line">在测试用例中访问捕获信息（即标准输出/标准错误）:可以使用固件capsys、capfd、capsysbinary </span><br><span class="line">  capsys捕获的是系统级别，如capsys.readouterr()结果是个系统级别的标准输出和标准错误的元组</span><br><span class="line">  capfd捕获的是文件/接口级别，如capfd.readouterr()结果是个接口级别的标准输出和标准错误的元组</span><br><span class="line">  capsysbinary用来返回非文本型的数据，capsysbinary.readouterr()返回的是字节流</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>特殊场景-文档测试</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">文档测试/注释测试；pytest会自动收集所有名称匹配<span class="built_in">test</span>*.txt规则的文件，并调用doctest执行它们；注释中的代码的执行使用的是Python的标准库doctest模块来实现的；</span><br><span class="line">注释需要满足几个条件：</span><br><span class="line">①文件名称是以<span class="built_in">test</span>开头或结尾的Python文件；</span><br><span class="line">②文档字符串中的注释必须是类似python交互式会话形式的注释(&gt;&gt;&gt; something())</span><br><span class="line">//可以通过pytest --doctest-glob=<span class="string">&#x27;*.rst&#x27;</span>来扩展支持的文档格式</span><br><span class="line">//执行文档中的注释代码，必须要加选项pytest --doctest-modules命令行选项;也可以在pytest.ini文件中配置指定必须要文档测试[pytest]</span><br><span class="line">addopts = --doctest-modules</span><br><span class="line">//用pytest --doctest-continue-on-failure选项在文档测试遇到第一个失败后继续执行</span><br><span class="line">//可以定制文档测试失败后的，失败输出格式pytest --doctest-modules --doctest-report none/udiff/cdiff/ndiff</span><br><span class="line">通过在文档中添加<span class="string">&#x27;&#x27;</span><span class="string">&#x27;&#x27;</span>&gt;&gt;&gt; tmp = getfixture(<span class="string">&#x27;tmpdir&#x27;</span>)<span class="string">&#x27;&#x27;</span><span class="string">&#x27;的方式在文档中使用固件;通过doctest_namespace 固件定义的参数，可以在文档中直接使用</span></span><br></pre></td></tr></table></figure>
+<p><strong>使用pytest.skip(‘注释’)，直接跳过文档测试，默认不执行文档测试</strong></p>
+</li>
+</ul>
+<h3 id="用例-断言-异常处理-跳过-标记"><a href="#用例-断言-异常处理-跳过-标记" class="headerlink" title="用例:(断言+异常处理+跳过+标记)"></a>用例:(断言+异常处理+跳过+标记)</h3><h4 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h4><ul>
+<li><strong>示例</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#常规断言</span></span><br><span class="line">def test_</span><br><span class="line">	assert True		//如果判断条件的结果为True则断言成功；</span><br><span class="line"></span><br><span class="line"><span class="comment">#指定预期异常</span></span><br><span class="line">def test_mytest():</span><br><span class="line">    with pytest.raises(SystemExit) as excinfo:</span><br><span class="line">        f()		//若用例没抛出指定异常则断言失败，且必须是上下文中的最后一行，因为raises之后的不会被执行</span><br><span class="line">    assert <span class="string">&#x27;456&#x27;</span> <span class="keyword">in</span> str(excinfo.value)	//excinfo是上下文的实例，且在上下文环境中   </span><br><span class="line"></span><br><span class="line"><span class="comment">#可以给异常加标记</span></span><br><span class="line">@pytest.mark.xfail(raises=IndexError)	//可以给异常加标记,出现IndexError，则标记用例失败类型为xfail，这种用法一般用来标记未修复的bug</span><br><span class="line">def test_f():</span><br><span class="line">    f()</span><br></pre></td></tr></table></figure>
+除了断言还可以设置断点：使用pdb.set_trace()，只影响断点用例；</li>
+</ul>
+<p><strong>异常的结果</strong>    </p>
+<ul>
+<li>不同数据类型的断言，不同地方都会标记出来；</li>
+<li>可以给断言失败，添加说明，可以用运算重载符，出现系统提示的字符串异常时，重载为我们想要的内容；第二种是利用钩子pytest_assertrepr_compare，来自定义异常；</li>
+<li>断言的异常信息，会存储在本地，如需禁止可以在conftest.py文件中加入这些配置实现：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import sys</span><br><span class="line">sys.dont_write_bytecode = True</span><br></pre></td></tr></table></figure></li>
+<li>关闭断言的失败提示功能：有两种方式（基本不会关闭）<ul>
+<li>在需要关闭提示的模块的docstring中添加PYTEST_DONT_REWRITE字符串；</li>
+<li>执行pytest时，添加–assert=plain选项</li>
+</ul>
+</li>
+</ul>
+<h4 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">warning告警，可以手动通过warnings.warn方法来触发特定的告警；</span><br><span class="line">recwarn fixture的功能和pytest.warning()等价；</span><br><span class="line">可以通过命令行 pytest -W arg(action:message:category:module:lineno)方式来执行，从而自定义捕获的告警；</span><br><span class="line">等价行为是通过pytest.ini配置文件来配置filterwarnings项（用来自定义过滤，也可以配置不捕获）；等价的装饰器为@pytest.mark.filterwarnings；</span><br><span class="line">--disable-warnings命令行选项来阻止，告警信息的显示（有捕获告警只是不显示）；</span><br><span class="line">-p no:warnings命令行，直接禁止告警的捕获；</span><br><span class="line">等价的使用pytest.deprecated_call方法来调用告警对象，也会实现禁止捕获告警；</span><br><span class="line">assert pytest.warns((DeprecationWarning, PendingDeprecationWarning), api_call_v1, match=r<span class="string">&#x27;和 pytest.raises() 方法一样，这时 pytest 不再判断告警信息是否正确&#x27;</span>) == 200</span><br><span class="line">来通过匹配告警，这个操作是匹配到的告警不显示,同时进行断言；</span><br><span class="line"></span><br><span class="line">异常提示：pytest.fail(<span class="string">&#x27;期望 api_call_v1 触发一个告警，实际上没有；&#x27;</span>)用来触发异常提示；</span><br></pre></td></tr></table></figure>
+<h4 id="标记"><a href="#标记" class="headerlink" title="标记"></a>标记</h4><p><code>使用标记来给用例打上不同的标记，从而在结果收集时，实现对用例的区分；</code></p>
+<ul>
+<li><strong>查看用例标记：</strong><br><code> 使用 pytest -r来定制显示不同标记的用例；支持的标记有 (f)ailed, (E)rror, (s)kipped, (x)failed, (X)passed, (p)assed, (P)assed with output, (a)ll except passed(p/P), or (A)ll</code></li>
+<li><strong>@pytest.mark.xfail()用来标记预期是失败的用例，如果满足预期的失败，则结果为xfail,如果是成功，则结果一般是xpass，可能是FAILED，详情如下</strong></li>
+</ul>
+<p><img src="/text_image/pytest_xfail.png" alt="alt text"></p>
+<ul>
+<li><code>标记可以和参数化装饰器结合，他提供了一个方法 pytest.param，可以给每个参数对应的实例打一个标记，并给一个测试id</code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@pytest.mark.parametrize(</span><br><span class="line">    (<span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;expected&#x27;</span>),</span><br><span class="line">    [(2, 1),</span><br><span class="line">     pytest.param(2, 1, marks=pytest.mark.xfail(), id=<span class="string">&#x27;XPASS&#x27;</span>),</span><br><span class="line">     pytest.param(0, 1, marks=pytest.mark.xfail(raises=ZeroDivisionError), id=<span class="string">&#x27;XFAIL&#x27;</span>),</span><br><span class="line">     pytest.param(1, 2, marks=pytest.mark.skip(reason=<span class="string">&#x27;无效的参数，跳过执行&#x27;</span>)),</span><br><span class="line">     pytest.param(1, 2, marks=pytest.mark.skipif(sys.version_info &lt;= (3, 8), reason=<span class="string">&#x27;请使用3.8及以上版本的python。&#x27;</span>))])</span><br><span class="line">def test_params(n, expected):</span><br><span class="line">    assert 2 / n == expected</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="跳过"><a href="#跳过" class="headerlink" title="跳过"></a>跳过</h4><p><strong>跳过用例的方法总结如下：</strong><br><img src="/text_image/pytest_skip.png" alt="alt text"><br><code>其中@pytest.mark.skipif     //如果一个用例有多个条件跳过装饰器，满足任意一个即跳过； @pytest.importorskip装饰器是会先进行import模块操作，同时会判断模块的版本；如果版本不对，或import失败则跳过；</code></p>
+<h3 id="参数化"><a href="#参数化" class="headerlink" title="参数化"></a>参数化</h3><h4 id="固件的参数化"><a href="#固件的参数化" class="headerlink" title="固件的参数化"></a>固件的参数化</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">使用@pytest.fixture(params=[(<span class="string">&#x27;3+5&#x27;</span>, 8),pytest.param((<span class="string">&#x27;6*9&#x27;</span>, 42),</span><br><span class="line">              marks=pytest.mark.xfail,id=<span class="string">&#x27;failed&#x27;</span>)])；和pytest.mark.parametrize装饰器是等价的</span><br></pre></td></tr></table></figure>
+<h4 id="测试用例参数化"><a href="#测试用例参数化" class="headerlink" title="测试用例参数化"></a>测试用例参数化</h4><p><code>参数化是指对用例的参数传递不同的值，来执行多次，从而覆盖用例不同的场景（不同值）</code></p>
+<ul>
+<li><strong>对象</strong><ul>
 <li>可以对测试用例方法进行参数化</li>
 <li>可以对测试类进行参数化</li>
-<li>可以对模块进行参数化<br>pytestmark = pytest.mark.parametrize(‘test_input, expected’, [(1, 2), (3, 4)])<br>后续的用例直接调用参数即可</li>
+<li>可以对模块进行参数化：<code>pytestmark = pytest.mark.parametrize(&#39;test_input, expected&#39;, [(1, 2), (3, 4)])后续的用例直接调用参数即可</code></li>
 </ul>
 </li>
-<li>方法：@pytest.mark.parametrize(argnames, argvalues, indirect=False, ids=None, scope=None) <ul>
-<li><p>argnames:参数名必须是用例引入的参数的子集（fun(arg1,arg2),必须是这两个参数的子集）；且引入的参数必须是没有默认值的；结构可以是用逗号分隔的字符串，或者一个列表/元组;<br>参数名默认会覆盖同名的固件</p>
-</li>
-<li><p>argvalues：实际返回的是一个命名元祖，ParameterSet(values=(1, 2), marks=[], id=None)];可以不带标记和测试id,也可以带；结构上必须是一个可迭代对象可以是[(1, 2), [2, 3], set([3, 4])]/方法返回的可迭代对象<br>如果argvalue要带标记和测试ID，可以这样实现：pytest.param(2, 1, marks=pytest.mark.xfail(), id=’XPASS’)param方法实际是对命名元祖的封装</p>
-</li>
-<li><p>indirect参数有默认值，为TRUE表示参数名不覆盖同名固件，且参数值要传递给固件，最后固件的返回才是实参@pytest.mark.parametrize(‘min, max’, [(1, 2), (3, 4)], indirect=True/[‘max’])    //[‘max’]仅指定这个参数名不覆盖固件</p>
-</li>
-<li><p>ids:ids是每个测试的实例的测试ID，报告可以记录，默认值是每一个实例的argvalue_拼接，如上是1_2；手动定义时ids值长度必须和argvalue长度保持一致；默认所有的id都进行了ascii编码，可以在pytest.ini中禁用ascii编码（disable_test_id_escaping_and_forfeit_all_rights_to_community_support = True）<br>可以构造函数方法来使用每个的argvalue参数来生成ids，类似ids=fun()</p>
-</li>
-<li><p>scope定义的是argnames的作用域，并通过argvalues的实例划分测试用例，影响到测试用例的收集顺序（不同用例，相同参数时，会根据值的大小来划分收集顺序；如果参数是固件时，且不覆盖，则参数的作用域，就是固件的作用域，按这个顺序收集测试结果，默认是function级别）</p>
-</li>
-<li><p>特殊情况：如果参数化没传值时，实例的结果将会被设置为SKIPPED；这种情况可以在pytest.ini中设置empty_parameter_set_mark选项来改变这种行为，可以的值如下<br>skip：默认值<br>xfail：执行跳过直接将示例标记为XFAIL，等价于xfail(run=False)<br>fail_at_collect：上报一个CollectError异常；</p>
-</li>
-<li><p>一个用例上可以有多个参数化标记，执行顺序是从近到远，组合提供值<br>@pytest.mark.parametrize(‘test_input’, [1, 2, 3])<br>@pytest.mark.parametrize(‘test_output, expected’, [(1, 2), (3, 4)])<br>结果：1_2_1,1_2_2,1_2_3,3_4_1,…</p>
-<h3 id="定制报告"><a href="#定制报告" class="headerlink" title="定制报告"></a>定制报告</h3></li>
+<li><strong>方法：@pytest.mark.parametrize(argnames, argvalues, indirect=False, ids=None, scope=None)</strong><ul>
+<li><strong>argnames：</strong><code>参数名必须是用例引入的参数的子集（fun(arg1,arg2),必须是这两个参数的子集）；且引入的参数必须是没有默认值的；结构可以是用逗号分隔的字符串，或者一个列表/元组; 参数名默认会覆盖同名的固件;</code></li>
+<li><strong>argvalues：</strong><code>实际返回的是一个命名元祖，ParameterSet(values=(1, 2), marks=[], id=None)];可以不带标记和测试id,也可以带；结构上必须是一个可迭代对象可以是[(1, 2), [2, 3], set([3, 4])]/方法返回的可迭代对象； 如果argvalue要带标记和测试ID，可以这样实现：pytest.param(2, 1,  marks=pytest.mark.xfail(), id=&#39;XPASS&#39;)param方法实际是对命名元祖的封装；</code></li>
+<li><strong>indirect参数：</strong><code>有默认值，为TRUE表示参数名不覆盖同名固件，且参数值要传递给固件，最后固件的返回才是实参@pytest.mark.parametrize(&#39;min, max&#39;, [(1, 2), (3, 4)], indirect=True/[&#39;max&#39;])    //[&#39;max&#39;]仅指定这个参数名不覆盖固件</code></li>
+<li><strong>ids：</strong><code>ids是每个测试的实例的测试ID，报告可以记录，默认值是每一个实例的argvalue_拼接，如上是1_2；手动定义时ids值长度必须和argvalue长度保持一致；默认所有的id都进行了ascii编码，可以在pytest.ini中禁用ascii编码（disable_test_id_escaping_and_forfeit_all_rights_to_community_support = True） 可以构造函数方法来使用每个的argvalue参数来生成ids，类似ids=fun()</code></li>
+<li><strong>scope：</strong><code>scope定义的是argnames的作用域，并通过argvalues的实例划分测试用例，影响到测试用例的收集顺序（不同用例，相同参数时，会根据值的大小来划分收集顺序；如果参数是固件时，且不覆盖，则参数的作用域，就是固件的作用域，按这个顺序收集测试结果，默认是function级别）</code></li>
+<li><strong>特殊情况：</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">如果参数化没传值时，实例的结果将会被设置为SKIPPED；</span><br><span class="line">这种情况可以在pytest.ini中设置empty_parameter_set_mark选项来改变这种行为，可以的值如下:</span><br><span class="line">  skip：默认值</span><br><span class="line">  xfail：执行跳过直接将示例标记为XFAIL，等价于xfail(run=False)</span><br><span class="line">  fail_at_collect：上报一个CollectError异常；</span><br></pre></td></tr></table></figure>
+<strong>一个用例上可以有多个参数化标记，执行顺序是从近到远，组合提供值<br>@pytest.mark.parametrize(‘test_input’, [1, 2, 3])<br>@pytest.mark.parametrize(‘test_output, expected’, [(1, 2), (3, 4)])<br>结果：1_2_1,1_2_2,1_2_3,3_4_1,…</strong></li>
 </ul>
 </li>
-<li>前后置处理<br>固件的作用是提供了一个固定的基线，能重复的运行；固件装饰器的作用是注册一个固件，<br>测试用例使用固件的方式，调用的是固件的形参没，实际生效的是固件的返回对象作为入参<br>setup、downup\fixture(必须放置在conftest模块中)，其中预制方法的yield前属于前置，yield后属于后置操作(这个后置操作，只能对前置产生的实例对象生效)；<br>除了yield的后置操作，支持上下文的对象，还可以使用with本身提供的隐式的清理操作；<br>除了这种方式来实现后置还可以使用，request.addfinalizer(后置方法)来实现后置，只是这个方法一定要放置预处理的固件的后面<br>@pytest.fixture(scope=’function/class/module/session’,autouse=True),scope是用来声明作用域的。前置后置可以有多个，可以显示调用，也可以不调用通过默认的自动调用来隐式调用(autouse=True，默认为true)；根据作用域大小和conftest中的先后顺序会有调用顺序，同时固件还可以彼此调用（作为参数）后置的顺序正好相反；前后置方法除了方法可以用，类也可以用@pytest.mark.usefixtures(‘class_scope’,’第二个固件’)；这个除了类可以使用外，方法也可以使用<br>除了显示调用，隐式自动调用，还可以设定按固定条件调用,估计还可以指定别名，指定别名后，原来的名字不可用；<br>参数化，不单可以针对测试函数（），固件也可以参数化<br>固件放在conftest中是为了方便复用和注册<br>固件fixture可用于共享数据<br>conftest作用域和这个文件的位置也有很多关系，如果需要对当前包的整体生效，那么conftest文件需要放置在包的根目录下<br>可以在固件中对测试用例打标记，并给测试用例分配测试id<br>@pytest.fixture(params=[(‘3+5’, 8),pytest.param((‘6*9’, 42),<pre><code>                              marks=pytest.mark.xfail,
-                           id=&#39;failed&#39;)])
-</code></pre>
-和用例参数化等价<br>@pytest.mark.parametrize(‘test_input, expected’,[(‘3+5’, 8),<br>   pytest.param(‘6*9’, 42, marks=pytest.mark.xfail,                 id=’failed’)])        //注意这是两组参数<br>固件除了在conftest中定义外，还可以在用例模块本地来复写     </li>
-<li>作用域<br>conftest.py（这是pytest的插件，pytest会自动调度）：放置在当前目录下，此目录及旗下所有子目录都生效，会执行以test开头/结尾的模块中的以test开头或结尾的方法；<br>使能autouse的fixture，先于其同级别的其它fixture实例化；同时autouse的fixture测试用例显示声明（形参），不声明的不会被实例化；<br>固件本身除了可以调用其他固件外；还可以给固件传参，从而使得固件可以实现通用化；<br>固件除了返回实例对象或参数给测试用例调用外，固件还可以直接返回工厂函数<br>可以对固件进行参数化。但是固件参数化后会创建多个实例，因此单个测试用例也会执行多次<br>@pytest.fixture(scope=’module’, params=[‘smtp.163.com’, “mail.python.org”])<br>def smtp_connection_params(request):<br>  server = request.param</li>
 </ul>
-<p>如果不想执行多次，可以使用模糊匹配来指定执行实例如pytest -k 163 用例<br>低级别的固件可以调用高级别作用域的固件，反之则不行<br>固件参数化时，应该是一个参数实例使用完后，才会使用第二个<br>可以有多个conftest.py文件，生效的顺序是就近原则，优先当前模块-当前文件夹-上一级文件夹中的<br>复写操作，除了在conftest中，用例模块中，还可以在用例的参数化中进行复写<br>@pytest.mark.parametrize(‘已定义固件名’, [‘directly-overridden-username’])<br>参数化的fixture和非参数化的fixture同样可以相互覆盖；同名覆盖，按距离优先原则</p>
-<ul>
-<li>生效机制<br>auto-test，test开头/结尾模块中的test开头/结尾的方法，类也满足此条件；（但类必须要以Test开头，且类中不能有__init__方法）<br>文档也能进行测试用doctest模块控制；所谓的文档测试是指将代码中的文档注释进行执行测试（需要满足文档在用例中，且是’’’&gt;&gt;&gt;test’’’格式的文档,必须要有命令行符号），默认test开头或结尾的txt文档都能被测试，可以通过pytest –doctest-glob=’*.rst’来扩展支持的文档格式<br>要执行文档中的注释代码，必须要加选项pytest –doctest-modules命令行选项;也可以在pytest.ini文件中配置指定必须要文档测试[pytest]<br>addopts = –doctest-modules<br>用pytest –doctest-continue-on-failure选项在文档测试遇到第一个失败后继续执行<br>可以定制文档测试失败后的，失败输出格式pytest –doctest-modules –doctest-report none/udiff/cdiff/ndiff<br>通过在文档中添加’’’’&gt;&gt;&gt; tmp = getfixture(‘tmpdir’)’’’的方式在文档中使用固件<br>通过doctest_namespace 固件定义的参数，可以在文档中直接使用</li>
-</ul>
-<p> 使用pytest.skip(‘注释’)，直接跳过文档测试，默认不执行文档测试</p>
-<ul>
-<li>如何调用</li>
-</ul>
-<p>pytest.main()<br>可以指定执行特定的函数使用（::/-k/-m+mark装饰器标记）；也可以反向操作，指定要跳过的函数（pytest.mark.skipif）<br>可以对函数执行失败进行定义，显示的提示失败使用装饰器（pytest.mark.xfail）<br>参数化装饰器：pytest.mark.parametrize(argnames, argvalues)<br>可设置最大允许的失败数，如果设置了达到最大时，这pytest会中断执行，否则无最大次数限制；（pytest –maxfail==2）<br>可通过命令行执行特定包中的用例/特定目录下/特定模块/特定方法/特定方法的特定参数化参数<br>pytest –pyargs pkg.testing<br>pytest testing/pytest test_mod.py/pytest test_mod.py::test_fun<br>$ pytest -q -s test_nodeid.py::TestNodeId::test_two[1-1]<br>模糊匹配：执行含特定字符或不含特定字符的模块/类/函数：<br>pytest -k “_class and not two”<br>还可以为用例添加标记。从而指定特定标记的用例<br>@pytest.mark.标记名<br>def test_one()<br>注意pytest.main([-m 标记])执行方法和命令行执行是相同的;第一个是选项，第二个是参数;注意main（）会将模块加入缓存，因此不建议执行过程中调用多次，最好只调用一次<br>命令行执行的各选项</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pytest -x							//pytest遇到第一个失败时退出执行</span><br><span class="line">pytest --maxfail==2					//设定允许失败的最大次数</span><br><span class="line">pytest -q							//-q选项可以查看精简版的测试报告</span><br><span class="line">pytest -r							//显示精简的总结报告-r后还要加一个参数，表示需要显示的内容，其他过滤，如-rfs(f是失败的，s是跳过的，因此总结会显示失败的和跳过的)</span><br><span class="line">pytest -s							//pytest框架的-s选项是用来关闭输出捕获，使得可以看到<span class="built_in">print</span>()输出的内容。</span><br><span class="line">pytest -k 							//模仿匹配要执行的用例</span><br><span class="line">pytest -m							//执行指定标记用例</span><br><span class="line">pytest -l, --showlocals         <span class="comment"># 打印本地变量</span></span><br><span class="line">pytest --tb=auto                <span class="comment"># 默认模式</span></span><br><span class="line">pytest --tb=long                <span class="comment"># 尽可能详细的输出</span></span><br><span class="line">pytest --full-trace						//比--tb=long更详细的输出模式</span><br><span class="line">pytest --tb=short               <span class="comment"># 更简短的输出</span></span><br><span class="line">pytest --tb=line                <span class="comment"># 每个失败信息总结在一行中</span></span><br><span class="line">pytest --tb=native              <span class="comment"># python的标准输出</span></span><br><span class="line">pytest --tb=no                  <span class="comment"># 不打印失败信息</span></span><br><span class="line">pytest --pdb                  //失败时进入pdb诊断器模式</span><br><span class="line">pytest --trace						//启动时就进入pdb诊断器模式</span><br><span class="line">pytest --durations=10				//获取执行最慢的十个测试用例</span><br><span class="line">pytest -vv							//获取用例的执行时间</span><br><span class="line"></span><br><span class="line">异常</span><br><span class="line">pytest --assert=plain选项			//关闭断言失败提示信息</span><br><span class="line">当用例执行出现断错误或超时，faulthandler模块，可以展示Python脚本的回溯信息（回溯不是错误信息，此时程序也不会中断，只是打印此时的相关信息，类似监控）</span><br><span class="line">python  -p no:faulthandler 		//默认是打开的，可以通过此命令关闭</span><br><span class="line">可以配置超时时间，一旦超时则显示所有线程的回溯信息，配置如下</span><br><span class="line">faulthandler_timeout=5（pytest.ini文件配置）</span><br><span class="line">pytest -o faulthandler_timeout=X 命令行配置超时时间</span><br><span class="line">pytest --junitxml=path  		//在path路径生成一个xml格式的测试报告</span><br><span class="line">junit_suite_name = pytest_chinese_doc（pytest.ini文件）		//自定义XML文件中testsuite根节点的name信息</span><br><span class="line">junit_duration_report = call（pytest.ini）	//只记录测试用例时间，不含前后置时间，默认time属性是含所有时间的</span><br><span class="line"></span><br><span class="line">pytest -p mypluginmodule		//-p尽早加载插件，插件可以是本地的插件，也可以是公共插件</span><br><span class="line">pytest -p no:doctest			//加no提前阻止插件的加载</span><br><span class="line">pytest.main([<span class="string">&quot;-qq&quot;</span>], plugins=[MyPlugin()])		//指定一个插件运行</span><br><span class="line"> pytest -q -s --collect-only显示测试ID不执行用例 test_params.py	//collect-only显示测试ID（固件创建的实例的测试ID）不执行用例</span><br><span class="line"> 设置固件实例的测试ID，使用ids @pytest.fixture(params=[0, 1], ids=[<span class="string">&#x27;spam&#x27;</span>, <span class="string">&#x27;ham&#x27;</span>]),也可以用一个函数来动态生成测试id（实例id）ids=函数的方式</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>断言<br>def test_<br>  assert<br>断言除了常规的判定式；还有指定异常的检测<br>def test_mytest():<br>  with pytest.raises(SystemExit) as excinfo:<pre><code>  f()        //raise SystemExit(1)抛出了指定异常
-</code></pre>
- assert ‘456’ in str(excinfo.value)    //excinfo是上下文的实例，且在上下文环境中raises必须是最后一行,因为，f()同层级的后续行不会被执行<br>除了断言还可以设置断点：使用pdb.set_trace()，只影响断点用例<br>可以给异常加标记：出现IndexError，则标记用例失败类型为xfail，这种用法一般用来标记未修复的bug<br>@pytest.mark.xfail(raises=IndexError)<br>def test_f():<br>  f()</li>
-</ul>
-<p>不同数据类型的断言，不同地方都会标记出来<br>可以给断言失败，添加说明，可以用运算重载符，出现系统提示的字符串异常时，重载为我们想要的内容；第二种是利用钩子pytest_assertrepr_compare，来定义异常<br>断言的异常信息，会存储在本地，如需禁止可以在conftest.py文件中加入这些配置实现：import sys<br>sys.dont_write_bytecode = True<br>关闭断言的失败提示功能：使用再需要去掉的模块中添加模块的docstring中添加PYTEST_DONT_REWRITE字符串；调度用例时添加 pytest –assert=plain选项</p>
-<p>warning告警，可以手动通过warnings.warn方法来触发特定的告警；<br>可以通过命令行 pytest -W arg(action:message:category:module:lineno)方式来自定义捕获的告警；等价行为是通过pytest.ini配置文件来配置filterwarnings项（用来自定义过滤，也可以配置不捕获）；等价的装饰器为@pytest.mark.filterwarnings<br>–disable-warnings命令行选项来阻止，告警信息的显示（有捕获告警只是不显示）；<br>-p no:warnings命令行，直接禁止告警的捕获；<br>等价的使用pytest.deprecated_call方法来调用告警对象，也会实现禁止捕获告警<br>assert pytest.warns((DeprecationWarning, PendingDeprecationWarning), api_call_v1, match=r’和 pytest.raises() 方法一样，这时 pytest 不再判断告警信息是否正确’) == 200<br>来通过匹配告警，这个操作是匹配到的告警不显示,同时进行断言</p>
-<p>异常提示：pytest.fail(‘期望 api_call_v1 触发一个告警，实际上没有；’)用来触发异常提示<br>recwarn fixture的功能和pytest.warning()等价</p>
-<ul>
-<li>固定固件<br>pytest有现成的一些估计，可以直接在测试单元中调用，或者在自定义的固件中调用<br>查看现成的固件的方法：pytest -q -v –fixtures<br>在程序执行时，动态的修改对象（使用固件monkeypatch）;这种修改是临时性的，不改本地代码<br>创建临时文件/目录，（使用tmp_path）</li>
-</ul>
-<p>在测试用例中访问捕获信息（即标准输出/标准错误）:可以使用固件capsys、capfd、capsysbinary<br>capsys捕获的是系统级别，如capsys.readouterr()结果是个系统级别的标准输出和标准错误的元组<br>capfd捕获的是文件/接口级别，如capfd.readouterr()结果是个接口级别的标准输出和标准错误的元组<br>capsysbinary用来返回非文本型的数据，capsysbinary.readouterr()返回的是字节流</p>
-<ul>
-<li>结果<br>为测试报告中的测试用例添加额外的信息，使用record_property fixture<br>def test_record_property(record_property):<br>  record_property(“test_id额外信息”, 10010额外信息值)<br>  assert 1<br>也可以在测试报告中加入用例的标记信息        //修改pytest_collection_modifyitems钩子方法，添加对test_id标记的支持：<br>可以为测试报告添加用例额外的属性信息        //使用record_xml_attribute fixture<br>可以在测试报告中为整个测试集添加额外的信息</li>
-</ul>
-<p>可以在报告中为用例创建链接<br>pytest –pastebin=all            //为所有用例创建链接<br>pytest –pastebin=failed        //为失败用例创建链接</p>
+<h3 id="定制报告"><a href="#定制报告" class="headerlink" title="定制报告"></a>定制报告</h3><p><strong>为测试报告中的测试用例添加额外的信息，使用record_property fixture</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">def test_record_property(record_property):</span><br><span class="line">    record_property(<span class="string">&quot;test_id额外信息&quot;</span>, 10010额外信息值)</span><br><span class="line">    assert 1</span><br><span class="line">也可以在测试报告中加入用例的标记信息		//修改pytest_collection_modifyitems钩子方法，添加对test_id标记的支持;</span><br><span class="line">可以为测试报告添加用例额外的属性信息		//使用record_xml_attribute fixture</span><br><span class="line">可以在测试报告中为整个测试集添加额外的信息；</span><br><span class="line"></span><br><span class="line">可以在报告中为用例创建链接</span><br><span class="line">pytest --pastebin=all			//为所有用例创建链接</span><br><span class="line">pytest --pastebin=failed		//为失败用例创建链接</span><br></pre></td></tr></table></figure>
+<p><strong>其他的对测试报告的定制操作，见上方选项合集</strong></p>
 <h3 id="性能-缓存"><a href="#性能-缓存" class="headerlink" title="性能-缓存"></a>性能-缓存</h3><ul>
-<li><p>是什么：pytest执行时默认会在根目录生成一个.pytest_cache文件夹，用来记录执行的情况，主要记录执行的所有失败（lastfailed）、执行的所有实例（nodeids）、最近一次失败（stepwise）、缓存配置数据（）;缓存是通过pytest自带的cacheprovider插件来实现</p>
+<li><p><strong>是什么：</strong><code>pytest执行时默认会在根目录生成一个.pytest_cache文件夹，用来记录执行的情况，主要记录执行的所有失败（lastfailed）、执行的所有实例（nodeids）、最近一次失败（stepwise）、缓存配置数据（）;缓存是通过pytest自带的cacheprovider插件来实现；</code></p>
 </li>
-<li><p>作用：可以通过选项来依赖缓存的结果和配置数据来定制执行的顺序、和跳过某些用例、使用缓存配置数据，从而提高性能</p>
+<li><p><strong>作用：</strong><code>可以通过选项来依赖缓存的结果和配置数据来定制执行的顺序、和跳过某些用例、使用缓存配置数据，从而提高性能；</code></p>
 </li>
-<li><p>怎么样：</p>
-</li>
-<li><p>缓存文件：默认位置是根目录生成一个.pytest_cache文件夹；可以通过pytest.ini中配置cache_dir = .pytest-cache来自定义缓存文件夹路径，可配置相对和绝对路径</p>
-</li>
-<li><p>缓存中主要其作用的是lastfailed(所有失败实例)/nodeids（所有实例）/stepwise（最近失败实例）</p>
+<li><p><strong>怎么样：</strong><code>生成缓存文件-控制执行顺序（范围）；</code></p>
+<ul>
+<li>缓存文件：默认位置是根目录生成一个.pytest_cache文件夹；可以通过pytest.ini中配置cache_dir = .pytest-cache来自定义缓存文件夹路径，可配置相对和绝对路径；</li>
+<li>缓存中主要起作用的是lastfailed(所有失败实例)/nodeids（所有实例）/stepwise（最近失败实例）</li>
+</ul>
 </li>
 </ul>
-<p>│   └───.pytest-cache<br>│       │   .gitignore<br>│       │   CACHEDIR.TAG<br>│       │   README.md<br>│       │<br>│       └───v<br>│           └───cache<br>│                   lastfailed<br>│                   nodeids<br>│                   stepwise<br>通过一些选项来利用上面的文件控制实例的执行顺序，并且过滤一些实例<br>查看缓存：pytest src/chapter-12/ -q –cache-show ‘lastfailed’/‘nodeids’/‘stepwise’<br>pytest –lf –collect-only src/chapter-12/            //仅执行已经收集到的失败实例<br>pytest –collect-only -s –ff src/chapter-12/        //先执行上次收集到的失败实例，在执行其他<br>pytest –collect-only -s –nf src/chapter-12/        //先执行新添加的-继而执行修改的（按最晚修改最先执行）-最后执行其他实例；<br>pytest –cache-clear -q -s src/chapter-12/test_pass.py    //先删除缓存文件夹（pytest-cache），在创建缓存文件夹，保存最新的缓存数据</p>
-<p>//以下都用于之前没有采集到失败实例的场景<br>pytest -q -s –ff –lfnf none src/chapter-12/test_pass.py        //会忽略失败</p>
-<p>pytest -q -s –ff –lfnf all src/chapter-12/test_pass.py        //遇到失败就结束了，只保留之前的成功的<br>缓存配置数据</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@pytest.fixture</span><br><span class="line">def mydata(request):</span><br><span class="line">    val = request.config.cache.get(<span class="string">&quot;example/value&quot;</span>, None)		//读取缓存配置</span><br><span class="line">    <span class="keyword">if</span> val is None:</span><br><span class="line">        expensive_computation()</span><br><span class="line">        val = 42</span><br><span class="line">        <span class="comment">#设置缓存配置。没有文件时，会先创建在设置，已存在会覆盖旧的</span></span><br><span class="line">        request.config.cache.set(<span class="string">&quot;example/value&quot;</span>, val)		</span><br><span class="line">    <span class="built_in">return</span> val</span><br></pre></td></tr></table></figure>
-<p>stepwise文件用来记录最近一次的失败；可以指定从这个失败开始执行，用此选项调度一般遇到失败pytest就会结束执行如下：<br>pytest –cache-clear –sw -q src/chapter-12/test_sample.py        //–cache-clear见上方删除旧缓存，–sw是（stepwise缩写），此选项执行时，遇到失败就会结束整个pytest,并将这个失败记录到stepwise文件；如果不指定–sw选项，这个文件不记录数据；下次在也–sw选项执行时，会优先执行stepwise文件中记录的实例，当遇到下一个失败时才结束，并且会使用新的失败来覆盖这个文件<br>pytest –sw –stepwise-skip -q src/chapter-12/test_sample.py    //跳过这个失败，继续执行后面的，遇到后续的失败在结束</p>
+<p>│   └───.pytest-cache<br>│       │   .gitignore<br>│       │   CACHEDIR.TAG<br>│       │   README.md<br>│       │<br>│       └───v<br>│           └───cache<br>│                   lastfailed<br>│                   nodeids<br>│                   stepwise</p>
+<ul>
+<li><strong>控制执行顺序（范围）:通过一些选项来利用上面的文件控制实例的执行顺序，并且过滤一些实例</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">查看缓存：pytest src/chapter-12/ -q --cache-show <span class="string">&#x27;lastfailed&#x27;</span>/<span class="string">&#x27;nodeids&#x27;</span>/<span class="string">&#x27;stepwise&#x27;</span></span><br><span class="line">pytest --lf --collect-only src/chapter-12/			//仅执行已经收集到的失败实例</span><br><span class="line">pytest --collect-only -s --ff src/chapter-12/		//先执行上次收集到的失败实例，在执行其他</span><br><span class="line">pytest --collect-only -s --nf src/chapter-12/		//先执行新添加的-继而执行修改的（按最晚修改最先执行）-最后执行其他实例；</span><br><span class="line">pytest --cache-clear -q -s src/chapter-12/test_pass.py	//先删除缓存文件夹（pytest-cache），在创建缓存文件夹，保存最新的缓存数据</span><br><span class="line"></span><br><span class="line">//以下都用于之前没有采集到失败实例的场景</span><br><span class="line">pytest -q -s --ff --lfnf none src/chapter-12/test_pass.py		//会忽略失败</span><br><span class="line"></span><br><span class="line">pytest -q -s --ff --lfnf all src/chapter-12/test_pass.py		//遇到失败就结束了，只保留之前的成功的</span><br><span class="line"></span><br><span class="line"><span class="comment">#缓存配置数据</span></span><br><span class="line">@pytest.fixture</span><br><span class="line">def mydata(request):</span><br><span class="line">    val = request.config.cache.get(<span class="string">&quot;example/value&quot;</span>, None)		//读取缓存配置</span><br><span class="line">    <span class="keyword">if</span> val is None:</span><br><span class="line">        expensive_computation()</span><br><span class="line">        val = 42</span><br><span class="line">        <span class="comment">#设置缓存配置。没有文件时，会先创建在设置，已存在会覆盖旧的</span></span><br><span class="line">        request.config.cache.set(<span class="string">&quot;example/value&quot;</span>, val)		</span><br><span class="line">    <span class="built_in">return</span> val</span><br><span class="line"></span><br><span class="line">stepwise文件用来记录最近一次的失败；可以指定从这个失败开始执行，用此选项调度一般遇到失败pytest就会结束执行如下：</span><br><span class="line">pytest --cache-clear --sw -q src/chapter-12/test_sample.py		</span><br><span class="line">//--cache-clear见上方删除旧缓存，--sw是（stepwise缩写），此选项执行时，遇到失败就会结束整个pytest,并将这个失败记录到stepwise文件；如果不指定--sw选项，这个文件不记录数据；下次在也--sw选项执行时，会优先执行stepwise文件中记录的实例，当遇到下一个失败时才结束，并且会使用新的失败来覆盖这个文件；</span><br><span class="line">pytest --sw --stepwise-skip -q src/chapter-12/test_sample.py	//跳过这个失败，继续执行后面的，遇到后续的失败在结束；</span><br></pre></td></tr></table></figure></li>
+</ul>
 <p><a href="https://learning-pytest.readthedocs.io/zh/latest/doc/intro/getting-started.html">pytest-概要版</a><br><a href="https://github.com/luizyao/pytest-chinese-doc">官方文档-中文版</a></p>
 ]]></content>
       <categories>
