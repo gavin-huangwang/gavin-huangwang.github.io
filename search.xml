@@ -67,123 +67,6 @@
       </tags>
   </entry>
   <entry>
-    <title>SOLOPI使用教程</title>
-    <url>/posts/49e140/</url>
-    <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<ul>
-<li><p><em><strong>介绍</strong></em></p>
-<p>  <code>solopi是支付宝团队研发的ui自动化工具;支持UI录制回放，录制脚本的编辑/扩展/转换成appium脚本/录制脚本支持分发到其他的设备执行；同时还支持性能测试和一机多控，执行采集各种性能数据，同时支持通过一台设备控制多台设备的行为；</code></p>
-</li>
-<li><p><em><strong>使用指南</strong></em></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">环境准备</span><br><span class="line">app配置</span><br><span class="line">录制</span><br><span class="line">回放</span><br><span class="line">性能测试</span><br><span class="line">一机多控</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>环境准备</strong></p>
-<ul>
-<li><p><em>下载配置Androidsdk</em></p>
-<ul>
-<li>地址:<a href="https://developer.android.com/studio/releases/platform-tools#downloads">https://developer.android.com/studio/releases/platform-tools#downloads</a></li>
-<li>操作：下载安装完Android调试工具后，在下载对应系统版本的 SDK Platform Tools，配置好环境变量，注意win10以上系统环境变量配置即生效，低版本需要重启pc才能生效；</li>
-</ul>
-</li>
-<li><p><em>给手机授权</em></p>
-<ul>
-<li>操作：进入开发者模式，并授权usb调试权限；</li>
-</ul>
-</li>
-<li><p><em>检测环境并连接wifi</em></p>
-<ul>
-<li>操作：通过adb devices命令检测，同时要连接wifi;</li>
-</ul>
-</li>
-<li><p><em>建立连接</em></p>
-<ul>
-<li>操作：通过pc的cmd启动服务,输入（adb tcpip 5555）</li>
-</ul>
-</li>
-<li><p><em>下载solopi的apk</em></p>
-<ul>
-<li>地址：<a href="https://github.com/alipay/SoloPi/releases/download/v0.11.2/SoloPi_0.11.2.apk">apk点击下载</a></li>
-<li>操作：下载安装后，通过配置授权</li>
-<li>环境配置：<a href="https://github.com/alipay/SoloPi/wiki/FirstUse">地址跳转参考内容</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>app配置</strong></p>
-<p>  <code>按需配置，一般不需要进行配置；可参考上方的环境配置</code></p>
-</li>
-<li><p><strong>录制/回放</strong></p>
-<ul>
-<li><a href="https://github.com/alipay/SoloPi/wiki/RecordCase"><em>官方教程</em></a></li>
-<li>录制：录制支持直接对收到操作进行录制，且录制的脚本支持编辑/扩展/保存/导入等操作，支持各类操作和断言，支持图像识别，简单方便；</li>
-<li>回放：回放支持单脚本回放，支持批量回放，支持重复播放；</li>
-<li>优点：操作简单，可扩展编辑定制策略，可同步到其他设备，可重复回放支持暴力遍历；</li>
-<li>缺点：不支持持续集成，需要手动触发；</li>
-</ul>
-</li>
-<li><p><strong>性能测试</strong></p>
-<ul>
-<li><a href="https://github.com/alipay/SoloPi/wiki/Performance"><em>官方教程</em></a></li>
-<li>操作：性能测试时，直接勾选需要监控的性能指标，不进行录制则可以实时查看；进行录制时，点击录制按钮开始录制，录制结束后点击录制结束按钮，录制的性能数据会存储下来，支持图表分析，可同时存储多份性能数据；</li>
-<li>优点：支持实时查看场景的性能，可和业务测试结合方便简单；支持性能录制，可和UI自动化结合，查看各场景的性能变化和差异；</li>
-<li>缺点：不支持续集成，利用脚本进行回放时不支持性能监控；</li>
-</ul>
-</li>
-<li><p><strong>一机多控</strong></p>
-<ul>
-<li>[<em>官方教程</em>]</li>
-<li>操作：多台设备上同时安装solopi和待测APP；做好配置和授权操作，同时主机（控制机）选中一机多控，选中为主机；其他设备点击一机多控，选中为从机；然后用主机扫码录入从机，然后在主机点击建立主从机的连接，然后主机点击录屏按钮，开始进行一机多控操作；原理是利用solopi的录屏回放功能，主机录屏，从机回放；</li>
-<li>优点：可以用一台机器，控制多台设备操作，能有效的覆盖兼容性测试；</li>
-<li>缺点：不支持ios系统；由于是先录制，在回放，因此所有设备都需要有网络，且必须是同一局域网，且存在延时；不支持批量操作时，同时监控性能数据；</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p><em><strong>和业务结合</strong></em></p>
-<p>  <code>和业务结合使用前，需要先梳理清楚solopi的优缺点：</code></p>
-<p>  优点：</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">支持录制UI自动化，且录制的脚本支持编辑自定义，且无环境依赖；</span><br><span class="line">录制的脚本可以导出在任意设备上回放，或者转换成appium脚本；</span><br><span class="line">支持回放管理，支持批量回放和重复回放；</span><br><span class="line">支持性能测试，实时监控APP性能和录制APP的性能；</span><br><span class="line">支持一机多控，可同时控制多台设备；</span><br></pre></td></tr></table></figure>
-
-<p>  缺点：</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">不支持iOS设备，仅支持Android设备；</span><br><span class="line">工具是一款纯功能测试辅助软件，不支持持续集成；</span><br><span class="line">功能过于离散，几个功能不能结合在一起使用；</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>和业务结合：</strong></p>
-<ul>
-<li><p><em>rc验收阶段：</em><br><code>建议功能测试完毕且无误后，最后在rc验收一遍，主流程，验收时进行功能&quot;录制&quot;,录制的脚本可定期回放/开发了相关功能时进行回放/也可以通过Jenkins触发回放;</code></p>
-</li>
-<li><p><em>灰度/线上验收阶段：</em><br><code>建议测试进行线上验收时，进行录制，录制的脚本，可通过扩展进行定期回放；</code></p>
-</li>
-<li><p><em>冒烟/功能测试/rc验收阶段：</em><br><code>建议以上阶段，进行测试验收时，打开性能测试监控，观察功能场景有没用性能问题；</code></p>
-</li>
-<li><p><em>冒烟/兼容性测试阶段：</em><br><code>可以使用一机多控功能，进行兼容性测试；但此功能对控制的终端有要求，最好有固定的兼容环境；</code></p>
-</li>
-<li><p><em>稳定性治理/预装版本暴力回放：</em><br><code>使用重复回放功能进行暴力回放；</code></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><em><strong>下一步：</strong></em></p>
-</li>
-</ul>
-<p><a href="https://github.com/alipay/SoloPi"><em>Solopi github</em>_</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>ui自动化</tag>
-        <tag>稳定性</tag>
-        <tag>前端性能</tag>
-        <tag>solopi</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>UI自动化元素定位</title>
     <url>/posts/2e4c0062/</url>
     <content><![CDATA[<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">APPIUM元素定位原理</span><br><span class="line">常见的元素定位方式</span><br><span class="line">元素定位技巧/辅助工具</span><br></pre></td></tr></table></figure>
@@ -330,15 +213,120 @@
       </tags>
   </entry>
   <entry>
-    <title>UI自动化基础--微软</title>
-    <url>/posts/d1646a55/</url>
-    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
+    <title>SOLOPI使用教程</title>
+    <url>/posts/49e140/</url>
+    <content><![CDATA[<h3 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">介绍</span><br><span class="line">使用指南</span><br><span class="line">和业务结合</span><br><span class="line">下一步</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<ul>
+<li><p><em><strong>介绍</strong></em></p>
+<p>  <code>solopi是支付宝团队研发的ui自动化工具;支持UI录制回放，录制脚本的编辑/扩展/转换成appium脚本/录制脚本支持分发到其他的设备执行；同时还支持性能测试和一机多控，执行采集各种性能数据，同时支持通过一台设备控制多台设备的行为；</code></p>
+</li>
+<li><p><em><strong>使用指南</strong></em></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">环境准备</span><br><span class="line">app配置</span><br><span class="line">录制</span><br><span class="line">回放</span><br><span class="line">性能测试</span><br><span class="line">一机多控</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>环境准备</strong></p>
+<ul>
+<li><p><em>下载配置Androidsdk</em></p>
+<ul>
+<li>地址:<a href="https://developer.android.com/studio/releases/platform-tools#downloads">https://developer.android.com/studio/releases/platform-tools#downloads</a></li>
+<li>操作：下载安装完Android调试工具后，在下载对应系统版本的 SDK Platform Tools，配置好环境变量，注意win10以上系统环境变量配置即生效，低版本需要重启pc才能生效；</li>
+</ul>
+</li>
+<li><p><em>给手机授权</em></p>
+<ul>
+<li>操作：进入开发者模式，并授权usb调试权限；</li>
+</ul>
+</li>
+<li><p><em>检测环境并连接wifi</em></p>
+<ul>
+<li>操作：通过adb devices命令检测，同时要连接wifi;</li>
+</ul>
+</li>
+<li><p><em>建立连接</em></p>
+<ul>
+<li>操作：通过pc的cmd启动服务,输入（adb tcpip 5555）</li>
+</ul>
+</li>
+<li><p><em>下载solopi的apk</em></p>
+<ul>
+<li>地址：<a href="https://github.com/alipay/SoloPi/releases/download/v0.11.2/SoloPi_0.11.2.apk">apk点击下载</a></li>
+<li>操作：下载安装后，通过配置授权</li>
+<li>环境配置：<a href="https://github.com/alipay/SoloPi/wiki/FirstUse">地址跳转参考内容</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>app配置</strong></p>
+<p>  <code>按需配置，一般不需要进行配置；可参考上方的环境配置</code></p>
+</li>
+<li><p><strong>录制/回放</strong></p>
+<ul>
+<li><a href="https://github.com/alipay/SoloPi/wiki/RecordCase"><em>官方教程</em></a></li>
+<li>录制：录制支持直接对收到操作进行录制，且录制的脚本支持编辑/扩展/保存/导入等操作，支持各类操作和断言，支持图像识别，简单方便；</li>
+<li>回放：回放支持单脚本回放，支持批量回放，支持重复播放；</li>
+<li>优点：操作简单，可扩展编辑定制策略，可同步到其他设备，可重复回放支持暴力遍历；</li>
+<li>缺点：不支持持续集成，需要手动触发；</li>
+</ul>
+</li>
+<li><p><strong>性能测试</strong></p>
+<ul>
+<li><a href="https://github.com/alipay/SoloPi/wiki/Performance"><em>官方教程</em></a></li>
+<li>操作：性能测试时，直接勾选需要监控的性能指标，不进行录制则可以实时查看；进行录制时，点击录制按钮开始录制，录制结束后点击录制结束按钮，录制的性能数据会存储下来，支持图表分析，可同时存储多份性能数据；</li>
+<li>优点：支持实时查看场景的性能，可和业务测试结合方便简单；支持性能录制，可和UI自动化结合，查看各场景的性能变化和差异；</li>
+<li>缺点：不支持续集成，利用脚本进行回放时不支持性能监控；</li>
+</ul>
+</li>
+<li><p><strong>一机多控</strong></p>
+<ul>
+<li>[<em>官方教程</em>]</li>
+<li>操作：多台设备上同时安装solopi和待测APP；做好配置和授权操作，同时主机（控制机）选中一机多控，选中为主机；其他设备点击一机多控，选中为从机；然后用主机扫码录入从机，然后在主机点击建立主从机的连接，然后主机点击录屏按钮，开始进行一机多控操作；原理是利用solopi的录屏回放功能，主机录屏，从机回放；</li>
+<li>优点：可以用一台机器，控制多台设备操作，能有效的覆盖兼容性测试；</li>
+<li>缺点：不支持ios系统；由于是先录制，在回放，因此所有设备都需要有网络，且必须是同一局域网，且存在延时；不支持批量操作时，同时监控性能数据；</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><em><strong>和业务结合</strong></em></p>
+<p>  <code>和业务结合使用前，需要先梳理清楚solopi的优缺点：</code></p>
+<p>  优点：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">支持录制UI自动化，且录制的脚本支持编辑自定义，且无环境依赖；</span><br><span class="line">录制的脚本可以导出在任意设备上回放，或者转换成appium脚本；</span><br><span class="line">支持回放管理，支持批量回放和重复回放；</span><br><span class="line">支持性能测试，实时监控APP性能和录制APP的性能；</span><br><span class="line">支持一机多控，可同时控制多台设备；</span><br></pre></td></tr></table></figure>
+
+<p>  缺点：</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">不支持iOS设备，仅支持Android设备；</span><br><span class="line">工具是一款纯功能测试辅助软件，不支持持续集成；</span><br><span class="line">功能过于离散，几个功能不能结合在一起使用；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>和业务结合：</strong></p>
+<ul>
+<li><p><em>rc验收阶段：</em><br><code>建议功能测试完毕且无误后，最后在rc验收一遍，主流程，验收时进行功能&quot;录制&quot;,录制的脚本可定期回放/开发了相关功能时进行回放/也可以通过Jenkins触发回放;</code></p>
+</li>
+<li><p><em>灰度/线上验收阶段：</em><br><code>建议测试进行线上验收时，进行录制，录制的脚本，可通过扩展进行定期回放；</code></p>
+</li>
+<li><p><em>冒烟/功能测试/rc验收阶段：</em><br><code>建议以上阶段，进行测试验收时，打开性能测试监控，观察功能场景有没用性能问题；</code></p>
+</li>
+<li><p><em>冒烟/兼容性测试阶段：</em><br><code>可以使用一机多控功能，进行兼容性测试；但此功能对控制的终端有要求，最好有固定的兼容环境；</code></p>
+</li>
+<li><p><em>稳定性治理/预装版本暴力回放：</em><br><code>使用重复回放功能进行暴力回放；</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em><strong>下一步：</strong></em></p>
+</li>
+</ul>
+<p><a href="https://github.com/alipay/SoloPi"><em>Solopi github</em>_</a></p>
 ]]></content>
       <categories>
         <category>技术</category>
       </categories>
       <tags>
-        <tag>UI</tag>
+        <tag>ui自动化</tag>
+        <tag>稳定性</tag>
+        <tag>前端性能</tag>
+        <tag>solopi</tag>
       </tags>
   </entry>
   <entry>
@@ -355,27 +343,6 @@
 <p>___ runner(入口) ___</p>
 <p><code>android入口程序文件：Runner/runner.py ios入口程序文件：Runner/runner.py </code><br>__ 入口程序代码review __</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment">#ios环境需要手动杀掉adb，杀掉win和mac上的adb</span></span><br><span class="line">    kill_adb()</span><br><span class="line">    <span class="comment">#获取imei</span></span><br><span class="line">    devicess = AndroidDebugBridge().attached_devices()</span><br><span class="line">    <span class="keyword">if</span> len(devicess) &gt; 0:</span><br><span class="line">        <span class="comment">#创建log里面的文件，先删旧文件，然后将数据写入新文件</span></span><br><span class="line">        mk_file()</span><br><span class="line">        <span class="comment">#存多设备数据，每个设备为一个字典</span></span><br><span class="line">        l_devices = []</span><br><span class="line">        <span class="keyword">for</span> dev <span class="keyword">in</span> devicess:</span><br><span class="line">            <span class="comment">#设备数据，含imei,包名，端口，备用端口，系统端口</span></span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            app[<span class="string">&quot;devices&quot;</span>] = dev</span><br><span class="line">            <span class="comment">#初始化安装应用</span></span><br><span class="line">            init(dev)</span><br><span class="line">            app[<span class="string">&quot;port&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;bport&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;systemPort&quot;</span>] = str(random.randint(4700, 4900))</span><br><span class="line">            app[<span class="string">&quot;app&quot;</span>] = PATH(<span class="string">&quot;../app/com.ximalaya.ting.android.apk&quot;</span>) <span class="comment"># 测试的app路径,喜马拉雅app</span></span><br><span class="line">            <span class="comment">#构造数据</span></span><br><span class="line">            l_devices.append(app)</span><br><span class="line">        <span class="comment">#启动appium服务</span></span><br><span class="line">        appium_server = AppiumServer(l_devices)</span><br><span class="line">        appium_server.start_server()</span><br><span class="line">        <span class="comment">#执行操作</span></span><br><span class="line">        runnerPool(l_devices)</span><br><span class="line">        <span class="comment">#结果怎么单独写入excel</span></span><br><span class="line">        writeExcel()</span><br><span class="line">        appium_server.stop_server(l_devices)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;没有可用的安卓设备&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>HEXO 官方使用指南</title>
-    <url>/posts/4a17b156/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><span id="more"></span>
-<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<p>#开启动画<br>canvas_nest: true </p>
-]]></content>
   </entry>
   <entry>
     <title>Python语法-unittest</title>
@@ -410,6 +377,61 @@
       <tags>
         <tag>unittest</tag>
         <tag>参数化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HEXO 官方使用指南</title>
+    <url>/posts/4a17b156/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><span id="more"></span>
+<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>#开启动画<br>canvas_nest: true </p>
+]]></content>
+  </entry>
+  <entry>
+    <title>UI自动化基础--微软</title>
+    <url>/posts/d1646a55/</url>
+    <content><![CDATA[<p><a href="https://docs.microsoft.com/en-us/dotnet/framework/ui-automation/">微软ui自动化基础</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>UI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python-协程</title>
+    <url>/posts/62a5b225/</url>
+    <content><![CDATA[<p><code>python的协程，是一种协作（异步）工作方式；类似于多线程，但不是多线程，实际是在一个线程中工作；工作过程实际是利用协程模块（标准库asyncio），构建协程对象；当协程对象执行时，其中可以构造专属的等待方法，处于等待时，会调度其他的协程对象执行，当等待时间过后，又会恢复到原来的协程对象上来工作，类似于多线程的上下文切换，可以在使用维度上理解成微线程，特性如下：</code></p>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">协程是单线程异步的工作方式；能避免无意义的多线程切换；没有多线程的开销，因此能提升性能；</span><br><span class="line">协程，没有多线程的锁机制，在一个线程中切换，因此效率会更高（性能）；</span><br><span class="line">协程不是多线程，不能利用cpu多核能力，不能实现并行，能实现并发；</span><br><span class="line">必须自己来承担调度的责任（控制调度）；</span><br></pre></td></tr></table></figure>
+<p><strong>例子：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import asyncio</span><br><span class="line"></span><br><span class="line">async def say_hello():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Hello&quot;</span>)</span><br><span class="line">    await asyncio.sleep(1)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;World&quot;</span>)</span><br><span class="line"></span><br><span class="line">async def main():</span><br><span class="line">    await asyncio.gather(say_hello(),say_hello(),say_hello())</span><br><span class="line"></span><br><span class="line">asyncio.run(main())</span><br><span class="line"></span><br><span class="line">:&gt;Hello</span><br><span class="line">:&gt;Hello</span><br><span class="line">:&gt;Hello</span><br><span class="line">//休眠1s</span><br><span class="line">:&gt;World</span><br><span class="line">:&gt;World</span><br><span class="line">:&gt;World</span><br></pre></td></tr></table></figure>
+<p><strong>第三方协程框架gevent</strong><br><code>它封装了libevent事件循环的API，因此能自动切换io操作；但是语法上好像不够清晰，写起来像是同步操作</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import gevent</span><br><span class="line"></span><br><span class="line">def say_hello():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Hello&quot;</span>)</span><br><span class="line">    <span class="comment">#如需阻断，可使用gevent.sleep()</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;World&quot;</span>)</span><br><span class="line"></span><br><span class="line">g1=gevent.spawn(say_hello)</span><br><span class="line">g2=gevent.spawn(say_hello)</span><br><span class="line">g3=gevent.spawn(say_hello)</span><br><span class="line"></span><br><span class="line">g1.join()</span><br><span class="line">g2.join()</span><br><span class="line">g3.join()</span><br><span class="line"></span><br><span class="line">:&gt;Hello</span><br><span class="line">:&gt;World</span><br><span class="line">:&gt;Hello</span><br><span class="line">:&gt;World</span><br><span class="line">:&gt;Hello</span><br><span class="line">:&gt;World</span><br><span class="line"></span><br><span class="line">如需阻断，请查看备注代码</span><br></pre></td></tr></table></figure>
+<p><strong>使用场景：</strong><br><code>协程主要是为了允许在单线程中对 IO 密集的过程进行调度，它允许我们显式指定一个位置，程序可以从此处被挂起，转而执行其他任务，当 IO 结束时被调度，从当前位置返回然后处理结果。</code></p>
+<p><strong>总结：协程相对于多线程有明显的性能优势，因此在处理IO密集型操作时，一般使用协程而非多线程；但由于不能利用cpu多核，因此在处理计算密集型场景时，还是要优先考虑多进程/多进程+协程</strong></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>协程</tag>
       </tags>
   </entry>
   <entry>
@@ -488,28 +510,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python-协程</title>
-    <url>/posts/62a5b225/</url>
-    <content><![CDATA[<p><code>python的协程，是一种协作（异步）工作方式；类似于多线程，但不是多线程，实际是在一个线程中工作；工作过程实际是利用协程模块（标准库asyncio），构建协程对象；当协程对象执行时，其中可以构造专属的等待方法，处于等待时，会调度其他的协程对象执行，当等待时间过后，又会恢复到原来的协程对象上来工作，类似于多线程的上下文切换，可以在使用维度上理解成微线程，特性如下：</code></p>
-<span id="more"></span>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">协程是单线程异步的工作方式；能避免无意义的多线程切换；没有多线程的开销，因此能提升性能；</span><br><span class="line">协程，没有多线程的锁机制，在一个线程中切换，因此效率会更高（性能）；</span><br><span class="line">协程不是多线程，不能利用cpu多核能力，不能实现并行，能实现并发；</span><br><span class="line">必须自己来承担调度的责任（控制调度）；</span><br></pre></td></tr></table></figure>
-<p><strong>例子：</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import asyncio</span><br><span class="line"></span><br><span class="line">async def say_hello():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Hello&quot;</span>)</span><br><span class="line">    await asyncio.sleep(1)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;World&quot;</span>)</span><br><span class="line"></span><br><span class="line">async def main():</span><br><span class="line">    await asyncio.gather(say_hello(),say_hello(),say_hello())</span><br><span class="line"></span><br><span class="line">asyncio.run(main())</span><br><span class="line"></span><br><span class="line">:&gt;Hello</span><br><span class="line">:&gt;Hello</span><br><span class="line">:&gt;Hello</span><br><span class="line">//休眠1s</span><br><span class="line">:&gt;World</span><br><span class="line">:&gt;World</span><br><span class="line">:&gt;World</span><br></pre></td></tr></table></figure>
-<p><strong>第三方协程框架gevent</strong><br><code>它封装了libevent事件循环的API，因此能自动切换io操作；但是语法上好像不够清晰，写起来像是同步操作</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">import gevent</span><br><span class="line"></span><br><span class="line">def say_hello():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Hello&quot;</span>)</span><br><span class="line">    <span class="comment">#如需阻断，可使用gevent.sleep()</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;World&quot;</span>)</span><br><span class="line"></span><br><span class="line">g1=gevent.spawn(say_hello)</span><br><span class="line">g2=gevent.spawn(say_hello)</span><br><span class="line">g3=gevent.spawn(say_hello)</span><br><span class="line"></span><br><span class="line">g1.join()</span><br><span class="line">g2.join()</span><br><span class="line">g3.join()</span><br><span class="line"></span><br><span class="line">:&gt;Hello</span><br><span class="line">:&gt;World</span><br><span class="line">:&gt;Hello</span><br><span class="line">:&gt;World</span><br><span class="line">:&gt;Hello</span><br><span class="line">:&gt;World</span><br><span class="line"></span><br><span class="line">如需阻断，请查看备注代码</span><br></pre></td></tr></table></figure>
-<p><strong>使用场景：</strong><br><code>协程主要是为了允许在单线程中对 IO 密集的过程进行调度，它允许我们显式指定一个位置，程序可以从此处被挂起，转而执行其他任务，当 IO 结束时被调度，从当前位置返回然后处理结果。</code></p>
-<p><strong>总结：协程相对于多线程有明显的性能优势，因此在处理IO密集型操作时，一般使用协程而非多线程；但由于不能利用cpu多核，因此在处理计算密集型场景时，还是要优先考虑多进程/多进程+协程</strong></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>协程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>python文档管理</title>
     <url>/posts/2020cd00/</url>
     <content><![CDATA[<h1 id="python文档说明"><a href="#python文档说明" class="headerlink" title="python文档说明"></a>python文档说明</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">文档管理的作用</span><br><span class="line">文档管理模块pydoc介绍</span><br><span class="line">怎么使用文档管理</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -566,18 +566,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>python语法特性</title>
-    <url>/posts/d641bafc/</url>
-    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
-<span id="more"></span>]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ui自动化分布式并行运算</title>
     <url>/posts/2be91958/</url>
     <content><![CDATA[<p><a href="https://cloud.tencent.com/developer/article/1974105">Gird</a></p>
@@ -588,6 +576,18 @@
       <tags>
         <tag>UI</tag>
         <tag>gird</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python语法特性</title>
+    <url>/posts/d641bafc/</url>
+    <content><![CDATA[<h1 id="python语法特性"><a href="#python语法特性" class="headerlink" title="python语法特性"></a>python语法特性</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> a or b:遇到为<span class="literal">true</span>的值即返回该值，如果均为<span class="literal">false</span>,即返回最后一个</span><br><span class="line"><span class="built_in">return</span> a and b:遇到为<span class="literal">false</span>的值，即返回该值，如果均为<span class="literal">true</span>就返回最后一个</span><br><span class="line">如果函数无<span class="built_in">return</span>,则该函数返回None对象</span><br><span class="line">生成器比用迭代器实现块的多，因为生成器底层是通过c编写的</span><br><span class="line">[line.upper() <span class="keyword">for</span> line <span class="keyword">in</span> open(text.txt) <span class="keyword">if</span> line[0]==1]</span><br><span class="line">[filter(f(i),list)]	<span class="comment">#生成器，返回由list中元素在f(i)中执行满足条件的元素构成的list</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -729,98 +729,6 @@
       </tags>
   </entry>
   <entry>
-    <title>职业--传易工作总结</title>
-    <url>/posts/c184c696/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><code>2020/9月入职传易，2023/6月离职，近三年的工作回顾；含工作内容，职场</code></p>
-<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">工作</span><br><span class="line">职场</span><br><span class="line">总结&#x2F;反思</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<h2 id="工作"><a href="#工作" class="headerlink" title="工作"></a>工作</h2><p><strong>前后工作内容经历了，音乐服务端测试/大数据侧功能测试/广告业务测试/自动化体系建设</strong></p>
-<h3 id="测试能力建设"><a href="#测试能力建设" class="headerlink" title="测试能力建设"></a>测试能力建设</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">测试自动化</span><br><span class="line">服务性能测试</span><br><span class="line">客户端性能测试</span><br><span class="line">客户端稳定性</span><br><span class="line">CD能力建设</span><br></pre></td></tr></table></figure>
-<h4 id="测试自动化"><a href="#测试自动化" class="headerlink" title="测试自动化"></a>测试自动化</h4><p><code>自动化能力，按我的理解应该属于研发CD体系中的重要一环，核心是提效/保障质量；但实现目标不仅仅需要自动化能力，云，研发体系，产品交互体系，线上质量保障体系，都是为了最终目标服务的</code></p>
-<h5 id="单元自动化–代码审查"><a href="#单元自动化–代码审查" class="headerlink" title="单元自动化–代码审查"></a>单元自动化–代码审查</h5><p><code>代码质量保障，主要由开发负责，主要是引入代码检查框架，在编码/合并时暴露问题，以及在代码进行部署时，通过Jenkins调度审查策略实现代码覆盖</code><br><strong>实现</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">开发团队通过Junit各自负责单测代码</span><br><span class="line">开发团队，针对新/大模块，核心代码，邀请运维，技术负责人，相关测试进行代码审查</span><br><span class="line">针对，代码合并，发布有严格的审核机制，和自审查机制</span><br></pre></td></tr></table></figure>
-<h5 id="集成自动化–接口测试"><a href="#集成自动化–接口测试" class="headerlink" title="集成自动化–接口测试"></a>集成自动化–接口测试</h5><p><img src="/text_image/%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96.png" alt="alt text"><br><strong>优缺点</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">实现/维护成本低</span><br><span class="line">定制化程度低</span><br><span class="line">无法对问题溯源，无法定位问题</span><br><span class="line">总结：在运维有使用普罗米修斯对接口做监控的情况下，仅对回归测试有效果，意义不大</span><br></pre></td></tr></table></figure>
-<h5 id="系统自动化–UI自动化"><a href="#系统自动化–UI自动化" class="headerlink" title="系统自动化–UI自动化"></a>系统自动化–UI自动化</h5><p><code>UI层级的自动化，是典型的功能自动化；核心点在于页面操作，页面元素的检查；难点在于稳定性和灵活性；常见的应用场景有功能回归，ui遍历，暴力操作</code></p>
-<h6 id="ui自动化"><a href="#ui自动化" class="headerlink" title="ui自动化"></a>ui自动化</h6><p><img src="/text_image/ui%E6%9E%B6%E6%9E%84.png" alt="alt text"><br><img src="/text_image/UI%E8%87%AA%E5%8A%A8%E5%8C%96.png" alt="alt text"></p>
-<h6 id="ui录制回放"><a href="#ui录制回放" class="headerlink" title="ui录制回放"></a>ui录制回放</h6><p><code>录制回放的核心点，在于怎么将录制信息转换成用例，已及回放时的用例反序列化操作</code><br><strong>优缺点</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">优点是，可维护，可定制化</span><br><span class="line">现行脚本缺点是，稳定性较差；维护成本高，实用性差，代码耦合度高，可扩展性差</span><br></pre></td></tr></table></figure>
-
-<h4 id="服务性能测试"><a href="#服务性能测试" class="headerlink" title="服务性能测试"></a>服务性能测试</h4><p><code>压测的依据是模拟线上的（极端）环境施压，以求将问题暴露出来；操作上基于对业务和架构的了解，试探性加压，到达瓶颈点之后，结合资源消耗，压力变化，处理能力等分析瓶颈点，并针对瓶颈进行验证，对优化后结果进行校验</code><br><strong><a href="https://docs.qq.com/s/EV0o-FmljRU-VIBxtTWYCW">压测报告合集</a></strong><br><strong>优缺点</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">通过Jenkins调度jmeter加压，可对每次的结果进行维护/推送，灵活方便，也可以进行持续集成</span><br><span class="line">缺点也很多，首先需要结合其他的监控，比如skywalking/普罗米修斯，查看结果及维护不方便</span><br><span class="line">其次需要专门的性能环境，成本极高</span><br><span class="line">由于事先不清楚瓶颈点，需要一点点加压，试探性的去找瓶颈，效率较低</span><br></pre></td></tr></table></figure>
-<h4 id="客户端性能测试"><a href="#客户端性能测试" class="headerlink" title="客户端性能测试"></a>客户端性能测试</h4><p><code>客户端性能测试，和服务端理念上是相同的，都是模拟线上操作来进行施压，以求问题前置暴露；区别在，施压方式，监控指标上</code><br><strong>难点</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">模拟线上操作较难，我前期是通过性能狗实现的，性能狗收费后，通过solopi来操作</span><br><span class="line">监控数据采集难度不小，由于客户端不像服务端，存在skywalking，这类注入式全生命周期的监控工具，在监控数据采集上，仅能基于adb命令或者开源工具提供的能力，采集的成本较高，尤其是像耗时</span><br><span class="line">分析/定位问题的成本较高，内存、cpu问题，需要查看堆栈，且都需要dump数据，dump数据分析的难度也较大，尤其是在无应用错误抛出时，分析定位问题，极其的依赖经验，成本很高</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong><a href="https://www.bujiaban.xyz/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/">客户端性能合集</a></strong></li>
-</ul>
-<h4 id="客户端稳定性"><a href="#客户端稳定性" class="headerlink" title="客户端稳定性"></a>客户端稳定性</h4><p><code>稳定性，是性能的子类；因为一般在极端场景下，稳定性问题才能暴露，稳定性问题常见的有crash/anr/内存泄露/oom等</code><br><strong>核心</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">异常场景的挖掘是核心，这块需要在整个产品的生命周期入手；我现在的思路，主要是依赖传音的成熟能力（标准）设计覆盖场景，同时基于功能体验，项目组同事反馈，线上反馈，分析可能存在问题的点，来设计覆盖场景</span><br><span class="line">操作上，主要通过定制monkey,ui遍历，暴力回放等实现覆盖</span><br><span class="line">实施工具，主要是monkey,solopi,字节的fastbot,各有利弊，总的来说，monkey是最灵活，且成本最低</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong><a href="https://www.bujiaban.xyz/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/">客户端性能合集</a></strong></li>
-</ul>
-<h4 id="CI-CD能力建设"><a href="#CI-CD能力建设" class="headerlink" title="CI/CD能力建设"></a>CI/CD能力建设</h4><p><code>持续集成/持续交互/持续部署；一体化的研发体系需要依赖众多的外部能力，这快主要由研发和运维实现；核心组件有，Jenkins，服务中间件，云原生及K8S，gitlab，监控能力（skywalking/普罗米修斯/zabbix）</code></p>
-<h4 id="质量体系建设"><a href="#质量体系建设" class="headerlink" title="质量体系建设"></a>质量体系建设</h4><p><code>高效的质量体系，必然是高产出，能全面覆盖产品生命周期的，且有效率的；这不是一个平台或者一个脚本就能实现的；需要深入研发体系中，结合公司情况，输出符合实际的测试能力</code><br><strong>核心</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">需要有话语权，有能力推动体系前进；能获取资源，能取得其他部门的信任和合作</span><br><span class="line">自动化能力是有效的，有产出，有回报的，这要求这块的建设是要符合项目需求，可持续迭代的</span><br><span class="line">针对核心问题需要有回溯机制，针对问题或者能力需要能深化总结成组内标准，如果不能形成标准，就不可复用和推广，则意义不大</span><br><span class="line">测试能力需要能集成进研发体系中，因为测试本质还是为研发体系服务的，如果不能集成，则产出有限</span><br></pre></td></tr></table></figure>
-
-<h3 id="广告业务测试"><a href="#广告业务测试" class="headerlink" title="广告业务测试"></a>广告业务测试</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">boomplay客户端广告</span><br><span class="line">boomplay web广告</span><br><span class="line">sdk广告</span><br><span class="line">web js广告</span><br><span class="line">自营广告</span><br><span class="line">聚合广告</span><br><span class="line">谷歌定制广告</span><br><span class="line">程序化广告</span><br><span class="line">广告归因</span><br></pre></td></tr></table></figure>
-<p><strong><a href="https://www.processon.com/view/link/645a0dddfb0ea17d3a90b724">广告业务架构</a></strong><br><strong>广告推荐架构</strong><br><img src="/text_image/ad%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F.png" alt="alt text"></p>
-<h3 id="音乐大数据能力测试"><a href="#音乐大数据能力测试" class="headerlink" title="音乐大数据能力测试"></a>音乐大数据能力测试</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">版权音乐资源同步</span><br><span class="line">埋点数据ETL（kafka/flink）</span><br><span class="line">数据报表</span><br><span class="line">音乐推荐</span><br><span class="line">广告推荐</span><br><span class="line">标签系统</span><br></pre></td></tr></table></figure>
-<h4 id="音乐资源同步"><a href="#音乐资源同步" class="headerlink" title="音乐资源同步"></a>音乐资源同步</h4><h4 id="埋点数据ETL"><a href="#埋点数据ETL" class="headerlink" title="埋点数据ETL"></a>埋点数据ETL</h4><h4 id="数据报表"><a href="#数据报表" class="headerlink" title="数据报表"></a>数据报表</h4><h4 id="音乐推荐"><a href="#音乐推荐" class="headerlink" title="音乐推荐"></a>音乐推荐</h4><h4 id="广告推荐"><a href="#广告推荐" class="headerlink" title="广告推荐"></a>广告推荐</h4><h4 id="标签系统"><a href="#标签系统" class="headerlink" title="标签系统"></a>标签系统</h4><p><strong>大数据架构</strong><br><img src="/text_image/biddate.png" alt="alt text"><br><strong>数仓架构</strong><br><img src="/text_image/bigdate_%E6%95%B0%E4%BB%93%E6%9E%B6%E6%9E%84.png" alt="alt text"><br><strong>数据架构</strong><br><img src="/text_image/bigdata_%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84.png" alt="alt text"></p>
-<ul>
-<li><strong>横向数据分层</strong><br><img src="/text_image/%E6%A8%AA%E5%90%91%E6%95%B0%E6%8D%AE%E5%88%86%E5%B1%82.png" alt="alt text"></li>
-<li><strong>纵向数据分层</strong><br><img src="/text_image/%E7%BA%B5%E5%90%91%E6%95%B0%E6%8D%AE%E5%88%86%E5%B1%82.png" alt="alt text"><br><strong>推荐系统</strong><br><img src="/text_image/boomplay_biddate%E6%8E%A8%E8%8D%90.png" alt="alt text"></li>
-</ul>
-<h3 id="音乐服务端功能测试"><a href="#音乐服务端功能测试" class="headerlink" title="音乐服务端功能测试"></a>音乐服务端功能测试</h3><p><strong>C端服务</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1️⃣网关服务</span><br><span class="line">2️⃣首页内容服务</span><br><span class="line">3️⃣推荐服务</span><br><span class="line">4️⃣内容基础服务</span><br><span class="line">5️⃣计数服务</span><br><span class="line">6️⃣埋点服务（通用异步）</span><br><span class="line">⑦播客服务</span><br><span class="line">8️⃣账户服务</span><br><span class="line">9️⃣订阅服务</span><br><span class="line">1️⃣0️⃣分布式ID获取服务（资源）</span><br><span class="line">1️⃣1️⃣FCM消息推送服务</span><br><span class="line">1️⃣2️⃣BUZZ服务</span><br><span class="line">1️⃣3️⃣活动服务</span><br><span class="line">1️⃣4️⃣内部消息服务</span><br><span class="line">1️⃣5️⃣电商服务</span><br><span class="line">1️⃣6️⃣游戏服务</span><br><span class="line">1️⃣⑦广告服务</span><br></pre></td></tr></table></figure>
-<p><strong>服务架构</strong><br><img src="/text_image/boomplay_server.png" alt="alt text"><br><img src="/text_image/boomplay_server2.png" alt="alt text"><br><strong>服务db模型</strong><br><img src="/text_image/boomplay_server_db.png" alt="alt text"><br><strong>B端服务</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">oms</span><br><span class="line">cms</span><br><span class="line">ams</span><br><span class="line">ads</span><br><span class="line">ssp</span><br><span class="line">adx</span><br></pre></td></tr></table></figure>
-
-<h2 id="职场"><a href="#职场" class="headerlink" title="职场"></a>职场</h2><h3 id="魅族"><a href="#魅族" class="headerlink" title="魅族"></a>魅族</h3><p><code>在魅族工作一年左右离职，离职的原因是疫情期间，魅族现金流出现了严重问题，周围同事纷纷离职，于是离职，另某出路；</code><br><code>在期间遇到过一些问题：领导批判，主动性不够，不能及时的暴露问题；实际情况是，项目线上遇到的问题，如产品需求设计有误，项目上线代码合并有误，或者带bug上线（bug已暴露），等会归咎于测试；</code><br><code>结合其他同事的工作情况反思，主要是由于；自己本身有一些瑕疵（如自己偶尔会迟到，且有一些摸鱼行为），同时本身和小组长关系不太好，由于这些瑕疵，导致领导不太信任自己；同时自己在项目中存在感太低，没有话语权，导致一些本身和测试无关的问题，也会压在测试身上，从而将问题带给组长，形成了负面循环；</code></p>
-<h3 id="传易"><a href="#传易" class="headerlink" title="传易"></a>传易</h3><p><code>传易工作三年左右，职场也不太顺利；研发部老大对我意见很大，期间直属上级提了两次升职，都被他给打回去了；</code><br><code>导致上述状况的原因有几点，我工作状态比较懒散（说是我因为经常躺在椅子上工作），经常迟到，经常到花园摸鱼，工作产出不够，出了一些事；</code><br><code>总的来说，还是因为我个人的风格，陆总不太喜欢，然后把压力传导给了我的直属上级，然后工作中得不到支持，处处碰壁，且自己产出也不够；</code></p>
-<h2 id="总结-反思"><a href="#总结-反思" class="headerlink" title="总结/反思"></a>总结/反思</h2><h3 id="专业"><a href="#专业" class="headerlink" title="专业"></a>专业</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">职业规划，未来还是要走专业路线，期望的发展方向还是devops和性能岗；但这类岗位较少，因此我在求职时，在核心突出的前提下，测开的各细分方向，我都需要有了解；</span><br><span class="line">职业技能方面，尤其是编码能力，算法能力，大数据架构能力，是我后续前进的方向；</span><br><span class="line">基础是基石，基础不牢固；很多想法就无法落地；</span><br></pre></td></tr></table></figure>
-
-<h3 id="职场-1"><a href="#职场-1" class="headerlink" title="职场"></a>职场</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">过去两份工作，由于自己在工作中有明显的瑕疵，导致容易授人以柄，因此对于后续的工作，一定要严抓职场纪律，不能迟到，最好在领导到之前到达公司，且不能有明显的问题被人拿捏；</span><br><span class="line">工作中，不受领导青睐，对于测开/架构类工作，工作是无法开展的；因此后续工作还是要和领导走近一点，要会来事，捧人，同时入职时，也要考虑下上级的为人，有些领导我是注定无法在他们手底下工作的；</span><br><span class="line">工作中，产出是核心，如果没有产出，专业素养不过关，注定得不到重视，获取不到话语权和资源；</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>工作</category>
-      </categories>
-      <tags>
-        <tag>传易</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>传音刷机</title>
-    <url>/posts/a1b2e86a/</url>
-    <content><![CDATA[<ol>
-<li>设置 -&gt; 开发者模式打开 oem unlock<br>输入 adb reboot bootloader</li>
-<li>进入fastboot模式输入 fastboot flashing unlock。按住音量上键确认unlock</li>
-<li>fastboot reboot 重启</li>
-<li>开机后,输入 adb root</li>
-<li>执行 adb disable-verity</li>
-<li>执行 adb reboot</li>
-<li>重启后 执行 adb root</li>
-<li>执行 adb remount</li>
-</ol>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>刷机</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>估值体系</title>
-    <url>/posts/daef770e/</url>
-    <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的扣非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
-<span id="more"></span>
-
-<h2 id="理念"><a href="#理念" class="headerlink" title="理念"></a>理念</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">高收益的前提是持续稳定的复利，即好企业是时间的朋友，坏企业是时间的敌人；</span><br><span class="line">30pe是合理估值的上限，这是由无风险收益率决定的，如果在高，买入收益就低于无风险收益率了；同理合理估值一般给到20-25，而我不买25倍以上的企业(这想法绝对是错的。只关乎个人的安全边际)；</span><br><span class="line">股权和债券的差异，主要体现在确定性和成长里；股市需要利用成长优势抵消不确定性；</span><br><span class="line">收益率=利润/本金（股价）=1/pe；合理估值的锚其实就是无风险收益率（1/无风险收益率）；</span><br><span class="line">无分红公司的净资产收益率=净利润增速（可能净利润要打折）；</span><br><span class="line">分红在投入公司的净资产真实收益率=roe(1/pb*分红金额比例+留存金额比例)；</span><br><span class="line">年化收益率=年份√总收益率；</span><br><span class="line">由收益率公式可知；收益率一般不会超过净利润增速（仅当市净率低于1时超过，但这种现金流会受负债等因素损耗）；且要提高投资收益率，只有提高净利润的增速、降低分红比例、在分红比例固定时则只有降低pb也就是估值才能有效提高收益率；</span><br></pre></td></tr></table></figure>
-
-<h2 id="买卖"><a href="#买卖" class="headerlink" title="买卖"></a>买卖</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">理想买点：三年后合理估值*0.5</span><br><span class="line">理想卖点：min(动态市盈率50,三年后合理估值150%)</span><br><span class="line"></span><br><span class="line">买操作：20-25倍区间都能买，仅茅台在25倍pe以上买入;到达理想买点时，分三批买完剩余资金（理想买点/理想买点-5%/理想买点-10%）</span><br><span class="line">卖操作：当年预计净利润的50/55/60三次清空；（买卖点是唐朝基于无风险收益率计算，正常超出合理估值都能卖，50%其实是预留的安全边际）</span><br><span class="line">三年后合理估值=三年后预估净利率*25（具体企业具体分析，也就是pe的中分位）</span><br><span class="line"></span><br><span class="line">全指数基金买/卖点：基于无风险收益率来，但是由于不确定性，要做净利润折算，需要进行等比例折算，折算区间在5-7折</span><br><span class="line">买点：12-15pe</span><br><span class="line">卖点：25-35pe</span><br><span class="line"></span><br><span class="line">♥卖出后买全指还是留现金取决于无风险收益率（一般2倍无风险收益率即可买pe=1/无风险收益率*2，全指唐朝仅关注沪深300/恒生指数/标普500/纳斯达克100）</span><br><span class="line">♥其他时间：企业逻辑未变时，低于买点买，高于卖点卖，其他时间坐等；但需要遵循单股不超40%原则，即三五个行业，七八家公司；</span><br><span class="line">♥不要严格按买卖价来，要接受错误和风险；确定性高的企业，越偏向合理估值之下就买，确定性低的企业越偏向理想买点才买，唐朝的理念是理想买点位置一定要买完资金；</span><br></pre></td></tr></table></figure>
-
-<h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">♥腾讯+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以300均价，买入6手；高溢价时，优先使用中概换腾讯（中概大部分公司不盈利）</span><br><span class="line">1️⃣理想买点：328</span><br><span class="line">2️⃣理想卖点：1年内720</span><br><span class="line">3️⃣纳指买点：21pe</span><br><span class="line">4️⃣纳指卖点：35pe</span><br><span class="line"></span><br><span class="line">♥银行+家电25%：计划100k,余量16k</span><br><span class="line">已持仓84k,其中家电50k&#x2F;银行34k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右，招商计划以28均价，买入5手</span><br><span class="line">2️⃣美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">3️⃣格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34</span><br><span class="line"></span><br><span class="line">♥消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利20k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣五粮液150快,理想买点150&#x2F;143&#x2F;135</span><br><span class="line">2️⃣伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下；此刻的分红在投资收益率为9.56%；</span><br><span class="line"></span><br><span class="line">♥医药10%：计划40k,余量3k</span><br><span class="line">已持仓37k,其中恒瑞20k&#x2F;ETF17K</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣恒瑞按50倍市盈率20.07%净利润增长，卖点60（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">2️⃣300医药ETF计划0.42，买入7000个，卖点为0.7以上，对应300医药指数50倍以上的估值</span><br><span class="line">医药需要恒瑞和etf实现高低互换，高换低；</span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
     <title>做点事</title>
     <url>/posts/2837d102/</url>
     <content><![CDATA[<h1 id="广告也是内容"><a href="#广告也是内容" class="headerlink" title="广告也是内容"></a>广告也是内容</h1><p><em><strong>广告内容加工</strong></em></p>
@@ -861,22 +769,36 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、政策/法律风险</span><br><span class="line">2、国外投放，由于文化差异，内容偏好不同</span><br><span class="line">3、国外封网站较严重，如果规避被封</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
-    <title>全局函数局部函数</title>
-    <url>/posts/ae3a85c8/</url>
-    <content><![CDATA[<h1 id="全局局部函数"><a href="#全局局部函数" class="headerlink" title="全局局部函数"></a>全局局部函数</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">全局函数：global</span><br><span class="line">局部函数：nonlocal</span><br></pre></td></tr></table></figure>
+    <title>估值体系</title>
+    <url>/posts/daef770e/</url>
+    <content><![CDATA[<h1 id="估值体系"><a href="#估值体系" class="headerlink" title="估值体系"></a>估值体系</h1><p><code>基于唐朝的估值体系，以无风险收益率为锚，取企业近五年的扣非净利润的均值（删除最大最小值）；估算三年后的合理估值，作为买卖点的依据； </code></p>
 <span id="more"></span>
-<p><strong>global</strong></p>
-<p><code>全局函数在模块py中生效；使用时需要先定义，在声明；一次声明，模块中全局使用，全局和局部不能是同一个变量； global a a=s</code></p>
-<p><strong>nonlocal</strong></p>
-<p><code>局部变量函数在模块中局部函数中生效；需要先声明，后定义成局部变量，一旦定义成局部变量就仅在该函数中生效，离开该函数就不生效，不能和全局变量为同一个变量 a=s nonlocal a</code></p>
-<p><a href="https://www.cnblogs.com/liyang93/p/6669874.html">参考</a></p>
+
+<h2 id="理念"><a href="#理念" class="headerlink" title="理念"></a>理念</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">高收益的前提是持续稳定的复利，即好企业是时间的朋友，坏企业是时间的敌人；</span><br><span class="line">30pe是合理估值的上限，这是由无风险收益率决定的，如果在高，买入收益就低于无风险收益率了；同理合理估值一般给到20-25，而我不买25倍以上的企业(这想法绝对是错的。只关乎个人的安全边际)；</span><br><span class="line">股权和债券的差异，主要体现在确定性和成长里；股市需要利用成长优势抵消不确定性；</span><br><span class="line">收益率=利润/本金（股价）=1/pe；合理估值的锚其实就是无风险收益率（1/无风险收益率）；</span><br><span class="line">无分红公司的净资产收益率=净利润增速（可能净利润要打折）；</span><br><span class="line">分红在投入公司的净资产真实收益率=roe(1/pb*分红金额比例+留存金额比例)；</span><br><span class="line">年化收益率=年份√总收益率；</span><br><span class="line">由收益率公式可知；收益率一般不会超过净利润增速（仅当市净率低于1时超过，但这种现金流会受负债等因素损耗）；且要提高投资收益率，只有提高净利润的增速、降低分红比例、在分红比例固定时则只有降低pb也就是估值才能有效提高收益率；</span><br></pre></td></tr></table></figure>
+
+<h2 id="买卖"><a href="#买卖" class="headerlink" title="买卖"></a>买卖</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">理想买点：三年后合理估值*0.5</span><br><span class="line">理想卖点：min(动态市盈率50,三年后合理估值150%)</span><br><span class="line"></span><br><span class="line">买操作：20-25倍区间都能买，仅茅台在25倍pe以上买入;到达理想买点时，分三批买完剩余资金（理想买点/理想买点-5%/理想买点-10%）</span><br><span class="line">卖操作：当年预计净利润的50/55/60三次清空；（买卖点是唐朝基于无风险收益率计算，正常超出合理估值都能卖，50%其实是预留的安全边际）</span><br><span class="line">三年后合理估值=三年后预估净利率*25（具体企业具体分析，也就是pe的中分位）</span><br><span class="line"></span><br><span class="line">全指数基金买/卖点：基于无风险收益率来，但是由于不确定性，要做净利润折算，需要进行等比例折算，折算区间在5-7折</span><br><span class="line">买点：12-15pe</span><br><span class="line">卖点：25-35pe</span><br><span class="line"></span><br><span class="line">♥卖出后买全指还是留现金取决于无风险收益率（一般2倍无风险收益率即可买pe=1/无风险收益率*2，全指唐朝仅关注沪深300/恒生指数/标普500/纳斯达克100）</span><br><span class="line">♥其他时间：企业逻辑未变时，低于买点买，高于卖点卖，其他时间坐等；但需要遵循单股不超40%原则，即三五个行业，七八家公司；</span><br><span class="line">♥不要严格按买卖价来，要接受错误和风险；确定性高的企业，越偏向合理估值之下就买，确定性低的企业越偏向理想买点才买，唐朝的理念是理想买点位置一定要买完资金；</span><br></pre></td></tr></table></figure>
+
+<h2 id="持仓组合"><a href="#持仓组合" class="headerlink" title="持仓组合"></a>持仓组合</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">♥腾讯+纳指50%：计划200k,余量133K</span><br><span class="line">已持仓67k,其中中概58k&#x2F;纳指9k</span><br><span class="line">腾讯计划以300均价，买入6手；高溢价时，优先使用中概换腾讯（中概大部分公司不盈利）</span><br><span class="line">1️⃣理想买点：328</span><br><span class="line">2️⃣理想卖点：1年内720</span><br><span class="line">3️⃣纳指买点：21pe</span><br><span class="line">4️⃣纳指卖点：35pe</span><br><span class="line"></span><br><span class="line">♥银行+家电25%：计划100k,余量16k</span><br><span class="line">已持仓84k,其中家电50k&#x2F;银行34k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣招行卖点1.4-1.7pb即45.8-55.6，买点低于1.13即37左右，招商计划以28均价，买入5手</span><br><span class="line">2️⃣美的按15倍市盈率12%净利润增长，合理卖点是78(合理估值)-81.9，买点是40</span><br><span class="line">3️⃣格力按14倍市盈率7.7%净利润增长，合理卖点是58（合理估值）-71.81，买点是34</span><br><span class="line"></span><br><span class="line">♥消费15%：计划60k,余量40k</span><br><span class="line">已持仓20k,伊利20k</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣五粮液150快,理想买点150&#x2F;143&#x2F;135</span><br><span class="line">2️⃣伊利按25倍市盈率11.42%净利润增长，理想卖点60-68，理想买点21，可买点34以下；此刻的分红在投资收益率为9.56%；</span><br><span class="line"></span><br><span class="line">♥医药10%：计划40k,余量3k</span><br><span class="line">已持仓37k,其中恒瑞20k&#x2F;ETF17K</span><br><span class="line">理想卖点&#x2F;买点：</span><br><span class="line">1️⃣恒瑞按50倍市盈率20.07%净利润增长，卖点60（合理估值）-86.85（理想卖点），买点34.7,理想买点29</span><br><span class="line">2️⃣300医药ETF计划0.42，买入7000个，卖点为0.7以上，对应300医药指数50倍以上的估值</span><br><span class="line">医药需要恒瑞和etf实现高低互换，高换低；</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>传音刷机</title>
+    <url>/posts/a1b2e86a/</url>
+    <content><![CDATA[<ol>
+<li>设置 -&gt; 开发者模式打开 oem unlock<br>输入 adb reboot bootloader</li>
+<li>进入fastboot模式输入 fastboot flashing unlock。按住音量上键确认unlock</li>
+<li>fastboot reboot 重启</li>
+<li>开机后,输入 adb root</li>
+<li>执行 adb disable-verity</li>
+<li>执行 adb reboot</li>
+<li>重启后 执行 adb root</li>
+<li>执行 adb remount</li>
+</ol>
 ]]></content>
       <categories>
-        <category>技术</category>
+        <category>工具</category>
       </categories>
       <tags>
-        <tag>python</tag>
-        <tag>变量</tag>
+        <tag>刷机</tag>
       </tags>
   </entry>
   <entry>
@@ -897,6 +819,25 @@
       <tags>
         <tag>python</tag>
         <tag>序列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>全局函数局部函数</title>
+    <url>/posts/ae3a85c8/</url>
+    <content><![CDATA[<h1 id="全局局部函数"><a href="#全局局部函数" class="headerlink" title="全局局部函数"></a>全局局部函数</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">全局函数：global</span><br><span class="line">局部函数：nonlocal</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><strong>global</strong></p>
+<p><code>全局函数在模块py中生效；使用时需要先定义，在声明；一次声明，模块中全局使用，全局和局部不能是同一个变量； global a a=s</code></p>
+<p><strong>nonlocal</strong></p>
+<p><code>局部变量函数在模块中局部函数中生效；需要先声明，后定义成局部变量，一旦定义成局部变量就仅在该函数中生效，离开该函数就不生效，不能和全局变量为同一个变量 a=s nonlocal a</code></p>
+<p><a href="https://www.cnblogs.com/liyang93/p/6669874.html">参考</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>变量</tag>
       </tags>
   </entry>
   <entry>
@@ -1045,62 +986,6 @@
       </tags>
   </entry>
   <entry>
-    <title>大数据--测试</title>
-    <url>/posts/ac354d65/</url>
-    <content><![CDATA[<p><code>大数据测试，工作内容主要有：数据测试、模型测试；同时在不同的业务阶段，工作的重心不同，数据质量体系也会有不同的倾向，要全局的了解大数据测试，必须先明白大数据的架构，工作过程</code></p>
-<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">大数据架构</span><br><span class="line">数据测试</span><br><span class="line">模型测试</span><br><span class="line">数据质量体系</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<h2 id="大数据架构"><a href="#大数据架构" class="headerlink" title="大数据架构"></a>大数据架构</h2><p><code>常见的大数据架构主要有Hadoop（分布式文件存储、计算系统）；由分布式文件系统（HDFS）/集群资源管理器（YARN）分布式计算框架（MR/mapreduce）构成；其中HDFS负责管理存储数据，YARN负责管理集群中的计算资源，调度和执行工作任务；</code></p>
-<p><strong>组件：</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">核心组件：</span><br><span class="line">HDFS:分布式文件系统，存储数据；</span><br><span class="line">YARN：集群资源管理器，管理计算资源，进行调度；</span><br><span class="line">MR：计算框架，一般负责离线计算；</span><br><span class="line"></span><br><span class="line">生态组件：</span><br><span class="line">PIG：数据流处理（用于并行计算的高级数据流语言和执行框架）；</span><br><span class="line">HBASE：NSQL型的分布式数据库，本质是一个键值系统,底层数据存储在文件系统HDFS上；</span><br><span class="line">SPARK：分布式计算引擎，类似MR,但在内存中计算，提供各种库，可以使开发者用来实现ETL、机器学习、数据流处理、图像计算等场景；</span><br><span class="line">FLUME：数据采集</span><br><span class="line">FLINK：针对流数据（实时数据）和批数据（离线数据）的实时处理引擎，有着高吞吐、低延迟的特点；</span><br><span class="line">SQOOP：数据导入导出</span><br><span class="line">KAFKA：分布式消息引擎及流处理平台，用来存储/传递消息（如日志或埋点）；</span><br><span class="line">AWS S3 ：静态资源存储，可能是大型的日志文件吧；</span><br><span class="line">SOLR：用于搜索索引的全文检索服务器；</span><br><span class="line"></span><br><span class="line">数据查询引擎:</span><br><span class="line">HIVE S3：数据仓库基础架构，提供数据汇总和命令行即席查询功能；</span><br><span class="line">IMPALA：高效的基于MPP架构的快速查询引擎，基于Hive并使用内存进行计算，兼顾ETL功能，具有实时、批处理、多并发等优点；</span><br><span class="line">KYLIN：开源分布式分析型数据仓库，提供Hadoop/Spark之上的SQL查询接口及多维分析（OLAP）能力，支持超大规模数据的压秒级查询（和视图有点点类似）；</span><br><span class="line">PRESTO：开源的分布式查询引擎，支持多数据源，大量级数据的场景；</span><br><span class="line"></span><br><span class="line">ETL：数据处理的过程，指数据提取（extract）、转换（transform）、加载（load）的过程；</span><br><span class="line">组件众多。不同组件提供不同能力，Hadoop框架，很像Android系统，是一个底层的数据框架。</span><br></pre></td></tr></table></figure>
-<p>参考架构：<br><img src="/text_image/Hadoop.png" alt="alt text"><br><img src="/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6.png" alt="alt text"></p>
-<h3 id="传易音乐大数据架构"><a href="#传易音乐大数据架构" class="headerlink" title="传易音乐大数据架构"></a>传易音乐大数据架构</h3><p><strong>传易hadoop</strong><br><img src="/text_image/biddate.png" alt="alt text"></p>
-<p><strong>传易数仓架构</strong><br><img src="/text_image/bigdate_%E6%95%B0%E4%BB%93%E6%9E%B6%E6%9E%84.png" alt="alt text"></p>
-<p><strong>数据架构（数仓）</strong><br><img src="/text_image/bigdata_%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84.png" alt="alt text"></p>
-<p><strong>数据架构–横向数据分层</strong><br><img src="/text_image/%E6%A8%AA%E5%90%91%E6%95%B0%E6%8D%AE%E5%88%86%E5%B1%82.png" alt="alt text"></p>
-<p><strong>数据架构–纵向数据分层</strong><br><img src="/text_image/%E7%BA%B5%E5%90%91%E6%95%B0%E6%8D%AE%E5%88%86%E5%B1%82.png" alt="alt text"></p>
-<p><strong>传易大数据架构总述：</strong></p>
-<p><code>传易架构的特点是处理的数据量大，数据来源复杂，人员多，业务应用广；存在无文档资料维护；测试介入低，质量不可度量；无测试环境，依赖线上数据开发测试，流程不规范，安全性差；缺乏标准和度量体系，投入产出比无法度量等问题；</code></p>
-<h2 id="数据测试"><a href="#数据测试" class="headerlink" title="数据测试"></a>数据测试</h2><p><code>数据测试前，需要对数据质量形成共识；数据的价值是由需求方决定的，能满足需求方/使用方需求的数据才能称得上好数据</code></p>
-<h3 id="标准"><a href="#标准" class="headerlink" title="标准"></a>标准</h3><h4 id="数据质量评测方向"><a href="#数据质量评测方向" class="headerlink" title="数据质量评测方向"></a>数据质量评测方向</h4><p><code>数据质量我们一般从以下六个维度评判，同时我们往往还需求考虑数据的（+安全性），评价这些维度往往需要用到监控数据和历史数据：</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">完整性：数据不多不少。数据条数完整，类型完整，参数完整；不重复，看是否有异常类型或者异常值（枚举外）；</span><br><span class="line">准确性：结果准确，抽样准；表内横向准确，表间/数据链路间的数据准备或一致，参数数据分布准确；</span><br><span class="line">及时性：实时数据性能满足需求，各组件性能满足要求；如用户余额，抽奖次数等，主要受任务调度、优先级、处理耗时影响，一般关注整体和局部的耗时情况；</span><br><span class="line">一致性：前后数据一致，参数和总体满足逻辑一致，如订阅总额=订阅单价*时长</span><br><span class="line">有效性：数据是有效的符合数据规范，如email数据、身份证数据规范</span><br><span class="line">唯一性：数据唯一，如每个用户的boom_id,每个音乐的music_id</span><br></pre></td></tr></table></figure>
-<p><img src="/text_image/%E6%95%B0%E6%8D%AE%E5%8A%9F%E8%83%BD.png" alt="alt text"><br><strong>以上是测试时评判的方向，测试过程也需要有标准来评判有效性,如下：(理论不同对象/不同阶段都应该有标准)</strong></p>
-<h4 id="测试活动度量标准"><a href="#测试活动度量标准" class="headerlink" title="测试活动度量标准"></a>测试活动度量标准</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">覆盖率</span><br><span class="line">测试效果-产出度量</span><br><span class="line">测试件的质量</span><br></pre></td></tr></table></figure>
-
-<h4 id="数据质量度量标准"><a href="#数据质量度量标准" class="headerlink" title="数据质量度量标准"></a>数据质量度量标准</h4><p><code>除了测试时，需要考虑的场景外，还需要对整体的数据质量好坏进行评判，以下为数据质量的优劣评判标准</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">98%：全年可用天数达到98%以上，即服务不达标天数全年不超过7天。</span><br><span class="line">基线时间：核心 SLA 基线产出时间需满足业务要求。</span><br><span class="line">是否易于使用：及其他非质量熟悉标准（见MFQ）</span><br></pre></td></tr></table></figure>
-
-<p><strong>以上指标为传易的定量的标准，以下为美团的定量的标准</strong><br><img src="/text_image/%E7%BE%8E%E5%9B%A2%E9%87%8F%E5%8C%96%E6%8C%87%E6%A0%87.png" alt="alt text"></p>
-<h3 id="数据质量评测流程"><a href="#数据质量评测流程" class="headerlink" title="数据质量评测流程"></a>数据质量评测流程</h3><p><code>要想把控数据质量，往往需要介入数据的全生命周期；需要有标准可依，有规范进行约束，有监控数据可查，有工具可用来进行评测，流程结果可量化，并且可以持续运营迭代体系：</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">业务分析--分析数据流（流程图）、数据特性（计算型/时效型）</span><br><span class="line">设计阶段--数据类型、数据处理逻辑、数据链路、数据服务</span><br><span class="line">数据标准--量化的数据标准，作为内外部的规范和约束</span><br><span class="line">数据监控--数据监控能力，是否有全链路监控能力</span><br><span class="line">数据卡点--针对不同阶段的数据（流程）是否有卡点，能进行评测和定位问题</span><br><span class="line">数据环境--如何低成本，高效的维护数据测试环境</span><br><span class="line">构造数据--如何快速有效的实现可复用数据构造能力</span><br><span class="line">数据评测--如何保障评测的有效性、覆盖率、标准化</span><br><span class="line">数据量化--如何实现数据流程、质量、评测的量化，让过程结果更公开透明</span><br><span class="line">迭代优化--如何管理问题，运营数据，归纳形成标准，持续的优化体系</span><br></pre></td></tr></table></figure>
-<h3 id="测试执行"><a href="#测试执行" class="headerlink" title="测试执行"></a>测试执行</h3><p><strong>数据治理可参考的切入阶段</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E5%8F%AF%E5%88%87%E5%85%A5%E7%9A%84%E9%98%B6%E6%AE%B5.png" alt="alt text"><br><strong>数据质量三板斧</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E4%B8%89%E6%9D%BF%E6%96%A7.png" alt="alt text"></p>
-<h4 id="数据功能测试"><a href="#数据功能测试" class="headerlink" title="数据功能测试"></a><strong>数据功能测试</strong></h4><p><strong>三板斧:数据分析技巧</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90.png" alt="alt text"><br><strong>测试范围</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E5%8A%9F%E8%83%BD.jpg" alt="alt text"><br><strong>功能测试，很重要的一环是ETL:ETL测试维度</strong><br><img src="/text_image/ETL%E6%B5%8B%E8%AF%95.png" alt="alt text"><br><strong>离线ETL测试步骤：核心在数据</strong><br><img src="/text_image/ETL%E6%B5%8B%E8%AF%95_%E6%AD%A5%E9%AA%A4.png" alt="alt text"><br><strong>实时数据ETL：核心除了数据、还有性能</strong><br><img src="/text_image/%E5%AE%9E%E6%97%B6etl.png" alt="alt text"><br><strong>数据仓库分层测试</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%88%86%E5%B1%82%E6%B5%8B%E8%AF%95.png" alt="alt text"><br><strong>项目测试经验</strong><br><img src="/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%E6%B5%8B%E8%AF%95%E7%BB%8F%E9%AA%8C.png" alt="alt text"></p>
-<h4 id="数据性能测试"><a href="#数据性能测试" class="headerlink" title="数据性能测试"></a><strong>数据性能测试</strong></h4><p><img src="/text_image/%E6%95%B0%E6%8D%AE%E6%80%A7%E8%83%BD.png" alt="alt text"><br><strong>大数据性能工具：</strong><br><img src="/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%80%A7%E8%83%BD.png" alt="alt text"></p>
-<h4 id="数据安全测试"><a href="#数据安全测试" class="headerlink" title="数据安全测试"></a><strong>数据安全测试</strong></h4><p><code>以上的数据质量评测标准未说明安全情况，数据安全需要考虑数据本身的安全（隐私脱敏），流程安全，权限管控、安全监控，故在此处说明，安全需要覆盖的场景如下：</code><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8.png" alt="alt text"></p>
-<p><strong>数据安全实施策略</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E5%AE%9E%E6%96%BD.png" alt="alt text"></p>
-<h4 id="数据质量问题处理链路"><a href="#数据质量问题处理链路" class="headerlink" title="数据质量问题处理链路"></a><strong>数据质量问题处理链路</strong></h4><p><img src="/text_image/%E6%95%B0%E6%8D%AE%E9%97%AE%E9%A2%98.png" alt="alt text"></p>
-<h3 id="数据治理工具"><a href="#数据治理工具" class="headerlink" title="数据治理工具"></a><strong>数据治理工具</strong></h3><p><strong>开源框架</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6.png" alt="alt text"><br><strong>大数据测试工具</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7.png" alt="alt text"><br><strong>大数据测试平台架构</strong><br><img src="/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E9%9C%80%E6%B1%82.png" alt="alt text"><br><img src="/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E6%9E%B6%E6%9E%84.png" alt="alt text"><br><img src="/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E7%9A%84%E5%AE%9E%E7%8E%B0.png" alt="alt text"></p>
-<ul>
-<li>大数据测试平台-参考质量报告<br><img src="/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0-%E8%B4%A8%E9%87%8F%E6%8A%A5%E5%91%8A.png" alt="alt text"></li>
-<li>展望：看起来是朝线上监控化的方向走<br><img src="/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E5%B1%95%E6%9C%9B.png" alt="alt text"></li>
-</ul>
-<h2 id="模型测试"><a href="#模型测试" class="headerlink" title="模型测试"></a>模型测试</h2><p><a href="https://www.bujiaban.xyz/posts/d775e226/">广告-模型测试</a></p>
-<h2 id="大数据质量体系"><a href="#大数据质量体系" class="headerlink" title="大数据质量体系"></a>大数据质量体系</h2><p><strong>数据质量活动需要遵循：有标准、有数据（监控）、可量化（度量）、自动化的原则；质量体系总结如下：</strong><br><img src="/text_image/%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93.jpg" alt="alt text"><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E4%BD%93%E7%B3%BB.png" alt="alt text"></p>
-<ul>
-<li><a href="%E7%BA%BF%E4%B8%8B%E6%96%87%E6%A1%A3">大数据治理规划</a></li>
-<li><a href="%E7%BA%BF%E4%B8%8B%E6%96%87%E6%A1%A3">大数据产品质量体系建设</a></li>
-<li><a href="https://mp.weixin.qq.com/s/AlxIMPnKcWSyhOSe8-OfTQ">美团–业务数据治理体系化思考与实践</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>数据测试</tag>
-        <tag>大数据</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>大数据BI报表架构调整</title>
     <url>/posts/10f9513d/</url>
     <content><![CDATA[<h1 id="大数据BI报表架构调整"><a href="#大数据BI报表架构调整" class="headerlink" title="大数据BI报表架构调整"></a>大数据BI报表架构调整</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><span id="more"></span>
@@ -1118,65 +1003,6 @@
 <li>覆盖接口性能</li>
 </ul>
 ]]></content>
-  </entry>
-  <entry>
-    <title>工作梳理</title>
-    <url>/posts/8c69a8ec/</url>
-    <content><![CDATA[<h1 id="工作梳理"><a href="#工作梳理" class="headerlink" title="工作梳理"></a>工作梳理</h1><ul>
-<li><em><strong>大纲</strong></em></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">重点核心</span><br><span class="line">kpi导向</span><br><span class="line">日常工作</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<ul>
-<li><p><em><strong>重点核心</strong></em></p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">外部标准&#x2F;规范（预装&#x2F;上架）：稳定性&#x2F;anr&#x2F;clash&#x2F;内存曲线（P0）</span><br><span class="line">线上监控&#x2F;稳定性：监控体系（P1）</span><br><span class="line">服务性能提升：性能测试(P1)</span><br><span class="line">增效：环境治理，效率提升</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>外部标准</strong></li>
-</ul>
-<p> <code> 外部标准，指的是对接传音/其他外部时（谷歌），需要遵循对方的标准；因为不达标会影响上线，因此优先级最高为PO级； </code></p>
-<ul>
-<li>场景：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">稳定性测试：监控anr/clash/内存曲线是否达标</span><br><span class="line">核心：场景需要和标准同步</span><br><span class="line">实践：实用性强</span><br></pre></td></tr></table></figure></li>
-<li>实现：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">待补</span><br></pre></td></tr></table></figure></li>
-<li><strong>线上监控</strong></li>
-</ul>
-<p> <code> 线上监控是质量保障体系的重要一环；设定监控可以及时发现线上问题，及时处理；有效保障系统的质量； </code></p>
-<ul>
-<li>场景：  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">系统监控：接口监控/服务器资源监控/数据的监控/基于埋点的功能监控</span><br></pre></td></tr></table></figure></li>
-<li>实践：</li>
-</ul>
-<p>  <a href="https://testerhome.com/topics/19188">线上监控体系概述</a></p>
-<ul>
-<li><strong>服务性能提升</strong> </li>
-</ul>
-<p>  <code>  c端的系统，性能问题通常是困扰系统的常见问题；性能保障，也是对系统可用性的最大保障  </code></p>
-<ul>
-<li>场景：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">接口性能优化</span><br><span class="line">服务性能优化</span><br><span class="line">app性能优化</span><br></pre></td></tr></table></figure></li>
-<li>实践：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">接口性能：接口性能其实是中后台性能，前后端分离的情况下，后端的性能瓶颈，往往是整个系统的性能瓶颈；</span><br><span class="line">服务性能：服务性能是后端的性能，粒度比接口更细，一般不用关注；</span><br><span class="line">客户端性能：客户端时和用户交互的，客户端性能直接影响到用户的体验；</span><br></pre></td></tr></table></figure></li>
-<li><strong>增效/功能自动化</strong>  </li>
-</ul>
-<p>  <code>  功能自动化，一般用于回归测试，定期的巡检；起到增效的作用；  </code></p>
-<ul>
-<li>场景：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CI/CD持续迭代系统</span><br><span class="line">接口自动化</span><br><span class="line">ui自动化</span><br><span class="line">数据测试自动化</span><br><span class="line">常见的自动化脚本等</span><br></pre></td></tr></table></figure></li>
-<li>实践：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">待补</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p><em><strong>kpi导向</strong></em></p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">增效&#x2F;功能自动化：ui自动化&#x2F;接口自动化(P2)&#x2F;数据测试&#x2F;常见的自动化脚本</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><em><strong>日常工作</strong></em></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">稳定性测试（monkey）</span><br><span class="line">接口自动化维护</span><br><span class="line">ui自动化维护</span><br><span class="line">数据测试脚本构建</span><br><span class="line">常见脚本开发</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>日常</tag>
-        <tag>价值</tag>
-      </tags>
   </entry>
   <entry>
     <title>常用app测试工具</title>
@@ -1304,6 +1130,62 @@
 <li>related_posts: true</li>
 </ul>
 ]]></content>
+  </entry>
+  <entry>
+    <title>大数据--测试</title>
+    <url>/posts/ac354d65/</url>
+    <content><![CDATA[<p><code>大数据测试，工作内容主要有：数据测试、模型测试；同时在不同的业务阶段，工作的重心不同，数据质量体系也会有不同的倾向，要全局的了解大数据测试，必须先明白大数据的架构，工作过程</code></p>
+<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">大数据架构</span><br><span class="line">数据测试</span><br><span class="line">模型测试</span><br><span class="line">数据质量体系</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h2 id="大数据架构"><a href="#大数据架构" class="headerlink" title="大数据架构"></a>大数据架构</h2><p><code>常见的大数据架构主要有Hadoop（分布式文件存储、计算系统）；由分布式文件系统（HDFS）/集群资源管理器（YARN）分布式计算框架（MR/mapreduce）构成；其中HDFS负责管理存储数据，YARN负责管理集群中的计算资源，调度和执行工作任务；</code></p>
+<p><strong>组件：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">核心组件：</span><br><span class="line">HDFS:分布式文件系统，存储数据；</span><br><span class="line">YARN：集群资源管理器，管理计算资源，进行调度；</span><br><span class="line">MR：计算框架，一般负责离线计算；</span><br><span class="line"></span><br><span class="line">生态组件：</span><br><span class="line">PIG：数据流处理（用于并行计算的高级数据流语言和执行框架）；</span><br><span class="line">HBASE：NSQL型的分布式数据库，本质是一个键值系统,底层数据存储在文件系统HDFS上；</span><br><span class="line">SPARK：分布式计算引擎，类似MR,但在内存中计算，提供各种库，可以使开发者用来实现ETL、机器学习、数据流处理、图像计算等场景；</span><br><span class="line">FLUME：数据采集</span><br><span class="line">FLINK：针对流数据（实时数据）和批数据（离线数据）的实时处理引擎，有着高吞吐、低延迟的特点；</span><br><span class="line">SQOOP：数据导入导出</span><br><span class="line">KAFKA：分布式消息引擎及流处理平台，用来存储/传递消息（如日志或埋点）；</span><br><span class="line">AWS S3 ：静态资源存储，可能是大型的日志文件吧；</span><br><span class="line">SOLR：用于搜索索引的全文检索服务器；</span><br><span class="line"></span><br><span class="line">数据查询引擎:</span><br><span class="line">HIVE S3：数据仓库基础架构，提供数据汇总和命令行即席查询功能；</span><br><span class="line">IMPALA：高效的基于MPP架构的快速查询引擎，基于Hive并使用内存进行计算，兼顾ETL功能，具有实时、批处理、多并发等优点；</span><br><span class="line">KYLIN：开源分布式分析型数据仓库，提供Hadoop/Spark之上的SQL查询接口及多维分析（OLAP）能力，支持超大规模数据的压秒级查询（和视图有点点类似）；</span><br><span class="line">PRESTO：开源的分布式查询引擎，支持多数据源，大量级数据的场景；</span><br><span class="line"></span><br><span class="line">ETL：数据处理的过程，指数据提取（extract）、转换（transform）、加载（load）的过程；</span><br><span class="line">组件众多。不同组件提供不同能力，Hadoop框架，很像Android系统，是一个底层的数据框架。</span><br></pre></td></tr></table></figure>
+<p>参考架构：<br><img src="/text_image/Hadoop.png" alt="alt text"><br><img src="/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6.png" alt="alt text"></p>
+<h3 id="传易音乐大数据架构"><a href="#传易音乐大数据架构" class="headerlink" title="传易音乐大数据架构"></a>传易音乐大数据架构</h3><p><strong>传易hadoop</strong><br><img src="/text_image/biddate.png" alt="alt text"></p>
+<p><strong>传易数仓架构</strong><br><img src="/text_image/bigdate_%E6%95%B0%E4%BB%93%E6%9E%B6%E6%9E%84.png" alt="alt text"></p>
+<p><strong>数据架构（数仓）</strong><br><img src="/text_image/bigdata_%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84.png" alt="alt text"></p>
+<p><strong>数据架构–横向数据分层</strong><br><img src="/text_image/%E6%A8%AA%E5%90%91%E6%95%B0%E6%8D%AE%E5%88%86%E5%B1%82.png" alt="alt text"></p>
+<p><strong>数据架构–纵向数据分层</strong><br><img src="/text_image/%E7%BA%B5%E5%90%91%E6%95%B0%E6%8D%AE%E5%88%86%E5%B1%82.png" alt="alt text"></p>
+<p><strong>传易大数据架构总述：</strong></p>
+<p><code>传易架构的特点是处理的数据量大，数据来源复杂，人员多，业务应用广；存在无文档资料维护；测试介入低，质量不可度量；无测试环境，依赖线上数据开发测试，流程不规范，安全性差；缺乏标准和度量体系，投入产出比无法度量等问题；</code></p>
+<h2 id="数据测试"><a href="#数据测试" class="headerlink" title="数据测试"></a>数据测试</h2><p><code>数据测试前，需要对数据质量形成共识；数据的价值是由需求方决定的，能满足需求方/使用方需求的数据才能称得上好数据</code></p>
+<h3 id="标准"><a href="#标准" class="headerlink" title="标准"></a>标准</h3><h4 id="数据质量评测方向"><a href="#数据质量评测方向" class="headerlink" title="数据质量评测方向"></a>数据质量评测方向</h4><p><code>数据质量我们一般从以下六个维度评判，同时我们往往还需求考虑数据的（+安全性），评价这些维度往往需要用到监控数据和历史数据：</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">完整性：数据不多不少。数据条数完整，类型完整，参数完整；不重复，看是否有异常类型或者异常值（枚举外）；</span><br><span class="line">准确性：结果准确，抽样准；表内横向准确，表间/数据链路间的数据准备或一致，参数数据分布准确；</span><br><span class="line">及时性：实时数据性能满足需求，各组件性能满足要求；如用户余额，抽奖次数等，主要受任务调度、优先级、处理耗时影响，一般关注整体和局部的耗时情况；</span><br><span class="line">一致性：前后数据一致，参数和总体满足逻辑一致，如订阅总额=订阅单价*时长</span><br><span class="line">有效性：数据是有效的符合数据规范，如email数据、身份证数据规范</span><br><span class="line">唯一性：数据唯一，如每个用户的boom_id,每个音乐的music_id</span><br></pre></td></tr></table></figure>
+<p><img src="/text_image/%E6%95%B0%E6%8D%AE%E5%8A%9F%E8%83%BD.png" alt="alt text"><br><strong>以上是测试时评判的方向，测试过程也需要有标准来评判有效性,如下：(理论不同对象/不同阶段都应该有标准)</strong></p>
+<h4 id="测试活动度量标准"><a href="#测试活动度量标准" class="headerlink" title="测试活动度量标准"></a>测试活动度量标准</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">覆盖率</span><br><span class="line">测试效果-产出度量</span><br><span class="line">测试件的质量</span><br></pre></td></tr></table></figure>
+
+<h4 id="数据质量度量标准"><a href="#数据质量度量标准" class="headerlink" title="数据质量度量标准"></a>数据质量度量标准</h4><p><code>除了测试时，需要考虑的场景外，还需要对整体的数据质量好坏进行评判，以下为数据质量的优劣评判标准</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">98%：全年可用天数达到98%以上，即服务不达标天数全年不超过7天。</span><br><span class="line">基线时间：核心 SLA 基线产出时间需满足业务要求。</span><br><span class="line">是否易于使用：及其他非质量熟悉标准（见MFQ）</span><br></pre></td></tr></table></figure>
+
+<p><strong>以上指标为传易的定量的标准，以下为美团的定量的标准</strong><br><img src="/text_image/%E7%BE%8E%E5%9B%A2%E9%87%8F%E5%8C%96%E6%8C%87%E6%A0%87.png" alt="alt text"></p>
+<h3 id="数据质量评测流程"><a href="#数据质量评测流程" class="headerlink" title="数据质量评测流程"></a>数据质量评测流程</h3><p><code>要想把控数据质量，往往需要介入数据的全生命周期；需要有标准可依，有规范进行约束，有监控数据可查，有工具可用来进行评测，流程结果可量化，并且可以持续运营迭代体系：</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">业务分析--分析数据流（流程图）、数据特性（计算型/时效型）</span><br><span class="line">设计阶段--数据类型、数据处理逻辑、数据链路、数据服务</span><br><span class="line">数据标准--量化的数据标准，作为内外部的规范和约束</span><br><span class="line">数据监控--数据监控能力，是否有全链路监控能力</span><br><span class="line">数据卡点--针对不同阶段的数据（流程）是否有卡点，能进行评测和定位问题</span><br><span class="line">数据环境--如何低成本，高效的维护数据测试环境</span><br><span class="line">构造数据--如何快速有效的实现可复用数据构造能力</span><br><span class="line">数据评测--如何保障评测的有效性、覆盖率、标准化</span><br><span class="line">数据量化--如何实现数据流程、质量、评测的量化，让过程结果更公开透明</span><br><span class="line">迭代优化--如何管理问题，运营数据，归纳形成标准，持续的优化体系</span><br></pre></td></tr></table></figure>
+<h3 id="测试执行"><a href="#测试执行" class="headerlink" title="测试执行"></a>测试执行</h3><p><strong>数据治理可参考的切入阶段</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E5%8F%AF%E5%88%87%E5%85%A5%E7%9A%84%E9%98%B6%E6%AE%B5.png" alt="alt text"><br><strong>数据质量三板斧</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E4%B8%89%E6%9D%BF%E6%96%A7.png" alt="alt text"></p>
+<h4 id="数据功能测试"><a href="#数据功能测试" class="headerlink" title="数据功能测试"></a><strong>数据功能测试</strong></h4><p><strong>三板斧:数据分析技巧</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90.png" alt="alt text"><br><strong>测试范围</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E5%8A%9F%E8%83%BD.jpg" alt="alt text"><br><strong>功能测试，很重要的一环是ETL:ETL测试维度</strong><br><img src="/text_image/ETL%E6%B5%8B%E8%AF%95.png" alt="alt text"><br><strong>离线ETL测试步骤：核心在数据</strong><br><img src="/text_image/ETL%E6%B5%8B%E8%AF%95_%E6%AD%A5%E9%AA%A4.png" alt="alt text"><br><strong>实时数据ETL：核心除了数据、还有性能</strong><br><img src="/text_image/%E5%AE%9E%E6%97%B6etl.png" alt="alt text"><br><strong>数据仓库分层测试</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%88%86%E5%B1%82%E6%B5%8B%E8%AF%95.png" alt="alt text"><br><strong>项目测试经验</strong><br><img src="/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%A1%B9%E7%9B%AE%E6%B5%8B%E8%AF%95%E7%BB%8F%E9%AA%8C.png" alt="alt text"></p>
+<h4 id="数据性能测试"><a href="#数据性能测试" class="headerlink" title="数据性能测试"></a><strong>数据性能测试</strong></h4><p><img src="/text_image/%E6%95%B0%E6%8D%AE%E6%80%A7%E8%83%BD.png" alt="alt text"><br><strong>大数据性能工具：</strong><br><img src="/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%80%A7%E8%83%BD.png" alt="alt text"></p>
+<h4 id="数据安全测试"><a href="#数据安全测试" class="headerlink" title="数据安全测试"></a><strong>数据安全测试</strong></h4><p><code>以上的数据质量评测标准未说明安全情况，数据安全需要考虑数据本身的安全（隐私脱敏），流程安全，权限管控、安全监控，故在此处说明，安全需要覆盖的场景如下：</code><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8.png" alt="alt text"></p>
+<p><strong>数据安全实施策略</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E5%AE%9E%E6%96%BD.png" alt="alt text"></p>
+<h4 id="数据质量问题处理链路"><a href="#数据质量问题处理链路" class="headerlink" title="数据质量问题处理链路"></a><strong>数据质量问题处理链路</strong></h4><p><img src="/text_image/%E6%95%B0%E6%8D%AE%E9%97%AE%E9%A2%98.png" alt="alt text"></p>
+<h3 id="数据治理工具"><a href="#数据治理工具" class="headerlink" title="数据治理工具"></a><strong>数据治理工具</strong></h3><p><strong>开源框架</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6.png" alt="alt text"><br><strong>大数据测试工具</strong><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7.png" alt="alt text"><br><strong>大数据测试平台架构</strong><br><img src="/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E9%9C%80%E6%B1%82.png" alt="alt text"><br><img src="/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E6%9E%B6%E6%9E%84.png" alt="alt text"><br><img src="/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E7%9A%84%E5%AE%9E%E7%8E%B0.png" alt="alt text"></p>
+<ul>
+<li>大数据测试平台-参考质量报告<br><img src="/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0-%E8%B4%A8%E9%87%8F%E6%8A%A5%E5%91%8A.png" alt="alt text"></li>
+<li>展望：看起来是朝线上监控化的方向走<br><img src="/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%E5%B1%95%E6%9C%9B.png" alt="alt text"></li>
+</ul>
+<h2 id="模型测试"><a href="#模型测试" class="headerlink" title="模型测试"></a>模型测试</h2><p><a href="https://www.bujiaban.xyz/posts/d775e226/">广告-模型测试</a></p>
+<h2 id="大数据质量体系"><a href="#大数据质量体系" class="headerlink" title="大数据质量体系"></a>大数据质量体系</h2><p><strong>数据质量活动需要遵循：有标准、有数据（监控）、可量化（度量）、自动化的原则；质量体系总结如下：</strong><br><img src="/text_image/%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93.jpg" alt="alt text"><br><img src="/text_image/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E4%BD%93%E7%B3%BB.png" alt="alt text"></p>
+<ul>
+<li><a href="%E7%BA%BF%E4%B8%8B%E6%96%87%E6%A1%A3">大数据治理规划</a></li>
+<li><a href="%E7%BA%BF%E4%B8%8B%E6%96%87%E6%A1%A3">大数据产品质量体系建设</a></li>
+<li><a href="https://mp.weixin.qq.com/s/AlxIMPnKcWSyhOSe8-OfTQ">美团–业务数据治理体系化思考与实践</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>数据测试</tag>
+        <tag>大数据</tag>
+      </tags>
   </entry>
   <entry>
     <title>数据库性能测试</title>
@@ -1566,6 +1448,164 @@
       </tags>
   </entry>
   <entry>
+    <title>工作梳理</title>
+    <url>/posts/8c69a8ec/</url>
+    <content><![CDATA[<h1 id="工作梳理"><a href="#工作梳理" class="headerlink" title="工作梳理"></a>工作梳理</h1><ul>
+<li><em><strong>大纲</strong></em></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">重点核心</span><br><span class="line">kpi导向</span><br><span class="line">日常工作</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<ul>
+<li><p><em><strong>重点核心</strong></em></p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">外部标准&#x2F;规范（预装&#x2F;上架）：稳定性&#x2F;anr&#x2F;clash&#x2F;内存曲线（P0）</span><br><span class="line">线上监控&#x2F;稳定性：监控体系（P1）</span><br><span class="line">服务性能提升：性能测试(P1)</span><br><span class="line">增效：环境治理，效率提升</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>外部标准</strong></li>
+</ul>
+<p> <code> 外部标准，指的是对接传音/其他外部时（谷歌），需要遵循对方的标准；因为不达标会影响上线，因此优先级最高为PO级； </code></p>
+<ul>
+<li>场景：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">稳定性测试：监控anr/clash/内存曲线是否达标</span><br><span class="line">核心：场景需要和标准同步</span><br><span class="line">实践：实用性强</span><br></pre></td></tr></table></figure></li>
+<li>实现：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">待补</span><br></pre></td></tr></table></figure></li>
+<li><strong>线上监控</strong></li>
+</ul>
+<p> <code> 线上监控是质量保障体系的重要一环；设定监控可以及时发现线上问题，及时处理；有效保障系统的质量； </code></p>
+<ul>
+<li>场景：  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">系统监控：接口监控/服务器资源监控/数据的监控/基于埋点的功能监控</span><br></pre></td></tr></table></figure></li>
+<li>实践：</li>
+</ul>
+<p>  <a href="https://testerhome.com/topics/19188">线上监控体系概述</a></p>
+<ul>
+<li><strong>服务性能提升</strong> </li>
+</ul>
+<p>  <code>  c端的系统，性能问题通常是困扰系统的常见问题；性能保障，也是对系统可用性的最大保障  </code></p>
+<ul>
+<li>场景：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">接口性能优化</span><br><span class="line">服务性能优化</span><br><span class="line">app性能优化</span><br></pre></td></tr></table></figure></li>
+<li>实践：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">接口性能：接口性能其实是中后台性能，前后端分离的情况下，后端的性能瓶颈，往往是整个系统的性能瓶颈；</span><br><span class="line">服务性能：服务性能是后端的性能，粒度比接口更细，一般不用关注；</span><br><span class="line">客户端性能：客户端时和用户交互的，客户端性能直接影响到用户的体验；</span><br></pre></td></tr></table></figure></li>
+<li><strong>增效/功能自动化</strong>  </li>
+</ul>
+<p>  <code>  功能自动化，一般用于回归测试，定期的巡检；起到增效的作用；  </code></p>
+<ul>
+<li>场景：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CI/CD持续迭代系统</span><br><span class="line">接口自动化</span><br><span class="line">ui自动化</span><br><span class="line">数据测试自动化</span><br><span class="line">常见的自动化脚本等</span><br></pre></td></tr></table></figure></li>
+<li>实践：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">待补</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><em><strong>kpi导向</strong></em></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">增效&#x2F;功能自动化：ui自动化&#x2F;接口自动化(P2)&#x2F;数据测试&#x2F;常见的自动化脚本</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><em><strong>日常工作</strong></em></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">稳定性测试（monkey）</span><br><span class="line">接口自动化维护</span><br><span class="line">ui自动化维护</span><br><span class="line">数据测试脚本构建</span><br><span class="line">常见脚本开发</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>日常</tag>
+        <tag>价值</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>算法--数据结构1️⃣</title>
+    <url>/posts/db1660cd/</url>
+    <content><![CDATA[<h1 id="常见的数据结构有"><a href="#常见的数据结构有" class="headerlink" title="常见的数据结构有"></a>常见的数据结构有</h1><p> <code>序列（列表、链表，元祖，队列，二叉树、堆、栈）、图、集合、字典</code></p>
+<span id="more"></span>
+<h2 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h2><ul>
+<li>查询序列中元素出现次数的方法:collections.Counter(LIST).most_common(TOP3);可用于计数的场景；</li>
+<li>序列分组：通过特定的元素，对序列或者字典分组；使用itertools.groupby()使用前要先对序列排序；</li>
+<li>对序列的下标/索引重命名：collections.namedtuple()；这种感觉是让序列有了字典的特性；</li>
+<li>实现：线性数据结构/链表数据结构；如下：<ul>
+<li>顺序存储：[]这种线性关系的特定是；查询快O(1)，插入/删除慢O(N)</li>
+<li>链表<ul>
+<li>实现：self.next=null</li>
+<li>特点：链式存储：当前节点含下个节点的指针，这个特定是写(add/update)快O(1),读/删很慢O(N)其他特性；单向链表/双向链表（每个节点既保留了下一个的指针，还保留了上一个节点的指针）/快指针/慢指针；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>列表推导/生成器表达式：两者都能用来过滤可迭代对象；列表推导生成的对象是列表，而生成式，生成的是可迭代对象；因此列表推动会占用更更多的内存（因为要覆盖整个列表），而生成器表达式只有在调用时，才提供元素，因此他性能更优，但他只能使用一次，列表推导可反复使用；除了用于序列，还能用于hashmap；</li>
+<li>sum/min/max函数中都可以放置生成器表达式 如sum(x for i in l)</li>
+<li>其他的序列过滤工具：filter(fun(),iterable)/itertools.compress(iterable,Boolean)Boolean是元素为TRUE/FALSE的序列，根据是否为true过滤对应位置的iterable的值；两个工具处理后的结果都是可迭代对象需要通过list(iterable)来转化为序列;</li>
+</ul>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><ul>
+<li>实现：str()/‘str’</li>
+<li>特点：字符串类似列表，不过其中的元素不可变，且只能为字符，他有序列的所有特点；底层是线性的数据结构，可以通过数组或者链表实现；</li>
+</ul>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><ul>
+<li>实现：list()/[]</li>
+<li>特点：列表是最常见的线性表，数据元素都是首尾相接的（内存结构是连续的，且事先分配固定长度的内存，可在之后动态调整）；<h4 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h4></li>
+<li>实现：二叉树用list表示，[根节点，左节点，右节点]</li>
+<li>特点：I为当前层；当前层节点数（2^(n-1)）;总节点数2^n-1;二叉树的父节点，维护子节点的指针；二叉树的特性类似于链表，每个跟节点都有指针，指向左右节点；二叉树在列表中的分布逻辑如下：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">在索引从0（根节点）开始的数组中：</span><br><span class="line">  父节点 i 的左子节点在位置(2*i+1)</span><br><span class="line">  父节点 i 的右子节点在位置(2*i+2)</span><br><span class="line">  子节点 i 的父节点在位置floor((i-1)/2)</span><br></pre></td></tr></table></figure>
+
+<p><strong>二叉树遍历的方式有两种：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">深度优先：前序，中序，后序</span><br><span class="line">广度优先：从跟节点开始遍历，然后到下一级子节点，一直递归直到最下层子节点；(类似于数组构造，但数据也支持深度遍历)</span><br><span class="line">二叉树是以列表展示，以栈逻辑的方式组织数据，这是由于，最先出去的一定是最底层的左节点子树；可以通过以上的遍历方式来以不同的效率查找到数据</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不同的二叉树：<ul>
+<li>二叉查找树：父节点的键（索引）大于左子节点，小于右子节点；</li>
+<li>满二叉树：每个内部节点（非叶子节点）都有两个子节点的树；</li>
+<li>完全二叉树：所有叶子节点在同一层的，满二叉树；有标号（索引）的二叉树，根节点为索引0（列表中），左子节点加1，右子节点加2；  </li>
+</ul>
+</li>
+</ul>
+<h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><ul>
+<li>实现：[]</li>
+<li>特点：先进先出（双端队列不是）；底层是线性的数据结构，可以通过数组或者链表实现<ul>
+<li>类型：优先队列/双端队列<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">优先队列：使用二叉堆实现</span><br><span class="line">  实现：heapq.heapify(queue)&#x2F;heapq.push(queue, e)&#x2F;heapq.pop(queue)&#x2F;queue[0]</span><br><span class="line">  特点：查询快，时间复杂度O(1)</span><br><span class="line">双端队列：可以在两端操作</span><br><span class="line">  实现：dq &#x3D; collections.deque();dq.appendleft(e)，dq.popleft()，dq[0]</span><br><span class="line">  特点：可通过两边操作，左右两端操作快，添加&#x2F;弹出&#x2F;查询的时间复杂度都是O(1)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h4 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h4><ul>
+<li>实现：[];物理结构为数组，逻辑结构为完全二叉树;</li>
+<li>特点：数据结构类似完全二叉树；堆有两种数据组织方式；根节点最大（且父节点均大于子节点）的为大根堆，跟节点最小（且父节点均小于子节点）的为小根堆；二叉树，一定满足左子节点，小于右子节点；且最底层的左叶子节点值、优先级一定最小，且最早弹出<ul>
+<li>大根堆/小根堆常用来处理数据优先级问题；原理是由于堆[]最先出的是[-1]的值，因此大根堆，最大优先级的最先出，小根堆正好相反；具体实现</li>
+<li>heapq.heappush([], (-priority, self._index, item))<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;priority优先级，由于堆默认弹出最小优先级，index是在优先级相同时，通过索引判断优先级</span><br><span class="line">              &gt;&gt;&gt; q.push(Item(&#39;foo&#39;), 1)</span><br><span class="line">              &gt;&gt;&gt; q.push(Item(&#39;bar&#39;), 5)</span><br><span class="line">              &gt;&gt;&gt; q.push(Item(&#39;spam&#39;), 4)</span><br><span class="line">              &gt;&gt;&gt; q.push(Item(&#39;grok&#39;), 1)</span><br><span class="line">              &gt;&gt;&gt; q.pop()</span><br><span class="line">              Item(&#39;bar&#39;)</span><br><span class="line">              &gt;&gt;&gt; q.pop()</span><br><span class="line">              Item(&#39;spam&#39;)</span><br><span class="line">              &gt;&gt;&gt; q.pop()</span><br><span class="line">              Item(&#39;foo&#39;)</span><br><span class="line">              &gt;&gt;&gt; q.pop()</span><br><span class="line">              Item(&#39;grok&#39;)</span><br><span class="line">          可用来对列表进行排序，将其转换成大根堆&#x2F;小根堆；</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h4 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h4><ul>
+<li>实现：[]、或使用队列实现collections.deque()</li>
+<li>特点：先进后出；底层的数据结构可以是数组或者双端队列；</li>
+</ul>
+<h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><ul>
+<li>实现：（*，）</li>
+<li>特点：线性序列；序列不可变；</li>
+</ul>
+<h3 id="图"><a href="#图" class="headerlink" title="图"></a>图</h3><ul>
+<li>图是多对对的非线性数据关系，可以用列表，字典，集合实现；</li>
+</ul>
+<h3 id="字典-hash-map"><a href="#字典-hash-map" class="headerlink" title="字典/hash_map"></a>字典/hash_map</h3><ul>
+<li>实现：dict()、｛key:value,｝</li>
+<li>特点：无序的键值对（底层是动态数据和一个哈希函数构成），且key不能重复；查询块O(1),添加/删除/改很快O(1)<ul>
+<li>有顺序关系的字典：Orderdict();他维护了一个双向链表，用来指示键的顺序，新加入的键放在双向链表的最后</li>
+<li>以上是对字典内部的排序，字典间的排序可以使用（sorted(dicts,key=itemgetter(‘lname’,’fname’))）,利用itemgetter指定排序模式；同时min/max函数也支持（min(rows, key=itemgetter(‘uid’))）</li>
+<li>以上的sort排序还可以用来对不支持排序的对象进行排序如对类或者函数排序（sorted(users, key=lambda u: u.user_id)）；同样他也适用于min/max函数；</li>
+<li>单个键，有多个值的字典：defaultdict(list/set)这是建多值字典的方法即｛k:[1,2]｝</li>
+<li>字典的运算：注意运算是针对键的，如果要针对值则需要转换，如sort(zip(dict.vaule,dict.key))</li>
+<li>字典&amp;集合：字典可以理解成键集合和值集合的映射关系；因此字典的dict.key和dict.item均可以执行集合的逻辑操作</li>
+<li>合并多个字典：c = collections.ChainMap(dict1,dict2),c其实是创建多个列表来维护这些字典的键和值，不是真的合并；这个对象查询相同键时，查到的是最先出现的键值，更新/删除数据操作，只能在第一个字典中生效；还能用dict1.update(dict2)合并字典；</li>
+<li>以上两种方法的区别，ChainMap是维护了一个数组，来建立key:value关系，不新建字典，变动会两端同步；update方法执行完后建立一个完全独立的新字典，和旧字典互不影响；</li>
+</ul>
+</li>
+</ul>
+<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><ul>
+<li>实现：set()、｛*，｝</li>
+<li>特点：确定，无序，元素不重复（底层也是hash实现的），类似于只有key的hash,查询慢O(N),添加/删除/改很快O(1)</li>
+</ul>
+<p><strong>查看对象占用的内存大小：sys.getsizeof()</strong></p>
+<p><strong>教程</strong><br><a href="https://www.icourse163.org/course/ZJU-93001?outVendor=zw_mooc_pcsybzkcph_">浙大-数据结构课程-完整</a><br><a href="https://algorithm.yuanbin.me/zh-hans/basics_data_structure/graph.html">github-算法快速教程-快</a><br><a href="https://github.com/TheAlgorithms/Python/blob/master/DIRECTORY.md">GitHub-算法示例大全-Python版</a><br><strong>可视化工具</strong><br><a href="https://visualgo.net/en/list?slide=1-1">新加坡国立大学算法可视化工具</a><br><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">数据结构可视化工具</a></p>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>稳定性治理</title>
     <url>/posts/a30df9c8/</url>
     <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">概述，目的？</span><br><span class="line">怎么进行稳定性治理，稳定性治理的体系建设？</span><br><span class="line">稳定性治理的过程？</span><br></pre></td></tr></table></figure>
@@ -1730,105 +1770,6 @@
       </tags>
   </entry>
   <entry>
-    <title>算法--数据结构1️⃣</title>
-    <url>/posts/db1660cd/</url>
-    <content><![CDATA[<h1 id="常见的数据结构有"><a href="#常见的数据结构有" class="headerlink" title="常见的数据结构有"></a>常见的数据结构有</h1><p> <code>序列（列表、链表，元祖，队列，二叉树、堆、栈）、图、集合、字典</code></p>
-<span id="more"></span>
-<h2 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h2><ul>
-<li>查询序列中元素出现次数的方法:collections.Counter(LIST).most_common(TOP3);可用于计数的场景；</li>
-<li>序列分组：通过特定的元素，对序列或者字典分组；使用itertools.groupby()使用前要先对序列排序；</li>
-<li>对序列的下标/索引重命名：collections.namedtuple()；这种感觉是让序列有了字典的特性；</li>
-<li>实现：线性数据结构/链表数据结构；如下：<ul>
-<li>顺序存储：[]这种线性关系的特定是；查询快O(1)，插入/删除慢O(N)</li>
-<li>链表<ul>
-<li>实现：self.next=null</li>
-<li>特点：链式存储：当前节点含下个节点的指针，这个特定是写(add/update)快O(1),读/删很慢O(N)其他特性；单向链表/双向链表（每个节点既保留了下一个的指针，还保留了上一个节点的指针）/快指针/慢指针；</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>列表推导/生成器表达式：两者都能用来过滤可迭代对象；列表推导生成的对象是列表，而生成式，生成的是可迭代对象；因此列表推动会占用更更多的内存（因为要覆盖整个列表），而生成器表达式只有在调用时，才提供元素，因此他性能更优，但他只能使用一次，列表推导可反复使用；除了用于序列，还能用于hashmap；</li>
-<li>sum/min/max函数中都可以放置生成器表达式 如sum(x for i in l)</li>
-<li>其他的序列过滤工具：filter(fun(),iterable)/itertools.compress(iterable,Boolean)Boolean是元素为TRUE/FALSE的序列，根据是否为true过滤对应位置的iterable的值；两个工具处理后的结果都是可迭代对象需要通过list(iterable)来转化为序列;</li>
-</ul>
-<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><ul>
-<li>实现：str()/‘str’</li>
-<li>特点：字符串类似列表，不过其中的元素不可变，且只能为字符，他有序列的所有特点；底层是线性的数据结构，可以通过数组或者链表实现；</li>
-</ul>
-<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><ul>
-<li>实现：list()/[]</li>
-<li>特点：列表是最常见的线性表，数据元素都是首尾相接的（内存结构是连续的，且事先分配固定长度的内存，可在之后动态调整）；<h4 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h4></li>
-<li>实现：二叉树用list表示，[根节点，左节点，右节点]</li>
-<li>特点：I为当前层；当前层节点数（2^(n-1)）;总节点数2^n-1;二叉树的父节点，维护子节点的指针；二叉树的特性类似于链表，每个跟节点都有指针，指向左右节点；二叉树在列表中的分布逻辑如下：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">在索引从0（根节点）开始的数组中：</span><br><span class="line">  父节点 i 的左子节点在位置(2*i+1)</span><br><span class="line">  父节点 i 的右子节点在位置(2*i+2)</span><br><span class="line">  子节点 i 的父节点在位置floor((i-1)/2)</span><br></pre></td></tr></table></figure>
-
-<p><strong>二叉树遍历的方式有两种：</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">深度优先：前序，中序，后序</span><br><span class="line">广度优先：从跟节点开始遍历，然后到下一级子节点，一直递归直到最下层子节点；(类似于数组构造，但数据也支持深度遍历)</span><br><span class="line">二叉树是以列表展示，以栈逻辑的方式组织数据，这是由于，最先出去的一定是最底层的左节点子树；可以通过以上的遍历方式来以不同的效率查找到数据</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>不同的二叉树：<ul>
-<li>二叉查找树：父节点的键（索引）大于左子节点，小于右子节点；</li>
-<li>满二叉树：每个内部节点（非叶子节点）都有两个子节点的树；</li>
-<li>完全二叉树：所有叶子节点在同一层的，满二叉树；有标号（索引）的二叉树，根节点为索引0（列表中），左子节点加1，右子节点加2；  </li>
-</ul>
-</li>
-</ul>
-<h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><ul>
-<li>实现：[]</li>
-<li>特点：先进先出（双端队列不是）；底层是线性的数据结构，可以通过数组或者链表实现<ul>
-<li>类型：优先队列/双端队列<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">优先队列：使用二叉堆实现</span><br><span class="line">  实现：heapq.heapify(queue)&#x2F;heapq.push(queue, e)&#x2F;heapq.pop(queue)&#x2F;queue[0]</span><br><span class="line">  特点：查询快，时间复杂度O(1)</span><br><span class="line">双端队列：可以在两端操作</span><br><span class="line">  实现：dq &#x3D; collections.deque();dq.appendleft(e)，dq.popleft()，dq[0]</span><br><span class="line">  特点：可通过两边操作，左右两端操作快，添加&#x2F;弹出&#x2F;查询的时间复杂度都是O(1)</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h4 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h4><ul>
-<li>实现：[];物理结构为数组，逻辑结构为完全二叉树;</li>
-<li>特点：数据结构类似完全二叉树；堆有两种数据组织方式；根节点最大（且父节点均大于子节点）的为大根堆，跟节点最小（且父节点均小于子节点）的为小根堆；二叉树，一定满足左子节点，小于右子节点；且最底层的左叶子节点值、优先级一定最小，且最早弹出<ul>
-<li>大根堆/小根堆常用来处理数据优先级问题；原理是由于堆[]最先出的是[-1]的值，因此大根堆，最大优先级的最先出，小根堆正好相反；具体实现</li>
-<li>heapq.heappush([], (-priority, self._index, item))<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;priority优先级，由于堆默认弹出最小优先级，index是在优先级相同时，通过索引判断优先级</span><br><span class="line">              &gt;&gt;&gt; q.push(Item(&#39;foo&#39;), 1)</span><br><span class="line">              &gt;&gt;&gt; q.push(Item(&#39;bar&#39;), 5)</span><br><span class="line">              &gt;&gt;&gt; q.push(Item(&#39;spam&#39;), 4)</span><br><span class="line">              &gt;&gt;&gt; q.push(Item(&#39;grok&#39;), 1)</span><br><span class="line">              &gt;&gt;&gt; q.pop()</span><br><span class="line">              Item(&#39;bar&#39;)</span><br><span class="line">              &gt;&gt;&gt; q.pop()</span><br><span class="line">              Item(&#39;spam&#39;)</span><br><span class="line">              &gt;&gt;&gt; q.pop()</span><br><span class="line">              Item(&#39;foo&#39;)</span><br><span class="line">              &gt;&gt;&gt; q.pop()</span><br><span class="line">              Item(&#39;grok&#39;)</span><br><span class="line">          可用来对列表进行排序，将其转换成大根堆&#x2F;小根堆；</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h4 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h4><ul>
-<li>实现：[]、或使用队列实现collections.deque()</li>
-<li>特点：先进后出；底层的数据结构可以是数组或者双端队列；</li>
-</ul>
-<h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><ul>
-<li>实现：（*，）</li>
-<li>特点：线性序列；序列不可变；</li>
-</ul>
-<h3 id="图"><a href="#图" class="headerlink" title="图"></a>图</h3><ul>
-<li>图是多对对的非线性数据关系，可以用列表，字典，集合实现；</li>
-</ul>
-<h3 id="字典-hash-map"><a href="#字典-hash-map" class="headerlink" title="字典/hash_map"></a>字典/hash_map</h3><ul>
-<li>实现：dict()、｛key:value,｝</li>
-<li>特点：无序的键值对（底层是动态数据和一个哈希函数构成），且key不能重复；查询块O(1),添加/删除/改很快O(1)<ul>
-<li>有顺序关系的字典：Orderdict();他维护了一个双向链表，用来指示键的顺序，新加入的键放在双向链表的最后</li>
-<li>以上是对字典内部的排序，字典间的排序可以使用（sorted(dicts,key=itemgetter(‘lname’,’fname’))）,利用itemgetter指定排序模式；同时min/max函数也支持（min(rows, key=itemgetter(‘uid’))）</li>
-<li>以上的sort排序还可以用来对不支持排序的对象进行排序如对类或者函数排序（sorted(users, key=lambda u: u.user_id)）；同样他也适用于min/max函数；</li>
-<li>单个键，有多个值的字典：defaultdict(list/set)这是建多值字典的方法即｛k:[1,2]｝</li>
-<li>字典的运算：注意运算是针对键的，如果要针对值则需要转换，如sort(zip(dict.vaule,dict.key))</li>
-<li>字典&amp;集合：字典可以理解成键集合和值集合的映射关系；因此字典的dict.key和dict.item均可以执行集合的逻辑操作</li>
-<li>合并多个字典：c = collections.ChainMap(dict1,dict2),c其实是创建多个列表来维护这些字典的键和值，不是真的合并；这个对象查询相同键时，查到的是最先出现的键值，更新/删除数据操作，只能在第一个字典中生效；还能用dict1.update(dict2)合并字典；</li>
-<li>以上两种方法的区别，ChainMap是维护了一个数组，来建立key:value关系，不新建字典，变动会两端同步；update方法执行完后建立一个完全独立的新字典，和旧字典互不影响；</li>
-</ul>
-</li>
-</ul>
-<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><ul>
-<li>实现：set()、｛*，｝</li>
-<li>特点：确定，无序，元素不重复（底层也是hash实现的），类似于只有key的hash,查询慢O(N),添加/删除/改很快O(1)</li>
-</ul>
-<p><strong>查看对象占用的内存大小：sys.getsizeof()</strong></p>
-<p><strong>教程</strong><br><a href="https://www.icourse163.org/course/ZJU-93001?outVendor=zw_mooc_pcsybzkcph_">浙大-数据结构课程-完整</a><br><a href="https://algorithm.yuanbin.me/zh-hans/basics_data_structure/graph.html">github-算法快速教程-快</a><br><a href="https://github.com/TheAlgorithms/Python/blob/master/DIRECTORY.md">GitHub-算法示例大全-Python版</a><br><strong>可视化工具</strong><br><a href="https://visualgo.net/en/list?slide=1-1">新加坡国立大学算法可视化工具</a><br><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">数据结构可视化工具</a></p>
-]]></content>
-      <categories>
-        <category>技术</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>类对象/实例对象/类方法/实例方法/静态方法</title>
     <url>/posts/93899372/</url>
     <content><![CDATA[<ul>
@@ -1895,6 +1836,11 @@
 </ul>
 <p><a href="https://www.appinn.com/markdown/basic.html">参考</a><br><a href="https://www.appinn.com/markdown/basic.html">参考2</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>职业--传易互联（涉密文件）</title>
+    <url>/posts/f7d524f8/</url>
+    <content><![CDATA[<h2 id="隐藏涉密文件，请联系我授权"><a href="#隐藏涉密文件，请联系我授权" class="headerlink" title="隐藏涉密文件，请联系我授权"></a>隐藏涉密文件，请联系我授权</h2>]]></content>
   </entry>
   <entry>
     <title>装饰器详解</title>
@@ -2281,6 +2227,8 @@
 <li><a href="https://www.processon.com/view/link/64be5dbc392b97462f4b12c9">‘大富翁游戏’</a></li>
 </ul>
 <p><strong>看到这是不是有种感觉，测试工作流程，越来越像工厂的流水线；这其实就是互联网的发展方向，未来估计行业的发展趋势也会和制造业趋同；不知是行业的幸运，还是个人的不幸！！！</strong></p>
+<h2 id="探索性测试"><a href="#探索性测试" class="headerlink" title="探索性测试"></a>探索性测试</h2><p><code>在基于guide word（引导词）测试思维方面，引申到了探索性测试模型。以上的测试思维很大程度上借鉴了探索性测试模型，并落地，因此很有必须看下史亮介绍的探索性测试模型HTSM(启发式测试策略模型)</code></p>
+<p><a href="https://www.cnblogs.com/liangshi/archive/2012/02/23/2364947.html">启发式测试策略模型</a></p>
 ]]></content>
       <categories>
         <category>技术</category>
@@ -2383,9 +2331,9 @@
 <li>✔语言基础</li>
 <li>✔算法</li>
 <li>✔计算机网络</li>
-<li>计算机系统/云原生体系</li>
+<li>✔计算机系统/云原生体系</li>
 <li>✔数据库</li>
-<li>大数据架构</li>
+<li>✔大数据架构</li>
 <li>前端</li>
 <li>✔测试设计</li>
 </ul>
@@ -2504,7 +2452,7 @@
 </ul>
 <h4 id="质量流程"><a href="#质量流程" class="headerlink" title="质量流程"></a><strong>质量流程</strong></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">基本的测试流程？</span><br><span class="line">测试周期是五天，今天是第三天，发现了一个主流程bug，你需要做什么？</span><br><span class="line">	评估整体问题风险，修改计划，影响范围，需要调动的修复资源</span><br><span class="line">	对交付时间的影响，整体项目是否可以接受，根据时间承受范围，做出修复方案的判断</span><br><span class="line">	完成修复计划</span><br><span class="line">	复盘整体问题，讨论为什么主流程问题会在测试后期才被发现。测试流程或总理，缺失？需求临时变更？代码无选择入库？堵住漏洞防止问题再次发生</span><br><span class="line"></span><br><span class="line">了解哪些测试方法；?黑盒白盒测试的测试用例设计方法都有哪些？</span><br><span class="line">介绍一下单元测试和冒烟测试？单元测试写过吗？</span><br><span class="line">项目质量的准入准出原则？</span><br><span class="line">灰度上线的标准是是么？</span><br><span class="line">平时怎么做的测试？</span><br><span class="line">现在的业务方面测试流程，质量保障方面的措施，除了自动化，人工怎么分配的?</span><br><span class="line">深问了覆盖率、接口自动化，同时也简单说了下BDA(数据测试)、CTS（android系列兼容测试（Compatibility Test suite））、PFT（），流水线一些准入要求</span><br><span class="line">如何看待peer之间观点不一致？怎么解决?</span><br></pre></td></tr></table></figure>
 <ul>
-<li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答①：需求评审阶段对需求进行分析-开发设计阶段对设计进行分析判断-设计测试方案-写才测试用例/准备测试数据/测试环境-提交自测用例给开发（辅助开发自测）-测试执行/bug跟踪-rc验收-复杂产品验收-灰度测试-线上验收-资料整理归档；（其中还涉及到部分环境的准入准出的标准的建立、事后的复盘）以上现有流程；</span><br><span class="line">测试流程，其实是质量体系很重要的一部分；需要遵循SOP标准（标准、文本、自动化）、基于上下文和风险的测试逻辑；兼顾成本和质量；因此在设计流程时，需要考虑以下方面：</span><br><span class="line">1、如何建立质量标准，OKR、KPI等工具如何和标准结合；维护质量标准，有无线上/线下问题的收集归纳机制；</span><br><span class="line">2、有没有配套工具，来运营流程；分析优化问题；</span><br><span class="line">3、如何提高流程的效率，如何建立适合公司的敏捷模式，如何和云原生、中台等相结合提效；</span><br><span class="line">4、如何根据公司的规模，人员情况，推动以上问题的处理；</span><br><span class="line"></span><br><span class="line">答②：测试的主要工作是提前发现问题，暴露风险；</span><br><span class="line">因此要赶快把风险暴露出来；先评估现阶段的风险，影响的范围；然后把风险立即暴露给项目组，组织协调资源，修改计划；</span><br><span class="line">完成修复计划；复盘问题，考虑为何没有提前发现主流程问题，是需求变更没有及时同步，还是开发私自更加了主流程代码或者其他代码合入问题，还是测试设计不合理；</span><br><span class="line">针对具体的原因，和未来可能出现的风险，优化流程，新增一些卡点策略或流程要求；</span><br><span class="line"></span><br><span class="line">答③：测试是一系列的活动；我理解的测试方法，应该是不局限于测试设计的；测试活动的主要过程有，测试信息收集（KYN）、测试信息分析（MFQ/SFDIPOT）、测试方法建模（PPDCS）、测试点覆盖率/有效性分析、最后是执行环节、其实每个环节都很重要需要注意，都考虑方式方法；但是我们一般问的都是测试设计/或者说是建模时候的方法；根据场景不同、特征不同使用不同的方法。比如如果是一些输入数据或者参数，具有数据/类型特征的，（如登录，注册输入的场景，就考虑使用等价类，边界值，覆盖有效等级类的各类，然后各类无效等价类边界值）；如果特征是一些状态变化的，（比如视频播放，暂停，恢复播放这些），我会考虑使用状态迁移法；如果是流程性的，（比如新手引导），我会考虑使用流程图；如果是输入直接有逻辑关系，输入输出有因果关系（比如抽奖活动的一些，IP限制，国家限制，不同国家，不同奖品不同中奖率这些），我会考虑因果图+判定表，然后使用没一列作为一条测试点；然后比如是一些数据报表，组合查询，这种输入参数没有逻辑约束，我可能直接就用组合法（也就是正交实验法）；白盒测试设计方法，主要是覆盖率方面考虑吧；考虑覆盖路径/覆盖条件/覆盖条件组合/覆盖语句这些，还是要根据具体业务和当前项目的情况来；这个问题有点大，我不确定我答的方向是否是对的；其他的一些方法，考虑其他方面，基于风险的，比如有些模块，测试/线上经常出问题，那功能迭代，过去的bug，是不是要做下参考甚至走一遍，其他的就是人员，为了保障质量是否对每个人员的开发质量，或者测试人员的质量需要做量化，如果有些人质量不好，是不是要进行一些培训或者帮助、或者调整；对提测功能大小、代码合并啊这些；当然这些都是要考虑，但一般不在测试设计环境考虑了，会在其他阶段；</span><br><span class="line"></span><br><span class="line">答④</span><br><span class="line">我是这样理解这个问题的，我先说一下黑盒/白盒的测试方法吧，然后我在讲下我在工作中哪些场景中用到了；黑盒（等价类/边界值/判定表/因果分析/正交分解/场景/错误推导/功能图）白盒（语句覆盖/判定覆盖/条件覆盖/条件组合覆盖/路径覆盖）；然后举例说明使用情况，举例最好能体现测试设计能力（覆盖率/成本/效率）</span><br><span class="line"></span><br><span class="line">答⑤</span><br><span class="line">单测是对系统最小粒度的测试；白盒层面的测试，一般是覆盖代码的函数/类/模块/多模块的测试（讲的时候需要体现单测的标准/覆盖率/流程/量化）；我们这边的单测是由开发实现单测代码，部分功能由测试codereview，检查单测代码的覆盖率（覆盖率要达到90%）；这种方式导致了单测环境测试参与不多，对整个项目的单测覆盖率很难衡量、还有就是需要codereview测试能参与的人力比较少，考虑通过开源框架实现一个待测覆盖率的检查脚本，同时开发单测时需要一些测试数据，这块未来考虑实现一个mock工具通过测试造数，开发调用给开发提供数据；冒烟是有测试在用例设计时标记冒烟用例（通过在线excel文档维护），提交给开发执行，开发执行通过后，标记执行通过，然后在进行提测；提测时，测试会先验收一遍冒烟用例，一旦冒烟不通过则会打回，且会记录，后续项目会根据文档数据归总，会影响开发的绩效；</span><br><span class="line"></span><br><span class="line">答⑥</span><br><span class="line">（各环节标准/标准的文档量化/优化）我们质量保障的设计在各环节都有准入准出标准，依次是需求分析阶段需求进入评审必须要有原型图有文档，且同一个需求评审不能多于两次，开发/设计/测试方案评审同理（测试用例的覆盖率不低于90%）；在提测前开发必须要进行单测且单测的覆盖率不低于90%（由开发自己实现），然后就是冒烟阶段（冒烟用例通过率必须是100%），测试执行，用例必须全部执行/中高等级用例必须全部执行，低级别用例未执行率不超过10%，rc验收前用例修复率必须达到100%，或者低级别用例不能超过5个、中高级别必须全部修复，且整体bug遗留率不能超过1%；然后就是rc验收必须无问题；灰度用例必须全部通过，线上反馈的bug不能超过总bug数的1%，且不能有中高级别的bug;整个过程主要通过tapd,在线excel文档，禅道来追溯；</span><br><span class="line"></span><br><span class="line">答⑦</span><br><span class="line">测试，rc验收通过；产品/设计验收通过；无bug遗留，或无中高级别bug遗留低级别bug遗留率不超过1%；上线环境、配置完成准备，且审核通过；然后就进行灰度方便；灰度梯度加量，线上无问题，则逐步到全量；</span><br><span class="line">工作占比，体系化思维，流程；我的日常工作在不同的时间段，工作重心不一样；在前面一年左右，主要负责大数据数据相关的测试，涉及的业务主要是版税结算，音乐的效果数据报表，音乐资源去重这些；已经自动化相关的建设，ui自动化、接口自动化、性能、压测；后面主要负责广告业务的测试已经部分音乐服务端业务的测试；在自动化工作中，我一开始的目的是想先把相应的工具搭起来，先解决从未到有的问题，以实现产出，后续主要是优化，建立规范标准，优化工具，来让工具产生实际的价值，解决监控，重复性回归的问题；当时的规划是提升自动化的覆盖率。让效果可量化，建立可视化的仪表（但这一块没机会落地），因为从22年年中开始就一直有大的人员的调整；在业务测试方面，我的工作思路是先用，先体验，在依赖需求，和相应的同事，以及网上相关的资料，和现在存在和遇到的问题来熟悉产品，发现痛点，从而设计测试方案，建立质量衡量的标准；在过程中遇到相关的问题会请教leader，协商解决然后推广；</span><br><span class="line"></span><br><span class="line">答⑧⑨</span><br><span class="line">我们人员共分了四组，一组负责主业务（音乐）客户端的测试，另一组负责音乐服务端的测试，剩下的第三组负责增值（广告）、会员、游戏、活动业务的测试，我这组负责大数据、脚本工具相关、质量体系探索相关的工作；人员分配是这样的；在质量保障方面，除了接口自动化ui自动化的定时巡检外，还有人工巡检、monkey稳定性、客户端/服务端性能、普罗米修斯的监控和服务的监控机制、已经运维相关同事的值班机制。</span><br><span class="line"></span><br><span class="line">答⑩</span><br><span class="line">覆盖率=度量场景/所有场景*100%（由于我们没法了解到所有场景，因此覆盖率是一个主观的概念；）但我们可以以其他明确的对象为锚；如从代码覆盖/产品功能覆盖方面入手；假设我们以代码的语句/判定+条件/分支/路径/组合条件方面来判断覆盖率，假定以代码的所有属性覆盖界定为百分百，那么我们就能得到一个确定的覆盖率值（这是白盒覆盖率）；功能方面，假定所有最小粒度的功能都覆盖到了我们认为是覆盖了50%，然后每个小功能的每个可能的特征（数值/因果相关/状态流/组合）都覆盖了，假定为90%；所有可能错误都覆盖了在假定为100%；当我们发现测后环节出现问题，我们则认为当前覆盖是不足100%；然后分析问题，定位原因，明确覆盖率的不足的地方；我们要明白，覆盖率作为一个相对指标，我们一般是没法得到明确值的，要评估覆盖率的有效性，最好是通过线上质量（问题）和现有的覆盖测试大纲来对比评判；</span><br><span class="line">代码实现接口自动化框架：接口执行、接口断言、接口结果查看、多接口执行、接口构造、接口数据维护、问题收集、监控通知、结果报告、持续集成、度量体系；因此要实现的模块有，执行模块、参数构造模块、参数化模块、问题收集模块、数据存储模块、前后置处理模块、调度的控制器、智能化（可视化操作支持、效果度量/结果仪表盘）；会使用到的开源框架、pytest（用例调度/参数化）+multiprocess(并发)+request+allour</span><br><span class="line"></span><br><span class="line">答①①</span><br><span class="line">性格、协作；要具体来看，如果是工作外的，求同存异吧，我会诚恳的表达自己的观点，但我不把说法他人作为目的；如果是工作中的分歧，我会听他说出他的观点，然后我会表达出我的观点，针对分歧的地方，我一般会从商业价值，对用户的体验和价值，成效方面来表达观点，如果仍难达成一致，我会找相应的决策人员来一起协商决定，如果最后拍板了，在我了解清楚的情况下和我的观点仍不一致，我也会积极的落实。</span><br></pre></td></tr></table></figure></li>
+<li><strong>答案</strong><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">答①：需要关注几点；流程追溯（度量）、各流程准入准出的标准（卡点）、怎么提供流程的效率，主要的流程有：</span><br><span class="line"></span><br><span class="line">需求评审阶段对需求进行分析-开发设计阶段对设计进行分析判断-设计测试方案-写才测试用例/准备测试数据/测试环境-提交自测用例给开发（辅助开发自测）-测试执行/bug跟踪-rc验收-复杂产品验收-灰度测试-线上验收-资料整理归档；（其中还涉及到部分环境的准入准出的标准的建立、事后的复盘）以上现有流程；</span><br><span class="line">测试流程，其实是质量体系很重要的一部分；需要遵循SOP标准（标准、文本、自动化）、基于上下文和风险的测试逻辑；兼顾成本和质量；因此在设计流程时，需要考虑以下方面：</span><br><span class="line">1、如何建立质量标准，OKR、KPI等工具如何和标准结合；维护质量标准，有无线上/线下问题的收集归纳机制；</span><br><span class="line">2、有没有配套工具，来运营流程；分析优化问题；</span><br><span class="line">3、如何提高流程的效率，如何建立适合公司的敏捷模式，如何和云原生、中台等相结合提效；</span><br><span class="line">4、如何根据公司的规模，人员情况，推动以上问题的处理；</span><br><span class="line"></span><br><span class="line">答②：测试的主要工作是提前发现问题，暴露风险；</span><br><span class="line">因此要赶快把风险暴露出来；先评估现阶段的风险，影响的范围；然后把风险立即暴露给项目组，组织协调资源，修改计划；</span><br><span class="line">完成修复计划；复盘问题，考虑为何没有提前发现主流程问题，是需求变更没有及时同步，还是开发私自更加了主流程代码或者其他代码合入问题，还是测试设计不合理；</span><br><span class="line">针对具体的原因，和未来可能出现的风险，优化流程，新增一些卡点策略或流程要求；</span><br><span class="line"></span><br><span class="line">答③：测试是一系列的活动；我理解的测试方法，应该是不局限于测试设计的；测试活动的主要过程有，测试信息收集（KYN）、测试信息分析（MFQ/SFDIPOT）、测试方法建模（PPDCS）、测试点覆盖率/有效性分析、最后是执行环节、其实每个环节都很重要需要注意，都考虑方式方法；但是我们一般问的都是测试设计/或者说是建模时候的方法；根据场景不同、特征不同使用不同的方法。比如如果是一些输入数据或者参数，具有数据/类型特征的，（如登录，注册输入的场景，就考虑使用等价类，边界值，覆盖有效等级类的各类，然后各类无效等价类边界值）；如果特征是一些状态变化的，（比如视频播放，暂停，恢复播放这些），我会考虑使用状态迁移法；如果是流程性的，（比如新手引导），我会考虑使用流程图；如果是输入直接有逻辑关系，输入输出有因果关系（比如抽奖活动的一些，IP限制，国家限制，不同国家，不同奖品不同中奖率这些），我会考虑因果图+判定表，然后使用没一列作为一条测试点；然后比如是一些数据报表，组合查询，这种输入参数没有逻辑约束，我可能直接就用组合法（也就是正交实验法）；白盒测试设计方法，主要是覆盖率方面考虑吧；考虑覆盖路径/覆盖条件/覆盖条件组合/覆盖语句这些，还是要根据具体业务和当前项目的情况来；这个问题有点大，我不确定我答的方向是否是对的；其他的一些方法，考虑其他方面，基于风险的，比如有些模块，测试/线上经常出问题，那功能迭代，过去的bug，是不是要做下参考甚至走一遍，其他的就是人员，为了保障质量是否对每个人员的开发质量，或者测试人员的质量需要做量化，如果有些人质量不好，是不是要进行一些培训或者帮助、或者调整；对提测功能大小、代码合并啊这些；当然这些都是要考虑，但一般不在测试设计环境考虑了，会在其他阶段；</span><br><span class="line"></span><br><span class="line">答④</span><br><span class="line">我是这样理解这个问题的，我先说一下黑盒/白盒的测试方法吧，然后我在讲下我在工作中哪些场景中用到了；黑盒（等价类/边界值/判定表/因果分析/正交分解/场景/错误推导/功能图）白盒（语句覆盖/判定覆盖/条件覆盖/条件组合覆盖/路径覆盖）；然后举例说明使用情况，举例最好能体现测试设计能力（覆盖率/成本/效率）</span><br><span class="line"></span><br><span class="line">答⑤</span><br><span class="line">单测是对系统最小粒度的测试；白盒层面的测试，一般是覆盖代码的函数/类/模块/多模块的测试（讲的时候需要体现单测的标准/覆盖率/流程/量化）；我们这边的单测是由开发实现单测代码，部分功能由测试codereview，检查单测代码的覆盖率（覆盖率要达到90%）；这种方式导致了单测环境测试参与不多，对整个项目的单测覆盖率很难衡量、还有就是需要codereview测试能参与的人力比较少，考虑通过开源框架实现一个待测覆盖率的检查脚本，同时开发单测时需要一些测试数据，这块未来考虑实现一个mock工具通过测试造数，开发调用给开发提供数据；冒烟是有测试在用例设计时标记冒烟用例（通过在线excel文档维护），提交给开发执行，开发执行通过后，标记执行通过，然后在进行提测；提测时，测试会先验收一遍冒烟用例，一旦冒烟不通过则会打回，且会记录，后续项目会根据文档数据归总，会影响开发的绩效；</span><br><span class="line"></span><br><span class="line">答⑥</span><br><span class="line">（各环节标准/标准的文档量化/优化）我们质量保障的设计在各环节都有准入准出标准，依次是需求分析阶段需求进入评审必须要有原型图有文档，且同一个需求评审不能多于两次，开发/设计/测试方案评审同理（测试用例的覆盖率不低于90%）；在提测前开发必须要进行单测且单测的覆盖率不低于90%（由开发自己实现），然后就是冒烟阶段（冒烟用例通过率必须是100%），测试执行，用例必须全部执行/中高等级用例必须全部执行，低级别用例未执行率不超过10%，rc验收前用例修复率必须达到100%，或者低级别用例不能超过5个、中高级别必须全部修复，且整体bug遗留率不能超过1%；然后就是rc验收必须无问题；灰度用例必须全部通过，线上反馈的bug不能超过总bug数的1%，且不能有中高级别的bug;整个过程主要通过tapd,在线excel文档，禅道来追溯；</span><br><span class="line"></span><br><span class="line">答⑦</span><br><span class="line">测试，rc验收通过；产品/设计验收通过；无bug遗留，或无中高级别bug遗留低级别bug遗留率不超过1%；上线环境、配置完成准备，且审核通过；然后就进行灰度方便；灰度梯度加量，线上无问题，则逐步到全量；</span><br><span class="line">工作占比，体系化思维，流程；我的日常工作在不同的时间段，工作重心不一样；在前面一年左右，主要负责大数据数据相关的测试，涉及的业务主要是版税结算，音乐的效果数据报表，音乐资源去重这些；已经自动化相关的建设，ui自动化、接口自动化、性能、压测；后面主要负责广告业务的测试已经部分音乐服务端业务的测试；在自动化工作中，我一开始的目的是想先把相应的工具搭起来，先解决从未到有的问题，以实现产出，后续主要是优化，建立规范标准，优化工具，来让工具产生实际的价值，解决监控，重复性回归的问题；当时的规划是提升自动化的覆盖率。让效果可量化，建立可视化的仪表（但这一块没机会落地），因为从22年年中开始就一直有大的人员的调整；在业务测试方面，我的工作思路是先用，先体验，在依赖需求，和相应的同事，以及网上相关的资料，和现在存在和遇到的问题来熟悉产品，发现痛点，从而设计测试方案，建立质量衡量的标准；在过程中遇到相关的问题会请教leader，协商解决然后推广；</span><br><span class="line"></span><br><span class="line">答⑧⑨</span><br><span class="line">我们人员共分了四组，一组负责主业务（音乐）客户端的测试，另一组负责音乐服务端的测试，剩下的第三组负责增值（广告）、会员、游戏、活动业务的测试，我这组负责大数据、脚本工具相关、质量体系探索相关的工作；人员分配是这样的；在质量保障方面，除了接口自动化ui自动化的定时巡检外，还有人工巡检、monkey稳定性、客户端/服务端性能、普罗米修斯的监控和服务的监控机制、已经运维相关同事的值班机制。</span><br><span class="line"></span><br><span class="line">答⑩</span><br><span class="line">覆盖率=度量场景/所有场景*100%（由于我们没法了解到所有场景，因此覆盖率是一个主观的概念；）但我们可以以其他明确的对象为锚；如从代码覆盖/产品功能覆盖方面入手；假设我们以代码的语句/判定+条件/分支/路径/组合条件方面来判断覆盖率，假定以代码的所有属性覆盖界定为百分百，那么我们就能得到一个确定的覆盖率值（这是白盒覆盖率）；功能方面，假定所有最小粒度的功能都覆盖到了我们认为是覆盖了50%，然后每个小功能的每个可能的特征（数值/因果相关/状态流/组合）都覆盖了，假定为90%；所有可能错误都覆盖了在假定为100%；当我们发现测后环节出现问题，我们则认为当前覆盖是不足100%；然后分析问题，定位原因，明确覆盖率的不足的地方；我们要明白，覆盖率作为一个相对指标，我们一般是没法得到明确值的，要评估覆盖率的有效性，最好是通过线上质量（问题）和现有的覆盖测试大纲来对比评判；</span><br><span class="line">代码实现接口自动化框架：接口执行、接口断言、接口结果查看、多接口执行、接口构造、接口数据维护、问题收集、监控通知、结果报告、持续集成、度量体系；因此要实现的模块有，执行模块、参数构造模块、参数化模块、问题收集模块、数据存储模块、前后置处理模块、调度的控制器、智能化（可视化操作支持、效果度量/结果仪表盘）；会使用到的开源框架、pytest（用例调度/参数化）+multiprocess(并发)+request+allour</span><br><span class="line"></span><br><span class="line">答①①</span><br><span class="line">性格、协作；要具体来看，如果是工作外的，求同存异吧，我会诚恳的表达自己的观点，但我不把说法他人作为目的；如果是工作中的分歧，我会听他说出他的观点，然后我会表达出我的观点，针对分歧的地方，我一般会从商业价值，对用户的体验和价值，成效方面来表达观点，如果仍难达成一致，我会找相应的决策人员来一起协商决定，如果最后拍板了，在我了解清楚的情况下和我的观点仍不一致，我也会积极的落实。</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h4 id="场景设计"><a href="#场景设计" class="headerlink" title="场景设计"></a><strong>场景设计</strong></h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">一个视频红包的场景让设计一下测试用例？</span><br><span class="line">接口、性能、压测?</span><br><span class="line">怎么进行弱网测试的？</span><br><span class="line">	Qnet腾讯、fiddler</span><br><span class="line">如果要评估一个接口的性能，首先要考虑哪几个方面？    </span><br><span class="line">测试接口时发现返回和预期不一致，应该怎样分析？</span><br><span class="line">如何根据接口文档测试接口？</span><br><span class="line">登陆界面?</span><br><span class="line">深挖项目？</span><br><span class="line">如果一个网页访问速度很慢 可能是什么原因？</span><br><span class="line">网页按钮文本框文件选择框怎么测试?</span><br><span class="line">抖音评论?</span><br><span class="line">如何测试网络直播（问了大概10分钟）？</span><br><span class="line">力扣46.全排列没做出来？</span><br><span class="line">数组中倒数第2大的数？</span><br><span class="line">百度搜索测试用例?</span><br><span class="line">测抖音注册?</span><br><span class="line">测试网易云音乐搜索窗口；?</span><br><span class="line">网易云窗口搜索关键字到返回结果的过程，经历了哪些阶段；?</span><br><span class="line">jacoco怎么统计接口覆盖率?</span><br><span class="line">设计抖音发布视频的测试用例？</span><br><span class="line">如果不同安卓版本上的抖音，一个能发布视频，一个不能，可能是什么原因？</span><br><span class="line">jmeter压测?</span><br><span class="line">针对一个零售机进行测试用例设计？</span><br><span class="line">针对一个IP地址校验的接口进行测试用例设计；（答的不好，面试官后来说是想让我给出具体的关键数据的测试用例）？</span><br><span class="line">测试一个促销活动页面，两种促销活动2选1，要注意安全性？</span><br><span class="line">有什么性能测试方法？</span><br><span class="line">微信发红包测试用例？</span><br><span class="line">微信抢红包测试用例设计?</span><br><span class="line">电梯问题设计测试用例?</span><br><span class="line">收到请求后，服务端调用了哪些相关的组件？越详细越好？</span><br><span class="line">平台开发技术栈介绍；?</span><br><span class="line">自动化介绍、测试框架介绍；?</span><br><span class="line">接口自动化设计；?</span><br><span class="line">微信朋友圈点赞功能设计测试用例 ?如果A点赞了，B没看到，写出自己排查定位原因的思路?</span><br><span class="line">自己说自己熟练使用Charles，问了下都用过Charles的哪些功能，怎么修改返回的状态码?</span><br><span class="line">U I自动化了解；?</span><br><span class="line">性能测试、健壮性测试、是否了解压测；?</span><br><span class="line">线上质量运营、COE分析。?</span><br><span class="line">接口测试、如何保证接口所有分支覆盖；?</span><br><span class="line">说出自己觉得系统中容易出现的问题；?</span><br><span class="line">测试过程中使用哪些方法或工具来测试；?</span><br><span class="line">自动化所用框架。?</span><br><span class="line">mock的底层原理?</span><br><span class="line">对于微信支付的场景设计测试用例？</span><br><span class="line">支付怎么考虑高并发？</span><br><span class="line">自动化这块，Selenium的原理、PO模式的优点？</span><br><span class="line">视频通话用什么协议？</span><br><span class="line">既然提到视频通话，那么给我说一下视频通话可能会出现什么问题？</span><br><span class="line">你如何测试它？</span><br></pre></td></tr></table></figure>
 <ul>
@@ -2543,8 +2491,7 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">k8s介绍未答出来；</span><br><span class="line">索引有哪些未答出来；</span><br><span class="line">协程介绍未答出来；</span><br><span class="line">装饰器答的不好；</span><br><span class="line">面试过程中，我太急了，没理解问题，和面试官的目的就答了；</span><br><span class="line">思路不清晰，反复问的时候，我有点不记得了（真实/思路）；</span><br><span class="line">Python中的闭包是什么意思？</span><br><span class="line">流量录制工具</span><br></pre></td></tr></table></figure>
 
 <p><strong>答:</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">⑦闭包是指将可调用对象和环境闭包在一起，一般是指将但参数的方法或类嵌套到包装方法/类中；常用的闭包操作有，委托机制，工厂函数，装饰器</span><br></pre></td></tr></table></figure>
-]]></content>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">⑦闭包是指将可调用对象和环境闭包在一起，一般是指将但参数的方法或类嵌套到包装方法/类中；常用的闭包操作有，委托机制，工厂函数，装饰器</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>面试</category>
       </categories>
