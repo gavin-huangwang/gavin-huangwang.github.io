@@ -29,6 +29,11 @@
 <meta property="og:site_name" content="Bu Jia Ban">
 <meta property="og:description" content="大数据测试，工作内容主要有：数据测试、模型测试；同时在不同的业务阶段，工作的重心不同，数据质量体系也会有不同的倾向，要全局的了解大数据测试，必须先明白大数据的架构，工作过程 大纲1234大数据架构数据测试模型测试数据质量体系">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bujiaban.xyz/text_image/hadoop_hive.png">
+<meta property="og:image" content="https://bujiaban.xyz/text_image/hadoop_click.png">
+<meta property="og:image" content="https://bujiaban.xyz/text_image/hadoop_stream.png">
+<meta property="og:image" content="https://bujiaban.xyz/text_image/flink.png">
+<meta property="og:image" content="https://bujiaban.xyz/text_image/hadoop_airl.png">
 <meta property="og:image" content="https://bujiaban.xyz/text_image/Hadoop.png">
 <meta property="og:image" content="https://bujiaban.xyz/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6.png">
 <meta property="og:image" content="https://bujiaban.xyz/text_image/biddate.png">
@@ -62,12 +67,12 @@
 <meta property="og:image" content="https://bujiaban.xyz/text_image/%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93.jpg">
 <meta property="og:image" content="https://bujiaban.xyz/text_image/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E4%BD%93%E7%B3%BB.png">
 <meta property="article:published_time" content="2023-08-07T08:45:00.000Z">
-<meta property="article:modified_time" content="2023-08-09T12:16:56.793Z">
+<meta property="article:modified_time" content="2023-08-28T16:40:17.014Z">
 <meta property="article:author" content="GAVIN HUANG">
 <meta property="article:tag" content="数据测试">
 <meta property="article:tag" content="大数据">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://bujiaban.xyz/text_image/Hadoop.png">
+<meta name="twitter:image" content="https://bujiaban.xyz/text_image/hadoop_hive.png">
 
 <link rel="canonical" href="https://bujiaban.xyz/posts/ac354d65/">
 
@@ -262,7 +267,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-09 20:16:56" itemprop="dateModified" datetime="2023-08-09T20:16:56+08:00">2023-08-09</time>
+                <time title="修改时间：2023-08-29 00:40:17" itemprop="dateModified" datetime="2023-08-29T00:40:17+08:00">2023-08-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -294,14 +299,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.6k</span>
+              <span>3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -317,9 +322,9 @@
 <h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">大数据架构</span><br><span class="line">数据测试</span><br><span class="line">模型测试</span><br><span class="line">数据质量体系</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
 <h2 id="大数据架构"><a href="#大数据架构" class="headerlink" title="大数据架构"></a>大数据架构</h2><p><code>常见的大数据架构主要有Hadoop（分布式文件存储、计算系统）；由分布式文件系统（HDFS）/集群资源管理器（YARN）分布式计算框架（MR/mapreduce）构成；其中HDFS负责管理存储数据，YARN负责管理集群中的计算资源，调度和执行工作任务；</code></p>
-<p><strong>组件：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">核心组件：</span><br><span class="line">HDFS:分布式文件系统，存储数据；</span><br><span class="line">YARN：集群资源管理器，管理计算资源，进行调度；</span><br><span class="line">MR：计算框架，一般负责离线计算；</span><br><span class="line"></span><br><span class="line">生态组件：</span><br><span class="line">PIG：数据流处理（用于并行计算的高级数据流语言和执行框架）；</span><br><span class="line">HBASE：NSQL型的分布式数据库，本质是一个键值系统,底层数据存储在文件系统HDFS上；</span><br><span class="line">SPARK：分布式计算引擎，类似MR,但在内存中计算，提供各种库，可以使开发者用来实现ETL、机器学习、数据流处理、图像计算等场景；</span><br><span class="line">FLUME：数据采集</span><br><span class="line">FLINK：针对流数据（实时数据）和批数据（离线数据）的实时处理引擎，有着高吞吐、低延迟的特点；</span><br><span class="line">SQOOP：数据导入导出</span><br><span class="line">KAFKA：分布式消息引擎及流处理平台，用来存储/传递消息（如日志或埋点）；</span><br><span class="line">AWS S3 ：静态资源存储，可能是大型的日志文件吧；</span><br><span class="line">SOLR：用于搜索索引的全文检索服务器；</span><br><span class="line"></span><br><span class="line">数据查询引擎:</span><br><span class="line">HIVE S3：数据仓库基础架构，提供数据汇总和命令行即席查询功能；</span><br><span class="line">IMPALA：高效的基于MPP架构的快速查询引擎，基于Hive并使用内存进行计算，兼顾ETL功能，具有实时、批处理、多并发等优点；</span><br><span class="line">KYLIN：开源分布式分析型数据仓库，提供Hadoop/Spark之上的SQL查询接口及多维分析（OLAP）能力，支持超大规模数据的压秒级查询（和视图有点点类似）；</span><br><span class="line">PRESTO：开源的分布式查询引擎，支持多数据源，大量级数据的场景；</span><br><span class="line"></span><br><span class="line">ETL：数据处理的过程，指数据提取（extract）、转换（transform）、加载（load）的过程；</span><br><span class="line">组件众多。不同组件提供不同能力，Hadoop框架，很像Android系统，是一个底层的数据框架。</span><br></pre></td></tr></table></figure>
-<p>参考架构：<br><img src="/text_image/Hadoop.png" alt="alt text"><br><img src="/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6.png" alt="alt text"></p>
+<p><strong>组件：核心组件如下</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">HDFS:分布式文件存储系统；实际存储的是文件，有备份机制，支持数据一次性写入（每次写入生成一个独立文件），不支持数据修改，支持大规模的数据查询，特点是容错，高吞吐量，易弹性扩容；</span><br><span class="line">YARN：集群资源管理器，管理计算资源，进行调度和监控，其他计算引擎均通过yarn获取计算资源；</span><br><span class="line">MR：计算框架，一般负责离线计算，大量数据计算，一般要通过hive来获取数据；</span><br><span class="line"></span><br><span class="line">生态组件：</span><br><span class="line">PIG：数据流处理（用于并行计算的高级数据流语言和执行框架）；</span><br><span class="line">HBASE：NSQL型的分布式数据库，本质是一个键值系统,底层数据存储在文件系统HDFS上；具有高可靠性、高性能、扩展性强的特定；</span><br><span class="line">SPARK：分布式（内存）计算引擎，类似MR,但在内存中计算(因为在内存中不用读hdfs,所以性能有大大提升)，提供各种库，可以使开发者用来实现数据流/批处理、交互式查询、ETL、机器学习、图像计算等场景；特定是快、易用、通用、兼容；</span><br><span class="line">FLUME：日志采集系统，可用来对日志进行预处理；基于流式数据的架构，简单而灵活。具有健壮性、容错机制、故障转移、恢复机制；</span><br><span class="line">FLINK：针对流数据（实时数据）和批数据（离线数据）的实时处理引擎，有着高吞吐、低延迟、高性能的特点；</span><br><span class="line">SQOOP：数据导入导出，用来实现结构型数据（如mysql中的数据）和Hadoop之间进行数据迁移的工具。利用MR并行特点可大幅提升迁移速度，同时MR提供容错；</span><br><span class="line">KAFKA：分布式消息队列，用来存储/传递消息（日志的生产/消费）；特定是支持弹性扩展、大吞吐量的场景；</span><br><span class="line">AWS S3 ：存储服务组件，可用来存储各类数据和文件（HDFS）；</span><br><span class="line">SOLR：用于搜索索引的全文检索服务器；</span><br><span class="line"></span><br><span class="line">数据查询引擎:</span><br><span class="line">HIVE S3：数仓工具，提供数据汇总和命令行即席查询功能；能将hdfs文件映射成一张表，能有sql来查询这个表的数据，同时能就sql命令转换成mr任务执行；支持多种格式文件，用于超大规模数据集场景；</span><br><span class="line">IMPALA：高效的基于MPP架构的快速查询引擎，基于Hive并使用内存进行计算，兼顾ETL功能，具有实时、批处理、多并发等优点；</span><br><span class="line">KYLIN：开源分布式分析型数据仓库，提供Hadoop/Spark之上的SQL查询接口及多维分析（OLAP）能力，支持超大规模数据的压秒级查询（和视图有点点类似）；查询比hive快，通过预计算构建cube实现快速查询；</span><br><span class="line">PRESTO：开源的分布式查询引擎，支持多数据源，大量级数据的场景；</span><br><span class="line"></span><br><span class="line">ETL：数据处理的过程，指数据提取（extract）、转换（transform）、加载（load）的过程；</span><br><span class="line">组件众多。不同组件提供不同能力，Hadoop框架，很像Android系统，是一个底层的数据框架。</span><br></pre></td></tr></table></figure>
+<p>组件特性：<br><img src="/text_image/hadoop_hive.png" alt="alt text"><br><img src="/text_image/hadoop_click.png" alt="alt text"><br><img src="/text_image/hadoop_stream.png" alt="alt text"><br><img src="/text_image/flink.png" alt="alt text"><br><img src="/text_image/hadoop_airl.png" alt="alt text"><br>参考架构：<br><img src="/text_image/Hadoop.png" alt="alt text"><br><img src="/text_image/%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%84%E4%BB%B6.png" alt="alt text"></p>
 <h3 id="传易音乐大数据架构"><a href="#传易音乐大数据架构" class="headerlink" title="传易音乐大数据架构"></a>传易音乐大数据架构</h3><p><strong>传易hadoop</strong><br><img src="/text_image/biddate.png" alt="alt text"></p>
 <p><strong>传易数仓架构</strong><br><img src="/text_image/bigdate_%E6%95%B0%E4%BB%93%E6%9E%B6%E6%9E%84.png" alt="alt text"></p>
 <p><strong>数据架构（数仓）</strong><br><img src="/text_image/bigdata_%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84.png" alt="alt text"></p>
@@ -575,12 +580,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">128k</span>
+    <span title="站点总字数">130k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:57</span>
+    <span title="站点阅读时长">1:58</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
